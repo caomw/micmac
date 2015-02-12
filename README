@@ -1,3 +1,27 @@
+This is a fork of the MICMAC project from https://geoportail.forge.ign.fr/
+
+The initial intention on this is to do a major refactor of most of the code to make life simple to develop over it
+The interface will be moved for a separate project. If suceeded, compile the interface will not need to requires be in source of micmac
+Goals:
+-	Lean down the repository: Documentation, applids and binaire-aux directories are supressed from now. Aux-binaries will
+	be added only whe source code is available or get from external places. The removal of all this reduced in 450 M of useless
+	files on a code repository
+-	Turn the world shared: Static libraries are good for your machine development, but everyone that developed in different architectures and
+	linux distributions knows that static gives us surprises when trying to run in different system than the one compiled.
+-	Eliminate the StdAfx precompiled headers: Sounds nice in theory, "works" well on older compilers, but if you need change onew single thing 
+	on a header included on the marvelous StdAfx.h, here it go. Hours of recompilation. So proper includes in cpp files,no more header blob.
+-	Get rif of Qt4: Migrate everything to Qt5.
+-	Unify code: There STL, boost, Qt4, Qt5 code. Try to move everything as possible to Qt5, even console applications.
+-	Clean up CMake and do a proper usage
+
+Other goals will be appearing on the process, and don't expect compile works on first days ( or weeks ), as long my off work time allows
+
+This is an independent project and i'm doing on my own, if anyone has interest on helping, please contact me :-)
+
+Below is the original README, which will be soon deprecated
+
+----------------------------------------------------------------------------------------------------------------------------
+
 Prerequisites
 
 	Some external tools need to be present on your system for Micmac to run properly :
