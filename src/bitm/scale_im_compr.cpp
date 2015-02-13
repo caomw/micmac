@@ -568,10 +568,10 @@ class Reducteur_Im_Compr  : public StdGray_Scale_Im_Compr
  	    PackB_IM<U_INT1>          _pbim;
  		Data_PackB_IM<U_INT1> *   _dpbim;
 		U_INT1 *                  _line;
-        ElSTDNS vector<U_INT2>  	  	  _LInd;
-        ElSTDNS vector<U_INT2>  		  _VInd;
-        ElSTDNS vector<U_INT1>  		  _Length;
-        ElSTDNS vector<U_INT1>    		  _Vals;      
+        std::vector<U_INT2>  	  	  _LInd;
+        std::vector<U_INT2>  		  _VInd;
+        std::vector<U_INT1>  		  _Length;
+        std::vector<U_INT1>    		  _Vals;      
 };
 
 

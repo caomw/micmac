@@ -325,7 +325,7 @@ class PolyBench
          void AddRoot(REAL x) 
          {
             mRoots.push_back(x);
-            ElSTDNS sort(mRoots.begin(),mRoots.end());
+            std::sort(mRoots.begin(),mRoots.end());
             mPol = ElPolynome<REAL>(-x,1) *mPol;
          }
 
@@ -335,7 +335,7 @@ class PolyBench
            ElPolynome<REAL> pe(eps);
             mPol = (px*px+pe) *mPol;
          }
-         void ShowVect(const char * name,const ElSTDNS vector<REAL> & v) const
+         void ShowVect(const char * name,const std::vector<REAL> & v) const
          {
              cout << "[" << name << "] ";
              for (INT k=0; k<(INT)v.size() ; k++)
@@ -345,7 +345,7 @@ class PolyBench
 
          void Verif() const
          {
-             ElSTDNS vector<REAL> Sol2;
+             std::vector<REAL> Sol2;
              RealRootsOfRealPolynome(Sol2,mPol,1e-9,100);
              
              BENCH_ASSERT(Sol2.size()==mRoots.size());
@@ -357,7 +357,7 @@ class PolyBench
          }
        
      private :
-        ElSTDNS vector<REAL>     mRoots;
+        std::vector<REAL>     mRoots;
         ElPolynome<REAL> mPol;
 };
 
@@ -451,7 +451,7 @@ void ElPhotogram::bench_photogram_0()
     REAL dA3B3 =  euclid(A3-B3);
     REAL dA3C3 =  euclid(A3-C3);
     REAL dB3C3 =  euclid(B3-C3);
-    ElSTDNS list<Pt3dr> L3;
+    std::list<Pt3dr> L3;
     ProfChampsFromDist ( L3,A,B,C,dA3B3,dA3C3,dB3C3);
 
 
@@ -459,7 +459,7 @@ void ElPhotogram::bench_photogram_0()
     REAL  EcartL = 1e2;
     REAL  EcartD = 0;                     
 
-    for ( ElSTDNS list<Pt3dr>::iterator it =L3.begin(); it!=L3.end(); it++)
+    for ( std::list<Pt3dr>::iterator it =L3.begin(); it!=L3.end(); it++)
     {
        EcartL = ElMin(EcartL,euclid(Labc-*it));
 
@@ -540,12 +540,12 @@ void BenchOrFromPtsApp()
      Pt2dr q4 =  CamOr.R3toF2(p4);
 
 
-     ElSTDNS list<ElRotation3D>  Lor;
+     std::list<ElRotation3D>  Lor;
      Cam0.OrientFromPtsAppui(Lor,p1,p2,p3,q1,q2,q3);
 
 
      REAL Ecart = 10;
-     for (ElSTDNS list<ElRotation3D>::iterator it=Lor.begin(); it!=Lor.end() ; it++)
+     for (std::list<ElRotation3D>::iterator it=Lor.begin(); it!=Lor.end() ; it++)
      {
          CamStenope        Cam2(Cam0,*it);
 
@@ -569,13 +569,13 @@ void BenchOrFromPtsApp()
          );
      }
 
-     ElSTDNS list<Pt3dr> L3; 
+     std::list<Pt3dr> L3; 
      L3.push_back(p1);
      L3.push_back(p2);
      L3.push_back(p3);
      L3.push_back(p4);
 
-     ElSTDNS list<Pt2dr> L2; 
+     std::list<Pt2dr> L2; 
      L2.push_back(q1);
      L2.push_back(q2);
      L2.push_back(q3);
@@ -583,8 +583,8 @@ void BenchOrFromPtsApp()
 
      if (Ecart > epsilon)
      {
-         ElSTDNS list<Pt3dr> L3Rob(L3); 
-         ElSTDNS list<Pt2dr> L2Rob(L2); 
+         std::list<Pt3dr> L3Rob(L3); 
+         std::list<Pt2dr> L2Rob(L2); 
 	 for (INT k=0 ;k<10 ; k++)
 	 {
 	    REAL rho = 1 + 0.5 * cos(double(k));
@@ -664,13 +664,13 @@ REAL TestOrient::t0()
      Pt2dr q4 =  CamSimul.R3toF2(p4);
 
 
-     ElSTDNS list<Pt3dr> L3; 
+     std::list<Pt3dr> L3; 
      L3.push_back(p1);
      L3.push_back(p2);
      L3.push_back(p3);
      L3.push_back(p4);
 
-     ElSTDNS list<Pt2dr> L2; 
+     std::list<Pt2dr> L2; 
      L2.push_back(DirD2(q1));
      L2.push_back(DirD2(q2));
      L2.push_back(DirD2(q3));
@@ -905,7 +905,7 @@ void BenchDiffCam()
 
 void bench_FoncMeanSquare()
 {
-    ElSTDNS list<Fonc_Num> l;
+    std::list<Fonc_Num> l;
 
     Fonc_Num Fa = 1.0;
     Fonc_Num Fb = FX;

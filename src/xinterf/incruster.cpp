@@ -424,7 +424,7 @@ ElImIncruster::ElImIncruster
      Pt2di                           SzIm,
      Pt2di                           SzBrd,
      Visu_ElImScr &                  Visu,
-     const ElSTDNS vector<ElImScroller*>   & Scrols,
+     const std::vector<ElImScroller*>   & Scrols,
      INT                             NbImRab
 )   :
     mSzBrd0      (SzBrd),
@@ -751,9 +751,9 @@ Filtr_Incr_EqDyn_Glob:: Filtr_Incr_EqDyn_Glob() :
  
 INT Filtr_Incr_EqDyn_Glob::Filters
     (
-       ElSTDNS vector<ElImIncr_ScrAttr> & Attrs,
-       ElSTDNS vector<Im2D_INT4> &ImsOut,
-       ElSTDNS vector<Im2D_INT4> &ImsIn,
+       std::vector<ElImIncr_ScrAttr> & Attrs,
+       std::vector<Im2D_INT4> &ImsOut,
+       std::vector<Im2D_INT4> &ImsIn,
        Pt2di p0,
        Pt2di p1,
        REAL Fact
@@ -819,9 +819,9 @@ Filtr_Incr_EqDyn_Loc::Filtr_Incr_EqDyn_Loc(ConvMne_Filtr_Incr_EqDyn_Loc,INT ValS
 
 INT Filtr_Incr_EqDyn_Loc:: Filters
      (
-           ElSTDNS vector<ElImIncr_ScrAttr> & Attrs,
-           ElSTDNS vector<Im2D_INT4> & ImsOut,
-           ElSTDNS vector<Im2D_INT4> & ImsIn,
+           std::vector<ElImIncr_ScrAttr> & Attrs,
+           std::vector<Im2D_INT4> & ImsOut,
+           std::vector<Im2D_INT4> & ImsIn,
            Pt2di p0,
            Pt2di p1,
            INT Brd,
@@ -874,9 +874,9 @@ Filtr_Incr_EtalDyn::Filtr_Incr_EtalDyn()
 
 INT Filtr_Incr_EtalDyn:: Filters
      (
-           ElSTDNS vector<ElImIncr_ScrAttr> & Attrs,
-           ElSTDNS vector<Im2D_INT4> & ImsOut,
-           ElSTDNS vector<Im2D_INT4> & ImsIn,
+           std::vector<ElImIncr_ScrAttr> & Attrs,
+           std::vector<Im2D_INT4> & ImsOut,
+           std::vector<Im2D_INT4> & ImsIn,
            Pt2di p0,
            Pt2di p1,
            REAL Vmin,
@@ -912,9 +912,9 @@ Filtr_Incr_NormDeriche::Filtr_Incr_NormDeriche()
 
 INT Filtr_Incr_NormDeriche:: Filters
      (
-           ElSTDNS vector<ElImIncr_ScrAttr> & Attrs,
-           ElSTDNS vector<Im2D_INT4> & ImsOut,
-           ElSTDNS vector<Im2D_INT4> & ImsIn,
+           std::vector<ElImIncr_ScrAttr> & Attrs,
+           std::vector<Im2D_INT4> & ImsOut,
+           std::vector<Im2D_INT4> & ImsIn,
            Pt2di p0,
            Pt2di p1,
            REAL FactDer,
@@ -958,9 +958,9 @@ Filtr_Incr_AngDeriche::Filtr_Incr_AngDeriche()
 
 INT Filtr_Incr_AngDeriche:: Filters
      (
-           ElSTDNS vector<ElImIncr_ScrAttr> & Attrs,
-           ElSTDNS vector<Im2D_INT4> & ImsOut,
-           ElSTDNS vector<Im2D_INT4> & ImsIn,
+           std::vector<ElImIncr_ScrAttr> & Attrs,
+           std::vector<Im2D_INT4> & ImsOut,
+           std::vector<Im2D_INT4> & ImsIn,
            Pt2di p0,
            Pt2di p1,
            REAL FactDer

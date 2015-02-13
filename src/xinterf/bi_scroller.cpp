@@ -540,7 +540,7 @@ Im2D_U_INT1  BiScroller::Im1() {return mImGray;}
 Im2D_U_INT1  BiScroller::Im2() {return mImCol;}
 
 
-const ElSTDNS vector<ElImScroller *> & BiScroller::SubScrolls()
+const std::vector<ElImScroller *> & BiScroller::SubScrolls()
 {
    return mSubScrolls;
 }

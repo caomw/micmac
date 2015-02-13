@@ -77,9 +77,9 @@ class Incruster : public ElImIncruster
 
             INT Filters
                 (
-                   ElSTDNS vector<ElImIncr_ScrAttr> & Attrs,
-                   ElSTDNS vector<Im2D_INT4> & ImsOut,
-                   ElSTDNS vector<Im2D_INT4> & ImsIn,
+                   std::vector<ElImIncr_ScrAttr> & Attrs,
+                   std::vector<Im2D_INT4> & ImsOut,
+                   std::vector<Im2D_INT4> & ImsIn,
                    Pt2di p0,Pt2di p1
                 );
 
@@ -113,9 +113,9 @@ Fonc_Num AUC(Fonc_Num f)
 
 INT Incruster::Filters
     (
-       ElSTDNS vector<ElImIncr_ScrAttr> & Attrs,
-       ElSTDNS vector<Im2D_INT4> & ImsOut,
-       ElSTDNS vector<Im2D_INT4> & ImsIn,
+       std::vector<ElImIncr_ScrAttr> & Attrs,
+       std::vector<Im2D_INT4> & ImsOut,
+       std::vector<Im2D_INT4> & ImsIn,
        Pt2di p0,Pt2di p1
     )
 {

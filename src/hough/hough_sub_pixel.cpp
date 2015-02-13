@@ -109,21 +109,21 @@ class ElHoughSubPixellaire : public ElHoughImplem
         typedef enum {MatriceMap,MatriceVect,VectXYRT} Mode;
         Mode  mode;
 
-        typedef ElSTDNS map<Pt2di,REAL>         tMapCelAccum;
-        typedef ElSTDNS vector<tMapCelAccum>    tMapLineAccum;
-        typedef ElSTDNS vector<tMapLineAccum>   tMapAccum;
+        typedef std::map<Pt2di,REAL>         tMapCelAccum;
+        typedef std::vector<tMapCelAccum>    tMapLineAccum;
+        typedef std::vector<tMapLineAccum>   tMapAccum;
         tMapAccum *                     mMapAccum;
    
-        typedef ElSTDNS pair <Pt2di,REAL>  tPCel;
+        typedef std::pair <Pt2di,REAL>  tPCel;
 
-        typedef ElSTDNS vector<tPCel> tVecCelAccum;
-        typedef ElSTDNS vector<tVecCelAccum>    tVecLineAccum;
-        typedef ElSTDNS vector<tVecLineAccum>   tVecAccum;
+        typedef std::vector<tPCel> tVecCelAccum;
+        typedef std::vector<tVecCelAccum>    tVecLineAccum;
+        typedef std::vector<tVecLineAccum>   tVecAccum;
         tVecAccum *                     mVecAccum;
 
 
 
-        typedef ElSTDNS vector<ElemXYRT>  tVxyrt;
+        typedef std::vector<ElemXYRT>  tVxyrt;
         typedef tVxyrt::iterator  tItVxyrt;
         tVxyrt *                  mVxyrt;
 
@@ -237,26 +237,26 @@ void ElHoughSubPixellaire::ElemPixel(tLCel & v,Pt2di Pxy)
        for (tMapCelAccum::iterator it = itBegin; it!= itEnd ; it++)
            v.push_back(tCel(it->first,it->second));
 /*
-       ElSTDNS copy
+       std::copy
        (
           (*mMapAccum)[Pxy.y][Pxy.x].begin(),
           (*mMapAccum)[Pxy.y][Pxy.x].end(),
-          ElSTDNS back_inserter(v)
+          std::back_inserter(v)
        );
 */
     }
     if (mVecAccum)
-       ElSTDNS copy
+       std::copy
        (
           (*mVecAccum)[Pxy.y][Pxy.x].begin(),
           (*mVecAccum)[Pxy.y][Pxy.x].end(),
-          ElSTDNS back_inserter(v)
+          std::back_inserter(v)
        );
 
     if (mVxyrt)
     {
-       ElSTDNS pair<tItVxyrt,tItVxyrt>  aPair =
-                                ElSTDNS equal_range
+       std::pair<tItVxyrt,tItVxyrt>  aPair =
+                                std::equal_range
                                 (
                                      mVxyrt->begin(),
                                      mVxyrt->end(),
@@ -365,7 +365,7 @@ void ElHoughSubPixellaire::PostInit()
         break;
 
         case VectXYRT :
-             mVxyrt   = new  ElSTDNS vector<ElemXYRT>;
+             mVxyrt   = new  std::vector<ElemXYRT>;
              mVxyrt->reserve(round_ni(NbY()*NbX()*NbTeta() * 2.35));
         break;
     }

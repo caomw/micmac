@@ -36,7 +36,7 @@ template <class Type,class TypeBase>
                   Pt2di    p0, Pt2di    p1     
              )
 {
-     ElSTDNS vector<Pt2di> Pts;
+     std::vector<Pt2di> Pts;
      CalcMaxLoc<Type,TypeBase> CML;
      CML.AllMaxLoc(Pts,Im,vois,p0,p1,-10000);
 
@@ -52,7 +52,7 @@ template <class Type,class TypeBase>
         1,
         lpts
      );
-     ElSTDNS vector<Pt2di> Pts2;
+     std::vector<Pt2di> Pts2;
      {
         Im2D_INT2  im_xy = lpts.image();
         INT2 * xPtr = im_xy.data()[0];

@@ -63,8 +63,8 @@ template <class T,const int NB> class  ElPackList
            INT  _sz;
            INT  _i0;
            INT  _i1;
-           ElSTDNS list<el >       _l;
-           ElSTDNS list<el > *     _rl;
+           std::list<el >       _l;
+           std::list<el > *     _rl;
 
 
            void set_reserv_non_empty()
@@ -118,11 +118,11 @@ template <class T,const int NB> class  ElPackList
            {
                friend  class ElPackList<T,NB>;
                private :
-                 ElTyName ElSTDNS list<el>::iterator _iter;
+                  std::list<el>::iterator _iter;
                  INT                _i;
                  INT                _pabs;
 
-                 iterator(ElTyName ElSTDNS list<el>::iterator iter,INT i,INT pos_abs) :
+                 iterator( std::list<el>::iterator iter,INT i,INT pos_abs) :
                       _iter (iter),
                       _i    (i),
                       _pabs (pos_abs)

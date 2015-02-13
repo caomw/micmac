@@ -101,7 +101,7 @@ class PolygoneClipBandeVert
 
 
 // Passe par un typedef IDIOT a cause de bug sur gcc version 2.95.2 19991024  (release)
-typedef CalcMaxLoc<INT,INT,ElSTDNS less<INT> > ElH_CML;
+typedef CalcMaxLoc<INT,INT,std::less<INT> > ElH_CML;
 
 
 class ElHoughImplem : public ElHough
@@ -175,8 +175,8 @@ class ElHoughImplem : public ElHough
 		INT IndRhoSym(INT IRho) {return -IRho - 2*mIRhoMin;}
 
 
-        typedef ElSTDNS pair<Pt2di,REAL>   tCel;
-        typedef  ElSTDNS vector<tCel>  tLCel;
+        typedef std::pair<Pt2di,REAL>   tCel;
+        typedef  std::vector<tCel>  tLCel;
 
         void SetStepRho(INT iTeta,REAL8 step)
         {
@@ -231,7 +231,7 @@ class ElHoughImplem : public ElHough
         void CalcMaxLoc
              (
                   Im2D_INT4,
-                  ElSTDNS vector<Pt2di> & Pts,
+                  std::vector<Pt2di> & Pts,
                   REAL VoisRho,
                   REAL VoisTeta,
                   REAL Vmin
@@ -247,7 +247,7 @@ class ElHoughImplem : public ElHough
               );                   
         void FiltrMaxLoc_BCVS
              (
-                  ElSTDNS vector<Pt2di> & Pts,
+                  std::vector<Pt2di> & Pts,
                   Im2D_INT4  Im,
                   REAL  FactInf,
                   REAL  TolGeom,

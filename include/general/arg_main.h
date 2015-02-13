@@ -127,9 +127,9 @@ template <> inline std::istream & ElStdRead (std::istream &is, bool & aVal, cons
 }
 
 
-template <class Type>  std::istream & operator >> (std::istream &is,ElSTDNS vector<Type> & vec);
+template <class Type>  std::istream & operator >> (std::istream &is,std::vector<Type> & vec);
 
-template <class Type>  inline std::istream & VElStdRead (std::istream &is,ElSTDNS vector<Type> & vec, const ElGramArgMain & Gram)
+template <class Type>  inline std::istream & VElStdRead (std::istream &is,std::vector<Type> & vec, const ElGramArgMain & Gram)
 {
     vec.clear();
 
@@ -153,13 +153,13 @@ template <class Type>  inline std::istream & VElStdRead (std::istream &is,ElSTDN
 }
 
 #define SPECIALIZE_ElStdRead(aTYPE)\
-template <> inline std::istream & ElStdRead (std::istream &is, ElSTDNS vector < aTYPE > & vec, const ElGramArgMain & G)\
+template <> inline std::istream & ElStdRead (std::istream &is, std::vector < aTYPE > & vec, const ElGramArgMain & G)\
 {\
     return VElStdRead(is,vec,G);\
 }
 
 SPECIALIZE_ElStdRead (INT)
-SPECIALIZE_ElStdRead (ElSTDNS vector <INT>)
+SPECIALIZE_ElStdRead (std::vector <INT>)
 SPECIALIZE_ElStdRead (REAL)
 SPECIALIZE_ElStdRead (Pt2dr)
 
@@ -167,7 +167,7 @@ SPECIALIZE_ElStdRead (Pt2dr)
 std::istream & VStrElStdRead
                       (
                               std::istream &is,
-                              ElSTDNS vector<std::string> & vec,
+                              std::vector<std::string> & vec,
                               const ElGramArgMain & Gram
                       );
 
@@ -175,14 +175,14 @@ std::istream & VStrElStdRead
 template <> inline std::istream & ElStdRead
                                   (
                                         std::istream &is,
-                                        ElSTDNS vector <std::string > & vec,
+                                        std::vector <std::string > & vec,
                                         const ElGramArgMain & G
                                   )
 {
     return VStrElStdRead(is,vec,G);
 }
 
-template <class Type> std::ostream & operator << (std::ostream &os,const ElSTDNS vector<Type> & v)
+template <class Type> std::ostream & operator << (std::ostream &os,const std::vector<Type> & v)
 {
     os << "[";
     for (INT k=0; k<(INT)v.size(); k++)
@@ -248,9 +248,9 @@ class GenElArgMain
                 ) ;
         virtual GenElArgMain * dup() const = 0;
 
-        virtual void InitEAM(const ElSTDNS string &s,const ElGramArgMain &) const = 0;
+        virtual void InitEAM(const std::string &s,const ElGramArgMain &) const = 0;
         virtual void * AddrArg() const = 0;
-        bool InitIfMatchEq(const ElSTDNS string &s,const ElGramArgMain & Gram) const;
+        bool InitIfMatchEq(const std::string &s,const ElGramArgMain & Gram) const;
 
         bool IsInit() const;
         const char *name() const;
@@ -273,7 +273,7 @@ class GenElArgMain
                 static const std::string  theChaineInactif;
                 static const std::string  theChaineActif;
 
-        ElSTDNS string  _name;
+        std::string  _name;
         mutable bool  _is_init;
                 eSpecArgMain    mSpec;
                 std::list<std::string>  mLEnum;
@@ -297,11 +297,11 @@ template <class Type> class ElArgMain : public GenElArgMain
                 Type*       DefVal() const {return _adr;}
 
         virtual void * AddrArg() const  {return _adr;}
-        void InitEAM(const ElSTDNS string &s,const ElGramArgMain & Gram) const
+        void InitEAM(const std::string &s,const ElGramArgMain & Gram) const
         {
                         AllAddrEAM.insert( (void *) _adr);
             _is_init = true;
-            std::STD_INPUT_STRING_STREAM Is(s.c_str());
+            std::istringstream Is(s.c_str());
             // Is >> *_adr;
             ::ElStdRead(Is,*_adr,Gram);
         }
@@ -339,7 +339,7 @@ template <class Type> class ElArgMain : public GenElArgMain
                 }
 
 
-             static const ElSTDNS list<Type>  theEmptyLvalADM;
+             static const std::list<Type>  theEmptyLvalADM;
 
              eArgMainBaseType type() const;
 
@@ -355,7 +355,7 @@ bool EAMIsInit(void *);
 std::string StrFromArgMain(const std::string & aStr);
 
 /*
-template <> inline void ElArgMain<std::string>::InitEAM(const ElSTDNS string &s,const ElGramArgMain & Gram) const
+template <> inline void ElArgMain<std::string>::InitEAM(const std::string &s,const ElGramArgMain & Gram) const
 {
    _is_init = true;
    *_adr = StrFromArgMain(s);
@@ -428,7 +428,7 @@ class LArgMain
                           bool  anAcceptUnknown
                      ) const;
     private :
-        ElSTDNS list<GenElArgMain *> _larg;
+        std::list<GenElArgMain *> _larg;
                 // Apparemment certains compilos
                 // utilisent la copie en temporaire;
         //      LArgMain(const LArgMain &);
@@ -476,10 +476,10 @@ void    ElInitArgMain
         );
 
 
-void SphInitArgs(const ElSTDNS string & NameFile,const LArgMain &);
-void StdInitArgsFromFile(const ElSTDNS string & NameFile,const LArgMain &);
-void HdrInitArgsFromFile(const ElSTDNS string & NameFile,const LArgMain &);
-INT ThomInitArgs(const ElSTDNS string & NameFile,const LArgMain &);
+void SphInitArgs(const std::string & NameFile,const LArgMain &);
+void StdInitArgsFromFile(const std::string & NameFile,const LArgMain &);
+void HdrInitArgsFromFile(const std::string & NameFile,const LArgMain &);
+INT ThomInitArgs(const std::string & NameFile,const LArgMain &);
 bool IsThomFile (const std::string & aName);
 
 
@@ -741,9 +741,6 @@ int CCL_main(int argc,char ** argv);
 int TDEpip_main(int argc, char **argv);
 
 
-
-
-
 void Paral_Tiff_Dev
     (
          const std::string & aDir,
@@ -757,38 +754,3 @@ void Paral_Tiff_Dev
 
 #endif // _ELISE_GENERAL_ARG_MAIN_H
 
-
-
-
-/*Footer-MicMac-eLiSe-25/06/2007
-
-Ce logiciel est un programme informatique servant �  la mise en
-correspondances d'images pour la reconstruction du relief.
-
-Ce logiciel est régi par la licence CeCILL-B soumise au droit français et
-respectant les principes de diffusion des logiciels libres. Vous pouvez
-utiliser, modifier et/ou redistribuer ce programme sous les conditions
-de la licence CeCILL-B telle que diffusée par le CEA, le CNRS et l'INRIA
-sur le site "http://www.cecill.info".
-
-En contrepartie de l'accessibilité au code source et des droits de copie,
-de modification et de redistribution accordés par cette licence, il n'est
-offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,
-seule une responsabilité restreinte pèse sur l'auteur du programme,  le
-titulaire des droits patrimoniaux et les concédants successifs.
-
-A cet égard  l'attention de l'utilisateur est attirée sur les risques
-associés au chargement,  �  l'utilisation,  �  la modification et/ou au
-développement et �  la reproduction du logiciel par l'utilisateur étant
-donné sa spécificité de logiciel libre, qui peut le rendre complexe �
-manipuler et qui le réserve donc �  des développeurs et des professionnels
-avertis possédant  des  connaissances  informatiques approfondies.  Les
-utilisateurs sont donc invités �  charger  et  tester  l'adéquation  du
-logiciel �  leurs besoins dans des conditions permettant d'assurer la
-sécurité de leurs systèmes et ou de leurs données et, plus généralement,
-�  l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
-
-Le fait que vous puissiez accéder �  cet en-tête signifie que vous avez
-pris connaissance de la licence CeCILL-B, et que vous en avez accepté les
-termes.
-Footer-MicMac-eLiSe-25/06/2007*/

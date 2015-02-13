@@ -131,7 +131,7 @@ template <class Type> class Std_Pack_Of_Pts : public Std_Pack_Of_Pts_Gen
        Tab_Prov<Tab_Prov<Type> *>   * _tprov_tprov;
        Tab_Prov<Type *>             * _tprov_ptr;
 
-       static CONST_STAT_TPL Pack_Of_Pts::type_pack type_glob;
+       static const Pack_Of_Pts::type_pack type_glob;
 
       virtual void rgb_bgr() ;
 

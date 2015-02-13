@@ -52,9 +52,9 @@ bool BugAZL = false;
 
 static void ToSepList
             (
-                    ElSTDNS list<Pt3dr> & PR3 ,
-                    ElSTDNS list<Pt2dr> & PF2 ,
-                    const ElSTDNS list<Appar23> & P23
+                    std::list<Pt3dr> & PR3 ,
+                    std::list<Pt2dr> & PF2 ,
+                    const std::list<Appar23> & P23
             )
 {
     PR3.clear();
@@ -62,7 +62,7 @@ static void ToSepList
 
     for
     (
-          ElSTDNS list<Appar23>::const_iterator It23 = P23.begin();
+          std::list<Appar23>::const_iterator It23 = P23.begin();
           It23 != P23.end();
           It23++
     )
@@ -2701,16 +2701,16 @@ void ElCamera::ChangeSys(const std::vector<ElCamera *> & aVCam, const cTransfo3D
 
 REAL ElCamera::EcProj
      (
-          const ElSTDNS list<Pt3dr> & PR3 ,
-          const ElSTDNS list<Pt2dr> & PF2
+          const std::list<Pt3dr> & PR3 ,
+          const std::list<Pt2dr> & PF2
      ) const
 {
     ELISE_ASSERT((PR3.size() == PF2.size()),"size != in ElCamera::EcProj");
 
     REAL res = 0;
 
-    ElSTDNS list<Pt3dr>::const_iterator It3 = PR3.begin();
-    ElSTDNS list<Pt2dr>::const_iterator It2 = PF2.begin();
+    std::list<Pt3dr>::const_iterator It3 = PR3.begin();
+    std::list<Pt2dr>::const_iterator It2 = PF2.begin();
 
     while (It3 != PR3.end())
     {
@@ -2736,10 +2736,10 @@ bool  ElCamera::TousDevant(const list<Pt3dr> & aL) const
 }
 
 
-REAL ElCamera::EcProj(const ElSTDNS list<Appar23> & P23)
+REAL ElCamera::EcProj(const std::list<Appar23> & P23)
 {
-    ElSTDNS list<Pt3dr> PR3;
-    ElSTDNS list<Pt2dr> PF2;
+    std::list<Pt3dr> PR3;
+    std::list<Pt2dr> PF2;
 
     ToSepList(PR3,PF2,P23);
 
@@ -3678,7 +3678,7 @@ void CamStenope::InstanceModifParam(cCalibrationInternConique & aParam)  const
 
 void CamStenope::OrientFromPtsAppui
      (
-         ElSTDNS list<ElRotation3D> & Res,
+         std::list<ElRotation3D> & Res,
          Pt3dr R3A, Pt3dr R3B, Pt3dr R3C,
          Pt2dr F2A, Pt2dr F2B, Pt2dr F2C
      )
@@ -3696,7 +3696,7 @@ void CamStenope::OrientFromPtsAppui
 
 
 
-    ElSTDNS list<Pt3dr>  Prof;
+    std::list<Pt3dr>  Prof;
     ElPhotogram::ProfChampsFromDist
     (
         Prof,
@@ -3708,7 +3708,7 @@ void CamStenope::OrientFromPtsAppui
     Res.clear();
     for (INT sign =-1; sign<=1 ; sign += 2)
     {
-        for (ElSTDNS list<Pt3dr>::iterator it=Prof.begin() ; it!=Prof.end() ; it++)
+        for (std::list<Pt3dr>::iterator it=Prof.begin() ; it!=Prof.end() ; it++)
         {
            Pt3dr L3A = RayA * it->x * sign;
            Pt3dr L3B = RayB * it->y * sign;
@@ -3732,9 +3732,9 @@ void CamStenope::OrientFromPtsAppui
 
 void CamStenope::OrientFromPtsAppui
      (
-         ElSTDNS list<ElRotation3D> & Res,
-         const ElSTDNS list<Pt3dr> & PR3 ,
-         const ElSTDNS list<Pt2dr> & PF2
+         std::list<ElRotation3D> & Res,
+         const std::list<Pt3dr> & PR3 ,
+         const std::list<Pt2dr> & PF2
      )
 {
      Res.clear();
@@ -3745,8 +3745,8 @@ void CamStenope::OrientFromPtsAppui
          "Bad Size in OrientFromPtsAppui"
      );
 
-    ElSTDNS list<Pt3dr>::const_iterator It3 = PR3.begin();
-    ElSTDNS list<Pt2dr>::const_iterator It2 = PF2.begin();
+    std::list<Pt3dr>::const_iterator It3 = PR3.begin();
+    std::list<Pt2dr>::const_iterator It2 = PF2.begin();
 
     Pt3dr R3A = *It3; It3++;
     Pt3dr R3B = *It3; It3++;
@@ -3760,12 +3760,12 @@ void CamStenope::OrientFromPtsAppui
 
 void CamStenope::OrientFromPtsAppui
      (
-         ElSTDNS list<ElRotation3D> & Res,
-         const ElSTDNS list<Appar23> & P23
+         std::list<ElRotation3D> & Res,
+         const std::list<Appar23> & P23
      )
 {
-    ElSTDNS list<Pt3dr> PR3;
-    ElSTDNS list<Pt2dr> PF2;
+    std::list<Pt3dr> PR3;
+    std::list<Pt2dr> PF2;
 
     ToSepList(PR3,PF2,P23);
     OrientFromPtsAppui(Res,PR3,PF2);
@@ -3775,14 +3775,14 @@ void CamStenope::OrientFromPtsAppui
 ElRotation3D  CamStenope::OrientFromPtsAppui
               (
                     bool RequireTousDevant,
-                    const ElSTDNS list<Pt3dr> & PR3 ,
-                    const ElSTDNS list<Pt2dr> & PF2 ,
+                    const std::list<Pt3dr> & PR3 ,
+                    const std::list<Pt2dr> & PF2 ,
                     REAL * Res_Dmin,
                     INT  * NbSol
               )
 {
 
-    ElSTDNS list<ElRotation3D>  Ors;
+    std::list<ElRotation3D>  Ors;
     OrientFromPtsAppui(Ors,PR3,PF2);
 
 
@@ -3801,7 +3801,7 @@ ElRotation3D  CamStenope::OrientFromPtsAppui
         ELISE_ASSERT(Ors.size()!=0,"Inc (No Solution) in OrientFromPtsAppui");
     }
 
-    ElSTDNS list<ElRotation3D>::iterator it=Ors.begin();
+    std::list<ElRotation3D>::iterator it=Ors.begin();
     ElRotation3D res = *it;
     REAL dmin = 1e5;
 
@@ -3856,8 +3856,8 @@ ElRotation3D  CamStenope::CombinatoireOFPAGen
               (
                     bool TousDevant,
                     INT  NbTest,
-                    const ElSTDNS list<Pt3dr> & PR3 ,
-                    const ElSTDNS list<Pt2dr> & PF2 ,
+                    const std::list<Pt3dr> & PR3 ,
+                    const std::list<Pt2dr> & PF2 ,
                     REAL * Res_Dmin,
             bool  aModeRansac,
                     Pt3dr * aDirApprox
@@ -3966,8 +3966,8 @@ ElRotation3D  CamStenope::CombinatoireOFPA
               (
                     bool TousDevant,
                     INT  NbTest,
-                    const ElSTDNS list<Pt3dr> & PR3 ,
-                    const ElSTDNS list<Pt2dr> & PF2 ,
+                    const std::list<Pt3dr> & PR3 ,
+                    const std::list<Pt2dr> & PF2 ,
                     REAL * Res_Dmin,
                     Pt3dr * aDirApprox
           )
@@ -3979,13 +3979,13 @@ ElRotation3D  CamStenope::CombinatoireOFPA
               (
                     bool TousDevant,
                     INT  NbTest,
-                    const ElSTDNS list<Appar23> & P23 ,
+                    const std::list<Appar23> & P23 ,
                     REAL * Res_Dmin,
                     Pt3dr * aDirApprox
           )
 {
-    ElSTDNS list<Pt3dr> PR3;
-    ElSTDNS list<Pt2dr> PF2;
+    std::list<Pt3dr> PR3;
+    std::list<Pt2dr> PF2;
 
     ToSepList(PR3,PF2,P23);
     return CombinatoireOFPA(TousDevant,NbTest,PR3,PF2,Res_Dmin,aDirApprox);
@@ -3995,13 +3995,13 @@ ElRotation3D  CamStenope::RansacOFPA
               (
                     bool TousDevant,
                     INT  NbTest,
-                    const ElSTDNS list<Appar23> & P23 ,
+                    const std::list<Appar23> & P23 ,
                     REAL * Res_Dmin,
                     Pt3dr * aDirApprox
           )
 {
-    ElSTDNS list<Pt3dr> PR3;
-    ElSTDNS list<Pt2dr> PF2;
+    std::list<Pt3dr> PR3;
+    std::list<Pt2dr> PF2;
 
     ToSepList(PR3,PF2,P23);
     return CombinatoireOFPAGen(TousDevant,NbTest,PR3,PF2,Res_Dmin,true,aDirApprox);
@@ -4015,13 +4015,13 @@ ElRotation3D  CamStenope::RansacOFPA
 ElRotation3D  CamStenope::OrientFromPtsAppui
               (
                     bool TousDevant,
-                    const ElSTDNS list<Appar23> & P23 ,
+                    const std::list<Appar23> & P23 ,
                     REAL * Res_Dmin,
                     INT   * NbSol
               )
 {
-    ElSTDNS list<Pt3dr> PR3;
-    ElSTDNS list<Pt2dr> PF2;
+    std::list<Pt3dr> PR3;
+    std::list<Pt2dr> PF2;
 
     ToSepList(PR3,PF2,P23);
     return OrientFromPtsAppui(TousDevant,PR3,PF2,Res_Dmin,NbSol);

@@ -55,7 +55,7 @@ class DATA_DXF_WRITER :  public RC_Object
 
           DATA_DXF_WRITER
           (
-               const ElSTDNS string &,
+               const std::string &,
                Box2di        ,
                bool         InvY = true
           );
@@ -74,7 +74,7 @@ class DATA_DXF_WRITER :  public RC_Object
           void PutPt1(Pt2dr);
           void PutPt0(Pt2dr,bool corY);
 
-          ElSTDNS string  _name;
+          std::string  _name;
           FILE *  _fp;
           bool    _inv_Y;
           REAL    _Y1;
@@ -225,7 +225,7 @@ void  DATA_DXF_WRITER::PutPt1(Pt2dr p)
 
 DATA_DXF_WRITER::DATA_DXF_WRITER
 (
-     const ElSTDNS string & Name,
+     const std::string & Name,
      Box2di         Box,
      bool           InvY 
 )   :

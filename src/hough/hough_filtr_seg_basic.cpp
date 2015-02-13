@@ -74,14 +74,14 @@ class StateEHFS_PrgDyn
 {
      public :
        typedef const StateEHFS_PrgDyn *     tPtrPred;
-       typedef ElSTDNS list<tPtrPred>       tLPred;
+       typedef std::list<tPtrPred>       tLPred;
        typedef tLPred::iterator             tItPred;
 
        StateEHFS_PrgDyn(bool IsSeg,INT anX);
        void ComputeGain(ElHoughFiltSeg &,bool IsExtre,bool IsLast);
        void AddPred(tPtrPred);
-       void AddPred(const ElSTDNS list<StateEHFS_PrgDyn>&);
-       void SetPred(const ElSTDNS list<StateEHFS_PrgDyn> &);
+       void AddPred(const std::list<StateEHFS_PrgDyn>&);
+       void SetPred(const std::list<StateEHFS_PrgDyn> &);
        const StateEHFS_PrgDyn * BestPred () const;
 
        bool GainGlobInf (const StateEHFS_PrgDyn & ) const;
@@ -123,12 +123,12 @@ class SetState_EHFS_PD
 
        friend ostream & operator << (ostream & Out,const SetState_EHFS_PD &);
 
-	   ElSTDNS list<StateEHFS_PrgDyn>::const_iterator stateBegin() const { return mStates.begin(); }
-	   ElSTDNS list<StateEHFS_PrgDyn>::const_iterator stateEnd() const { return mStates.end(); }
+	   std::list<StateEHFS_PrgDyn>::const_iterator stateBegin() const { return mStates.begin(); }
+	   std::list<StateEHFS_PrgDyn>::const_iterator stateEnd() const { return mStates.end(); }
 
      private :
          INT mX;
-         ElSTDNS list<StateEHFS_PrgDyn>   mStates;
+         std::list<StateEHFS_PrgDyn>   mStates;
 };
 
     /*+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+-+-+-+*/
@@ -143,7 +143,7 @@ class EHFS_PrgDyn
        EHFS_PrgDyn(INT NbMax);
        void  ComputeBestChem
              (
-                  std::vector<ElSTDNS  pair<INT,INT> > & res,
+                  std::vector<std:: pair<INT,INT> > & res,
                   ElHoughFiltSeg &,
                   INT Nb
              );
@@ -226,21 +226,21 @@ void StateEHFS_PrgDyn::AddPred(StateEHFS_PrgDyn::tPtrPred aPred)
     mPreds.push_back(aPred);
 }
 
-void StateEHFS_PrgDyn::AddPred(const ElSTDNS list<StateEHFS_PrgDyn> &l)
+void StateEHFS_PrgDyn::AddPred(const std::list<StateEHFS_PrgDyn> &l)
 {
     for 
     (
-        ElSTDNS list<StateEHFS_PrgDyn>::const_iterator it=l.begin() ;
+        std::list<StateEHFS_PrgDyn>::const_iterator it=l.begin() ;
         it!=l.end();
         it++
     )
         AddPred(&(*it));
 }
 
-void StateEHFS_PrgDyn::SetPred(const ElSTDNS list<StateEHFS_PrgDyn> &l)
+void StateEHFS_PrgDyn::SetPred(const std::list<StateEHFS_PrgDyn> &l)
 {
     ELISE_ASSERT(l.size()==mPreds.size(),"StateEHFS_PrgDyn::SetPred");
-    ElSTDNS list<StateEHFS_PrgDyn>::const_iterator it=l.begin() ;
+    std::list<StateEHFS_PrgDyn>::const_iterator it=l.begin() ;
     tItPred  it2= mPreds.begin();
 
     for ( ; it!=l.end() ; it++,it2++)
@@ -296,7 +296,7 @@ ostream & operator << (ostream & Out,const SetState_EHFS_PD & Set)
    Out << "#{";
    for 
    (
-       ElSTDNS list<StateEHFS_PrgDyn>::const_iterator  it = Set.stateBegin();
+       std::list<StateEHFS_PrgDyn>::const_iterator  it = Set.stateBegin();
        it != Set.stateEnd();
        it++
    )
@@ -312,7 +312,7 @@ StateEHFS_PrgDyn * SetState_EHFS_PD::Best()
    StateEHFS_PrgDyn * res = &(*mStates.begin());
    for 
    (
-       ElSTDNS list<StateEHFS_PrgDyn>::iterator  it = mStates.begin();
+       std::list<StateEHFS_PrgDyn>::iterator  it = mStates.begin();
        it != mStates.end();
        it++
    )
@@ -326,7 +326,7 @@ void SetState_EHFS_PD::AddPred(SetState_EHFS_PD & Pred)
 {
     for 
     (
-       ElSTDNS list<StateEHFS_PrgDyn>::iterator it=mStates.begin();
+       std::list<StateEHFS_PrgDyn>::iterator it=mStates.begin();
        it != mStates.end();
        it++
     )
@@ -339,7 +339,7 @@ void SetState_EHFS_PD::SetPred(SetState_EHFS_PD & Pred)
 {
     for 
     (
-       ElSTDNS list<StateEHFS_PrgDyn>::iterator it=mStates.begin();
+       std::list<StateEHFS_PrgDyn>::iterator it=mStates.begin();
        it != mStates.end();
        it++
     )
@@ -350,7 +350,7 @@ void  SetState_EHFS_PD::ComputeGain(ElHoughFiltSeg & Ehfs,bool IsExtre,bool IsLa
 {
     for 
     (
-       ElSTDNS list<StateEHFS_PrgDyn>::iterator it=mStates.begin();
+       std::list<StateEHFS_PrgDyn>::iterator it=mStates.begin();
        it != mStates.end();
        it++
     )
@@ -396,7 +396,7 @@ void EHFS_PrgDyn::ComputeGain
 
 void  EHFS_PrgDyn::ComputeBestChem
       (
-           std::vector<ElSTDNS pair<INT,INT> > & res,
+           std::vector<std::pair<INT,INT> > & res,
            ElHoughFiltSeg &  Ehfs,
            INT Nb
       )
@@ -417,7 +417,7 @@ void  EHFS_PrgDyn::ComputeBestChem
             if ((aState->IsSeg()) && (!nextState->IsSeg()))
             {
                ELISE_ASSERT(xDeb!=-100, "EHFS_PrgDyn::ComputeBestChem");
-               res.push_back(ElSTDNS pair<INT,INT>(xDeb,aState->X()));
+               res.push_back(std::pair<INT,INT>(xDeb,aState->X()));
                xDeb = -100;
             }
         }
@@ -561,7 +561,7 @@ void ElHoughFiltSeg::GenPrgDynGet(std::vector<Seg2d> & Segs,REAL dMin)
     Segs.clear();
     for 
     (
-       ElSTDNS vector<ElSTDNS pair<INT,INT> >::iterator itP=mVPairI.begin();
+       std::vector<std::pair<INT,INT> >::iterator itP=mVPairI.begin();
        itP!=mVPairI.end();
        itP++
     )
@@ -605,7 +605,7 @@ Seg2d ElHoughFiltSeg::OneExtendSeg
 
       for 
       (
-           ElSTDNS vector<Seg2d>::iterator itS = mVSegsExt.begin();
+           std::vector<Seg2d>::iterator itS = mVSegsExt.begin();
            itS != mVSegsExt.end();
            itS++
       )

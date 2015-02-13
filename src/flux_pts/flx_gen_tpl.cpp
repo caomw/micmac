@@ -415,8 +415,8 @@ template <class Type> void Std_Pack_Of_Pts<Type>::verif_inside
    }
 }
 
-template <> CONST_STAT_TPL Pack_Of_Pts::type_pack Std_Pack_Of_Pts<INT>::type_glob = Pack_Of_Pts::integer;
-template <> CONST_STAT_TPL Pack_Of_Pts::type_pack Std_Pack_Of_Pts<REAL>::type_glob = Pack_Of_Pts::real;
+template <> const Pack_Of_Pts::type_pack Std_Pack_Of_Pts<INT>::type_glob = Pack_Of_Pts::integer;
+template <> const Pack_Of_Pts::type_pack Std_Pack_Of_Pts<REAL>::type_glob = Pack_Of_Pts::real;
 
 
 #if ElTemplateInstantiation

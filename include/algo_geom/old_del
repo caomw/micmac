@@ -98,12 +98,12 @@ template <class Iterator,class Fpt,class Act>  void
 
     {
         ElComparPtOn_x_then_y<Type ,Fpt> Cmp(fpt);
-        STDSORT(vals,vals+nb,Cmp);                       
+        std::sort(vals,vals+nb,Cmp);                       
     }
    
     {
         ElComparPts<Type ,Fpt> CmpEq(fpt);
-        Type ** newlast = STDUNIQUE(vals,vals+nb,CmpEq);
+        Type ** newlast = std::unique(vals,vals+nb,CmpEq);
         nb = newlast - vals;
     }
 
@@ -262,12 +262,12 @@ template <class Type,class Fpt,class Act>  void
 
     {
         ElComparPtOn_x_then_y<Type,Fpt> Cmp(fpt);
-        STDSORT(vals,vals+nb,Cmp);                       
+        std::sort(vals,vals+nb,Cmp);                       
     }
    
     {
         ElComparPts<Type,Fpt> CmpEq(fpt);
-        Type * newlast = STDUNIQUE(vals,vals+nb,CmpEq);
+        Type * newlast = std::unique(vals,vals+nb,CmpEq);
         nb = newlast - vals;
     }
     ElFifo<INT> MARQUEUR_K;
@@ -411,13 +411,13 @@ template <class Iterator,class Fpt,class Act>  void
 
     {
         ElComparPtOn_x_then_y<Type,Fpt> Cmp(fpt);
-        STDSORT(begin,end,Cmp);                       
+        std::sort(begin,end,Cmp);                       
     }
 
    
     {
         ElComparPts<Type,Fpt> CmpEq(fpt);
-        end = STDUNIQUE(begin,end,CmpEq);
+        end = std::unique(begin,end,CmpEq);
     }
     INT nb =0;
     {

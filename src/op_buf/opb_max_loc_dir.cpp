@@ -75,8 +75,8 @@ class MaxLocDir_OPB : public Simple_OPBuf1<REAL,REAL>
 
   
      TIm2D<REAL8,REAL8>    mIm;
-     ElSTDNS vector<ElPFixed<NbBits> > mVois;
-     ElSTDNS vector<INT>               mIndVois;
+     std::vector<ElPFixed<NbBits> > mVois;
+     std::vector<INT>               mIndVois;
      REAL8                     mROuvAng;
      INT                       mIOuvAng;
      bool                      mOrientedMaxLoc;

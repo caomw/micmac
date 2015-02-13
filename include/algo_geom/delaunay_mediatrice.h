@@ -81,12 +81,12 @@ template <class Iterator,class Fpt,class Act,class Type>  void
 
     {
         ElComparPtOn_x_then_y<Type ,Fpt> Cmp(fpt);
-        STDSORT(vals,vals+nb,Cmp);                       
-    }
-   
+        std::sort(vals,vals+nb,Cmp);
+ 	}
+
     {
         ElComparPts<Type ,Fpt> CmpEq(fpt);
-        Type ** newlast = STDUNIQUE(vals,vals+nb,CmpEq);
+        Type ** newlast = std::unique(vals,vals+nb,CmpEq);
         nb = (int)(newlast - vals);
     }
 

@@ -395,26 +395,26 @@ class Tiff_Im : public ElGenFileIm
           std::vector<Im2DGen *>  VecOfIm(Pt2di aSz);
           std::vector<Im2DGen *>  ReadVecOfIm();
 
-          static const ElSTDNS string Str_No_Compr;		// NoCompr
-          static const ElSTDNS string Str_CCITT_G3_1D_Compr; 	// CCITTG31D
-          static const ElSTDNS string Str_Group_3FAX_Compr;	// FAX3
-          static const ElSTDNS string Str_Group_4FAX_Compr;	// FAX4
-          static const ElSTDNS string Str_LZW_Compr;		// LZW
-          static const ElSTDNS string Str_JPEG_Compr;		// JPEG
-          static const ElSTDNS string Str_MPD_T6; 		// MPTDT6
-          static const ElSTDNS string Str_PackBits_Compr;	// PackBits
-          static const ElSTDNS string Str_NoBytePackBits_Compr;	// PackBits
+          static const std::string Str_No_Compr;		// NoCompr
+          static const std::string Str_CCITT_G3_1D_Compr; 	// CCITTG31D
+          static const std::string Str_Group_3FAX_Compr;	// FAX3
+          static const std::string Str_Group_4FAX_Compr;	// FAX4
+          static const std::string Str_LZW_Compr;		// LZW
+          static const std::string Str_JPEG_Compr;		// JPEG
+          static const std::string Str_MPD_T6; 		// MPTDT6
+          static const std::string Str_PackBits_Compr;	// PackBits
+          static const std::string Str_NoBytePackBits_Compr;	// PackBits
 
-      static Tiff_Im  StdConv(const ElSTDNS string & Name); // => remis  pour compat  avec certain binaires (=BasicConvStd)
-      static Tiff_Im  BasicConvStd(const ElSTDNS string & Name);  // Que les tif ou assim
-      static Tiff_Im  UnivConvStd(const ElSTDNS string & Name);   // cree des tifs cache pour les RAW-JPGS (uses StdConvGen)
+      static Tiff_Im  StdConv(const std::string & Name); // => remis  pour compat  avec certain binaires (=BasicConvStd)
+      static Tiff_Im  BasicConvStd(const std::string & Name);  // Que les tif ou assim
+      static Tiff_Im  UnivConvStd(const std::string & Name);   // cree des tifs cache pour les RAW-JPGS (uses StdConvGen)
           // Convertit (avec NameFileStd) les jpg , raw et tif comprs
-      static Tiff_Im  StdConvGen(const ElSTDNS string & Name,int aNbChan,bool Cons16B,bool ExigNoCompr = true);
+      static Tiff_Im  StdConvGen(const std::string & Name,int aNbChan,bool Cons16B,bool ExigNoCompr = true);
 
       // Test dand l'ordre aName + ".tif" et aName
       static std::string GetNameOfFileExist(const std::string & aName);
 
-      static COMPR_TYPE mode_compr(const ElSTDNS string &);
+      static COMPR_TYPE mode_compr(const std::string &);
          Tiff_Im(class DATA_Tiff_Ifd *);
 
          Im2DGen ReadIm();

@@ -443,8 +443,8 @@ class ElImScroller
 class ElPyramScroller : public ElImScroller
 {
     public :
-       ElPyramScroller(ElSTDNS vector<ElImScroller *> & scrolls);
-       const ElSTDNS vector<ElImScroller *> & SubScrolls();
+       ElPyramScroller(std::vector<ElImScroller *> & scrolls);
+       const std::vector<ElImScroller *> & SubScrolls();
 
 
 		virtual REAL TimeLoadXIm() const; // 0.0
@@ -459,7 +459,7 @@ class ElPyramScroller : public ElImScroller
            void LoadXImage(Pt2di p0,Pt2di p1,bool quick);
            void ReflexSetVisuCur(Visu_ElImDest *);
 
-           ElSTDNS vector<ElImScroller *> _subs;
+           std::vector<ElImScroller *> _subs;
            ElImScroller * _cur;
            ElPyramScroller(const ElPyramScroller &);
 };
@@ -484,7 +484,7 @@ class ElImIncruster
 				Pt2di                           SzIm,
 				Pt2di                           SzBrd,
 				Visu_ElImScr &                  Visu,
-				const ElSTDNS vector<ElImScroller*>   & Scrols,
+				const std::vector<ElImScroller*>   & Scrols,
 				INT                             NbImRab = 0
 			);
 
@@ -534,9 +534,9 @@ class ElImIncruster
 			void IncrustOrigineAtPtW(Pt2di pt,Elise_Palette *);
 			virtual INT Filters
                                     (
-                                          ElSTDNS vector<ElImIncr_ScrAttr> & Attrs,
-                                          ElSTDNS vector<Im2D_INT4> &        OutPut,
-                                          ElSTDNS vector<Im2D_INT4> &        InPut,
+                                          std::vector<ElImIncr_ScrAttr> & Attrs,
+                                          std::vector<Im2D_INT4> &        OutPut,
+                                          std::vector<Im2D_INT4> &        InPut,
                                           Pt2di p0,
                                           Pt2di p1
                                     ) =0;
@@ -581,9 +581,9 @@ class Filtr_Incr_EqDyn_Glob
          Filtr_Incr_EqDyn_Glob() ;
          INT Filters
              (
-                     ElSTDNS vector<ElImIncr_ScrAttr> & Attrs,
-                     ElSTDNS vector<Im2D_INT4> & OutPut,
-                     ElSTDNS vector<Im2D_INT4> &InPut,
+                     std::vector<ElImIncr_ScrAttr> & Attrs,
+                     std::vector<Im2D_INT4> & OutPut,
+                     std::vector<Im2D_INT4> &InPut,
                      Pt2di p0,Pt2di p1,REAL Fact=1
              );
 
@@ -602,9 +602,9 @@ class Filtr_Incr_EqDyn_Loc
          Filtr_Incr_EqDyn_Loc(ConvMne_Filtr_Incr_EqDyn_Loc,INT ValSpec) ;
          INT Filters
              (
-                  ElSTDNS vector<ElImIncr_ScrAttr> & Attrs,
-                  ElSTDNS vector<Im2D_INT4> & OutPut,
-                  ElSTDNS vector<Im2D_INT4> &InPut,
+                  std::vector<ElImIncr_ScrAttr> & Attrs,
+                  std::vector<Im2D_INT4> & OutPut,
+                  std::vector<Im2D_INT4> &InPut,
                   Pt2di p0,Pt2di p1,INT Brd,REAL Fact=1
              );
 
@@ -620,9 +620,9 @@ class Filtr_Incr_EtalDyn
          Filtr_Incr_EtalDyn() ;
          INT Filters
              (
-                  ElSTDNS vector<ElImIncr_ScrAttr> & Attrs,
-                  ElSTDNS vector<Im2D_INT4> & OutPut,
-                  ElSTDNS vector<Im2D_INT4> &InPut,
+                  std::vector<ElImIncr_ScrAttr> & Attrs,
+                  std::vector<Im2D_INT4> & OutPut,
+                  std::vector<Im2D_INT4> &InPut,
                   Pt2di p0,Pt2di p1,REAL Vmin,REAL Vmax
              );
 
@@ -636,9 +636,9 @@ class Filtr_Incr_NormDeriche
          Filtr_Incr_NormDeriche() ;
          INT Filters
              (
-                  ElSTDNS vector<ElImIncr_ScrAttr> & Attrs,
-                  ElSTDNS vector<Im2D_INT4> & OutPut,
-                  ElSTDNS vector<Im2D_INT4> &InPut,
+                  std::vector<ElImIncr_ScrAttr> & Attrs,
+                  std::vector<Im2D_INT4> & OutPut,
+                  std::vector<Im2D_INT4> &InPut,
                   Pt2di p0,Pt2di p1,REAL FactDer,REAL Dyn
              );
 
@@ -652,9 +652,9 @@ class Filtr_Incr_AngDeriche
          Filtr_Incr_AngDeriche() ;
          INT Filters
              (
-                  ElSTDNS vector<ElImIncr_ScrAttr> & Attrs,
-                  ElSTDNS vector<Im2D_INT4> & OutPut,
-                  ElSTDNS vector<Im2D_INT4> &InPut,
+                  std::vector<ElImIncr_ScrAttr> & Attrs,
+                  std::vector<Im2D_INT4> & OutPut,
+                  std::vector<Im2D_INT4> &InPut,
                   Pt2di p0,Pt2di p1,REAL FactDer
              );
 
@@ -894,7 +894,7 @@ class BiScroller : public ElImScroller
 
                 Im2D_U_INT1 ImMasq();
 
-                const ElSTDNS vector<ElImScroller *> & SubScrolls();
+                const std::vector<ElImScroller *> & SubScrolls();
 
 
                  BiScroller
@@ -996,7 +996,7 @@ class BiScroller : public ElImScroller
                 U_INT1 *      mDataImB;
 
                 Pt2dr         mTr;
-                ElSTDNS vector<ElImScroller *> mSubScrolls;
+                std::vector<ElImScroller *> mSubScrolls;
                 bool                           mIm1Act;
                 bool                           mIm2Act;
                 Im2D_U_INT1                    mImMasq;

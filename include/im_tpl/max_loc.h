@@ -162,7 +162,7 @@ class GenMaxLoc
        U_INT1 **             mDataMarq;
 };
 
-template <class Type,class TypeBase,class Compare = ElSTDNS less<Type> >  
+template <class Type,class TypeBase,class Compare = std::less<Type> >  
          class CalcMaxLoc  : private GenMaxLoc
 {
     public :
@@ -191,7 +191,7 @@ template <class Type,class TypeBase,class Compare = ElSTDNS less<Type> >
 
 		  void FiltrMaxLoc_BCVS
 			   (
-				        ElSTDNS vector<Pt2di> & Pts,
+				        std::vector<Pt2di> & Pts,
 					Im2D<Type,TypeBase> Im,
 					REAL  FactInf,
 					REAL  TolGeom,

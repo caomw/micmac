@@ -143,7 +143,7 @@ class TFlux_Line2d
 template <class TypeFlux,class TypeFonc> class TFluxSelect
 {
          public :
-            typedef ElTyName TypeFlux::OutFlux   OutFlux;
+            typedef  TypeFlux::OutFlux   OutFlux;
 
             TFluxSelect(TypeFlux flux,TypeFonc fonc)  :
                  _flux (flux), 

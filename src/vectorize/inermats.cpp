@@ -117,7 +117,7 @@ template <class Type>   typename Type::TypeReel::TypeEff
 template <class Type> Seg2d  seg_mean_square(const Mat_Inertie<Type> & Minitiale, REAL norm)
 {
 
-   Mat_Inertie<ElTypeName_NotMSW Type::TypeReel> m = Minitiale.normalize();
+   Mat_Inertie<typename Type::TypeReel> m = Minitiale.normalize();
 
 // si mat inert circulaire, alors n'importe
 // quelle droite passant par le cdg

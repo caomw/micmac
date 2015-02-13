@@ -64,7 +64,7 @@ char * std_ch_dup(const char * ch)
 /*                                                          */
 /************************************************************/
 
-INT   IndPostfixed  (const ElSTDNS string & str,char  c)
+INT   IndPostfixed  (const std::string & str,char  c)
 {
     size_t ind = str.rfind(c);
     if ( ind ==  string::npos)
@@ -76,12 +76,12 @@ INT   IndPostfixed  (const ElSTDNS string & str,char  c)
     return (int) ind;
 }
 
-bool IsPostfixed(const ElSTDNS string & str,char  c)
+bool IsPostfixed(const std::string & str,char  c)
 {
-     return   str.rfind(c) !=  ElSTDNS string::npos;
+     return   str.rfind(c) !=  std::string::npos;
 }
 
-bool    IsPostfixedBy  (const ElSTDNS string & aName,const std::string & aPost)
+bool    IsPostfixedBy  (const std::string & aName,const std::string & aPost)
 {
     return IsPostfixed(aName) && (StdPostfix(aName)==aPost);
 }
@@ -92,18 +92,18 @@ bool IsFileDmp(const std::string & aName)
 }
 
 
-ElSTDNS string StdPrefix(const ElSTDNS string & str,char c)
+std::string StdPrefix(const std::string & str,char c)
 {
     return str.substr(0,IndPostfixed(str,c));
 }
 
-ElSTDNS string StdPostfix(const ElSTDNS string & str,char c)
+std::string StdPostfix(const std::string & str,char c)
 {
     return str.substr(IndPostfixed(str,c)+1,str.length());
 }
 
 //remove extension
-ElSTDNS string StdPrefixGen(const ElSTDNS string & aStr,char c)
+std::string StdPrefixGen(const std::string & aStr,char c)
 {
         if (IsPostfixed(aStr,c))
         return aStr.substr(0,IndPostfixed(aStr,c));
@@ -542,36 +542,3 @@ void BanniereMM3D()
     std::cout << getBanniereMM3D();
 }
 
-
-/*Footer-MicMac-eLiSe-25/06/2007
-
-Ce logiciel est un programme informatique servant �  la mise en
-correspondances d'images pour la reconstruction du relief.
-
-Ce logiciel est régi par la licence CeCILL-B soumise au droit français et
-respectant les principes de diffusion des logiciels libres. Vous pouvez
-utiliser, modifier et/ou redistribuer ce programme sous les conditions
-de la licence CeCILL-B telle que diffusée par le CEA, le CNRS et l'INRIA
-sur le site "http://www.cecill.info".
-
-En contrepartie de l'accessibilité au code source et des droits de copie,
-de modification et de redistribution accordés par cette licence, il n'est
-offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,
-seule une responsabilité restreinte pèse sur l'auteur du programme,  le
-titulaire des droits patrimoniaux et les concédants successifs.
-
-A cet égard  l'attention de l'utilisateur est attirée sur les risques
-associés au chargement,  �  l'utilisation,  �  la modification et/ou au
-développement et �  la reproduction du logiciel par l'utilisateur étant
-donné sa spécificité de logiciel libre, qui peut le rendre complexe �
-manipuler et qui le réserve donc �  des développeurs et des professionnels
-avertis possédant  des  connaissances  informatiques approfondies.  Les
-utilisateurs sont donc invités �  charger  et  tester  l'adéquation  du
-logiciel �  leurs besoins dans des conditions permettant d'assurer la
-sécurité de leurs systèmes et ou de leurs données et, plus généralement,
-�  l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
-
-Le fait que vous puissiez accéder �  cet en-tête signifie que vous avez
-pris connaissance de la licence CeCILL-B, et que vous en avez accepté les
-termes.
-Footer-MicMac-eLiSe-25/06/2007*/

@@ -1657,25 +1657,25 @@ Elise_Palette  Tiff_Im::std_pal(Video_Win W)
     return W.pgray();
 }
 
-Tiff_Im  Tiff_Im::StdConv(const ElSTDNS string & aName)
+Tiff_Im  Tiff_Im::StdConv(const std::string & aName)
 {
    return BasicConvStd(aName);
 }
 /*
 */
 
-Tiff_Im  Tiff_Im::UnivConvStd(const ElSTDNS string & aName)
+Tiff_Im  Tiff_Im::UnivConvStd(const std::string & aName)
 {
    return StdConvGen(aName,-1,true,false);
 }
 
 
 
-Tiff_Im  Tiff_Im::BasicConvStd(const ElSTDNS string & Name)
+Tiff_Im  Tiff_Im::BasicConvStd(const std::string & Name)
 {
     if (IsPostfixed(Name))
     {
-       ElSTDNS string post = StdPostfix(Name);
+       std::string post = StdPostfix(Name);
 
        if ((post=="tif") || (post=="tiff") || (post=="TIF") || (post=="TIFF") || (post=="Tif"))
            return Tiff_Im(Name.c_str());
@@ -1703,7 +1703,7 @@ Tiff_Im  Tiff_Im::BasicConvStd(const ElSTDNS string & Name)
     }
 
    {
-      ElSTDNS string Name_Head = Name+ElSTDNS string(".header");
+      std::string Name_Head = Name+std::string(".header");
       if (ELISE_fp::exist_file(Name_Head.c_str()))
          return Elise_Tiled_File_Im_2D::Saphir
                 (
@@ -1728,7 +1728,7 @@ Tiff_Im  Tiff_Im::BasicConvStd(const ElSTDNS string & Name)
 
     if (IsPostfixed(Name))
     {
-       ElSTDNS string post = StdPostfix(Name);
+       std::string post = StdPostfix(Name);
        Tjs_El_User.ElAssert
        (
           false,
@@ -2096,7 +2096,7 @@ Fonc_Num Tiff_Im::in_bool(Fonc_Num aFonc)
 
 
 
-Tiff_Im  Tiff_Im::StdConvGen(const ElSTDNS string & Name,int aNbChan,bool Bits16,bool ExigNoCompr)
+Tiff_Im  Tiff_Im::StdConvGen(const std::string & Name,int aNbChan,bool Bits16,bool ExigNoCompr)
 {
    return Tiff_Im::BasicConvStd(NameFileStd(Name,aNbChan,Bits16,ExigNoCompr));
 }
@@ -2175,7 +2175,7 @@ std::string NameFileStd
 
    if (IsPostfixed(aFullNameOri))
    {
-        ElSTDNS string post = StdPostfix(aFullNameOri);
+        std::string post = StdPostfix(aFullNameOri);
        if (
                  (post == "HDR")
               || (post == "xml")

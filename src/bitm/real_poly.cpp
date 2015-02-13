@@ -148,7 +148,7 @@ template <class Type> Type DichotSolvePolynone<Type>::BracketSolve
 template<class Type>
 void IntervVarOfPrimtive
      (
-         ElSTDNS vector<Type> &  Roots,
+         std::vector<Type> &  Roots,
          Type  BorneInf,
          Type  BorneSup,
          const ElPolynome<Type>  &aPol,
@@ -170,7 +170,7 @@ void IntervVarOfPrimtive
      else
      {
 
-         ElSTDNS vector<Type>  RootsDeriv;
+         std::vector<Type>  RootsDeriv;
          ElPolynome<Type> PolDeriv = aPol.deriv();
       
 
@@ -205,7 +205,7 @@ bool BugPoly = false;
 template <class Type> void  
      RealRootsOfRealPolynome
      (
-         ElSTDNS vector<Type> &  Sols,
+         std::vector<Type> &  Sols,
          const ElPolynome<Type>  &aPol,
          Type                    tol,
          INT                     ItMax
@@ -222,21 +222,21 @@ template <class Type> void
 
 template  void  RealRootsOfRealPolynome<REAL>
                   (
-                      ElSTDNS vector<REAL> &  Sols,
+                      std::vector<REAL> &  Sols,
                       const ElPolynome<REAL>  &aPol,
                       REAL                    tol,
                       INT                     ItMax
                   );
 template  void  RealRootsOfRealPolynome<float>
                   (
-                      ElSTDNS vector<float> &  Sols,
+                      std::vector<float> &  Sols,
                       const ElPolynome<float>  &aPol,
                       float                    tol,
                       INT                     ItMax
                   );
 template  void  RealRootsOfRealPolynome<REAL16>
                   (
-                      ElSTDNS vector<REAL16> &  Sols,
+                      std::vector<REAL16> &  Sols,
                       const ElPolynome<REAL16>  &aPol,
                       REAL16                    tol,
                       INT                     ItMax

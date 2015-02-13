@@ -174,7 +174,7 @@ INT ElHoughImplem::GetIndTeta(INT AValue,tElIndex *tab,INT Nb)
     if (mGetTetaTrivial)
        return AValue;
 
-    return (INT) (ElSTDNS lower_bound(tab,tab+Nb,AValue)-tab);
+    return (INT) (std::lower_bound(tab,tab+Nb,AValue)-tab);
 }
 
 
@@ -189,7 +189,7 @@ static bool CmpPairOnTeta
 
 void ElHoughImplem::finish()
 {
-   ElSTDNS vector<ElSTDNS pair<Pt2di,REAL> >  tmp;
+   std::vector<std::pair<Pt2di,REAL> >  tmp;
 
    mNbCelTot = 0;
    REAL  PdsCelMax =0;

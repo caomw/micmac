@@ -124,7 +124,7 @@ template <class Type,class TypeBase,class Compare>
 template <class Type,class TypeBase,class Compare>
         void CalcMaxLoc<Type,TypeBase,Compare>::AllMaxLoc 
              (
-                  ElSTDNS vector<Pt2di> &res,
+                  std::vector<Pt2di> &res,
                   Im2D<Type,TypeBase> Im,
                   Pt2di    Vois,
                   Pt2di    p0, Pt2di    p1,
@@ -148,7 +148,7 @@ template <class Type,class TypeBase,class Compare>
  
 
    res.clear();
-   ElSTDNS vector<Pt3di> & OVois = OrdVois(Vois);
+   std::vector<Pt3di> & OVois = OrdVois(Vois);
 
    for (INT Y0=p0.y ; Y0<p1.y ; Y0+=dly)
    {
@@ -277,7 +277,7 @@ static Pt2di  NoPts(-(1<<30),1<<30);
 template <class Type,class TypeBase,class Compare>
 void  CalcMaxLoc<Type,TypeBase,Compare>::FiltrMaxLoc_BCVS
       (
-          ElSTDNS vector<Pt2di> & Pts,
+          std::vector<Pt2di> & Pts,
           Im2D<Type,TypeBase> Im,
           REAL  FactInf,
           REAL  TolGeom,
@@ -331,7 +331,7 @@ void  CalcMaxLoc<Type,TypeBase,Compare>::FiltrMaxLoc_BCVS
 }
 
 
-template class CalcMaxLoc <INT,INT, ElSTDNS less<INT> >;
+template class CalcMaxLoc <INT,INT, std::less<INT> >;
 
 
 

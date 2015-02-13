@@ -590,10 +590,10 @@ std::string ToStrBlkCorr(const std::string &);
 
 
 std::string StrToLower(const std::string & aStr);
-INT    IndPostfixed  (const ElSTDNS string &,char = '.');
-ElSTDNS string StdPostfix(const ElSTDNS string &,char = '.');
-ElSTDNS string StdPrefix (const ElSTDNS string &,char = '.');
-ElSTDNS string StdPrefixGen (const ElSTDNS string &,char = '.');
+INT    IndPostfixed  (const std::string &,char = '.');
+std::string StdPostfix(const std::string &,char = '.');
+std::string StdPrefix (const std::string &,char = '.');
+std::string StdPrefixGen (const std::string &,char = '.');
 std::string NameWithoutDir(const std::string &);
 
 std::string ExtractDigit(const std::string & aName,const std::string &  aDef);
@@ -668,8 +668,8 @@ bool GetOneModifLC
 void MakeFileDirCompl(std::string &);
 
 
-bool    IsPostfixed  (const ElSTDNS string &,char = '.');
-bool    IsPostfixedBy  (const ElSTDNS string &,const std::string &);
+bool    IsPostfixed  (const std::string &,char = '.');
+bool    IsPostfixedBy  (const std::string &,const std::string &);
 
 bool IsFileDmp(const std::string &);
 

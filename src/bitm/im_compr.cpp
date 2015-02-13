@@ -44,10 +44,10 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 template <class Type>  void ImPackBitsCompr1Block
      (
-	  		ElSTDNS vector<U_INT2> &  	LInd,
-	  		ElSTDNS vector<U_INT2> &	VInd,
-	  		ElSTDNS vector<U_INT1> &  	Length,
-	  		ElSTDNS vector<Type> &	Vals,
+	  		std::vector<U_INT2> &  	LInd,
+	  		std::vector<U_INT2> &	VInd,
+	  		std::vector<U_INT1> &  	Length,
+	  		std::vector<Type> &	Vals,
                         const Type *  	line,
                         INT 				nb_tot
      )
@@ -122,10 +122,10 @@ template <class Type>  void ImPackBitsCompr1Block
 
 template <class Type> void ImPackBitsCompr
      (
-	  		ElSTDNS vector<U_INT2> &  	LInd,
-	  		ElSTDNS vector<U_INT2> &	VInd,
-	  		ElSTDNS vector<U_INT1> &  	Length,
-	  		ElSTDNS vector<Type> &		Vals,
+	  		std::vector<U_INT2> &  	LInd,
+	  		std::vector<U_INT2> &	VInd,
+	  		std::vector<U_INT1> &  	Length,
+	  		std::vector<Type> &		Vals,
             const Type *  		line,
           	INT 				nb_tot,
           	INT 				per
@@ -169,10 +169,10 @@ template <class Type> Line_PackB_IM<Type>::Line_PackB_IM() :
 template <class Type> void Line_PackB_IM<Type>::init
 (
     INT                         BlockInit,
-	ElSTDNS vector<U_INT2> &    LInd,
-	ElSTDNS vector<U_INT2> &    VInd,
-	ElSTDNS vector<U_INT1> &    Length,
-	ElSTDNS vector<Type> &		Vals,
+	std::vector<U_INT2> &    LInd,
+	std::vector<U_INT2> &    VInd,
+	std::vector<U_INT1> &    Length,
+	std::vector<Type> &		Vals,
 	const Type *      	line,
 	INT                 nb_tot,
 	INT                 per
@@ -191,8 +191,8 @@ template <class Type> void Line_PackB_IM<Type>::init
         INT indV0 = VInd[k];
         INT indV1 = VInd[k+1];
 
-        ElSTDNS vector <U_INT1> & vL =  mRuns[k+BlockInit].mLRun;
-        ElSTDNS vector <Type> &   vV =  mRuns[k+BlockInit].mVRun;
+        std::vector <U_INT1> & vL =  mRuns[k+BlockInit].mLRun;
+        std::vector <Type> &   vV =  mRuns[k+BlockInit].mVRun;
 
         vL.clear();
         vV.clear();
@@ -241,10 +241,10 @@ template <class Type> class Init_Data_PackB_IM :   public Simple_OPBuf1<INT,Type
 		 void  calc_buf (INT ** output,Type *** );
 	private :
 		Data_PackB_IM<Type> &	dpim;
-  		ElSTDNS vector<U_INT2>	LInd;
-        ElSTDNS vector<U_INT2>	VInd;
-        ElSTDNS vector<U_INT1>	Length;
-        ElSTDNS vector<Type>	Vals;
+  		std::vector<U_INT2>	LInd;
+        std::vector<U_INT2>	VInd;
+        std::vector<U_INT1>	Length;
+        std::vector<Type>	Vals;
 };
 
 
@@ -466,10 +466,10 @@ template <class Type> class   DPIM_Out_Comp : public Output_Computed
         Type *                  mBufDec;
         Type *                  mCurDec;
 
-	    ElSTDNS vector<U_INT2>      mVLIND;
-	    ElSTDNS vector<U_INT2>      mVVIND;
-	    ElSTDNS vector<U_INT1>      mVLength;
-	    ElSTDNS vector<Type>  	mVVals;
+	    std::vector<U_INT2>      mVLIND;
+	    std::vector<U_INT2>      mVVIND;
+	    std::vector<U_INT1>      mVLength;
+	    std::vector<Type>  	mVVals;
             Mode_DPIM_Out               mMode;
             bool                        mIsCste;
             INT                         mVCste;

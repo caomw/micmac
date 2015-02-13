@@ -174,7 +174,7 @@ cout << NbX << " " << NbY << " "
 	return aRes;
 }
 
-ElHough * ElHough::NewOne(const ElSTDNS string & name)
+ElHough * ElHough::NewOne(const std::string & name)
 {
    return ElHoughFromFile::NewOne(name);
 }

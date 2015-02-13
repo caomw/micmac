@@ -91,7 +91,7 @@ template <class Type,class Fpt,class Act>  void
          )
 {
      ElComparPtOn_x_then_y<Type,Fpt> Cmp(fpt);
-     STDSORT(begin,end,Cmp);
+     std::sort(begin,end,Cmp);
 
      REAL d2 = ElSquare(dist);
      for( Type * it1=begin; it1!=end ; it1++)
@@ -153,7 +153,7 @@ template <class Type,class Fpt> void RvoisinsSortX<Type,Fpt>::init(Type * begin,
      _objs.clear();
      for (Type * v =begin; v!= end ; v++)
          _objs.pushlast(Pair(v,_fpt(*v)));
-     STDSORT(_objs.tab(),_objs.tab() +_objs.nb(), _cmp);
+     std::sort(_objs.tab(),_objs.tab() +_objs.nb(), _cmp);
 }
 
 template <class Type,class Fpt,class Act>  

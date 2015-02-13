@@ -83,9 +83,8 @@ set( ELISE_SRCS
 	ori_phot/cOriMntCarto.cpp )
 
 if( CMAKE_COMPILER_IS_GNUCC )
-	set_source_files_properties(${TIFF_DIR}/el_dcraw.c PROPERTIES COMPILE_FLAGS -Wno-aggressive-loop-optimizations)
+	set_source_files_properties( tiff/el_dcraw.c PROPERTIES COMPILE_FLAGS -Wno-aggressive-loop-optimizations )
 endif()
-
 
 set(SAISIE_DIR ${PROJECT_SOURCE_DIR}/src/saisieQT)
 

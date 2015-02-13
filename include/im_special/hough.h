@@ -101,7 +101,7 @@ class ElHough : public Mcheck
                                   REAL RabRho,   // rab en pixel sur l'accum
                                   REAL RabTeta   // rab en radian sur l'accum
                               );
-            static ElHough * NewOne(const ElSTDNS string &);
+            static ElHough * NewOne(const std::string &);
 
             virtual Im2D_INT4 PdsInit() = 0;
             virtual INT NbCel() const = 0;
@@ -121,7 +121,7 @@ class ElHough : public Mcheck
             virtual  void CalcMaxLoc
                      (   
                          Im2D_INT4,
-                         ElSTDNS vector<Pt2di> & Pts, 
+                         std::vector<Pt2di> & Pts, 
                          REAL VoisRho, 
                          REAL VoisTeta, 
                          REAL Vmin
@@ -137,7 +137,7 @@ class ElHough : public Mcheck
                          ) = 0;
              virtual void FiltrMaxLoc_BCVS
                           (
-                                ElSTDNS vector<Pt2di> & Pts,
+                                std::vector<Pt2di> & Pts,
                                 Im2D_INT4 Im,
                                 REAL  FactInf,
                                 REAL  TolGeom,
@@ -167,7 +167,7 @@ class ElHough : public Mcheck
 };               
 
 
-void ElSegMerge(ElSTDNS vector<Seg2d> & VecInits,REAL dLong,REAL dLarg);
+void ElSegMerge(std::vector<Seg2d> & VecInits,REAL dLong,REAL dLarg);
 
 
 

@@ -402,61 +402,61 @@ template <class Type,class TyBase> void  *
     return _data_lin;
 }
 
-template <> CONST_STAT_TPL  GenIm::type_el DataGenImType<U_INT1,INT>::type_el_bitm = GenIm::u_int1;
-template <> CONST_STAT_TPL INT DataGenImType<U_INT1,INT>::v_max = 1<<8;
-template <> CONST_STAT_TPL INT DataGenImType<U_INT1,INT>::v_min = 0;
-template <> CONST_STAT_TPL bool DataGenImType<U_INT1,INT>::_integral_type = true;
-template <> CONST_STAT_TPL DataIm1D<U_INT1,INT> DataIm1D<U_INT1,INT>::The_Bitm =  DataIm1D<U_INT1,INT>(0,0,0,0);
+template <> const  GenIm::type_el DataGenImType<U_INT1,INT>::type_el_bitm = GenIm::u_int1;
+template <> const INT DataGenImType<U_INT1,INT>::v_max = 1<<8;
+template <> const INT DataGenImType<U_INT1,INT>::v_min = 0;
+template <> const bool DataGenImType<U_INT1,INT>::_integral_type = true;
+template <> const DataIm1D<U_INT1,INT> DataIm1D<U_INT1,INT>::The_Bitm =  DataIm1D<U_INT1,INT>(0,0,0,0);
 
 
-template <> CONST_STAT_TPL  GenIm::type_el DataGenImType<INT1,INT>::type_el_bitm = GenIm::int1;
-template <> CONST_STAT_TPL INT DataGenImType<INT1,INT>::v_max = 1<<7;
-template <> CONST_STAT_TPL INT DataGenImType<INT1,INT>::v_min = -(1<<7);
-template <> CONST_STAT_TPL bool DataGenImType<INT1,INT>::_integral_type = true;
-template <> CONST_STAT_TPL DataIm1D<INT1,INT> DataIm1D<INT1,INT>::The_Bitm =  DataIm1D<INT1,INT>(0,0,0,0);
+template <> const  GenIm::type_el DataGenImType<INT1,INT>::type_el_bitm = GenIm::int1;
+template <> const INT DataGenImType<INT1,INT>::v_max = 1<<7;
+template <> const INT DataGenImType<INT1,INT>::v_min = -(1<<7);
+template <> const bool DataGenImType<INT1,INT>::_integral_type = true;
+template <> const DataIm1D<INT1,INT> DataIm1D<INT1,INT>::The_Bitm =  DataIm1D<INT1,INT>(0,0,0,0);
 
 
-template <> CONST_STAT_TPL  GenIm::type_el DataGenImType<U_INT2,INT>::type_el_bitm = GenIm::u_int2;
-template <> CONST_STAT_TPL INT DataGenImType<U_INT2,INT>::v_max = 1<<16;
-template <> CONST_STAT_TPL INT DataGenImType<U_INT2,INT>::v_min = 0;
-template <> CONST_STAT_TPL bool DataGenImType<U_INT2,INT>::_integral_type = true;
-template <> CONST_STAT_TPL DataIm1D<U_INT2,INT> DataIm1D<U_INT2,INT>::The_Bitm =  DataIm1D<U_INT2,INT>(0,0,0,0);
+template <> const  GenIm::type_el DataGenImType<U_INT2,INT>::type_el_bitm = GenIm::u_int2;
+template <> const INT DataGenImType<U_INT2,INT>::v_max = 1<<16;
+template <> const INT DataGenImType<U_INT2,INT>::v_min = 0;
+template <> const bool DataGenImType<U_INT2,INT>::_integral_type = true;
+template <> const DataIm1D<U_INT2,INT> DataIm1D<U_INT2,INT>::The_Bitm =  DataIm1D<U_INT2,INT>(0,0,0,0);
 
 
-template <> CONST_STAT_TPL  GenIm::type_el DataGenImType<INT2,INT>::type_el_bitm = GenIm::int2;
-template <> CONST_STAT_TPL INT DataGenImType<INT2,INT>::v_max = 1<<15;
-template <> CONST_STAT_TPL INT DataGenImType<INT2,INT>::v_min = -(1<<15);
-template <> CONST_STAT_TPL bool DataGenImType<INT2,INT>::_integral_type = true;
-template <> CONST_STAT_TPL DataIm1D<INT2,INT> DataIm1D<INT2,INT>::The_Bitm =  DataIm1D<INT2,INT>(0,0,0,0);
+template <> const  GenIm::type_el DataGenImType<INT2,INT>::type_el_bitm = GenIm::int2;
+template <> const INT DataGenImType<INT2,INT>::v_max = 1<<15;
+template <> const INT DataGenImType<INT2,INT>::v_min = -(1<<15);
+template <> const bool DataGenImType<INT2,INT>::_integral_type = true;
+template <> const DataIm1D<INT2,INT> DataIm1D<INT2,INT>::The_Bitm =  DataIm1D<INT2,INT>(0,0,0,0);
 
 
-template <> CONST_STAT_TPL  GenIm::type_el DataGenImType<INT,INT>::type_el_bitm = GenIm::int4;
-template <> CONST_STAT_TPL INT DataGenImType<INT,INT>::v_max = 1<<30;
-template <> CONST_STAT_TPL INT DataGenImType<INT,INT>::v_min = 1<<30;
-template <> CONST_STAT_TPL bool DataGenImType<INT,INT>::_integral_type = true;
-template <> CONST_STAT_TPL DataIm1D<INT,INT> DataIm1D<INT,INT>::The_Bitm =  DataIm1D<INT,INT>(0,0,0,0);
+template <> const  GenIm::type_el DataGenImType<INT,INT>::type_el_bitm = GenIm::int4;
+template <> const INT DataGenImType<INT,INT>::v_max = 1<<30;
+template <> const INT DataGenImType<INT,INT>::v_min = 1<<30;
+template <> const bool DataGenImType<INT,INT>::_integral_type = true;
+template <> const DataIm1D<INT,INT> DataIm1D<INT,INT>::The_Bitm =  DataIm1D<INT,INT>(0,0,0,0);
 
 
 
 
-template <> CONST_STAT_TPL  GenIm::type_el DataGenImType<REAL4,REAL8>::type_el_bitm = GenIm::real4;
-template <> CONST_STAT_TPL INT  DataGenImType<REAL4,REAL8>::v_max = 0;
-template <> CONST_STAT_TPL INT  DataGenImType<REAL4,REAL8>::v_min = 0;
-template <> CONST_STAT_TPL bool DataGenImType<REAL4,REAL8>::_integral_type = false;
-template <> CONST_STAT_TPL DataIm1D<REAL4,REAL8> DataIm1D<REAL4,REAL8>::The_Bitm =  DataIm1D<REAL4,REAL8>(0,0,0,0);
+template <> const  GenIm::type_el DataGenImType<REAL4,REAL8>::type_el_bitm = GenIm::real4;
+template <> const INT  DataGenImType<REAL4,REAL8>::v_max = 0;
+template <> const INT  DataGenImType<REAL4,REAL8>::v_min = 0;
+template <> const bool DataGenImType<REAL4,REAL8>::_integral_type = false;
+template <> const DataIm1D<REAL4,REAL8> DataIm1D<REAL4,REAL8>::The_Bitm =  DataIm1D<REAL4,REAL8>(0,0,0,0);
 
-template <> CONST_STAT_TPL  GenIm::type_el DataGenImType<REAL8,REAL8>::type_el_bitm = GenIm::real8;
-template <> CONST_STAT_TPL INT DataGenImType<REAL8,REAL8>::v_max = 0;
-template <> CONST_STAT_TPL INT DataGenImType<REAL8,REAL8>::v_min = 0;
-template <> CONST_STAT_TPL bool DataGenImType<REAL8,REAL8>::_integral_type = false;
-template <> CONST_STAT_TPL DataIm1D<REAL8,REAL8> DataIm1D<REAL8,REAL8>::The_Bitm =  DataIm1D<REAL8,REAL8>(0,0,0,0);
+template <> const  GenIm::type_el DataGenImType<REAL8,REAL8>::type_el_bitm = GenIm::real8;
+template <> const INT DataGenImType<REAL8,REAL8>::v_max = 0;
+template <> const INT DataGenImType<REAL8,REAL8>::v_min = 0;
+template <> const bool DataGenImType<REAL8,REAL8>::_integral_type = false;
+template <> const DataIm1D<REAL8,REAL8> DataIm1D<REAL8,REAL8>::The_Bitm =  DataIm1D<REAL8,REAL8>(0,0,0,0);
 
 
-template <> CONST_STAT_TPL  GenIm::type_el DataGenImType<REAL16,REAL16>::type_el_bitm = GenIm::real16;
-template <> CONST_STAT_TPL INT DataGenImType<REAL16,REAL16>::v_max = 0;
-template <> CONST_STAT_TPL INT DataGenImType<REAL16,REAL16>::v_min = 0;
-template <> CONST_STAT_TPL bool DataGenImType<REAL16,REAL16>::_integral_type = false;
-template <> CONST_STAT_TPL DataIm1D<REAL16,REAL16> DataIm1D<REAL16,REAL16>::The_Bitm =  DataIm1D<REAL16,REAL16>(0,0,0,0);
+template <> const  GenIm::type_el DataGenImType<REAL16,REAL16>::type_el_bitm = GenIm::real16;
+template <> const INT DataGenImType<REAL16,REAL16>::v_max = 0;
+template <> const INT DataGenImType<REAL16,REAL16>::v_min = 0;
+template <> const bool DataGenImType<REAL16,REAL16>::_integral_type = false;
+template <> const DataIm1D<REAL16,REAL16> DataIm1D<REAL16,REAL16>::The_Bitm =  DataIm1D<REAL16,REAL16>(0,0,0,0);
 
 
 
@@ -2543,35 +2543,4 @@ Output StdOutput(std::vector<Im2DGen *> aV)
 // Output   StdOutput(std::vector<Im2DGen *>);
 
 
-/*Footer-MicMac-eLiSe-25/06/2007
 
-Ce logiciel est un programme informatique servant �  la mise en
-correspondances d'images pour la reconstruction du relief.
-
-Ce logiciel est régi par la licence CeCILL-B soumise au droit français et
-respectant les principes de diffusion des logiciels libres. Vous pouvez
-utiliser, modifier et/ou redistribuer ce programme sous les conditions
-de la licence CeCILL-B telle que diffusée par le CEA, le CNRS et l'INRIA
-sur le site "http://www.cecill.info".
-
-En contrepartie de l'accessibilité au code source et des droits de copie,
-de modification et de redistribution accordés par cette licence, il n'est
-offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,
-seule une responsabilité restreinte pèse sur l'auteur du programme,  le
-titulaire des droits patrimoniaux et les concédants successifs.
-
-A cet égard  l'attention de l'utilisateur est attirée sur les risques
-associés au chargement,  �  l'utilisation,  �  la modification et/ou au
-développement et �  la reproduction du logiciel par l'utilisateur étant
-donné sa spécificité de logiciel libre, qui peut le rendre complexe �
-manipuler et qui le réserve donc �  des développeurs et des professionnels
-avertis possédant  des  connaissances  informatiques approfondies.  Les
-utilisateurs sont donc invités �  charger  et  tester  l'adéquation  du
-logiciel �  leurs besoins dans des conditions permettant d'assurer la
-sécurité de leurs systèmes et ou de leurs données et, plus généralement,
-�  l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
-
-Le fait que vous puissiez accéder �  cet en-tête signifie que vous avez
-pris connaissance de la licence CeCILL-B, et que vous en avez accepté les
-termes.
-Footer-MicMac-eLiSe-25/06/2007*/

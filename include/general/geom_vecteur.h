@@ -290,12 +290,12 @@ template <class Type> class Mat_Inertie
        Mat_Inertie();
        Mat_Inertie
        (
-              ElTyName Type::TypeScal S,
-              ElTyName Type::TypeEff  S1,
-              ElTyName Type::TypeEff  S2,
-              ElTyName Type::TypeScal S11,
-              ElTyName Type::TypeScal S12,
-              ElTyName Type::TypeScal S22
+               Type::TypeScal S,
+               Type::TypeEff  S1,
+               Type::TypeEff  S2,
+               Type::TypeScal S11,
+               Type::TypeScal S12,
+               Type::TypeScal S22
        )
           :
                _s     (S),
@@ -307,7 +307,7 @@ template <class Type> class Mat_Inertie
        {
        }
 
-       void add_pt_en_place(ElTyName Type::TypeEff v1,ElTyName  Type::TypeEff v2)
+       void add_pt_en_place( Type::TypeEff v1,  Type::TypeEff v2)
        {
             _s   += 1;
             _s1  += v1;
@@ -319,9 +319,9 @@ template <class Type> class Mat_Inertie
 
        void add_pt_en_place
            (
-               ElTyName Type::TypeEff v1,
-               ElTyName  Type::TypeEff v2,
-               ElTyName Type::TypeScal pds
+                Type::TypeEff v1,
+                 Type::TypeEff v2,
+                Type::TypeScal pds
             )
        {
             _s   += pds;
@@ -333,19 +333,19 @@ template <class Type> class Mat_Inertie
        }
 
 
-       ElTyName Type::TypeScal    s()    const {return _s;}
-       ElTyName Type::TypeEff     s1()   const {return _s1;}
-       ElTyName Type::TypeEff     s2()   const {return _s2;}
-       ElTyName Type::TypeScal    s11()  const {return _s11;}
-       ElTyName Type::TypeScal    s12()  const {return _s12;}
-       ElTyName Type::TypeScal    s22()  const {return _s22;}
+        Type::TypeScal    s()    const {return _s;}
+        Type::TypeEff     s1()   const {return _s1;}
+        Type::TypeEff     s2()   const {return _s2;}
+        Type::TypeScal    s11()  const {return _s11;}
+        Type::TypeScal    s12()  const {return _s12;}
+        Type::TypeScal    s22()  const {return _s22;}
 
 
        Mat_Inertie  plus_cple
                     (
-                      ElTyName Type::TypeEff v1,
-                      ElTyName Type::TypeEff v2,
-                      ElTyName Type::TypeScal pds =1
+                       Type::TypeEff v1,
+                       Type::TypeEff v2,
+                       Type::TypeScal pds =1
                     ) const
        {
             return Mat_Inertie
@@ -367,7 +367,7 @@ template <class Type> class Mat_Inertie
             // second point (indertermine a pi pres) situe a dun distance norm
 
 
-       Mat_Inertie<ElTyName Type::TypeReel>  normalize() const
+       Mat_Inertie< Type::TypeReel>  normalize() const
        {
              ELISE_ASSERT
              (
@@ -375,14 +375,14 @@ template <class Type> class Mat_Inertie
                   "som pds = 0 in Mat_Inertie::normalize"
              );
 
-             ElTyName Type::TypeReel::TypeEff  S1 =  _s1 / (REAL) _s;
-             ElTyName Type::TypeReel::TypeEff  S2 =  _s2 / (REAL) _s;
+              Type::TypeReel::TypeEff  S1 =  _s1 / (REAL) _s;
+              Type::TypeReel::TypeEff  S2 =  _s2 / (REAL) _s;
 
 
 #if ( ELISE_windows & ELISE_MinGW )
     return Mat_Inertie<typename Type::TypeReel>
 #else
-    return Mat_Inertie<ElTypeName_NotMSW Type::TypeReel>
+    return Mat_Inertie<typename Type::TypeReel>
 #endif
                     (
                          _s,
@@ -399,7 +399,7 @@ template <class Type> class Mat_Inertie
            #if ( ELISE_windows & ELISE_MinGW )
              Mat_Inertie<typename  Type::TypeReel> m =  normalize();
            #else
-             Mat_Inertie<ElTypeName_NotMSW  Type::TypeReel> m =  normalize();
+             Mat_Inertie<typename  Type::TypeReel> m =  normalize();
            #endif
              return m.s12() / sqrt(ElMax(epsilon,m.s11()*m.s22()));
        }
@@ -409,7 +409,7 @@ template <class Type> class Mat_Inertie
             #if ( ELISE_windows & ELISE_MinGW )
               Mat_Inertie<typename  Type::TypeReel> m =  normalize();
             #else
-              Mat_Inertie<ElTypeName_NotMSW  Type::TypeReel> m =  normalize();
+              Mat_Inertie<typename  Type::TypeReel> m =  normalize();
             #endif
          if ((m.s11()<=0) || (m.s22() <=0)) return aDef;
              return m.s12() / sqrt(m.s11()*m.s22());
@@ -417,7 +417,7 @@ template <class Type> class Mat_Inertie
 
 
 
-       ElTyName   Type::TypeScal S0() const {return _s;}
+          Type::TypeScal S0() const {return _s;}
        typename Type::TypeReel::TypeEff  V2toV1(const typename Type::TypeReel::TypeEff & aV2,REAL epsilon = 1e-14);
        typename Type::TypeReel::TypeEff  V1toV2(const typename Type::TypeReel::TypeEff & aV2,REAL epsilon = 1e-14);
 
@@ -425,12 +425,12 @@ template <class Type> class Mat_Inertie
     private :
 
 
-        ElTyName   Type::TypeScal         _s;
-        ElTyName   Type::TypeEff          _s1;
-        ElTyName   Type::TypeEff          _s2;
-        ElTyName   Type::TypeScal         _s11;
-        ElTyName   Type::TypeScal         _s12;
-        ElTyName   Type::TypeScal         _s22;
+           Type::TypeScal         _s;
+           Type::TypeEff          _s1;
+           Type::TypeEff          _s2;
+           Type::TypeScal         _s11;
+           Type::TypeScal         _s12;
+           Type::TypeScal         _s22;
 };
 
 REAL   surf_or_poly(const ElFifo<Pt2dr> &);
@@ -977,36 +977,3 @@ class cElPolygone
 
 #endif // _ELISE_GENERAL_GEOM_VECTEUR_H
 
-
-/*Footer-MicMac-eLiSe-25/06/2007
-
-Ce logiciel est un programme informatique servant �  la mise en
-correspondances d'images pour la reconstruction du relief.
-
-Ce logiciel est régi par la licence CeCILL-B soumise au droit français et
-respectant les principes de diffusion des logiciels libres. Vous pouvez
-utiliser, modifier et/ou redistribuer ce programme sous les conditions
-de la licence CeCILL-B telle que diffusée par le CEA, le CNRS et l'INRIA
-sur le site "http://www.cecill.info".
-
-En contrepartie de l'accessibilité au code source et des droits de copie,
-de modification et de redistribution accordés par cette licence, il n'est
-offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,
-seule une responsabilité restreinte pèse sur l'auteur du programme,  le
-titulaire des droits patrimoniaux et les concédants successifs.
-
-A cet égard  l'attention de l'utilisateur est attirée sur les risques
-associés au chargement,  �  l'utilisation,  �  la modification et/ou au
-développement et �  la reproduction du logiciel par l'utilisateur étant
-donné sa spécificité de logiciel libre, qui peut le rendre complexe �
-manipuler et qui le réserve donc �  des développeurs et des professionnels
-avertis possédant  des  connaissances  informatiques approfondies.  Les
-utilisateurs sont donc invités �  charger  et  tester  l'adéquation  du
-logiciel �  leurs besoins dans des conditions permettant d'assurer la
-sécurité de leurs systèmes et ou de leurs données et, plus généralement,
-�  l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
-
-Le fait que vous puissiez accéder �  cet en-tête signifie que vous avez
-pris connaissance de la licence CeCILL-B, et que vous en avez accepté les
-termes.
-Footer-MicMac-eLiSe-25/06/2007*/

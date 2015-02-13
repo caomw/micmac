@@ -58,8 +58,8 @@ class RacineFonc1D
 
          void solutions_1prof
               (
-                  ElSTDNS vector<REAL> &,
-                  ElSTDNS vector<REAL> &,
+                  std::vector<REAL> &,
+                  std::vector<REAL> &,
                   REAL x0,
                   REAL x1,
                   INT  nb_step
@@ -75,8 +75,8 @@ class RacineFonc1D
 
 void RacineFonc1D::solutions_1prof
      (
-         ElSTDNS vector<REAL> & bsup,
-         ElSTDNS vector<REAL> & binf,
+         std::vector<REAL> & bsup,
+         std::vector<REAL> & binf,
          REAL X0,
          REAL X1,
          INT  nb_step
@@ -451,7 +451,7 @@ template <class Type> class  ResProfChamp
         ResProfChamp(Type DistBC,Pt3dr pa,Pt3dr pb,Pt3dr pc,Type rhoA,Type rhoC);
 
 
-        void ListeC(ElSTDNS list<Pt3dr>&  res);
+        void ListeC(std::list<Pt3dr>&  res);
 
      private :
 
@@ -498,7 +498,7 @@ template <class Type> class  ResProfChamp
         ElPolynome<Type> _Omega;
         ElPolynome<Type> _Alpha;
         ElPolynome<Type> _Resolv;
-        ElSTDNS vector<Type>     mRoots;
+        std::vector<Type>     mRoots;
 
         INT    _signdisc;
 
@@ -784,7 +784,7 @@ template <class Type> void ResProfChamp<Type>::AddBC(std::list<Pt3dr> & res,Type
     }
 }
 
-template <class Type> void ResProfChamp<Type>::ListeC(ElSTDNS list<Pt3dr>&  res)
+template <class Type> void ResProfChamp<Type>::ListeC(std::list<Pt3dr>&  res)
 {
      // mNRP.GetSols();
      res.clear();
@@ -850,7 +850,7 @@ void ShowSol(const std::string & aMes, const std::list<Pt3dr>  & aSol)
 
 void ElPhotogram::ProfChampsFromDist
      (
-                 ElSTDNS list<Pt3dr>&  res,  // liste de triplets de prof de champs
+                 std::list<Pt3dr>&  res,  // liste de triplets de prof de champs
                  Pt3dr A,Pt3dr B,Pt3dr C, // points de projection
                  REAL dAB, REAL dAC, REAL dBC
      )

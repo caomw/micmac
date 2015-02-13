@@ -35,8 +35,8 @@ template <class TPt> TPt RandPt(TPt SZ)
 {
      return TPt
             (
-                (ElTyName TPt::TypeScal) (NRrandom3()*SZ.x),
-                (ElTyName TPt::TypeScal) (NRrandom3()*SZ.y)
+                ( TPt::TypeScal) (NRrandom3()*SZ.x),
+                ( TPt::TypeScal) (NRrandom3()*SZ.y)
             );
 }
         //  env_min

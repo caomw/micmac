@@ -351,7 +351,7 @@ class Vecto_Contour : public Simple_OPBuf1<INT,U_INT1>,
        Pt2di                _p1_dom;
        Pt2di                _dec;
 
-       typedef ElSTDNS map<Pt3di,Br_Cont_Vect *,TyPt3dCmp> TyMapPBr;
+       typedef std::map<Pt3di,Br_Cont_Vect *,TyPt3dCmp> TyMapPBr;
        TyMapPBr _DicBrIp0;
        TyMapPBr _DicBrIp1;
        ContVectLCodes  _BufLcodes;

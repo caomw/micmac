@@ -156,20 +156,20 @@ class   BenchQdt
          const Box2dr                    Box;
          const INT                       NbObj;
          ElQT<TQdt,Pt2dr,TypeFPRIM>      qdt;
-         ElSTDNS set<TQdt>                       GSet;
+         std::set<TQdt>                       GSet;
 
          ElQT<STQdt,SegComp,TypeSFPRIM>  Sqdt;
-         ElSTDNS set<STQdt>                      SGSet;
+         std::set<STQdt>                      SGSet;
         
 };
 
 void BenchQdt::remove(REAL proba)
 {
-     // ElSTDNS list<TQdt> l (GSet.begin(),GSet.end());
-     ElSTDNS list<TQdt> l;
-	 std::copy(GSet.begin(),GSet.end(),ElSTDNS back_inserter(l));
+     // std::list<TQdt> l (GSet.begin(),GSet.end());
+     std::list<TQdt> l;
+	 std::copy(GSet.begin(),GSet.end(),std::back_inserter(l));
 
-     for (ElSTDNS list<TQdt>::iterator it = l.begin(); it != l.end() ; it++)
+     for (std::list<TQdt>::iterator it = l.begin(); it != l.end() ; it++)
          if (NRrandom3() < proba)
             remove(*it);
 }
@@ -177,10 +177,10 @@ void BenchQdt::remove(REAL proba)
 
 void BenchQdt::sremove(REAL proba)
 {
-     // ElSTDNS list<STQdt> l (SGSet.begin(),SGSet.end());
-     ElSTDNS list<STQdt> l;
+     // std::list<STQdt> l (SGSet.begin(),SGSet.end());
+     std::list<STQdt> l;
 	 std::copy(SGSet.begin(),SGSet.end(),std::back_inserter(l));
-     for (ElSTDNS list<STQdt>::iterator it = l.begin(); it != l.end() ; it++)
+     for (std::list<STQdt>::iterator it = l.begin(); it != l.end() ; it++)
          if (NRrandom3() < proba)
             remove(*it);
 }
@@ -188,21 +188,21 @@ void BenchQdt::sremove(REAL proba)
 
 void BenchQdt::verif(Pt2dr p0,REAL ray)
 {
-     ElSTDNS set<TQdt> SSup;
-     ElSTDNS set<TQdt> SInf;
-     ElSTDNS set<TQdt> S0;
+     std::set<TQdt> SSup;
+     std::set<TQdt> SInf;
+     std::set<TQdt> S0;
 
      qdt.RVoisins(SSup,p0,ray+1e-5);
      qdt.RVoisins(SInf,p0,ray-1e-5);
 
-     for (ElSTDNS set<TQdt>::iterator it =GSet.begin(); it!=GSet.end() ; it++)
+     for (std::set<TQdt>::iterator it =GSet.begin(); it!=GSet.end() ; it++)
          if (euclid(p0,(*it)._pt) <ray)
             S0.insert(*it);
 
 
-     BENCH_ASSERT(ElSTDNS includes(SSup.begin(),SSup.end(),SInf.begin(),SInf.end()));
-     BENCH_ASSERT(ElSTDNS includes(S0.begin(),S0.end(),SInf.begin(),SInf.end()));
-     BENCH_ASSERT(ElSTDNS includes(SSup.begin(),SSup.end(),S0.begin(),S0.end()));
+     BENCH_ASSERT(std::includes(SSup.begin(),SSup.end(),SInf.begin(),SInf.end()));
+     BENCH_ASSERT(std::includes(S0.begin(),S0.end(),SInf.begin(),SInf.end()));
+     BENCH_ASSERT(std::includes(SSup.begin(),SSup.end(),S0.begin(),S0.end()));
 
 
 }
@@ -212,21 +212,21 @@ void BenchQdt::verif(Pt2dr p0,Pt2dr p1,REAL ray)
      if (euclid(p0,p1) < 1.0) 
         return;
 
-     ElSTDNS set<TQdt> SSup;
-     ElSTDNS set<TQdt> SInf;
-     ElSTDNS set<TQdt> S0;
+     std::set<TQdt> SSup;
+     std::set<TQdt> SInf;
+     std::set<TQdt> S0;
      SegComp s01 (p0,p1);
 
      qdt.RVoisins(SSup,s01,ray+1e-5);
      qdt.RVoisins(SInf,s01,ray-1e-5);
 
-     for (ElSTDNS set<TQdt>::iterator it =GSet.begin(); it!=GSet.end() ; it++)
+     for (std::set<TQdt>::iterator it =GSet.begin(); it!=GSet.end() ; it++)
          if (sqrt(s01.square_dist_seg((*it)._pt)) <ray)
             S0.insert(*it);
 
-     BENCH_ASSERT(ElSTDNS includes(SSup.begin(),SSup.end(),SInf.begin(),SInf.end()));
-     BENCH_ASSERT(ElSTDNS includes(S0.begin(),S0.end(),SInf.begin(),SInf.end()));
-     BENCH_ASSERT(ElSTDNS includes(SSup.begin(),SSup.end(),S0.begin(),S0.end()));
+     BENCH_ASSERT(std::includes(SSup.begin(),SSup.end(),SInf.begin(),SInf.end()));
+     BENCH_ASSERT(std::includes(S0.begin(),S0.end(),SInf.begin(),SInf.end()));
+     BENCH_ASSERT(std::includes(SSup.begin(),SSup.end(),S0.begin(),S0.end()));
 
 }
 
@@ -235,21 +235,21 @@ void BenchQdt::verif_box(Pt2dr p0,Pt2dr p1,REAL ray)
      if (euclid(p0,p1) < 1.0) 
         return;
 
-     ElSTDNS set<TQdt> SSup;
-     ElSTDNS set<TQdt> SInf;
-     ElSTDNS set<TQdt> S0;
+     std::set<TQdt> SSup;
+     std::set<TQdt> SInf;
+     std::set<TQdt> S0;
      Box2dr  box (p0,p1);
 
      qdt.RVoisins(SSup,box,ray+1e-5);
      qdt.RVoisins(SInf,box,ray-1e-5);
 
-     for (ElSTDNS set<TQdt>::iterator it =GSet.begin(); it!=GSet.end() ; it++)
+     for (std::set<TQdt>::iterator it =GSet.begin(); it!=GSet.end() ; it++)
          if (sqrt(box.SquareDist((*it)._pt)) <ray)
             S0.insert(*it);
 
-     BENCH_ASSERT(ElSTDNS includes(SSup.begin(),SSup.end(),SInf.begin(),SInf.end()));
-     BENCH_ASSERT(ElSTDNS includes(S0.begin(),S0.end(),SInf.begin(),SInf.end()));
-     BENCH_ASSERT(ElSTDNS includes(SSup.begin(),SSup.end(),S0.begin(),S0.end()));
+     BENCH_ASSERT(std::includes(SSup.begin(),SSup.end(),SInf.begin(),SInf.end()));
+     BENCH_ASSERT(std::includes(S0.begin(),S0.end(),SInf.begin(),SInf.end()));
+     BENCH_ASSERT(std::includes(SSup.begin(),SSup.end(),S0.begin(),S0.end()));
 }
 
 
@@ -259,24 +259,24 @@ void BenchQdt::verif_box(Pt2dr p0,Pt2dr p1,REAL ray)
 
 void BenchQdt::sverif(Pt2dr p0,REAL ray)
 {
-     ElSTDNS set<STQdt> SSup;
-     ElSTDNS set<STQdt> SInf;
-     ElSTDNS set<STQdt> S0;
+     std::set<STQdt> SSup;
+     std::set<STQdt> SInf;
+     std::set<STQdt> S0;
 
      Sqdt.RVoisins(SSup,p0,ray+1e-5);
      Sqdt.RVoisins(SInf,p0,ray-1e-5);
      REAL R2 = ElSquare(ray);
 
-     for (ElSTDNS set<STQdt>::iterator it =SGSet.begin(); it!=SGSet.end() ; it++)
+     for (std::set<STQdt>::iterator it =SGSet.begin(); it!=SGSet.end() ; it++)
      {
          SegComp S((*it)._p1,(*it)._p2);
          if (S.square_dist_seg(p0) <R2)
             S0.insert(*it);
      }
 
-     BENCH_ASSERT(ElSTDNS includes(SSup.begin(),SSup.end(),SInf.begin(),SInf.end()));
-     BENCH_ASSERT(ElSTDNS includes(S0.begin(),S0.end(),SInf.begin(),SInf.end()));
-     BENCH_ASSERT(ElSTDNS includes(SSup.begin(),SSup.end(),S0.begin(),S0.end()));
+     BENCH_ASSERT(std::includes(SSup.begin(),SSup.end(),SInf.begin(),SInf.end()));
+     BENCH_ASSERT(std::includes(S0.begin(),S0.end(),SInf.begin(),SInf.end()));
+     BENCH_ASSERT(std::includes(SSup.begin(),SSup.end(),S0.begin(),S0.end()));
 
 }
 
@@ -284,21 +284,21 @@ void BenchQdt::sverif(Pt2dr p0,Pt2dr p1,REAL ray)
 {
      if (euclid(p0,p1) < 1.0) 
         return;
-     ElSTDNS set<STQdt> SSup;
-     ElSTDNS set<STQdt> SInf;
-     ElSTDNS set<STQdt> S0;
+     std::set<STQdt> SSup;
+     std::set<STQdt> SInf;
+     std::set<STQdt> S0;
      SegComp s01 (p0,p1);
 
      Sqdt.RVoisins(SSup,s01,ray+1);
      Sqdt.RVoisins(SInf,s01,ElMax(ray-1,0.0));
 
-     for (ElSTDNS set<STQdt>::iterator it =SGSet.begin(); it!=SGSet.end() ; it++)
+     for (std::set<STQdt>::iterator it =SGSet.begin(); it!=SGSet.end() ; it++)
          if (sqrt(s01.square_dist(SegComp::seg,(*it).seg(),SegComp::seg)) <ray)
             S0.insert(*it);
 
-     BENCH_ASSERT(ElSTDNS includes(SSup.begin(),SSup.end(),SInf.begin(),SInf.end()));
-     BENCH_ASSERT(ElSTDNS includes(S0.begin(),S0.end(),SInf.begin(),SInf.end()));
-     BENCH_ASSERT(ElSTDNS includes(SSup.begin(),SSup.end(),S0.begin(),S0.end()));
+     BENCH_ASSERT(std::includes(SSup.begin(),SSup.end(),SInf.begin(),SInf.end()));
+     BENCH_ASSERT(std::includes(S0.begin(),S0.end(),SInf.begin(),SInf.end()));
+     BENCH_ASSERT(std::includes(SSup.begin(),SSup.end(),S0.begin(),S0.end()));
 
 }
 
@@ -306,22 +306,22 @@ void BenchQdt::sverif_box(Pt2dr p0,Pt2dr p1,REAL ray)
 {
      if (euclid(p0,p1) < 1.0) 
         return;
-     ElSTDNS set<STQdt> SSup;
-     ElSTDNS set<STQdt> SInf;
-     ElSTDNS set<STQdt> S0;
+     std::set<STQdt> SSup;
+     std::set<STQdt> SInf;
+     std::set<STQdt> S0;
      Box2dr  box (p0,p1);
 
      Sqdt.RVoisins(SSup,box,ray+1);
      Sqdt.RVoisins(SInf,box,ElMax(ray-1,0.0));
 
-     for (ElSTDNS set<STQdt>::iterator it =SGSet.begin(); it!=SGSet.end() ; it++)
+     for (std::set<STQdt>::iterator it =SGSet.begin(); it!=SGSet.end() ; it++)
          if (sqrt(box.SquareDist((*it).seg())) <ray)
             S0.insert(*it);
 
 
-     BENCH_ASSERT(ElSTDNS includes(SSup.begin(),SSup.end(),SInf.begin(),SInf.end()));
-     BENCH_ASSERT(ElSTDNS includes(S0.begin(),S0.end(),SInf.begin(),SInf.end()));
-     BENCH_ASSERT(ElSTDNS includes(SSup.begin(),SSup.end(),S0.begin(),S0.end()));
+     BENCH_ASSERT(std::includes(SSup.begin(),SSup.end(),SInf.begin(),SInf.end()));
+     BENCH_ASSERT(std::includes(S0.begin(),S0.end(),SInf.begin(),SInf.end()));
+     BENCH_ASSERT(std::includes(SSup.begin(),SSup.end(),S0.begin(),S0.end()));
 
 }
 

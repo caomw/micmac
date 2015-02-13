@@ -648,7 +648,7 @@ GrpOpMIxteTpl<plus_elem>  OpMIxteTpl_plus_The_only_one;
 const OperAssocMixte & OpSum =  OpMIxteTpl_plus_The_only_one;
 template <> const OperAssocMixte::Id OpMIxteTpl<plus_elem>::_cl_id 
     = OperAssocMixte::Sum;
-ElTmplSpecNull const char * OpMIxteTpl<plus_elem>::name() const
+template <> const char * OpMIxteTpl<plus_elem>::name() const
 {
     return "OpSum";
 }
@@ -668,7 +668,7 @@ const OperAssocMixte & OpMul =  OpMIxteTpl_mul_The_only_one;
 template <> const OperAssocMixte::Id OpMIxteTpl<mul_elem>::_cl_id 
     = OperAssocMixte::Mul;
 
-ElTmplSpecNull const char * OpMIxteTpl<mul_elem>::name() const
+template <> const char * OpMIxteTpl<mul_elem>::name() const
 {
     return "OpMul";
 }
@@ -682,7 +682,7 @@ const OperAssocMixte & OpMax =  OpMIxteTpl_max_The_only_one;
 template <> const OperAssocMixte::Id OpMIxteTpl<max_elem>::_cl_id 
     = OperAssocMixte::Max;
 
-ElTmplSpecNull const char * OpMIxteTpl<max_elem>::name() const
+template <> const char * OpMIxteTpl<max_elem>::name() const
 {
     return "OpMax";
 }
@@ -696,7 +696,7 @@ const OperAssocMixte & OpMin =  OpMIxteTpl_min_The_only_one;
 template <> const OperAssocMixte::Id OpMIxteTpl<min_elem>::_cl_id 
     = OperAssocMixte::Min;
 
-ElTmplSpecNull const char * OpMIxteTpl<min_elem>::name() const
+template <> const char * OpMIxteTpl<min_elem>::name() const
 {
     return "OpMin";
 }

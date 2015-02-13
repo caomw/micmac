@@ -63,7 +63,7 @@ class MyPrimFQdt
 
 
 typedef ElQT<SegComp *,Seg2d,MyPrimFQdt>  tElMergeSegQdt;
-typedef  ElSTDNS vector<SegComp>::iterator  tItSC;
+typedef  std::vector<SegComp>::iterator  tItSC;
 
 
 
@@ -71,7 +71,7 @@ typedef  ElSTDNS vector<SegComp>::iterator  tItSC;
 
 void ElSegMerge
      (
-         ElSTDNS vector<Seg2d> & VecInits,
+         std::vector<Seg2d> & VecInits,
          REAL  dLong,
          REAL  dLarg
      )
@@ -79,17 +79,17 @@ void ElSegMerge
      if (VecInits.size() ==0) 
          return;
 
-     // ElSTDNS vector<SegComp> VC(VecInits.begin(),VecInits.end()); Error sur Sun-Fronte
-     ElSTDNS vector<SegComp> VC;
+     // std::vector<SegComp> VC(VecInits.begin(),VecInits.end()); Error sur Sun-Fronte
+     std::vector<SegComp> VC;
      for 
      ( 
-        ElSTDNS vector<Seg2d>::iterator ItS = VecInits.begin();
+        std::vector<Seg2d>::iterator ItS = VecInits.begin();
         ItS != VecInits.end();
         ItS++
      )
         VC.push_back(*ItS);
 
-     ElSTDNS sort(VC.begin(),VC.end(),LengthIsSup);
+     std::sort(VC.begin(),VC.end(),LengthIsSup);
 
      Box2dr box(VC[0].p0(),VC[0].p1());
 
@@ -105,7 +105,7 @@ void ElSegMerge
      tElMergeSegQdt   aQdt( aPrim, box, 10, d);
 
      VecInits.clear();
-     ElSTDNS set<SegComp *> sVois;
+     std::set<SegComp *> sVois;
 
 	 {
      for(tItSC itV = VC.begin(); itV != VC.end(); itV++)
@@ -116,7 +116,7 @@ void ElSegMerge
         bool Ok = true;
         for
         (
-            ElSTDNS set<SegComp *>::iterator itVois = sVois.begin();
+            std::set<SegComp *>::iterator itVois = sVois.begin();
             (itVois != sVois.end()) && Ok;
             itVois++
         )

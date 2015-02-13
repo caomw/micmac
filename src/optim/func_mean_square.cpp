@@ -53,12 +53,12 @@ void f()
 }
 */
 
-template <class Type> const ElSTDNS vector<Type>  StdTmpVector (const ElSTDNS list<Type> & l)
+template <class Type> const std::vector<Type>  StdTmpVector (const std::list<Type> & l)
 {
-    ElSTDNS vector<Type> v;
+    std::vector<Type> v;
     v.clear();
 
-    ElSTDNS copy(l.begin(),l.end(),ElSTDNS back_inserter(v));
+    std::copy(l.begin(),l.end(),std::back_inserter(v));
     return v;
 }
 
@@ -69,7 +69,7 @@ class ClassFoncMeanSquare
     public :
         ClassFoncMeanSquare
         (
-            ElSTDNS list<Fonc_Num> Lfonc,
+            std::list<Fonc_Num> Lfonc,
             Fonc_Num       Obs,
             Fonc_Num       Pds
         ) ;
@@ -82,8 +82,8 @@ class ClassFoncMeanSquare
         Im1D_REAL8        mSoms;
         REAL8 *           mDataS;
         INT               mNbVar;
-        ElSTDNS vector<Fonc_Num>  mVars;
-        ElSTDNS vector<Symb_FNum> mSVar;
+        std::vector<Fonc_Num>  mVars;
+        std::vector<Symb_FNum> mSVar;
         Fonc_Num          mObs;
         Symb_FNum         mSObs;
         Fonc_Num          mPds;
@@ -96,7 +96,7 @@ class ClassFoncMeanSquare
 
 ClassFoncMeanSquare::ClassFoncMeanSquare
 ( 
-    ElSTDNS list<Fonc_Num> Lfonc,
+    std::list<Fonc_Num> Lfonc,
     Fonc_Num       Obs,
     Fonc_Num       Pds
 ) :
@@ -172,7 +172,7 @@ Fonc_Num ClassFoncMeanSquare::Approx()
 
 Fonc_Num SomPondFoncNum
          (
-              ElSTDNS list<Fonc_Num> Lfonc,
+              std::list<Fonc_Num> Lfonc,
               ElMatrix<REAL8>  s
          )      
 {
@@ -190,7 +190,7 @@ Fonc_Num SomPondFoncNum
 ElMatrix<REAL8> MatrFoncMeanSquare
                 (
                      Flux_Pts       flux,
-                     ElSTDNS list<Fonc_Num> Lfonc,
+                     std::list<Fonc_Num> Lfonc,
                      Fonc_Num       Obs,
                      Fonc_Num       Pds
                 ) 
@@ -206,7 +206,7 @@ ElMatrix<REAL8> MatrFoncMeanSquare
 Fonc_Num ApproxFoncMeanSquare
          (
             Flux_Pts       flux,
-            ElSTDNS list<Fonc_Num> Lfonc,
+            std::list<Fonc_Num> Lfonc,
             Fonc_Num       Obs,
             Fonc_Num       Pds
          ) 

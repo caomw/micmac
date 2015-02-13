@@ -44,10 +44,10 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 // eTypeTapas aTTT = eTT_RRRRRRRRR;
 
-// template <class T> ElSTDNS complex<T> Pt2d2complex(Pt2d<T> p) {return ElSTDNS complex<T>(p.x,p.y);}
-ElSTDNS complex<INT> Pt2d2complex(Pt2d<INT> p) {return ElSTDNS complex<INT>(p.x,p.y);}
+// template <class T> std::complex<T> Pt2d2complex(Pt2d<T> p) {return std::complex<T>(p.x,p.y);}
+std::complex<INT> Pt2d2complex(Pt2d<INT> p) {return std::complex<INT>(p.x,p.y);}
 
-template <class T> Pt2d<T> complex2Pt2d(ElSTDNS complex<T> p) {return Pt2d<T>(p.real(),p.imag());}
+template <class T> Pt2d<T> complex2Pt2d(std::complex<T> p) {return Pt2d<T>(p.real(),p.imag());}
 
 /**********************************************************/
 /*                                                        */
@@ -161,7 +161,7 @@ INT EL_API_VECTO::ParamFile::GetThresh
 
 EL_API_VECTO::ParamFile::ParamFile
               (
-                      const ElSTDNS string & aName,
+                      const std::string & aName,
                       bool Inferieur ,
                       int  Threshold 
 
@@ -255,8 +255,8 @@ class EL_API_MAKE_VECTO : public  Br_Vect_Action
            Pt2di                   _dec;
 
            ElFifo<INT>        _approx;
-           ElSTDNS vector<ComplexI>   _pts_interm;
-           ElSTDNS vector<int>        _d_interm;
+           std::vector<ComplexI>   _pts_interm;
+           std::vector<int>        _d_interm;
 
 };
 

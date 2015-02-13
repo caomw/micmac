@@ -481,15 +481,15 @@ Elise_Tiled_File_Im_2D
 Elise_Tiled_File_Im_2D Elise_Tiled_File_Im_2D::Saphir(const char * name_file,const char * name_header)
 {
 
-    ElSTDNS vector<int> origine;
-    ElSTDNS vector<int> dimensions;
+    std::vector<int> origine;
+    std::vector<int> dimensions;
     int         header;
     int         tail;
-    ElSTDNS vector<int> block;
-    ElSTDNS string      block_truncated;
+    std::vector<int> block;
+    std::string      block_truncated;
     int         size;
-    ElSTDNS string      type;
-    ElSTDNS string      format;
+    std::string      type;
+    std::string      format;
     int         line_head;
     int         line_tail;
     int         block_head;

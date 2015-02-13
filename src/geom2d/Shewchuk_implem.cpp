@@ -828,16 +828,16 @@ int minus1mod3[3] = {2, 0, 1};
 /*   extracted from the two least significant bits of the pointer.           */
 
 #define decode(ptr, triedge)                                                  \
-  (triedge).orient = (int) ((ELISE_PTR_U_INT) (ptr) & (ELISE_PTR_U_INT) 3l);      \
+  (triedge).orient = (int) ((U_INT8) (ptr) & (U_INT8) 3l);      \
   (triedge).tri = (triangle *)                                                \
-                  ((ELISE_PTR_U_INT) (ptr) ^ (ELISE_PTR_U_INT) (triedge).orient)
+                  ((U_INT8) (ptr) ^ (U_INT8) (triedge).orient)
 
 /* encode() compresses an oriented triangle into a single pointer.  It       */
 /*   relies on the assumption that all triangles are aligned to four-byte    */
 /*   boundaries, so the two least significant bits of (triedge).tri are zero.*/
 
 #define encode(triedge)                                                       \
-  (triangle) ((ELISE_PTR_U_INT) (triedge).tri | (ELISE_PTR_U_INT) (triedge).orient)
+  (triangle) ((U_INT8) (triedge).tri | (U_INT8) (triedge).orient)
 
 /* The following edge manipulation primitives are all described by Guibas    */
 /*   and Stolfi.  However, they use an edge-based data structure, whereas I  */
@@ -1006,16 +1006,16 @@ int minus1mod3[3] = {2, 0, 1};
 
 #define infect(triedge)                                                       \
   (triedge).tri[6] = (triangle)                                               \
-                     ((ELISE_PTR_U_INT) (triedge).tri[6] | (ELISE_PTR_U_INT) 2l)
+                     ((U_INT8) (triedge).tri[6] | (U_INT8) 2l)
 
 #define uninfect(triedge)                                                     \
   (triedge).tri[6] = (triangle)                                               \
-                     ((ELISE_PTR_U_INT) (triedge).tri[6] & ~ (ELISE_PTR_U_INT) 2l)
+                     ((U_INT8) (triedge).tri[6] & ~ (U_INT8) 2l)
 
 /* Test a triangle for viral infection.                                      */
 
 #define infected(triedge)                                                     \
-  (((ELISE_PTR_U_INT) (triedge).tri[6] & (ELISE_PTR_U_INT) 2l) != 0)
+  (((U_INT8) (triedge).tri[6] & (U_INT8) 2l) != 0)
 
 /* Check or set a triangle's attributes.                                     */
 
@@ -1042,16 +1042,16 @@ int minus1mod3[3] = {2, 0, 1};
 /*   are masked out to produce the real pointer.                             */
 
 #define sdecode(sptr, edge)                                                   \
-  (edge).shorient = (int) ((ELISE_PTR_U_INT) (sptr) & (ELISE_PTR_U_INT) 1l);      \
+  (edge).shorient = (int) ((U_INT8) (sptr) & (U_INT8) 1l);      \
   (edge).sh = (shelle *)                                                      \
-              ((ELISE_PTR_U_INT) (sptr) & ~ (ELISE_PTR_U_INT) 3l)
+              ((U_INT8) (sptr) & ~ (U_INT8) 3l)
 
 /* sencode() compresses an oriented shell edge into a single pointer.  It    */
 /*   relies on the assumption that all shell edges are aligned to two-byte   */
 /*   boundaries, so the least significant bit of (edge).sh is zero.          */
 
 #define sencode(edge)                                                         \
-  (shelle) ((ELISE_PTR_U_INT) (edge).sh | (ELISE_PTR_U_INT) (edge).shorient)
+  (shelle) ((U_INT8) (edge).sh | (U_INT8) (edge).shorient)
 
 /* ssym() toggles the orientation of a shell edge.                           */
 
@@ -3054,64 +3054,64 @@ void printtriangle( struct triedge *t)
   struct edge printsh;
   point printpoint;
 
-  printf("triangle x" ELISE_PTR_FORMAT "x with orientation %d:\n", (ELISE_PTR_U_INT) t->tri,
+  printf("triangle x" "%ll" "x with orientation %d:\n", (U_INT8) t->tri,
          t->orient);
   decode(t->tri[0], printtri);
   if (printtri.tri == dummytri) {
     printf("    [0] = Outer space\n");
   } else {
-    printf("    [0] = x" ELISE_PTR_FORMAT "x  %d\n", (ELISE_PTR_U_INT) printtri.tri,
+    printf("    [0] = x" "%ll" "x  %d\n", (U_INT8) printtri.tri,
            printtri.orient);
   }
   decode(t->tri[1], printtri);
   if (printtri.tri == dummytri) {
     printf("    [1] = Outer space\n");
   } else {
-    printf("    [1] = x" ELISE_PTR_FORMAT "x  %d\n", (ELISE_PTR_U_INT) printtri.tri,
+    printf("    [1] = x" "%ll" "x  %d\n", (U_INT8) printtri.tri,
            printtri.orient);
   }
   decode(t->tri[2], printtri);
   if (printtri.tri == dummytri) {
     printf("    [2] = Outer space\n");
   } else {
-    printf("    [2] = x" ELISE_PTR_FORMAT "x  %d\n", (ELISE_PTR_U_INT) printtri.tri,
+    printf("    [2] = x" "%ll" "x  %d\n", (U_INT8) printtri.tri,
            printtri.orient);
   }
   org(*t, printpoint);
   if (printpoint == (point) NULL)
     printf("    Origin[%d] = NULL\n", (t->orient + 1) % 3 + 3);
   else
-    printf("    Origin[%d] = x" ELISE_PTR_FORMAT "x  (%.12g, %.12g)\n",
-           (t->orient + 1) % 3 + 3, (ELISE_PTR_U_INT) printpoint,
+    printf("    Origin[%d] = x" "%ll" "x  (%.12g, %.12g)\n",
+           (t->orient + 1) % 3 + 3, (U_INT8) printpoint,
            printpoint[0], printpoint[1]);
   dest(*t, printpoint);
   if (printpoint == (point) NULL)
     printf("    Dest  [%d] = NULL\n", (t->orient + 2) % 3 + 3);
   else
-    printf("    Dest  [%d] = x" ELISE_PTR_FORMAT "x  (%.12g, %.12g)\n",
-           (t->orient + 2) % 3 + 3, (ELISE_PTR_U_INT) printpoint,
+    printf("    Dest  [%d] = x" "%ll" "x  (%.12g, %.12g)\n",
+           (t->orient + 2) % 3 + 3, (U_INT8) printpoint,
            printpoint[0], printpoint[1]);
   apex(*t, printpoint);
   if (printpoint == (point) NULL)
     printf("    Apex  [%d] = NULL\n", t->orient + 3);
   else
-    printf("    Apex  [%d] = x" ELISE_PTR_FORMAT "x  (%.12g, %.12g)\n",
-           t->orient + 3, (ELISE_PTR_U_INT) printpoint,
+    printf("    Apex  [%d] = x" "%ll" "x  (%.12g, %.12g)\n",
+           t->orient + 3, (U_INT8) printpoint,
            printpoint[0], printpoint[1]);
   if (useshelles) {
     sdecode(t->tri[6], printsh);
     if (printsh.sh != dummysh) {
-      printf("    [6] = x" ELISE_PTR_FORMAT "x  %d\n", (ELISE_PTR_U_INT) printsh.sh,
+      printf("    [6] = x" "%ll" "x  %d\n", (U_INT8) printsh.sh,
              printsh.shorient);
     }
     sdecode(t->tri[7], printsh);
     if (printsh.sh != dummysh) {
-      printf("    [7] = x" ELISE_PTR_FORMAT "x  %d\n", (ELISE_PTR_U_INT) printsh.sh,
+      printf("    [7] = x" "%ll" "x  %d\n", (U_INT8) printsh.sh,
              printsh.shorient);
     }
     sdecode(t->tri[8], printsh);
     if (printsh.sh != dummysh) {
-      printf("    [8] = x" ELISE_PTR_FORMAT "x  %d\n", (ELISE_PTR_U_INT) printsh.sh,
+      printf("    [8] = x" "%ll" "x  %d\n", (U_INT8) printsh.sh,
              printsh.shorient);
     }
   }
@@ -3138,48 +3138,48 @@ void printshelle( struct edge *s)
   struct triedge printtri;
   point printpoint;
 
-  printf("shell edge x" ELISE_PTR_FORMAT "x with orientation %d and mark %d:\n",
-         (ELISE_PTR_U_INT) s->sh, s->shorient, mark(*s));
+  printf("shell edge x" "%ll" "x with orientation %d and mark %d:\n",
+         (U_INT8) s->sh, s->shorient, mark(*s));
   sdecode(s->sh[0], printsh);
   if (printsh.sh == dummysh) {
     printf("    [0] = No shell\n");
   } else {
-    printf("    [0] = x" ELISE_PTR_FORMAT "x  %d\n", (ELISE_PTR_U_INT) printsh.sh,
+    printf("    [0] = x" "%ll" "x  %d\n", (U_INT8) printsh.sh,
            printsh.shorient);
   }
   sdecode(s->sh[1], printsh);
   if (printsh.sh == dummysh) {
     printf("    [1] = No shell\n");
   } else {
-    printf("    [1] = x" ELISE_PTR_FORMAT "x  %d\n", (ELISE_PTR_U_INT) printsh.sh,
+    printf("    [1] = x" "%ll" "x  %d\n", (U_INT8) printsh.sh,
            printsh.shorient);
   }
   sorg(*s, printpoint);
   if (printpoint == (point) NULL)
     printf("    Origin[%d] = NULL\n", 2 + s->shorient);
   else
-    printf("    Origin[%d] = x" ELISE_PTR_FORMAT "x  (%.12g, %.12g)\n",
-           2 + s->shorient, (ELISE_PTR_U_INT) printpoint,
+    printf("    Origin[%d] = x" "%ll" "x  (%.12g, %.12g)\n",
+           2 + s->shorient, (U_INT8) printpoint,
            printpoint[0], printpoint[1]);
   sdest(*s, printpoint);
   if (printpoint == (point) NULL)
     printf("    Dest  [%d] = NULL\n", 3 - s->shorient);
   else
-    printf("    Dest  [%d] = x" ELISE_PTR_FORMAT "x  (%.12g, %.12g)\n",
-           3 - s->shorient, (ELISE_PTR_U_INT) printpoint,
+    printf("    Dest  [%d] = x" "%ll" "x  (%.12g, %.12g)\n",
+           3 - s->shorient, (U_INT8) printpoint,
            printpoint[0], printpoint[1]);
   decode(s->sh[4], printtri);
   if (printtri.tri == dummytri) {
     printf("    [4] = Outer space\n");
   } else {
-    printf("    [4] = x" ELISE_PTR_FORMAT "x  %d\n", (ELISE_PTR_U_INT) printtri.tri,
+    printf("    [4] = x" "%ll" "x  %d\n", (U_INT8) printtri.tri,
            printtri.orient);
   }
   decode(s->sh[5], printtri);
   if (printtri.tri == dummytri) {
     printf("    [5] = Outer space\n");
   } else {
-    printf("    [5] = x" ELISE_PTR_FORMAT "x  %d\n", (ELISE_PTR_U_INT) printtri.tri,
+    printf("    [5] = x" "%ll" "x  %d\n", (U_INT8) printtri.tri,
            printtri.orient);
   }
 }
@@ -3278,11 +3278,11 @@ void poolrestart(struct memorypool * pool)
   /* Set the currently active block. */
   pool->nowblock = pool->firstblock;
   /* Find the first item in the pool.  Increment by the size of (VOID *). */
-  alignptr = (ELISE_PTR_U_INT) (pool->nowblock + 1);
+  alignptr = (U_INT8) (pool->nowblock + 1);
   /* Align the item on an `alignbytes'-byte boundary. */
   pool->nextitem = (VOID *)
-    (alignptr + (ELISE_PTR_U_INT) pool->alignbytes
-     - (alignptr % (ELISE_PTR_U_INT) pool->alignbytes));
+    (alignptr + (U_INT8) pool->alignbytes
+     - (alignptr % (U_INT8) pool->alignbytes));
   /* There are lots of unallocated items left in this block. */
   pool->unallocateditems = pool->itemsperblock;
   /* The stack of deallocated items is empty. */
@@ -3342,11 +3342,11 @@ VOID *poolalloc( struct memorypool *pool)
       pool->nowblock = (VOID **) *(pool->nowblock);
       /* Find the first item in the block.    */
       /*   Increment by the size of (VOID *). */
-      alignptr = (ELISE_PTR_U_INT) (pool->nowblock + 1);
+      alignptr = (U_INT8) (pool->nowblock + 1);
       /* Align the item on an `alignbytes'-byte boundary. */
       pool->nextitem = (VOID *)
-        (alignptr + (ELISE_PTR_U_INT) pool->alignbytes
-         - (alignptr % (ELISE_PTR_U_INT) pool->alignbytes));
+        (alignptr + (U_INT8) pool->alignbytes
+         - (alignptr % (U_INT8) pool->alignbytes));
       /* There are lots of unallocated items left in this block. */
       pool->unallocateditems = pool->itemsperblock;
     }
@@ -3398,11 +3398,11 @@ void traversalinit(struct memorypool *pool)
   /* Begin the traversal in the first block. */
   pool->pathblock = pool->firstblock;
   /* Find the first item in the block.  Increment by the size of (VOID *). */
-  alignptr = (ELISE_PTR_U_INT) (pool->pathblock + 1);
+  alignptr = (U_INT8) (pool->pathblock + 1);
   /* Align with item on an `alignbytes'-byte boundary. */
   pool->pathitem = (VOID *)
-    (alignptr + (ELISE_PTR_U_INT) pool->alignbytes
-     - (alignptr % (ELISE_PTR_U_INT) pool->alignbytes));
+    (alignptr + (U_INT8) pool->alignbytes
+     - (alignptr % (U_INT8) pool->alignbytes));
   /* Set the number of items left in the current block. */
   pool->pathitemsleft = pool->itemsperblock;
 }
@@ -3436,11 +3436,11 @@ VOID *traverse(struct memorypool *pool)
     /* Find the next block. */
     pool->pathblock = (VOID **) *(pool->pathblock);
     /* Find the first item in the block.  Increment by the size of (VOID *). */
-    alignptr = (ELISE_PTR_U_INT) (pool->pathblock + 1);
+    alignptr = (U_INT8) (pool->pathblock + 1);
     /* Align with item on an `alignbytes'-byte boundary. */
     pool->pathitem = (VOID *)
-      (alignptr + (ELISE_PTR_U_INT) pool->alignbytes
-       - (alignptr % (ELISE_PTR_U_INT) pool->alignbytes));
+      (alignptr + (U_INT8) pool->alignbytes
+       - (alignptr % (U_INT8) pool->alignbytes));
     /* Set the number of items left in the current block. */
     pool->pathitemsleft = pool->itemsperblock;
   }
@@ -3490,10 +3490,10 @@ void dummyinit(int trianglewords, int shellewords)
     exit(1);
   }
   /* Align `dummytri' on a `triangles.alignbytes'-byte boundary. */
-  alignptr = (ELISE_PTR_U_INT) dummytribase;
+  alignptr = (U_INT8) dummytribase;
   dummytri = (triangle *)
-    (alignptr + (ELISE_PTR_U_INT) triangles.alignbytes
-     - (alignptr % (ELISE_PTR_U_INT) triangles.alignbytes));
+    (alignptr + (U_INT8) triangles.alignbytes
+     - (alignptr % (U_INT8) triangles.alignbytes));
   /* Initialize the three adjoining triangles to be "outer space".  These  */
   /*   will eventually be changed by various bonding operations, but their */
   /*   values don't really matter, as long as they can legally be          */
@@ -3517,10 +3517,10 @@ void dummyinit(int trianglewords, int shellewords)
       exit(1);
     }
     /* Align `dummysh' on a `shelles.alignbytes'-byte boundary. */
-    alignptr = (ELISE_PTR_U_INT) dummyshbase;
+    alignptr = (U_INT8) dummyshbase;
     dummysh = (shelle *)
-      (alignptr + (ELISE_PTR_U_INT) shelles.alignbytes
-       - (alignptr % (ELISE_PTR_U_INT) shelles.alignbytes));
+      (alignptr + (U_INT8) shelles.alignbytes
+       - (alignptr % (U_INT8) shelles.alignbytes));
     /* Initialize the two adjoining shell edges to be the omnipresent shell */
     /*   edge.  These will eventually be changed by various bonding         */
     /*   operations, but their values don't really matter, as long as they  */
@@ -3811,9 +3811,9 @@ point getpoint(int number)
     current += points.itemsperblock;
   }
   /* Now find the right point. */
-  alignptr = (ELISE_PTR_U_INT) (getblock + 1);
-  foundpoint = (point) (alignptr + (ELISE_PTR_U_INT) points.alignbytes
-                        - (alignptr % (ELISE_PTR_U_INT) points.alignbytes));
+  alignptr = (U_INT8) (getblock + 1);
+  foundpoint = (point) (alignptr + (U_INT8) points.alignbytes
+                        - (alignptr % (U_INT8) points.alignbytes));
   while (current < number) {
     foundpoint += points.itemwords;
     current++;
@@ -5870,9 +5870,9 @@ enum locateresult dt2d_locate( point searchpoint, struct triedge *searchtri)
   sampleblock = triangles.firstblock;
   sampletri.orient = 0;
   for (i = 0; i < sampleblocks; i++) {
-    alignptr = (ELISE_PTR_U_INT) (sampleblock + 1);
-    firsttri = (triangle *) (alignptr + (ELISE_PTR_U_INT) triangles.alignbytes
-                          - (alignptr % (ELISE_PTR_U_INT) triangles.alignbytes));
+    alignptr = (U_INT8) (sampleblock + 1);
+    firsttri = (triangle *) (alignptr + (U_INT8) triangles.alignbytes
+                          - (alignptr % (U_INT8) triangles.alignbytes));
     for (j = 0; j < samplesperblock; j++) {
       if (i == triblocks - 1) {
         samplenum = randomnation((int)
@@ -13260,36 +13260,3 @@ int main(int argc,char ** argv)
   return 0;
 #endif /* not TRILIBRARY */
 }
-
-/*Footer-MicMac-eLiSe-25/06/2007
-
-Ce logiciel est un programme informatique servant à la mise en
-correspondances d'images pour la reconstruction du relief.
-
-Ce logiciel est régi par la licence CeCILL-B soumise au droit français et
-respectant les principes de diffusion des logiciels libres. Vous pouvez
-utiliser, modifier et/ou redistribuer ce programme sous les conditions
-de la licence CeCILL-B telle que diffusée par le CEA, le CNRS et l'INRIA 
-sur le site "http://www.cecill.info".
-
-En contrepartie de l'accessibilité au code source et des droits de copie,
-de modification et de redistribution accordés par cette licence, il n'est
-offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,
-seule une responsabilité restreinte pèse sur l'auteur du programme,  le
-titulaire des droits patrimoniaux et les concédants successifs.
-
-A cet égard  l'attention de l'utilisateur est attirée sur les risques
-associés au chargement,  à l'utilisation,  à la modification et/ou au
-développement et à la reproduction du logiciel par l'utilisateur étant 
-donné sa spécificité de logiciel libre, qui peut le rendre complexe à 
-manipuler et qui le réserve donc à des développeurs et des professionnels
-avertis possédant  des  connaissances  informatiques approfondies.  Les
-utilisateurs sont donc invités à charger  et  tester  l'adéquation  du
-logiciel à leurs besoins dans des conditions permettant d'assurer la
-sécurité de leurs systèmes et ou de leurs données et, plus généralement, 
-à l'utiliser et l'exploiter dans les mêmes conditions de sécurité. 
-
-Le fait que vous puissiez accéder à cet en-tête signifie que vous avez 
-pris connaissance de la licence CeCILL-B, et que vous en avez accepté les
-termes.
-Footer-MicMac-eLiSe-25/06/2007*/

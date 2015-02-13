@@ -209,7 +209,7 @@ bool Optim_L1FormLin::ExploreChVAR
            _vad1.push_back(AbscD1(_Scal1D,kf));
 	}
 
-    STDSORT(_vad1.begin(),_vad1.end());
+    std::sort(_vad1.begin(),_vad1.end());
 
     REAL ptot = 0;
     for (INT k=0; k<(INT)_vad1.size() ; k++)

@@ -128,10 +128,10 @@ class CBenchElSList
 {
      public :
            typedef ElSlist<INT>::iterator  ElIt;
-           typedef ElSTDNS list<INT>::iterator     LIt;
+           typedef std::list<INT>::iterator     LIt;
 
            ElSlist<INT>      _l1;
-           ElSTDNS list<INT>         _l2;
+           std::list<INT>         _l2;
            ElSlist<INT> *    _res;
            INT               _sz;
            INT               _som;

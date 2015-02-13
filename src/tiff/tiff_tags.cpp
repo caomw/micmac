@@ -336,17 +336,17 @@ INT  Tiff_Im::nb_chan_of_phot_interp(PH_INTER_TYPE phot_interp)
      return 1;
 }
 
-const ElSTDNS string   Tiff_Im::Str_No_Compr("NoCompr");
-const ElSTDNS string   Tiff_Im::Str_CCITT_G3_1D_Compr("CCITTG31D");
-const ElSTDNS string   Tiff_Im::Str_Group_3FAX_Compr("FAX3");
-const ElSTDNS string   Tiff_Im::Str_Group_4FAX_Compr("FAX4");
-const ElSTDNS string   Tiff_Im::Str_LZW_Compr("LZW");
-const ElSTDNS string   Tiff_Im::Str_JPEG_Compr("JPEG");
-const ElSTDNS string   Tiff_Im::Str_MPD_T6("MPTDT6");
-const ElSTDNS string   Tiff_Im::Str_PackBits_Compr("PackBits");
-const ElSTDNS string   Tiff_Im::Str_NoBytePackBits_Compr("NoBytePackBits");
+const std::string   Tiff_Im::Str_No_Compr("NoCompr");
+const std::string   Tiff_Im::Str_CCITT_G3_1D_Compr("CCITTG31D");
+const std::string   Tiff_Im::Str_Group_3FAX_Compr("FAX3");
+const std::string   Tiff_Im::Str_Group_4FAX_Compr("FAX4");
+const std::string   Tiff_Im::Str_LZW_Compr("LZW");
+const std::string   Tiff_Im::Str_JPEG_Compr("JPEG");
+const std::string   Tiff_Im::Str_MPD_T6("MPTDT6");
+const std::string   Tiff_Im::Str_PackBits_Compr("PackBits");
+const std::string   Tiff_Im::Str_NoBytePackBits_Compr("NoBytePackBits");
 
-Tiff_Im::COMPR_TYPE Tiff_Im::mode_compr(const ElSTDNS string & str)
+Tiff_Im::COMPR_TYPE Tiff_Im::mode_compr(const std::string & str)
 {
 	if (str ==Str_No_Compr)
 		return  No_Compr;
@@ -367,7 +367,7 @@ Tiff_Im::COMPR_TYPE Tiff_Im::mode_compr(const ElSTDNS string & str)
 	if (str ==Str_NoBytePackBits_Compr)
 		return  NoByte_PackBits_Compr;
 
-	ELISE_ASSERT(false,"Inc in Tiff_Im::mode_compr(const ElSTDNS string & str)");
+	ELISE_ASSERT(false,"Inc in Tiff_Im::mode_compr(const std::string & str)");
 	return  PackBits_Compr;
 }
 

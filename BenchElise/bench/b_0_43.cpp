@@ -80,7 +80,7 @@ void bench_delaunay()
     for (INT nb = 100; nb < 500 ; nb +=50)
     {
 
-       ElSTDNS list<PtDelTest> L;
+       std::list<PtDelTest> L;
        ElFilo<PtDelTest> Pts;
 
        for (INT k= 0; k< nb; k++)

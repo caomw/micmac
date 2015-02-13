@@ -326,7 +326,7 @@ ElFilo<EventInterv> & PileEvInterv::events()
 
 void PileEvInterv::sort_ev()
 {
-    STDSORT
+    std::sort
     (
          _events.tab(),
          _events.tab() + _events.nb(),

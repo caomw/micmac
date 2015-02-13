@@ -543,7 +543,7 @@ class ElPhotogram  // + ou - NameSpace
 
         static void ProfChampsFromDist
              (
-                 ElSTDNS list<Pt3dr>&  res,  // liste de triplets de prof de champs
+                 std::list<Pt3dr>&  res,  // liste de triplets de prof de champs
                  Pt3dr p1,Pt3dr p2,Pt3dr p3, // points de projection
                  REAL d12, REAL d13, REAL d23
              );
@@ -1627,10 +1627,10 @@ class ElCamera : public cCapture3D
 
           bool Devant(const Pt3dr &) const;
           bool TousDevant(const std::list<Pt3dr> &) const;
-          REAL EcProj(const ElSTDNS list<Pt3dr> & PR3 ,
-                      const ElSTDNS list<Pt2dr> & PF2) const;
+          REAL EcProj(const std::list<Pt3dr> & PR3 ,
+                      const std::list<Pt2dr> & PF2) const;
 
-          REAL EcProj ( const ElSTDNS list<Appar23> & P23);
+          REAL EcProj ( const std::list<Appar23> & P23);
 
           // Differentielle de l'application globale
                 // par rapport a un point
@@ -1991,20 +1991,20 @@ class CamStenope : public ElCamera
 
          void OrientFromPtsAppui
               (
-                 ElSTDNS list<ElRotation3D> &,
+                 std::list<ElRotation3D> &,
                  Pt3dr R3A, Pt3dr R3B, Pt3dr R3C,
                  Pt2dr F2A, Pt2dr F2B, Pt2dr F2C
               );
          void OrientFromPtsAppui
               (
-                 ElSTDNS list<ElRotation3D> & Res,
-                 const ElSTDNS list<Pt3dr> & PR3 ,
-                 const ElSTDNS list<Pt2dr> & PF2
+                 std::list<ElRotation3D> & Res,
+                 const std::list<Pt3dr> & PR3 ,
+                 const std::list<Pt2dr> & PF2
               );
          void OrientFromPtsAppui
               (
-                 ElSTDNS list<ElRotation3D>  & Res,
-                 const ElSTDNS list<Appar23> & P32
+                 std::list<ElRotation3D>  & Res,
+                 const std::list<Appar23> & P32
               );
 
         // Si  NbSol ==  0 et resultat vide => Erreur
@@ -2013,8 +2013,8 @@ class CamStenope : public ElCamera
          ElRotation3D  OrientFromPtsAppui
               (
                  bool TousDevant,
-                 const ElSTDNS list<Pt3dr> & PR3 ,
-                 const ElSTDNS list<Pt2dr> & PF2 ,
+                 const std::list<Pt3dr> & PR3 ,
+                 const std::list<Pt2dr> & PF2 ,
                  REAL * Ecart = 0,
                  INT  * NbSol    = 0
               );
@@ -2022,7 +2022,7 @@ class CamStenope : public ElCamera
          ElRotation3D  OrientFromPtsAppui
               (
                                 bool TousDevant,
-                 const ElSTDNS list<Appar23> & P32 ,
+                 const std::list<Appar23> & P32 ,
                  REAL * Ecart = 0,
                  INT  * NbSol    = 0
               );
@@ -2030,8 +2030,8 @@ class CamStenope : public ElCamera
                (
                                 bool TousDevant,
                 INT  NbTest,
-                const ElSTDNS list<Pt3dr> & PR3 ,
-                const ElSTDNS list<Pt2dr> & PF2,
+                const std::list<Pt3dr> & PR3 ,
+                const std::list<Pt2dr> & PF2,
                 REAL * Res_Dmin,
                 bool   ModeRansac,
                                 Pt3dr * aDirApprox = 0
@@ -2041,8 +2041,8 @@ class CamStenope : public ElCamera
                (
                                 bool TousDevant,
                 INT  NbTest,
-                const ElSTDNS list<Pt3dr> & PR3 ,
-                const ElSTDNS list<Pt2dr> & PF2,
+                const std::list<Pt3dr> & PR3 ,
+                const std::list<Pt2dr> & PF2,
                 REAL * Res_Dmin,
                                 Pt3dr * aDirApprox = 0
                );
@@ -2051,7 +2051,7 @@ class CamStenope : public ElCamera
                (
                                 bool TousDevant,
                 INT  NbTest,
-                const ElSTDNS list<Appar23> & P23 ,
+                const std::list<Appar23> & P23 ,
                 REAL * Res_Dmin,
                                 Pt3dr * aDirApprox = 0
                );
@@ -2062,7 +2062,7 @@ class CamStenope : public ElCamera
                (
                                 bool TousDevant,
                 INT  NbTest,
-                                const ElSTDNS list<Appar23> & P32 ,
+                                const std::list<Appar23> & P32 ,
                 REAL * Res_Dmin,
                                 Pt3dr * aDirApprox = 0
                );
@@ -3211,40 +3211,3 @@ class cCamStenopeBilin : public CamStenope
 
 
 #endif // !  _ELISE_GENERAL_PHOTOGRAM_H
-
-
-
-
-
-/*Footer-MicMac-eLiSe-25/06/2007
-
-Ce logiciel est un programme informatique servant �  la mise en
-correspondances d'images pour la reconstruction du relief.
-
-Ce logiciel est régi par la licence CeCILL-B soumise au droit français et
-respectant les principes de diffusion des logiciels libres. Vous pouvez
-utiliser, modifier et/ou redistribuer ce programme sous les conditions
-de la licence CeCILL-B telle que diffusée par le CEA, le CNRS et l'INRIA
-sur le site "http://www.cecill.info".
-
-En contrepartie de l'accessibilité au code source et des droits de copie,
-de modification et de redistribution accordés par cette licence, il n'est
-offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,
-seule une responsabilité restreinte pèse sur l'auteur du programme,  le
-titulaire des droits patrimoniaux et les concédants successifs.
-
-A cet égard  l'attention de l'utilisateur est attirée sur les risques
-associés au chargement,  �  l'utilisation,  �  la modification et/ou au
-développement et �  la reproduction du logiciel par l'utilisateur étant
-donné sa spécificité de logiciel libre, qui peut le rendre complexe �
-manipuler et qui le réserve donc �  des développeurs et des professionnels
-avertis possédant  des  connaissances  informatiques approfondies.  Les
-utilisateurs sont donc invités �  charger  et  tester  l'adéquation  du
-logiciel �  leurs besoins dans des conditions permettant d'assurer la
-sécurité de leurs systèmes et ou de leurs données et, plus généralement,
-�  l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
-
-Le fait que vous puissiez accéder �  cet en-tête signifie que vous avez
-pris connaissance de la licence CeCILL-B, et que vous en avez accepté les
-termes.
-Footer-MicMac-eLiSe-25/06/2007*/

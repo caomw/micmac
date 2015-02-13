@@ -57,10 +57,10 @@ template <class Type> class Tile_UL_PCKB
 
 		void UCompr
      	(
-            ElSTDNS vector<U_INT2> &    LInd,
-            ElSTDNS vector<U_INT2> &    VInd,
-            ElSTDNS vector<U_INT1> &    Length,
-            ElSTDNS vector<Type> &  	Vals
+            std::vector<U_INT2> &    LInd,
+            std::vector<U_INT2> &    VInd,
+            std::vector<U_INT1> &    Length,
+            std::vector<Type> &  	Vals
      	); 
 
 		void UpdateSize(unsigned int sz)
@@ -92,10 +92,10 @@ template <class Type> class Tile_UL_PCKB
 
 template <class Type> void Tile_UL_PCKB<Type>::UCompr
      (
-         ElSTDNS vector<U_INT2> &    LInd,
-         ElSTDNS vector<U_INT2> &    VInd,
-         ElSTDNS vector<U_INT1> &    Length,
-         ElSTDNS vector<Type> &    Vals
+         std::vector<U_INT2> &    LInd,
+         std::vector<U_INT2> &    VInd,
+         std::vector<U_INT1> &    Length,
+         std::vector<Type> &    Vals
      )
 {
 
@@ -192,7 +192,7 @@ template <class Type> PackB_IM<Type> UnLoadPackBit<Type>::Do(DATA_Tiff_Ifd &aDTI
     }
 
 
-	ElSTDNS vector<Tile_UL_PCKB<Type> >  TUP;
+	std::vector<Tile_UL_PCKB<Type> >  TUP;
 	
 	{
 	for (INT Tilx =0,x=0; Tilx<aDTI._nb_tile.x; Tilx++,x+=aDTI._sz_tile.x)
@@ -214,10 +214,10 @@ template <class Type> PackB_IM<Type> UnLoadPackBit<Type>::Do(DATA_Tiff_Ifd &aDTI
 
 	ELISE_fp  fp(aDTI.name(),ELISE_fp::READ);
 
-   ElSTDNS vector<U_INT2>   LInd;
-   ElSTDNS vector<U_INT2>   VInd;
-   ElSTDNS vector<U_INT1>   Length;
-   ElSTDNS vector<Type>  	Vals;
+   std::vector<U_INT2>   LInd;
+   std::vector<U_INT2>   VInd;
+   std::vector<U_INT1>   Length;
+   std::vector<Type>  	Vals;
 
 	Data_PackB_IM<Type> * res = new Data_PackB_IM<Type>(aDTI._sz.x,aDTI._sz.y,0,-aDTI._sz_tile.x);
 

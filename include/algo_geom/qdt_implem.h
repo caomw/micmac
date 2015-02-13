@@ -471,7 +471,7 @@ template <class Obj,class Prim,class FPrim>
 template <class Obj,class Prim,class FPrim>
          void ElQT<Obj,Prim,FPrim>::RVoisins 
               (
-                       ElSTDNS set<Obj>             & TheSet,
+                       std::set<Obj>             & TheSet,
                        Pt2dr                  pt,
                        REAL                   d
               )
@@ -497,7 +497,7 @@ template <class Obj,class Prim,class FPrim>
 template <class Obj,class Prim,class FPrim>
          void ElQT<Obj,Prim,FPrim>::RVoisins 
               (
-                       ElSTDNS set<Obj>             & TheSet,
+                       std::set<Obj>             & TheSet,
                        Box2dr                 box,
                        REAL                   d
               )
@@ -524,7 +524,7 @@ template <class Obj,class Prim,class FPrim>
 template <class Obj,class Prim,class FPrim>
          void ElQT<Obj,Prim,FPrim>::RVoisins 
               (
-                       ElSTDNS set<Obj>             & TheSet,
+                       std::set<Obj>             & TheSet,
                        Seg2d                  seg,
                        REAL                   d
               )

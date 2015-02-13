@@ -257,7 +257,7 @@ REAL ElHough::Dynamic(ElHough::tModeAccum  aMode)
 void ElHoughImplem::CalcMaxLoc
      (
          Im2D_INT4    Im,
-         ElSTDNS vector<Pt2di> & Pts,
+         std::vector<Pt2di> & Pts,
          REAL VoisRho,
          REAL VoisTeta,
          REAL VMin
@@ -304,7 +304,7 @@ bool ElHoughImplem::BandeConnectedVsup
                                   
 void ElHoughImplem::FiltrMaxLoc_BCVS
      (
-        ElSTDNS vector<Pt2di> & Pts,
+        std::vector<Pt2di> & Pts,
         Im2D_INT4       Im,
         REAL            FactInf,
         REAL            TolGeom,

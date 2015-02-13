@@ -66,12 +66,15 @@ option( WITH_CPP11 "Compilateur C++11" ON )
 
 option( UPDATE_TRANSLATIONS "Update source translation translations/*.ts files (WARNING: make clean will delete the source .ts files! Danger!)" )
 
+# Utiliser Doxygen
+option( WITH_DOXYGEN "Generation de documentation" OFF )
+
 # Set C++ preprocessor definitions
 if( CMAKE_COMPILER_IS_GNUCC )
     add_definitions( -O2 -Wall )
 	set( CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined" )
 	if( ${WITH_CPP11} )
-		add_definitions( -std=c++11 )
+        list( APPEND CMAKE_CXX_FLAGS -std=c++11 )
 	endif()
 endif()
 
@@ -91,13 +94,8 @@ if ( WITH_OPEN_MP )
         add_definitions(-DUSE_OPEN_MP)
 endif()
 
-# Utiliser Doxygen
-OPTION(WITH_DOXYGEN "Generation de documentation" OFF )
+include_directories( include )
 
-
-######################################
-## 	Trouver les EXES et Libs	##
-######################################
 if ( ${CMAKE_SYSTEM_NAME} MATCHES "Darwin" )
     add_definitions(-DELISE_Darwin)
 endif()

@@ -209,9 +209,9 @@ template <class AttrSom,class AttrArc> class ElArc
             typedef AttrSom ASom;
             typedef AttrArc AArc;
 
-            friend ClassFriend ElSom<AttrSom,AttrArc>;
-            friend ClassFriend ElGraphe<AttrSom,AttrArc>;
-            friend ClassFriend ElArcIterator<AttrSom,AttrArc>;
+            friend class ElSom<AttrSom,AttrArc>;
+            friend class ElGraphe<AttrSom,AttrArc>;
+            friend class ElArcIterator<AttrSom,AttrArc>;
 
             TSom & s1()                   { return *_s1;}
             TSom & s2()                   { return *_s2;}
@@ -293,7 +293,7 @@ template <class AttrSom,class AttrArc> class ElArcIterator
             typedef AttrSom ASom;
             typedef AttrArc AArc;
 
-            friend ClassFriend  ElSom<AttrSom,AttrArc>;
+            friend class  ElSom<AttrSom,AttrArc>;
 
             void operator ++ (INT) 
             {

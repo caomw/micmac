@@ -460,7 +460,7 @@ ElImScroller * ElImScroller::StdFileGenerique
     REAL aScale = 1.0/InvScale;
     char CScale[10];
     sprintf(CScale,"%d",InvScale);
-    ElSTDNS string Scale(CScale);
+    std::string Scale(CScale);
 
     ElImScroller * res =0;
 
@@ -501,7 +501,7 @@ ElPyramScroller * ElImScroller::StdPyramide
                         
                   )
 {
-     ElSTDNS vector <ElImScroller *>  VScrol; 
+     std::vector <ElImScroller *>  VScrol; 
 
      for (INT InvScale=1 ; InvScale< 128 ; InvScale*=2)
      {
@@ -790,7 +790,7 @@ REAL RGBTrue16Col_PckbImScr::TimeUnCompr() const
 
 
 // Fonction identite pour contourner bug sur "," en WSCC5.0
-static ElSTDNS vector<ElImScroller *>  VerifSize(ElSTDNS vector<ElImScroller *> & scrolls)
+static std::vector<ElImScroller *>  VerifSize(std::vector<ElImScroller *> & scrolls)
 {
    ELISE_ASSERT(scrolls.size() !=0,"empty size inElPyramScroller");
    return scrolls;
@@ -798,7 +798,7 @@ static ElSTDNS vector<ElImScroller *>  VerifSize(ElSTDNS vector<ElImScroller *> 
 
 ElPyramScroller::ElPyramScroller
 (
-	ElSTDNS vector<ElImScroller *> & scrolls
+	std::vector<ElImScroller *> & scrolls
 ) :
     ElImScroller
     (
@@ -875,7 +875,7 @@ void ElPyramScroller::ReflexSetVisuCur(Visu_ElImDest * pVEID)
 }
 
 
-const ElSTDNS vector<ElImScroller *> & ElPyramScroller::SubScrolls()
+const std::vector<ElImScroller *> & ElPyramScroller::SubScrolls()
 {
    return _subs;
 }

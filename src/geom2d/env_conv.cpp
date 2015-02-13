@@ -79,7 +79,7 @@ template <class TPt> class  Cmp_Vect_Then_Norm
 
        public :
 
-           typedef ElTyName TPt::TypeScal TScal;
+           typedef  TPt::TypeScal TScal;
            Cmp_Vect_Then_Norm
            (
                  TPt                 DN,
@@ -124,7 +124,7 @@ template <class TPt> class  Cmp_Vect_Then_Norm
 template <class TPt> class  Env_Conv
 {
      private :
-         typedef ElTyName TPt::TypeScal TScal;
+         typedef  TPt::TypeScal TScal;
 
          ElFifo<INT> &        _ind;
          const ElFilo<TPt> &  _pts;
@@ -164,7 +164,7 @@ template <class TPt> class  Env_Conv
             TPt down_right = pts_down_right(_pts);
 
             Cmp_Vect_Then_Norm<TPt> cmp_crois(down_right,_pts,true);
-            STDSORT(_ind.tab(),_ind.tab()+nb_pts,cmp_crois);
+            std::sort(_ind.tab(),_ind.tab()+nb_pts,cmp_crois);
 
             {
                 // supression des duplicatas 
@@ -190,7 +190,7 @@ template <class TPt> class  Env_Conv
                       k--;
                 k++;
                 Cmp_Vect_Then_Norm<TPt> cmp_decrois(down_right,_pts,false);
-				STDSORT(_ind.tab()+k,_ind.tab()+nb_pts,cmp_decrois);
+				std::sort(_ind.tab()+k,_ind.tab()+nb_pts,cmp_decrois);
 
                 // si tout les poinst allignes, et env_min le test sup_iterm ne
                 // fonctionne pas bien au niveau du rebroussement, donc on sort maintenant

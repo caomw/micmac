@@ -44,7 +44,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 template <class O1,class O2> class TClCatOut
 {
      public :
-          typedef ElPair<ElTyName O1::ValOut,ElTyName O2::ValOut>  ValOut;
+          typedef ElPair< O1::ValOut, O2::ValOut>  ValOut;
 
           TClCatOut (O1 o1,O2 o2) : _o1 (o1), _o2 (o2) {}
           void   oset(const Pt2di & p,const ValOut & pair) 
@@ -65,7 +65,7 @@ TClCatOut<O1,O2> TCatO(O1 o1,O2 o2) { return TClCatOut<O1,O2>(o1,o2);}
 template <class O1,class O2> class TClPipeOut
 {
      public :
-          typedef ElTyName O1::ValOut  ValOut;
+          typedef  O1::ValOut  ValOut;
 
           TClPipeOut (O1 o1,O2 o2) : _o1 (o1), _o2 (o2) {}
           void   oset(const Pt2di & p,ValOut v) 
@@ -105,7 +105,7 @@ template <class Type> TClSigma<Type> TSigma(Type & v) { return TClSigma<Type>(v)
 template <class F,class O> class TClRedirOut
 {
      public :
-          typedef ElTyName O::ValOut  ValOut;
+          typedef  O::ValOut  ValOut;
 
           TClRedirOut (O o,F f) : _f (f), _o (o) {}
           void   oset(const Pt2di & p,ValOut) 

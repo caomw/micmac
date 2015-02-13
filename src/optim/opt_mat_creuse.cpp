@@ -37,14 +37,13 @@ English :
 
 Header-MicMac-eLiSe-25/06/2007*/
 
-#include "StdAfx.h"
-
 /****************************************************/
 /*                                                  */
 /*             cElMatCreuseGen                      */
 /*                                                  */
 /****************************************************/
 
+#include <general/optim.h>
 
 
 cElMatCreuseGen::cElMatCreuseGen(bool OptSym,INT aNbCol,INT aNbLig) :
@@ -165,7 +164,7 @@ void  cElMatCreuseGen::EqMatIndexee
       (
                           const std::vector<INT> & aVInd,
                           REAL aPds,REAL ** aMat
-      ) 
+      )
 {
     INT aNbInd = (INT) aVInd.size();
     for (INT aKY=0 ; aKY<aNbInd ; aKY++)

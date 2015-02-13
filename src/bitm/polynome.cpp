@@ -48,7 +48,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 /*************************************************************/
 
 template <class Type> ElPolynome<Type>  
-         ElPolynome<Type>::FromRoots(const ElSTDNS vector<Type> & VRoots)
+         ElPolynome<Type>::FromRoots(const std::vector<Type> & VRoots)
 {
    ElPolynome <Type> aRes(El1);
    for (INT aK=0; aK<INT(VRoots.size()) ; aK++)

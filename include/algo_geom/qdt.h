@@ -123,9 +123,9 @@ template <class Obj,class Prim,class FPrim>
 
             Obj  NearestObj(Pt2dr,double aDistInit,double aDistMax);
 
-            void RVoisins(ElSTDNS set<Obj> &,Pt2dr   pt,REAL d);
-            void RVoisins(ElSTDNS set<Obj> &,Seg2d   pt,REAL d);
-            void RVoisins(ElSTDNS set<Obj> &,Box2dr  pt,REAL d);
+            void RVoisins(std::set<Obj> &,Pt2dr   pt,REAL d);
+            void RVoisins(std::set<Obj> &,Seg2d   pt,REAL d);
+            void RVoisins(std::set<Obj> &,Box2dr  pt,REAL d);
 
             void RVoisins(cTplResRVoisin<Obj> &,Pt2dr   pt,REAL d);
             void RVoisins(cTplResRVoisin<Obj> &,Seg2d    pt,REAL d);

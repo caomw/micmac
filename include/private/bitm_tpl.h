@@ -73,8 +73,8 @@ template <class Type,class TyBase>  class DataGenImType :
 
       // max and min integral values of the type: the convention
       // v_max == v_min is used when these values are useless:
-      static CONST_STAT_TPL INT v_min;
-      static CONST_STAT_TPL INT v_max;
+      static const INT v_min;
+      static const INT v_max;
       static GenIm::type_el     type_el_bitm;
 
 
@@ -83,7 +83,7 @@ template <class Type,class TyBase>  class DataGenImType :
       virtual INT vmax() const;
       virtual INT vmin() const;
 
-      static CONST_STAT_TPL bool  _integral_type;
+      static const bool  _integral_type;
       protected :
           virtual ~DataGenImType();
           void Resize(INT tTot);
@@ -181,7 +181,7 @@ template <class Type,class TyBase> class DataIm1D :
     public :
 
 
-      static CONST_STAT_TPL  DataIm1D<Type,TyBase> The_Bitm; 
+      static const  DataIm1D<Type,TyBase> The_Bitm; 
 
 
       virtual void out_pts_integer(Const_INT_PP coord,INT nb,const void *) ;

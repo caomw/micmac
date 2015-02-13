@@ -777,16 +777,16 @@ static void SMP_Instantiate_Templates()
 }
 
 
-CONST_STAT_TPL U_INT1      Smart_Pointer<U_INT1>::_VAL_DEF = 0;
-CONST_STAT_TPL U_INT2      Smart_Pointer<U_INT2>::_VAL_DEF = 0;
-CONST_STAT_TPL U_INT1_Ptr  Smart_Pointer<U_INT1_Ptr>::_VAL_DEF = 0;
-CONST_STAT_TPL Pt2di       Smart_Pointer<Pt2di>::_VAL_DEF = Pt2di(0,0);
+const U_INT1      Smart_Pointer<U_INT1>::_VAL_DEF = 0;
+const U_INT2      Smart_Pointer<U_INT2>::_VAL_DEF = 0;
+const U_INT1_Ptr  Smart_Pointer<U_INT1_Ptr>::_VAL_DEF = 0;
+const Pt2di       Smart_Pointer<Pt2di>::_VAL_DEF = Pt2di(0,0);
 
-CONST_STAT_TPL INT4        Smart_Pointer<INT4>::_VAL_DEF = 0;
-CONST_STAT_TPL INT4_Ptr    Smart_Pointer<INT4_Ptr>::_VAL_DEF = 0;
+const INT4        Smart_Pointer<INT4>::_VAL_DEF = 0;
+const INT4_Ptr    Smart_Pointer<INT4_Ptr>::_VAL_DEF = 0;
 
-CONST_STAT_TPL REAL8        Smart_Pointer<REAL8>::_VAL_DEF = 0.0;
-CONST_STAT_TPL REAL8_Ptr    Smart_Pointer<REAL8_Ptr>::_VAL_DEF = 0;
+const REAL8        Smart_Pointer<REAL8>::_VAL_DEF = 0.0;
+const REAL8_Ptr    Smart_Pointer<REAL8_Ptr>::_VAL_DEF = 0;
 
 #else  /* DEBUG_SMART_POINTEUR */
 

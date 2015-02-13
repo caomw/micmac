@@ -76,7 +76,7 @@ class TFY
 template <class F1,class F2> class TClPlusFonc
 {
      public :
-          typedef ElTyName  F1::OutputFonc  OutputFonc;
+          typedef   F1::OutputFonc  OutputFonc;
           TClPlusFonc(F1 f1,F2 f2) : _f1 (f1), _f2 (f2) {}
           OutputFonc   get(const Pt2di & p) {return _f1.get(p) + _f2.get(p);}
 
@@ -91,7 +91,7 @@ TClPlusFonc<F1,F2> TPlus(F1 f1,F2 f2) { return TClPlusFonc<F1,F2>(f1,f2);}
 template <class F1,class F2> class TClModFonc
 {
      public :
-          typedef ElTyName  F1::OutputFonc  OutputFonc;
+          typedef   F1::OutputFonc  OutputFonc;
           TClModFonc(F1 f1,F2 f2) : _f1 (f1), _f2 (f2) {}
           OutputFonc   get(const Pt2di & p) {return _f1.get(p) % _f2.get(p);}
 
@@ -119,7 +119,7 @@ template <class T1,class T2> class ElPair
 template <class F1,class F2> class TClCatFonc
 {
      public :
-          typedef ElPair<ElTyName  F1::OutputFonc,ElTyName  F2::OutputFonc>   OutputFonc;
+          typedef ElPair<  F1::OutputFonc,  F2::OutputFonc>   OutputFonc;
           TClCatFonc (F1 f1,F2 f2) : _f1 (f1), _f2 (f2) {}
           OutputFonc   get(const Pt2di & p) {return OutputFonc(_f1.get(p),_f2.get(p));}
 

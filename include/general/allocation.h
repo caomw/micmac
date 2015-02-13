@@ -82,7 +82,7 @@ template <const INT NBB> class  ElListAlloc
          }
 
      private :
-          ElSTDNS list<void *> _l;
+          std::list<void *> _l;
 };
 
 

@@ -185,7 +185,7 @@ template  <const INT NBB> class  TIm2DBits : public GTIm2D
 template <class TypeFlx,class TypeFonc,class TypeOut>  
          void TElCopy(TypeFlx flx,TypeFonc fonc,TypeOut out)
 {
-    ElTyName TypeFlx::OutFlux pt = flx.PtsInit();
+     TypeFlx::OutFlux pt = flx.PtsInit();
     while(flx.next(pt))
          out.oset(pt,fonc.get(pt));
 }

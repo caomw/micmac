@@ -626,7 +626,7 @@ template <class Type> class  ImFileLoader : public GenScaleIm<INT>
 			ELISE_fp *                      _fp;
 			Pt2di                           _nb_tile;
 			Pt2di                           _sz_tile;
-			ElSTDNS vector<ElSTDNS vector<TilesIMFL<Type> *> >    _tiles;
+			std::vector<std::vector<TilesIMFL<Type> *> >    _tiles;
 																															 
 			Pt2di                             _tiles_0;
 			Pt2di                             _tiles_1;
@@ -637,7 +637,7 @@ template <class Type> class  ImFileLoader : public GenScaleIm<INT>
 			bool                            _dynamic;
 		private :
 
-			ElSTDNS vector<IFL_LineWindow *> mBufLW;
+			std::vector<IFL_LineWindow *> mBufLW;
 			INT ** GetLineWindow(INT x0U,INT x1U,INT y0U);
 			void init_LW();
 
@@ -886,10 +886,10 @@ template <class Type> class Line_PackB_IM  : public Gen_PackB_IM
                 void init
                 (       
 				    INT                         BlockInit,
-					ElSTDNS vector<U_INT2> &    LInd,
-					ElSTDNS vector<U_INT2> &    VInd,
-					ElSTDNS vector<U_INT1> &    Length,
-					ElSTDNS vector<Type> &		Vals,
+					std::vector<U_INT2> &    LInd,
+					std::vector<U_INT2> &    VInd,
+					std::vector<U_INT1> &    Length,
+					std::vector<Type> &		Vals,
 					const Type *		line =0,
 					INT                 nb_tot =0,
 					INT                 per =0
@@ -898,8 +898,8 @@ template <class Type> class Line_PackB_IM  : public Gen_PackB_IM
            class RunsOfPer
            {
                  public :
-                     ElSTDNS vector <U_INT1> mLRun;
-                     ElSTDNS vector <Type>   mVRun;
+                     std::vector <U_INT1> mLRun;
+                     std::vector <Type>   mVRun;
 
 
                      inline int  run_length_pixel(INT ind) const

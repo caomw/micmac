@@ -113,7 +113,7 @@ template <class Type >  class LoadedTilesIMFL
 
     private :
 
-        typedef  ElTyName El_CTypeTraits<Type>::tBase   tBase;
+        typedef   El_CTypeTraits<Type>::tBase   tBase;
 	
 		Im2D<Type,tBase>  _im;
 		Type *          _data_lin;
@@ -164,7 +164,7 @@ template <class Type> class LoadedTilesIMFLAllocator
 
 		~LoadedTilesIMFLAllocator();
 	private :
-		ElSTDNS list<LoadedTilesIMFL<Type> *> _reserve;
+		std::list<LoadedTilesIMFL<Type> *> _reserve;
 };
 
 template <class Type>  LoadedTilesIMFLAllocator<Type>::~LoadedTilesIMFLAllocator()
@@ -172,7 +172,7 @@ template <class Type>  LoadedTilesIMFLAllocator<Type>::~LoadedTilesIMFLAllocator
 
 	for 
     (
-        ElTyName std::list<LoadedTilesIMFL<Type> *>::iterator itl    = _reserve.begin();
+         std::list<LoadedTilesIMFL<Type> *>::iterator itl    = _reserve.begin();
         itl   != _reserve.end()  ;
         itl++
     )
@@ -183,7 +183,7 @@ template <class Type>  void LoadedTilesIMFLAllocator<Type>:: get_if_loaded(Tiles
 {
 	for 
     (
-        ElTyName ElSTDNS list<LoadedTilesIMFL<Type> *>::iterator itl    = _reserve.begin();
+         std::list<LoadedTilesIMFL<Type> *>::iterator itl    = _reserve.begin();
         itl   != _reserve.end()  ;
         itl++
     )
@@ -204,7 +204,7 @@ template <class Type> void  LoadedTilesIMFLAllocator<Type>::load_it(TilesIMFL<Ty
 
     for 
     (
-        ElTyName ElSTDNS list<LoadedTilesIMFL<Type> *>::iterator itl    = _reserve.begin()			;
+         std::list<LoadedTilesIMFL<Type> *>::iterator itl    = _reserve.begin()			;
         (itl   != _reserve.end()) && (lt==0)  ;
         itl++
     )
@@ -521,7 +521,7 @@ template <class Type> ImFileLoader<Type>::ImFileLoader
     _alloc = NEW_ONE(LoadedTilesIMFLAllocator<Type>);
 
 
-	_tiles.push_back(ElSTDNS vector<TilesIMFL<Type> *>());
+	_tiles.push_back(std::vector<TilesIMFL<Type> *>());
 	_tiles[0].push_back(CLASS_NEW_ONE(TilesIMFL<Type>,(_SzU,_nb_chan)));
 
 
@@ -637,7 +637,7 @@ template <class Type> ImFileLoader<Type>::ImFileLoader
 
     for (INT y=0; y<_nb_tile.y ; y++)
     {
-	   _tiles.push_back(ElSTDNS vector<TilesIMFL<Type> *>());
+	   _tiles.push_back(std::vector<TilesIMFL<Type> *>());
 	   for (INT x=0; x<_nb_tile.x ; x++)
 	   {
 		 _tiles[y].push_back

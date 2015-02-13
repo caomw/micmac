@@ -9,6 +9,7 @@
     Copyright : Institut Geographique National
     Author : Marc Pierrot Deseilligny
     Contributors : Gregoire Maillet, Didier Boldo.
+	Refactoring: Helio Chissini de Castro <helio@kde.org>
 
 [1] M. Pierrot-Deseilligny, N. Paparoditis.
     "A multiresolution and optimization-based image matching approach:
@@ -37,13 +38,13 @@ English :
 
 Header-MicMac-eLiSe-25/06/2007*/
 
-
-
 #ifndef _ELISE_GENERAL_OPTIM_H
 #define _ELISE_GENERAL_OPTIM_H
 
 class NROptF1vND;
 class NROptF1vDer;
+
+#include <general/sys_dep.h>
 
 // NROptF1vND : Num Recipes Optimisation de Fonction d'1 var, Non Derivable 
 
@@ -1180,7 +1181,7 @@ class Optim_L1FormLin
 
         ElMatrix<REAL>    _BestSol;
         bool              _bench_comb_made;
-        ElSTDNS vector<AbscD1>    _vad1;
+        std::vector<AbscD1>    _vad1;
 
         static Optim_L1FormLin RandOLF(INT NbVar,INT NbForm,INT Nb0 = 0);
         static void BenchRand(INT NbVar,INT NbForm,INT NbTest,bool Comb);
@@ -1239,7 +1240,7 @@ REAL IRoots(REAL val,INT exp);
 ElMatrix<REAL8> MatrFoncMeanSquare
                 (
                      Flux_Pts       flux,
-                     ElSTDNS list<Fonc_Num> Lfonc,
+                     std::list<Fonc_Num> Lfonc,
                      Fonc_Num       Obs,
                      Fonc_Num       Pds
                 );
@@ -1247,7 +1248,7 @@ ElMatrix<REAL8> MatrFoncMeanSquare
 Fonc_Num ApproxFoncMeanSquare
          (
             Flux_Pts       flux,
-            ElSTDNS list<Fonc_Num> Lfonc,
+            std::list<Fonc_Num> Lfonc,
             Fonc_Num       Obs,
             Fonc_Num       Pds
          );
@@ -1255,7 +1256,7 @@ Fonc_Num ApproxFoncMeanSquare
 	
 Fonc_Num SomPondFoncNum
          (
-		   ElSTDNS    list<Fonc_Num> Lfonc,
+		   std::   list<Fonc_Num> Lfonc,
 			  ElMatrix<REAL8>
 		 );
 template <class Type> class cMSymCoffact3x3
@@ -1332,43 +1333,5 @@ class cEq12Parametre
         double mValueFixArb;
 };
 
+#endif  // _ELISE_GENERAL_OPTIM_H
 
-
-#endif //  _ELISE_GENERAL_OPTIM_H
-
-
-
-
-
-/*Footer-MicMac-eLiSe-25/06/2007
-
-Ce logiciel est un programme informatique servant à la mise en
-correspondances d'images pour la reconstruction du relief.
-
-Ce logiciel est régi par la licence CeCILL-B soumise au droit français et
-respectant les principes de diffusion des logiciels libres. Vous pouvez
-utiliser, modifier et/ou redistribuer ce programme sous les conditions
-de la licence CeCILL-B telle que diffusée par le CEA, le CNRS et l'INRIA 
-sur le site "http://www.cecill.info".
-
-En contrepartie de l'accessibilité au code source et des droits de copie,
-de modification et de redistribution accordés par cette licence, il n'est
-offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,
-seule une responsabilité restreinte pèse sur l'auteur du programme,  le
-titulaire des droits patrimoniaux et les concédants successifs.
-
-A cet égard  l'attention de l'utilisateur est attirée sur les risques
-associés au chargement,  à l'utilisation,  à la modification et/ou au
-développement et à la reproduction du logiciel par l'utilisateur étant 
-donné sa spécificité de logiciel libre, qui peut le rendre complexe à 
-manipuler et qui le réserve donc à des développeurs et des professionnels
-avertis possédant  des  connaissances  informatiques approfondies.  Les
-utilisateurs sont donc invités à charger  et  tester  l'adéquation  du
-logiciel à leurs besoins dans des conditions permettant d'assurer la
-sécurité de leurs systèmes et ou de leurs données et, plus généralement, 
-à l'utiliser et l'exploiter dans les mêmes conditions de sécurité. 
-
-Le fait que vous puissiez accéder à cet en-tête signifie que vous avez 
-pris connaissance de la licence CeCILL-B, et que vous en avez accepté les
-termes.
-Footer-MicMac-eLiSe-25/06/2007*/

@@ -43,19 +43,19 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 
 
-ElTmplSpecNull INT   ElStdTypeScal<INT>::RtoT(REAL v) { return round_ni(v);}
-ElTmplSpecNull INT   ElStdTypeScal<INT>::RTtoT(REAL v) { return round_ni(v);}
-ElTmplSpecNull REAL  ElStdTypeScal<REAL>::RtoT(REAL v) { return v;}
-ElTmplSpecNull REAL  ElStdTypeScal<REAL>::RTtoT(REAL v) { return v;}
+template <> INT   ElStdTypeScal<INT>::RtoT(REAL v) { return round_ni(v);}
+template <> INT   ElStdTypeScal<INT>::RTtoT(REAL v) { return round_ni(v);}
+template <> REAL  ElStdTypeScal<REAL>::RtoT(REAL v) { return v;}
+template <> REAL  ElStdTypeScal<REAL>::RTtoT(REAL v) { return v;}
 
 
-ElTmplSpecNull REAL16  ElStdTypeScal<REAL16>::RtoT(REAL v) { return v;}
-ElTmplSpecNull REAL16  ElStdTypeScal<REAL16>::RTtoT(REAL v) { return v;}
+template <> REAL16  ElStdTypeScal<REAL16>::RtoT(REAL v) { return v;}
+template <> REAL16  ElStdTypeScal<REAL16>::RTtoT(REAL v) { return v;}
 
 
 
-ElTmplSpecNull float   ElStdTypeScal<float>::RtoT(REAL v) { return float(v);}
-ElTmplSpecNull float   ElStdTypeScal<float>::RTtoT(REAL v) { return float(v);}
+template <> float   ElStdTypeScal<float>::RtoT(REAL v) { return float(v);}
+template <> float   ElStdTypeScal<float>::RTtoT(REAL v) { return float(v);}
 
 
 template <class Type> void set_cste(Type * t,Type cste,INT nb)

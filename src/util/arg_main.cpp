@@ -39,7 +39,6 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 #include "StdAfx.h"
 #include <iterator>
-//#include <process.h>
 
 
 #if ElMemberTpl
@@ -238,7 +237,7 @@ void ShowArgs()
 std::istream & VStrElStdRead
     (
     std::istream &is,
-    ElSTDNS vector<std::string> & vec,
+    std::vector<std::string> & vec,
     const ElGramArgMain & Gram
     )
 {
@@ -290,28 +289,28 @@ const ElGramArgMain ElGramArgMain::HDRGram(' ',-1,'\n',true);
 const ElGramArgMain ElGramArgMain::StdGram('=','[',']',false);
 
 
-istream & operator >> (istream & is,ElSTDNS string & st)
+istream & operator >> (istream & is,std::string & st)
 {
 
     is >> buf;
-    st = ElSTDNS string(buf);
+    st = std::string(buf);
     return is;
 }
 
 
 template <class Type>  std::istream & operator >>
-    (std::istream &is,ElSTDNS vector<Type> & vec)
+    (std::istream &is,std::vector<Type> & vec)
 {
     return ElStdRead(is,vec,ElGramArgMain::StdGram);
 }
-template std::istream & operator >> (std::istream &is,ElSTDNS vector<INT> & vec);
+template std::istream & operator >> (std::istream &is,std::vector<INT> & vec);
 
 
 
 
 
 #define DEFINE_theEmptyLvalADM(Type,Name)\
-    template <> const  ElSTDNS list<Type > ElArgMain<Type >::theEmptyLvalADM;\
+    template <> const  std::list<Type > ElArgMain<Type >::theEmptyLvalADM;\
     template <> const char * str_type(Type *) { return Name; }
 
 
@@ -324,15 +323,15 @@ DEFINE_theEmptyLvalADM(Pt2di,"Pt2di");
 DEFINE_theEmptyLvalADM(Pt2dr,"Pt2dr");
 DEFINE_theEmptyLvalADM(Pt3dr,"Pt3dr");
 DEFINE_theEmptyLvalADM(Pt3di,"Pt3di");
-DEFINE_theEmptyLvalADM(ElSTDNS string,"string");
+DEFINE_theEmptyLvalADM(std::string,"string");
 DEFINE_theEmptyLvalADM(U_INT1,"u_int1");
 DEFINE_theEmptyLvalADM(INT1,"int1");
 DEFINE_theEmptyLvalADM(char,"char");
-DEFINE_theEmptyLvalADM(ElSTDNS vector<Pt2dr>,"vector<Pt2dr>");
-DEFINE_theEmptyLvalADM(ElSTDNS vector<int>,"vector<int>");
-DEFINE_theEmptyLvalADM(ElSTDNS vector<double>,"vector<double>");
-DEFINE_theEmptyLvalADM(ElSTDNS vector < ElSTDNS vector < int > >,"vector<vector<int> >");
-DEFINE_theEmptyLvalADM(ElSTDNS vector<std::string>,"vector<std::string>");
+DEFINE_theEmptyLvalADM(std::vector<Pt2dr>,"vector<Pt2dr>");
+DEFINE_theEmptyLvalADM(std::vector<int>,"vector<int>");
+DEFINE_theEmptyLvalADM(std::vector<double>,"vector<double>");
+DEFINE_theEmptyLvalADM(std::vector < std::vector < int > >,"vector<vector<int> >");
+DEFINE_theEmptyLvalADM(std::vector<std::string>,"vector<std::string>");
 
 template <> eArgMainBaseType ElArgMain<Box2di>::type() const { return AMBT_Box2di; }
 template <> eArgMainBaseType ElArgMain<Box2dr>::type() const { return AMBT_Box2dr; }
@@ -392,7 +391,7 @@ INT LArgMain::Init
     INT k=0;
     for
         (
-        ElSTDNS list<GenElArgMain *>::const_iterator it = _larg.begin();
+        std::list<GenElArgMain *>::const_iterator it = _larg.begin();
     it != _larg.end();
     it++
         )
@@ -417,7 +416,7 @@ bool  LArgMain::OneInitIfMatchEq
 {
     for
         (
-        ElSTDNS list<GenElArgMain *>::const_iterator it = _larg.begin();
+        std::list<GenElArgMain *>::const_iterator it = _larg.begin();
     it != _larg.end();
     it++
         )
@@ -466,7 +465,7 @@ void LArgMain::VerifInitialize() const
 {
     for
         (
-        ElSTDNS list<GenElArgMain *>::const_iterator it = _larg.begin();
+        std::list<GenElArgMain *>::const_iterator it = _larg.begin();
     it != _larg.end();
     it++
         )
@@ -487,7 +486,7 @@ void LArgMain::show(bool isNamed) const
 {
     for
         (
-        ElSTDNS list<GenElArgMain *>::const_iterator it = _larg.begin();
+        std::list<GenElArgMain *>::const_iterator it = _larg.begin();
     it!= _larg.end();
     it++
         )
@@ -500,7 +499,7 @@ LArgMain::~LArgMain()
 {
     for
         (
-        ElSTDNS list<GenElArgMain *>::iterator it = _larg.begin();
+        std::list<GenElArgMain *>::iterator it = _larg.begin();
     it!= _larg.end();
     it++
         )
@@ -559,7 +558,7 @@ const std::string  GenElArgMain::theChaineActif="OK";
 
 
 
-bool GenElArgMain::InitIfMatchEq(const ElSTDNS string &s,const ElGramArgMain & Gram)  const
+bool GenElArgMain::InitIfMatchEq(const std::string &s,const ElGramArgMain & Gram)  const
 {
     const char * N = _name.c_str();
     const char * EQ = s.c_str();
@@ -576,7 +575,7 @@ bool GenElArgMain::InitIfMatchEq(const ElSTDNS string &s,const ElGramArgMain & G
             while(EQ[1] == Gram.mCharEq)
                 EQ++;
         }
-        InitEAM(ElSTDNS string(EQ+1),Gram);
+        InitEAM(std::string(EQ+1),Gram);
         return true;
     }
     return false;
@@ -645,7 +644,7 @@ std::vector<char *>  	ElInitArgMain
         }
     }
 
-    // if ((argc >=1) && (ElSTDNS string(argv[0]) == "-help"))
+    // if ((argc >=1) && (std::string(argv[0]) == "-help"))
     if (Help)
     {
         cout << "*****************************\n";
@@ -721,7 +720,7 @@ INT GenFileInitArgs
     INT   aCarCommentaire,
     INT   FirstLineUsed,
     INT   FirstCarInLine,
-    const ElSTDNS string & NameFile,
+    const std::string & NameFile,
     const LArgMain & L1 ,
     INT   StopCar,
     bool  anAcceptUnknown
@@ -764,7 +763,7 @@ INT GenFileInitArgs
 
 void SphInitArgs
     (
-    const ElSTDNS string & NameFile,
+    const std::string & NameFile,
     const LArgMain & L1
     )
 {
@@ -783,7 +782,7 @@ void SphInitArgs
 
 void StdInitArgsFromFile
     (
-    const ElSTDNS string & NameFile,
+    const std::string & NameFile,
     const LArgMain & L1
     )
 {
@@ -802,7 +801,7 @@ void StdInitArgsFromFile
 
 void HdrInitArgsFromFile
     (
-    const ElSTDNS string & NameFile,
+    const std::string & NameFile,
     const LArgMain & L1
     )
 {
@@ -822,7 +821,7 @@ void HdrInitArgsFromFile
 
 INT ThomInitArgs
     (
-    const ElSTDNS string & NameFile,
+    const std::string & NameFile,
     const LArgMain & L1
     )
 {
@@ -1475,36 +1474,3 @@ string protect_spaces( const string &i_str )
         lastPos += 2;
     }
 }
-
-/*Footer-MicMac-eLiSe-25/06/2007
-
-Ce logiciel est un programme informatique servant �  la mise en
-correspondances d'images pour la reconstruction du relief.
-
-Ce logiciel est régi par la licence CeCILL-B soumise au droit français et
-respectant les principes de diffusion des logiciels libres. Vous pouvez
-utiliser, modifier et/ou redistribuer ce programme sous les conditions
-de la licence CeCILL-B telle que diffusée par le CEA, le CNRS et l'INRIA
-sur le site "http://www.cecill.info".
-
-En contrepartie de l'accessibilité au code source et des droits de copie,
-de modification et de redistribution accordés par cette licence, il n'est
-offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,
-seule une responsabilité restreinte pèse sur l'auteur du programme,  le
-titulaire des droits patrimoniaux et les concédants successifs.
-
-A cet égard  l'attention de l'utilisateur est attirée sur les risques
-associés au chargement,  �  l'utilisation,  �  la modification et/ou au
-développement et �  la reproduction du logiciel par l'utilisateur étant
-donné sa spécificité de logiciel libre, qui peut le rendre complexe �
-manipuler et qui le réserve donc �  des développeurs et des professionnels
-avertis possédant  des  connaissances  informatiques approfondies.  Les
-utilisateurs sont donc invités �  charger  et  tester  l'adéquation  du
-logiciel �  leurs besoins dans des conditions permettant d'assurer la
-sécurité de leurs systèmes et ou de leurs données et, plus généralement,
-�  l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
-
-Le fait que vous puissiez accéder �  cet en-tête signifie que vous avez
-pris connaissance de la licence CeCILL-B, et que vous en avez accepté les
-termes.
-Footer-MicMac-eLiSe-25/06/2007*/
