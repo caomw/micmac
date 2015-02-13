@@ -1,26 +1,27 @@
-cmake_minimum_required( VERSION 2.8.1 )
+include_directories( include )
 
-set (MICMAC_VERSION_MAJOR 1)
-set (MICMAC_VERSION_MINOR 0)
+add_library( ANN SHARED
+	src/ANN.cpp
+	src/bd_pr_search.cpp
+	src/bd_tree.cpp
+	src/kd_dump.cpp
+	src/kd_pr_search.cpp
+	src/kd_split.cpp
+	src/kd_util.cpp
+	src/bd_fix_rad_search.cpp
+	src/bd_search.cpp
+	src/brute.cpp
+	src/kd_fix_rad_search.cpp
+	src/kd_search.cpp
+	src/kd_tree.cpp
+	src/perf.cpp )
 
-include_directories ( ${PROJECT_SOURCE_DIR}/CodeExterne/ANN/include )
-set(Install_Dir_lib ${PROJECT_SOURCE_DIR}/lib)
+set_target_properties( ANN
+   	PROPERTIES
+	VERSION ${MICMAC_VERSION_MAJOR}.${MICMAC_VERSION_MINOR}.${MICMAC_VERSION_PATCH}
+	SOVERSION ${MICMAC_VERSION_MAJOR} )
 
-set(ANN_SRC_DIR ${PROJECT_SOURCE_DIR}/CodeExterne/ANN/src)
+install( TARGETS ANN
+	ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
+	LIBRARY DESTINATION ${LIB_INSTALL_DIR} )
 
-add_library( ANN 	${ANN_SRC_DIR}/ANN.cpp
-					${ANN_SRC_DIR}/bd_pr_search.cpp
-					${ANN_SRC_DIR}/bd_tree.cpp
-					${ANN_SRC_DIR}/kd_dump.cpp
-					${ANN_SRC_DIR}/kd_pr_search.cpp
-					${ANN_SRC_DIR}/kd_split.cpp
-					${ANN_SRC_DIR}/kd_util.cpp
-					${ANN_SRC_DIR}/bd_fix_rad_search.cpp
-					${ANN_SRC_DIR}/bd_search.cpp
-					${ANN_SRC_DIR}/brute.cpp
-					${ANN_SRC_DIR}/kd_fix_rad_search.cpp
-					${ANN_SRC_DIR}/kd_search.cpp
-					${ANN_SRC_DIR}/kd_tree.cpp
-					${ANN_SRC_DIR}/perf.cpp )
-
-INSTALL(TARGETS ANN ARCHIVE DESTINATION ${Install_Dir_lib} )

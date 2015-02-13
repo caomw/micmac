@@ -1,68 +1,79 @@
-# fichier contenant la fonction gerant les en-tetes precompilees
-include(${CMAKE_CURRENT_SOURCE_DIR}/precompiled_headers.cmake)
-
 cmake_minimum_required( VERSION 2.8.1 ) 
-project(MICMAC)
 
-set(VERBOSE 0)
+project( micmac )
 
-set (MICMAC_VERSION_MAJOR 1)
-set (MICMAC_VERSION_MINOR 0)
+set( MICMAC_VERSION_MAJOR 1 )
+set( MICMAC_VERSION_MINOR 0 )
+set( MICMAC_VERSION_PATCH 0 )
+
+# CMake global sets
+set( CMAKE_INCLUDE_CURRENT_DIR ON )
+set( CMAKE_POSITION_INDEPENDENT_CODE ON )
+
+# CMake global sets for Qt
+set( CMAKE_AUTOMOC ON )
+
+# Set default installation paths
+set(LIB_INSTALL_DIR "lib${LIB_SUFFIX}" CACHE PATH "Installation path for libraries")
 
 ##############################
 ## 			OPTIONS			##
 ##############################
 
 # construire l'interface graphique
-OPTION(WITH_INTERFACE  "build graphic interface" OFF)
+option( WITH_INTERFACE  "build graphic interface" OFF )
 
 # Utiliser Kakadu
-OPTION(WITH_KAKADU  "Include KAKADU Support" OFF)
+option( WITH_KAKADU  "Include KAKADU Support" OFF )
 
 # Utiliser Ign orientation
-OPTION(WITH_IGN_ORI "Include Ign orientation" OFF )
+option( WITH_IGN_ORI "Include Ign orientation" OFF )
 
 # Utiliser Ign orientation
-OPTION(WITH_IGN_IMAGE "Include Ign image" OFF )
+option( WITH_IGN_IMAGE "Include Ign image" OFF )
 
 # Utiliser les en-tetes precompilees
-OPTION(WITH_HEADER_PRECOMP "En-tetes precompilees" ON )
+option( WITH_HEADER_PRECOMP "En-tetes precompilees" ON )
 
 # Utiliser les en-tetes precompilees
-OPTION(BUILD_ONLY_ELISE_MM3D "Projet Elise et MM3D uniquement" OFF )
+option( BUILD_ONLY_ELISE_MM3D "Projet Elise et MM3D uniquement" OFF )
 
 # construire l'interface graphique
-OPTION(WITH_ETALONPOLY  "Build etalonnage polygone" ON)
+option( WITH_ETALONPOLY  "Build etalonnage polygone" ON )
 
 # construire les binaires Poisson
-OPTION(BUILD_POISSON "Build Poisson binaries" OFF )
+option( BUILD_POISSON "Build Poisson binaries" OFF )
 
 # Utiliser Cuda
-OPTION(CUDA_ENABLED "Utilisation de cuda" OFF )
+option( CUDA_ENABLED "Utilisation de cuda" OFF )
 
-OPTION(WITH_OPENCL  "Utilisation d'OpenCL" OFF )
+option( WITH_OPENCL  "Utilisation d'OpenCL" OFF )
 
 # Multi thread Poisson avec OpenMP
-OPTION(WITH_OPEN_MP "use OpenMP" OFF )
+option( WITH_OPEN_MP "use OpenMP" OFF )
 
 # print system calls
-OPTION(TRACE_SYSTEM "print system calls" OFF )
+option( TRACE_SYSTEM "print system calls" OFF )
 
 # compile low-level test bench
-OPTION(BUILD_BENCH "compile low-level test bench" OFF )
+option( BUILD_BENCH "compile low-level test bench" OFF )
 
 # Interfaces de saisie des paramètres
-OPTION(WITH_QT5 "compile Qt interfaces" OFF )
-
-# Interfaces de saisie des paramètres
-OPTION(WITH_QT4 "compile Qt 4 interfaces" OFF )
+option( WITH_QT5 "compile Qt interfaces" ON )
 
 # Compilateur C++11
-OPTION(WITH_CPP11 "Compilateur C++11" OFF )
+option( WITH_CPP11 "Compilateur C++11" ON )
 
-OPTION(DEPLOY "compile for end-user" OFF)
+option( UPDATE_TRANSLATIONS "Update source translation translations/*.ts files (WARNING: make clean will delete the source .ts files! Danger!)" )
 
-OPTION(UPDATE_TRANSLATIONS "Update source translation translations/*.ts files (WARNING: make clean will delete the source .ts files! Danger!)")
+# Set C++ preprocessor definitions
+if( CMAKE_COMPILER_IS_GNUCC )
+    add_definitions( -O2 -Wall )
+	set( CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined" )
+	if( ${WITH_CPP11} )
+		add_definitions( -std=c++11 )
+	endif()
+endif()
 
 if ( TRACE_SYSTEM )
         add_definitions(-D__TRACE_SYSTEM__)
@@ -87,108 +98,27 @@ OPTION(WITH_DOXYGEN "Generation de documentation" OFF )
 ######################################
 ## 	Trouver les EXES et Libs	##
 ######################################
-IF ( ${CMAKE_SYSTEM_NAME} MATCHES "Darwin" )
+if ( ${CMAKE_SYSTEM_NAME} MATCHES "Darwin" )
     add_definitions(-DELISE_Darwin)
 endif()
 
-# DEFINITION : Dossier des exe et Dll necessaires sous windows
-set(BinAuxWinDir ${PROJECT_SOURCE_DIR}/binaire-aux/BIN_AUX_WIN32)
+if( ${WITH_QT5} )
+	find_package( Qt5Core REQUIRED )
+	include_directories( ${Qt5Core_INCLUDES} )
 
-# DEFINITIION : des chemins binaires sous UNIX
-set(UnixBinPath
-                /bin
-                /usr/bin
-                /usr/local/bin)
+	find_package( Qt5Gui REQUIRED )
+	include_directories( ${Qt5Gui_INCLUDES} )
 
-set(qt_version 0)
-set(DEPLOY 0)
-set(PROJECT_SRC_DIR \"${PROJECT_SOURCE_DIR}\" )
+	find_package(OpenGL REQUIRED)
+	find_package( Qt5OpenGL REQUIRED )
+	include_directories( ${Qt5OpenGL_INCLUDES} )
 
-if(${WITH_QT5} OR ${WITH_QT4})
-        find_package(OpenGL REQUIRED)
+	find_package( Qt5Xml REQUIRED )
+	include_directories( ${Qt5Xml_INCLUDES} )
 
-        if ( OPENGL_FOUND )
-                message( STATUS "-----> OpenGL found" )
-
-                if ( MSVC )
-                                include("${PROJECT_SOURCE_DIR}/src/saisieQT/FindWindowsSDK.txt")
-                                # ajoute /lib a tous les repertoires contenant un SDK
-                                foreach( sdk_dir ${WINDOWSSDK_DIRS} )
-                                                list( APPEND SDK_LIB_DIRS "${sdk_dir}/lib" )
-                                endforeach()
-                                set( CMAKE_PREFIX_PATH "${SDK_LIB_DIRS}" )
-                                message (" WindowsSDKDir : " ${CMAKE_PREFIX_PATH} )
-                endif()
-
-                if (${WITH_QT5})
-
-                            #find_package(Qt5 COMPONENTS Gui Core Widgets OpenGL LinguistTools Concurrent Xml)
-                            find_package(Qt5 COMPONENTS Gui Core OpenGL Xml)
-
-                        if (Qt5_FOUND)
-
-                            message( STATUS "-----> Qt5 found" )
-
-                            set(qt_version 5)
-
-#                            set(QT_LIBRARIES
-#                                    ${Qt5Core_LIBRARIES}
-#                                    ${Qt5Gui_LIBRARIES}
-#                                    ${Qt5Xml_LIBRARIES}
-#                                    ${Qt5OpenGL_LIBRARIES}
-#                            )
-
-#                            message("${Qt5Core_LIBRARIES}")
-
-                            #SET(QT_LIBRARY_DIRS "${Qt5_LIBRARY_DIRS}")
-
-#                            link_directories(${Qt5_LIBRARY_DIRS})
-
-                        elseif(${WITH_QT5} AND NOT Qt5Widgets_FOUND)
-
-                            message("WARNING QT 5 not found")
-                            message("Set Qt5_DIR to qt CMAKE directory")
-                            message("   Qt5_DIR --> C:\\Qt\\Qt5.0.1\\5.0.1\\msvc2010\\lib\\cmake\\Qt5")
-                            message("   Qt5_DIR --> /opt/Qt5.x.x/5.x.x/gcc_64/lib/cmake/Qt5")
-
-                        endif()
-
-                elseif (${WITH_QT4})
-
-                        FIND_PACKAGE(Qt4 QUIET COMPONENTS QtCore QtGui QtOpenGL QtXml)
-                        if( QT4_FOUND )
-                            message( STATUS "-----> Qt4 found" )
-                            set(qt_version 4)
-                        else()
-                            message( "Qt not available, Qt graphical tools disabled" )
-                            message( "**************************************************************************************************************************************" )
-                            message( "If Qt is installed, please set QT_QMAKE_EXECUTABLE" )
-                            message( "**************************************************************************************************************************************" )
-                        endif()
-
-                endif()
-        else()
-                message( "OpenGL not available, Qt graphical tools disabled" )
-        endif()
-endif()
-
-if ( NOT ${qt_version} EQUAL 0 )
-      message( STATUS "QT tools enabled (Qt" ${qt_version} ")" )
-endif()
-
-if (${DEPLOY})
-    set(DEPLOY 1)
-endif()
-
-if(${WITH_CPP11})
-    IF(NOT MSVC)
-            message("c++11")
-            # support c++11
-            ADD_DEFINITIONS(
-                    -std=c++11 # Or -std=c++0x
-                    # Other flags
-            )
-    endif()
+	find_package( Qt5Widgets REQUIRED )
+	include_directories( ${Qt5Widgets_INCLUDES} )
+	add_definitions( ${Qt5Widgets_DEFINITIONS} )
 endif()
 
 # CUDA
@@ -272,41 +202,7 @@ if (${WITH_ETALONPOLY})
         add_definitions(-DETA_POLYGON)
 endif()
 
-# MERCURIAL
-find_program(MERCURIAL_EXECUTABLE hg DOC "Emplacement de gestionnaire de versions Mercurial")
-
-if(NOT MERCURIAL_EXECUTABLE)
-        message( STATUS "Mercurial (hg) cannot be found" )
-else()
-        # Affiche la revision MICMAC
-        EXECUTE_PROCESS(
-                COMMAND
-                ${MERCURIAL_EXECUTABLE} identify --num
-                WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-                RESULT_VARIABLE hg_result
-                OUTPUT_VARIABLE HG_REVISION_DIST
-                ERROR_QUIET
-                OUTPUT_STRIP_TRAILING_WHITESPACE
-        )
-        message( STATUS "Derniere revision mercurial de MicMac : " ${HG_REVISION_DIST})
-
-        set(HG_REV ${HG_REVISION_DIST} CACHE STRING "Revision" FORCE)
-
-        if ( NOT ${hg_result} )
-           set( HG_REVISION_DIST \"${HG_REVISION_DIST}\" )
-           CONFIGURE_FILE (
-              "include/general/HG_defines.h.in"
-              "${CMAKE_SOURCE_DIR}/include/general/HG_defines.h"
-           )
-        endif()
-endif()
-
-CONFIGURE_FILE (
-        "include/general/CMake_defines.h.in"
-        "${CMAKE_SOURCE_DIR}/include/general/CMake_defines.h"
-)
-
-INCLUDE_DIRECTORIES(${PROJECT_BINARY_DIR}/include)
+configure_file ( "include/general/micmac_version.h.in" "${CMAKE_SOURCE_DIR}/include/general/micmac_version.h" )
 
 # Utiliser le driver Kakadu pour gerer les images JP2OOO
 IF(${WITH_KAKADU})
@@ -460,84 +356,21 @@ if(NOT WIN32) # ImageMagick n'est pas obligatoire sous windows puisque les exécu
         endif(NOT ImageMagick_FOUND)
 endif()
 
-# VERIFICATION si exiftool est installe
-
-find_program(EXIF_EXECUTABLE exiftool
-                                PATHS 	${BinAuxWinDir} ${UnixBinPath}
-                                DOC "Chemin vers la commande exiftool"
-                                NO_DEFAULT_PATH)
-
-if(EXIF_EXECUTABLE_NOTFOUND)
-
-        message("Exiftool non trouve!!")
-
-endif()
-
-# VERIFICATION si exiv2 est installe
-find_program(EXIV2_EXECUTABLE exiv2
-                                PATHS 	${BinAuxWinDir} ${UnixBinPath}
-                                DOC "Chemin vers la commande exiv2"
-                                NO_DEFAULT_PATH)
-
-if(EXIV2_EXECUTABLE_NOTFOUND)
-
-        message("Exiv2 non trouve!!")
-
-endif(EXIV2_EXECUTABLE_NOTFOUND)
-
 if (MINGW)
         add_definitions(-D__MINGW__)
         set( WINSOCK2_LIBRARY ws2_32 )
 endif()
 
-if(NOT WIN32)
-
-        # VERIFICATION si Proj4 est installe
-        #find_program(PROJ4_EXECUTABLE proj4 PATHS ${UnixBinPath} )
-        if(PROJ4_EXECUTABLE_FOUND)
-
-                message("Proj4 non trouve!!")
-
-        endif()
-
+if( NOT WIN32 )
         # VERIFICATION si X11 est present sous MacOS et Linux
-        OPTION(NO_X11  "ignoring X11 libraries even if existing" OFF)
+		option( WITH_X11  "Ignoring X11 libraries even if existing" OFF )
 
-        IF (NOT NO_X11)
-                #message("Trying to find X11 packageÉ")
-                FIND_PACKAGE(X11)
-        ELSE()
-                message("Ignoring X11 package...")
-                set(X11_LIBRARY_DIR "") # au cas ou on ait fait une passe de cmake sans actier 'NO_X11'
-        ENDIF()
-
-        IF ( ${CMAKE_SYSTEM_NAME} MATCHES "Linux" )
-                set( DYN_LIB_LIBRARY dl )
-        endif()
-
-        IF (X11_FOUND)
-                #message("X11 Found : ")
-                #message("   include dir   : " ${X11_INCLUDE_DIR} )
-                #message("   libraries     : " ${X11_LIBRARIES} )
-                #message("   libraries dir : " ${X11_LIBRARY_DIR} )
-        INCLUDE_DIRECTORIES( ${X11_INCLUDE_DIR} )
-        ELSE()
-                add_definitions(-DNO_X11)
-                MESSAGE("X11 Not Found : pas de SaisieMasq")
-        ENDIF()
-ELSE()
-                set( CMAKE_BUILD_TYPE Release )
-        find_program(MAKE_EXECUTABLE make
-                                PATHS 	${BinAuxWinDir}
-                                DOC "Chemin vers la commande Make"
-                                NO_DEFAULT_PATH)
-
-        if(MAKE_EXECUTABLE_NOTFOUND)
-
-                message("Make non trouve!!")
-
-        endif()
-
+		if ( WITH_X11 )
+			find_package( X11 REQUIRED )
+			include_directories( ${X11_INCLUDE_DIR} )
+		else( WITH_X11 )
+            add_definitions( -DNO_X11 )
+		endif( WITH_X11 )
 ENDIF()
 
 # DEFINITION : des preprocesseurs windows
@@ -570,59 +403,21 @@ IF (MSVC)
 
 ENDIF()
 
-# DEFINITION : Dossier include
-INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/include)
 
-# DEFINITION : des preprocesseurs G++
-IF (CMAKE_COMPILER_IS_GNUCC)
-        ADD_DEFINITIONS(-O2 -Wall)
-ENDIF()
+add_subdirectory( CodeExterne )
+add_subdirectory( src )
 
-# DEFINITION : Windows : le projet debug est genere directement sous bin pour avoir les informations de Debug
-
-IF (MSVC)
-         set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/bin)
-         set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/bin)
-endif()
-
-# DEFINITION : du dossier d'installation
-set(Install_Dir ${PROJECT_SOURCE_DIR}/bin)
-set(Install_Dir_lib ${PROJECT_SOURCE_DIR}/lib)
-
-# DEFINITION : du dossier des sources d'Elise
-set(ELISE_DIR src)
-
-# CONSTRUCTION : Librairie ANN
-include(${PROJECT_SOURCE_DIR}/CodeExterne/ANN/CMakeLists.txt)
-# CONSTRUCTION : Librairie POISSON
-include(${PROJECT_SOURCE_DIR}/CodeExterne/Poisson/CMakeLists.txt)
-# CONSTRUCTION : Librairie ELISE
-set( code_genere_dir ${PROJECT_SOURCE_DIR}/CodeGenere )
-include(${code_genere_dir}/Sources.cmake)
-ADD_SUBDIRECTORY(${ELISE_DIR})
-
-# INSTALLATION : Liste des exe et Dll necessaires sous windows
-if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-        configure_file( ${BinAuxWinDir}/convert.exe ${PROJECT_SOURCE_DIR}/binaire-aux/convert.exe COPYONLY )
-        configure_file( ${BinAuxWinDir}/vcomp100.dll ${PROJECT_SOURCE_DIR}/binaire-aux/proj.exe COPYONLY )
-        configure_file( ${BinAuxWinDir}/exiftool.exe ${PROJECT_SOURCE_DIR}/binaire-aux/exiftool.exe COPYONLY )
-        configure_file( ${BinAuxWinDir}/exiv2.exe ${PROJECT_SOURCE_DIR}/binaire-aux/exiv2.exe COPYONLY )
-        configure_file( ${BinAuxWinDir}/libexpat.dll ${PROJECT_SOURCE_DIR}/binaire-aux/libexpat.dll COPYONLY )
-        configure_file( ${BinAuxWinDir}/libiconv2.dll ${PROJECT_SOURCE_DIR}/binaire-aux/libiconv2.dll COPYONLY )
-        configure_file( ${BinAuxWinDir}/libintl3.dll ${PROJECT_SOURCE_DIR}/binaire-aux/libintl3.dll COPYONLY )
-        configure_file( ${BinAuxWinDir}/make.exe ${PROJECT_SOURCE_DIR}/binaire-aux/make.exe COPYONLY )
-        configure_file( ${BinAuxWinDir}/proj.exe ${PROJECT_SOURCE_DIR}/binaire-aux/proj.exe COPYONLY )
-        configure_file( ${BinAuxWinDir}/proj.dll ${PROJECT_SOURCE_DIR}/binaire-aux/proj.dll COPYONLY )
-        configure_file( ${BinAuxWinDir}/cs2cs.exe ${PROJECT_SOURCE_DIR}/binaire-aux/cs2cs.exe COPYONLY )
-endif()
+#set( code_genere_dir ${PROJECT_SOURCE_DIR}/CodeGenere )
+#include(${code_genere_dir}/Sources.cmake)
+#ADD_SUBDIRECTORY(${ELISE_DIR})
 
 # Doxygen
-if(${WITH_DOXYGEN})
-    find_package(Doxygen)
-    if(DOXYGEN_FOUND)
-          configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
-          add_custom_target(doc ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generating API documentation with Doxygen" VERBATIM)
-    endif(DOXYGEN_FOUND)
+if( ${WITH_DOXYGEN} )
+    find_package( Doxygen )
+    if( DOXYGEN_FOUND )
+		configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY )
+		add_custom_target( doc ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generating API documentation with Doxygen" VERBATIM )
+    endif( DOXYGEN_FOUND )
 endif()
 
 if ( ${BUILD_BENCH} )

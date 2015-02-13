@@ -1,16 +1,21 @@
-if ( ${qt_version} EQUAL 5 AND WIN32)
-	if(POLICY CMP0020)
-			cmake_policy(SET CMP0020 NEW)
-	endif()
-endif()
-add_executable(mm3d mm3d.cpp)
+set( MM3D_SRCS mm3d.cpp )
 
-#target_link_libraries(mm3d elise ${X11_LIBRARIES} ${WINSOCK2_LIBRARY} ${DYN_LIB_LIBRARY} ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ANN)
+add_executable( mm3d ${MM3D_SRCS} )
 
-target_link_libraries(mm3d elise ${X11_LIBRARIES} ${WINSOCK2_LIBRARY} ${DYN_LIB_LIBRARY} ${Qt5Core_LIBRARIES} ${Qt5Gui_LIBRARIES} ${Qt5Xml_LIBRARIES} ${Qt5OpenGL_LIBRARIES} ${OPENGL_LIBRARIES} ANN)
+target_link_libraries( mm3d
+   	elise
+	ANN
+	${X11_LIBRARIES} 
+	${WINSOCK2_LIBRARY} 
+	${DYN_LIB_LIBRARY} 
+	${Qt5Core_LIBRARIES} 
+	${Qt5Gui_LIBRARIES} 
+	${Qt5Xml_LIBRARIES} 
+	${Qt5OpenGL_LIBRARIES} 
+	${OPENGL_LIBRARIES} )
 
 if(${CUDA_ENABLED})
-         target_link_libraries(mm3d ${libStatGpGpuTools} ${libStatGpGpuInterfMicMac} ${libStatGpGpuOpt})
+    target_link_libraries(mm3d ${libStatGpGpuTools} ${libStatGpGpuInterfMicMac} ${libStatGpGpuOpt})
 endif()
 
 if(IgnSocle_FOUND)
@@ -48,7 +53,6 @@ endif()
 if(Boost_FOUND)
     target_link_libraries(mm3d ${Boost_LIBRARIES} ${Boost_THREADAPI})
 endif()
-
 
 
 INSTALL(TARGETS mm3d RUNTIME DESTINATION ${Install_Dir})
