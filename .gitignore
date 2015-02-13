@@ -1,0 +1,7 @@
+build
+.hg
+.kdev4/
+culture3d.kdev4
+Documentation
+interface
+include/general/micmac_version.h
