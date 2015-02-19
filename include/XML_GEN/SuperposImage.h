@@ -1,11 +1,11 @@
-// #include "general/all.h"
-// #include "private/all.h"
 #ifndef Define_NotSupIm
 #define Define_NotSupIm
-// #include "general/all.h"
-// #include "private/all.h"
-// #include "XML_GEN/ParamChantierPhotogram.h"
-//
+
+#include <private/files.h>
+#include <XML_GEN/ParamChantierPhotogram.h>
+
+#include <string>
+
 typedef enum
 {
   eTSA_CylindreRevolution
@@ -1033,8 +1033,8 @@ class cCreateCompColoree
         std::string & KeyCalcNameCalib();
         const std::string & KeyCalcNameCalib()const ;
 
-        cTplValGesInit< string > & FileChantierNameDescripteur();
-        const cTplValGesInit< string > & FileChantierNameDescripteur()const ;
+        cTplValGesInit< std::string > & FileChantierNameDescripteur();
+        const cTplValGesInit< std::string > & FileChantierNameDescripteur()const ;
 
         cImageCmpCol & ImMaitresse();
         const cImageCmpCol & ImMaitresse()const ;
@@ -1080,7 +1080,7 @@ class cCreateCompColoree
         std::list< cShowCalibsRel > mShowCalibsRel;
         std::list< cResultCompCol > mResultCompCol;
         std::string mKeyCalcNameCalib;
-        cTplValGesInit< string > mFileChantierNameDescripteur;
+        cTplValGesInit< std::string > mFileChantierNameDescripteur;
         cImageCmpCol mImMaitresse;
         cEspaceResultSuperpCol mEspaceResultSuperpCol;
         cTplValGesInit< Box2di > mBoxCalc;
@@ -2839,8 +2839,8 @@ class cCreateOrtho
         cTplValGesInit< cChantierDescripteur > & DicoLoc();
         const cTplValGesInit< cChantierDescripteur > & DicoLoc()const ;
 
-        cTplValGesInit< string > & FileChantierNameDescripteur();
-        const cTplValGesInit< string > & FileChantierNameDescripteur()const ;
+        cTplValGesInit< std::string > & FileChantierNameDescripteur();
+        const cTplValGesInit< std::string > & FileChantierNameDescripteur()const ;
 
         std::string & WorkDir();
         const std::string & WorkDir()const ;
@@ -3017,7 +3017,7 @@ class cCreateOrtho
         const cTplValGesInit< cSectionEgalisation > & SectionEgalisation()const ;
     private:
         cTplValGesInit< cChantierDescripteur > mDicoLoc;
-        cTplValGesInit< string > mFileChantierNameDescripteur;
+        cTplValGesInit< std::string > mFileChantierNameDescripteur;
         std::string mWorkDir;
         cTplValGesInit< int > mKBox0;
         cSectionEntree mSectionEntree;
@@ -3223,8 +3223,8 @@ class cParamVisuProjNuage
         cTplValGesInit< cChantierDescripteur > & DicoLoc();
         const cTplValGesInit< cChantierDescripteur > & DicoLoc()const ;
 
-        cTplValGesInit< string > & FileChantierNameDescripteur();
-        const cTplValGesInit< string > & FileChantierNameDescripteur()const ;
+        cTplValGesInit< std::string > & FileChantierNameDescripteur();
+        const cTplValGesInit< std::string > & FileChantierNameDescripteur()const ;
 
         cPVPN_Orientation & Orient();
         const cPVPN_Orientation & Orient()const ;
@@ -3258,7 +3258,7 @@ class cParamVisuProjNuage
     private:
         std::string mWorkDir;
         cTplValGesInit< cChantierDescripteur > mDicoLoc;
-        cTplValGesInit< string > mFileChantierNameDescripteur;
+        cTplValGesInit< std::string > mFileChantierNameDescripteur;
         cTplValGesInit< cPVPN_ImFixe > mPVPN_ImFixe;
         cPVPN_Camera mPVPN_Camera;
         cPVPN_Fond mPVPN_Fond;

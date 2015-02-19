@@ -37,10 +37,20 @@ English :
 
 Header-MicMac-eLiSe-25/06/2007*/
 
-
-
 #ifndef _ELISE_UTIL_H
 #define _ELISE_UTIL_H
+
+#include <general/sys_dep.h>
+#include <general/opt_debug.h>
+
+#include <string>
+#include <cstring>
+#include <vector>
+#include <istream>
+#include <sstream>
+#include <iostream>
+#include <list>
+#include <map>
 
 class tFileOffset;
 
@@ -78,7 +88,7 @@ extern double Delay_Brkp;
 void SleepProcess(double);
 #define BRKP \
 {\
-    cout << "BRKP at " << __LINE__ << " of " << __FILE__ << "\n";\
+	std::cout << "BRKP at " << __LINE__ << " of " << __FILE__ << "\n";\
     if (Delay_Brkp>0)\
         getchar();\
 }
@@ -682,10 +692,8 @@ std::string  ToStringNBD(int aNb,int aNbDig);
 
 template <class Type> bool FromString(Type& x,const std::string & s)
 {
-/// std::cout << "SSSS=["<<s<<"]\n";
    std::istringstream i(s);
    i >> x;
- // std::cout << "GOOOD="<<i.fail() << "::" << x <<"]\n";
    return ! i.fail();
 }
 
@@ -948,14 +956,14 @@ class tFileOffset
          static  tFileOffset FromReinterpretInt(int anI)
          {
                tByte4AbsFileOffset anUI;
-               memcpy(&anUI,&anI,sizeof(tByte4AbsFileOffset));
+			   std::memcpy(&anUI,&anI,sizeof(tByte4AbsFileOffset));
                return tFileOffset(anUI);
          }
          int ToReinterpretInt() const
          {
               int aRes;
               tByte4AbsFileOffset anOfs4 = Byte4AbsLLO();
-              memcpy(&aRes,&anOfs4,sizeof(tByte4AbsFileOffset));
+			  std::memcpy(&aRes,&anOfs4,sizeof(tByte4AbsFileOffset));
               return aRes;
          }
     private :
@@ -1376,8 +1384,8 @@ class cElHour
      void to_raw_data( bool i_reverseByteOrder, char *&o_rawData ) const;
      static unsigned int raw_size();
 
-     void read_raw( istream &io_istream, bool i_inverseByteOrder );
-     void write_raw( ostream &io_ostream, bool i_inverseByteOrder ) const;
+     void read_raw( std::istream &io_istream, bool i_inverseByteOrder );
+     void write_raw( std::ostream &io_ostream, bool i_inverseByteOrder ) const;
 
      static void getCurrentHour_local( cElHour &o_localHour );
      static void getCurrentHour_UTC( cElHour &o_utcHour );
@@ -1425,8 +1433,8 @@ class cElDate
     void to_raw_data( bool i_reverseByteOrder, char *&o_rawData ) const;
     static unsigned int raw_size();
 
-    void read_raw( istream &io_istream, bool i_inverseByteOrder=false );
-    void write_raw( ostream &io_ostream, bool i_inverseByteOrder=false ) const;
+    void read_raw( std::istream &io_istream, bool i_inverseByteOrder=false );
+    void write_raw( std::ostream &io_ostream, bool i_inverseByteOrder=false ) const;
 
     static void getCurrentDate_local( cElDate &o_localDate );
     static void getCurrentDate_UTC( cElDate &o_utcDate );
@@ -1591,7 +1599,7 @@ bool ElGetStrSys( const std::string & i_base_cmd, std::string &o_result );
 void BanniereGlobale();
 
 // protect spaces with backslashes (for use with 'make')
-string protect_spaces( const string &i_str );
+std::string protect_spaces( const std::string &i_str );
 
 int MMNbProc();
 
@@ -1603,43 +1611,3 @@ int MMNbProc();
 bool launchMake( const std::string &i_makefile, const std::string &i_rule=std::string(), unsigned int i_nbJobs=MMNbProc(), const std::string &i_options=std::string(), bool i_stopCurrentProgramOnFail=true );
 
 #endif /* ! _ELISE_UTIL_H */
-
-
-
-
-
-
-
-
-/*Footer-MicMac-eLiSe-25/06/2007
-
-Ce logiciel est un programme informatique servant �  la mise en
-correspondances d'images pour la reconstruction du relief.
-
-Ce logiciel est régi par la licence CeCILL-B soumise au droit français et
-respectant les principes de diffusion des logiciels libres. Vous pouvez
-utiliser, modifier et/ou redistribuer ce programme sous les conditions
-de la licence CeCILL-B telle que diffusée par le CEA, le CNRS et l'INRIA
-sur le site "http://www.cecill.info".
-
-En contrepartie de l'accessibilité au code source et des droits de copie,
-de modification et de redistribution accordés par cette licence, il n'est
-offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,
-seule une responsabilité restreinte pèse sur l'auteur du programme,  le
-titulaire des droits patrimoniaux et les concédants successifs.
-
-A cet égard  l'attention de l'utilisateur est attirée sur les risques
-associés au chargement,  �  l'utilisation,  �  la modification et/ou au
-développement et �  la reproduction du logiciel par l'utilisateur étant
-donné sa spécificité de logiciel libre, qui peut le rendre complexe �
-manipuler et qui le réserve donc �  des développeurs et des professionnels
-avertis possédant  des  connaissances  informatiques approfondies.  Les
-utilisateurs sont donc invités �  charger  et  tester  l'adéquation  du
-logiciel �  leurs besoins dans des conditions permettant d'assurer la
-sécurité de leurs systèmes et ou de leurs données et, plus généralement,
-�  l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
-
-Le fait que vous puissiez accéder �  cet en-tête signifie que vous avez
-pris connaissance de la licence CeCILL-B, et que vous en avez accepté les
-termes.
-Footer-MicMac-eLiSe-25/06/2007*/

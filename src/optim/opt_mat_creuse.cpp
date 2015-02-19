@@ -43,8 +43,15 @@ Header-MicMac-eLiSe-25/06/2007*/
 /*                                                  */
 /****************************************************/
 
+#include <general/opt_debug.h>
+#include <general/util.h>
 #include <general/optim.h>
+#include <general/abstract_types.h>
 
+#include <string>
+#include <vector>
+#include <iostream>
+#include <map>
 
 cElMatCreuseGen::cElMatCreuseGen(bool OptSym,INT aNbCol,INT aNbLig) :
    mOptSym (OptSym),
@@ -465,14 +472,14 @@ class cElMatCreuseStrFixe : public cElMatCreuseGen
 void cElMatCreuseStrFixe::Show() const
 {
 	INT aNbD = (INT) mVDiags.size();
-	cout << "++ NB DIAGS = " << aNbD <<  "\n";
+	std::cout << "++ NB DIAGS = " << aNbD <<  "\n";
 	for (INT aK =0 ; aK<aNbD ; aK++)
 	{
             const cDiag & aDiag =  *mVDiags[aK];
-            cout << "  Offset = " << aDiag.mOffset 
+			std::cout << "  Offset = " << aDiag.mOffset 
 		    << " @Data : " << aDiag.mD << "\n";
             for (INT aK=0 ; aK<mNbVar ; aK++)
-                cout << "  -   " << aK << " : " << aDiag.mD[aK] << "\n";
+                std::cout << "  -   " << aK << " : " << aDiag.mD[aK] << "\n";
 	}
 }
 
@@ -705,7 +712,6 @@ ELISE_ASSERT
 
 tSysCho cBlocMCBS::ScalCol(int aCol,const cBlocMCBS &  aBl2,int aCol2) const
 {
-   //  std::cout << "SC " << aCol <<  aCol2 << "\n";
    tSysCho aRes = 0;
 
    // Toute la col, 
@@ -719,7 +725,6 @@ tSysCho cBlocMCBS::ScalCol(int aCol,const cBlocMCBS &  aBl2,int aCol2) const
            aNb--;
    }
 
-   //  std::cout << "SC N " << aNb << "\n";
    const tSysCho * aData1 =  PtrDataAbs(aCol,mY0) ;
    const tSysCho * aData2 =  aBl2.PtrDataAbs(aCol2,aBl2.mY0) ;
 
@@ -729,8 +734,6 @@ tSysCho cBlocMCBS::ScalCol(int aCol,const cBlocMCBS &  aBl2,int aCol2) const
       aData1 += mNbX;
       aData2 += aBl2.mNbX;
    }
-
-   //  std::cout << "SCR " << aRes << "\n";
 
    return aRes;
 }
@@ -1119,7 +1122,6 @@ bool cElMatCreuseBlocSym::DirectInverse(const tSysCho * aDIn,tSysCho * aDOut)
             aDEr[aK] = aDIn[aK] - aDMO[aK];
             aSomEr += ElAbs(aDEr[aK]);
         }
-        // std::cout << "ER = " << aSomEr << "\n";
 
         Im1D<tSysCho,tSysCho> aImTmp(mNbEl);
         tSysCho * aDTmp = aImTmp.data();
@@ -1155,7 +1157,6 @@ void cElMatCreuseBlocSym::SolveLowerSys(tSysCho * aDOut,const tSysCho * aDIn,tSy
        {
            tSysCho aSom = aDIn[anY];
            cBlocMCBS * aBl0 = mDataBlocs[aKBy][aKBy];
-// std::cout << "TATA -----------------\n";
            for (cBlocMCBS * aBl = aBl0;  aBl ; aBl = aBl->YNextUp())
            {
                 int aKx = aBl->NumBlY();
@@ -1535,16 +1536,6 @@ cBlocMCBS * cElMatCreuseBlocSym::BlocOfKbxKby(int aKBx,int aKBy) const
    cBlocMCBS * & aRes = mDataBlocs[aKBy][aKBx];
    if (aRes ==0)
    {
-/*
-       if (::ShowPermutVar)
-       {
-           std::cout  << "BLOC " << aKBx << " " << aKBy 
-                      << " SOLVE: x ["  << mStrBlocs[aKBx]->I0Solve()  <<" " << mStrBlocs[aKBx]->I1Solve() << "]"
-                      << " y ["  << mStrBlocs[aKBy]->I0Solve() << " " << mStrBlocs[aKBy]->I1Solve() << "]"
-                      << "\n";
-            getchar();
-       }
-*/
        aRes = new cBlocMCBS
                   (
                       Pt2di(aKBx,aKBy),
@@ -1557,16 +1548,11 @@ cBlocMCBS * cElMatCreuseBlocSym::BlocOfKbxKby(int aKBx,int aKBy) const
 
 void  cElMatCreuseBlocSym::VerifScal()
 {
-   // std::cout << "TT 00 \n";
-   // std::cout << ScaleCol(0,30) << "\n";
-   // std::cout << "OK TT 00 \n";
    for (int aC1 = 0 ; aC1 < mNbEl ; aC1++)
    {
        for (int aC2 = 0 ; aC2 < mNbEl ; aC2++)
        {
-           // std::cout << "IND " << aC1 << " " << aC2 << " " << mISolve2Bloc.size() <<  "\n";
            tSysCho aScA = SimpleScaleCol(aC1,aC2);
-           // std::cout << "   = OK A \n";
            tSysCho aScB = ScaleCol(aC1,aC2);
            tSysCho aEps = 1e-6;
 
@@ -1580,7 +1566,6 @@ void  cElMatCreuseBlocSym::VerifScal()
 
 void  cElMatCreuseBlocSym::ShowStruct(bool basic)
 {
-   // std::cout << "TT 00 \n";
 
    for (int aKx = 0 ; aKx< mNbBlocs  ; aKx++)
        std::cout << (aKx/10) ;
@@ -1709,7 +1694,6 @@ void cElMatCreuseBlocSym::TestCholesky() const
                   std::cout  << "X=" << anX << " Y=" << anY  << " V1=" << aV1 << " V2=" << aV2 << " Dif=" << aDif << "\n";
              }
        }
-        // std::cout  <<  "\n";
    }
     std::cout << "SOM DIF = " << aSomDif << "\n";
     getchar();
@@ -1796,7 +1780,6 @@ void cElMatCreuseBlocSym::CalculCholesky()
                                aScal = 1;
                            }
                            mMChol->LowSetElem(anX,anY,sqrt(aScal));
-   // std::cout << " X=" << anX << " Y=" << anY << " Sc=" << aScal << " Chol=" << mMChol->LowGetElem(anX,anY) << "\n";
                       }
                  }
             }
@@ -1812,7 +1795,6 @@ void cElMatCreuseBlocSym::CalculCholesky()
 
 tSysCho  cElMatCreuseBlocSym::ScaleCol(int aCol1,int aCol2)
 {
-// std::cout << "AAAAAAAAAAAAAAAA \n";
     if (aCol1> aCol2) ElSwap(aCol1,aCol2);
     // int aNb = ElMin(aCol1,aCol2-1);
 
@@ -1821,9 +1803,6 @@ tSysCho  cElMatCreuseBlocSym::ScaleCol(int aCol1,int aCol2)
 
     tSysCho aRes = 0;
 
-// std::cout << "BBBBBBBBBBBbb  " << aKBl1 << " " << aKBl2 <<  "  " << mNbBlocs << " \n";
-// std::cout << "    b111   " << mBloc0OfCol[aKBl1]   << " \n";
-// std::cout << "    b222   " << mBloc0OfCol[aKBl2]   << " \n";
     for 
     (
        cBlocMCBS * aBl2 =  mBloc0OfCol[aKBl2], * aBl1 =  mBloc0OfCol[aKBl1] ;
@@ -1831,7 +1810,6 @@ tSysCho  cElMatCreuseBlocSym::ScaleCol(int aCol1,int aCol2)
        aBl2 = aBl2->YNextDown()
     )
     {
-//  std::cout << "TTTTTTTTTTTTttooo \n";
         ELISE_ASSERT(aBl2!=0,"Internal Er (Bl2=0) in cElMatCreuseBlocSym::ScaleCol");
         while (aBl1 && (aBl1->NumBlY() < aBl2->NumBlY()))
         {
@@ -1848,7 +1826,6 @@ tSysCho  cElMatCreuseBlocSym::ScaleCol(int aCol1,int aCol2)
     }
     //  cBlocMCBS **                           mBloc0OfCol;
 
-/// std::cout << "ZZZZZZZZZZZZZZZZZZz \n";
     return aRes;
 }
 

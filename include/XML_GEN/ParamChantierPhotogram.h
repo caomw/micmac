@@ -1,8 +1,11 @@
-#include "StdAfx.h"
-//#include "general/all.h"
-//#include "private/all.h"
 #ifndef Define_NotPCP
 #define Define_NotPCP
+
+#include <private/files.h>
+#include <api/el_regex.h>
+
+#include <string>
+
 // NO MORE
 typedef enum
 {
@@ -1227,6 +1230,7 @@ std::string  Mangling( cBaseDataCD *);
 /******************************************************/
 /******************************************************/
 /******************************************************/
+
 class cParamVolChantierPhotogram
 {
     public:

@@ -62,6 +62,17 @@ Header-MicMac-eLiSe-25/06/2007*/
                              public cObjFormel2Destroy
 */
 
+#include <general/optim.h>
+#include <general/bitm.h>
+
+#include <photogram_defs.h>
+
+#include <ElProjStenopeGen>
+
+#include <string>
+#include <vector>
+#include <set>
+
 #define DIRECTORY_GENCODE_FORMEL "CodeGenere/photogram/"
 
 
@@ -172,6 +183,8 @@ class cEqObsBlockCam;
 //   inutiles.
 // 
 
+class cSsBloc;
+
 class cIncIntervale
 {
     public :
@@ -256,7 +269,7 @@ class cSsBloc
 
          void AssertIntInit() const;
          void BlocSetInt(cIncIntervale &);
-         inline const cIncIntervale *  Intervale() const {return mInt;};
+         inline const cIncIntervale *  Intervale() const {return mInt;}
           
         int Cpt() const;
          
@@ -521,7 +534,7 @@ class cEqFPtLiaison
 
           ElPackHomologue & StdPack();
      protected :
-          ElPackHomologue   mStdPack;
+          ElPackHomologue  & mStdPack;
 	  virtual ~cEqFPtLiaison();
           cEqFPtLiaison();
 
@@ -573,6 +586,20 @@ class cManipOrdInc
         std::vector<int>              mAlloc2Solve;
         std::vector<int>              mSolve2Alloc;
 };
+
+
+class AllocateurDInconnues;
+class CamStenope;
+class cFormQuadCreuse;
+class cCamStenopeDistRadPol;
+class cCamStenopeDistPolyn;
+class cCamStenopeModStdPhpgr;
+class cCamStenopeDistHomogr;
+class cCamStenopeBilin;
+class cGenSysSurResol;
+class cMirePolygonEtal;
+class cElHomographie;
+class ElDistRadiale_PolynImpair;
 
 class cSetEqFormelles : public cNameSpaceEqF
 {
@@ -710,7 +737,6 @@ class cSetEqFormelles : public cNameSpaceEqF
 		cParamIFDistPolynXY  * NewIntrPolyn(bool isDistC2M,cCamStenopeDistPolyn *);
                 cParamIFDistStdPhgr * NewIntrDistStdPhgr
 			              (bool isDistC2M,cCamStenopeModStdPhpgr *, int aDegFig);
-
 
                 cPIF_Bilin *  NewPIFBilin(cCamStenopeBilin * aCSB);
                 cParamIntrinsequeFormel *  AsPIF_NewPIFBilin(cCamStenopeBilin * aCSB); // Pour utiliser sans connaitre cPIF_Bilin
@@ -882,7 +908,7 @@ class cSetEqFormelles : public cNameSpaceEqF
 
           void SetPtCur(const double * aPt);
           void UpdateFctr();
-          AllocateurDInconnues    mAlloc;
+          AllocateurDInconnues  & mAlloc;
           tContFcteur             mLFoncteurs;
           INT                     mNbVar;
           // L2SysSurResol *      mSys;
@@ -984,6 +1010,7 @@ class cHomogFormelle : public cElemEqFormelle,
 };
 #endif
 
+class cElComposHomographie;
 class cHomogFormelle : public cElemEqFormelle,
                        public cObjFormel2Destroy
 {
@@ -1021,8 +1048,8 @@ class cHomogFormelle : public cElemEqFormelle,
             };
 
             // Foncteur de Rappel sur Valeur Init
-            cElHomographie  mHomInit;
-            cElHomographie  mCurHom;
+            cElHomographie  &mHomInit;
+            cElHomographie  &mCurHom;
 
             cComp           mCX;
             cComp           mCY;
@@ -1031,7 +1058,7 @@ class cHomogFormelle : public cElemEqFormelle,
 	    double          mHomFTol;
 };
 
-
+class cDistModStdPhpgr;
 class cDistRadialeFormelle : public cElemEqFormelle,
                              public cObjFormel2Destroy
 {
@@ -1084,8 +1111,8 @@ class cDistRadialeFormelle : public cElemEqFormelle,
 
 	   bool                       mCentreFige;
 	   INT                        mDegreFige;
-           cDistModStdPhpgr           mDistInitStd;
-           cDistModStdPhpgr           mCurDistStd;
+           cDistModStdPhpgr           &mDistInitStd;
+           cDistModStdPhpgr           &mCurDistStd;
 	   ElDistRadiale_PolynImpair& mDistInit;
 	   ElDistRadiale_PolynImpair& mCurDist;
 	   INT                        mIndCentre;
@@ -1097,6 +1124,7 @@ class cDistRadialeFormelle : public cElemEqFormelle,
 };
 
 
+class cCamStenopeGrid;
 
 class cParamIntrinsequeFormel : public cElemEqFormelle,
                                 public cObjFormel2Destroy
@@ -2877,36 +2905,3 @@ class cPIF_Bilin : public cParamIntrinsequeFormel
 
 
 #endif  // _PHGR_FORMEL_H_
-
-/*Footer-MicMac-eLiSe-25/06/2007
-
-Ce logiciel est un programme informatique servant à la mise en
-correspondances d'images pour la reconstruction du relief.
-
-Ce logiciel est régi par la licence CeCILL-B soumise au droit français et
-respectant les principes de diffusion des logiciels libres. Vous pouvez
-utiliser, modifier et/ou redistribuer ce programme sous les conditions
-de la licence CeCILL-B telle que diffusée par le CEA, le CNRS et l'INRIA 
-sur le site "http://www.cecill.info".
-
-En contrepartie de l'accessibilité au code source et des droits de copie,
-de modification et de redistribution accordés par cette licence, il n'est
-offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,
-seule une responsabilité restreinte pèse sur l'auteur du programme,  le
-titulaire des droits patrimoniaux et les concédants successifs.
-
-A cet égard  l'attention de l'utilisateur est attirée sur les risques
-associés au chargement,  à l'utilisation,  à la modification et/ou au
-développement et à la reproduction du logiciel par l'utilisateur étant 
-donné sa spécificité de logiciel libre, qui peut le rendre complexe à 
-manipuler et qui le réserve donc à des développeurs et des professionnels
-avertis possédant  des  connaissances  informatiques approfondies.  Les
-utilisateurs sont donc invités à charger  et  tester  l'adéquation  du
-logiciel à leurs besoins dans des conditions permettant d'assurer la
-sécurité de leurs systèmes et ou de leurs données et, plus généralement, 
-à l'utiliser et l'exploiter dans les mêmes conditions de sécurité. 
-
-Le fait que vous puissiez accéder à cet en-tête signifie que vous avez 
-pris connaissance de la licence CeCILL-B, et que vous en avez accepté les
-termes.
-Footer-MicMac-eLiSe-25/06/2007*/

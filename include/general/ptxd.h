@@ -40,6 +40,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_INCLUDE_GENERAL_PTXD_H_
 #define _ELISE_INCLUDE_GENERAL_PTXD_H_
 
+#include <general/util.h>
 
 //#define Pt2di  Pt2d<INT>
 //#define Pt2dr  Pt2d<REAL>
@@ -85,15 +86,12 @@ template <> REAL  ElStdTypeScal<REAL>::RTtoT(REAL v) ; // { return v;}
 // REAL totoI() {return ElStdTypeScal<REAL>::RtoT(3.0);}
 
 
-
 class Fonc_Num;
 class Symb_FNum;
 // Fonctions a Effets de bords sur Fonc_Num => Erreurs Fatales
-template <>  void ElSetMax (Fonc_Num & v1,Fonc_Num v2);
-template <>  void ElSetMin (Fonc_Num & v1,Fonc_Num v2);
 Fonc_Num operator += (Fonc_Num &,const Fonc_Num &);
 Fonc_Num operator -= (Fonc_Num &,const Fonc_Num &);
-template <>  void set_min_max (Fonc_Num &,Fonc_Num &);
+void set_min_max (Fonc_Num &,Fonc_Num &);
 
 template <> class ElStdTypeScal<Fonc_Num>
 {
@@ -255,8 +253,8 @@ template <class Type> class Pt2d : public  ElStdTypeScal<Type>
                 {return Pt2d(x/p2.x,y/p2.y);}
 
 
-     void SetSup(const Pt2d<Type> & p){ElSetMax(x,p.x); ElSetMax(y,p.y);}
-     void SetInf(const Pt2d<Type> & p){ElSetMin(x,p.x); ElSetMin(y,p.y);}
+     void SetSup(const Pt2d<Type> & p){std::max(x,p.x); std::max(y,p.y);}
+     void SetInf(const Pt2d<Type> & p){std::min(x,p.x); std::min(y,p.y);}
 
     // RatioMin :  return Min ( x/(TypeScalReel)p.x, y/(TypeScalReel)p.y);
      typename Pt2d<Type>::TypeScalReel RatioMin(const Pt2d<Type> & p) const;
@@ -1081,8 +1079,8 @@ Box2dr  I2R(const Box2di &);
 Box2di  R2I(const Box2dr &);   // Par round_ni
 Box2di  R2ISup(const Box2dr &);   // Par down et sup
 
-ostream & operator << (ostream & ofs,const Box2di  &aBox);
-ostream & operator << (ostream & ofs,const Box2dr  &aBox);
+std::ostream & operator << (std::ostream & ofs,const Box2di  &aBox);
+std::ostream & operator << (std::ostream & ofs,const Box2dr  &aBox);
 
 
 

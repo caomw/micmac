@@ -42,6 +42,10 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_BITM_BITS_H
 #define _ELISE_BITM_BITS_H
 
+#include <private/bitm_def.h>
+#include <private/bitm_tpl.h>
+#include <general/error.h>
+#include <general/smart_pointeur.h>
 
 class Tabul_Bits_Gen
 {

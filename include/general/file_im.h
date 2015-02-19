@@ -50,6 +50,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_FILEIM_H  // general
 #define _ELISE_FILEIM_H
 
+#include <general/bitm.h>
 
 
 class ElDataGenFileIm;
@@ -269,8 +270,12 @@ class Elise_Tiled_File_Im_2D : public ElGenFileIm
 /*************************************************************/
 /*************************************************************/
 
-void test_gif(char  * name,Video_Win,Video_Display);
+class Video_Win;
+class Video_Display;
+class Disc_Pal;
+class Elise_colour;
 
+void test_gif(char  * name, Video_Win, Video_Display);
 
 class Gif_Im : public ElGenFileIm
 {

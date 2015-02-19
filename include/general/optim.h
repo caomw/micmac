@@ -41,10 +41,14 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_OPTIM_H
 #define _ELISE_GENERAL_OPTIM_H
 
-class NROptF1vND;
-class NROptF1vDer;
 
 #include <general/sys_dep.h>
+#include <general/ptxd.h>
+#include <general/phgr_formel.h>
+#include <general/bitm.h>
+
+class NROptF1vND;
+class NROptF1vDer;
 
 // NROptF1vND : Num Recipes Optimisation de Fonction d'1 var, Non Derivable 
 
@@ -317,9 +321,6 @@ class ElSignedGrowingSetInd
        ElGrowingSetInd mSetPos;
        ElGrowingSetInd mSetNeg;
 };
-
-class cIncIntervale;
-class cSsBloc;
 
 class cElMatCreuseGen
 {

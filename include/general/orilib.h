@@ -42,6 +42,8 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_ORILIB_H
 #define _ELISE_GENERAL_ORILIB_H
 
+#include <XML_GEN/ParamChantierPhotogram.h>
+
 class Ori3D_Gen : public PRC0 
 {
       friend class To_Phot_3Std_Not_Comp;

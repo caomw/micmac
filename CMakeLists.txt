@@ -74,7 +74,7 @@ if( CMAKE_COMPILER_IS_GNUCC )
     add_definitions( -O2 -Wall )
 	set( CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined" )
 	if( ${WITH_CPP11} )
-        list( APPEND CMAKE_CXX_FLAGS -std=c++11 )
+        list( APPEND CMAKE_CXX_FLAGS "-std=c++11 -fmax-errors=5" )
 	endif()
 endif()
 
@@ -93,8 +93,6 @@ if ( WITH_OPEN_MP )
         list( APPEND CMAKE_CXX_FLAGS ${OpenMP_CXX_FLAGS} )
         add_definitions(-DUSE_OPEN_MP)
 endif()
-
-include_directories( include )
 
 if ( ${CMAKE_SYSTEM_NAME} MATCHES "Darwin" )
     add_definitions(-DELISE_Darwin)
@@ -401,8 +399,15 @@ IF (MSVC)
 
 ENDIF()
 
+# MicMac directories 
+include_directories(
+	include
+	include/general/photogram
+	)
+
 
 add_subdirectory( CodeExterne )
+add_subdirectory( include )
 add_subdirectory( src )
 
 #set( code_genere_dir ${PROJECT_SOURCE_DIR}/CodeGenere )

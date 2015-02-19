@@ -40,7 +40,11 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_BITM_H_
 #define  _ELISE_GENERAL_BITM_H_
 
+#include <general/abstract_types.h>
+
 #include <climits>
+#include <cstring>
+#include <string>
 
 template <class Type>  class ElMatrix;
 template <class TypeEl> class cInterpolateurIm2D;
@@ -384,7 +388,7 @@ class GenIm : public PRC0 ,
 
 };
 
-string type_elToString( GenIm::type_el );
+std::string type_elToString( GenIm::type_el );
 
 template <class Type,class TyBase> class Im1D;
 
@@ -607,6 +611,17 @@ template <class Type,class TyBase> class Im2D : public Im2DGen
       DataIm2D<Type,TyBase> * di2d(){return (DataIm2D<Type,TyBase> *) (_ptr);}
 };
 
+typedef Im2D<U_INT1,INT>  Im2D_U_INT1;
+typedef Im2D<INT1,INT>    Im2D_INT1;
+typedef Im2D<U_INT2,INT>  Im2D_U_INT2;
+typedef Im2D<INT2,INT>    Im2D_INT2;
+typedef Im2D<INT4,INT>    Im2D_INT4;
+
+typedef Im2D<REAL4,REAL>  Im2D_REAL4;
+typedef Im2D<REAL8,REAL>  Im2D_REAL8;
+typedef Im2D<REAL16,REAL16> Im2D_REAL16;
+
+
 
 template <class TypeIn,class TypeOut> TypeOut Conv2Type(TypeIn anImIn,TypeOut * )
 {
@@ -678,6 +693,9 @@ template <const int nbb> class Im2D_Bits : public Im2DGen
        inline DataIm2D_Bits<nbb> * didb() const;
 };
 
+typedef Im2D_Bits<1>	  Im2D_BIN;
+
+
 template  <const int nbb> Im2D_Bits<nbb>::Im2D_Bits(INT tx,INT ty) :
         Im2DGen(new DataIm2D_Bits<nbb>(tx,ty,false,0,0))
 {
@@ -735,6 +753,14 @@ template <class Type,class TyBase> class Im1D : public GenIm
       Im1D<Type,TyBase>  AugmentSizeTo(INT aTx,Type aValCompl = 0);
 };
 
+typedef Im1D<U_INT1,INT>  Im1D_U_INT1;
+typedef Im1D<INT1,INT>    Im1D_INT1;
+typedef Im1D<U_INT2,INT>  Im1D_U_INT2;
+typedef Im1D<INT2,INT>    Im1D_INT2;
+typedef Im1D<INT4,INT>    Im1D_INT4;
+
+typedef Im1D<REAL4,REAL>  Im1D_REAL4;
+typedef Im1D<REAL8,REAL>  Im1D_REAL8;
 
 class Im3D_WithDataLin{};
 template <class Type,class TyBase> class Im3D : public GenIm
@@ -753,45 +779,6 @@ template <class Type,class TyBase> class Im3D : public GenIm
    private :
 };
 
-
-
-
-
-#if (Compiler_Visual_5_0|| Compiler_Visual_6_0 ) // But Why Microsoft ?
-
-#define Im3D_U_INT1    Im3D<U_INT1,INT>
-#define Im3D_INT1      Im3D<INT1,INT>
-#define Im3D_U_INT2    Im3D<U_INT2,INT>
-#define Im3D_INT2      Im3D<INT2,INT>
-#define Im3D_INT4      Im3D<INT4,INT>
-
-#define Im3D_REAL4     Im3D<REAL4,REAL>
-#define Im3D_REAL8     Im3D<REAL8,REAL>
-
-
-
-#define Im2D_U_INT1    Im2D<U_INT1,INT>
-#define Im2D_INT1      Im2D<INT1,INT>
-#define Im2D_U_INT2    Im2D<U_INT2,INT>
-#define Im2D_INT2      Im2D<INT2,INT>
-#define Im2D_INT4      Im2D<INT4,INT>
-
-#define Im2D_REAL4     Im2D<REAL4,REAL>
-#define Im2D_REAL8     Im2D<REAL8,REAL>
-#define Im2D_REAL16    Im2D<REAL16,REAL16>
-#define Im2D_BIN	   Im2D_Bits<1>
-
-#define Im1D_U_INT1    Im1D<U_INT1,INT>
-#define Im1D_INT1      Im1D<INT1,INT>
-#define Im1D_U_INT2    Im1D<U_INT2,INT>
-#define Im1D_INT2      Im1D<INT2,INT>
-#define Im1D_INT4      Im1D<INT4,INT>
-
-#define Im1D_REAL4     Im1D<REAL4,REAL>
-#define Im1D_REAL8     Im1D<REAL8,REAL>
-
-#else // fucking Visual 5 C--
-
 typedef Im3D<U_INT1,INT>  Im3D_U_INT1;
 typedef Im3D<INT1,INT>    Im3D_INT1;
 typedef Im3D<U_INT2,INT>  Im3D_U_INT2;
@@ -800,36 +787,6 @@ typedef Im3D<INT4,INT>    Im3D_INT4;
 
 typedef Im3D<REAL4,REAL>  Im3D_REAL4;
 typedef Im3D<REAL8,REAL>  Im3D_REAL8;
-
-
-
-
-typedef Im2D<U_INT1,INT>  Im2D_U_INT1;
-typedef Im2D<INT1,INT>    Im2D_INT1;
-typedef Im2D<U_INT2,INT>  Im2D_U_INT2;
-typedef Im2D<INT2,INT>    Im2D_INT2;
-typedef Im2D<INT4,INT>    Im2D_INT4;
-
-typedef Im2D<REAL4,REAL>  Im2D_REAL4;
-typedef Im2D<REAL8,REAL>  Im2D_REAL8;
-typedef Im2D<REAL16,REAL16> Im2D_REAL16;
-
-typedef Im2D_Bits<1>	  Im2D_BIN;
-
-typedef Im1D<U_INT1,INT>  Im1D_U_INT1;
-typedef Im1D<INT1,INT>    Im1D_INT1;
-typedef Im1D<U_INT2,INT>  Im1D_U_INT2;
-typedef Im1D<INT2,INT>    Im1D_INT2;
-typedef Im1D<INT4,INT>    Im1D_INT4;
-
-typedef Im1D<REAL4,REAL>  Im1D_REAL4;
-typedef Im1D<REAL8,REAL>  Im1D_REAL8;
-#endif
-
-
-//----------------------------------------
-//----------------------------------------
-
 
 class Data_Liste_Pts_Gen;
 
@@ -1287,11 +1244,7 @@ template <class Type>  class ElPolynome;
 template <class Type>  class ElPolynome
 {
      public :
-#if (STRICT_ANSI_FRIEND_TPL)
-          //friend  ElPolynome<Type> operator *<Type> (const Type &,const ElPolynome<Type> &) ;
-#else
-          friend  ElPolynome<Type> operator * (const Type &,const ElPolynome<Type> &) ;
-#endif
+          friend  ElPolynome<Type> operator *<Type> (const Type &,const ElPolynome<Type> &) ;
           ElPolynome<Type> operator * (const Type &) const;
           ElPolynome<Type> operator * (const ElPolynome<Type> &) const;
           ElPolynome<Type> operator + (const ElPolynome<Type> &) const;
@@ -1996,7 +1949,6 @@ class cIm2DInter
        virtual int  SzKernel() const = 0;
        virtual ~cIm2DInter(){}
 };
-
 
 #endif //   _ELISE_GENERAL_BITM_H_
 

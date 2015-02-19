@@ -37,7 +37,8 @@ English :
 
 Header-MicMac-eLiSe-25/06/2007*/
 
-#include "StdAfx.h"
+#include <general/optim.h>
+#include <general/exemple_phgr_formel.h>
 
 cVectMatMul::~cVectMatMul()
 {

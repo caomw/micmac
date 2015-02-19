@@ -1,8 +1,6 @@
-#include "StdAfx.h"
 #ifndef Define_NotApero
 #define Define_NotApero
-// #include "XML_GEN/all.h"
-// NO MORE ...
+
 typedef enum
 {
   eAllParamLibres,
@@ -52,6 +50,7 @@ typedef enum
   eFige_AFocal0,
   eFige_AFocal1
 } eTypeContrainteCalibCamera;
+
 void xml_init(eTypeContrainteCalibCamera & aVal,cElXMLTree * aTree);
 std::string  eToString(const eTypeContrainteCalibCamera & aVal);
 

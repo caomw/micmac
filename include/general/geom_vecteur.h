@@ -43,6 +43,8 @@ Header-MicMac-eLiSe-25/06/2007*/
 #define _ELISE_GENERAL_GEOM_VECTEUR_H
 
 #include "ext_stl/fifo.h"
+#include <general/ptxd.h>
+
 
 class Seg2d
 {
@@ -290,12 +292,12 @@ template <class Type> class Mat_Inertie
        Mat_Inertie();
        Mat_Inertie
        (
-               Type::TypeScal S,
-               Type::TypeEff  S1,
-               Type::TypeEff  S2,
-               Type::TypeScal S11,
-               Type::TypeScal S12,
-               Type::TypeScal S22
+               typename Type::TypeScal S,
+               typename Type::TypeEff  S1,
+               typename Type::TypeEff  S2,
+               typename Type::TypeScal S11,
+               typename Type::TypeScal S12,
+               typename Type::TypeScal S22
        )
           :
                _s     (S),
@@ -307,7 +309,7 @@ template <class Type> class Mat_Inertie
        {
        }
 
-       void add_pt_en_place( Type::TypeEff v1,  Type::TypeEff v2)
+       void add_pt_en_place( typename Type::TypeEff v1,  typename Type::TypeEff v2)
        {
             _s   += 1;
             _s1  += v1;
@@ -319,9 +321,9 @@ template <class Type> class Mat_Inertie
 
        void add_pt_en_place
            (
-                Type::TypeEff v1,
-                 Type::TypeEff v2,
-                Type::TypeScal pds
+                typename Type::TypeEff v1,
+                typename Type::TypeEff v2,
+                typename Type::TypeScal pds
             )
        {
             _s   += pds;
@@ -333,19 +335,19 @@ template <class Type> class Mat_Inertie
        }
 
 
-        Type::TypeScal    s()    const {return _s;}
-        Type::TypeEff     s1()   const {return _s1;}
-        Type::TypeEff     s2()   const {return _s2;}
-        Type::TypeScal    s11()  const {return _s11;}
-        Type::TypeScal    s12()  const {return _s12;}
-        Type::TypeScal    s22()  const {return _s22;}
+        typename Type::TypeScal    s()    const {return _s;}
+        typename Type::TypeEff     s1()   const {return _s1;}
+        typename Type::TypeEff     s2()   const {return _s2;}
+        typename Type::TypeScal    s11()  const {return _s11;}
+        typename Type::TypeScal    s12()  const {return _s12;}
+        typename Type::TypeScal    s22()  const {return _s22;}
 
 
        Mat_Inertie  plus_cple
                     (
-                       Type::TypeEff v1,
-                       Type::TypeEff v2,
-                       Type::TypeScal pds =1
+                       typename Type::TypeEff v1,
+                       typename Type::TypeEff v2,
+                       typename Type::TypeScal pds =1
                     ) const
        {
             return Mat_Inertie
@@ -367,7 +369,7 @@ template <class Type> class Mat_Inertie
             // second point (indertermine a pi pres) situe a dun distance norm
 
 
-       Mat_Inertie< Type::TypeReel>  normalize() const
+       Mat_Inertie< typename Type::TypeReel>  normalize() const
        {
              ELISE_ASSERT
              (
@@ -375,8 +377,8 @@ template <class Type> class Mat_Inertie
                   "som pds = 0 in Mat_Inertie::normalize"
              );
 
-              Type::TypeReel::TypeEff  S1 =  _s1 / (REAL) _s;
-              Type::TypeReel::TypeEff  S2 =  _s2 / (REAL) _s;
+              typename Type::TypeReel::TypeEff  S1 =  _s1 / (REAL) _s;
+              typename Type::TypeReel::TypeEff  S2 =  _s2 / (REAL) _s;
 
 
 #if ( ELISE_windows & ELISE_MinGW )
@@ -417,7 +419,7 @@ template <class Type> class Mat_Inertie
 
 
 
-          Type::TypeScal S0() const {return _s;}
+       typename Type::TypeScal S0() const {return _s;}
        typename Type::TypeReel::TypeEff  V2toV1(const typename Type::TypeReel::TypeEff & aV2,REAL epsilon = 1e-14);
        typename Type::TypeReel::TypeEff  V1toV2(const typename Type::TypeReel::TypeEff & aV2,REAL epsilon = 1e-14);
 
@@ -425,12 +427,12 @@ template <class Type> class Mat_Inertie
     private :
 
 
-           Type::TypeScal         _s;
-           Type::TypeEff          _s1;
-           Type::TypeEff          _s2;
-           Type::TypeScal         _s11;
-           Type::TypeScal         _s12;
-           Type::TypeScal         _s22;
+           typename Type::TypeScal         _s;
+           typename Type::TypeEff          _s1;
+           typename Type::TypeEff          _s2;
+           typename Type::TypeScal         _s11;
+           typename Type::TypeScal         _s12;
+           typename Type::TypeScal         _s22;
 };
 
 REAL   surf_or_poly(const ElFifo<Pt2dr> &);
