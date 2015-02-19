@@ -2,6 +2,9 @@
 #define _ELISE_GENERAL_PHOTOGRAM_ELDISTORTION22_GEN_H
 
 #include "general/sys_dep.h"
+#include "XML_GEN/ParamChantierPhotogram.h"
+
+#include <ElDistortionPolynomiale>
 
 class ElDistortion22_Gen
 {

@@ -3,6 +3,8 @@
 
 #include "general/sys_dep.h"
 
+#include <CamStenope>
+
 class CamStenopeIdeale : public CamStenope
 {
 public :

@@ -45,8 +45,10 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 #include <general/opt_debug.h>
 #include <general/util.h>
-#include <general/optim.h>
+
 #include <general/abstract_types.h>
+
+#include <cElMatCreuseGen>
 
 #include <string>
 #include <vector>

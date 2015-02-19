@@ -1,0 +1,262 @@
+/*Header-MicMac-eLiSe-25/06/2007
+
+    MicMac : Multi Image Correspondances par Methodes Automatiques de Correlation
+    eLiSe  : ELements of an Image Software Environnement
+
+    www.micmac.ign.fr
+
+
+    Copyright : Institut Geographique National
+    Author : Marc Pierrot Deseilligny
+    Contributors : Gregoire Maillet, Didier Boldo.
+    Refactoring: Helio Chissini de Castro <helio@kde.org>
+
+[1] M. Pierrot-Deseilligny, N. Paparoditis.
+    "A multiresolution and optimization-based image matching approach:
+    An application to surface reconstruction from SPOT5-HRS stereo imagery."
+    In IAPRS vol XXXVI-1/W41 in ISPRS Workshop On Topographic Mapping From Space
+    (With Special Emphasis on Small Satellites), Ankara, Turquie, 02-2006.
+
+[2] M. Pierrot-Deseilligny, "MicMac, un lociel de mise en correspondance
+    d'images, adapte au contexte geograhique" to appears in
+    Bulletin d'information de l'Institut Geographique National, 2007.
+
+Francais :
+
+   MicMac est un logiciel de mise en correspondance d'image adapte
+   au contexte de recherche en information geographique. Il s'appuie sur
+   la bibliotheque de manipulation d'image eLiSe. Il est distibue sous la
+   licences Cecill-B.  Voir en bas de fichier et  http://www.cecill.info.
+
+
+English :
+
+    MicMac is an open source software specialized in image matching
+    for research in geographic information. MicMac is built on the
+    eLiSe image library. MicMac is governed by the  "Cecill-B licence".
+    See below and http://www.cecill.info.
+
+Header-MicMac-eLiSe-25/06/2007*/
+
+
+#ifndef _ELISE_GENERAL_BITM_EL_CTYPETRAITS_H
+#define _ELISE_GENERAL_BITM_EL_CTYPETRAITS_H
+
+#include "general/sys_dep.h"
+
+template <class Type> class El_CTypeTraits
+{
+public :
+    typedef Type  tVal;
+    typedef Type  tBase;
+    enum   {eSizeOf = 1111};
+    static tVal  RawDataToVal(U_INT1 *);
+private :
+};
+
+template <> class El_CTypeTraits<INT1>
+{
+public :
+    static std::string   Name() {return "INT1";}
+    static const INT1 MaxValue() {return SCHAR_MAX;}
+    static const INT1 MinValue() {return SCHAR_MIN;}
+    static Fonc_Num TronqueF(Fonc_Num aFonc) {return Max(tBase(eVMin),Min(tBase(eVMax),aFonc));}
+    typedef INT1    tSignedVal;
+    typedef U_INT1  tUnSignedVal;
+
+    typedef INT1   tVal;
+    typedef INT    tBase;
+    static bool IsIntType() {return true;}
+    static tVal Tronque(tBase aVal) {return ElMax(tBase(eVMin),ElMin(tBase(eVMax),aVal));}
+    static tVal TronqueR(double aVal)
+    {
+        if (aVal>eVMax) return eVMax;
+        if (aVal<eVMin) return eVMin;
+        return round_ni(aVal);
+    }
+    enum   {
+        eSizeOf = 1,
+        eVMax=127,
+        eVMin=-128,
+        e100PozSize =0
+    };
+};
+
+
+template <> class El_CTypeTraits<INT2>
+{
+public :
+    static std::string   Name() {return "INT2";}
+    static const INT2 MaxValue () { return SHRT_MAX;}
+    static const INT2 MinValue () { return SHRT_MIN;}
+    static Fonc_Num TronqueF(Fonc_Num aFonc) {return Max(tBase(eVMin),Min(tBase(eVMax),aFonc));}
+    typedef INT2  tVal;
+    typedef INT     tBase;
+    static bool IsIntType() {return true;}
+    static tVal Tronque(tBase aVal) {return ElMax(tBase(eVMin),ElMin(tBase(eVMax),aVal));}
+    static tVal TronqueR(double aVal)
+    {
+        if (aVal>eVMax) return eVMax;
+        if (aVal<eVMin) return eVMin;
+        return round_ni(aVal);
+    }
+    enum   {
+        eSizeOf = 2,
+        eVMax=SHRT_MAX,
+        eVMin=SHRT_MIN,
+        e100PozSize =10000
+    };
+};
+
+template <> class El_CTypeTraits<INT>
+{
+public :
+    static const INT MaxValue (){ return INT_MAX;}
+    static const INT MinValue (){ return INT_MIN;}
+    static Fonc_Num TronqueF(Fonc_Num aFonc) {return aFonc;}
+    static std::string   Name() {return "INT";}
+    typedef INT   tVal;
+    typedef INT   tBase;
+    static bool IsIntType() {return true;}
+    static tVal Tronque(tBase aVal) {return aVal;}
+    static tVal TronqueR(double aVal) { return round_ni(aVal); }
+    enum   {
+        eSizeOf = 4,
+        eVMax=0,
+        eVMin=0,
+        e100PozSize =0
+    };
+
+};
+
+
+template <> class El_CTypeTraits<REAL16>
+{
+public :
+    static std::string   Name() {return "REAL16";}
+    typedef REAL16   tVal;
+    typedef REAL16   tBase;
+    static bool IsIntType() {return false;}
+    enum   {
+        eSizeOf = 16,
+        eVMax=0,
+        eVMin=0,
+        e100PozSize =0
+    };
+    static tVal Tronque(tBase aVal) {return aVal;}
+    static tVal TronqueR(double aVal) { return   aVal;}
+};
+
+
+template <> class El_CTypeTraits<REAL4>
+{
+public :
+    static const REAL4 MaxValue (){return FLT_MAX;}
+    static const REAL4 MinValue (){return -FLT_MAX;}
+    static Fonc_Num TronqueF(Fonc_Num aFonc) {return aFonc;}
+    static std::string   Name() {return "REAL4";}
+    typedef REAL4   tVal;
+    typedef REAL8   tBase;
+    static bool IsIntType() {return false;}
+    enum   {
+        eSizeOf = 4,
+        eVMax=0,
+        eVMin=0,
+        e100PozSize =0
+    };
+    static tVal Tronque(tBase aVal) {return (tVal) aVal;}
+
+    static tVal TronqueR(double aVal) { return  (tVal) aVal;}
+
+};
+
+template <> class El_CTypeTraits<REAL8>
+{
+public :
+    static REAL8 MaxValue() {return DBL_MAX;}
+    static REAL8 MinValue() {return -DBL_MAX;}
+    static Fonc_Num TronqueF(Fonc_Num aFonc) {return aFonc;}
+    static std::string   Name() {return "REAL8";}
+    typedef REAL8   tVal;
+    typedef REAL8   tBase;
+    static bool IsIntType() {return false;}
+    enum   {
+        eSizeOf = 8,
+        eVMax=0,
+        eVMin=0,
+        e100PozSize =0
+    };
+    static tVal Tronque(tBase aVal) {return aVal;}
+    static tVal TronqueR(double aVal) { return   aVal;}
+};
+
+
+template <> class El_CTypeTraits<U_INT1>
+{
+public :
+    static const U_INT1 MaxValue() {return   UCHAR_MAX;}
+    static const U_INT1 MinValue() {return   0;}
+    static Fonc_Num TronqueF(Fonc_Num aFonc) {return Max(tBase(eVMin),Min(tBase(eVMax),aFonc));}
+
+    static std::string   Name() {return "U_INT1";}
+    typedef INT1    tSignedVal;
+    typedef U_INT1  tUnSignedVal;
+
+    typedef U_INT1  tVal;
+    typedef INT     tBase;
+    static tVal Tronque(tBase aVal) {return ElMax(tBase(eVMin),ElMin(tBase(eVMax),aVal));}
+    static tVal TronqueR(double aVal)
+    {
+        if (aVal>eVMax) return eVMax;
+        if (aVal<eVMin) return eVMin;
+        return round_ni(aVal);
+    }
+    static bool IsIntType() {return true;}
+
+    enum   {eSizeOf = 1,eVMin=0,eVMax=255,e100PozSize = 100};
+    static tVal  RawData2Val(const U_INT1 * Raw) {return  *Raw;}
+    static void Val2RawData(U_INT1 * Raw,U_INT1 val) {*Raw = val;}
+    static bool EqualsRaw2Val(const U_INT1 * Raw1,const U_INT1 * Raw2){return *Raw1==*Raw2;}
+private :
+};
+
+
+template <> class El_CTypeTraits<U_INT2>
+{
+public :
+    static const U_INT2 MaxValue() {return   USHRT_MAX;}
+    static const U_INT2 MinValue() {return  0;}
+    static Fonc_Num TronqueF(Fonc_Num aFonc) {return Max(tBase(eVMin),Min(tBase(eVMax),aFonc));}
+    static std::string   Name() {return "U_INT2";}
+    typedef U_INT2  tVal;
+    typedef INT     tBase;
+    static bool IsIntType() {return true;}
+    static tVal Tronque(tBase aVal) {return ElMax(tBase(eVMin),ElMin(tBase(eVMax),aVal));}
+    static tVal TronqueR(double aVal)
+    {
+        if (aVal>eVMax) return eVMax;
+        if (aVal<eVMin) return eVMin;
+        return round_ni(aVal);
+    }
+
+    enum   {eSizeOf = 2,eVMin=0,eVMax=0xFFFF,e100PozSize =10000};
+    static tVal  RawData2Val(const U_INT1 * Raw)
+    {
+        tVal u;
+        ((U_INT1 *)&u)[0] = Raw[0];
+        ((U_INT1 *)&u)[1] = Raw[1];
+        return u;
+    }
+    static void Val2RawData(U_INT1 * Raw,U_INT2 val)
+    {
+        Raw[0] = ((U_INT1 *)&val)[0]  ;
+        Raw[1] = ((U_INT1 *)&val)[1]  ;
+    }
+    static bool EqualsRaw2Val(const U_INT1 * Raw1,const U_INT1 * Raw2)
+    {
+        return Raw1[0]==Raw2[0]&& Raw1[1]==Raw2[1];
+    }
+private :
+};
+
+#endif

@@ -3,6 +3,8 @@
 
 #include "general/sys_dep.h"
 
+#include <ElDistortion22_Gen>
+
 class cDistorBilin :   public ElDistortion22_Gen
 {
 public :

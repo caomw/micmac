@@ -42,6 +42,8 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 #include <general/abstract_types.h>
 
+#include <ElDistortion22_Gen>
+
 #include <climits>
 #include <cstring>
 #include <string>
@@ -707,8 +709,6 @@ typedef enum
    eModeBilin,
    eModeBicub
 } eModeInterp;
-
-class ElDistortion22_Gen;
 
 template <class TOut,class TIn>
 class cChCoord

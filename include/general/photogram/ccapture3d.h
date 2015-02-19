@@ -3,6 +3,8 @@
 
 #include "general/sys_dep.h"
 
+#include <ElSeg3D>
+
 class cCapture3D
 {
 public :

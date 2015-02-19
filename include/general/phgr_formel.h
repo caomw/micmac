@@ -40,34 +40,10 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef  _PHGR_FORMEL_H_
 #define  _PHGR_FORMEL_H_
 
-//Debug du probleme de condtionnement de la matrice (3x3) de point
-
-/*
-
-         
-    class cRotationFormelle : public cElemEqFormelle,
-                              public cObjFormel2Destroy
-
-
-    class cHomogFormelle : public cElemEqFormelle,
-                       public cObjFormel2Destroy
-
-     class cDistRadialeFormelle : public cElemEqFormelle,
-                                  public cObjFormel2Destroy
-
-    class cParamIntrinsequeFormel : public cElemEqFormelle,
-                                public cObjFormel2Destroy
-
-    class cCameraFormelle :  public cNameSpaceEqF ,
-                             public cObjFormel2Destroy
-*/
-
-#include <general/optim.h>
-#include <general/bitm.h>
-
 #include <photogram_defs.h>
 
 #include <ElProjStenopeGen>
+#include <CamStenopeIdeale>
 
 #include <string>
 #include <vector>

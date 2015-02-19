@@ -3,6 +3,9 @@
 
 #include "general/sys_dep.h"
 
+#include <cDistorBilin>
+#include <CamStenope>
+
 class cCamStenopeBilin : public CamStenope
 {
 public :

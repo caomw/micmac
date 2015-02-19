@@ -3,6 +3,8 @@
 
 #include "general/sys_dep.h"
 
+#include <ElCamera>
+
 class CamStenope : public ElCamera
 {
 public :

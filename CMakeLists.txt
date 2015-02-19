@@ -74,7 +74,7 @@ if( CMAKE_COMPILER_IS_GNUCC )
     add_definitions( -O2 -Wall )
 	set( CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined" )
 	if( ${WITH_CPP11} )
-        list( APPEND CMAKE_CXX_FLAGS "-std=c++11 -fmax-errors=5" )
+        list( APPEND CMAKE_CXX_FLAGS "-std=c++11 -fmax-errors=10" )
 	endif()
 endif()
 
@@ -403,6 +403,10 @@ ENDIF()
 include_directories(
 	include
 	include/general/photogram
+	include/general/geom_vecteur
+	include/general/file_im
+	include/general/bitm
+	include/general/optim
 	)
 
 

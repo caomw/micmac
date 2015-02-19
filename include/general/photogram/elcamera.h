@@ -3,6 +3,10 @@
 
 #include "general/sys_dep.h"
 
+#include <cCapture3D>
+#include <cCamStenopeBilin>
+#include <cDistorBilin>
+
 class ElCamera : public cCapture3D
 {
 public :

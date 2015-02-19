@@ -43,7 +43,6 @@ Header-MicMac-eLiSe-25/06/2007*/
 #include <private/flux_pts.h>
 #include <general/ptxd.h>
 #include <general/operator.h>
-#include <general/file_im.h>
 
 extern INT PTS_00000000000000 [];
 
