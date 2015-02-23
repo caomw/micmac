@@ -3,6 +3,8 @@
 
 #include "general/sys_dep.h"
 
+class cIncIntervale;
+
 class cSsBloc
 {
      public :

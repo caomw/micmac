@@ -66,8 +66,8 @@ option( WITH_CPP11 "Compilateur C++11" ON )
 
 option( UPDATE_TRANSLATIONS "Update source translation translations/*.ts files (WARNING: make clean will delete the source .ts files! Danger!)" )
 
-# Utiliser Doxygen
-option( WITH_DOXYGEN "Generation de documentation" OFF )
+# Enable Doxygen as default
+option( WITH_DOXYGEN "API doc generation" ON )
 
 # Set C++ preprocessor definitions
 if( CMAKE_COMPILER_IS_GNUCC )
@@ -407,6 +407,12 @@ include_directories(
 	include/general/file_im
 	include/general/bitm
 	include/general/optim
+	include/general/phgr_formel
+	include/general/abstract_types
+	include/general/allocation
+	include/general/ptxd
+	include/general/window
+	include/general/garb_coll_pub
 	)
 
 
@@ -422,8 +428,9 @@ add_subdirectory( src )
 if( ${WITH_DOXYGEN} )
     find_package( Doxygen )
     if( DOXYGEN_FOUND )
-		configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY )
-		add_custom_target( doc ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generating API documentation with Doxygen" VERBATIM )
+		configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY )
+		# Later
+		#add_custom_target( doc ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generating API documentation with Doxygen" VERBATIM )
     endif( DOXYGEN_FOUND )
 endif()
 

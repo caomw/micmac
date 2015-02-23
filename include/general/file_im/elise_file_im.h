@@ -3,6 +3,10 @@
 
 #include "general/sys_dep.h"
 
+#include <ElGenFileIm>
+#include <GenIm>
+#include <Elise_Tiled_File_Im_2D>
+
 class Elise_File_Im : public ElGenFileIm 
 {
     friend class DataGenIm;

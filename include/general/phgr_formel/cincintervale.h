@@ -38,97 +38,12 @@ English :
 
 Header-MicMac-eLiSe-25/06/2007*/
 
-
-#ifndef _ELISE_GENERAL_PHGR_FORMEL_CEQF1INCTMP;_H
-#define _ELISE_GENERAL_PHGR_FORMEL_CEQF1INCTMP;_H
-
-#include "general/sys_dep.h"
-
-class cEqf1IncTmp;   // 1 Inconnue temporaire
-#ifndef _ELISE_GENERAL_PHGR_FORMEL_CEQFBLOCINCTMP;_H
-#define _ELISE_GENERAL_PHGR_FORMEL_CEQFBLOCINCTMP;_H
-
-#include "general/sys_dep.h"
-
-class cEqfBlocIncTmp;  // 1 Bloc d'inconnue temporaire
-#ifndef _ELISE_GENERAL_PHGR_FORMEL_CEQFP3DINCTMP;_H
-#define _ELISE_GENERAL_PHGR_FORMEL_CEQFP3DINCTMP;_H
-
-#include "general/sys_dep.h"
-
-class cEqfP3dIncTmp;  // Une specialisation de cEqfBlocIncTmp pour point terrain
-
-class cParamPtProj;
-class cP3d_Etat_PhgrF;
-class cP2d_Etat_PhgrF;
-class cMatr_Etat_PhgrF;
-
-// -----------------------------
-//class cMapIncInterv;
-class cElCompiledFonc ;
-
-class cIncIntervale;
-class cIncListInterv;
-
-class cNameSpaceEqF;
-class cSetEqFormelles;
-class cHomogFormelle;
-class cDistRadialeFormelle;
-class cEqHomogFormelle;
-class cEqOneHomogFormelle;
-class cParamIntrinsequeFormel;
-class cRotationFormelle;
-class cCameraFormelle;
-class cCpleCamFormelle;
-class cParamIFDistRadiale;
-class cParamIFDistPolynXY ;
-class cTriangulFormelle;
-class cCpleGridEq;
-class cEqEllipseImage;
-class cParamIFHomogr;
-class cLIParam_Image;
-class cEqVueLaserImage;
-class cEqCorrelGrid;
-class cEqFormelleLineaire;
-class cParamIFDistStdPhgr;
-class cAppuiGridEq;
-class cEqPlanInconnuFormel;
-class cTFI_Triangle;
-
-class cTFI_AttrSom;
-
-class cInterfSurfaceAnalytique ;
-class cInterfSurfAn_Formelle;
-class cCylindreRevolution;
-class cCylindreRevolFormel;
-
-
-class cL2EqObsBascult;
-class cSolBasculeRig;
-
-class cPIF_Bilin;
-
-
-class cEqOffsetGPS;
-class cBaseGPS;
-class cEqObsBlockCam;
-
-
-//   Il n'avait pas ete prevu de renumeroter les intervales. Quand le besoin
-//   est apparu, pour la resolution des systemes par cholesky creux, on a gere
-//   ca par une double numerotation :
-//         - I0Init : numerotation initiale, lie a l'ordre d'allocation des inconnues
-//         - I0Final : systeme de numerotation  optumisie pour les matrices
-//    En premiere phase, on duplique touts les numero, sans doute certains deviendront
-//   inutiles.
-// 
-
-class cSsBloc;
-
 #ifndef _ELISE_GENERAL_PHGR_FORMEL_CINCINTERVALE_H
 #define _ELISE_GENERAL_PHGR_FORMEL_CINCINTERVALE_H
 
 #include "general/sys_dep.h"
+
+class cSetEqFormelles;
 
 class cIncIntervale
 {

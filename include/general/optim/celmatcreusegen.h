@@ -4,6 +4,8 @@
 #include "general/sys_dep.h"
 
 #include <cSsBloc>
+#include <Im1D>
+
 
 class cElMatCreuseGen
 {

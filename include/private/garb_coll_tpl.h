@@ -42,7 +42,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GAR_COLL_TPL_H
 #define _ELISE_GAR_COLL_TPL_H
 
-#include <general/allocation.h>
+#include <Mcheck>
 
 template <class Type> class Tab_Prov
                       : public Mcheck

@@ -3,6 +3,8 @@
 
 #include "general/sys_dep.h"
 
+#include <Seg2d>
+
 class SegComp : public Seg2d
 {
     // equation normale de la droite

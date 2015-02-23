@@ -141,14 +141,7 @@ Im2D_Bits<1> MasqForInterpole(Im2D_Bits<1> aMasqInInit,eModeInterp aMode);
 GenIm alloc_im1d(GenIm::type_el type_el,int tx,void * data);
 
 
-typedef Im1D<U_INT1,INT>  Im1D_U_INT1;
-typedef Im1D<INT1,INT>    Im1D_INT1;
-typedef Im1D<U_INT2,INT>  Im1D_U_INT2;
-typedef Im1D<INT2,INT>    Im1D_INT2;
-typedef Im1D<INT4,INT>    Im1D_INT4;
 
-typedef Im1D<REAL4,REAL>  Im1D_REAL4;
-typedef Im1D<REAL8,REAL>  Im1D_REAL8;
 
 class Im3D_WithDataLin{};
 

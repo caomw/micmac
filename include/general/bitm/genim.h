@@ -1,25 +1,8 @@
-#ifndef _ELISE_GENERAL_BITM_TYPE>_H
-#define _ELISE_GENERAL_BITM_TYPE>_H
-
-#include "general/sys_dep.h"
-
-template<class Type> Fonc_Num TronqueVal(Fonc_Num aFonc)
-{
-   return Max
-          (
-               El_CTypeTraits<Type>::eVMin,
-               Min(El_CTypeTraits<Type>::eVMax,aFonc)
-          );
-}
-
-
-
-class DataGenIm;
-
 #ifndef _ELISE_GENERAL_BITM_GENIM_H
 #define _ELISE_GENERAL_BITM_GENIM_H
 
-#include "general/sys_dep.h"
+#include <PRC0>
+#include <Rectang_Object>
 
 class GenIm : public PRC0 ,
               public Rectang_Object
@@ -37,7 +20,7 @@ class GenIm : public PRC0 ,
 
         virtual ~GenIm();
 
-        typedef enum type_el
+        typedef enum
         {
              u_int1,
              int1,
@@ -55,8 +38,7 @@ class GenIm : public PRC0 ,
 
              real16,
              no_type    // to have some def value
-        }
-        type_el;
+        } type_el;
 
        // must be same size, use optimized if same type,
        // else use ELISE_COPY

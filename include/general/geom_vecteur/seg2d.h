@@ -44,6 +44,8 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 #include "general/sys_dep.h"
 
+#include <Box2d>
+
 class Seg2d
 {
    public :

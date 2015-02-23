@@ -4,4 +4,10 @@ include_directories(
 	file_im
 	bitm
 	optim
+	phgr_formel
+	abstract_types
+	allocation
+	ptxd
+	window
+	garb_coll_pub
 	)

@@ -40,9 +40,10 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef __BITM_DEF__
 #define __BITM_DEF__
 
-#include <private/flux_pts.h>
 #include <general/ptxd.h>
-#include <general/operator.h>
+
+#include <GenIm>
+#include <Elise_File_Im>
 
 extern INT PTS_00000000000000 [];
 

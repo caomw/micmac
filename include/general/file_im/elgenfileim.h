@@ -43,6 +43,12 @@ Header-MicMac-eLiSe-25/06/2007*/
 #define _ELISE_GENERAL_FILE_IM_ELGENFILEIM_H
 
 #include "general/sys_dep.h"
+#include "general/allocation.h"
+
+#include <GenIm>
+#include <Rectang_Object>
+
+class ElDataGenFileIm;
 
 class ElGenFileIm :  public PRC0,
         public Rectang_Object

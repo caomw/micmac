@@ -5,3 +5,4 @@ culture3d.kdev4
 Documentation
 interface
 include/general/micmac_version.h
+CMakeLists.txt.user

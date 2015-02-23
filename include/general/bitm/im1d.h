@@ -3,6 +3,8 @@
 
 #include "general/sys_dep.h"
 
+#include <GenIm>
+
 template <class Type,class TyBase> class Im1D : public GenIm
 {
    public :
@@ -23,5 +25,14 @@ template <class Type,class TyBase> class Im1D : public GenIm
       Im1D(Im1D<Type,TyBase> *,INT tx,void * );
       Im1D<Type,TyBase>  AugmentSizeTo(INT aTx,Type aValCompl = 0);
 };
+
+typedef Im1D<U_INT1,INT>  Im1D_U_INT1;
+typedef Im1D<INT1,INT>    Im1D_INT1;
+typedef Im1D<U_INT2,INT>  Im1D_U_INT2;
+typedef Im1D<INT2,INT>    Im1D_INT2;
+typedef Im1D<INT4,INT>    Im1D_INT4;
+
+typedef Im1D<REAL4,REAL>  Im1D_REAL4;
+typedef Im1D<REAL8,REAL>  Im1D_REAL8;
 
 #endif

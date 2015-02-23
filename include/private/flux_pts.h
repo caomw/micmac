@@ -42,9 +42,11 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_FLUX_PTS
 #define _ELISE_FLUX_PTS
 
+#include <general/sys_dep.h>
 #include <private/garb_coll_tpl.h>
 #include <private/flux_pts.h>
-#include <general/ptxd.h>
+
+#include <Pt2d>
 
 /*
       One of the major feature of the ELISE'lib is the generality of the
@@ -282,6 +284,7 @@ private :
 /*                                                         */
 /***********************************************************/
 
+#include <Box2d>
 
 class Flux_Pts_Computed : public Mcheck
 {

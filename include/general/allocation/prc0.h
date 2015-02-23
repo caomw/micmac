@@ -40,42 +40,44 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_ALLOCATION_PRC0_H
 #define _ELISE_ALLOCATION_PRC0_H
 
-    /*
+/*
     Class PRC0 :
 
          Pointer to References Counting Object
 */
 
-    class PRC0
-    {
+#include <RC_Object>
 
-    public :
+class PRC0
+{
 
-
-        // big three :
-
-        PRC0 (const PRC0&);
-        ~PRC0(void) ;
-        void operator=(const PRC0 &p2);
+public :
 
 
+    // big three :
 
-        void * ptr(){return _ptr;}
-        PRC0 (RC_Object *) ;
+    PRC0 (const PRC0&);
+    ~PRC0(void) ;
+    void operator=(const PRC0 &p2);
 
-    protected :
 
-        inline PRC0(){_ptr=0;};
 
-        //-------- data ----------
+    void * ptr(){return _ptr;}
+    PRC0 (RC_Object *) ;
 
-        RC_Object     * _ptr;
+protected :
 
-    private :
-        static  void decr_ref(RC_Object * oc);
+    inline PRC0(){_ptr=0;};
 
-        // just to avoid use  :
-        // PRC0 * operator &();
-    };
+    //-------- data ----------
+
+    RC_Object     * _ptr;
+
+private :
+    static  void decr_ref(RC_Object * oc);
+
+    // just to avoid use  :
+    // PRC0 * operator &();
+};
 
 #endif
