@@ -46,29 +46,29 @@ class Elise_colour;
 
 Elise_colour operator - (Elise_colour,Elise_colour);
 Elise_colour operator + (Elise_colour,Elise_colour);
-Elise_colour operator * (REAL,Elise_colour);
+Elise_colour operator * (double_t,Elise_colour);
 
 class Elise_colour
 {
     public :
 
-        REAL eucl_dist (const Elise_colour &); 
+        double_t eucl_dist (const Elise_colour &); 
 
         friend Elise_colour operator - (Elise_colour,Elise_colour);
         friend Elise_colour operator + (Elise_colour,Elise_colour);
-        friend Elise_colour operator * (REAL,Elise_colour);
+        friend Elise_colour operator * (double_t,Elise_colour);
 
-        friend  Elise_colour som_pond(Elise_colour C1,REAL pds,Elise_colour C2);
+        friend  Elise_colour som_pond(Elise_colour C1,double_t pds,Elise_colour C2);
                   // pds (*this) + (1-pds) c2
 
-        static inline Elise_colour rgb(REAL rr,REAL gg,REAL bb)   
+        static inline Elise_colour rgb(double_t rr,double_t gg,double_t bb)   
         {
                return Elise_colour(rr,gg,bb);
         }
 
-        static Elise_colour cmy(REAL,REAL,REAL);   
+        static Elise_colour cmy(double_t,double_t,double_t);   
         static Elise_colour rand();   
-        static Elise_colour gray(REAL);
+        static Elise_colour gray(double_t);
 
 
         static const Elise_colour   red;
@@ -96,30 +96,30 @@ class Elise_colour
         static const Elise_colour   salmon;
         static const Elise_colour   emerald;
 
-        inline REAL r() const { return _rgb[0];}
-        inline REAL g() const { return _rgb[1];}
-        inline REAL b() const { return _rgb[2];}
-		inline REAL GrayVal() const {return (r()+g()+b()) /3.0;}
-		inline REAL MinRGB() const {return ElMin3(r(),g(),b());}
-		inline REAL MaxRGB() const {return ElMax3(r(),g(),b());}
+        inline double_t r() const { return _rgb[0];}
+        inline double_t g() const { return _rgb[1];}
+        inline double_t b() const { return _rgb[2];}
+		inline double_t GrayVal() const {return (r()+g()+b()) /3.0;}
+		inline double_t MinRGB() const {return ElMin3(r(),g(),b());}
+		inline double_t MaxRGB() const {return ElMax3(r(),g(),b());}
 
         Elise_colour() {*this = rgb(0,0,0);};
 
-        void to_its(REAL & i,REAL & t, REAL & s);
-        static Elise_colour its(REAL i,REAL t,REAL s);
+        void to_its(double_t & i,double_t & t, double_t & s);
+        static Elise_colour its(double_t i,double_t t,double_t s);
 
     private :
 
-        REAL    _rgb[3];
-        inline Elise_colour(REAL rr,REAL gg,REAL bb)
+        double_t    _rgb[3];
+        inline Elise_colour(double_t rr,double_t gg,double_t bb)
         {
              _rgb[0] = rr; _rgb[1] = gg; _rgb[2] = bb;
         }
 
-        static REAL adj_rvb(REAL);
+        static double_t adj_rvb(double_t);
 
 
-       friend class Disc_Pal GIF_palette(class ELISE_fp,INT nb);
+       friend class Disc_Pal GIF_palette(class ELISE_fp,int nb);
 };
 
 typedef ElList<class Elise_colour> L_El_Col;
@@ -161,9 +161,9 @@ class  Elise_Palette : public PRC0
        friend class  ElXim;
 
        public :
-           INT  nb();
+           int  nb();
            Fonc_Num to_rgb(Fonc_Num);
-		   INT  dim_pal();
+		   int  dim_pal();
 		   enum {MaxDimPal = 3};
 
 
@@ -188,16 +188,16 @@ ElList<Elise_colour> NewLElCol(const Elise_colour & c);
 class  Lin1Col_Pal : public Elise_Palette 
 {
      public :
-         Lin1Col_Pal(Elise_colour,Elise_colour,INT nb);
-         class Col_Pal operator () (INT);
+         Lin1Col_Pal(Elise_colour,Elise_colour,int nb);
+         class Col_Pal operator () (int);
 };
 
 class  Gray_Pal : public Elise_Palette 
 {
      friend class  El_Window;
      public :
-         Gray_Pal(INT nb);
-         class Col_Pal operator () (INT);
+         Gray_Pal(int nb);
+         class Col_Pal operator () (int);
 	 private :
 		 Gray_Pal(Elise_Palette);
 };
@@ -209,11 +209,11 @@ class  BiCol_Pal : public Elise_Palette
                             Elise_colour c0,
                             Elise_colour c1,
                             Elise_colour c2,
-                            INT nb1,
-                            INT nb2
+                            int nb1,
+                            int nb2
                      );
 
-          class Col_Pal operator () (INT,INT);
+          class Col_Pal operator () (int,int);
 };
 
 
@@ -225,12 +225,12 @@ class  TriCol_Pal : public Elise_Palette
                             Elise_colour c1,
                             Elise_colour c2,
                             Elise_colour c3,
-                            INT nb1,
-                            INT nb2,
-                            INT nb3
+                            int nb1,
+                            int nb2,
+                            int nb3
                      );
 
-          class Col_Pal operator () (INT,INT,INT);
+          class Col_Pal operator () (int,int,int);
 };
 
 
@@ -238,9 +238,9 @@ class  RGB_Pal : public Elise_Palette
 {
        friend class El_Window;
        public :  
-           RGB_Pal (INT nb1, INT nb2, INT nb3);
+           RGB_Pal (int nb1, int nb2, int nb3);
 
-          class Col_Pal operator () (INT,INT,INT);
+          class Col_Pal operator () (int,int,int);
 
        private :
          RGB_Pal(Elise_Palette);
@@ -305,24 +305,24 @@ class Disc_Pal :  public Elise_Palette
                             bool reverse = false
                         );
 
-         Disc_Pal(Elise_colour *,INT nb);
+         Disc_Pal(Elise_colour *,int nb);
          void  getcolors(Elise_colour *);
          Elise_colour *  create_tab_c();  // allocated by NEW_VECTEUR
 
          // Just for compatiblity with my old clisp data
-         static  Disc_Pal    clisp_pal(INT nb);
+         static  Disc_Pal    clisp_pal(int nb);
 
          static  Disc_Pal    P8COL();
          static  Disc_Pal    PNCOL();
          static  Disc_Pal    PBIN();
-         static  Disc_Pal    PCirc(INT = 256); // Palette en teinte, 
-         class Col_Pal operator () (INT);
-         INT  nb_col();
+         static  Disc_Pal    PCirc(int = 256); // Palette en teinte, 
+         class Col_Pal operator () (int);
+         int  nb_col();
 
          class DEP_Discrete * depd() 
                {return SAFE_DYNC(class DEP_Discrete *,_ptr);}
 
-         Disc_Pal reduce_col(Im1D_INT4 lut,INT nb_cible);
+         Disc_Pal reduce_col(Im1D_int4 lut,int nb_cible);
 
       private :
          Disc_Pal();
@@ -336,12 +336,12 @@ class Circ_Pal : public Elise_Palette
 			friend class El_Window;
             Circ_Pal (   
                          L_El_Col,
-                         INT NB,
+                         int NB,
                          bool reverse = false
                      );
 
-           static Circ_Pal PCIRC6(INT NB);
-           class Col_Pal operator () (INT);
+           static Circ_Pal PCIRC6(int NB);
+           class Col_Pal operator () (int);
 	  private :
 		   Circ_Pal(Elise_Palette);
 };
@@ -356,7 +356,7 @@ class Elise_Set_Of_Palette : public PRC0
 
            L_El_Palette   lp() const;
            bool operator == (Elise_Set_Of_Palette) const;
-           INT  som_nb_col() const;
+           int  som_nb_col() const;
 
            void  pal_is_loaded(Elise_Palette) const;
            Elise_Palette pal_of_type(TYOFPAL::t) const;

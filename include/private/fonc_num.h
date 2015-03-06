@@ -66,9 +66,9 @@ class Fonc_Num_Computed : public Mcheck
       public :
            virtual const Pack_Of_Pts * values(const Pack_Of_Pts *) = 0;
 
-           virtual bool  icste( INT *); // in fact INT[ELise_Std_Max_Dim]
+           virtual bool  icste( int *); // in fact int[ELise_Std_Max_Dim]
 
-           inline INT  idim_out(void) const {return _dim_out;}
+           inline int  idim_out(void) const {return _dim_out;}
            inline Pack_Of_Pts::type_pack      type_out(void) const {return _type_out;}
 
 
@@ -77,9 +77,9 @@ class Fonc_Num_Computed : public Mcheck
  
       protected :          
 
-          Fonc_Num_Computed(const Arg_Fonc_Num_Comp &,INT dim_out,Pack_Of_Pts::type_pack type_out);
+          Fonc_Num_Computed(const Arg_Fonc_Num_Comp &,int dim_out,Pack_Of_Pts::type_pack type_out);
           
-          INT                                  _dim_out;
+          int                                  _dim_out;
           Pack_Of_Pts::type_pack               _type_out;
           Flux_Pts_Computed *                  _flux_of_comp;
 
@@ -109,9 +109,9 @@ class cElCompiledFonc
 	  typedef cElCompiledFonc * (* tAllocObj)();
 /*
           virtual void Compute(double *) = 0;
-          REAL Val()         const {return mVal;}
-          REAL Deriv(INT aK) const {return mDer[aK];}
-          INT  NbVar()       const {return mNbVar;}
+          double_t Val()         const {return mVal;}
+          double_t Deriv(int aK) const {return mDer[aK];}
+          int  NbVar()       const {return mNbVar;}
 */
 
 
@@ -129,20 +129,20 @@ class cElCompiledFonc
          void ComputeValAndSetIVC();
 
 // Debug, aucune verif sur init !! Dangereux hors debug
-         REAL ValBrute(INT aD)         const;
+         double_t ValBrute(int aD)         const;
 
-         REAL Val(INT aD)         const;
-         REAL Deriv(INT aD,INT aK) const;
-         REAL DerSec(INT aD,INT aK1,INT aK2) const;
+         double_t Val(int aD)         const;
+         double_t Deriv(int aD,int aK) const;
+         double_t DerSec(int aD,int aK1,int aK2) const;
 	 const std::vector<double> &   Vals() const;
 
         
 	 void SVD_And_AddEqSysSurResol
               (
                    bool isCstr,
-                   const std::vector<INT> & aVInd,
-                   REAL aPds,
-                   REAL *       Pts,
+                   const std::vector<int> & aVInd,
+                   double_t aPds,
+                   double_t *       Pts,
                    cGenSysSurResol & aSys,
                    cSetEqFormelles & aSet,
                    bool EnPtsCur
@@ -150,9 +150,9 @@ class cElCompiledFonc
 	 void SVD_And_AddEqSysSurResol
               (
                    bool isCstr,
-                   const std::vector<INT> & aVInd,
+                   const std::vector<int> & aVInd,
                    const std::vector<double> & aVPds,
-                   REAL *       Pts,
+                   double_t *       Pts,
                    cGenSysSurResol & aSys,
                    cSetEqFormelles & aSet,
                    bool EnPtsCur
@@ -163,8 +163,8 @@ class cElCompiledFonc
 	 void Std_AddEqSysSurResol
               (
                    bool   isCstr,
-                   REAL aPds,
-                   REAL *       Pts,
+                   double_t aPds,
+                   double_t *       Pts,
                    cGenSysSurResol & aSys,
                    cSetEqFormelles & aSet,
                    bool EnPtsCur
@@ -173,7 +173,7 @@ class cElCompiledFonc
               (
                    bool   isCstr,
                    const std::vector<double> & aVPds,
-                   REAL *       Pts,
+                   double_t *       Pts,
                    cGenSysSurResol & aSys,
                    cSetEqFormelles & aSet,
                    bool EnPtsCur
@@ -181,10 +181,10 @@ class cElCompiledFonc
 
 
 
-         void AddDevLimOrd1ToSysSurRes( cGenSysSurResol &,REAL aPds,bool EnPtsCur);
+         void AddDevLimOrd1ToSysSurRes( cGenSysSurResol &,double_t aPds,bool EnPtsCur);
          void AddContrainteToSysSurRes( cGenSysSurResol &,bool EnPtsCur);
          // Ordre 2, tjs en Pts Cur
-         void AddDevLimOrd2ToSysSurRes(L2SysSurResol &,REAL aPds);
+         void AddDevLimOrd2ToSysSurRes(L2SysSurResol &,double_t aPds);
 
 
          virtual ~cElCompiledFonc();
@@ -192,29 +192,29 @@ class cElCompiledFonc
          static cElCompiledFonc * DynamicAlloc(const cIncListInterv &  aListInterv,Fonc_Num);
 
 	 // Pour des foncteur dynamique de type Xk=Cste
-         static cElCompiledFonc * FoncSetVar(cSetEqFormelles *,INT Ind,bool GenCode=false);
+         static cElCompiledFonc * FoncSetVar(cSetEqFormelles *,int Ind,bool GenCode=false);
 	 static cElCompiledFonc *FoncSetValsEq
-		                 (cSetEqFormelles *,INT Ind1,INT Ind2,bool GenCode=false);
+		                 (cSetEqFormelles *,int Ind1,int Ind2,bool GenCode=false);
 
          static const std::string NameFoncSetVar;
          double * FoncSetVarAdr();
 	 
 	 // Pour des foncteur dynamique de type Sigma(ak,Xk)=Cste
          static const  std::string &  NameKthAffineVar(int aNB);
-         static cElCompiledFonc * FoncRappelAffine(cSetEqFormelles *,INT Ind0,INT NbInd);
+         static cElCompiledFonc * FoncRappelAffine(cSetEqFormelles *,int Ind0,int NbInd);
          double * FoncAffAdrCste();
-         double * FoncAffAdrKth(INT aK); // A partir de 0,
+         double * FoncAffAdrKth(int aK); // A partir de 0,
 
 
-         static cElCompiledFonc * FoncFixeNormEucl(cSetEqFormelles *,INT Ind0,INT NbInd,REAL Val,bool GenCode = false);
-         static cElCompiledFonc * FoncFixeNormEuclVect(cSetEqFormelles *,INT Ind0,INT Ind1,INT NbInd,REAL Val,bool GenCode = false);
-         static cElCompiledFonc * FoncFixedScal(cSetEqFormelles *,INT Ind0,INT Ind1,INT NbInd,REAL Val,bool GenCode = false);
+         static cElCompiledFonc * FoncFixeNormEucl(cSetEqFormelles *,int Ind0,int NbInd,double_t Val,bool GenCode = false);
+         static cElCompiledFonc * FoncFixeNormEuclVect(cSetEqFormelles *,int Ind0,int Ind1,int NbInd,double_t Val,bool GenCode = false);
+         static cElCompiledFonc * FoncFixedScal(cSetEqFormelles *,int Ind0,int Ind1,int NbInd,double_t Val,bool GenCode = false);
 
 
-	 void SetNormValFtcrFixedNormEuclid(REAL Val);
+	 void SetNormValFtcrFixedNormEuclid(double_t Val);
 
 	 static cElCompiledFonc * GenFoncVarsInd
-		         (cSetEqFormelles *,const std::string &aName,INT aNbVar,
+		         (cSetEqFormelles *,const std::string &aName,int aNbVar,
 			  std::vector<Fonc_Num> aFonc,bool Code2Gen);
 	 static cElCompiledFonc * RegulD1(cSetEqFormelles *,bool Code2Gen);
 	 static cElCompiledFonc * RegulD2(cSetEqFormelles *,bool Code2Gen);
@@ -234,13 +234,13 @@ class cElCompiledFonc
 
 
   
-         void AddContrainteEqSSR(bool Contr,REAL Pds, cGenSysSurResol &,bool EnPtsCur);
+         void AddContrainteEqSSR(bool Contr,double_t Pds, cGenSysSurResol &,bool EnPtsCur);
 	  friend class cAutoAddEntry;
 
 	  static void AddNewEntryAlloc(const std::string &,tAllocObj);
 	  static class cDico_Compiled * mDicoAlloc;
           
-          cElCompiledFonc(INT aDimOut);
+          cElCompiledFonc(int aDimOut);
           void AddIntRef(const cIncIntervale &);
           void Close(bool Dyn);
           void CloseIndexed();
@@ -255,7 +255,7 @@ class cElCompiledFonc
 
          virtual  void PostSetCoordCur();
 
-	  INT                     mDimOut;
+	  int                     mDimOut;
           bool                    isValComputed;
           bool                    isDerComputed;
           // bool                    isHessComputed;
@@ -263,10 +263,10 @@ class cElCompiledFonc
           bool                    isCurMappingSet;
 	  bool                    intMayOverlap;
 
-          INT                     mNbCompVar;
-          // INT                     mNbRealVar;
-          // INT                     mVarMaxComp;
-          //  INT                     mVarMaxReal;
+          int                     mNbCompVar;
+          // int                     mNbRealVar;
+          // int                     mVarMaxComp;
+          //  int                     mVarMaxReal;
 
       // Je pense que le mode mAlwaysIndexed devrait etre le mode
       // systematique, mais par compatibilite ...
@@ -274,16 +274,16 @@ class cElCompiledFonc
 
           std::vector<double>     mCompCoord;
           //  double *                mRealCoord;
-          std::vector<INT>        mMapComp2Real;
+          std::vector<int>        mMapComp2Real;
 	  std::vector<std::vector<double> >    mCompDer;
 	  // std::vector<std::vector<std::vector<double> > >   mCompHessian;
 
 	  // Utile pour AddSys
 	  // std::vector<std::vector<double> >    mRealDer;
-          // std::vector<INT>        mMapReal2Comp;
+          // std::vector<int>        mMapReal2Comp;
 
-          // std::vector<INT>       mListIndComp;
-          // std::vector<INT>       mListIndReal;
+          // std::vector<int>       mListIndComp;
+          // std::vector<int>       mListIndReal;
 
           // Pour assurer la suppression progressive de mListIndComp & co
           inline int LIC(const int &) const;
@@ -294,7 +294,7 @@ class cElCompiledFonc
          void SetNoInit();
 
          static cElCompiledFonc * FoncFixedNormScal
-                   (cSetEqFormelles * aSet,INT Ind0,INT Ind1,INT NbInd,REAL Val,bool Code2Gen,
+                   (cSetEqFormelles * aSet,int Ind0,int Ind1,int NbInd,double_t Val,bool Code2Gen,
                     cAllocNameFromInt & aNameAlloc,bool ModeNorm);
 
           cIncListInterv                   mMapRef;
@@ -310,11 +310,11 @@ class cElCompileFN
 
 	     cElCompileFN &  operator << (const std::string &);
 	     cElCompileFN &  operator << (const char *);
-	     cElCompileFN &  operator << (const INT &);
+	     cElCompileFN &  operator << (const int &);
 	     cElCompileFN &  operator << (const double &);
 	     cElCompileFN &  operator << (Fonc_Num &);
 
-	     void  PutVarNum(INT aK);
+	     void  PutVarNum(int aK);
 	     void  PutVarLoc(cVarSpec);
 
              static void DoEverything
@@ -360,7 +360,7 @@ class cElCompileFN
              void CloseFile();
 	     std::string  NameVarLoc(const std::string &);
              void MakeFileCpp(std::vector<Fonc_Num> );
-             void MakeFonc(std::vector<Fonc_Num> f,INT DegDeriv);
+             void MakeFonc(std::vector<Fonc_Num> f,int DegDeriv);
              void MakeFileH();
 
              cElCompileFN(const cElCompileFN &);      // Unimplemanted
@@ -370,7 +370,7 @@ class cElCompileFN
              FILE * mFile;
              cECFN_SetString * mNamesLoc;
 	     cDico_SymbFN   *  mDicSymb;
-             INT               mNVMax;
+             int               mNVMax;
 	     std::string       mNameVarNum;
              std::string       mPrefVarLoc;
 
@@ -388,24 +388,24 @@ class Fonc_Num_Not_Comp : public RC_Object
       public :
          virtual  Fonc_Num_Computed * compute(const Arg_Fonc_Num_Comp &) = 0;
          virtual bool integral_fonc(bool integral_flux) const = 0;
-         virtual INT dimf_out() const = 0;
+         virtual int dimf_out() const = 0;
 
          virtual bool  is0() const;
          virtual bool  is1() const;
-         virtual bool  IsCsteRealDim1(REAL &) const;
+         virtual bool  IsCsteRealDim1(double_t &) const;
 
 	 virtual void compile (cElCompileFN &);
-         virtual Fonc_Num deriv(INT k) const ;
+         virtual Fonc_Num deriv(int k) const ;
          virtual void  show(std::ostream &) const ;
-         virtual REAL  ValFonc(const  PtsKD &  pts) const ;
-         virtual REAL  ValDeriv(const  PtsKD &  pts,INT k) const ;
-	 virtual INT  NumCoord() const;
+         virtual double_t  ValFonc(const  PtsKD &  pts) const ;
+         virtual double_t  ValDeriv(const  PtsKD &  pts,int k) const ;
+	 virtual int  NumCoord() const;
          virtual void VarDerNN(ElGrowingSetInd &) const = 0;
-         virtual INT DegrePoly() const;
+         virtual int DegrePoly() const;
 
 
          virtual Fonc_Num::tKindOfExpr  KindOfExpr();
-         virtual INT CmpFormelIfSameKind(Fonc_Num_Not_Comp *);
+         virtual int CmpFormelIfSameKind(Fonc_Num_Not_Comp *);
 	 Fonc_Num_Not_Comp();
 	 ~Fonc_Num_Not_Comp();
 
@@ -423,8 +423,8 @@ class Op_Bin_Not_Comp : public Fonc_Num_Not_Comp
 {
       public :
          typedef double   (* TyVal)  (double,double);
-         typedef Fonc_Num (* TyDeriv)(Fonc_Num,Fonc_Num,INT k);
-         typedef double   (* TyValDeriv)(Fonc_Num,Fonc_Num,const  PtsKD &,INT k);
+         typedef Fonc_Num (* TyDeriv)(Fonc_Num,Fonc_Num,int k);
+         typedef double   (* TyValDeriv)(Fonc_Num,Fonc_Num,const  PtsKD &,int k);
 
          virtual  Fonc_Num_Computed * compute(const Arg_Fonc_Num_Comp &);
          virtual  Fonc_Num_Computed * op_bin_comp
@@ -442,10 +442,10 @@ class Op_Bin_Not_Comp : public Fonc_Num_Not_Comp
                 TyDeriv,
 		TyValDeriv
          );
-         virtual INT dimf_out() const;
+         virtual int dimf_out() const;
 	 virtual void compile (cElCompileFN &);
          virtual Fonc_Num::tKindOfExpr  KindOfExpr();
-         virtual INT CmpFormelIfSameKind(Fonc_Num_Not_Comp *);
+         virtual int CmpFormelIfSameKind(Fonc_Num_Not_Comp *);
 	 void  PutFoncPar
 	       (
 			Fonc_Num f,
@@ -465,10 +465,10 @@ class Op_Bin_Not_Comp : public Fonc_Num_Not_Comp
 		 TyValDeriv      mOpBinValDeriv;
 
          virtual void VarDerNN(ElGrowingSetInd &) const;
-         virtual Fonc_Num deriv(INT k) const ;
+         virtual Fonc_Num deriv(int k) const ;
 		 virtual void  show(std::ostream &) const ;
-         virtual REAL  ValFonc(const  PtsKD &  pts) const;
-		 REAL ValDeriv(const  PtsKD &  pts,INT k) const;
+         virtual double_t  ValFonc(const  PtsKD &  pts) const;
+		 double_t ValDeriv(const  PtsKD &  pts,int k) const;
 };
 
 
@@ -482,8 +482,8 @@ class Op_Un_Not_Comp : public Fonc_Num_Not_Comp
                                       ) = 0;
 
           typedef double   (* TyVal)  (double);
-          typedef Fonc_Num (* TyDeriv)(Fonc_Num,INT k);
-          typedef REAL (* TyValDeriv)(Fonc_Num,const  PtsKD &,INT k);
+          typedef Fonc_Num (* TyDeriv)(Fonc_Num,int k);
+          typedef double_t (* TyValDeriv)(Fonc_Num,const  PtsKD &,int k);
 
 
          Op_Un_Not_Comp(Fonc_Num,const char *,TyVal,TyDeriv,TyValDeriv);
@@ -495,15 +495,15 @@ class Op_Un_Not_Comp : public Fonc_Num_Not_Comp
          TyDeriv            _OpUnDeriv;
 		 TyValDeriv         mOpUnValDeriv;
 
-         virtual INT        dimf_out() const;
+         virtual int        dimf_out() const;
          virtual void VarDerNN(ElGrowingSetInd &) const;
-         virtual Fonc_Num deriv(INT k) const ;
+         virtual Fonc_Num deriv(int k) const ;
 		 virtual void  show(std::ostream &) const ;
-         virtual REAL  ValFonc(const  PtsKD &  pts) const;
-		 REAL ValDeriv(const  PtsKD &  pts,INT k) const;
+         virtual double_t  ValFonc(const  PtsKD &  pts) const;
+		 double_t ValDeriv(const  PtsKD &  pts,int k) const;
 	 virtual void compile (cElCompileFN &);
          virtual Fonc_Num::tKindOfExpr  KindOfExpr();
-         virtual INT CmpFormelIfSameKind(Fonc_Num_Not_Comp *);
+         virtual int CmpFormelIfSameKind(Fonc_Num_Not_Comp *);
 };
 
 
@@ -525,7 +525,7 @@ extern  Fonc_Num_Computed * convert_fonc_num
 
 
 /*
-    If one of the tf is REAL, all will be converted to REAL.
+    If one of the tf is double_t, all will be converted to double_t.
 */
 
 
@@ -534,7 +534,7 @@ extern Pack_Of_Pts::type_pack  convert_fonc_num_to_com_type
           const Arg_Fonc_Num_Comp & arg,
           Fonc_Num_Computed * * tf,
           Flux_Pts_Computed * flx,
-          INT nb
+          int nb
        );
 
 
@@ -542,11 +542,11 @@ extern  Fonc_Num_Computed * clip_fonc_num_def_val
         (       const Arg_Fonc_Num_Comp & arg,
                 Fonc_Num_Computed * f,
                 Flux_Pts_Computed * flux,
-                const INT * _p0,
-                const INT * _p1,
-                REAL        def_val,
-                REAL        rab_p0 = 0.0,
-                REAL        rab_p1 = 0.0,
+                const int * _p0,
+                const int * _p1,
+                double_t        def_val,
+                double_t        rab_p0 = 0.0,
+                double_t        rab_p1 = 0.0,
                 bool        flush_flx  = false
         );
 

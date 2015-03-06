@@ -10,7 +10,7 @@ class cParamIFDistPolynXY : public cParamIntrinsequeFormel
           virtual ~cParamIFDistPolynXY();
 
           cMultiContEQF      StdContraintes() ;
-          void SetFige(INT DegreMax);
+          void SetFige(int DegreMax);
 	   ElDistortionPolynomiale DistCur() const;
 
 	  friend class cSetEqFormelles;

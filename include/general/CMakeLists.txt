@@ -10,4 +10,6 @@ include_directories(
 	ptxd
 	window
 	garb_coll_pub
+	operator
+	util
 	)

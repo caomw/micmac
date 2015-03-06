@@ -294,8 +294,8 @@ Im2DGen AllocImGen(Pt2di aSz,const std::string & aName);
 #endif
 
 #if (ELISE_windows)
-    #ifdef INT
-        #undef INT
+    #ifdef int
+        #undef int
     #endif
     #ifndef NOMINMAX
         #define NOMINMAX
@@ -322,8 +322,8 @@ Im2DGen AllocImGen(Pt2di aSz,const std::string & aName);
     #include <process.h>
 #endif // _WIN32
 
-#ifndef INT
-    #define INT int
+#ifndef int
+    #define int int
 #endif
 
 #include "../src/uti_image/Ann/AnnSearcher.h"

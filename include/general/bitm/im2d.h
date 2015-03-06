@@ -7,7 +7,7 @@ template <class Type,class TyBase> class Im2D : public Im2DGen
 {
    public :
 
-      ElMatrix<REAL>  ToMatrix() const;
+      ElMatrix<double_t>  ToMatrix() const;
       typedef Type   tElem;
       typedef TyBase tBase;
       Fonc_Num FoncEtalDyn();
@@ -19,11 +19,11 @@ template <class Type,class TyBase> class Im2D : public Im2DGen
   /*
       Pt2di sz() const {return Pt2di(tx(),ty());}
       Box2di ImBox2d() const  {return Box2di(Pt2di(0,0),sz());}
-      Box2di ImBox2d(INT Brd) const {return Box2di(Pt2di(Brd,Brd),Pt2di(tx()-Brd,ty()-Brd));}
+      Box2di ImBox2d(int Brd) const {return Box2di(Pt2di(Brd,Brd),Pt2di(tx()-Brd,ty()-Brd));}
   */
 
-      INT     tx() const;
-      INT     ty() const;
+      int     tx() const;
+      int     ty() const;
       virtual void TronqueAndSet(const Pt2di &,double aVal);
 
       virtual cIm2DInter * BilinIm() ;
@@ -41,21 +41,21 @@ template <class Type,class TyBase> class Im2D : public Im2DGen
                                (const std::string &,Pt2di aSz,Fonc_Num);
 
       Im2D(); //  !! Dangereux, mais necessaire vs xml generation
-      Im2D(INT tx, INT ty);
-      Im2D(INT tx, INT ty,TyBase v_init);
-      Im2D(INT tx, INT ty,const char * v_inits);
-      Im2D(Type*,Type**,INT tx, INT ty,INT tx_phys =-1);
+      Im2D(int tx, int ty);
+      Im2D(int tx, int ty,TyBase v_init);
+      Im2D(int tx, int ty,const char * v_inits);
+      Im2D(Type*,Type**,int tx, int ty,int tx_phys =-1);
 
-      Im2D(Im2D_NoDataLin,INT tx, INT ty);
+      Im2D(Im2D_NoDataLin,int tx, int ty);
 
 
-      Fonc_Num ImGridReech(Fonc_Num aFX,Fonc_Num aFY,INT szGr,REAL def);
-      Fonc_Num ImGridReech(Fonc_Num aFX,Fonc_Num aFY,INT szGr,Pt2di aP0,Pt2di aP1,REAL def);
+      Fonc_Num ImGridReech(Fonc_Num aFX,Fonc_Num aFY,int szGr,double_t def);
+      Fonc_Num ImGridReech(Fonc_Num aFX,Fonc_Num aFY,int szGr,Pt2di aP0,Pt2di aP1,double_t def);
 
       void PutData(FILE * aFP,const Pt2di & anI,bool aModeBin) const;
       void SetI(const Pt2di & ,int aValI) ;
       void SetR(const Pt2di & ,double aValR) ;
-      INT     GetI(const Pt2di &) const ;
+      int     GetI(const Pt2di &) const ;
       double  GetR(const Pt2di &) const ;
       Im2DGen  *ImOfSameType(const Pt2di & aSz) const;
       Im2DGen * ImRotate(int aRot ) const;
@@ -63,19 +63,19 @@ template <class Type,class TyBase> class Im2D : public Im2DGen
       Type **   data() const;
       Type *    data_lin();
       const Type *    data_lin() const;
-      INT  vmax() const;
-      INT  vmin() const;
+      int  vmax() const;
+      int  vmin() const;
       double  MoyG2() const ;
       virtual  GenIm::type_el TypeEl() const ;
       void raz();
       void dup (Im2D<Type,TyBase> to_dup);
       Im2D<Type,TyBase> dup ();
-      REAL  som_rect();
-      REAL  som_rect(Pt2dr p0,Pt2dr p1,REAL def=0.0);
-      REAL  moy_rect(Pt2dr p0,Pt2dr p1,REAL def=0.0);
+      double_t  som_rect();
+      double_t  som_rect(Pt2dr p0,Pt2dr p1,double_t def=0.0);
+      double_t  moy_rect(Pt2dr p0,Pt2dr p1,double_t def=0.0);
       Im2D<Type,TyBase>  ToSom1();
 
-          Im2D<Type,TyBase> Reech(REAL aZoom);
+          Im2D<Type,TyBase> Reech(double_t aZoom);
 
 
 
@@ -83,15 +83,15 @@ template <class Type,class TyBase> class Im2D : public Im2DGen
       void auto_translate(Pt2di);
       void raz(Pt2di p0,Pt2di p1);
 
-          void SetLine(INT x0,INT y,INT nb,INT val);
+          void SetLine(int x0,int y,int nb,int val);
 
       Seg2d   OptimizeSegTournantSomIm
               (
-                    REAL &                 score,
+                    double_t &                 score,
                     Seg2d                  seg,
-                    INT                    NbPts,
-                    REAL                   step_init,
-                    REAL                   step_limite,
+                    int                    NbPts,
+                    double_t                   step_init,
+                    double_t                   step_limite,
                     bool                   optim_absc  = true,
                     bool                   optim_teta  = true,
                     bool  *                FreelyOpt = 0
@@ -108,7 +108,7 @@ template <class Type,class TyBase> class Im2D : public Im2DGen
           // ils ne sont pas au courant du changement)
           void Resize(Pt2di aSz);
 
-          Im2D<Type,TyBase> gray_im_red(INT zoom);
+          Im2D<Type,TyBase> gray_im_red(int zoom);
 
       void MulVect(Im1D<Type,TyBase> aRes,Im1D<Type,TyBase> aMat);
 

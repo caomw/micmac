@@ -7,9 +7,9 @@ class ElQTRegSeg : public ElQTRegionPlan
 {
       public :
 
-         virtual REAL D2(const Box2dr &)  const ;
-         virtual REAL D2(const Pt2dr & )  const ;
-         virtual REAL D2(const SegComp &)  const;
+         virtual double_t D2(const Box2dr &)  const ;
+         virtual double_t D2(const Pt2dr & )  const ;
+         virtual double_t D2(const SegComp &)  const;
 
          ElQTRegSeg (Seg2d);
      virtual ~ElQTRegSeg() {}

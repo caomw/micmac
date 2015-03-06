@@ -131,8 +131,8 @@ template <class T> class cDynTplNappe3D
           typedef  T **             tPtrPtrT;
           cDynTplNappe3D
           (
-               Im2D_INT2       aImZMin,
-               Im2D_INT2       aImZMax,
+               Im2D_int2       aImZMin,
+               Im2D_int2       aImZMax,
                int             aRab,
                int             aMul
           )   :
@@ -161,19 +161,19 @@ template <class T> class cDynTplNappe3D
           }
  
           T*** Data() {return mData;}
-          Im2D_INT2 IZMin(){return mImZMin;}
-          Im2D_INT2 IZMax(){return mImZMax;}
-          INT2 ** ZMin() {return mZMin;}
-          INT2 ** ZMax() {return mZMax;}
+          Im2D_int2 IZMin(){return mImZMin;}
+          Im2D_int2 IZMax(){return mImZMax;}
+          int2 ** ZMin() {return mZMin;}
+          int2 ** ZMax() {return mZMax;}
 
     private :
           cDynTplNappe3D(const cDynTplNappe3D<T> &) ; // N.I.
 
           Pt2di                 mSz;
-          Im2D_INT2             mImZMin;
-          TIm2D<INT2,INT>       mTZMin;
-          Im2D_INT2             mImZMax;
-          TIm2D<INT2,INT>       mTZMax;
+          Im2D_int2             mImZMin;
+          TIm2D<int2,int>       mTZMin;
+          Im2D_int2             mImZMax;
+          TIm2D<int2,int>       mTZMax;
           signed short **       mZMin;
           signed short **       mZMax;
           int                   mRab;
@@ -192,7 +192,7 @@ template <class Type> class cNappeSizeUndef
          // void InitParcour();
          bool next(Pt2di &,int & I0,int & I1);
 
-         Im2D_INT2       Cpt()            {return mCpt;}
+         Im2D_int2       Cpt()            {return mCpt;}
          const std::vector<Type> & Objs() {return mObjs;}
          void PushCur(const std::vector<Type> &);
 
@@ -207,8 +207,8 @@ template <class Type> class cNappeSizeUndef
          Box2di            mBox;
          Pt2di             mSz;
          std::vector<Type> mObjs;
-         Im2D_INT2         mCpt;
-         TIm2D<INT2,INT>   mTCpt;
+         Im2D_int2         mCpt;
+         TIm2D<int2,int>   mTCpt;
          TFlux_Rect2d      mFlux;
          Pt2di             mPCur;
          int               mICur;

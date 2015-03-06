@@ -30,9 +30,9 @@ class cSetEqFormelles : public cNameSpaceEqF
 
               cGenSysSurResol * Sys();
 	      cFormQuadCreuse*  FQC();  // Evtlt 0
-              cEqFormelleLineaire * NewEqLin(INT aNInc,INT aNbVt,bool GenCode = false);
-              cEqCorrelGrid * NewEqCorrelGrid(INT aNbPix, bool Im2MoyVar, bool GenCode = false);
-	      cEqCorrelGrid * ReuseEqCorrelGrid(INT aNbPix, bool Im2MoyVar);
+              cEqFormelleLineaire * NewEqLin(int aNInc,int aNbVt,bool GenCode = false);
+              cEqCorrelGrid * NewEqCorrelGrid(int aNbPix, bool Im2MoyVar, bool GenCode = false);
+	      cEqCorrelGrid * ReuseEqCorrelGrid(int aNbPix, bool Im2MoyVar);
 
 
               // Valeur par defaut, correspondant ancienne
@@ -42,12 +42,12 @@ class cSetEqFormelles : public cNameSpaceEqF
               //
               cTriangulFormelle * NewTriangulFormelle
                                  ( int aDim,
-				   const std::list<Pt2dr> &,REAL Dmax,
+				   const std::list<Pt2dr> &,double_t Dmax,
                                   ElDistortion22_Gen * PosInit= 0
                                   );
               cTriangulFormelle * NewTriangulFormelle
                                   ( int aDim,
-				    Box2dr aBox,INT aNb,REAL Dmax,
+				    Box2dr aBox,int aNb,double_t Dmax,
                                     ElDistortion22_Gen * PosInit= 0
                                   );
               cTriangulFormelle * NewTriangulFormelleUnitaire(int aDim);
@@ -118,7 +118,7 @@ class cSetEqFormelles : public cNameSpaceEqF
               cRotationFormelle * NewRotationEvol
                                   (
                                         ElRotation3D aRC2MInit,
-                                        INT aDegre,
+                                        int aDegre,
                                         const std::string & aName = ""
                                   );
 
@@ -147,8 +147,8 @@ class cSetEqFormelles : public cNameSpaceEqF
                 cEqEllipseImage * NewEqElIm
                 (
 	           const cMirePolygonEtal &,
-                   Pt2dr aCentre, REAL  anA, REAL  aB, REAL  aC,
-                   REAL  aLarg, REAL  aBlanc, REAL  aNoir,
+                   Pt2dr aCentre, double_t  anA, double_t  aB, double_t  aC,
+                   double_t  aLarg, double_t  aBlanc, double_t  aNoir,
 		   bool  Code2Gen = false
                 );
                 cAppuiGridEq * NewEqAppuiGrid
@@ -199,8 +199,8 @@ class cSetEqFormelles : public cNameSpaceEqF
 
 		cLIParam_Image *  NewLIParamImage
                                  (
-                                    Im2D_REAL4 anIm,
-                                    REAL  aZoom,
+                                    Im2D_double_t4 anIm,
+                                    double_t  aZoom,
                                     CamStenope & aCam,
                                     cNameSpaceEqF::eModeContrRot
                                  );
@@ -208,7 +208,7 @@ class cSetEqFormelles : public cNameSpaceEqF
                                    ( cRotationFormelle * aRotPts,
 			             bool Multi,
 			             bool Normalize,
-				     INT aNbPts,
+				     int aNbPts,
 				     cLIParam_Image &,cLIParam_Image &,
 				     bool GenCode = false);
 	               
@@ -241,46 +241,46 @@ class cSetEqFormelles : public cNameSpaceEqF
 	  // VAddEqFonctToSys est la plus utile,
 	  // AddEqFonctToSys est connservee pour compatibilite
 
-	  const std::vector<REAL> & VAddEqFonctToSys
+	  const std::vector<double_t> & VAddEqFonctToSys
                (
                   cElCompiledFonc * aFonct,
                   const std::vector<double> & aVPds,
                   bool WithDerSec
                );
-	  const std::vector<REAL> & VAddEqFonctToSys
+	  const std::vector<double_t> & VAddEqFonctToSys
                (
                   cElCompiledFonc * aFonct,
-                  REAL aPds,
+                  double_t aPds,
                   bool WithDerSec
                );
 
 
 
-          REAL AddEqFonctToSys
+          double_t AddEqFonctToSys
                (
                   cElCompiledFonc * aFonct,
-                  REAL aPds,
+                  double_t aPds,
                   bool WithDerSec
                );
 
-	   const std::vector<REAL> & AddEqIndexeToSys
+	   const std::vector<double_t> & AddEqIndexeToSys
 		                     (  
                                          cElCompiledFonc * aFonct,
-                                         REAL aPds,const std::vector<INT>  & VIncs
+                                         double_t aPds,const std::vector<int>  & VIncs
 				     );
 	  
-          REAL ResiduSigne ( cElCompiledFonc * aFonct);
-	  const std::vector<REAL> & VResiduSigne ( cElCompiledFonc * aFonct);
+          double_t ResiduSigne ( cElCompiledFonc * aFonct);
+	  const std::vector<double_t> & VResiduSigne ( cElCompiledFonc * aFonct);
 
 
-          REAL AddEqFonctToSys
+          double_t AddEqFonctToSys
                (
                   const tContFcteur &,
-                  REAL aPds,
+                  double_t aPds,
                   bool WithDerSec
                );
 
-          void Reinit(INT k0,INT k1);
+          void Reinit(int k0,int k1);
           void AddElem(cElemEqFormelle & anEq);
           void  AddObj2Kill(cObjFormel2Destroy *);
 
@@ -298,12 +298,12 @@ class cSetEqFormelles : public cNameSpaceEqF
           int   Alloc2Solve(const int aK){return mMOI.Alloc2Solve()[aK];}
           void TestPbFaisceau(bool doCheck,bool doSVD,bool doV0);
         private :
-           Im1D_REAL8 ReordonneSol(Im1D_REAL8 aIm);
+           Im1D_double_t8 ReordonneSol(Im1D_double_t8 aIm);
            void NumeroteBloc();
 
 
            cEqCorrelGrid * NewEqCorrelGridGen
-		              (INT aNbPix, bool Im2MoyVar, bool GenCode,bool Reuse);
+		              (int aNbPix, bool Im2MoyVar, bool GenCode,bool Reuse);
 	  friend class cParamIntrinsequeFormel;  // pour AddCamFormelle
           void  AddCamFormelle(cCameraFormelle  *,const std::string &);
 
@@ -312,7 +312,7 @@ class cSetEqFormelles : public cNameSpaceEqF
           void UpdateFctr();
           AllocateurDInconnues  & mAlloc;
           tContFcteur             mLFoncteurs;
-          INT                     mNbVar;
+          int                     mNbVar;
           // L2SysSurResol *      mSys;
           cGenSysSurResol *       mSys;
 	  cFormQuadCreuse*        mFQC;
@@ -333,7 +333,7 @@ class cSetEqFormelles : public cNameSpaceEqF
 		                        ElRotation3D aRC2MInit,
                                         cRotationFormelle *  , // Rot Attach
 		                        const std::string & aName ,
-                                        INT   aDegre,
+                                        int   aDegre,
                                         bool aVraiBaseU
                                );
 
@@ -353,8 +353,8 @@ class cSetEqFormelles : public cNameSpaceEqF
           // std::vector<int>              mAlloc2Solve;
           // std::vector<int>              mSolve2Alloc;
           cManipOrdInc                  mMOI;
-          Im1D_REAL8                    mSolQuad;
-          Im1D_REAL8                    mCurSol;
+          Im1D_double_t8                    mSolQuad;
+          Im1D_double_t8                    mCurSol;
 
 
           cSetEqFormelles(const cSetEqFormelles &); // N.I.

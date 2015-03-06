@@ -60,8 +60,8 @@ template <class AttrSom,class AttrArc,class QtArc>
                     ElSom<AttrSom,AttrArc> *       s2,
                     ElSubGraphe<AttrSom,AttrArc> & sgr,
                     QtArc                        & qt,
-                    REAL    epsilon = 0.0,
-                    REAL    ang		= Tpl_OkTopoDefAngle
+                    double_t    epsilon = 0.0,
+                    double_t    ang		= Tpl_OkTopoDefAngle
                )
 {
     if (s1==s2) return false;

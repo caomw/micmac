@@ -65,21 +65,21 @@ extern void               write_cadastre_txt(ElList<Facette_2d>& f_cad, char* na
 extern void               write_cadastre_txt(ElList<Facette_2d>& f_cad, char* name);
 
 
-extern Facette_2d         carte_to_terrain(Facette_2d f, Ori3D_Std ori, REAL z = 0);
+extern Facette_2d         carte_to_terrain(Facette_2d f, Ori3D_Std ori, double_t z = 0);
 extern Facette_3d         carte_to_terrain(Facette_3d f, Ori3D_Std ori);
-extern ElList<Facette_2d> carte_to_terrain(ElList<Facette_2d> lf, Ori3D_Std  ori, REAL z = 0);
-extern ElList<Facette_2d> carte_to_terrain(ElList<Facette_2d> lf, char* ori_name, REAL z = 0);
-extern void               carte_to_terrain(ElFilo<Facette_2d>& lf, Ori3D_Std  ori, REAL z = 0);
-extern void               carte_to_terrain(ElFilo<Facette_2d>& lf, char* ori_name, REAL z = 0);
+extern ElList<Facette_2d> carte_to_terrain(ElList<Facette_2d> lf, Ori3D_Std  ori, double_t z = 0);
+extern ElList<Facette_2d> carte_to_terrain(ElList<Facette_2d> lf, char* ori_name, double_t z = 0);
+extern void               carte_to_terrain(ElFilo<Facette_2d>& lf, Ori3D_Std  ori, double_t z = 0);
+extern void               carte_to_terrain(ElFilo<Facette_2d>& lf, char* ori_name, double_t z = 0);
 extern void               carte_to_terrain(ElFilo<Facette_3d>& lf, Ori3D_Std ori);
 extern void               carte_to_terrain(ElFilo<Facette_3d>& lf, char* ori_name);
 
-extern Facette_2d         terrain_to_carte(Facette_2d f, Ori3D_Std ori, REAL z = 0);
+extern Facette_2d         terrain_to_carte(Facette_2d f, Ori3D_Std ori, double_t z = 0);
 extern Facette_3d         terrain_to_carte(Facette_3d f, Ori3D_Std ori);
-extern ElList<Facette_2d> terrain_to_carte(ElList<Facette_2d> lf, Ori3D_Std ori, REAL z = 0);
-extern ElList<Facette_2d> terrain_to_carte(ElList<Facette_2d> lf, char* ori_name, REAL z = 0);
-extern void               terrain_to_carte(ElFilo<Facette_2d>& lf, Ori3D_Std ori, REAL z = 0);
-extern void               terrain_to_carte(ElFilo<Facette_2d>& lf, char* ori_name, REAL z = 0);
+extern ElList<Facette_2d> terrain_to_carte(ElList<Facette_2d> lf, Ori3D_Std ori, double_t z = 0);
+extern ElList<Facette_2d> terrain_to_carte(ElList<Facette_2d> lf, char* ori_name, double_t z = 0);
+extern void               terrain_to_carte(ElFilo<Facette_2d>& lf, Ori3D_Std ori, double_t z = 0);
+extern void               terrain_to_carte(ElFilo<Facette_2d>& lf, char* ori_name, double_t z = 0);
 extern void               terrain_to_carte(ElFilo<Facette_3d>& lf, Ori3D_Std ori);
 extern void               terrain_to_carte(ElFilo<Facette_3d>& lf, char* ori_name);
 

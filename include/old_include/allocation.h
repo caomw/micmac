@@ -59,7 +59,7 @@ private :
     void operator delete [] (void * ptr) ;
 };
 
-    template <const INT NBB> class  ElListAlloc
+    template <const int NBB> class  ElListAlloc
     {
         public :
         void * get()

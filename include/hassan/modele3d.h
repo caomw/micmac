@@ -52,7 +52,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 //-------------------------- Definitions structures -------------------
 
-typedef INT ADRESSE;
+typedef int ADRESSE;
 typedef ADRESSE *P_ADRESSE;	
 
 	/*--------------------------*/
@@ -170,9 +170,9 @@ class Face {
   ADRESSE num_face;  
   
   // a mettre dans infoFaces
-  INT type_face;			// type de face
-  INT matiere_face;  		// matiere de face
-  INT code_face;			// code de face
+  int type_face;			// type de face
+  int matiere_face;  		// matiere de face
+  int code_face;			// code de face
   
   // a mettre dans normales face
   BOOLEAN existe_norm;	// boolen qui indique si la surface est orientee
@@ -300,13 +300,13 @@ class Objet3D {
 
  public:
 	
-  INT num_objet;      	 	  // numero d'identification de l'objet
-  INT num_sous_objet;			// numero d'identification de sous-objet
-  INT num_ilot_objet;			// numero d'identification de l'ilot
-  INT existence;				// etat physique-semantique de l'objet
-  INT num_groupe;				
-  INT type_objet;				
-  INT classe_objet;			
+  int num_objet;      	 	  // numero d'identification de l'objet
+  int num_sous_objet;			// numero d'identification de sous-objet
+  int num_ilot_objet;			// numero d'identification de l'ilot
+  int existence;				// etat physique-semantique de l'objet
+  int num_groupe;				
+  int type_objet;				
+  int classe_objet;			
   BOOLEAN is_facette;
   BOOLEAN is_graphe;	
 
@@ -338,17 +338,17 @@ class Modele3D {
 
   Orientation orientation;
 
-  INT nb_sommets;		   		
-  INT nb_aretes;		   		
-  INT nb_triangles;			
-  INT nb_faces;			  
-  INT nb_objets;		
+  int nb_sommets;		   		
+  int nb_aretes;		   		
+  int nb_triangles;			
+  int nb_faces;			  
+  int nb_objets;		
 
   Box3D box;	  										
   TPileBase < Objet3D > *objet;	  					
   
-  TPileBase < INT > *infoSommetType;						
-  INT flagSommetType;
+  TPileBase < int > *infoSommetType;						
+  int flagSommetType;
   TPileBase < Sommet3D > *sommet;						
   TPileBase < TPoint3D < double > > *xyz;						
   TPileBase < TPoint2D < double > > *xy;

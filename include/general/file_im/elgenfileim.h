@@ -59,9 +59,9 @@ public :
 
     // caracteristique logique :
 
-    INT              Dim()       const;
+    int              Dim()       const;
     const int *      Sz()        const;
-    INT              NbChannel() const;
+    int              NbChannel() const;
     Pt2di 			Sz2() const;  // Error if Dim != 1
 
 
@@ -79,7 +79,7 @@ public :
     bool       Compressed() const;
 
     Fonc_Num in();
-    Fonc_Num in(REAL val);
+    Fonc_Num in(double_t val);
     Output   out();
 
 

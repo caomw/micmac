@@ -40,69 +40,69 @@ Header-MicMac-eLiSe-25/06/2007*/
 #define    _HASSAN_FILTRAGE_H
 
 
-void             up_date_facettes(   ElFilo<Facette_3d>& f_f, U_INT1* et_f);
+void             up_date_facettes(   ElFilo<Facette_3d>& f_f, U_int1* et_f);
 
-void             filtrer_plan_selon_mne(   ElFilo<Hplan>& lp, Boite&b_c, Facette_3d f, REAL z_min, REAL z_max);
-
-
-void             transforme_plan_facettes(  Hplan& plan, ElFilo<Facette_3d>& f_f, Facette_2d f, REAL z_min, REAL z_max);
-void             transforme_plans_facettes(  ElFilo<Hplan>& lp, ElFilo<Facette_3d>& f_f, Facette_2d f, REAL z_min, REAL z_max);
+void             filtrer_plan_selon_mne(   ElFilo<Hplan>& lp, Boite&b_c, Facette_3d f, double_t z_min, double_t z_max);
 
 
-void             intersection_plans(  ElFilo<Hplan>& lp, Boite& b_c, ElFilo<Facette_3d>& f_f, Facette_2d f, REAL z_min, REAL z_max);
+void             transforme_plan_facettes(  Hplan& plan, ElFilo<Facette_3d>& f_f, Facette_2d f, double_t z_min, double_t z_max);
+void             transforme_plans_facettes(  ElFilo<Hplan>& lp, ElFilo<Facette_3d>& f_f, Facette_2d f, double_t z_min, double_t z_max);
+
+
+void             intersection_plans(  ElFilo<Hplan>& lp, Boite& b_c, ElFilo<Facette_3d>& f_f, Facette_2d f, double_t z_min, double_t z_max);
 
 
 void             intersection_elegation_facettes(  ElFilo<Facette_3d>& f_f );
-void             intersection_facettes(  ElFilo<Facette_3d>& f_f, ElFilo<Facette_3d>& f_sortie, INT n_facet);
+void             intersection_facettes(  ElFilo<Facette_3d>& f_f, ElFilo<Facette_3d>& f_sortie, int n_facet);
 
-void             filtrer_plan_inf_sup(  ElFilo<Facette_3d>& f_f, Im1D_U_INT1 im_et_f, REAL z_min, REAL z_max);
-void             filtrer_plan_inf_sup(  ElFilo<Facette_3d>& f_f, REAL z_min, REAL z_max);
+void             filtrer_plan_inf_sup(  ElFilo<Facette_3d>& f_f, Im1D_U_int1 im_et_f, double_t z_min, double_t z_max);
+void             filtrer_plan_inf_sup(  ElFilo<Facette_3d>& f_f, double_t z_min, double_t z_max);
 
-void             filtrer_selon_le_mne(  ElFilo<Facette_3d>& f_f, Im1D_U_INT1 im_et_f, Boite& b_c, INT pourcentage = 5);
-void             filtrer_selon_le_mne(  ElFilo<Facette_3d>& f_f, Boite& b_c, INT pourcentage);
-void             filtrage_meil(  ElFilo<Facette_3d>& f_f, Boite& b_c, INT nb_max);
+void             filtrer_selon_le_mne(  ElFilo<Facette_3d>& f_f, Im1D_U_int1 im_et_f, Boite& b_c, int pourcentage = 5);
+void             filtrer_selon_le_mne(  ElFilo<Facette_3d>& f_f, Boite& b_c, int pourcentage);
+void             filtrage_meil(  ElFilo<Facette_3d>& f_f, Boite& b_c, int nb_max);
 
-void             arrange_selon_le_mne(  ElFilo<Facette_3d>& f_f, ElFilo<INT>& indice, Boite& b_c);
+void             arrange_selon_le_mne(  ElFilo<Facette_3d>& f_f, ElFilo<int>& indice, Boite& b_c);
 
-void             coef_mne(  Boite& b_c, Boite& b_mne, REAL par1 = 0, REAL par2 = 0, REAL alpha = .75);
-void             coef_mne(  ElFilo<Facette_3d>& f_f, Boite& b_c, Boite& b_mne, REAL par1 = 0, REAL par2 = 0, REAL alpha = .75 );
+void             coef_mne(  Boite& b_c, Boite& b_mne, double_t par1 = 0, double_t par2 = 0, double_t alpha = .75);
+void             coef_mne(  ElFilo<Facette_3d>& f_f, Boite& b_c, Boite& b_mne, double_t par1 = 0, double_t par2 = 0, double_t alpha = .75 );
 void             coef_mne(  ElFilo<Facette_3d>& f_f, Boite& b_c, Mne& mne );
 void             recherche_mne(  ElFilo<Facette_3d>& f_f, Boite& b_c);
 void             recherche_mne_prog_dyn(  ElFilo<Facette_3d>& f_f, Boite& b_c);
 
-void             filtrer_facettes_sup_inf_mne(  ElFilo<Facette_3d>& f_f, U_INT1* et_f, Boite& b_c);
+void             filtrer_facettes_sup_inf_mne(  ElFilo<Facette_3d>& f_f, U_int1* et_f, Boite& b_c);
 
-void             meilleurs_n_plans( ElFilo<Hplan>& pl_f, ElFilo<REAL8>& a_pl_f, INT n);
+void             meilleurs_n_plans( ElFilo<Hplan>& pl_f, ElFilo<double_t8>& a_pl_f, int n);
 
 void             enlever_plans_horisontaux_mult( ElFilo<Hplan>& pl_f);
 
-void             affiche_facettes( ElFilo<Facette_3d>& f_f, U_INT1* et_f, ElList<Facette_3d> l_facades, Video_Win W );
+void             affiche_facettes( ElFilo<Facette_3d>& f_f, U_int1* et_f, ElList<Facette_3d> l_facades, Video_Win W );
 void             affiche_facettes( ElFilo<Facette_3d>& f_f, ElList<Facette_3d> l_facades, Video_Win W );
 
 
-Liste_Pts_INT2   intersection_facette_mne( Facette_3d f, Im2D_U_INT1 mne, Im2D_U_INT1 masq, INT decal = 0);
-Im2D_U_INT1      image_intersection_facette_mne( Facette_3d f, Im2D_U_INT1 mne, Im2D_U_INT1 masq, INT decal = 0);
-Im2D_U_INT1      image_intersection_facette_mne( Facette_3d f, Boite& b, Im2D_U_INT1 masq, INT decal = 0);
+Liste_Pts_int2   intersection_facette_mne( Facette_3d f, Im2D_U_int1 mne, Im2D_U_int1 masq, int decal = 0);
+Im2D_U_int1      image_intersection_facette_mne( Facette_3d f, Im2D_U_int1 mne, Im2D_U_int1 masq, int decal = 0);
+Im2D_U_int1      image_intersection_facette_mne( Facette_3d f, Boite& b, Im2D_U_int1 masq, int decal = 0);
 
-void             affiche_image_intersection_facette_mne( Facette_3d f, Boite& b, Im2D_U_INT1 masq, Video_Win W, INT max_palet, INT decal = 0, INT test_stab = 0);
+void             affiche_image_intersection_facette_mne( Facette_3d f, Boite& b, Im2D_U_int1 masq, Video_Win W, int max_palet, int decal = 0, int test_stab = 0);
 
-REAL             poids_facette_coef(Facette_3d f, H_WcorVis Wa, H_WcorVis Wb, Pt3dr pas, INT cor_fnt, INT sdng);
-REAL             poids_facette_mne( Facette_3d f, Im2D_U_INT1 mne, Im2D_U_INT1 masq, INT decal = 0 , INT test_stab = 0);
-REAL             poids_segment_mne( Pt3dr p0, Pt3dr p1, Im2D_U_INT1 mne, INT decal = 0);
+double_t             poids_facette_coef(Facette_3d f, H_WcorVis Wa, H_WcorVis Wb, Pt3dr pas, int cor_fnt, int sdng);
+double_t             poids_facette_mne( Facette_3d f, Im2D_U_int1 mne, Im2D_U_int1 masq, int decal = 0 , int test_stab = 0);
+double_t             poids_segment_mne( Pt3dr p0, Pt3dr p1, Im2D_U_int1 mne, int decal = 0);
 
-REAL             filtrage_morpho(ElFilo<Facette_3d>& f_f, Boite& b_mne, Im2D_U_INT1 masq, INT seuil, INT decal = 0, INT test_stab = 0);
-REAL             filtrage_morpho(ElFilo<Facette_3d>& f_f, Boite& b_cor, INT seuil, INT decal = 0, INT test_stab = 0);
+double_t             filtrage_morpho(ElFilo<Facette_3d>& f_f, Boite& b_mne, Im2D_U_int1 masq, int seuil, int decal = 0, int test_stab = 0);
+double_t             filtrage_morpho(ElFilo<Facette_3d>& f_f, Boite& b_cor, int seuil, int decal = 0, int test_stab = 0);
 
-void             filtrage_normale(ElFilo<Hplan>& f_f,      ElFilo<REAL>& poids, REAL angl_min = 25, REAL dist = 1);  //degree
-void             filtrage_normale(ElFilo<Facette_3d>& f_f, ElFilo<REAL>& poids, REAL angl_min = 25, REAL dist = 1);  //degree et metre
+void             filtrage_normale(ElFilo<Hplan>& f_f,      ElFilo<double_t>& poids, double_t angl_min = 25, double_t dist = 1);  //degree
+void             filtrage_normale(ElFilo<Facette_3d>& f_f, ElFilo<double_t>& poids, double_t angl_min = 25, double_t dist = 1);  //degree et metre
 
 
 //   Fonctions modifiees par F.Taillandier
 
 #include <map>
-void             transforme_plans_facettes(ElFilo<Hplan> & lp, ElFilo <Hplan> & facades, ElFilo<Facette_3d>& f_f, Facette_3d &f, REAL z_min, REAL z_max);
+void             transforme_plans_facettes(ElFilo<Hplan> & lp, ElFilo <Hplan> & facades, ElFilo<Facette_3d>& f_f, Facette_3d &f, double_t z_min, double_t z_max);
 
-void             intersection_facettes(  ElFilo<Facette_3d>& f_f, INT plan_virtuel=-10);
+void             intersection_facettes(  ElFilo<Facette_3d>& f_f, int plan_virtuel=-10);
 
 #endif   //_HASSAN_FILTRAGE_H
 

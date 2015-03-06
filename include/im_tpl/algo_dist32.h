@@ -45,7 +45,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 template  <class Type,class Type_Base>
           void TIm2D<Type,Type_Base>::algo_dist_env_Klisp_Sup(int aD4,int aD8)
 {
-    INT x,y;
+    int x,y;
     for ( y =1 ; y<_ty-1 ; y++)
         for ( x =1 ; x<_tx-1 ; x++)
         {
@@ -81,7 +81,7 @@ template  <class Type,class Type_Base> class Border_algo_dist_32_neg
        Pt2di                    _p0;
        Pt2di                    _p1;
 
-       INT safe_get(Pt2di p)
+       int safe_get(Pt2di p)
        {
            return p.in_box(_p0,_p1) ?
                   _im.get(p)        :
@@ -90,12 +90,12 @@ template  <class Type,class Type_Base> class Border_algo_dist_32_neg
 
     public :
        
-       typedef INT OutputFonc;
+       typedef int OutputFonc;
 
-       INT get(Pt2di p)
+       int get(Pt2di p)
        {
-           INT res = safe_get(p);
-           for (INT k=0; k <8 ; k++)
+           int res = safe_get(p);
+           for (int k=0; k <8 ; k++)
                ElSetMax(res,safe_get(p+TAB_8_NEIGH[k])-2-k%2);
            return res;
        }
@@ -126,10 +126,10 @@ template  <class Type,class Type_Base>
         *this
    );
 
-    INT x,y;
+    int x,y;
     Type  *lm1,*l,*lp1;
 
-    INT NBX = p1.x-1 -(p0.x+1);
+    int NBX = p1.x-1 -(p0.x+1);
 
     for (y = p0.y ; y<p1.y ; y++)
     {
@@ -142,7 +142,7 @@ template  <class Type,class Type_Base>
     {
         l   = _d[y] + p0.x+1;
         lm1 = _d[y-1] + p0.x+1;
-        INT  nb = NBX;
+        int  nb = NBX;
         for (; nb ; nb--,l++,lm1++)
             if (*l >0)
             {
@@ -157,7 +157,7 @@ template  <class Type,class Type_Base>
     {
         l   = _d[y] + p1.x-2;
         lp1 = _d[y+1] + p1.x-2;
-        INT  nb = NBX;
+        int  nb = NBX;
         for (;nb;nb--,l--,lp1--)
             if ( *l >0)
             {
@@ -278,9 +278,9 @@ void  ComplKLipsParLBas
 
    Pt2di aSz(aTMaskValInit.sz());
    std::vector<Pt2di> aVPts;
-   Im2D<INT2,INT>  aZHerit(aSz.x,aSz.y,0);
+   Im2D<int2,int>  aZHerit(aSz.x,aSz.y,0);
    aZHerit.dup(aTZ._the_im);
-   TIm2D<INT2,INT> aTZHerit(aZHerit);
+   TIm2D<int2,int> aTZHerit(aZHerit);
 
    Pt2di aP;
    for (aP.y =1 ; aP.y<(aSz.y-1) ; aP.y++)

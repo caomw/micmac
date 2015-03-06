@@ -54,7 +54,7 @@ template <class  AttrSom,class AttrArc> class  ElChainePcc
            typedef CmpElChainePcc<AttrSom,AttrArc>  TCECPCC;
            friend class CmpElChainePcc<AttrSom,AttrArc>;
 
-           ElChainePcc(TSom * pere,TSom * s,REAL  pds) :
+           ElChainePcc(TSom * pere,TSom * s,double_t  pds) :
                _pere (pere),
                _s    (s   ),
                _pds  (pds )
@@ -69,7 +69,7 @@ template <class  AttrSom,class AttrArc> class  ElChainePcc
 
            TSom * _pere;
            TSom * _s;
-           REAL      _pds;
+           double_t      _pds;
 };
 
 template <class  AttrSom,class AttrArc> class  CmpElChainePcc
@@ -117,7 +117,7 @@ template <class  AttrSom,class AttrArc> class  ElPcc
                         TSom   &          s1,
                         TSom   &          s2,
                         TSubGraphe  &     sub,
-                        REAL              DMax,
+                        double_t              DMax,
                         eModeCoutArbre        aModeCout,
                         bool              force_init = false
                 );
@@ -132,7 +132,7 @@ template <class  AttrSom,class AttrArc> class  ElPcc
                         TSubGraphe  &                        sub,
                         eModeCoutArbre        aModeCout,
                         bool                                 force_init = false,
-                        REAL                                 DMax  = 1e60
+                        double_t                                 DMax  = 1e60
                   );
 
 
@@ -143,7 +143,7 @@ template <class  AttrSom,class AttrArc> class  ElPcc
                         TSubGraphe  &                        sub,
                         eModeCoutArbre        aModeCout,
                         bool                                 force_init = false,
-                        REAL                                 DMax  = 1e60
+                        double_t                                 DMax  = 1e60
                   );
 
 
@@ -152,7 +152,7 @@ template <class  AttrSom,class AttrArc> class  ElPcc
                         ElFilo<TSom *>  &                    ts1,
                         ElSubGrapheSom<AttrSom,AttrArc>  &   but,
                         TSubGraphe  &                        sub,
-                        REAL                                 DMax, 
+                        double_t                                 DMax, 
                         eModeCoutArbre        aModeCout,
                         bool                                 force_init = false
                   );
@@ -164,7 +164,7 @@ template <class  AttrSom,class AttrArc> class  ElPcc
                         TSubGraphe  &                        sub,
                         eModeCoutArbre        aModeCout,
                         bool                                 force_init = false,
-                        REAL                                 DMax  = 1e60
+                        double_t                                 DMax  = 1e60
                   );
 
           void chemin(ElFilo<TSom *>  &,TSom &);
@@ -175,7 +175,7 @@ template <class  AttrSom,class AttrArc> class  ElPcc
           {}
 
           bool reached(TSom & s) {return s.flag_kth(_flag);}
-          REAL pds(TSom & s) 
+          double_t pds(TSom & s) 
           {
                ELISE_ASSERT(reached(s),"ElPcc::pds");
                return _pds[s.num()];
@@ -192,9 +192,9 @@ template <class  AttrSom,class AttrArc> class  ElPcc
       private :
 
          ElFilo<TSom *>      _som_sing;
-         INT                     _flag;
+         int                     _flag;
          ElFilo<TSom * >      _reached;
-         ElTabDyn<REAL>           _pds;
+         ElTabDyn<double_t>           _pds;
          ElTabDyn<TSom * >       _pere;
          ElHeap
          <
@@ -232,7 +232,7 @@ template <class  AttrSom,class AttrArc>
                   ElSubGraphe<AttrSom,AttrArc>     &  sub,
                   eModeCoutArbre                          aModeCout,
                   bool                                force_init,
-                  REAL                                DMax
+                  double_t                                DMax
               )
 {
      ElSubGrapheSingleton<AttrSom,AttrArc> but(s2);
@@ -245,7 +245,7 @@ template <class  AttrSom,class AttrArc>
                   ElSom<AttrSom,AttrArc>  &           s1,
                   ElSom<AttrSom,AttrArc>  &           s2,
                   ElSubGraphe<AttrSom,AttrArc>     &  sub,
-                  REAL                                DMax,
+                  double_t                                DMax,
                   eModeCoutArbre                          aModeCout,
                   bool                                force_init
               )
@@ -268,7 +268,7 @@ template <class  AttrSom,class AttrArc>
                   ElSubGraphe<AttrSom,AttrArc>     &  sub,
                   eModeCoutArbre                          aModeCout,
                   bool                                force_init,
-                  REAL                                DMax
+                  double_t                                DMax
               )
 {
     _som_sing.clear();
@@ -287,11 +287,11 @@ template <class  AttrSom,class AttrArc>
                   ElSubGraphe<AttrSom,AttrArc>     &  sub,
                   eModeCoutArbre                          aModeCout,
                   bool                                force_init,
-                  REAL                                DMax
+                  double_t                                DMax
               )
 {
       _heap.clear();
-	  INT k;
+	  int k;
       for ( k= 0; k<_reached.nb();k++)
           _reached[k]->flag_set_kth_false(_flag);
       _reached.clear();
@@ -310,8 +310,8 @@ template <class  AttrSom,class AttrArc>
 
 
 
-      INT last_nb = _pere.nb();
-      INT new_nb = gr.nb_som_phys();
+      int last_nb = _pere.nb();
+      int new_nb = gr.nb_som_phys();
       _pere.set_intexable_until(new_nb);
       _pds.set_intexable_until(new_nb);
 
@@ -357,7 +357,7 @@ template <class  AttrSom,class AttrArc>
                              TSom * s2 = &((*ait).s2());
                              if (! s2->flag_kth(_flag))
                              {
-                                 REAL pds = sub.pds(*ait);
+                                 double_t pds = sub.pds(*ait);
                                  if (aModeCout==eModePCC_Somme)
                                  {
                                     pds += te._pds;
@@ -388,7 +388,7 @@ template <class  AttrSom,class AttrArc>
                   ElFilo<ElSom<AttrSom,AttrArc> *> &  ts1,
                   ElSubGrapheSom<AttrSom,AttrArc>  &  but,
                   ElSubGraphe<AttrSom,AttrArc>     &  sub,
-                  REAL                                DMax,
+                  double_t                                DMax,
                   eModeCoutArbre                          aModeCout,
                   bool                                force_init
               )

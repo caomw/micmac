@@ -1,5 +1,5 @@
-#ifndef _ELISE_GENERAL_PHOTOGRAM_CPOINTEETALONAGE_H
-#define _ELISE_GENERAL_PHOTOGRAM_CPOINTEETALONAGE_H
+#ifndef _ELISE_GENERAL_PHOTOGRAM_CPOintEETALONAGE_H
+#define _ELISE_GENERAL_PHOTOGRAM_CPOintEETALONAGE_H
 
 #include "general/sys_dep.h"
 
@@ -12,13 +12,13 @@ public :
     void SetPosIm(Pt2dr);
     const cCiblePolygoneEtal  & Cible() const;
     bool  UseIt () const;
-    REAL  Pds()    const;
+    double_t  Pds()    const;
 private :
 
     Pt2dr                       mPos;
     const cCiblePolygoneEtal *  mCible;
     bool                        mUseIt;
-    REAL                        mPds;
+    double_t                        mPds;
 
 };
 

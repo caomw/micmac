@@ -11,8 +11,8 @@ class Liste_Pts_Gen :  public PRC0
       public :
           Flux_Pts  all_pts();
           bool      empty() const;
-          INT       card() const;
-          INT       dim() const;
+          int       card() const;
+          int       dim() const;
 };
 
 #endif

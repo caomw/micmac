@@ -90,24 +90,24 @@ class Ori3D_Std : public Ori3D_Gen
 
          // Pour creer une orientation correspondand a une image homthetique facteur zoom
          // zoom = 0.5 pour une orientation correspondant a une image plus petite
-         Ori3D_Std(Ori3D_Std ,REAL zoom,Box2dr = TheNoBox);
+         Ori3D_Std(Ori3D_Std ,double_t zoom,Box2dr = TheNoBox);
 
          Fonc_Num  to_photo(Fonc_Num);
          Fonc_Num  photo_et_z_to_terrain(Fonc_Num);
          Pt2dr to_photo(Pt3dr p,bool DontUseDist=false) const;
 
 	 void SetUseDist(bool UseDist) const;
-         INT  ZoneLambert() const;
+         int  ZoneLambert() const;
 
 
-         REAL  FocaleAngulaire() const;         //HJ
-         REAL  resolution_angulaire() const;         //HJ
-         REAL  resolution() const;         //HJ
+         double_t  FocaleAngulaire() const;         //HJ
+         double_t  resolution_angulaire() const;         //HJ
+         double_t  resolution() const;         //HJ
 	 Pt3dr orsommet_de_pdv_terrain() const;
-	 REAL altisol() const;
-	 REAL profondeur() const;
-         void SetAltiSol(REAL aZ);
-	 REAL BSurH(Ori3D_Std Ori2);
+	 double_t altisol() const;
+	 double_t profondeur() const;
+         void SetAltiSol(double_t aZ);
+	 double_t BSurH(Ori3D_Std Ori2);
 	 void UnCpleHom(Ori3D_Std Ori2,Pt2dr & pH1,Pt2dr & pH2);
 
          Pt2dr DistT2P(const Pt2dr & aP) const;
@@ -122,10 +122,10 @@ class Ori3D_Std : public Ori3D_Gen
                (
                    Pt2dr p1,
                    Ori3D_Std  ph2,Pt2dr p2,
-                   REAL & dist
+                   double_t & dist
                );
-         Pt3dr to_terrain(Pt2dr p1,REAL z) const;
-         Pt3dr ImEtProf_To_Terrain(Pt2dr pp,REAL z) const;
+         Pt3dr to_terrain(Pt2dr p1,double_t z) const;
+         Pt3dr ImEtProf_To_Terrain(Pt2dr pp,double_t z) const;
          Pt3dr Im1etProf2_To_Terrain
                (Pt2dr p1,Ori3D_Std  ph2,double prof2) const;
          double Prof(const Pt3dr &) const ;
@@ -133,7 +133,7 @@ class Ori3D_Std : public Ori3D_Gen
 
          Pt3dr carte_to_terr(Pt3dr) const;
          Pt3dr terr_to_carte(Pt3dr) const; // HJMPD
-         Tab_CPT_REF<Pt2dr> carte_et_z_to_terrain(Tab_CPT_REF<Pt2dr>,REAL z_lamb,REAL & z_ter);
+         Tab_CPT_REF<Pt2dr> carte_et_z_to_terrain(Tab_CPT_REF<Pt2dr>,double_t z_lamb,double_t & z_ter);
          
          void write_txt(const char *);
          void write_bin(const char *);
@@ -154,7 +154,7 @@ class Ori3D_Std : public Ori3D_Gen
 	   
 	   cOrientationConique * OC() const;
 
-	  Pt3dr  ImDirEtProf2Terrain(const Pt2dr & aPIm,const REAL & aProf,const Pt3dr & aNormPl) const;
+	  Pt3dr  ImDirEtProf2Terrain(const Pt2dr & aPIm,const double_t & aProf,const Pt3dr & aNormPl) const;
 
          Pt3dr Im1DirEtProf2_To_Terrain
                (Pt2dr p1,Ori3D_Std  ph2,double prof2,const Pt3dr & aDir) const;
@@ -176,7 +176,7 @@ class cOriMntCarto
        // on peut avoir interet a ce que les grandeur tel que resol
        // soit des multiples exacts de ces unites
 
-       static REAL ToUniteOri(REAL);
+       static double_t ToUniteOri(double_t);
 
        cOriMntCarto(const std::string &);
        void ToFile(const std::string &);
@@ -184,31 +184,31 @@ class cOriMntCarto
        Pt2dr TerrainToPix(Pt2dr) const;
        Pt2dr ToPix(Pt2dr) const;
        Pt3dr PixToTerrain(Pt3dr) const;
-       REAL ResolZ() const;
-       REAL ResolPlani() const;
+       double_t ResolZ() const;
+       double_t ResolPlani() const;
 
        cOriMntCarto
        (
            Pt2dr Ori,
-           INT   mZoneLambert,
+           int   mZoneLambert,
            Pt2di aSz,
            Pt2dr aResol,
-           REAL  aZ0,
-           REAL  aResolZ
+           double_t  aZ0,
+           double_t  aResolZ
        );
        
     private :
 
 
-       static REAL StdLireIntAsReal(FILE * aFp);
-       static long long  INT ToStdInt(REAL);
-       static const REAL  UniteFile;
+       static double_t StdLireIntAsReal(FILE * aFp);
+       static long long  int ToStdInt(double_t);
+       static const double_t  UniteFile;
        Pt2dr mOrigine;
-       INT   mZoneLambert; 
+       int   mZoneLambert; 
        Pt2di mSz;
        Pt2dr mResol;
-       REAL  mZ0;
-       REAL  mResolZ;
+       double_t  mZ0;
+       double_t  mResolZ;
    
 };
 

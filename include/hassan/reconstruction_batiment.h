@@ -62,9 +62,9 @@ class HJ_Reconstruction_Batiment : public HJ_Chantier
 
      Facette_2d _f;
 
-     REAL       _surf_inf_min;
-     REAL       _surf_inf_moy;
-     REAL       _surf_inf_max;
+     double_t       _surf_inf_min;
+     double_t       _surf_inf_moy;
+     double_t       _surf_inf_max;
 
 
      HJ_Reconstruction_Batiment();
@@ -82,7 +82,7 @@ class HJ_Reconstruction_Batiment : public HJ_Chantier
      virtual void detection_plans();
 
              void filtrage_plans();
-     virtual void filtrage_plans_morpho(REAL seuil1, REAL seuil2);
+     virtual void filtrage_plans_morpho(double_t seuil1, double_t seuil2);
      virtual void filtrage_plans_normale();
 
              void creation_graphe();
@@ -117,7 +117,7 @@ class HJ_Reconstruction_Batiment_Couple : public HJ_Reconstruction_Batiment
 
      virtual void detection_plans();
 
-     virtual void filtrage_plans_morpho(REAL seuil1, REAL seuil2);
+     virtual void filtrage_plans_morpho(double_t seuil1, double_t seuil2);
      virtual void filtrage_plans_normale();
      virtual void ponderation_graphe_heur();
      virtual void recherche_meil_solution();
@@ -145,7 +145,7 @@ class HJ_Reconstruction_Batiment_Cube : public HJ_Reconstruction_Batiment
 
      virtual void detection_plans();
 
-     virtual void filtrage_plans_morpho(REAL seuil1, REAL seuil2);
+     virtual void filtrage_plans_morpho(double_t seuil1, double_t seuil2);
      virtual void filtrage_plans_normale();
      virtual void ponderation_graphe_heur();
      virtual void recherche_meil_solution();
@@ -174,7 +174,7 @@ class HJ_Reconstruction_Batiment_MNS : public HJ_Reconstruction_Batiment
 
      virtual void detection_plans();
 
-     virtual void filtrage_plans_morpho(REAL seuil1, REAL seuil2);
+     virtual void filtrage_plans_morpho(double_t seuil1, double_t seuil2);
      virtual void filtrage_plans_normale();
      virtual void ponderation_graphe_heur();
      virtual void recherche_meil_solution();

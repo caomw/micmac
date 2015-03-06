@@ -1,5 +1,5 @@
-#ifndef _ELISE_GENERAL_PHOTOGRAM_CSETPOINTES1IM_H
-#define _ELISE_GENERAL_PHOTOGRAM_CSETPOINTES1IM_H
+#ifndef _ELISE_GENERAL_PHOTOGRAM_CSETPOintES1IM_H
+#define _ELISE_GENERAL_PHOTOGRAM_CSETPOintES1IM_H
 
 #include "general/sys_dep.h"
 
@@ -17,7 +17,7 @@ public :
     tCont  & Pointes() ;
     cPointeEtalonage & PointeOfId(cCiblePolygoneEtal::tInd);
     cPointeEtalonage * PointeOfIdSvp(cCiblePolygoneEtal::tInd);
-    void RemoveCibles(const std::vector<INT> & IndToRemove);
+    void RemoveCibles(const std::vector<int> & IndToRemove);
     bool  InitFromFile(const cPolygoneEtal &,ELISE_fp & aFp,bool InPK1);
 private :
     tCont mPointes;

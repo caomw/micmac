@@ -38,10 +38,12 @@ English :
 
 Header-MicMac-eLiSe-25/06/2007*/
 
-#ifndef _ELISE_GENERAL_PHGR_FORMEL_CINCINTERVALE_H
-#define _ELISE_GENERAL_PHGR_FORMEL_CINCINTERVALE_H
+#ifndef _ELISE_GENERAL_PHGR_FORMEL_CINCintERVALE_H
+#define _ELISE_GENERAL_PHGR_FORMEL_CINCintERVALE_H
 
 #include "general/sys_dep.h"
+
+#include <cSsBloc>
 
 class cSetEqFormelles;
 
@@ -54,22 +56,22 @@ class cIncIntervale
        typedef std::string tId;
 
        cIncIntervale(bool isTmp,const tId & anId,cSetEqFormelles     &,int aNbInc=-1);
-       cIncIntervale(const tId & anId,INT anI0,INT anI1,bool isTmp=false);
+       cIncIntervale(const tId & anId,int anI0,int anI1,bool isTmp=false);
     // Copie, avec renommage
        cIncIntervale(const cIncIntervale &,const tId &);
 
        void SetName(const tId &);
-       void SetI0I1Alloc(INT I0,INT I1);
+       void SetI0I1Alloc(int I0,int I1);
 
-       INT I0Alloc()  const ;
-       INT I1Alloc()  const ;
+       int I0Alloc()  const ;
+       int I1Alloc()  const ;
        int NumBlocAlloc() const {return mNumBlocAlloc;}
-       INT I0Solve()  const ;
-       INT I1Solve()  const ;
+       int I0Solve()  const ;
+       int I1Solve()  const ;
        int NumBlocSolve() const {return mNumBlocSolve;}
 
 
-       INT Sz()  const ;
+       int Sz()  const ;
        const tId & Id() const;
        void Close();
        void SetNumAlloc(int aNum);
@@ -86,10 +88,10 @@ class cIncIntervale
        bool IsTmp() const;
     private :
 
-       INT mI0Alloc;
-       INT mI1Alloc;
-       INT mI0Solve;
-       INT mI1Solve;
+       int mI0Alloc;
+       int mI1Alloc;
+       int mI0Solve;
+       int mI1Solve;
 
        cSetEqFormelles     * mSet;
        tId                    mId;

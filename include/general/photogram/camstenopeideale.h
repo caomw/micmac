@@ -8,7 +8,7 @@
 class CamStenopeIdeale : public CamStenope
 {
 public :
-    CamStenopeIdeale (bool isDistC2M,REAL Focale,Pt2dr Centre,const std::vector<double> & ParamAF);
+    CamStenopeIdeale (bool isDistC2M,double_t Focale,Pt2dr Centre,const std::vector<double> & ParamAF);
     CamStenopeIdeale(const CamStenopeIdeale &,const ElRotation3D &);
     static CamStenopeIdeale  CameraId(bool isDistC2M,const ElRotation3D &);
     CamStenopeIdeale(const CamStenopeIdeale &);

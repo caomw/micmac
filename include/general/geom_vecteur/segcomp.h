@@ -4,6 +4,8 @@
 #include "general/sys_dep.h"
 
 #include <Seg2d>
+#include <Pt3d>
+#include <ElFifo>
 
 class SegComp : public Seg2d
 {
@@ -48,41 +50,41 @@ class SegComp : public Seg2d
              ) const;
 
 
-        REAL ordonnee(Pt2dr pt) const;
-        REAL ordonnee(Pt3dr pt) const;  // Point Projectif
+        double_t ordonnee(Pt2dr pt) const;
+        double_t ordonnee(Pt3dr pt) const;  // Point Projectif
         Fonc_Num ordonnee(Pt3d<Fonc_Num> pt) const;  // Point Projectif Formel
-        REAL  abscisse(Pt2dr pt) const;
+        double_t  abscisse(Pt2dr pt) const;
 
-        REAL  abscisse_proj_seg(Pt2dr pt) const;  // clippee dans [0 lenght]
-        REAL  recouvrement_seg(const Seg2d &) const;  // clippee dans [0 lenght]
+        double_t  abscisse_proj_seg(Pt2dr pt) const;  // clippee dans [0 lenght]
+        double_t  recouvrement_seg(const Seg2d &) const;  // clippee dans [0 lenght]
 
         Pt2dr to_rep_loc(Pt2dr) const;
         Pt2dr from_rep_loc(Pt2dr) const;
 
-        REAL  length()   const  {return _length;}
+        double_t  length()   const  {return _length;}
         Pt2dr tangente() const  {return _tangente;}
         Pt2dr normale()  const  {return _normale;}
-        REAL  c()        const  {return _c;}
+        double_t  c()        const  {return _c;}
 
         bool in_bande(Pt2dr pt,ModePrim) const;
 
-        bool BoxContains(Pt2dr pt,REAL DLong,REAL DLarg) const;
-        bool BoxContains(const Seg2d & ,REAL DLong,REAL DLarg) const;
+        bool BoxContains(Pt2dr pt,double_t DLong,double_t DLarg) const;
+        bool BoxContains(const Seg2d & ,double_t DLong,double_t DLarg) const;
 
    //=========   DISTANCES   ==============
 
-        REAL square_dist_droite(Pt2dr pt) const;
-        REAL square_dist_demi_droite(Pt2dr pt) const;
-        REAL square_dist_seg(Pt2dr pt) const;
-        REAL square_dist(ModePrim  mode,Pt2dr   pt) const;
+        double_t square_dist_droite(Pt2dr pt) const;
+        double_t square_dist_demi_droite(Pt2dr pt) const;
+        double_t square_dist_seg(Pt2dr pt) const;
+        double_t square_dist(ModePrim  mode,Pt2dr   pt) const;
 
-        REAL dist_droite(Pt2dr pt) const;
-        REAL dist_demi_droite(Pt2dr pt) const;
-        REAL dist_seg(Pt2dr pt) const;
-        REAL dist(ModePrim  mode,Pt2dr   pt) const;
+        double_t dist_droite(Pt2dr pt) const;
+        double_t dist_demi_droite(Pt2dr pt) const;
+        double_t dist_seg(Pt2dr pt) const;
+        double_t dist(ModePrim  mode,Pt2dr   pt) const;
 
-        REAL square_dist(ModePrim,const SegComp &,ModePrim) const;
-        REAL dist(ModePrim,const SegComp &,ModePrim) const;
+        double_t square_dist(ModePrim,const SegComp &,ModePrim) const;
+        double_t dist(ModePrim,const SegComp &,ModePrim) const;
 
    //=========   DISTANCES DE HAUSSDORF   ==============
 
@@ -91,15 +93,15 @@ class SegComp : public Seg2d
         // dans les version assym, il s'agit de la dist du point de la premiere
         // le pus loin de la deuxieme.
 
-        REAL  square_haussdorf_seg_assym(const SegComp &) const;
-        REAL  square_haussdorf_seg_sym(const SegComp &) const;
-        REAL  square_haussdorf_droite_assym(const SegComp &) const;
+        double_t  square_haussdorf_seg_assym(const SegComp &) const;
+        double_t  square_haussdorf_seg_sym(const SegComp &) const;
+        double_t  square_haussdorf_droite_assym(const SegComp &) const;
 
               // max de "square_haussdorf_droite_assym" dans
               // les 2 sens, donc pas vraiment une distance de haussdorf
               //  au sens mathematique du terme
 
-        REAL  square_haussdorf_droite_sym(const SegComp &) const;
+        double_t  square_haussdorf_droite_sym(const SegComp &) const;
 
    //=========   PROJECTIONS   ==============
 
@@ -109,7 +111,7 @@ class SegComp : public Seg2d
         Pt2dr  proj_ortho(ModePrim,Pt2dr pt) const;
         Seg2d  proj_ortho(ModePrim,const SegComp &,ModePrim) const;
 
-   //=========   INTERSECTION   ==============
+   //=========   intERSECTION   ==============
 
         Pt2dr   inter(const SegComp &,bool &) const;  // droite
         Pt2dr   inter(ModePrim,const SegComp &,ModePrim,bool &) const;
@@ -118,7 +120,7 @@ class SegComp : public Seg2d
              (
                  ModePrim,
                  const ElFifo<Pt2dr> &,
-                 ElFifo<INT>  &,   // index
+                 ElFifo<int>  &,   // index
                  ElFifo<Pt2dr> &   // resultats
              );
 
@@ -128,18 +130,18 @@ class SegComp : public Seg2d
      protected :
 
         Pt2dr _tangente;
-        REAL  _length;
+        double_t  _length;
         Pt2dr _normale;
-        REAL  _c;
-        REAL  _a1;   // abscisse p1, dans le repere de la droite
+        double_t  _c;
+        double_t  _a1;   // abscisse p1, dans le repere de la droite
 
-        REAL   _square_dist(ModePrim m1,const SegComp & s2,ModePrim m2) const;
+        double_t   _square_dist(ModePrim m1,const SegComp & s2,ModePrim m2) const;
         void   proj_ortho
                (
                    ModePrim,
                    const SegComp &,
                    ModePrim,
-                   REAL & dmin,
+                   double_t & dmin,
                    Pt2dr & p0min,
                    Pt2dr & p1min
                ) const;

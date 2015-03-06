@@ -61,13 +61,40 @@ class Flux_Pts : public  PRC0
      Flux_Pts(class Flux_Pts_Not_Comp *);
      class Flux_Pts_Computed * compute (const class  Arg_Flux_Pts_Comp &);
 
-     Flux_Pts(Std_Pack_Of_Pts<INT> *);
+     Flux_Pts(Std_Pack_Of_Pts<int> *);
      Flux_Pts(ElList<Pt2di>);
      Flux_Pts(Pt2di);
 
      Flux_Pts chc(class Fonc_Num);
 
      Flux_Pts operator || (Flux_Pts);
+
+     static Flux_Pts rectangle(int,int);
+
+     static Flux_Pts border_rect(int p1,int p2,int b1,int b2);
+     static Flux_Pts border_rect(int p1,int p2,int b);
+
+     // 2-D
+     // - - -
+
+     // surfacic
+
+     static Flux_Pts rectangle(Pt2di p0,Pt2di p1);
+     static Flux_Pts rectangle(const Box2di &);
+
+
+     // lineic
+
+     // lines
+
+     static Flux_Pts line(Pt2di p0,Pt2di p1);
+     static Flux_Pts line(ElList<Pt2di>,bool ferm = false);
+     static Flux_Pts line_4c(Pt2di p0,Pt2di p1);
+     static Flux_Pts line_4c(ElList<Pt2di>,bool ferm = false);
+     static Flux_Pts line_for_poly(ElList<Pt2di>);
+
+     static Flux_Pts polygone(ElList<Pt2di>,bool front = true);
+     static Flux_Pts quick_poly(ElList<Pt2di>);
 };
 
 #endif

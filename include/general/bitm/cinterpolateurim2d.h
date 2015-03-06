@@ -4,8 +4,8 @@
 #include "general/sys_dep.h"
 
 template <class TypeEl>
-#ifndef _ELISE_GENERAL_BITM_CINTERPOLATEURIM2D_H
-#define _ELISE_GENERAL_BITM_CINTERPOLATEURIM2D_H
+#ifndef _ELISE_GENERAL_BITM_CintERPOLATEURIM2D_H
+#define _ELISE_GENERAL_BITM_CintERPOLATEURIM2D_H
 
 #include "general/sys_dep.h"
 

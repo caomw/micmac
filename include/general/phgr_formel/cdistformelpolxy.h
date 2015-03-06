@@ -14,14 +14,14 @@ class cDistFormelPolXY  : public cNameSpaceEqF
            ~cDistFormelPolXY();
            Pt2d<Fonc_Num> operator () (Pt2d<Fonc_Num> aP);
               
-           INT Degre() const;
+           int Degre() const;
            cMultiContEQF      StdContraintes() ;
-           void SetFige(INT DegreMax,bool Std);
+           void SetFige(int DegreMax,bool Std);
 	              
 	   ElDistortionPolynomiale DistCur() const;
        private :
-           INT              mDegre;
-           INT              mDegreFige;
+           int              mDegre;
+           int              mDegreFige;
            cPolynFormelXY * mPolX;
            cPolynFormelXY * mPolY;
 };

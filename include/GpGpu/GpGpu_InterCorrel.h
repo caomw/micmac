@@ -1,9 +1,9 @@
-#ifndef __GPGPU_INTERCORREL_H__
-#define __GPGPU_INTERCORREL_H__
+#ifndef __GPGPU_intERCORREL_H__
+#define __GPGPU_intERCORREL_H__
 
 #ifdef _WIN32
-    #ifdef INT
-        #undef INT
+    #ifdef int
+        #undef int
     #endif
 #endif
 
@@ -37,7 +37,7 @@ public:
   ~GpGpuInterfaceCorrel();
 
   /// \brief    Initialise les parametres de correlation
-  void          SetParameter(int nbLayer , ushort2 dRVig , uint2 dimImg, float mAhEpsilon, uint samplingZ, int uvINTDef, ushort nClass);
+  void          SetParameter(int nbLayer , ushort2 dRVig , uint2 dimImg, float mAhEpsilon, uint samplingZ, int uvintDef, ushort nClass);
 
   /// \brief    Calcul de la correlation en Gpu
   void          BasicCorrelation();
@@ -105,4 +105,4 @@ private:
 
 #endif
 
-#endif // __GPGPU_INTERCORREL_H__
+#endif // __GPGPU_intERCORREL_H__

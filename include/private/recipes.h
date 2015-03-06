@@ -43,9 +43,9 @@ Header-MicMac-eLiSe-25/06/2007*/
 #define _ELISE_RECIPES_H
 
 
-template <class Type> void NR_InitNrMat(ElFilo<Type *> & Mat,Type ** a,INT n);
+template <class Type> void NR_InitNrMat(ElFilo<Type *> & Mat,Type ** a,int n);
 
-template <class Type> void  NR_InitVect(ElFilo<Type> & V,INT n);
+template <class Type> void  NR_InitVect(ElFilo<Type> & V,int n);
 
 #endif  // _ELISE_RECIPES_H
 

@@ -1,5 +1,5 @@
-#ifndef _ELISE_GENERAL_PHOTOGRAM_CALCPTSINTERET_H
-#define _ELISE_GENERAL_PHOTOGRAM_CALCPTSINTERET_H
+#ifndef _ELISE_GENERAL_PHOTOGRAM_CALCPTSintERET_H
+#define _ELISE_GENERAL_PHOTOGRAM_CALCPTSintERET_H
 
 #include "general/sys_dep.h"
 
@@ -22,8 +22,8 @@ public :
             Pt2di aP0,
             Pt2di aP1,
             Fonc_Num aFonc,
-            REAL aSize,
-            REAL aRatio = 0.8
+            double_t aSize,
+            double_t aRatio = 0.8
             );
 
     static tContainerPtsInt GetEnsPtsInteret_Nb
@@ -31,21 +31,21 @@ public :
             Pt2di aP0,
             Pt2di aP1,
             Fonc_Num aFonc,
-            INT  aNb,  // NbTot = NbX * NbY
-            REAL aRatio = 0.8
+            int  aNb,  // NbTot = NbX * NbY
+            double_t aRatio = 0.8
             );
 
     static tContainerPtsInt GetEnsPtsInteret_Size
     (
-            Im2D_U_INT1,
-            REAL aSize,
-            REAL aRatio = 0.8
+            Im2D_U_int1,
+            double_t aSize,
+            double_t aRatio = 0.8
             );
     static tContainerPtsInt GetEnsPtsInteret_Nb
     (
-            Im2D_U_INT1,
-            INT  aNb,
-            REAL aRatio = 0.8
+            Im2D_U_int1,
+            int  aNb,
+            double_t aRatio = 0.8
             );
 
 private :

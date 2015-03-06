@@ -9,20 +9,20 @@ public :
     StatElPackH(const ElPackHomologue &);
     Pt2dr Cdg1 () const;
     Pt2dr Cdg2 () const;
-    REAL  RMax1 () const;
-    REAL  RMax2 () const;
-    INT   NbPts() const;
-    REAL  SomD1 () const;
-    REAL  SomD2 () const;
+    double_t  RMax1 () const;
+    double_t  RMax2 () const;
+    int   NbPts() const;
+    double_t  SomD1 () const;
+    double_t  SomD2 () const;
 private :
-    REAL  mSPds;
-    INT   mNbPts;
+    double_t  mSPds;
+    int   mNbPts;
     Pt2dr mCdg1;
     Pt2dr mCdg2;
-    REAL  mRMax1;
-    REAL  mRMax2;
-    REAL  mSomD1;
-    REAL  mSomD2;
+    double_t  mRMax1;
+    double_t  mRMax2;
+    double_t  mSomD1;
+    double_t  mSomD2;
 };
 
 #endif

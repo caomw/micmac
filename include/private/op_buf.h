@@ -43,7 +43,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 #define _ELISE_PRIVATE_OP_BUF_H
 
 
-INT adjust_nb_pack_y(INT nb_pack_y,INT nby_tot);
+int adjust_nb_pack_y(int nb_pack_y,int nby_tot);
 
 
 class Arg_FNOPB
@@ -58,7 +58,7 @@ class Arg_FNOPB
         bool  really_an_arg() const { return _f.really_a_fonc();}
         Box2di side() const { return _side;}
         GenIm::type_el type() const { return _type;}
-		INT  DimF() const;
+		int  DimF() const;
 
     private :
         Fonc_Num          _f;
@@ -83,51 +83,51 @@ class Fonc_Num_OP_Buf
                 Arg_FNOPB               ar2,
 				bool                    aLineInit
            );
-           void maj_buf_values(INT y);
+           void maj_buf_values(int y);
 
 
-         REAL *** kth_buf(REAL *,INT k) ;
-         INT  *** kth_buf(INT *,INT k)  ;
-         U_INT1 *** kth_buf(U_INT1 *,INT k) ;
-         INT1 *** kth_buf(INT1 *,INT k) ;
-         U_INT2 *** kth_buf(U_INT2 *,INT k) ;
-         REAL4 *** kth_buf(REAL4 *,INT k) ;
+         double_t *** kth_buf(double_t *,int k) ;
+         int  *** kth_buf(int *,int k)  ;
+         U_int1 *** kth_buf(U_int1 *,int k) ;
+         int1 *** kth_buf(int1 *,int k) ;
+         U_int2 *** kth_buf(U_int2 *,int k) ;
+         double_t4 *** kth_buf(double_t4 *,int k) ;
 
-		 void  convert_data(INT Kth,INT * dest,INT nb,INT dim,INT y,INT x0Src);
-		 void  convert_data(INT Kth,REAL * dest,INT nb,INT dim,INT y,INT x0Src);
+		 void  convert_data(int Kth,int * dest,int nb,int dim,int y,int x0Src);
+		 void  convert_data(int Kth,double_t * dest,int nb,int dim,int y,int x0Src);
 
-		 INT  DimKthFonc(INT k);
-
-
-         Box2di  kth_box_buf(INT k)  ;
-
-         Fonc_Num_Computed * kth_fonc(INT k);
-
-         INT _x0;
-         INT _x1;
-         INT _y0;
-         INT _y1;
-         INT _y_cur;
-
-         INT            _x0_side;
-         INT            _x1_side;
-         INT            _y0_side;
-         INT            _y1_side;
-
-         INT            _x0_buf;
-         INT            _x1_buf;
-         INT            _y0_buf;
-         INT            _y1_buf;
+		 int  DimKthFonc(int k);
 
 
+         Box2di  kth_box_buf(int k)  ;
 
-         INT                    _nbf;
+         Fonc_Num_Computed * kth_fonc(int k);
+
+         int _x0;
+         int _x1;
+         int _y0;
+         int _y1;
+         int _y_cur;
+
+         int            _x0_side;
+         int            _x1_side;
+         int            _y0_side;
+         int            _y1_side;
+
+         int            _x0_buf;
+         int            _x1_buf;
+         int            _y0_buf;
+         int            _y1_buf;
+
+
+
+         int                    _nbf;
       private :
          class Buf_Fonc_Op_buf  * (_buf_foncs[3]);
 
 
          bool                  _first;
-         INT                   _last_y;
+         int                   _last_y;
 
 
           //******************************************
@@ -156,7 +156,7 @@ template <class Type> class Fonc_Num_OPB_TPL  : public Fonc_Num_Comp_TPL<Type>,
            Fonc_Num_OPB_TPL
            (
                 const Arg_Fonc_Num_Comp & arg,
-                INT                     dim_out,
+                int                     dim_out,
                 Arg_FNOPB               = Arg_FNOPB::def,
                 Arg_FNOPB               = Arg_FNOPB::def,
                 Arg_FNOPB               = Arg_FNOPB::def,
@@ -164,7 +164,7 @@ template <class Type> class Fonc_Num_OPB_TPL  : public Fonc_Num_Comp_TPL<Type>,
            );
 
 		   bool    mCatFoncInit;
-		   INT     mDimOutSpec;
+		   int     mDimOutSpec;
            Type ** _buf_res;
 
 
@@ -188,7 +188,7 @@ template <class Type> class Fonc_Num_OPB_TPL  : public Fonc_Num_Comp_TPL<Type>,
 extern Fonc_Num label_maj
          (
             Fonc_Num     label,
-            INT          vmax,
+            int          vmax,
             Box2di       side,
             Fonc_Num     pds ,
             bool         /* compl  */

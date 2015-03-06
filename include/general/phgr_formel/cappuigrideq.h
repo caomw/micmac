@@ -8,7 +8,7 @@ class cAppuiGridEq : public cNameSpaceEqF,
 {
      public :
 	  void   GenCode();
-	  Pt2dr  AddAppui(Pt3dr aP,Pt2dr aPIm,REAL aPds);
+	  Pt2dr  AddAppui(Pt3dr aP,Pt2dr aPIm,double_t aPds);
 	         // Donne le residu mais n'ajoute pas au systeme
 	  Pt2dr  ResiduAppui(Pt3dr aP,Pt2dr aPIm);
 

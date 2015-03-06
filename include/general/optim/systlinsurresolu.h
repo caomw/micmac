@@ -1,3 +1,44 @@
+/*Header-MicMac-eLiSe-25/06/2007
+
+    MicMac : Multi Image Correspondances par Methodes Automatiques de Correlation
+    eLiSe  : ELements of an Image Software Environnement
+
+    www.micmac.ign.fr
+
+
+    Copyright : Institut Geographique National
+    Author : Marc Pierrot Deseilligny
+    Contributors : Gregoire Maillet, Didier Boldo.
+    Refactoring: Helio Chissini de Castro <helio@kde.org>
+
+[1] M. Pierrot-Deseilligny, N. Paparoditis.
+    "A multiresolution and optimization-based image matching approach:
+    An application to surface reconstruction from SPOT5-HRS stereo imagery."
+    In IAPRS vol XXXVI-1/W41 in ISPRS Workshop On Topographic Mapping From Space
+    (With Special Emphasis on Small Satellites), Ankara, Turquie, 02-2006.
+
+[2] M. Pierrot-Deseilligny, "MicMac, un lociel de mise en correspondance
+    d'images, adapte au contexte geograhique" to appears in
+    Bulletin d'information de l'Institut Geographique National, 2007.
+
+Francais :
+
+   MicMac est un logiciel de mise en correspondance d'image adapte
+   au contexte de recherche en information geographique. Il s'appuie sur
+   la bibliotheque de manipulation d'image eLiSe. Il est distibue sous la
+   licences Cecill-B.  Voir en bas de fichier et  http://www.cecill.info.
+
+
+English :
+
+    MicMac is an open source software specialized in image matching
+    for research in geographic information. MicMac is built on the
+    eLiSe image library. MicMac is governed by the  "Cecill-B licence".
+    See below and http://www.cecill.info.
+
+Header-MicMac-eLiSe-25/06/2007*/
+
+
 #ifndef _ELISE_GENERAL_OPTIM_SYSTLINSURRESOLU_H
 #define _ELISE_GENERAL_OPTIM_SYSTLINSURRESOLU_H
 
@@ -6,15 +47,15 @@
 class  SystLinSurResolu : public cGenSysSurResol  // Herite en tant que Solveur L1
 {
 	public :
-               Im1D_REAL8  V_GSSR_Solve(bool * aResOk);
+               Im1D_double_t8  V_GSSR_Solve(bool * aResOk);
                void V_GSSR_Reset();
-               void V_GSSR_AddNewEquation(REAL aPds,REAL * aCoeff,REAL aB);
-	        INT NbVar() const;
+               void V_GSSR_AddNewEquation(double_t aPds,double_t * aCoeff,double_t aB);
+	        int NbVar() const;
 
-               SystLinSurResolu(INT NbVar,INT NbEq);
+               SystLinSurResolu(int NbVar,int NbEq);
 
-                  void SetSize(INT NbVar,INT NbEq);
-			void SetNbEquation(INT aNbEq);
+                  void SetSize(int NbVar,int NbEq);
+			void SetNbEquation(int aNbEq);
 			void SetNoEquation();
 
 
@@ -22,70 +63,70 @@ class  SystLinSurResolu : public cGenSysSurResol  // Herite en tant que Solveur 
 			     (
                                    Fonc_Num      aFonc,
                                    const PtsKD & aPts,
-                                   REAL          aPds = 1.0
+                                   double_t          aPds = 1.0
                              );
 			void PushEquation
 			     (
-                                   Im1D_REAL8    aFormLin,
-				   REAL          aValue,
-                                   REAL          aPds = 1.0
+                                   Im1D_double_t8    aFormLin,
+				   double_t          aValue,
+                                   double_t          aPds = 1.0
                              );
 			void PopEquation();
 			void PushEquation
 			     (
-                                   REAL8 *       aFormLin,
-				   REAL          aValue,
-                                   REAL          aPds = 1.0
+                                   double_t8 *       aFormLin,
+				   double_t          aValue,
+                                   double_t          aPds = 1.0
                              );
 
-			Im1D_REAL8  L1Solve();
+			Im1D_double_t8  L1Solve();
 			// Si Ok ==0, matrice sing => erreur fatale
-			Im1D_REAL8  L2Solve(bool *Ok); 
+			Im1D_double_t8  L2Solve(bool *Ok); 
 
 			// Non Pondere, signe
-			REAL Residu(Im1D_REAL8,INT iEq) const; 
+			double_t Residu(Im1D_double_t8,int iEq) const; 
 			// Pondere :
-			REAL L2SomResiduPond(Im1D_REAL8)const; 
-			INT NbEq() const;
+			double_t L2SomResiduPond(Im1D_double_t8)const; 
+			int NbEq() const;
 
-			REAL Pds(INT iEq) const;
-			REAL CoefLin(INT iVar,INT iEq) const;
-			REAL CoefCste(INT iEq) const;
+			double_t Pds(int iEq) const;
+			double_t CoefLin(int iVar,int iEq) const;
+			double_t CoefCste(int iEq) const;
 
-			REAL Residu(const REAL *,INT iEq) const; 
+			double_t Residu(const double_t *,int iEq) const; 
 		protected :
 		private :
 
                         void AdjustSizeCapa();
 			void BarrodaleSetSize();
 			void L2SetSize();
-			void AssertIndexEqValide(INT IndEq) const;
-			void AssertIndexVarValide(INT IndEq) const;
-			void AssertIndexGoodNbVar(INT aNbVar) const;
+			void AssertIndexEqValide(int IndEq) const;
+			void AssertIndexVarValide(int IndEq) const;
+			void AssertIndexGoodNbVar(int aNbVar) const;
 
 
-			INT          mNbVarCur;
-			INT          mNbEqCur;
-			INT          mNbVarCapa;
-			INT          mNbEqCapa;
+			int          mNbVarCur;
+			int          mNbEqCur;
+			int          mNbVarCapa;
+			int          mNbEqCapa;
 
-			Im2D_REAL8   mA;  // mA.data() [IEqu][Ivar]
-			REAL8 **     mDataA;
-			Im1D_REAL8   mB;
-			REAL8 *      mDataB;
-			Im1D_REAL8   mPds;
-			REAL8 *      mDataPds;
+			Im2D_double_t8   mA;  // mA.data() [IEqu][Ivar]
+			double_t8 **     mDataA;
+			Im1D_double_t8   mB;
+			double_t8 *      mDataB;
+			Im1D_double_t8   mPds;
+			double_t8 *      mDataPds;
 
 
 			// variables tempo pour  L1 Barrodale
-			Im1D_REAL8   mBarodA;
-			REAL8 *      mDataBarodA;
-			Im1D_REAL8   mBarodB;
-			REAL8 *      mDataBarodB;
-			Im1D_REAL8   mBarodSOL;
-			REAL8 *      mDataBarodSOL;
-			Im1D_REAL8   mBarodRESIDU;
-			REAL8 *      mDataBarodRESIDU;
+			Im1D_double_t8   mBarodA;
+			double_t8 *      mDataBarodA;
+			Im1D_double_t8   mBarodB;
+			double_t8 *      mDataBarodB;
+			Im1D_double_t8   mBarodSOL;
+			double_t8 *      mDataBarodSOL;
+			Im1D_double_t8   mBarodRESIDU;
+			double_t8 *      mDataBarodRESIDU;
 		
 			// variables tempo pour  L2-Gaussj
 			// Pour resoudre au moindre carre
@@ -94,12 +135,12 @@ class  SystLinSurResolu : public cGenSysSurResol  // Herite en tant que Solveur 
                          L2SysSurResol mL2;
 		
 /*
-			 Im2D_REAL8   mtLi_Li; // Sigma des trans(Li) Li
-                         REAL8 **     mDatatLi_Li;
-			 Im1D_REAL8   mbi_Li;  // Sigma des bi * Li
-                         REAL8 *      mDatabi_Li;
-			 Im1D_REAL8   mSolL2;
-                         REAL8 *      mDataSolL2;
+			 Im2D_double_t8   mtLi_Li; // Sigma des trans(Li) Li
+                         double_t8 **     mDatatLi_Li;
+			 Im1D_double_t8   mbi_Li;  // Sigma des bi * Li
+                         double_t8 *      mDatabi_Li;
+			 Im1D_double_t8   mSolL2;
+                         double_t8 *      mDataSolL2;
 */
 
 };

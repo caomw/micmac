@@ -84,23 +84,23 @@ class Camera_V
 
 //   protected :
       
-      REAL _m00, _m01, _m02, _m03;
-      REAL _m10, _m11, _m12, _m13;
-      REAL _m20, _m21, _m22, _m23;
-      REAL _m30, _m31, _m32, _m33;
-      REAL _zoom;
-      REAL _teta;
-      REAL _phi;
-      REAL _rho;
-      REAL _d_zoom;
-      REAL _d_teta;
-      REAL _d_phi;
-      REAL _d_rho;
-      REAL _x_c;
-      REAL _y_c;
-      REAL _z_c;
-      INT  _tx_1_2;
-      INT  _ty_1_2;
+      double_t _m00, _m01, _m02, _m03;
+      double_t _m10, _m11, _m12, _m13;
+      double_t _m20, _m21, _m22, _m23;
+      double_t _m30, _m31, _m32, _m33;
+      double_t _zoom;
+      double_t _teta;
+      double_t _phi;
+      double_t _rho;
+      double_t _d_zoom;
+      double_t _d_teta;
+      double_t _d_phi;
+      double_t _d_rho;
+      double_t _x_c;
+      double_t _y_c;
+      double_t _z_c;
+      int  _tx_1_2;
+      int  _ty_1_2;
       bool _avant_arrier;
 
 
@@ -164,8 +164,8 @@ class Camera_V
 
       Pt2di   projeter(Pt3dr p){
                                   return Pt2di(
-                                                 (INT)(_m00 * p.x + _m01 * p.y + _m02 * p.z + _m03),
-                                                 (INT)(_m10 * p.x + _m11 * p.y + _m12 * p.z + _m13)
+                                                 (int)(_m00 * p.x + _m01 * p.y + _m02 * p.z + _m03),
+                                                 (int)(_m10 * p.x + _m11 * p.y + _m12 * p.z + _m13)
                                                );
                                }
 
@@ -191,10 +191,10 @@ class Camera_V
                                           Window window = W.window().mW;
                                           XEvent event;
                                           char buffer[20];
-                                          INT  bufsize = 20;
+                                          int  bufsize = 20;
                                           KeySym keysym = XK_a;
                                           XComposeStatus compose;
-                                          INT charcount;
+                                          int charcount;
                                           XSelectInput(display, window, KeyPressMask | KeyReleaseMask);
                                           while(keysym != XK_q)
                                           {
@@ -285,23 +285,23 @@ class Camera_MNE_F:public Camera_V
 
    protected:
 
-      INT2**              _mne;
+      int2**              _mne;
 
-      INT2                _label_interdit;
-      INT                 _tx_mne;
-      INT                 _ty_mne;
+      int2                _label_interdit;
+      int                 _tx_mne;
+      int                 _ty_mne;
 
-      Im1D_REAL4          _im_x00;
-      Im1D_REAL4          _im_x10;
-      Im1D_REAL4          _im_y01;
-      Im1D_REAL4          _im_y11;
-      REAL4*              _im_x00_d;
-      REAL4*              _im_x10_d;
-      REAL4*              _im_y01_d; 
-      REAL4*              _im_y11_d; 
+      Im1D_double_t4          _im_x00;
+      Im1D_double_t4          _im_x10;
+      Im1D_double_t4          _im_y01;
+      Im1D_double_t4          _im_y11;
+      double_t4*              _im_x00_d;
+      double_t4*              _im_x10_d;
+      double_t4*              _im_y01_d; 
+      double_t4*              _im_y11_d; 
 
-      INT                 _tx_W;
-      INT                 _ty_W;
+      int                 _tx_W;
+      int                 _ty_W;
 
       ElFilo<Facette_3d>  _f_face;
 
@@ -328,14 +328,14 @@ class Camera_G:public Camera_V
 
       H_Graphe&     _graphe;
 
-      INT    _nb_som;
+      int    _nb_som;
       Pt3dr* _som;
-      INT*   _som_flag;
+      int*   _som_flag;
 
-      INT    _nb_seg;
-      INT*   _seg0;
-      INT*   _seg1;
-      INT*   _seg_flag;
+      int    _nb_seg;
+      int*   _seg0;
+      int*   _seg1;
+      int*   _seg_flag;
 
       Pt2di*        _p_proj;
 

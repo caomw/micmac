@@ -42,10 +42,10 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 namespace Reechantillonnage
 {
-   template<class Type> Type plus_proche_voisin(Type** im, INT tx, INT ty, Pt2dr p)
+   template<class Type> Type plus_proche_voisin(Type** im, int tx, int ty, Pt2dr p)
    {
-      INT x = (INT)(p.x + .5);
-      INT y = (INT)(p.y + .5);
+      int x = (int)(p.x + .5);
+      int y = (int)(p.y + .5);
       if( x <  0 || x >= tx || y <  0 || y >= ty )
         return 0;
       return im[y][x];
@@ -53,22 +53,22 @@ namespace Reechantillonnage
 
 /************************************************************************************/
 
-   template<class Type> Type biline (Type** im, INT tx, INT ty, Pt2dr p)//tx ty la taille de l'image en x et y
+   template<class Type> Type biline (Type** im, int tx, int ty, Pt2dr p)//tx ty la taille de l'image en x et y
    {
-      INT x_min = (INT)(p.x);
-      INT y_min = (INT)(p.y);
-      INT x_max = x_min+1;
-      INT y_max = y_min+1;
+      int x_min = (int)(p.x);
+      int y_min = (int)(p.y);
+      int x_max = x_min+1;
+      int y_max = y_min+1;
 
       if( x_min < 0 || y_min < 0  || x_max > tx-1 || y_max > ty-1 )
           return 0;
 
-      REAL p_x_x_min = p.x  - x_min;
-      REAL p_x_x_max = p.x  - x_max;
-      REAL p_y_y_min = p.y  - y_min;
-      REAL p_y_y_max = p.y  - y_max;
+      double_t p_x_x_min = p.x  - x_min;
+      double_t p_x_x_max = p.x  - x_max;
+      double_t p_y_y_min = p.y  - y_min;
+      double_t p_y_y_max = p.y  - y_max;
 
-      REAL r =   p_x_x_min * p_y_y_min * im[y_max][x_max]
+      double_t r =   p_x_x_min * p_y_y_min * im[y_max][x_max]
                + p_x_x_max * p_y_y_max * im[y_min][x_min]
                - p_x_x_min * p_y_y_max * im[y_min][x_max]
                - p_x_x_max * p_y_y_min * im[y_max][x_min];
@@ -78,50 +78,50 @@ namespace Reechantillonnage
 
 /************************************************************************************/
 
-   template<class Type> Type bicube (Type** im, INT tx, INT ty, Pt2dr p)
+   template<class Type> Type bicube (Type** im, int tx, int ty, Pt2dr p)
    {
                                                            //attention la valeur peut etre negative : probleme apres casting
-      if(     (p.x < 1.0) || (p.x >= (REAL)(tx - 2))
-           || (p.y < 1.0) || (p.y >= (REAL)(ty - 2))
+      if(     (p.x < 1.0) || (p.x >= (double_t)(tx - 2))
+           || (p.y < 1.0) || (p.y >= (double_t)(ty - 2))
         )
            return  0;
 
-      INT xc = (INT) ( p.x ) ;
-      INT xc__1 = xc - 1;
-      INT xc_1  = xc + 1;
-      INT xc_2  = xc + 2;
-      INT yc = (INT) ( p.y ) ;
+      int xc = (int) ( p.x ) ;
+      int xc__1 = xc - 1;
+      int xc_1  = xc + 1;
+      int xc_2  = xc + 2;
+      int yc = (int) ( p.y ) ;
 
-      REAL dc  = p.x - xc;
-      REAL dc2 = dc * dc;
-      REAL dl  = p.y - yc;
-      REAL dl2 = dl * dl;
+      double_t dc  = p.x - xc;
+      double_t dc2 = dc * dc;
+      double_t dl  = p.y - yc;
+      double_t dl2 = dl * dl;
 
-      REAL coefc0 =   -dc * (1 - dc) * (1 - dc);
-      REAL coefc1 =   (1 - (2 - dc) * dc2);
-      REAL coefc2 =   dc * (1 + dc -  dc2);
-      REAL coefc3 =   -dc2 * (1 - dc);
+      double_t coefc0 =   -dc * (1 - dc) * (1 - dc);
+      double_t coefc1 =   (1 - (2 - dc) * dc2);
+      double_t coefc2 =   dc * (1 + dc -  dc2);
+      double_t coefc3 =   -dc2 * (1 - dc);
 
                                         // interpolation sur les colonnes
       int yv = yc - 1;
-      REAL valcol0 = coefc0 * im[yv][xc__1]     + coefc1 * im[yv][xc] + coefc2 * im[yv][xc_1] + coefc3 * im[yv][xc_2];
-      REAL valcol1 = coefc0 * im[(++yv)][xc__1] + coefc1 * im[yv][xc] + coefc2 * im[yv][xc_1] + coefc3 * im[yv][xc_2];
-      REAL valcol2 = coefc0 * im[(++yv)][xc__1] + coefc1 * im[yv][xc] + coefc2 * im[yv][xc_1] + coefc3 * im[yv][xc_2];
-      REAL valcol3 = coefc0 * im[(++yv)][xc__1] + coefc1 * im[yv][xc] + coefc2 * im[yv][xc_1] + coefc3 * im[yv][xc_2];
+      double_t valcol0 = coefc0 * im[yv][xc__1]     + coefc1 * im[yv][xc] + coefc2 * im[yv][xc_1] + coefc3 * im[yv][xc_2];
+      double_t valcol1 = coefc0 * im[(++yv)][xc__1] + coefc1 * im[yv][xc] + coefc2 * im[yv][xc_1] + coefc3 * im[yv][xc_2];
+      double_t valcol2 = coefc0 * im[(++yv)][xc__1] + coefc1 * im[yv][xc] + coefc2 * im[yv][xc_1] + coefc3 * im[yv][xc_2];
+      double_t valcol3 = coefc0 * im[(++yv)][xc__1] + coefc1 * im[yv][xc] + coefc2 * im[yv][xc_1] + coefc3 * im[yv][xc_2];
 
                                        // interpolation sur la ligne
 
 
-      REAL somme =   (   -dl * (1 - dl) * (1 - dl) * valcol0
+      double_t somme =   (   -dl * (1 - dl) * (1 - dl) * valcol0
                        + (1 - (2 - dl) * dl2)      * valcol1
                        + dl * (1 + dl - dl2)       * valcol2
                        - dl2 * (1 - dl)            * valcol3
                      );
 
-     REAL max; 
-     REAL min; // = (REAL) std::numeric_limits<Type>::min();
+     double_t max; 
+     double_t min; // = (double_t) std::numeric_limits<Type>::min();
 
-     if(sizeof(Type) == sizeof(U_INT1) ) { max = 255; min = 0; }
+     if(sizeof(Type) == sizeof(U_int1) ) { max = 255; min = 0; }
                                         
 
      if( somme > max ) somme = max;

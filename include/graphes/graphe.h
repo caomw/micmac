@@ -55,7 +55,7 @@ template <class T> class ElTabDyn
     public :
       ElTabDyn() : _tvals (0), _nb(0) {}
       ~ElTabDyn();
-      INT nb() { return _nb;}
+      int nb() { return _nb;}
 
       T & operator [] (int k)
       {
@@ -63,21 +63,21 @@ template <class T> class ElTabDyn
          return _tvals[i0(k)][i1(k)][i2(k)];
       }
       void augment_index();
-      void set_intexable_until(INT NB);
+      void set_intexable_until(int NB);
 
 
     private :
 
-      T ** & t1(INT k) {return  _tvals [i0(k)]       ;}
-      T *  & t2(INT k) {return  _tvals [i0(k)][i1(k)];}
+      T ** & t1(int k) {return  _tvals [i0(k)]       ;}
+      T *  & t2(int k) {return  _tvals [i0(k)][i1(k)];}
 
-      INT   i0(INT k){return  k/v2    ;}
-      INT   i1(INT k){return (k/v1)%v1;}
-      INT   i2(INT k){return  k%v1    ;}
+      int   i0(int k){return  k/v2    ;}
+      int   i1(int k){return (k/v1)%v1;}
+      int   i2(int k){return  k%v1    ;}
 
         
       T *** _tvals;
-      INT   _nb;
+      int   _nb;
 
       enum
       {
@@ -144,13 +144,13 @@ template <class AttrSom,class AttrArc>
                _ts   (ts) ,
                _flag (ts.nb()?ts[0]->gr().alloc_flag_som() : -1)
           {
-               for (INT k=0; k<_ts.nb() ; k++)
+               for (int k=0; k<_ts.nb() ; k++)
                    _ts[k]->flag_set_kth_true(_flag);
           }
 
           virtual ~ElSubGrapheInFilo() 
           {
-               for (INT k=0; k<_ts.nb() ; k++)
+               for (int k=0; k<_ts.nb() ; k++)
                    _ts[k]->flag_set_kth_false(_flag);
                if(_flag>=0)
                    _ts[0]->gr().free_flag_som(_flag);
@@ -159,7 +159,7 @@ template <class AttrSom,class AttrArc>
       private :
 
           ElFilo<TSom *> & _ts;
-          INT     _flag;
+          int     _flag;
 
 };
 
@@ -179,8 +179,8 @@ template <class AttrSom,class AttrArc>
 
           virtual bool   inS(TSom &)  {return true;}
           virtual bool   inA(TArc &)  {return true;} 
-          virtual REAL   pds(TArc &) {return 1.0;} 
-          virtual REAL   pds(TSom &) {return 0.0;} 
+          virtual double_t   pds(TArc &) {return 1.0;} 
+          virtual double_t   pds(TSom &) {return 0.0;} 
           virtual Pt2dr  pt(TSom &)
           {
                 ELISE_ASSERT(false,"ElSubGraphe::pt");
@@ -231,30 +231,30 @@ template <class AttrSom,class AttrArc> class ElArc
 
             void    remove();
 
-            bool  flag_kth(INT k) const         {return _flag.kth(k);  }
-            void  flag_set_kth_true(INT k)      {_flag.set_kth_true(k);}
-            void  flag_set_kth_false(INT k)     {_flag.set_kth_false(k);}
-            void  flag_set_kth(INT k,bool val)  {_flag.set_kth(k,val);}
-            void  flag_inv_kth(INT k)  {_flag.set_kth(k,!flag_kth(k));}
+            bool  flag_kth(int k) const         {return _flag.kth(k);  }
+            void  flag_set_kth_true(int k)      {_flag.set_kth_true(k);}
+            void  flag_set_kth_false(int k)     {_flag.set_kth_false(k);}
+            void  flag_set_kth(int k,bool val)  {_flag.set_kth(k,val);}
+            void  flag_inv_kth(int k)  {_flag.set_kth(k,!flag_kth(k));}
 
 
-            void  sym_flag_set_kth_true(INT k)
+            void  sym_flag_set_kth_true(int k)
             {
                   flag_set_kth_true(k);
                   arc_rec().flag_set_kth_true(k);
             }
-            void  sym_flag_set_kth_false(INT k)
+            void  sym_flag_set_kth_false(int k)
             {
                   flag_set_kth_false(k);
                   arc_rec().flag_set_kth_false(k);
             }
 
-            void  sym_flag_set_kth(INT k,bool val)
+            void  sym_flag_set_kth(int k,bool val)
             {
                   flag_set_kth(k,val);
                   arc_rec().flag_set_kth(k,val);
             }
-            void sym_flag_inv_kth(INT k)
+            void sym_flag_inv_kth(int k)
             {
                   sym_flag_set_kth(k,!flag_kth(k));
             }
@@ -295,7 +295,7 @@ template <class AttrSom,class AttrArc> class ElArcIterator
 
             friend class  ElSom<AttrSom,AttrArc>;
 
-            void operator ++ (INT) 
+            void operator ++ (int) 
             {
                  if (_a)
                  {
@@ -358,7 +358,7 @@ template <class AttrSom,class AttrArc> class  ElSom
             friend class ElTabDyn<TSom>;
             friend class ElSomIterator<AttrSom,AttrArc>;
 
-            INT nb_succ(TSubGraphe &);
+            int nb_succ(TSubGraphe &);
             TArcIter begin(TSubGraphe & sub) 
             { 
                  TArcIter res(sub , (sub.inS(*this)?_succ:0));
@@ -377,26 +377,26 @@ template <class AttrSom,class AttrArc> class  ElSom
             void remove();
             AttrSom & attr() {return _attr;} 
             const AttrSom & attr() const {return _attr;} 
-            INT num () const {return _num;}
+            int num () const {return _num;}
             TGraphe  & gr() {return *_gr;}
 
-            bool  flag_kth(INT k)  const        {return _flag.kth(k);  }
-            void  flag_set_kth_true(INT k)      {_flag.set_kth_true(k);}
-            void  flag_set_kth_false(INT k)     {_flag.set_kth_false(k);}
-            void  flag_set_kth(INT k,bool val)  {_flag.set_kth(k,val);}
+            bool  flag_kth(int k)  const        {return _flag.kth(k);  }
+            void  flag_set_kth_true(int k)      {_flag.set_kth_true(k);}
+            void  flag_set_kth_false(int k)     {_flag.set_kth_false(k);}
+            void  flag_set_kth(int k,bool val)  {_flag.set_kth(k,val);}
 			
             ElSom() : _gr(0), _succ(0) {}
             ~ElSom();
        private  :
             TArc * _remove_succ(TSom *);
 
-            ElSom(TGraphe* gr,const AttrSom & attr,INT Num) ;
+            ElSom(TGraphe* gr,const AttrSom & attr,int Num) ;
 
             bool         _alive;
             TGraphe *    _gr;
             TArc  *      _succ;
             AttrSom      _attr;
-            INT          _num;
+            int          _num;
             ElTabFlag    _flag;
             bool really_in(TSubGraphe & sub){return _alive && sub.inS(*this);}
 };
@@ -427,9 +427,9 @@ template <class  AttrSom,class AttrArc> class ElGraphe
             TSomIter end(TSubGraphe & sub)   
                      { return TSomIter(*this,sub,_tsom.nb());}
 
-             INT   nb_som_phys() {return _tsom.nb();}
-             INT   nb_som()      {return _nb_som;}
-             INT   maj_num() {return _tsom.nb();}
+             int   nb_som_phys() {return _tsom.nb();}
+             int   nb_som()      {return _nb_som;}
+             int   maj_num() {return _tsom.nb();}
 
              TArc * arc_s1s2(TSom & s1,TSom & s2);
 
@@ -451,11 +451,11 @@ template <class  AttrSom,class AttrArc> class ElGraphe
              }
              virtual ~ElGraphe();
 
-             INT   alloc_flag_som() {return _flag_som_alloc.flag_alloc();}
-             INT   alloc_flag_arc() {return _flag_arc_alloc.flag_alloc();}
+             int   alloc_flag_som() {return _flag_som_alloc.flag_alloc();}
+             int   alloc_flag_arc() {return _flag_arc_alloc.flag_alloc();}
 
-             void    free_flag_som(INT k) { _flag_som_alloc.flag_free(k);}
-             void    free_flag_arc(INT k) { _flag_arc_alloc.flag_free(k);}
+             void    free_flag_som(int k) { _flag_som_alloc.flag_free(k);}
+             void    free_flag_arc(int k) { _flag_arc_alloc.flag_free(k);}
             
 
 
@@ -471,10 +471,10 @@ template <class  AttrSom,class AttrArc> class ElGraphe
             TArc & _add_arc(TSom & s1,TSom &s2,const AttrArc & a1);
             static void kill_arc(TArc * la);
 
-            INT             _nb_som;
+            int             _nb_som;
             TArc *          _larc_free;
             ElTabDyn<TSom>  _tsom;
-            ElFilo<INT>     _free_number;
+            ElFilo<int>     _free_number;
 
             ElFlagAllocator   _flag_som_alloc;
             ElFlagAllocator   _flag_arc_alloc;
@@ -504,7 +504,7 @@ template <class AttrSom,class AttrArc> class ElSomIterator
 
             friend class ElGraphe<AttrSom,AttrArc> ;
 
-            void operator ++ (INT) 
+            void operator ++ (int) 
             {
                  do 
                       _k++ ;
@@ -523,7 +523,7 @@ template <class AttrSom,class AttrArc> class ElSomIterator
 
      private  :
 
-            ElSomIterator(TGraphe & gr,TSubGraphe & sub_gr,INT k) :
+            ElSomIterator(TGraphe & gr,TSubGraphe & sub_gr,int k) :
                     _gr(gr),
                     _sub_gr (sub_gr),
                     _k (k)
@@ -532,7 +532,7 @@ template <class AttrSom,class AttrArc> class ElSomIterator
             
             TGraphe & _gr;
             TSubGraphe & _sub_gr;
-            INT  _k;
+            int  _k;
 
 };
 

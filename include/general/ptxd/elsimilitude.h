@@ -63,7 +63,7 @@ class ElSimilitude : public cElMap2D
                    );
          }
 
-         static ElSimilitude SimOfCentre(Pt2dr centre,REAL rho,REAL teta)
+         static ElSimilitude SimOfCentre(Pt2dr centre,double_t rho,double_t teta)
          {
                 return SimOfCentre
                        (

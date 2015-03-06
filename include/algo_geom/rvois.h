@@ -85,7 +85,7 @@ template <class Type,class Fpt,class Act>  void
          (
              Type * begin,
              Type * end,
-             REAL  dist,
+             double_t  dist,
              Fpt   fpt,
              Act   act
          )
@@ -93,12 +93,12 @@ template <class Type,class Fpt,class Act>  void
      ElComparPtOn_x_then_y<Type,Fpt> Cmp(fpt);
      std::sort(begin,end,Cmp);
 
-     REAL d2 = ElSquare(dist);
+     double_t d2 = ElSquare(dist);
      for( Type * it1=begin; it1!=end ; it1++)
      {
           Pt2dr p1 = fpt(*it1);
           Type * it2 = it1;
-          REAL x_lim = p1.x + dist;
+          double_t x_lim = p1.x + dist;
           it2++;
           while ( it2 != end &&  (fpt(*it2).x < x_lim))
           {
@@ -161,14 +161,14 @@ template <class Type,class Fpt,class Act>
               (
                     RvoisinsSortX<Type,Fpt> &  RV,
                     Pt2di                      pt,
-                    REAL                       dist,
+                    double_t                       dist,
                     Act &                      act
               )
 {
       typedef typename RvoisinsSortX<Type,Fpt>::Pair Pair;
-      INT  xinf = round_down(pt.x-dist);
-      INT  xsup = round_up(pt.x+dist);
-      REAL d2 = ElSquare(dist);
+      int  xinf = round_down(pt.x-dist);
+      int  xsup = round_up(pt.x+dist);
+      double_t d2 = ElSquare(dist);
       Pair * end = RV._objs.tab() +RV._objs.nb();
 
       for (

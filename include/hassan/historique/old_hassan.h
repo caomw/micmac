@@ -53,13 +53,13 @@ template  <class Type> class Data_Tab_CPT_REF : public RC_Object
      public :
      private :
 
-         Data_Tab_CPT_REF(const Type * objects,INT nb);
-         Data_Tab_CPT_REF(INT nb);
+         Data_Tab_CPT_REF(const Type * objects,int nb);
+         Data_Tab_CPT_REF(int nb);
          virtual ~Data_Tab_CPT_REF();
 
          Type *   _objects;
-         INT        _nb;
-         INT        _capa;
+         int        _nb;
+         int        _capa;
          void  push(Type);
 };
 

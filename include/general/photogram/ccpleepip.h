@@ -73,8 +73,8 @@ private :
     std::string        mPrefRight;
     Pt2di              mSzIn;
     double             mFoc;
-    ElMatrix<REAL>     mMatM2C;
-    ElMatrix<REAL>     mMatC2M;
+    ElMatrix<double_t>     mMatM2C;
+    ElMatrix<double_t>     mMatC2M;
 
     CamStenopeIdeale   mCamOut1;
     CamStenopeIdeale   mCamOut2;

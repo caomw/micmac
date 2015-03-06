@@ -46,54 +46,54 @@ Header-MicMac-eLiSe-25/06/2007*/
 class Isol_region
 {
     public:
-      Im2D_U_INT1   im_src;
-      Im2D<INT,INT> im_reg;
+      Im2D_U_int1   im_src;
+      Im2D<int,int> im_reg;
       
       Isol_region(
-                   Im2D_U_INT1   Im_src,
-                   Im2D<INT,INT> Im_reg,
-                   INT           Nb_min_reg,
-                   REAL4         Param_der,
-                   REAL4         S_grad_min,
-                   REAL4         S_grad_max,
-                   REAL4         sbas,
-                   REAL4         shaut,
+                   Im2D_U_int1   Im_src,
+                   Im2D<int,int> Im_reg,
+                   int           Nb_min_reg,
+                   double_t4         Param_der,
+                   double_t4         S_grad_min,
+                   double_t4         S_grad_max,
+                   double_t4         sbas,
+                   double_t4         shaut,
 		   Output        wgr,
-		   INT           nb_colour=8,
+		   int           nb_colour=8,
                    bool          hyst=true,
-                   INT           Nb_min_cont = 10
+                   int           Nb_min_cont = 10
                  );
                  
       Isol_region(
-                   Im2D_U_INT1   Im_src,
-                   REAL4         Param_der,
-                   REAL4         sbas,
-                   REAL4         shaut,
+                   Im2D_U_int1   Im_src,
+                   double_t4         Param_der,
+                   double_t4         sbas,
+                   double_t4         shaut,
 		   Output        wgr,
-		   INT           nb_colour=8,
+		   int           nb_colour=8,
                    bool          hyst=true,
-                   INT           Nb_min_cont = 10
+                   int           Nb_min_cont = 10
                  );
 
-       void xhyster(REAL4 sbas=10, REAL4 shaut=20);
-       Im2D_REAL4  get_norm(){return norm;}
-       Im2D_REAL4  get_teta(){return teta;}
-       Im2D_U_INT1 get_cont(){return cont;}
+       void xhyster(double_t4 sbas=10, double_t4 shaut=20);
+       Im2D_double_t4  get_norm(){return norm;}
+       Im2D_double_t4  get_teta(){return teta;}
+       Im2D_U_int1 get_cont(){return cont;}
        ElList<Pt2di> get_list_region(){return l;}
 
     private:
-       Im2D_REAL4    gradx;
-       Im2D_REAL4    grady;
-       Im2D_REAL4    norm;
-       Im2D_REAL4    teta;
-       Im2D_U_INT1   m_loc;
-       Im2D_U_INT1   cont;
+       Im2D_double_t4    gradx;
+       Im2D_double_t4    grady;
+       Im2D_double_t4    norm;
+       Im2D_double_t4    teta;
+       Im2D_U_int1   m_loc;
+       Im2D_U_int1   cont;
        Output        _wgr;
        ElList<Pt2di>   l;
-       REAL4         param_der;
-       REAL4         s_grad_min;
-       REAL4         s_grad_max;
-       REAL4         s_grad; 
+       double_t4         param_der;
+       double_t4         s_grad_min;
+       double_t4         s_grad_max;
+       double_t4         s_grad; 
        int           nb_min_reg;
        int           nb_reg;
        int           nb_pt_reg;
@@ -105,10 +105,10 @@ class Isol_region
        int           nb_min_cont;
        
        void dilate_reg();
-       Liste_Pts_INT2  dilate_reg(Flux_Pts flx);
+       Liste_Pts_int2  dilate_reg(Flux_Pts flx);
 
        void max_loc();
-       void hyster(REAL4,REAL4);
+       void hyster(double_t4,double_t4);
        void cal_teta();
        void extract_reg();   
        void parcour(int x, int y);
@@ -125,23 +125,23 @@ class Data_reg:public RC_Object
      public:
      private:
     
-          Data_reg(Liste_Pts_U_INT2 reg, INT etiq, INT nr);
+          Data_reg(Liste_Pts_U_int2 reg, int etiq, int nr);
           virtual ~Data_reg(){}
 
-         Liste_Pts_U_INT2  _reg;
-         INT               _etiq;
-         INT               _nr;
-         REAL              _w; 
+         Liste_Pts_U_int2  _reg;
+         int               _etiq;
+         int               _nr;
+         double_t              _w; 
          ElList<Hregion>      _lr;
-         REAL *            _coef;
-         INT               _nb;
-         INT               _capa;
-         INT               _z;
-         REAL              _zl0;
-         REAL              _dz;
+         double_t *            _coef;
+         int               _nb;
+         int               _capa;
+         int               _z;
+         double_t              _zl0;
+         double_t              _dz;
          bool              _visite;
-         void              set_capa(INT nb);
-         void              push(REAL);
+         void              set_capa(int nb);
+         void              push(double_t);
          void              push(Hregion);
 };
 
@@ -151,30 +151,30 @@ class Hregion : public  PRC0
      public :
      
            Hregion ():PRC0(0){}
-           Hregion (Liste_Pts_U_INT2 reg, INT etiq, INT nr);
+           Hregion (Liste_Pts_U_int2 reg, int etiq, int nr);
 
 //           Hregion* ptr();
 
-           INT   capa();
-           INT   z();  
+           int   capa();
+           int   z();  
            bool  visite();
-           INT   etiq();
-           REAL  zl0();
-           REAL  dz();
+           int   etiq();
+           double_t  zl0();
+           double_t  dz();
            ElList<Hregion> lrv();
-           void  push(REAL);
+           void  push(double_t);
            void  push(Hregion);
            void  set_v(bool);
-           void  set_z(INT);
-           void  set_zl0(REAL);
-           void  set_dz(REAL);
-           void  set_capa(INT);
-           REAL  & operator [](INT i);
-           INT   nr();
-           REAL  poid();
+           void  set_z(int);
+           void  set_zl0(double_t);
+           void  set_dz(double_t);
+           void  set_capa(int);
+           double_t  & operator [](int i);
+           int   nr();
+           double_t  poid();
            void  cal_poid();
-           Liste_Pts_U_INT2  rg();
-           REAL  cout(INT, REAL);
+           Liste_Pts_U_int2  rg();
+           double_t  cout(int, double_t);
 
     private :
      

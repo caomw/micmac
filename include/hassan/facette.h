@@ -50,13 +50,13 @@ template  <class Type> class Data_Tab_CPT_REF : public RC_Object
      public :
      private :
 
-         Data_Tab_CPT_REF(const Type * objects,INT nb);
-         Data_Tab_CPT_REF(INT nb);
+         Data_Tab_CPT_REF(const Type * objects,int nb);
+         Data_Tab_CPT_REF(int nb);
          virtual ~Data_Tab_CPT_REF();
 
          Type *   _objects;
-         INT        _nb;
-         INT        _capa;
+         int        _nb;
+         int        _capa;
          void  push(Type);
 };
 
@@ -67,11 +67,11 @@ template  <class Type> class Tab_CPT_REF : public PRC0
       
            Tab_CPT_REF(Type p0,Type p1,Type p2);
            Tab_CPT_REF(Type p0,Type p1,Type p2,Type p3);
-           Tab_CPT_REF(const Type *objects,INT nb);
-           Tab_CPT_REF(INT nb);
+           Tab_CPT_REF(const Type *objects,int nb);
+           Tab_CPT_REF(int nb);
 
-           INT   nb();
-           Type & operator [](INT i);
+           int   nb();
+           Type & operator [](int i);
            void  push(Type);
 
      private :
@@ -95,22 +95,22 @@ class Data_facette_3d : public RC_Object
      public :
      private :
 
-         Data_facette_3d(const Pt3dr * objects,INT nb);
-         Data_facette_3d(INT nb);
+         Data_facette_3d(const Pt3dr * objects,int nb);
+         Data_facette_3d(int nb);
          virtual ~Data_facette_3d();
 
          Pt3dr *  _objects;
-         INT      _nb;
-         INT      _capa;
+         int      _nb;
+         int      _capa;
          Pt3dr    _norm;
          bool     _statu;
          bool     _visu;
-         U_INT1   _coulor;
-         REAL     _poids;
-         INT      _refplan;
+         U_int1   _coulor;
+         double_t     _poids;
+         int      _refplan;
          void     push(Pt3dr);
-         void     poids(REAL pds){_poids = pds;}
-         REAL     poids(){return _poids;}
+         void     poids(double_t pds){_poids = pds;}
+         double_t     poids(){return _poids;}
 };
 
 class Facette_3d : public PRC0
@@ -120,28 +120,28 @@ class Facette_3d : public PRC0
            Facette_3d();
            Facette_3d(Pt3dr p0,Pt3dr p1,Pt3dr p2);
            Facette_3d(Pt3dr p0,Pt3dr p1,Pt3dr p2,Pt3dr p3);
-           Facette_3d(const Pt3dr *objects,INT nb);
-           Facette_3d(Facette_2D f2d, REAL4 z=0);
-           Facette_3d(Facette_2d f2d, REAL4 z=0);
-           Facette_3d(INT nb);
+           Facette_3d(const Pt3dr *objects,int nb);
+           Facette_3d(Facette_2D f2d, double_t4 z=0);
+           Facette_3d(Facette_2d f2d, double_t4 z=0);
+           Facette_3d(int nb);
 
-           Facette_3d trans(Facette_2D f2d, REAL4 z=0);
-           Facette_3d trans(Facette_2d f2d, REAL4 z=0);
+           Facette_3d trans(Facette_2D f2d, double_t4 z=0);
+           Facette_3d trans(Facette_2d f2d, double_t4 z=0);
            
            Facette_2D to_2D();
            Facette_2d to_2d();
 
            void set(Pt3dr p0,Pt3dr p1,Pt3dr p2);
            void set(Pt3dr p0,Pt3dr p1,Pt3dr p2,Pt3dr p3);
-           void set(const Pt3dr *objects,INT nb);
-           void set(INT);
-           void set(INT, Pt3dr v);
-           void set(U_INT1 coul);
+           void set(const Pt3dr *objects,int nb);
+           void set(int);
+           void set(int, Pt3dr v);
+           void set(U_int1 coul);
            bool test();
            bool test_v(Pt3dr ray);
            void normer();
            void initialiser();
-           bool intersect_ray(Pt3dr ray, Pt3dr p, REAL4& t);
+           bool intersect_ray(Pt3dr ray, Pt3dr p, double_t4& t);
            bool test_into(Pt3dr pi);
            ElList<Facette_3d> intersection(Facette_3d f);
            ElList<Facette_3d> intersection(ElList<Facette_3d> lf);
@@ -149,26 +149,26 @@ class Facette_3d : public PRC0
 
            void chc(Pt3dr trans);
            void rot(Pt3dr per);
-           void rot(REAL4 teta);
+           void rot(double_t4 teta);
 
 
-           REAL surface();               //cas facette plane
+           double_t surface();               //cas facette plane
            Pt3dr centre_gravite();
 
 //           Facette_3d* ptr();
-           INT   nb();
+           int   nb();
            Pt3dr  norm();
            bool  statu();
            bool  visu();
-           U_INT1 coulor();
-           void setrefplan(INT ref);
-           INT  refplan();
+           U_int1 coulor();
+           void setrefplan(int ref);
+           int  refplan();
 
-           // void  poids(REAL pds){dtd()->poids(pds);}
-           // REAL  poids()        {return dtd()->poids();}
+           // void  poids(double_t pds){dtd()->poids(pds);}
+           // double_t  poids()        {return dtd()->poids();}
 
 
-           Pt3dr & operator [](INT i);
+           Pt3dr & operator [](int i);
 		   std::ostream& operator >>(std::ofstream& os);
 		   std::istream& operator <<(std::istream& is);
            void  push(Pt3dr);
@@ -184,27 +184,27 @@ class Facette
 {
     public :
       Pt3dr* point;
-      INT    nb;
+      int    nb;
       Pt3dr  norm;
       bool   statu;
       bool   visu;
-      U_INT1 coulor;
+      U_int1 coulor;
 
       Facette();
       Facette(Pt3dr p0, Pt3dr p1, Pt3dr p2);
       Facette(Pt3dr p0, Pt3dr p1, Pt3dr p2, Pt3dr p3);
-      Facette(INT, Pt3dr*);
+      Facette(int, Pt3dr*);
       void set(Pt3dr, Pt3dr, Pt3dr);
       void set(Pt3dr, Pt3dr, Pt3dr, Pt3dr);
-      void set(INT, Pt3dr*);
-      void set(INT);
-      void set(INT, Pt3dr);
-      void set_coulor(U_INT1 coul){coulor = coul;}
+      void set(int, Pt3dr*);
+      void set(int);
+      void set(int, Pt3dr);
+      void set_coulor(U_int1 coul){coulor = coul;}
       bool test();
       bool test_v(Pt3dr);
       void normer();
-      bool intersect_ray_plan(Pt3dr, Pt3dr, Pt3dr&, REAL4&);
-      bool intersect_ray(Pt3dr, Pt3dr, REAL4&);
+      bool intersect_ray_plan(Pt3dr, Pt3dr, Pt3dr&, double_t4&);
+      bool intersect_ray(Pt3dr, Pt3dr, double_t4&);
       bool test_into(Pt3dr);
       virtual ~Facette(){ delete [] point; }
           
@@ -221,13 +221,13 @@ class Data_facette_2d : public RC_Object
      public :
      private :
 
-         Data_facette_2d(const Pt2dr * objects,INT nb);
-         Data_facette_2d(INT nb);
+         Data_facette_2d(const Pt2dr * objects,int nb);
+         Data_facette_2d(int nb);
          virtual ~Data_facette_2d();
 
          Pt2dr *  _objects;
-         INT      _nb;
-         INT      _capa;
+         int      _nb;
+         int      _capa;
          void     push(Pt2dr);
 };
 
@@ -238,18 +238,18 @@ class Facette_2d : public PRC0
            Facette_2d();
            Facette_2d(Pt2dr p0,Pt2dr p1,Pt2dr p2);
            Facette_2d(Pt2dr p0,Pt2dr p1,Pt2dr p2,Pt2dr p3);
-           Facette_2d(const Pt2dr *objects,INT nb);
+           Facette_2d(const Pt2dr *objects,int nb);
            Facette_2d(Facette_2D f2d);
-           Facette_2d(INT nb);
+           Facette_2d(int nb);
 
-           INT   nb();
-           Pt2dr & operator [](INT i);
+           int   nb();
+           Pt2dr & operator [](int i);
            void  push(Pt2dr);
            Facette_2D to_2D();
-           ElList<REAL> get_perpend_directions(REAL dif = 5, REAL long_min = 3);
+           ElList<double_t> get_perpend_directions(double_t dif = 5, double_t long_min = 3);
 
            bool if_into(Pt2dr);
-           bool if_intersect(Facette_2d f, REAL petit_surf = .00001);
+           bool if_intersect(Facette_2d f, double_t petit_surf = .00001);
 
      private :
 

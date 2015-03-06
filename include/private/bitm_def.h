@@ -45,16 +45,16 @@ Header-MicMac-eLiSe-25/06/2007*/
 #include <GenIm>
 #include <Elise_File_Im>
 
-extern INT PTS_00000000000000 [];
+extern int PTS_00000000000000 [];
 
 class  Image_Lut_1D_Compile
 {
 public :
-    INT * _l;
-    INT   _b1;
-    INT   _b2;
+    int * _l;
+    int   _b1;
+    int   _b2;
 
-    Image_Lut_1D_Compile(Im1D<INT4,INT>);
+    Image_Lut_1D_Compile(Im1D<int4,int>);
 };
 
 
@@ -65,48 +65,48 @@ public :
 
     virtual ~DataGenIm();
 
-    virtual INT sz_el() const = 0;
-    virtual INT sz_base_el() const = 0;
-    virtual INT dim()   const = 0;
-    virtual INT sz_tot() const = 0;   // Number of pixels
+    virtual int sz_el() const = 0;
+    virtual int sz_base_el() const = 0;
+    virtual int dim()   const = 0;
+    virtual int sz_tot() const = 0;   // Number of pixels
     virtual bool integral_type() const = 0;
 
     // p0, p1 => return limit of bounding box
-    virtual const INT  * p0() const = 0;
-    virtual const INT  * p1() const = 0;
+    virtual const int  * p0() const = 0;
+    virtual const int  * p1() const = 0;
 
 
-    virtual void  out_rle(void *,INT,const INT*,INT offs_0) const  = 0;
-    virtual void  out_rle(void *,INT,const REAL*,INT offs_0)const  = 0;
-    virtual void  * calc_adr_seg(INT *)     = 0;
-    virtual void  input_rle(void *,INT,const void*,INT offs_0)const  = 0;
+    virtual void  out_rle(void *,int,const int*,int offs_0) const  = 0;
+    virtual void  out_rle(void *,int,const double_t*,int offs_0)const  = 0;
+    virtual void  * calc_adr_seg(int *)     = 0;
+    virtual void  input_rle(void *,int,const void*,int offs_0)const  = 0;
 
-    virtual void  striped_input_rle(void *,INT nb,INT dim,const void*,INT offs_0) const = 0;
-    virtual void  striped_output_rle(void *,INT nb,INT dim,const void*,INT offs_0) const = 0;
+    virtual void  striped_input_rle(void *,int nb,int dim,const void*,int offs_0) const = 0;
+    virtual void  striped_output_rle(void *,int nb,int dim,const void*,int offs_0) const = 0;
 
-    virtual void  verif_in_range_type(INT*,const Pack_Of_Pts *) ;
-    virtual void  verif_in_range_type(REAL*,const Pack_Of_Pts *);
+    virtual void  verif_in_range_type(int*,const Pack_Of_Pts *) ;
+    virtual void  verif_in_range_type(double_t*,const Pack_Of_Pts *);
 
 
-    static void  verif_in_range_type(INT*,const Pack_Of_Pts *,INT,INT) ;
-    static void  verif_in_range_type(REAL*,const Pack_Of_Pts *,INT,INT);
+    static void  verif_in_range_type(int*,const Pack_Of_Pts *,int,int) ;
+    static void  verif_in_range_type(double_t*,const Pack_Of_Pts *,int,int);
 
     // This function is used for the not rle input or output, so it is described
     // in each specialization of dimention to allow a quicker implementation
 
-    virtual void out_pts_integer(Const_INT_PP coord,INT nb,const void *)  = 0;
-    virtual void input_pts_integer(void *,Const_INT_PP coord,INT nb) const  = 0;
-    virtual void input_pts_reel(REAL *,Const_REAL_PP coord,INT nb) const  = 0;
+    virtual void out_pts_integer(Const_int_PP coord,int nb,const void *)  = 0;
+    virtual void input_pts_integer(void *,Const_int_PP coord,int nb) const  = 0;
+    virtual void input_pts_reel(double_t *,Const_double_t_PP coord,int nb) const  = 0;
 
-    virtual INT vmin() const = 0;
-    virtual INT vmax() const = 0;
+    virtual int vmin() const = 0;
+    virtual int vmax() const = 0;
 
     virtual void out_assoc
     (
             void * out, // never 0
             const OperAssocMixte &,
-            Const_INT_PP coord,
-            INT nb,
+            Const_int_PP coord,
+            int nb,
             const void * values
             )  const = 0;
 
@@ -116,11 +116,11 @@ public :
 
     // By default : generate a fatal error. Redefined to 2-dimentionnal images.
     virtual void q_dilate
-    (  Std_Pack_Of_Pts<INT> * set_dilated,
+    (  Std_Pack_Of_Pts<int> * set_dilated,
        char **,
-       const Std_Pack_Of_Pts<INT> * set_to_dilate,
-       INT **,
-       INT   nb_v,
+       const Std_Pack_Of_Pts<int> * set_to_dilate,
+       int **,
+       int   nb_v,
        Image_Lut_1D_Compile   func_selection,
        Image_Lut_1D_Compile   func_update
        );
@@ -128,7 +128,7 @@ public :
 
     // def error fatale
     virtual void tiff_predictor
-    (INT nb_el,INT nb_ch,INT max_val,bool codage);
+    (int nb_el,int nb_ch,int max_val,bool codage);
 
     void load_file(Elise_File_Im,GenIm);
     void read_data(ELISE_fp &);
@@ -138,7 +138,7 @@ public :
 protected :
 
 private :
-    Fonc_Num  in(bool,REAL);
+    Fonc_Num  in(bool,double_t);
 };
 
 #endif
@@ -153,10 +153,10 @@ extern GenIm alloc_im1d(GenIm::type_el type_el,int tx,void * data = 0);
 extern GenIm alloc_im2d(GenIm::type_el type_el,int tx,int ty);
 extern bool  type_im_integral(GenIm::type_el type_el);
 
-extern INT nbb_type_num(GenIm::type_el type_el);     // nb byte
+extern int nbb_type_num(GenIm::type_el type_el);     // nb byte
 extern bool msbf_type_num(GenIm::type_el type_el);   // is most signif first
 extern bool signed_type_num(GenIm::type_el type_el); // is it signed int
-extern GenIm::type_el type_u_int_of_nbb(INT nbb,bool msbf = true);
+extern GenIm::type_el type_u_int_of_nbb(int nbb,bool msbf = true);
 
-extern void min_max_type_num(GenIm::type_el,INT & v_min,INT &v_max);
+extern void min_max_type_num(GenIm::type_el,int & v_min,int &v_max);
 */

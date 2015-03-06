@@ -54,12 +54,12 @@ class Data_Ori3D_Gen : public RC_Object
 
          virtual void  to_photo
                  (
-                     REAL *xp,
-                     REAL *yp,
-                     const REAL *xt,
-                     const REAL *yt,
-                     const REAL * zt,
-                     INT nb
+                     double_t *xp,
+                     double_t *yp,
+                     const double_t *xt,
+                     const double_t *yt,
+                     const double_t * zt,
+                     int nb
                  )=0;
       private :
 };
@@ -84,24 +84,24 @@ class Data_Ori3D_Std : public Data_Ori3D_Gen
          virtual ~Data_Ori3D_Std ();
          void  to_photo
                (
-                     REAL *xp,
-                     REAL *yp,
-                     const REAL *xt,
-                     const REAL *yt,
-                     const REAL * zt,
-                     INT nb
+                     double_t *xp,
+                     double_t *yp,
+                     const double_t *xt,
+                     const double_t *yt,
+                     const double_t * zt,
+                     int nb
                );
 
          void  photo_et_z_to_terrain
                (
-                     REAL *xt,
-                     REAL *yt,
-                     REAL *x_tmp,
-                     REAL *y_tmp,
-                     const REAL *xp,
-                     const REAL *yp,
-                     const REAL * zt,
-                     INT nb
+                     double_t *xt,
+                     double_t *yt,
+                     double_t *x_tmp,
+                     double_t *y_tmp,
+                     const double_t *xp,
+                     const double_t *yp,
+                     const double_t * zt,
+                     int nb
                );
 
          Pt2dr  PP() const;
@@ -123,20 +123,20 @@ class Data_Ori3D_Std : public Data_Ori3D_Gen
          Pt3dr orPhoto_to_DirLoc(Pt2dr);
 
 
-	 REAL altisol();
-	 REAL profondeur();
-         void SetAltiSol(REAL aZ);
+	 double_t altisol();
+	 double_t profondeur();
+         void SetAltiSol(double_t aZ);
 
          Pt3dr orSM(Pt2dr aP); // renvoie la dierction du rayon perspectif dans le repere terrain
          // W est optionnel, calcule comme produit vectoriel
          void orrepere_3D_image(Pt3dr & aP0,Pt3dr & anU,Pt3dr & aV,Pt3dr * aW);
 
-         void  correct(REAL *xp,REAL *yp,INT nb);
+         void  correct(double_t *xp,double_t *yp,int nb);
 
 	 Data_Ori3D_Std(or_orientation    * _ori);
 
          Data_Ori3D_Std (const char *,bool inv_y,bool binary,bool QuickGrid );
-         Data_Ori3D_Std (Data_Ori3D_Std *,REAL zoom,Box2dr = Ori3D_Std::TheNoBox);
+         Data_Ori3D_Std (Data_Ori3D_Std *,double_t zoom,Box2dr = Ori3D_Std::TheNoBox);
          void init_commun( or_orientation * = 0);
 
          Pt2dr to_photo(Pt3dr p,bool DontUseDist=false);
@@ -144,17 +144,17 @@ class Data_Ori3D_Std : public Data_Ori3D_Gen
                (
                    Pt2dr p1,
                    Data_Ori3D_Std & ph2,Pt2dr p2,
-                   REAL & dist
+                   double_t & dist
                );
-         Pt3dr to_terrain(Pt2dr p1,REAL z);
+         Pt3dr to_terrain(Pt2dr p1,double_t z);
          Pt3dr carte_to_terr(Pt3dr);
          Pt3dr terr_to_carte(Pt3dr);    //   HJMPD
 
          // Renvoie un point se projetant en PIm et siuter a une profondeur de aProf
 	 // dans la direction aNormPl
-	 Pt3dr  ImDirEtProf2Terrain(const Pt2dr & aPIm,const REAL & aProf,const Pt3dr & aNormPl);
+	 Pt3dr  ImDirEtProf2Terrain(const Pt2dr & aPIm,const double_t & aProf,const Pt3dr & aNormPl);
 
-         Pt3dr ImEtProf_To_Terrain(Pt2dr p1,REAL prof);
+         Pt3dr ImEtProf_To_Terrain(Pt2dr p1,double_t prof);
          Pt3dr Im1etProf2_To_Terrain
                (Pt2dr p1,Data_Ori3D_Std * ph2,double prof2) ;
           double Prof(const Pt3dr &) ;
@@ -191,7 +191,7 @@ class Data_Ori3D_Std : public Data_Ori3D_Gen
 
 
 
-         Tab_CPT_REF<Pt2dr> carte_et_z_to_terrain(Tab_CPT_REF<Pt2dr>,REAL z_lamb,REAL & z_ter);
+         Tab_CPT_REF<Pt2dr> carte_et_z_to_terrain(Tab_CPT_REF<Pt2dr>,double_t z_lamb,double_t & z_ter);
 
          // Met dans epi1 epi2 les orientation  epipolaire de phot1, phot2
          // aP1 , aP2 est un couple de point approximatvement homologue,
@@ -203,7 +203,7 @@ class Data_Ori3D_Std : public Data_Ori3D_Gen
                    tPtr & epi2, Data_Ori3D_Std  & phot2,Pt2dr aP2
                );
 
-          INT  ZoneLambert() const;
+          int  ZoneLambert() const;
 
          or_orientation * Ori() const {return _ori;}
          void  SetOrigineTgtLoc(const Pt2dr & aPt);
@@ -213,7 +213,7 @@ class Data_Ori3D_Std : public Data_Ori3D_Gen
 
 
       private :
-         // void  rev_tab_pt_photo(REAL *xt,REAL *yt,INT nb);
+         // void  rev_tab_pt_photo(double_t *xt,double_t *yt,int nb);
 
          inline void  correct(Pt2dr &); // enventually reverse
          void*                    _photo;
@@ -238,7 +238,7 @@ class cOri3D_OneEpip : public  ElDistortion22_Gen
 
            virtual bool OwnInverse(Pt2dr &) const ;    //  Epi vers Phot
            virtual Pt2dr Direct(Pt2dr) const  ;    // Photo vers Epi
-           cOri3D_OneEpip MapingChScale(REAL aChSacle) const;
+           cOri3D_OneEpip MapingChScale(double_t aChSacle) const;
            ~cOri3D_OneEpip();
 
           Data_Ori3D_Std  * Phot();
@@ -250,8 +250,8 @@ class cOri3D_OneEpip : public  ElDistortion22_Gen
 
       private :
 
-            virtual ElDistortion22_Gen  * D22G_ChScale(REAL aS) const; // 
-            void  Diff(ElMatrix<REAL> &,Pt2dr) const ;  //  Erreur Fatale
+            virtual ElDistortion22_Gen  * D22G_ChScale(double_t aS) const; // 
+            void  Diff(ElMatrix<double_t> &,Pt2dr) const ;  //  Erreur Fatale
 
 
 
@@ -265,7 +265,7 @@ class cOri3D_OneEpip : public  ElDistortion22_Gen
             Pt3dr             mUEpi;
             Pt3dr             mVEpi;
             Pt3dr             mWEpi;
-            ElMatrix<REAL>    mTer2Epi;
+            ElMatrix<double_t>    mTer2Epi;
 };
 
 

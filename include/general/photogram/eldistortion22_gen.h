@@ -20,9 +20,9 @@ public :
     (const cPreCondGrid&);
 
 
-    REAL D1(const ElDistortion22_Gen &,Pt2dr P0, Pt2dr P1,INT NbEch) const;
-    REAL D2(const ElDistortion22_Gen &,Pt2dr P0, Pt2dr P1,INT NbEch) const;
-    REAL DInfini(const ElDistortion22_Gen &,Pt2dr P0, Pt2dr P1,INT NbEch) const;
+    double_t D1(const ElDistortion22_Gen &,Pt2dr P0, Pt2dr P1,int NbEch) const;
+    double_t D2(const ElDistortion22_Gen &,Pt2dr P0, Pt2dr P1,int NbEch) const;
+    double_t DInfini(const ElDistortion22_Gen &,Pt2dr P0, Pt2dr P1,int NbEch) const;
 
     virtual Pt2dr Direct(Pt2dr) const = 0 ;    //
     Pt2dr Inverse(Pt2dr) const ; //  Pour inverser :
@@ -31,40 +31,40 @@ public :
     //    (3) Sinon on applique le ComputeInvFromDirByDiff
 
 
-    ElMatrix<REAL> Diff(Pt2dr) const;  // Juste interf a "Diff(ElMatrix<REAL> &,..)"
+    ElMatrix<double_t> Diff(Pt2dr) const;  // Juste interf a "Diff(ElMatrix<double_t> &,..)"
     virtual ~ElDistortion22_Gen();
 
-    // PolynLeastSquareInverse (REAL aDom,INT aDegre);
+    // PolynLeastSquareInverse (double_t aDom,int aDegre);
 
     ElDistortionPolynomiale NewPolynLeastSquareInverse
     (
             Box2dr aBox,
-            INT  aDegre,
-            INT  aNbPts = -1
+            int  aDegre,
+            int  aNbPts = -1
             );
     Polynome2dReal  NewPolynLeastSquareInverse_OneCoord
     (
             bool XCoord,
             Box2dr aBox,
-            INT  aDegre,
-            INT  aNbPts = -1
+            int  aDegre,
+            int  aNbPts = -1
             );
     //  aSc * Direct (aP/aSc*)
     // Def renvoit un objet contenant un pointeur sur this
-    virtual ElDistortion22_Gen  * D22G_ChScale(REAL aS) const;
+    virtual ElDistortion22_Gen  * D22G_ChScale(double_t aS) const;
     virtual bool IsId() const; // Def false
 
     // Fonction "ad hoc" de dynamic cast, par defaut return 0, strict change pour PhgStd qui
     // ne se voit pas alors comme un cas particulier de DRad
     virtual ElDistRadiale_PolynImpair * DRADPol(bool strict = false);
 
-    Box2dr ImageOfBox(Box2dr,INT aNbPtsDisc=8 );
-    Box2dr ImageRecOfBox(Box2dr,INT aNbPtsDisc=8  );
+    Box2dr ImageOfBox(Box2dr,int aNbPtsDisc=8 );
+    Box2dr ImageRecOfBox(Box2dr,int aNbPtsDisc=8  );
 
     // Par defaut renvoie un objet contenant un pointeur sur this
     // et redirigeant Direct sur inverse et Lycee de Versailles
     virtual ElDistortion22_Gen * CalcInverse() const;
-    void SetParamConvInvDiff(INT aNbIter,REAL aEps);
+    void SetParamConvInvDiff(int aNbIter,double_t aEps);
 
     void SaveAsGrid(const std::string&,const Pt2dr& aP0,const Pt2dr& aP1,const Pt2dr& aStep);
 
@@ -97,19 +97,19 @@ protected :
 
     void ErrorInvert() const;
     ElDistortion22_Gen();
-    void DiffByDiffFinies(ElMatrix<REAL> &,Pt2dr,Pt2dr Eps) const;
-    void DiffByDiffFinies(ElMatrix<REAL> &,Pt2dr,REAL Eps) const;
+    void DiffByDiffFinies(ElMatrix<double_t> &,Pt2dr,Pt2dr Eps) const;
+    void DiffByDiffFinies(ElMatrix<double_t> &,Pt2dr,double_t Eps) const;
 
 private :
 
     virtual  void V_SetScalingTranslate(const double &,const Pt2dr &);
 
-    REAL DistanceObjet(INT tagDist,const ElDistortion22_Gen &,Pt2dr P0, Pt2dr P1,INT NbEch) const;
+    double_t DistanceObjet(int tagDist,const ElDistortion22_Gen &,Pt2dr P0, Pt2dr P1,int NbEch) const;
 
 
     ElDistortionPolynomiale * mPolynInv;
 
-    virtual void  Diff(ElMatrix<REAL> &,Pt2dr) const ;  //  differentielle
+    virtual void  Diff(ElMatrix<double_t> &,Pt2dr) const ;  //  differentielle
     // Def err fatale
 
 
@@ -124,8 +124,8 @@ private :
 
 
 protected :
-    REAL mEpsInvDiff;
-    INT  mNbIterMaxInvDiff;
+    double_t mEpsInvDiff;
+    int  mNbIterMaxInvDiff;
 private :
     double mScN;
     bool   mDist22Gen_UsePreConditionner;

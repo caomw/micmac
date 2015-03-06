@@ -26,8 +26,8 @@ public :
     Bmp_Im(const char * name);
     Output              out();
     Fonc_Num              in();
-    Fonc_Num              in(INT);
-    INT      bpp() const;   // bits per pixel
+    Fonc_Num              in(int);
+    int      bpp() const;   // bits per pixel
     Disc_Pal   pal() const ;  // error when bpp() == 24
     mode_compr  compr();
     Pt2di       sz();

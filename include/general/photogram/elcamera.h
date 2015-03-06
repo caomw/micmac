@@ -108,9 +108,9 @@ public :
     Pt3dr  PseudoInter(Pt2dr aPF2A,const ElCamera & CamB,Pt2dr aPF2B,double * aD=0) const;
     Pt3dr  CdgPseudoInter(const ElPackHomologue &,const ElCamera & CamB,double & aD) const;
 
-    REAL EcartProj(Pt2dr aPF2A,const ElCamera & CamB,Pt2dr aPF2B) const;
+    double_t EcartProj(Pt2dr aPF2A,const ElCamera & CamB,Pt2dr aPF2B) const;
 
-    REAL EcartProj(Pt2dr aPF2A,Pt3dr aPR3,Pt3dr aDirR3) const;
+    double_t EcartProj(Pt2dr aPF2A,Pt3dr aPR3,Pt3dr aDirR3) const;
 
 
     double  ScaleCamNorm() const;
@@ -166,18 +166,18 @@ public :
 
     bool Devant(const Pt3dr &) const;
     bool TousDevant(const std::list<Pt3dr> &) const;
-    REAL EcProj(const std::list<Pt3dr> & PR3 ,
+    double_t EcProj(const std::list<Pt3dr> & PR3 ,
                 const std::list<Pt2dr> & PF2) const;
 
-    REAL EcProj ( const std::list<Appar23> & P23);
+    double_t EcProj ( const std::list<Appar23> & P23);
 
     // Differentielle de l'application globale
     // par rapport a un point
-    void  DiffR3F2(ElMatrix<REAL> &,Pt3dr) const;
-    ElMatrix<REAL>  DiffR3F2(Pt3dr) const;
+    void  DiffR3F2(ElMatrix<double_t> &,Pt3dr) const;
+    ElMatrix<double_t>  DiffR3F2(Pt3dr) const;
     // par rapport aux params
-    void  DiffR3F2Param(ElMatrix<REAL> &,Pt3dr) const;
-    ElMatrix<REAL>  DiffR3F2Param(Pt3dr) const;
+    void  DiffR3F2Param(ElMatrix<double_t> &,Pt3dr) const;
+    ElMatrix<double_t>  DiffR3F2Param(Pt3dr) const;
 
     // void SetDistInverse();
     // void SetDistDirecte();

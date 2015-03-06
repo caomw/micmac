@@ -6,18 +6,18 @@
 class cEqFPtLiaison
 {
      public  :
-          virtual REAL AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,REAL aPds,bool WithD2) = 0;
-          REAL AddPackLiaisonP1P2
+          virtual double_t AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,double_t aPds,bool WithD2) = 0;
+          double_t AddPackLiaisonP1P2
 	       (
 		    const ElPackHomologue & aPack,
 		    bool WithD2,
 		    cElStatErreur * = 0,
-                    REAL aPdsGlob  = 1.0,
-		    REAL * SomPdsTot = 0
+                    double_t aPdsGlob  = 1.0,
+		    double_t * SomPdsTot = 0
 	       );
-	  virtual REAL ResiduNonSigneP1P2(Pt2dr aP1,Pt2dr aP2) = 0;
+	  virtual double_t ResiduNonSigneP1P2(Pt2dr aP1,Pt2dr aP2) = 0;
 	  void PondereFromResidu
-	       (ElPackHomologue & aPack,REAL Ecart,REAL Coupure = -1);
+	       (ElPackHomologue & aPack,double_t Ecart,double_t Coupure = -1);
 
 
           ElPackHomologue & StdPack();

@@ -13,7 +13,7 @@
 #include "sys/stat.h"
 
 #ifdef _MSC_VER
-	#define mode_t U_INT4
+	#define mode_t U_int4
 #endif
 
 class ctPath;
@@ -73,7 +73,7 @@ public:
    // read/write in raw binary format
    static cElCommandToken * from_raw_data( char const *&io_rawData, bool i_reverseByteOrder );
    void to_raw_data( bool i_reverseByteOrder, char *&o_rawData ) const;
-   inline U_INT8 raw_size() const;
+   inline U_int8 raw_size() const;
 };
 
 
@@ -122,7 +122,7 @@ public:
    // read/write in raw binary format
    void from_raw_data( char const *&i_rawData, bool i_reverseByteOrder );
    void to_raw_data( bool i_reverseByteOrder, char *&o_rawData ) const;
-   U_INT8 raw_size() const;
+   U_int8 raw_size() const;
    
    // returns is the command has been modified
    bool replace( const std::map<std::string,std::string> &i_dictionary );   
@@ -247,7 +247,7 @@ public:
    bool remove() const;
    inline bool setRights( mode_t o_rights ) const;
    inline bool getRights( mode_t &o_rights ) const;
-   U_INT8 getSize() const;
+   U_int8 getSize() const;
 };
 
 
@@ -285,17 +285,17 @@ std::string generate_random_string( unsigned int i_strLength );
 std::string generate_random_string( unsigned int i_minLength, unsigned int i_maxLength );
 
 // string<->raw
-inline U_INT8 string_raw_size( const std::string &i_str );
+inline U_int8 string_raw_size( const std::string &i_str );
 void string_to_raw_data( const std::string &i_str, bool i_reverseByteOrder, char *&o_rawData );
 void string_from_raw_data( const char *&io_rawData, bool i_reverseByteOrder, std::string &o_str );
 
 // int4<->raw
-inline void int4_to_raw_data( const INT4 &i_v, bool i_reverseByteOrder, char *&o_rawData );
-inline void int4_from_raw_data( const char *&io_rawData, bool i_reverseByteOrder, INT4 &o_v );
+inline void int4_to_raw_data( const int4 &i_v, bool i_reverseByteOrder, char *&o_rawData );
+inline void int4_from_raw_data( const char *&io_rawData, bool i_reverseByteOrder, int4 &o_v );
 
 // uint4<->raw
-inline void uint4_to_raw_data( const U_INT4 &i_v, bool i_reverseByteOrder, char *&o_rawData );
-inline void uint4_from_raw_data( const char *&io_rawData, bool i_reverseByteOrder, U_INT4 &o_v );
+inline void uint4_to_raw_data( const U_int4 &i_v, bool i_reverseByteOrder, char *&o_rawData );
+inline void uint4_from_raw_data( const char *&io_rawData, bool i_reverseByteOrder, U_int4 &o_v );
 
 std::string file_rights_to_string( mode_t i_rights );
 

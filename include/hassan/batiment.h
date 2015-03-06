@@ -53,28 +53,28 @@ class Data_batiment: public RC_Object
       public :
       private :
  
-           Data_batiment(Facette_3d f, REAL4 z);
-           Data_batiment(H_Graphe& gr, REAL4 z_ter);
+           Data_batiment(Facette_3d f, double_t4 z);
+           Data_batiment(H_Graphe& gr, double_t4 z_ter);
            Data_batiment(ElFilo<Facette_3d>& f_f);
            virtual ~Data_batiment();
            
            Facette_3d _f;
            ElList<Facette_3d> _lf;
-           REAL4 _z;
+           double_t4 _z;
 };
 
 class Batiment : public PRC0
 {
      public:
          Batiment();
-         Batiment(Facette_3d F, REAL4 Z);
-         Batiment(H_Graphe& gr, REAL4 z_ter);
+         Batiment(Facette_3d F, double_t4 Z);
+         Batiment(H_Graphe& gr, double_t4 z_ter);
          Batiment(ElFilo<Facette_3d>& f_f);
          Batiment* ptr();
          ElList<Facette_3d> lf();
          void fil_facet(ElFilo<Facette_3d> & f_f);
          Facette_3d f();
-         REAL4 z();
+         double_t4 z();
 
 		 std::ostream& operator>>(std::ostream& os);
          std::istream& operator<<(std::istream& is);

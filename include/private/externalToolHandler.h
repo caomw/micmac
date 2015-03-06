@@ -1,12 +1,12 @@
 #define EXTERNAL_TOOLS_SUBDIRECTORY "binaire-aux"
-#define INTERNAL_TOOLS_SUBDIRECTORY "bin"
+#define intERNAL_TOOLS_SUBDIRECTORY "bin"
 
 typedef enum {
 	EXT_TOOL_UNDEF 			 = 0,
 	EXT_TOOL_NOT_FOUND 		 = 1,	// the tool has been researched and not found
 	EXT_TOOL_FOUND_IN_PATH 	 = 2,	// the tool has been found using the PATH environment variable
 	EXT_TOOL_FOUND_IN_EXTERN = 4, 	// the tool has been found in EXTERNAL_TOOLS_SUBDIRECTORY
-	EXT_TOOL_FOUND_IN_INTERN = 8, 	// the tool has been found in INTERNAL_TOOLS_SUBDIRECTORY
+	EXT_TOOL_FOUND_IN_intERN = 8, 	// the tool has been found in intERNAL_TOOLS_SUBDIRECTORY
 	EXT_TOOL_FOUND_IN_LOC 	 = 16,	// the tool has been specified with a location and was there
 	EXT_TOOL_HAS_EXEC_RIGHTS = 32,	// the tool has no execution rights and they could not be granted by the process
 } ExtToolStatus;

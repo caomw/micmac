@@ -44,20 +44,23 @@ Header-MicMac-eLiSe-25/06/2007*/
 /****************************************************/
 
 #include "general/opt_debug.h"
-#include "general/util.h"
+#include "abstract_types.h"
 
 #include <cElMatCreuseGen>
 #include <cIncIntervale>
+#include <ElGrowingSetInd>
 #include <ElMatrix>
 #include <Im1D>
 #include <cFormQuadCreuse>
+#include <PtsKD>
 
 #include <string>
 #include <vector>
 #include <iostream>
 #include <map>
+#include <cstring>
 
-cElMatCreuseGen::cElMatCreuseGen(bool OptSym,INT aNbCol,INT aNbLig) :
+cElMatCreuseGen::cElMatCreuseGen(bool OptSym,int aNbCol,int aNbLig) :
     mOptSym (OptSym),
     mNbCol (aNbCol),
     mNbLig (aNbLig),
@@ -95,30 +98,30 @@ bool cElMatCreuseGen::OptSym() const
 }
 
 
-Im1D<tSysCho,tSysCho>  Im16(const double * aD8,int aNb)
+Im1D<double,double>  Im16(const double * aD8,int aNb)
 {
-    Im1D<tSysCho,tSysCho> aRes(aNb);
-    tSysCho * aD16 = aRes.data();
+    Im1D<double,double> aRes(aNb);
+    double * aD16 = aRes.data();
     for (int aK=0 ; aK<aNb ; aK++)
         aD16[aK] = aD8[aK];
     return aRes;
 }
 
-void  cElMatCreuseGen::MulVect8(double * out,const double * in) 
+void  cElMatCreuseGen::MulVect8(double_t * out,const double_t * in)
 {
-    Im1D<tSysCho,tSysCho> aIOut = Im16(out,mNbLig);
-    Im1D<tSysCho,tSysCho> aIIn = Im16(in,mNbLig);
+    Im1D<double,double> aIOut = Im16(out,mNbLig);
+    Im1D<double,double> aIIn = Im16(in,mNbLig);
     MulVect(aIOut.data(),aIIn.data());
 
-    tSysCho * aDOut16 = aIOut.data();
+    double * aDOut16 = aIOut.data();
     for (int aK=0 ; aK<mNbLig ; aK++)
         out[aK] = aDOut16[aK];
 }
 
-Im1D<tSysCho,tSysCho> cElMatCreuseGen::MulVect(Im1D<tSysCho,tSysCho> aV) const
+Im1D<double,double> cElMatCreuseGen::MulVect(Im1D<double,double> aV) const
 {
     ELISE_ASSERT(aV.tx() == mNbCol,"Bad Size in cElMatCreuseGen::MulVect");
-    Im1D<tSysCho,tSysCho> aRes(mNbLig,0.0);
+    Im1D<double,double> aRes(mNbLig,0.0);
     // aRes.raz();
     MulVect(aRes.data(),aV.data());
 
@@ -135,7 +138,7 @@ void cElMatCreuseGen::Verif(const std::string & aMes)
 }
 
 
-void cElMatCreuseGen::AddElem(INT aX,INT aY,REAL aVal)
+void cElMatCreuseGen::AddElem(int aX,int aY,double aVal)
 {
     ELISE_ASSERT
             (
@@ -147,25 +150,25 @@ void cElMatCreuseGen::AddElem(INT aX,INT aY,REAL aVal)
         LowAddElem(aX,aY,aVal);
 }
 
-void cElMatCreuseGen::SetOffsets(const std::vector<INT> &)
+void cElMatCreuseGen::SetOffsets(const std::vector<int> &)
 {
 }
 
 
 void cElMatCreuseGen::AddLineInd
 (
-        INT aKY,
-        INT aY,
-        REAL aCyP,
-        const std::vector<INT> & aVInd,
-        REAL * aCoeff
+        int aKY,
+        int aY,
+        double aCyP,
+        const std::vector<int> & aVInd,
+        double * aCoeff
         )
 {
-    INT aNbInd = (INT) aVInd.size();
-    for (INT aK2=0 ; aK2<aNbInd ; aK2++)
+    int aNbInd = (int) aVInd.size();
+    for (int aK2=0 ; aK2<aNbInd ; aK2++)
     {
-        INT aX = aVInd[aK2];
-        REAL aCX = aCoeff[aK2];
+        int aX = aVInd[aK2];
+        double aCX = aCoeff[aK2];
         if (aCX)
             AddElem(aX,aY,aCX*aCyP);
     }
@@ -173,18 +176,18 @@ void cElMatCreuseGen::AddLineInd
 
 void  cElMatCreuseGen::EqMatIndexee
 (
-        const std::vector<INT> & aVInd,
-        REAL aPds,REAL ** aMat
+        const std::vector<int> & aVInd,
+        double aPds,double ** aMat
         )
 {
-    INT aNbInd = (INT) aVInd.size();
-    for (INT aKY=0 ; aKY<aNbInd ; aKY++)
-        for (INT aKX=0 ; aKX<aNbInd ; aKX++)
+    int aNbInd = (int) aVInd.size();
+    for (int aKY=0 ; aKY<aNbInd ; aKY++)
+        for (int aKX=0 ; aKX<aNbInd ; aKX++)
             AddElem(aVInd[aKY],aVInd[aKX],aMat[aKY][aKX] * aPds);
 
 }
 
-void cElMatCreuseGen::LowAddElem(INT aX,INT aY,REAL aVal) 
+void cElMatCreuseGen::LowAddElem(int aX,int aY,double aVal)
 {
     if ((!mOptSym) || (aX>=aY))
         LowSetElem(aX,aY,LowGetElem(aX,aY)+aVal);
@@ -211,7 +214,7 @@ bool cElMatCreuseGen::IsOptForAddEqIndexee() const
 }
 
 void cElMatCreuseGen::Indexee_EcrireDansMatrWithQuad
-(   ElMatrix<tSysCho> &aMatr,
+(   ElMatrix<double> &aMatr,
     const std::vector<cSsBloc> &  aVx,
     const std::vector<cSsBloc> &  aVy
     )   const
@@ -222,8 +225,8 @@ void cElMatCreuseGen::Indexee_EcrireDansMatrWithQuad
 void cElMatCreuseGen::SoutraitProduc3x3
 (
         bool                   Sym,
-        ElMatrix<tSysCho> &aM1,
-        ElMatrix<tSysCho> &aM2,
+        ElMatrix<double> &aM1,
+        ElMatrix<double> &aM2,
         const std::vector<cSsBloc> * aYVSB
         )
 {
@@ -240,7 +243,7 @@ void cElMatCreuseGen::VMAT_GSSR_AddNewEquation_Indexe
         const std::vector<cSsBloc> * aVSB,
         double *  FullCoeff,
         int aNbTot,
-        REAL aPds,tSysCho *,REAL aB)
+        double aPds,double *,double aB)
 {
     ELISE_ASSERT(false,"cElMatCreuseGen::V_GSSR_AddNewEquation_Indexe");
 }
@@ -260,44 +263,44 @@ void cElMatCreuseGen::VMAT_GSSR_AddNewEquation_Indexe
 class cElMatCreuseMap : public cElMatCreuseGen
 {
 public :
-    cElMatCreuseMap(INT aNbCol,INT aNbLig);
+    cElMatCreuseMap(int aNbCol,int aNbLig);
 
-    tSysCho   LowGetElem(INT I,INT J) const ;
-    void    LowSetElem(INT aX,INT aY,const tSysCho &);
+    double   LowGetElem(int I,int J) const ;
+    void    LowSetElem(int aX,int aY,const double &);
     void Reset();
     void PrecCondQuad(double *);
 private:
-    typedef std::pair<INT,REAL> tPair;
-    typedef std::map<INT,REAL>  tLigne;
+    typedef std::pair<int,double> tPair;
+    typedef std::map<int,double>  tLigne;
     typedef std::vector<tLigne> tMat;
 
     tMat  mMat;
 
-    void  MulVect(tSysCho * out,const tSysCho * in) const;
-    void  tMulVect(tSysCho * out,const tSysCho * in) const;
+    void  MulVect(double * out,const double * in) const;
+    void  tMulVect(double * out,const double * in) const;
 
 
 };
 
-cElMatCreuseMap::cElMatCreuseMap(INT aNbCol,INT aNbLig) :
+cElMatCreuseMap::cElMatCreuseMap(int aNbCol,int aNbLig) :
     cElMatCreuseGen (false,aNbCol,aNbLig),
     mMat(aNbLig)
 {
 }
 
-tSysCho  cElMatCreuseMap::LowGetElem(INT aX,INT aY) const
+double  cElMatCreuseMap::LowGetElem(int aX,int aY) const
 {
     return const_cast<cElMatCreuseMap&>(*this).mMat[aY][aX];
 }
 
-void cElMatCreuseMap::LowSetElem(INT aX,INT aY,const tSysCho & aVal)
+void cElMatCreuseMap::LowSetElem(int aX,int aY,const double & aVal)
 {
     mMat[aY][aX] = aVal;
 }
 
-void cElMatCreuseMap::MulVect(tSysCho * out,const tSysCho * in) const
+void cElMatCreuseMap::MulVect(double * out,const double * in) const
 {
-    INT aK=0;
+    int aK=0;
     for
             (
              tMat::const_iterator itLigne = mMat.begin();
@@ -320,10 +323,10 @@ void cElMatCreuseMap::MulVect(tSysCho * out,const tSysCho * in) const
     }
 }
 
-void cElMatCreuseMap:: tMulVect(tSysCho * out,const tSysCho * in) const
+void cElMatCreuseMap:: tMulVect(double * out,const double * in) const
 {
 
-    for (INT aK=0 ; aK<mNbLig ; aK++)
+    for (int aK=0 ; aK<mNbLig ; aK++)
     {
         out[aK] = 0;
     }
@@ -420,37 +423,37 @@ strcuture suivant les cannaux, par exemple :
 class cElMatCreuseStrFixe : public cElMatCreuseGen
 {
 public :
-    cElMatCreuseStrFixe (INT aNbVar);
+    cElMatCreuseStrFixe (int aNbVar);
 private :
     void Show() const;
-    tSysCho  LowGetElem(INT aX,INT aY) const ;
-    void    LowSetElem(INT aX,INT aY,const tSysCho &);
+    double  LowGetElem(int aX,int aY) const ;
+    void    LowSetElem(int aX,int aY,const double &);
 
 
     virtual void Reset(); // Remet tous les elements a 0
-    virtual void  MulVect(tSysCho * out,const tSysCho * in) const;
-    virtual void  tMulVect(tSysCho * out,const tSysCho * in) const;
+    virtual void  MulVect(double * out,const double * in) const;
+    virtual void  tMulVect(double * out,const double * in) const;
     void AddLineInd
     (
-            INT aKY,
-            INT aY,
-            REAL aCyP,
-            const std::vector<INT> & aVInd,
-            REAL * aCoeff
+            int aKY,
+            int aY,
+            double aCyP,
+            const std::vector<int> & aVInd,
+            double * aCoeff
             );
 
-    void SetOffsets (const std::vector<INT> & aVOfset);
-    // void VerifOffset(const std::vector<INT> & aVOfset);
+    void SetOffsets (const std::vector<int> & aVOfset);
+    // void VerifOffset(const std::vector<int> & aVOfset);
 
-    INT mNbVar;
+    int mNbVar;
     struct  cDiag
     {
         Im1D_REAL8 mIm;
-        REAL8 *    mD;
-        INT mOffset;
+        double_t *    mD;
+        int mOffset;
 
 
-        cDiag(INT aNbVar,INT anOffset) :
+        cDiag(int aNbVar,int anOffset) :
             mIm      (aNbVar,0.0),
             mD       (mIm.data()),
             mOffset  (anOffset)
@@ -461,11 +464,11 @@ private :
     std::vector<cDiag *>    mVDiags;
     std::vector<std::vector<cDiag *> >  mCurDiags;
 
-    void  MulVectLine(tSysCho * out,const tSysCho * in,bool Transp) const;
+    void  MulVectLine(double * out,const double * in,bool Transp) const;
     void  EqMatIndexee
     (
-            const std::vector<INT> & aVInd,
-            REAL aPds,REAL ** aMat
+            const std::vector<int> & aVInd,
+            double aPds,double ** aMat
             ) ;
 };
 
@@ -475,30 +478,30 @@ private :
 
 void cElMatCreuseStrFixe::Show() const
 {
-    INT aNbD = (INT) mVDiags.size();
+    int aNbD = (int) mVDiags.size();
     std::cout << "++ NB DIAGS = " << aNbD <<  "\n";
-    for (INT aK =0 ; aK<aNbD ; aK++)
+    for (int aK =0 ; aK<aNbD ; aK++)
     {
         const cDiag & aDiag =  *mVDiags[aK];
         std::cout << "  Offset = " << aDiag.mOffset
                   << " @Data : " << aDiag.mD << "\n";
-        for (INT aK=0 ; aK<mNbVar ; aK++)
+        for (int aK=0 ; aK<mNbVar ; aK++)
             std::cout << "  -   " << aK << " : " << aDiag.mD[aK] << "\n";
     }
 }
 
 void cElMatCreuseStrFixe::Reset()
 {
-    for (INT aKD=0; aKD<INT(mVDiags.size()) ; aKD++)
+    for (int aKD=0; aKD<int(mVDiags.size()) ; aKD++)
     {
-        REAL8 * aD = mVDiags[aKD]->mD;
-        for (INT aKY=0 ; aKY< mNbVar ; aKY++)
+        double_t * aD = mVDiags[aKD]->mD;
+        for (int aKY=0 ; aKY< mNbVar ; aKY++)
             aD[aKY] = 0;
     }
 }
 
 
-tSysCho  cElMatCreuseStrFixe::LowGetElem(INT aX,INT aY)  const
+double  cElMatCreuseStrFixe::LowGetElem(int aX,int aY)  const
 {
     ELISE_ASSERT
             (
@@ -507,9 +510,9 @@ tSysCho  cElMatCreuseStrFixe::LowGetElem(INT aX,INT aY)  const
                 );
     //return *((double*)0);
     // return *((double*)&aX); // this is bad news anyway but avoid clang's warning
-    return (tSysCho)0; // should avoid any warning ?
+    return (double)0; // should avoid any warning ?
 }
-void cElMatCreuseStrFixe::LowSetElem(INT aX,INT aY,const tSysCho &)
+void cElMatCreuseStrFixe::LowSetElem(int aX,int aY,const double &)
 {
     ELISE_ASSERT
             (
@@ -518,7 +521,7 @@ void cElMatCreuseStrFixe::LowSetElem(INT aX,INT aY,const tSysCho &)
                 );
 }
 
-cElMatCreuseStrFixe::cElMatCreuseStrFixe(INT aNbVar) :
+cElMatCreuseStrFixe::cElMatCreuseStrFixe(int aNbVar) :
     cElMatCreuseGen(false,aNbVar,aNbVar),
     mNbVar (aNbVar)
 {
@@ -526,49 +529,49 @@ cElMatCreuseStrFixe::cElMatCreuseStrFixe(INT aNbVar) :
 
 void  cElMatCreuseStrFixe::EqMatIndexee
 (
-        const std::vector<INT> & aVInd,
-        REAL aPds,REAL ** aMat
+        const std::vector<int> & aVInd,
+        double aPds,double ** aMat
         )
 {
-    INT aNbInd = (INT) aVInd.size();
-    for (INT aKY = 0 ; aKY<aNbInd ; aKY++)
+    int aNbInd = (int) aVInd.size();
+    for (int aKY = 0 ; aKY<aNbInd ; aKY++)
     {
-        INT aY = aVInd[aKY];
+        int aY = aVInd[aKY];
         AddLineInd(aKY,aY,aPds,aVInd,aMat[aKY]);
     }
 }
 
 void cElMatCreuseStrFixe::AddLineInd
 (
-        INT aKY,
-        INT aY,
-        REAL aCyP,
-        const std::vector<INT> & aVInd,
-        REAL * aCoeff
+        int aKY,
+        int aY,
+        double aCyP,
+        const std::vector<int> & aVInd,
+        double * aCoeff
         )
 {
     std::vector<cDiag *> & aDiag = mCurDiags[aKY];
-    for (INT aK=0 ; aK< INT(aVInd.size()) ; aK++)
+    for (int aK=0 ; aK< int(aVInd.size()) ; aK++)
     {
         aDiag[aK]->mD[aY]  += aCyP * aCoeff[aK];
     }
 }
 
-void cElMatCreuseStrFixe::SetOffsets(const std::vector<INT> & aVInd)
+void cElMatCreuseStrFixe::SetOffsets(const std::vector<int> & aVInd)
 {
     mCurDiags.clear();
-    for (INT aKY=0 ;aKY<INT(aVInd.size()) ; aKY++)
+    for (int aKY=0 ;aKY<int(aVInd.size()) ; aKY++)
     {
         std::vector<cDiag *> aV0;
         mCurDiags.push_back(aV0);
 
-        INT anY = aVInd[aKY];
-        for (INT aKX=0 ; aKX<INT(aVInd.size()) ; aKX++)
+        int anY = aVInd[aKY];
+        for (int aKX=0 ; aKX<int(aVInd.size()) ; aKX++)
         {
-            INT anX = aVInd[aKX];
+            int anX = aVInd[aKX];
             cDiag * pGot = 0;
-            INT anOffset = anX-anY;
-            for (INT aKD=0 ; aKD<INT(mVDiags.size()) ; aKD++)
+            int anOffset = anX-anY;
+            for (int aKD=0 ; aKD<int(mVDiags.size()) ; aKD++)
             {
                 cDiag * pDiag = mVDiags[aKD];
                 if (pDiag->mOffset == anOffset)
@@ -585,37 +588,37 @@ void cElMatCreuseStrFixe::SetOffsets(const std::vector<INT> & aVInd)
 
 }
 
-void  cElMatCreuseStrFixe::MulVectLine(tSysCho * out,const tSysCho * in,bool isTransp) const
+void  cElMatCreuseStrFixe::MulVectLine(double * out,const double * in,bool isTransp) const
 {
-    for (INT aY = 0 ; aY<mNbVar ; aY++)
+    for (int aY = 0 ; aY<mNbVar ; aY++)
         out[aY] = 0;
 
-    for (INT aD = 0 ; aD<INT(mVDiags.size()) ; aD++)
+    for (int aD = 0 ; aD<int(mVDiags.size()) ; aD++)
     {
-        INT anOff  = mVDiags[aD]->mOffset;
-        REAL * aData  = mVDiags[aD]->mD;
-        INT Y0 = ElMax(0,-anOff);
-        INT Y1 = ElMin(mNbVar,mNbVar-anOff);
+        int anOff  = mVDiags[aD]->mOffset;
+        double * aData  = mVDiags[aD]->mD;
+        int Y0 = std::max(0,-anOff);
+        int Y1 = std::min(mNbVar,mNbVar-anOff);
 
         if (isTransp)
         {
-            for (INT aY = Y0 ; aY<Y1 ; aY++)
+            for (int aY = Y0 ; aY<Y1 ; aY++)
                 out[aY+anOff] +=  aData[aY] * in[aY];
         }
         else
         {
-            for (INT aY = Y0 ; aY<Y1 ; aY++)
+            for (int aY = Y0 ; aY<Y1 ; aY++)
                 out[aY] +=  aData[aY] * in[aY+anOff];
         }
     }
 }
 
-void  cElMatCreuseStrFixe::MulVect(tSysCho * out,const tSysCho * in) const
+void  cElMatCreuseStrFixe::MulVect(double * out,const double * in) const
 {
     MulVectLine(out,in,false);
 }
 
-void  cElMatCreuseStrFixe::tMulVect(tSysCho * out,const tSysCho * in) const
+void  cElMatCreuseStrFixe::tMulVect(double * out,const double * in) const
 {
     MulVectLine(out,in,true);
 }
@@ -647,7 +650,7 @@ public :
     bool IsNull () const;
 
     cBlocMCBS(Pt2di mNumBl,Pt2di aP0,Pt2di aP1);
-    tSysCho & DataRel(int aX,int aY)
+    double & DataRel(int aX,int aY)
     {
         /*
 ELISE_ASSERT
@@ -659,21 +662,21 @@ ELISE_ASSERT
         return mDataL[aX+mNbX*aY];
     }
 
-    // Suppose aCol <= aCol2 deja realise, n'inclut pas le carre diag
-    tSysCho ScalCol(int aCol,const cBlocMCBS &  aBl2,int aCol2) const;
+    // Suppose aCol <= aCol2 deja doubleise, n'inclut pas le carre diag
+    double ScalCol(int aCol,const cBlocMCBS &  aBl2,int aCol2) const;
 
-    inline tSysCho * PtrDataAbs(int aX,int aY)
+    inline double * PtrDataAbs(int aX,int aY)
     {
         return mData2[aY]+aX;
     }
-    inline const  tSysCho *  PtrDataAbs(int aX,int aY)  const
+    inline const  double *  PtrDataAbs(int aX,int aY)  const
     {
         return mData2[aY]+aX;
     }
 
 
 
-    inline tSysCho & DataAbs(int aX,int aY)
+    inline double & DataAbs(int aX,int aY)
     {
         /*
 ELISE_ASSERT
@@ -690,7 +693,7 @@ ELISE_ASSERT
     int NumBlX() const {return mNumBl.x;}
     int NumBlY() const {return mNumBl.y;}
 
-    tSysCho * DataL();
+    double * DataL();
     void   Reset();
     int    NbX() const;
     int    NbY() const;
@@ -710,13 +713,13 @@ private :
     int       mY0;
     int       mNbX;
     int       mNbY;
-    tSysCho *  mDataL;
-    tSysCho ** mData2;
+    double *  mDataL;
+    double ** mData2;
 };
 
-tSysCho cBlocMCBS::ScalCol(int aCol,const cBlocMCBS &  aBl2,int aCol2) const
+double cBlocMCBS::ScalCol(int aCol,const cBlocMCBS &  aBl2,int aCol2) const
 {
-    tSysCho aRes = 0;
+    double aRes = 0;
 
     // Toute la col,
     int aNb =  mNbY;
@@ -729,8 +732,8 @@ tSysCho cBlocMCBS::ScalCol(int aCol,const cBlocMCBS &  aBl2,int aCol2) const
             aNb--;
     }
 
-    const tSysCho * aData1 =  PtrDataAbs(aCol,mY0) ;
-    const tSysCho * aData2 =  aBl2.PtrDataAbs(aCol2,aBl2.mY0) ;
+    const double * aData1 =  PtrDataAbs(aCol,mY0) ;
+    const double * aData2 =  aBl2.PtrDataAbs(aCol2,aBl2.mY0) ;
 
     for (int aK=0 ; aK<aNb ; aK++)
     {
@@ -780,7 +783,7 @@ bool cBlocMCBS::IsNull (const cBlocMCBS * aBl)
 
 void cBlocMCBS::Reset()
 {
-    MEM_RAZ(mDataL,mNbX*mNbY);
+    //MEM_RAZ(mDataL,mNbX*mNbY);
 }
 
 cBlocMCBS::cBlocMCBS(Pt2di aNumBl,Pt2di aP0,Pt2di aP1) :
@@ -792,8 +795,8 @@ cBlocMCBS::cBlocMCBS(Pt2di aNumBl,Pt2di aP0,Pt2di aP1) :
     mY0   (aP0.y),
     mNbX  (aP1.x-aP0.x),
     mNbY  (aP1.y-aP0.y),
-    mDataL (new tSysCho [mNbX*mNbY]),
-    mData2 (new tSysCho * [mNbY])
+    mDataL (new double [mNbX*mNbY]),
+    mData2 (new double * [mNbY])
 {
     for (int aK=0 ; aK<mNbY ; aK++)
         mData2[aK] = mDataL + aK * mNbX - aP0.x;
@@ -801,7 +804,7 @@ cBlocMCBS::cBlocMCBS(Pt2di aNumBl,Pt2di aP0,Pt2di aP1) :
     Reset();
 }
 
-tSysCho * cBlocMCBS::DataL()
+double * cBlocMCBS::DataL()
 {
     return mDataL;
 }
@@ -838,7 +841,7 @@ public :
 
     int NumBl0OfCol(int aCol) const;
 
-    bool DirectInverse(const tSysCho *,tSysCho *);
+    bool DirectInverse(const double *,double *);
 
 private :
     void TestCholesky() const;
@@ -846,28 +849,28 @@ private :
     void Verif(const std::string & aMes) ;
     // void Show() const;
 
-    tSysCho   LowGetElem(INT aX,INT aY) const ;
-    void      LowSetElem(INT aX,INT aY,const tSysCho &) ;
+    double   LowGetElem(int aX,int aY) const ;
+    void      LowSetElem(int aX,int aY,const double &) ;
 
 
     // Optimise
-    tSysCho  ScaleCol(int aCol1,int aCol2);
+    double  ScaleCol(int aCol1,int aCol2);
     // Inefficace, mais pour verif
-    tSysCho  SimpleScaleCol(int aCol1,int aCol2);
+    double  SimpleScaleCol(int aCol1,int aCol2);
 
-    tSysCho  SimpleGet(INT aX,INT aY) const ;   // Test basique
+    double  SimpleGet(int aX,int aY) const ;   // Test basique
     virtual void Reset(); // Remet tous les elements a 0
     void VerifScal(); // Remet tous les elements a 0
     void ShowStruct(bool Basic); // Remet tous les elements a 0
 
 
     // Pour tester les inversion partielles utilisees dans SSOR on a besoin 	de multiplie par des ss ensemble
-    void TestMulVect(tSysCho * out,const tSysCho * in,tSysCho aPdsInf,tSysCho aPdsDiag,tSysCho aPdsSup) const;
+    void TestMulVect(double * out,const double * in,double aPdsInf,double aPdsDiag,double aPdsSup) const;
 
-    virtual void  MulVect(tSysCho * out,const tSysCho * in) const;
+    virtual void  MulVect(double * out,const double * in) const;
 
 
-    virtual void  tMulVect(tSysCho * out,const tSysCho * in) const
+    virtual void  tMulVect(double * out,const double * in) const
     {
         ELISE_ASSERT(false,"cElMatCreuseBlocSym::tMulVec");
     }
@@ -911,8 +914,8 @@ private :
     void SoutraitProduc3x3
     (
             bool                   Sym,
-            ElMatrix<tSysCho> &aM1,
-            ElMatrix<tSysCho> &aM2,
+            ElMatrix<double> &aM1,
+            ElMatrix<double> &aM2,
             const std::vector<cSsBloc> * aYVSB
             );
 
@@ -922,12 +925,12 @@ private :
             const std::vector<cSsBloc> * aVSB,
             double *  FullCoeff,
             int aNbTot,
-            REAL aPds,tSysCho *,REAL aB);
+            double aPds,double *,double aB);
 
 
     void  Indexee_EcrireDansMatrWithQuad
     (
-            ElMatrix<tSysCho> &aMatr,
+            ElMatrix<double> &aMatr,
             const std::vector<cSsBloc> &  aVx,
             const std::vector<cSsBloc> &  aVy
             ) const;
@@ -936,9 +939,9 @@ private :
                            const std::vector<cSsBloc> & aVIndy);
 
 
-    void SolveUperSys(tSysCho * aDOut,const tSysCho * aDIn,tSysCho aW);
-    void SolveLowerSys(tSysCho * aDOut,const tSysCho * aDIn,tSysCho aW);
-    void SolveDiagSys(tSysCho * aDOut,const tSysCho * aDIn,tSysCho aW);
+    void SolveUperSys(double * aDOut,const double * aDIn,double aW);
+    void SolveLowerSys(double * aDOut,const double * aDIn,double aW);
+    void SolveDiagSys(double * aDOut,const double * aDIn,double aW);
 };
 /*
 */
@@ -952,8 +955,8 @@ void cElMatCreuseBlocSym::Indexee_QuadSet0 (const std::vector<cSsBloc> & aVx,
         const cSsBloc & aBlX = aVx[aKx];
         int aI0x = aBlX.I0AbsSolve();
         int aNbX = aBlX.Nb();
-        const cIncIntervale * aIntX  = aBlX.Intervale();
-        int aNumBlocIntervX    = aIntX->NumBlocSolve();
+        const cIncIntervale * aintX  = aBlX.Intervale();
+        int aNumBlocIntervX    = aintX->NumBlocSolve();
 
         for (int aKy=0 ; aKy <int(aVy.size()) ; aKy++)
         {
@@ -970,7 +973,7 @@ void cElMatCreuseBlocSym::Indexee_QuadSet0 (const std::vector<cSsBloc> & aVx,
                 int aI1y = aBlY.I1AbsSolve();
                 for (int aYIn=aI0y ; aYIn<aI1y ; aYIn++)
                 {
-                    MEM_RAZ (aBlocOut->PtrDataAbs(aI0x,aYIn), aNbX);
+                    //MEM_RAZ (aBlocOut->PtrDataAbs(aI0x,aYIn), aNbX);
                 }
             }
         }
@@ -1063,7 +1066,7 @@ void cElMatCreuseBlocSym::PrepPreCond()
                         && (aBOut->NbY()==aSz),
                         "cElMatCreuseBlocSym::PrepPreCond"
                         );
-            ElMatrix<tSysCho> aMat(aSz,aSz);
+            ElMatrix<double> aMat(aSz,aSz);
             for (int aKy = 0 ; aKy < aSz; aKy++)
             {
                 for (int aKx =  aKy ; aKx < aSz; aKx++)
@@ -1089,7 +1092,7 @@ void cElMatCreuseBlocSym::PrepPreCond()
     //  VerifScal();
 }
 
-bool cElMatCreuseBlocSym::DirectInverse(const tSysCho * aDIn,tSysCho * aDOut)
+bool cElMatCreuseBlocSym::DirectInverse(const double_t * aDIn,double_t * aDOut)
 {
     if (ShowCholesky)
     {
@@ -1113,24 +1116,24 @@ bool cElMatCreuseBlocSym::DirectInverse(const tSysCho * aDIn,tSysCho * aDOut)
 
     for (int anIter = 0 ; anIter<2 ; anIter++)
     {
-        Im1D<tSysCho,tSysCho>  aMOut(mNbEl);
-        tSysCho * aDMO = aMOut.data();
+        Im1D<double,double>  aMOut(mNbEl);
+        double * aDMO = aMOut.data();
         MulVect(aDMO,aDOut);
 
-        Im1D<tSysCho,tSysCho>  aIEr(mNbEl);
-        tSysCho * aDEr = aIEr.data();
+        Im1D<double,double>  aIEr(mNbEl);
+        double * aDEr = aIEr.data();
 
-        tSysCho aSomEr = 0;
+        double aSomEr = 0;
         for (int aK=0 ; aK<mNbEl ; aK++)
         {
             aDEr[aK] = aDIn[aK] - aDMO[aK];
-            aSomEr += ElAbs(aDEr[aK]);
+            aSomEr += std::abs(aDEr[aK]);
         }
 
-        Im1D<tSysCho,tSysCho> aImTmp(mNbEl);
-        tSysCho * aDTmp = aImTmp.data();
-        Im1D<tSysCho,tSysCho> aMInvEr(mNbEl);
-        tSysCho * aDMInvEr = aMInvEr.data();
+        Im1D<double,double> aImTmp(mNbEl);
+        double * aDTmp = aImTmp.data();
+        Im1D<double,double> aMInvEr(mNbEl);
+        double * aDMInvEr = aMInvEr.data();
 
         mMChol->SolveLowerSys(aDTmp,aDEr,1.0);
         mMChol->SolveUperSys(aDMInvEr,aDTmp,1.0);
@@ -1151,7 +1154,7 @@ bool cElMatCreuseBlocSym::DirectInverse(const tSysCho * aDIn,tSysCho * aDOut)
 */
 
 // Inverse le systeme triangulaire superiereure (avec diagonale divise par W)
-void cElMatCreuseBlocSym::SolveLowerSys(tSysCho * aDOut,const tSysCho * aDIn,tSysCho aW)
+void cElMatCreuseBlocSym::SolveLowerSys(double * aDOut,const double * aDIn,double aW)
 {
     for (int aKBy=0 ; aKBy<mNbBlocs   ; aKBy++)
     {
@@ -1159,7 +1162,7 @@ void cElMatCreuseBlocSym::SolveLowerSys(tSysCho * aDOut,const tSysCho * aDIn,tSy
         int anY1 = mStrBlocs[aKBy]->I1Solve();
         for (int anY=anY0 ; anY<anY1 ; anY++)
         {
-            tSysCho aSom = aDIn[anY];
+            double aSom = aDIn[anY];
             cBlocMCBS * aBl0 = mDataBlocs[aKBy][aKBy];
             for (cBlocMCBS * aBl = aBl0;  aBl ; aBl = aBl->YNextUp())
             {
@@ -1179,7 +1182,7 @@ void cElMatCreuseBlocSym::SolveLowerSys(tSysCho * aDOut,const tSysCho * aDIn,tSy
 
 
 
-void cElMatCreuseBlocSym::SolveUperSys(tSysCho * aDOut,const tSysCho * aDIn,tSysCho aW)
+void cElMatCreuseBlocSym::SolveUperSys(double * aDOut,const double * aDIn,double aW)
 {
     for (int aKBy=mNbBlocs-1; aKBy>=0  ; aKBy--)
     {
@@ -1187,7 +1190,7 @@ void cElMatCreuseBlocSym::SolveUperSys(tSysCho * aDOut,const tSysCho * aDIn,tSys
         int anY1 = mStrBlocs[aKBy]->I1Solve();
         for (int anY=anY1-1 ; anY>=anY0 ; anY--)
         {
-            tSysCho aSom = aDIn[anY];
+            double aSom = aDIn[anY];
             cBlocMCBS * aBl0 = mDataBlocs[aKBy][aKBy];
             for (cBlocMCBS * aBl = aBl0;  aBl ; aBl = aBl->XNext())
             {
@@ -1208,7 +1211,7 @@ void cElMatCreuseBlocSym::SolveUperSys(tSysCho * aDOut,const tSysCho * aDIn,tSys
 
 void cElMatCreuseBlocSym::VPCDo(double * aDOut,double * aDIn)
 {
-    // A priori devenu inutile et incompatible avec  tSysCho
+    // A priori devenu inutile et incompatible avec  double
     ELISE_ASSERT(false,"No more cElMatCreuseBlocSym::VPCDo");
 }
 /*
@@ -1225,7 +1228,7 @@ void cElMatCreuseBlocSym::VPCDo(double * aDOut,double * aDIn)
     else if (mModePC == ePrecCondSSOR)
     {
         double aW = 0.5;
-        Im1D_REAL8 aImTmp(mNbCol);
+        Im1D_double8 aImTmp(mNbCol);
         double * aDTmp = aImTmp.data();
         SolveUperSys(aDTmp,aDIn,aW);
 
@@ -1244,7 +1247,7 @@ void cElMatCreuseBlocSym::VPCDo(double * aDOut,double * aDIn)
 
 void  cElMatCreuseBlocSym::Indexee_EcrireDansMatrWithQuad
 (
-        ElMatrix<tSysCho> &aMatr,
+        ElMatrix<double> &aMatr,
         const std::vector<cSsBloc> &  aVx,
         const std::vector<cSsBloc> &  aVy
         )  const
@@ -1260,15 +1263,15 @@ void  cElMatCreuseBlocSym::Indexee_EcrireDansMatrWithQuad
                     "Incoherence in sym optim"
                     );
     }
-    tSysCho ** aDOut = aMatr.data();
+    double ** aDOut = aMatr.data();
     int xout=0;
     for (int aKx=0 ; aKx <int(aVx.size()) ; aKx++)
     {
         const cSsBloc & aBlX = aVx[aKx];
         int aI0x = aBlX.I0AbsSolve();
         int aNbX = aBlX.Nb();
-        const cIncIntervale * aIntX  = aBlX.Intervale();
-        int aNumBlocIntervX    = aIntX->NumBlocSolve();
+        const cIncIntervale * aintX  = aBlX.Intervale();
+        int aNumBlocIntervX    = aintX->NumBlocSolve();
 
         int yout=0;
         for (int aKy=0 ; aKy <int(aVy.size()) ; aKy++)
@@ -1279,8 +1282,8 @@ void  cElMatCreuseBlocSym::Indexee_EcrireDansMatrWithQuad
             if ((aI0x>=aI0y) || (!mOptSym))
             {
                 bool toTransp = (aKx<aKy) && mOptSym &&  (&aVx==&aVy);
-                const cIncIntervale * aIntY  = aBlY.Intervale();
-                int aNumBlocIntervY    = aIntY->NumBlocSolve();
+                const cIncIntervale * aintY  = aBlY.Intervale();
+                int aNumBlocIntervY    = aintY->NumBlocSolve();
                 cBlocMCBS * aBlocOut = BlocOfKbxKby(aNumBlocIntervX, aNumBlocIntervY);
                 int aI1y = aBlY.I1AbsSolve();
                 // Le cas de la transposition est en pratique tres minoritaire, on ne l'optimise
@@ -1301,11 +1304,11 @@ void  cElMatCreuseBlocSym::Indexee_EcrireDansMatrWithQuad
                 {
                     for (int aYIn=aI0y ; aYIn<aI1y ; aYIn++)
                     {
-                        memcpy
+                        std::memcpy
                                 (
                                     aDOut[yout]+xout,
                                     aBlocOut->PtrDataAbs(aI0x,aYIn),
-                                    aNbX*sizeof(tSysCho)
+                                    aNbX*sizeof(double)
                                     );
                         yout++;
                     }
@@ -1326,20 +1329,20 @@ void cElMatCreuseBlocSym::VMAT_GSSR_AddNewEquation_Indexe
         const std::vector<cSsBloc> * aVSB,
         double *  aFullCoeff,
         int aNbTot,
-        REAL aPds,tSysCho * aDataLin,REAL aB
+        double aPds,double * aDataLin,double aB
         )
 {
 
-    tSysCho a2P =  2 * aPds ;
-    tSysCho a2PB =  a2P *aB;
+    double a2P =  2 * aPds ;
+    double a2PB =  a2P *aB;
     int aNbBl = aVSB->size();
 
     int Y0InBloc =0;
     for (int aKBly=0 ; aKBly <aNbBl ; aKBly++)
     {
         const cSsBloc & aBlY = (*aVSB)[aKBly];
-        const cIncIntervale * aIntY  = aBlY.Intervale();
-        int aNumBlocIntervY    = aIntY->NumBlocSolve();
+        const cIncintervale * aintY  = aBlY.intervale();
+        int aNumBlocintervY    = aintY->NumBlocSolve();
 
         int aI0y = aBlY.I0AbsSolve();
         int aI1y = aBlY.I1AbsSolve();
@@ -1349,11 +1352,11 @@ void cElMatCreuseBlocSym::VMAT_GSSR_AddNewEquation_Indexe
         for (int aKBlx=0 ; aKBlx <aNbBl ; aKBlx++)
         {
             const cSsBloc & aBlX = (*aVSB)[aKBlx];
-            const cIncIntervale * aIntX  = aBlX.Intervale();
-            int aNumBlocIntervX    = aIntX->NumBlocSolve();
-            if ((!mOptSym) || (aNumBlocIntervX>=aNumBlocIntervY))
+            const cIncintervale * aintX  = aBlX.intervale();
+            int aNumBlocintervX    = aintX->NumBlocSolve();
+            if ((!mOptSym) || (aNumBlocintervX>=aNumBlocintervY))
             {
-                cBlocMCBS * aBlocOut=BlocOfKbxKby(aNumBlocIntervX,aNumBlocIntervY);
+                cBlocMCBS * aBlocOut=BlocOfKbxKby(aNumBlocintervX,aNumBlocintervY);
 
                 int aI0x = aBlX.I0AbsSolve();
                 int aI1x = aBlX.I1AbsSolve();
@@ -1361,11 +1364,11 @@ void cElMatCreuseBlocSym::VMAT_GSSR_AddNewEquation_Indexe
 
                 for (int aYOut = aI0y; aYOut<aI1y ; aYOut++)
                 {
-                    tSysCho aPCV1 =  a2P * aFullCoeff[yin++];
-                    int aDebX  = (mOptSym && (aNumBlocIntervX==aNumBlocIntervY)) ? aYOut : aI0x;
+                    double aPCV1 =  a2P * aFullCoeff[yin++];
+                    int aDebX  = (mOptSym && (aNumBlocintervX==aNumBlocintervY)) ? aYOut : aI0x;
 
                     int xin = X0InBloc + aDebX-aI0x;
-                    tSysCho * aLineOut = aBlocOut->PtrDataAbs(aDebX,aYOut);
+                    double * aLineOut = aBlocOut->PtrDataAbs(aDebX,aYOut);
                     for (int XOut = aDebX ; XOut<aI1x ; XOut++)
                     {
                         *(aLineOut++)  += aPCV1 * aFullCoeff[xin++];
@@ -1391,25 +1394,25 @@ void cElMatCreuseBlocSym::VMAT_GSSR_AddNewEquation_Indexe
 void cElMatCreuseBlocSym::SoutraitProduc3x3
 (
         bool                   Sym,
-        ElMatrix<tSysCho> &aM1,
-        ElMatrix<tSysCho> &aM2,
+        ElMatrix<double> &aM1,
+        ElMatrix<double> &aM2,
         const std::vector<cSsBloc> * aYVSB
         )
 {
-    tSysCho ** aData1 = aM1.data();
-    tSysCho ** aData2 = aM2.data();
+    double ** aData1 = aM1.data();
+    double ** aData2 = aM2.data();
 
-    tSysCho * aL2A = aData2[0];
-    tSysCho * aL2B = aData2[1];
-    tSysCho * aL2C = aData2[2];
+    double * aL2A = aData2[0];
+    double * aL2B = aData2[1];
+    double * aL2C = aData2[2];
     int aNbBl = aYVSB->size();
     int Y0InBloc = 0;
 
     for (int aKBly=0 ; aKBly <aNbBl ; aKBly++)
     {
         const cSsBloc & aBlY = (*aYVSB)[aKBly];
-        const cIncIntervale * aIntY  = aBlY.Intervale();
-        int aNumBlocIntervY    = aIntY->NumBlocSolve();
+        const cIncintervale * aintY  = aBlY.intervale();
+        int aNumBlocintervY    = aintY->NumBlocSolve();
 
         int aI0y = aBlY.I0AbsSolve();
         int aI1y = aBlY.I1AbsSolve();
@@ -1419,11 +1422,11 @@ void cElMatCreuseBlocSym::SoutraitProduc3x3
         for (int aKBlx=0 ; aKBlx <aNbBl ; aKBlx++)
         {
             const cSsBloc & aBlX = (*aYVSB)[aKBlx];
-            const cIncIntervale * aIntX  = aBlX.Intervale();
-            int aNumBlocIntervX    = aIntX->NumBlocSolve();
-            if ((!mOptSym) || (aNumBlocIntervX>=aNumBlocIntervY))
+            const cIncintervale * aintX  = aBlX.intervale();
+            int aNumBlocintervX    = aintX->NumBlocSolve();
+            if ((!mOptSym) || (aNumBlocintervX>=aNumBlocintervY))
             {
-                cBlocMCBS * aBlocOut=BlocOfKbxKby(aNumBlocIntervX,aNumBlocIntervY);
+                cBlocMCBS * aBlocOut=BlocOfKbxKby(aNumBlocintervX,aNumBlocintervY);
 
                 int aI0x = aBlX.I0AbsSolve();
                 int aI1x = aBlX.I1AbsSolve();
@@ -1431,14 +1434,14 @@ void cElMatCreuseBlocSym::SoutraitProduc3x3
 
                 for (int aYOut = aI0y; aYOut<aI1y ; aYOut++,yin++)
                 {
-                    tSysCho A1 = aData1[yin][0];
-                    tSysCho B1 = aData1[yin][1];
-                    tSysCho C1 = aData1[yin][2];
+                    double A1 = aData1[yin][0];
+                    double B1 = aData1[yin][1];
+                    double C1 = aData1[yin][2];
 
-                    int aDebX  = (mOptSym && (aNumBlocIntervX==aNumBlocIntervY)) ? aYOut : aI0x;
+                    int aDebX  = (mOptSym && (aNumBlocintervX==aNumBlocintervY)) ? aYOut : aI0x;
 
                     int xin = X0InBloc + aDebX-aI0x;
-                    tSysCho * aLineOut = aBlocOut->PtrDataAbs(aDebX,aYOut);
+                    double * aLineOut = aBlocOut->PtrDataAbs(aDebX,aYOut);
                     for (int XOut = aDebX ; XOut<aI1x ; XOut++)
                     {
                         *aLineOut -= A1 * aL2A[xin] + B1 * aL2B[xin] + C1 *aL2C[xin];
@@ -1469,9 +1472,9 @@ typedef cBlocMCBS ** tBlPP;
 
 
 
-cElMatCreuseBlocSym::cElMatCreuseBlocSym 
+cElMatCreuseBlocSym::cElMatCreuseBlocSym
 (
-        const  std::vector<cIncIntervale *> &  strBlocs,
+        const  std::vector<cIncintervale *> &  strBlocs,
         const  std::vector<int> &              ISolve2Bloc,
         eModePreCond                           aMode
         ) :
@@ -1510,7 +1513,7 @@ cElMatCreuseBlocSym::cElMatCreuseBlocSym
     {
         int aN = mISolve2Bloc[aKN];
         ELISE_ASSERT((aN>=0)&&(aN<int(strBlocs.size())),"Er6 in cElMatCreuseBlocSym::cElMatCreuseBlocSym");
-        cIncIntervale * anI =  mStrBlocs[aN];
+        cIncintervale * anI =  mStrBlocs[aN];
         ELISE_ASSERT
                 (
                     (aKN>=anI->I0Solve())&& (aKN<anI->I1Solve()),
@@ -1556,11 +1559,11 @@ void  cElMatCreuseBlocSym::VerifScal()
     {
         for (int aC2 = 0 ; aC2 < mNbEl ; aC2++)
         {
-            tSysCho aScA = SimpleScaleCol(aC1,aC2);
-            tSysCho aScB = ScaleCol(aC1,aC2);
-            tSysCho aEps = 1e-6;
+            double aScA = SimpleScaleCol(aC1,aC2);
+            double aScB = ScaleCol(aC1,aC2);
+            double aEps = 1e-6;
 
-            tSysCho aDif = ElAbs((aScA-aScB)/(aEps+ElAbs(aScA)+ElAbs(aScB)));
+            double aDif = ElAbs((aScA-aScB)/(aEps+ElAbs(aScA)+ElAbs(aScB)));
             if (ElAbs(aScA) > aEps)
                 std::cout << aScA << " " << aScB <<  " " << aDif << "\n";
             ELISE_ASSERT(aDif<aEps,"cElMatCreuseBlocSym::ShowStruct");
@@ -1633,7 +1636,7 @@ void  cElMatCreuseBlocSym::Reset()
 
 
 
-tSysCho  cElMatCreuseBlocSym::LowGetElem(INT aX,INT aY)  const
+double  cElMatCreuseBlocSym::LowGetElem(int aX,int aY)  const
 {
     if (aX <aY) ElSwap(aX,aY);
 
@@ -1647,7 +1650,7 @@ tSysCho  cElMatCreuseBlocSym::LowGetElem(INT aX,INT aY)  const
 }
 
 
-void  cElMatCreuseBlocSym::LowSetElem(INT aX,INT aY,const tSysCho & aVal) 
+void  cElMatCreuseBlocSym::LowSetElem(int aX,int aY,const double & aVal)
 {
     if (aX <aY) ElSwap(aX,aY);
 
@@ -1655,16 +1658,16 @@ void  cElMatCreuseBlocSym::LowSetElem(INT aX,INT aY,const tSysCho & aVal)
     int aKbY = mISolve2Bloc[aY];
     cBlocMCBS *  aBloc = BlocOfKbxKby(aKbX,aKbY);
 
-    tSysCho & aRes =  aBloc->DataAbs (aX, aY);
+    double & aRes =  aBloc->DataAbs (aX, aY);
 
     aRes = aVal;
 }
 
-tSysCho  cElMatCreuseBlocSym::SimpleScaleCol(int aCol1,int aCol2)
+double  cElMatCreuseBlocSym::SimpleScaleCol(int aCol1,int aCol2)
 {
     if (aCol1> aCol2) ElSwap(aCol1,aCol2);
     int aNb = ElMin(aCol1,aCol2-1);
-    tSysCho aRes = 0;
+    double aRes = 0;
     for (int aK=0 ; aK<= aNb; aK++)
         aRes += SimpleGet(aCol1,aK) * SimpleGet(aCol2,aK);
 
@@ -1679,18 +1682,18 @@ int cElMatCreuseBlocSym::NumBl0OfCol(int aCol) const
 void cElMatCreuseBlocSym::TestCholesky() const
 {
     std::cout << "TestCholesky \n";
-    tSysCho aSomDif  = 0;
+    double aSomDif  = 0;
 
     for (int anX=0 ; anX <mNbEl ; anX++)
     {
         for (int anY=0 ; anY <mNbEl ; anY++)
         {
-            tSysCho aV1 =  LowGetElem(anX,anY);
-            tSysCho aV2 =  mMChol->ScaleCol(anX,anY);
+            double aV1 =  LowGetElem(anX,anY);
+            double aV2 =  mMChol->ScaleCol(anX,anY);
             if (anX==anY)
-                aV2 += ElSquare(mMChol->LowGetElem(anX,anY));
+                aV2 += std::sqrt(mMChol->LowGetElem(anX,anY));
 
-            tSysCho aDif = ElAbs(aV1-aV2) / (1+ElAbs(aV1));
+            double aDif = std::abs(aV1-aV2) / (1 + std::abs(aV1));
 
             aSomDif += aDif;
             if (aDif > 1e-5)
@@ -1728,7 +1731,7 @@ void cElMatCreuseBlocSym::CalculCholesky()
             int aKBlZ1 = aKBly;
             cBlocMCBS * aYBloc0 = mBloc0OfCol[aKBly];
             int aKBlZ0y  = aYBloc0->NumBlY();
-            int aKblZ0 = ElMax(aKBlZ0x,aKBlZ0y);
+            int aKblZ0 = std::max(aKBlZ0x,aKBlZ0y);
 
             bool AllBlocNull = cBlocMCBS::IsNull(mDataBlocs[aKBly][aKBlx]);
             for (int aKblZ=aKblZ0 ; AllBlocNull &&(aKblZ<=aKBlZ1) ; aKblZ++)
@@ -1747,11 +1750,11 @@ void cElMatCreuseBlocSym::CalculCholesky()
             {
                 for (int anX=aX0 ; anX<aX1 ; anX++)
                 {
-                    int aY1Dyn = ElMin(aY1,anX+1);
+                    int aY1Dyn = std::min(aY1,anX+1);
                     for (int anY=aY0 ; anY<aY1Dyn ; anY++)
                     {
 
-                        tSysCho aScal = 0;
+                        double aScal = 0;
                         for (int aKblZ=aKblZ0 ; aKblZ<=aKBlZ1 ; aKblZ++)
                         {
                             cBlocMCBS * aBXZ = mMChol->mDataBlocs[aKblZ][aKBlx];
@@ -1797,15 +1800,15 @@ void cElMatCreuseBlocSym::CalculCholesky()
 
 
 
-tSysCho  cElMatCreuseBlocSym::ScaleCol(int aCol1,int aCol2)
+double  cElMatCreuseBlocSym::ScaleCol(int aCol1,int aCol2)
 {
-    if (aCol1> aCol2) ElSwap(aCol1,aCol2);
+    if (aCol1> aCol2) std::swap(aCol1,aCol2);
     // int aNb = ElMin(aCol1,aCol2-1);
 
     int aKBl1 = mISolve2Bloc[aCol1];
     int aKBl2 = mISolve2Bloc[aCol2];
 
-    tSysCho aRes = 0;
+    double aRes = 0;
 
     for
             (
@@ -1814,13 +1817,13 @@ tSysCho  cElMatCreuseBlocSym::ScaleCol(int aCol1,int aCol2)
              aBl2 = aBl2->YNextDown()
              )
     {
-        ELISE_ASSERT(aBl2!=0,"Internal Er (Bl2=0) in cElMatCreuseBlocSym::ScaleCol");
+        ELISE_ASSERT(aBl2!=0,"internal Er (Bl2=0) in cElMatCreuseBlocSym::ScaleCol");
         while (aBl1 && (aBl1->NumBlY() < aBl2->NumBlY()))
         {
             aBl1 = aBl1->YNextDown();
         }
 
-        ELISE_ASSERT(aBl1!=0,"Internal Er (Bl1=0) in cElMatCreuseBlocSym::ScaleCol");
+        ELISE_ASSERT(aBl1!=0,"internal Er (Bl1=0) in cElMatCreuseBlocSym::ScaleCol");
         // Seul cas "interessant", les deux memes blocs sont != 0
         if (aBl1->NumBlY() == aBl2->NumBlY())
         {
@@ -1834,7 +1837,7 @@ tSysCho  cElMatCreuseBlocSym::ScaleCol(int aCol1,int aCol2)
 }
 
 
-tSysCho  cElMatCreuseBlocSym::SimpleGet(INT aX,INT aY)  const
+double  cElMatCreuseBlocSym::SimpleGet(int aX,int aY)  const
 {
     if (aX <aY) ElSwap(aX,aY);
 
@@ -1847,7 +1850,7 @@ tSysCho  cElMatCreuseBlocSym::SimpleGet(INT aX,INT aY)  const
 
 
 
-void cElMatCreuseBlocSym::TestMulVect(tSysCho * out,const tSysCho * in,tSysCho aPdsInf,tSysCho aPdsDiag,tSysCho aPdsSup) const
+void cElMatCreuseBlocSym::TestMulVect(double * out,const double * in,double aPdsInf,double aPdsDiag,double aPdsSup) const
 {
     for (int aKy=0 ; aKy<mNbCol ; aKy++)
     {
@@ -1866,7 +1869,7 @@ void cElMatCreuseBlocSym::TestMulVect(tSysCho * out,const tSysCho * in,tSysCho a
 
 void VerifMats(const std::string & aMes,Im1D_REAL8  aM1,Im1D_REAL8 aM2)
 {
-    tSysCho aSom,aMax;
+    double aSom,aMax;
     ELISE_COPY
             (
                 aM1.all_pts(),
@@ -1885,17 +1888,17 @@ void VerifMats(const std::string & aMes,Im1D_REAL8  aM1,Im1D_REAL8 aM2)
 void cElMatCreuseBlocSym::Test()
 {
 
-    // Im1D_REAL8 aI0(mNbCol);
+    // Im1D_double8 aI0(mNbCol);
     // ELISE_COPY(aI0.all_pts(), frandr(),aI0.out());
 
-    Im1D<tSysCho,tSysCho> aI0(mNbCol);
+    Im1D<double,double> aI0(mNbCol);
     for (int aK=0 ; aK<mNbCol ; aK++)
         aI0.data()[aK] = NRrandom3();
 
     {
         // On verifie la mult
-        Im1D<tSysCho,tSysCho> aI1(mNbCol);
-        Im1D<tSysCho,tSysCho> aI2(mNbCol);
+        Im1D<double,double> aI1(mNbCol);
+        Im1D<double,double> aI2(mNbCol);
 
         MulVect(aI1.data(),aI0.data());
         TestMulVect(aI2.data(),aI0.data(),1,1,1);
@@ -1903,23 +1906,23 @@ void cElMatCreuseBlocSym::Test()
     }
 
     {
-        tSysCho aW = 1.4;
+        double aW = 1.4;
 
-        Im1D<tSysCho,tSysCho> aI1(mNbCol);
+        Im1D<double,double> aI1(mNbCol);
         TestMulVect(aI1.data(),aI0.data(),0,1.0/aW,1);
 
-        Im1D<tSysCho,tSysCho> aI2(mNbCol);
+        Im1D<double,double> aI2(mNbCol);
         SolveUperSys(aI2.data(),aI1.data(),aW);
         // VerifMats("UpSys",aI0,aI2);
     }
 
     {
-        tSysCho aW = 0.7;
+        double aW = 0.7;
 
-        Im1D<tSysCho,tSysCho> aI1(mNbCol);
+        Im1D<double,double> aI1(mNbCol);
         TestMulVect(aI1.data(),aI0.data(),1.0,1.0/aW,0);
 
-        Im1D<tSysCho,tSysCho> aI2(mNbCol);
+        Im1D<double,double> aI2(mNbCol);
         SolveLowerSys(aI2.data(),aI1.data(),aW);
         // VerifMats("LowSys",aI0,aI2);
     }
@@ -1931,7 +1934,7 @@ void cElMatCreuseBlocSym::Test()
 
 
 
-void  cElMatCreuseBlocSym::MulVect(tSysCho * out,const tSysCho * in) const
+void  cElMatCreuseBlocSym::MulVect(double * out,const double * in) const
 {
     int NbNN = 0;
 
@@ -1950,12 +1953,12 @@ void  cElMatCreuseBlocSym::MulVect(tSysCho * out,const tSysCho * in) const
             int aKx = aBl->NumBlX();
             int anX0 = mStrBlocs[aKx]->I0Solve();
             int anX1 = mStrBlocs[aKx]->I1Solve();
-            tSysCho * aData = aBl->DataL();
+            double * aData = aBl->DataL();
             for (int anY=anY0; anY<anY1 ; anY++)
             {
                 for (int anX=anX0; anX<anX1 ; anX++)
                 {
-                    tSysCho aV = *(aData++);
+                    double aV = *(aData++);
 
                     out[anY] +=   aV* in[anX];
                     if (anX != anY)
@@ -1977,8 +1980,8 @@ void  cElMatCreuseBlocSym::MulVect(tSysCho * out,const tSysCho * in) const
 /*                                                  */
 /****************************************************/
 
-cFormQuadCreuse::cFormQuadCreuse(INT aNbVar,cElMatCreuseGen * aMatCr) :
-    FoncNVarDer<REAL> (aNbVar),
+cFormQuadCreuse::cFormQuadCreuse(int aNbVar,cElMatCreuseGen * aMatCr) :
+    FoncNVarDer<double> (aNbVar),
     cGenSysSurResol
     (
         false,
@@ -2028,22 +2031,22 @@ void cFormQuadCreuse::VPCDo(Im1D_REAL8 in,Im1D_REAL8 out)
 
 
 
-INT cFormQuadCreuse::NbVar() const 
+int cFormQuadCreuse::NbVar() const
 {
     return mNbVar;
 }
-void cFormQuadCreuse::V_GSSR_AddNewEquation (REAL aPds,REAL * aCoeff,REAL aB) 
+void cFormQuadCreuse::V_GSSR_AddNewEquation (double aPds,double * aCoeff,double aB)
 {
-    mV0 += aPds * ElSquare(aB);
-    for (INT aX=0 ; aX<mNbVar ; aX++)
+    mV0 += aPds * std::sqrt(aB);
+    for (int aX=0 ; aX<mNbVar ; aX++)
     {
         if (aCoeff[aX])
         {
-            REAL aCXP = 2 * aCoeff[aX] * aPds;
+            double aCXP = 2 * aCoeff[aX] * aPds;
             mDataLin[aX] -=  aCXP * aB;
-            for (INT aY=0 ; aY<mNbVar ; aY++)
+            for (int aY=0 ; aY<mNbVar ; aY++)
             {
-                REAL aCY = aCoeff[aY];
+                double aCY = aCoeff[aY];
                 if (aCY)
                     mMat->LowAddElem(aX,aY,aCXP*aCY);
             }
@@ -2065,32 +2068,34 @@ bool cFormQuadCreuse::GSSR_UseEqMatIndexee()
 
 void cFormQuadCreuse::V_GSSR_EqMatIndexee
 (
-        const std::vector<INT> & aVInd,
-        REAL aPds,REAL ** aMat,
-        REAL * aVect,REAL aCste
+        const std::vector<int> & aVInd,
+        double aPds,double ** aMat,
+        double * aVect,double aCste
         )
 {
     mV0 += aPds * aCste;
-    INT aNbInd = (INT) aVInd.size();
-    for (INT aKX=0 ; aKX<aNbInd ; aKX++)
+    int aNbInd = (int) aVInd.size();
+    for (int aKX=0 ; aKX<aNbInd ; aKX++)
         mDataLin[aVInd[aKX]] +=  aPds * aVect[aKX];
     mMat->EqMatIndexee(aVInd,aPds,aMat);
 }
 
-tSysCho  cFormQuadCreuse::GetElemLin(int y) const
+double  cFormQuadCreuse::GetElemLin(int y) const
 {
     return mDataLin[y];
 }
-void  cFormQuadCreuse::SetElemLin(int y,const tSysCho& aV)
+
+void  cFormQuadCreuse::SetElemLin(int y,const double& aV)
 {
     mDataLin[y] = aV;
 }
 
-tSysCho   cFormQuadCreuse::GetElemQuad(int x,int y) const
+double   cFormQuadCreuse::GetElemQuad(int x,int y) const
 {
     return mMat->LowGetElem(x,y);
 }
-void  cFormQuadCreuse::SetElemQuad(int x,int y,const tSysCho& aV )
+
+void  cFormQuadCreuse::SetElemQuad(int x,int y,const double& aV )
 {
     mMat->LowSetElem(x,y,aV);
 }
@@ -2100,29 +2105,29 @@ void cFormQuadCreuse::V_GSSR_AddNewEquation_Indexe
 (
         const std::vector<cSsBloc> * aVSB,
         double * aFullCoeff,int aNbTot,
-        const std::vector<INT> & aVInd,
-        REAL aPds,REAL * aCoeff,REAL aB
+        const std::vector<int> & aVInd,
+        double aPds,double * aCoeff,double aB
         )
 {
-    mV0 += aPds * ElSquare(aB);
+    mV0 += aPds * std::sqrt(aB);
     if ( mMatIsOptForAddEqIndexee  && aVSB)
     {
         mMat->VMAT_GSSR_AddNewEquation_Indexe (aVSB,aFullCoeff,aNbTot,aPds,mDataLin,aB);
     }
     else
     {
-        INT aNbInd = (INT) aVInd.size();
-        for (INT aK1 = 0 ; aK1<aNbInd ; aK1++)
+        int aNbInd = (int) aVInd.size();
+        for (int aK1 = 0 ; aK1<aNbInd ; aK1++)
         {
-            INT aY = aVInd[aK1];
-            REAL aCYP = 2 * aCoeff[aK1] * aPds;
+            int aY = aVInd[aK1];
+            double aCYP = 2 * aCoeff[aK1] * aPds;
             mDataLin[aY] -=  aCYP * aB;
             mMat->AddLineInd(aK1,aY,aCYP,aVInd,aCoeff);
             /*
-         for (INT aK2=0 ; aK2<aNbInd ; aK2++)
+         for (int aK2=0 ; aK2<aNbInd ; aK2++)
          {
-             INT aY = aVInd[aK2];
-             REAL aCY = aCoeff[aK2];
+             int aY = aVInd[aK2];
+             double aCY = aCoeff[aK2];
              if (aCY)
                  mMat->AddElem(aX,aY,aCXP*aCY);
                  //mMat->LowAddElem(aX,aY,aCXP*aCY);
@@ -2135,8 +2140,8 @@ void cFormQuadCreuse::V_GSSR_AddNewEquation_Indexe
 void cFormQuadCreuse::SoutraitProduc3x3
 (
         bool                   Sym,
-        ElMatrix<tSysCho> &aM1,
-        ElMatrix<tSysCho> &aM2,
+        ElMatrix<double> &aM1,
+        ElMatrix<double> &aM2,
         const std::vector<cSsBloc> * aYVSB
         )
 {
@@ -2149,7 +2154,7 @@ void cFormQuadCreuse::SoutraitProduc3x3
 
 void cFormQuadCreuse::Indexee_EcrireDansMatrWithQuad
 (
-        ElMatrix<tSysCho> &aMatr,
+        ElMatrix<double> &aMatr,
         const std::vector<cSsBloc> &  aVx,
         const std::vector<cSsBloc> &  aVy
         )  const
@@ -2191,12 +2196,12 @@ bool cFormQuadCreuse:: AcceptContrainteNonUniV() const
 
 
 
-Im1D_REAL8   cFormQuadCreuse::V_GSSR_Solve(bool * aResOk) 
+Im1D_REAL8   cFormQuadCreuse::V_GSSR_Solve(bool * aResOk)
 {
 
     Im1D_REAL8 aR2(mNbVar,0.0);
 
-    Im1D<tSysCho,tSysCho> aR2Cho(mNbVar,0.0);
+    Im1D<double,double> aR2Cho(mNbVar,0.0);
     if (mMat->DirectInverse(mFLin.data(),aR2Cho.data()))
     {
         for (int aK=0 ; aK<mNbVar ; aK++)
@@ -2284,11 +2289,11 @@ void cFormQuadCreuse::AddDiff
     }
 }
 
-REAL  cFormQuadCreuse::ValFNV(const REAL *  aP)
+double  cFormQuadCreuse::ValFNV(const double *  aP)
 {
-    REAL aRes = mV0;
+    double aRes = mV0;
     mMat->MulVect8(mDataGrad,aP);
-    for (INT k=0 ; k<mNbVar ; k++)
+    for (int k=0 ; k<mNbVar ; k++)
         aRes += aP[k]*(mDataLin[k] + mDataGrad[k]/2.0);
 
     return aRes;
@@ -2302,14 +2307,14 @@ double  cFormQuadCreuse::ResiduOfSol(const double * aP)
     return aResidu;
 }
 
-void  cFormQuadCreuse::GradFNV(REAL *grad,const REAL *  aP)
+void  cFormQuadCreuse::GradFNV(double *grad,const double *  aP)
 {
     mMat->MulVect8(mDataGrad,aP);
-    for (INT k=0 ; k<mNbVar ; k++)
+    for (int k=0 ; k<mNbVar ; k++)
         grad[k]  = mDataLin[k] + mDataGrad[k];
 }
 
-void cFormQuadCreuse::SetOffsets(const std::vector<INT> & aVIndexes)
+void cFormQuadCreuse::SetOffsets(const std::vector<int> & aVIndexes)
 {
     mMat->SetOffsets(aVIndexes);
 }
@@ -2344,40 +2349,7 @@ void cElMatCreuseGen::PrecCondQuad(double *)
     ELISE_ASSERT(false,"cElMatCreuseGen::PrecCondQuad");
 }
 
-bool cElMatCreuseGen::DirectInverse(const tSysCho *,tSysCho *)
+bool cElMatCreuseGen::DirectInverse(const double *,double *)
 {
     return false;
 }
-
-/*Footer-MicMac-eLiSe-25/06/2007
-
-Ce logiciel est un programme informatique servant à la mise en
-correspondances d'images pour la reconstruction du relief.
-
-Ce logiciel est régi par la licence CeCILL-B soumise au droit français et
-respectant les principes de diffusion des logiciels libres. Vous pouvez
-utiliser, modifier et/ou redistribuer ce programme sous les conditions
-de la licence CeCILL-B telle que diffusée par le CEA, le CNRS et l'INRIA 
-sur le site "http://www.cecill.info".
-
-En contrepartie de l'accessibilité au code source et des droits de copie,
-de modification et de redistribution accordés par cette licence, il n'est
-offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,
-seule une responsabilité restreinte pèse sur l'auteur du programme,  le
-titulaire des droits patrimoniaux et les concédants successifs.
-
-A cet égard  l'attention de l'utilisateur est attirée sur les risques
-associés au chargement,  à l'utilisation,  à la modification et/ou au
-développement et à la reproduction du logiciel par l'utilisateur étant 
-donné sa spécificité de logiciel libre, qui peut le rendre complexe à 
-manipuler et qui le réserve donc à des développeurs et des professionnels
-avertis possédant  des  connaissances  informatiques approfondies.  Les
-utilisateurs sont donc invités à charger  et  tester  l'adéquation  du
-logiciel à leurs besoins dans des conditions permettant d'assurer la
-sécurité de leurs systèmes et ou de leurs données et, plus généralement, 
-à l'utiliser et l'exploiter dans les mêmes conditions de sécurité. 
-
-Le fait que vous puissiez accéder à cet en-tête signifie que vous avez 
-pris connaissance de la licence CeCILL-B, et que vous en avez accepté les
-termes.
-Footer-MicMac-eLiSe-25/06/2007*/

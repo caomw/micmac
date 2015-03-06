@@ -50,42 +50,42 @@ Header-MicMac-eLiSe-25/06/2007*/
 class Tabul_Bits_Gen
 {
       public :
-         virtual INT   kieme_val      (INT byte,INT k) const  = 0;
-         virtual INT   set_kieme_val  (INT old_byte,INT val,INT k) const = 0;
+         virtual int   kieme_val      (int byte,int k) const  = 0;
+         virtual int   set_kieme_val  (int old_byte,int val,int k) const = 0;
 
          static void  init_tabul_bits();
-         virtual void  input(INT * out,const U_INT1 * in,INT x0,INT x1) const = 0;
-         virtual void  output(U_INT1 * out,const  INT * in,INT x0,INT x1) const = 0;
-         virtual void  output(U_INT1 * out,const REAL * in,INT x0,INT x1) const = 0;
+         virtual void  input(int * out,const U_int1 * in,int x0,int x1) const = 0;
+         virtual void  output(U_int1 * out,const  int * in,int x0,int x1) const = 0;
+         virtual void  output(U_int1 * out,const double_t * in,int x0,int x1) const = 0;
 
 	 virtual ~Tabul_Bits_Gen() {}
 
-         static const Tabul_Bits_Gen & tbb(INT nbb,bool msbf);
+         static const Tabul_Bits_Gen & tbb(int nbb,bool msbf);
 
          static void  unpack
                       (
-                         U_INT1 *          out,
-                         const U_INT1 *    in,
-                         INT               nb,
-                         INT               nbb,
+                         U_int1 *          out,
+                         const U_int1 *    in,
+                         int               nb,
+                         int               nbb,
                          bool              msbf
                       );
 
          static void  pack
                       (
-                         U_INT1 *          out,
-                         const U_INT1 *    in,
-                         INT               nb,
-                         INT               nbb,
+                         U_int1 *          out,
+                         const U_int1 *    in,
+                         int               nb,
+                         int               nbb,
                          bool              msbf
                       );
 
 
 };
 
-template <const INT nbb>  class DataGenImBits;
+template <const int nbb>  class DataGenImBits;
 
-template<const INT nbb,const bool msbf> class Tabul_Bits : public Tabul_Bits_Gen
+template<const int nbb,const bool msbf> class Tabul_Bits : public Tabul_Bits_Gen
 {
     friend class Tabul_Bits_Gen;
     friend class DataGenImBits<nbb>;
@@ -98,24 +98,24 @@ template<const INT nbb,const bool msbf> class Tabul_Bits : public Tabul_Bits_Gen
               nb_val      = 1<<nbb
         };
 
-        static INT sz_line(INT nb_el);
+        static int sz_line(int nb_el);
 
-        typedef U_INT1  tLineInputTab[nb_per_byte];
-        typedef U_INT1  tLineOutputTab[nb_val][nb_per_byte];
+        typedef U_int1  tLineInputTab[nb_per_byte];
+        typedef U_int1  tLineOutputTab[nb_val][nb_per_byte];
 
         static  tLineInputTab *  input_tab;
         static  tLineOutputTab * out_tab;
 
-        // static U_INT1  input_tab[256][nb_per_byte];
-        // static U_INT1  out_tab[256][nb_val][nb_per_byte];
+        // static U_int1  input_tab[256][nb_per_byte];
+        // static U_int1  out_tab[256][nb_val][nb_per_byte];
 
 
-         void  input(INT * out,const U_INT1 * in,INT x0,INT x1) const;
-         void  output(U_INT1 * out,const  INT * in,INT x0,INT x1) const ;
-         void  output(U_INT1 * out,const REAL * in,INT x0,INT x1) const ;
+         void  input(int * out,const U_int1 * in,int x0,int x1) const;
+         void  output(U_int1 * out,const  int * in,int x0,int x1) const ;
+         void  output(U_int1 * out,const double_t * in,int x0,int x1) const ;
 
-         virtual INT   kieme_val      (INT byte,INT k) const;
-         virtual INT   set_kieme_val  (INT old_byte,INT val,INT k) const;
+         virtual int   kieme_val      (int byte,int k) const;
+         virtual int   set_kieme_val  (int old_byte,int val,int k) const;
 
 
         static  Tabul_Bits<nbb,msbf> The_Only_One;
@@ -126,30 +126,30 @@ template<const INT nbb,const bool msbf> class Tabul_Bits : public Tabul_Bits_Gen
 };
 
 
-template <const INT nbb>  class DataGenImBits : public DataGenIm
+template <const int nbb>  class DataGenImBits : public DataGenIm
 {
    public :
 
-      DataGenImBits(INT sz_0,INT sz_tot,void * DataLin);  // sz_tot do not incopoarte first dim
-      virtual void  input_rle(void *,INT,const void*,INT offs_0) const;
+      DataGenImBits(int sz_0,int sz_tot,void * DataLin);  // sz_tot do not incopoarte first dim
+      virtual void  input_rle(void *,int,const void*,int offs_0) const;
 
 
-      virtual void  out_rle(void *,INT,const INT*,INT offs_0) const;
-      virtual void  out_rle(void *,INT,const REAL*,INT offs_0) const;
-      virtual INT sz_tot() const;
+      virtual void  out_rle(void *,int,const int*,int offs_0) const;
+      virtual void  out_rle(void *,int,const double_t*,int offs_0) const;
+      virtual int sz_tot() const;
 
 
 
-       void SetAll(INT aVal);
+       void SetAll(int aVal);
       bool          mDataLinOwner;
-      INT           _sz_tot;
-      INT           _sz_line; 
-      U_INT1 *      _data_lin; // for afficionados of manipulations
+      int           _sz_tot;
+      int           _sz_line; 
+      U_int1 *      _data_lin; // for afficionados of manipulations
                                // like _data_lin[x+y*_tx]
                                //  use is disrecommended with images
 
-      virtual INT vmax() const;
-      virtual INT vmin() const;
+      virtual int vmax() const;
+      virtual int vmin() const;
       virtual bool integral_type() const;
       virtual GenIm::type_el type() const;
 
@@ -165,10 +165,10 @@ template <const INT nbb>  class DataGenImBits : public DataGenIm
      // compatibility with ``DataGenIm'', but, as far as I know, can never
      // be reached
 
-      virtual void  striped_input_rle(void *,INT nb,INT dim,const void*,INT offs_0) const;
-      virtual void  striped_output_rle(void *,INT nb,INT dim,const void*,INT offs_0) const;
-      virtual INT sz_el() const;
-      virtual INT sz_base_el() const;
+      virtual void  striped_input_rle(void *,int nb,int dim,const void*,int offs_0) const;
+      virtual void  striped_output_rle(void *,int nb,int dim,const void*,int offs_0) const;
+      virtual int sz_el() const;
+      virtual int sz_base_el() const;
       virtual void  *  data_lin_gen();
 
       static GenIm::type_el     type_el_bitm;
@@ -176,7 +176,7 @@ template <const INT nbb>  class DataGenImBits : public DataGenIm
 
 
 
-template <const INT nbb> class DataIm2D_Bits :
+template <const int nbb> class DataIm2D_Bits :
              public  DataGenImBits<nbb> ,
              public  DataIm2DGen
 {
@@ -189,50 +189,50 @@ template <const INT nbb> class DataIm2D_Bits :
 
         };
 
-       void SetAll(INT aVal);
+       void SetAll(int aVal);
 
-       inline INT get(INT x,INT y) const;
-       inline INT get_def(INT x,INT y,INT v) const;
-       inline void set(INT x,INT y,INT val) const
+       inline int get(int x,int y) const;
+       inline int get_def(int x,int y,int v) const;
+       inline void set(int x,int y,int val) const
     {
-        U_INT1 * adr_x = _data[y] +  x / nb_per_byte;
+        U_int1 * adr_x = _data[y] +  x / nb_per_byte;
         *adr_x =  Tabul_Bits<nbb,true>::out_tab[*adr_x][val][x%nb_per_byte];
     }
 
-      virtual void out_pts_integer(Const_INT_PP coord,INT nb,const void *) ;
-      virtual void input_pts_integer(void *,Const_INT_PP coord,INT nb) const;
-      virtual void input_pts_reel(REAL *,Const_REAL_PP coord,INT nb) const;
+      virtual void out_pts_integer(Const_int_PP coord,int nb,const void *) ;
+      virtual void input_pts_integer(void *,Const_int_PP coord,int nb) const;
+      virtual void input_pts_reel(double_t *,Const_double_t_PP coord,int nb) const;
 
-      virtual void  *   calc_adr_seg(INT *);
+      virtual void  *   calc_adr_seg(int *);
       virtual ~DataIm2D_Bits();
 
 
-      virtual INT    dim() const;
-      virtual const INT  * p0()  const;
-      virtual const INT  * p1()  const;
+      virtual int    dim() const;
+      virtual const int  * p0()  const;
+      virtual const int  * p1()  const;
 
-      U_INT1 **     _data;
+      U_int1 **     _data;
 
-      Im2D_U_INT1  gray_im_red(INT & zoom);
+      Im2D_U_int1  gray_im_red(int & zoom);
 
 
-      DataIm2D_Bits(INT tx, INT ty,bool to_init,INT v_init,void *);
+      DataIm2D_Bits(int tx, int ty,bool to_init,int v_init,void *);
 
       virtual void out_assoc
               (
                   void * out, // eventually 0
                   const OperAssocMixte &,
-                  Const_INT_PP coord,
-                  INT nb,
+                  Const_int_PP coord,
+                  int nb,
                   const void * values
               ) const;
 
       virtual void q_dilate
-                   (  Std_Pack_Of_Pts<INT> * set_dilated,
+                   (  Std_Pack_Of_Pts<int> * set_dilated,
                       char **,
-                      const Std_Pack_Of_Pts<INT> * set_to_dilate,
-                      INT **,
-                      INT   nb_v,
+                      const Std_Pack_Of_Pts<int> * set_to_dilate,
+                      int **,
+                      int   nb_v,
                       Image_Lut_1D_Compile   func_selection,
                       Image_Lut_1D_Compile   func_update
                    );
@@ -240,18 +240,18 @@ template <const INT nbb> class DataIm2D_Bits :
 };
 
 
-template <const INT nbb>  DataIm2D_Bits<nbb>::DataIm2D_Bits
+template <const int nbb>  DataIm2D_Bits<nbb>::DataIm2D_Bits
 (
- INT Tx,
- INT Ty,
+ int Tx,
+ int Ty,
  bool to_init ,
- INT  v_init,
+ int  v_init,
  void * aDataLin
  ) :
 DataGenImBits<nbb>(Tx,Ty,aDataLin),
 DataIm2DGen(Tx,Ty)
 {
-    _data =  STD_NEW_TAB_USER(ty(),U_INT1 *);
+    _data =  STD_NEW_TAB_USER(ty(),U_int1 *);
     
     for (int y = 0 ; y<ty() ; y++)
         _data[y] = this->_data_lin + y *this->_sz_line;
@@ -264,9 +264,9 @@ DataIm2DGen(Tx,Ty)
          EEM0 << "Bad init value in Im2D_Bits \n"
          << "|  Got " << v_init << ", expected >= " << this->vmin() << " and < " << this->vmax()
          );
-        for (INT b=0; b<nb_per_byte ; b++)
+        for (int b=0; b<nb_per_byte ; b++)
             set(b,0,v_init);
-        U_INT1  v0 = this->_data_lin[0];
+        U_int1  v0 = this->_data_lin[0];
         set_cste(this->_data_lin,v0,this->_sz_line*ty());
     }
 }
@@ -276,46 +276,46 @@ DataIm2DGen(Tx,Ty)
 // du type : error: explicit specialization of 'TheType' after instantiation
 
 
-template <const INT nbb>  void DataGenImBits<nbb>::input_rle
-(void * v_out,INT nb,const void* v_in,INT offs_0) const
+template <const int nbb>  void DataGenImBits<nbb>::input_rle
+(void * v_out,int nb,const void* v_in,int offs_0) const
 {
     
     Tabul_Bits<nbb,true>::The_Only_One.input
     (
-     C_CAST(INT *,v_out),
-     C_CAST(const U_INT1 *,v_in),
+     C_CAST(int *,v_out),
+     C_CAST(const U_int1 *,v_in),
      offs_0,
      offs_0+nb
      );
 }
 
-template <const INT nbb>  void DataGenImBits<nbb>::out_rle
-(void * v_out,INT nb,const INT * v_in,INT offs_0) const
+template <const int nbb>  void DataGenImBits<nbb>::out_rle
+(void * v_out,int nb,const int * v_in,int offs_0) const
 {
     
     Tabul_Bits<nbb,true>::The_Only_One.output
     (
-     C_CAST(U_INT1 *,v_out),
+     C_CAST(U_int1 *,v_out),
      v_in,
      offs_0,
      offs_0+nb
      );
 }
 
-template <const INT nbb>  void DataGenImBits<nbb>::out_rle
-(void * v_out,INT nb,const REAL * v_in,INT offs_0) const
+template <const int nbb>  void DataGenImBits<nbb>::out_rle
+(void * v_out,int nb,const double_t * v_in,int offs_0) const
 {
     
     Tabul_Bits<nbb,true>::The_Only_One.output
     (
-     C_CAST(U_INT1 *,v_out),
+     C_CAST(U_int1 *,v_out),
      v_in,
      offs_0,
      offs_0+nb
      );
 }
 
-template <const INT nbb>  GenIm::type_el  DataGenImBits<nbb>::type() const
+template <const int nbb>  GenIm::type_el  DataGenImBits<nbb>::type() const
 {
     return type_el_bitm;
 }

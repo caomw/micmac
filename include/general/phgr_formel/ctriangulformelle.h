@@ -27,14 +27,14 @@ class cTriangulFormelle : public ElDistortion22_Gen,
 	// Renvoie un sommet aS2 tq (aS1 aS2) soit horizontal et assez grand
 	// virtual cTFI_AttrSom  & SomVecHorz(cTFI_AttrSom & aS1) =0;
 	// 
-	// INT 
+	// int 
 
           cSetEqFormelles & Set();
 	  // Contraintes pour bloquer un mouvement de rotation
           cMultiContEQF      ContraintesRot() ;
 	  // Contraintes pour bloquer tous les sommets
           cMultiContEQF      ContraintesAll() ;
-	  virtual void SetTolMax(REAL) =0;
+	  virtual void SetTolMax(double_t) =0;
           const  std::vector<cTFI_Triangle *> & VTri() const;
 
 	  void AssertD2() const;
@@ -47,7 +47,7 @@ class cTriangulFormelle : public ElDistortion22_Gen,
       private :
 	  virtual cTFI_AttrSom * SomCentral() = 0;
 	  virtual cTFI_AttrSom * VecHorz() = 0;
-	  void  Diff(ElMatrix<REAL> &,Pt2dr) const ; // Non implantee
+	  void  Diff(ElMatrix<double_t> &,Pt2dr) const ; // Non implantee
 
 	  double  mTrianFTol;
 };

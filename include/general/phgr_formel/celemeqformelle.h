@@ -15,8 +15,8 @@ class  cElemEqFormelle :  public cNameSpaceEqF
             const  cIncIntervale & IncInterv() const;
             cIncIntervale & IncInterv() ;
             tContFcteur & AllFonct();
-	    void  AddFoncRappInit(cMultiContEQF &,INT i0,INT i1,double aTol);
-            REAL AddRappViscosite
+	    void  AddFoncRappInit(cMultiContEQF &,int i0,int i1,double aTol);
+            double_t AddRappViscosite
                  (
                       const std::string  & aContexte,
                       bool OnCur,
@@ -26,19 +26,19 @@ class  cElemEqFormelle :  public cNameSpaceEqF
                  );
 
 
-            // void AddFoncRappOnCur(cMultiContEQF &,INT i0,INT i1,double * aTol );
+            // void AddFoncRappOnCur(cMultiContEQF &,int i0,int i1,double * aTol );
 
             void AssertClosed();
             void AssertUnClosed();
             void AssertSameSet(const cElemEqFormelle &);
 
-	    virtual void SetValAndInit(REAL,INT IndGlob);
+	    virtual void SetValAndInit(double_t,int IndGlob);
 	    // Les contraintes se referent au valeur init,
 	    // d'ou l'interet eventuel de les remettre sur 
 	    // sur les valeur courantes si c'est elles que l'on
 	    // veut figer
 	    virtual void SetValInitOnValCur();
-	    INT NbInc();
+	    int NbInc();
 
 
         protected :
@@ -48,14 +48,14 @@ class  cElemEqFormelle :  public cNameSpaceEqF
             // Au cas ou des inconnues ont ete modifiee,
             // remet a jour mSet.Alloc()
             void ReinitOnCur();
-            tContFcteur  FoncRapp(INT i0,INT i1,const double * vals);
-            tContFcteur  FoncRappInit(INT i0,INT i1);
+            tContFcteur  FoncRapp(int i0,int i1,const double * vals);
+            tContFcteur  FoncRappInit(int i0,int i1);
 
             cSetEqFormelles & mSet;
             // Foncteur de Rappel sur Valeur Init
-            INT                    mNumInc0;
+            int                    mNumInc0;
             cIncIntervale          mIncInterv;
-            INT                    mNumIncN;
+            int                    mNumIncN;
 
             tContFcteur                mFoncRap;
             tContFcteur                mAllFonct;

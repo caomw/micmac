@@ -46,21 +46,21 @@ class cELise_InterfaceIm2D : public NS_TestOpBuf::cInterfaceIm2D
 {
      public :
 
-        U_INT1 GetValue(const std::complex<int> & aP) const 
+        U_int1 GetValue(const std::complex<int> & aP) const 
         {
             return mIm.getproj(Std2Elise(aP));
         }
-        void  SetValue(const std::complex<int> & aP,const U_INT1 & aVal) 
+        void  SetValue(const std::complex<int> & aP,const U_int1 & aVal) 
         {
            mIm.oset(Std2Elise(aP),aVal);
         }
 
-        cELise_InterfaceIm2D(Im2D<U_INT1,int> anIm) :
+        cELise_InterfaceIm2D(Im2D<U_int1,int> anIm) :
           mIm (anIm)
         {
         }
      private :
-        TIm2D<U_INT1,int> mIm;
+        TIm2D<U_int1,int> mIm;
 };
 
 

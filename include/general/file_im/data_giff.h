@@ -8,8 +8,8 @@ class Gif_File : public PRC0
 public :
     Gif_File(const char * name);
 
-    INT      nb_im   ()        const;
-    Gif_Im   kth_im  (INT)     const;
+    int      nb_im   ()        const;
+    Gif_Im   kth_im  (int)     const;
 
 
 private :

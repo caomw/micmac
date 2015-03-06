@@ -174,8 +174,8 @@ template <class TArg> class cProg2DOptimiser
              cProg2DOptimiser
              (
                    TArg  &         anArg,
-                   Im2D_INT2       aZMin,
-                   Im2D_INT2       aZMax,
+                   Im2D_int2       aZMin,
+                   Im2D_int2       aZMax,
                    int             aRab,
                    int             aMul
              ) :
@@ -201,7 +201,7 @@ template <class TArg> class cProg2DOptimiser
              double DMoyDir() const {return mDMoyDir;};
              void SetTeta0(double aTeta0){mTeta0=aTeta0;}
              // Pour recupere les donnees en sorties
-             void TranfereSol(INT2**);
+             void TranfereSol(int2**);
              const Pt2di  & Dir() const {return mDir;}
      private :
 
@@ -230,10 +230,10 @@ template <class TArg> class cProg2DOptimiser
             int                                           mMul;
             double                                        mTeta0;
             Pt2di                                         mSz;
-            Im2D_INT2                                     mImZMin;
-            TIm2D<INT2,INT>                               mTZMin;
-            Im2D_INT2                                     mImZMax;
-            TIm2D<INT2,INT>                               mTZMax;
+            Im2D_int2                                     mImZMin;
+            TIm2D<int2,int>                               mTZMin;
+            Im2D_int2                                     mImZMax;
+            TIm2D<int2,int>                               mTZMax;
             signed short **                               mZMin;
             signed short **                               mZMax;
             cLineMapRect                                  mLMR;
@@ -241,8 +241,8 @@ template <class TArg> class cProg2DOptimiser
             Pt2di                                         mDir;
             double                                        mDMoyDir;  // Dist moy entre deux point selon la direction
             int                                           mNbLine;
-            std::vector<INT2>                             mLineZMin;
-            std::vector<INT2>                             mLineZMax;
+            std::vector<int2>                             mLineZMin;
+            std::vector<int2>                             mLineZMax;
 };
 
 template <class TArg> void cProg2DOptimiser<TArg>::BalayageOneSens
@@ -289,7 +289,7 @@ template <class TArg> void cProg2DOptimiser<TArg>::BalayageOneSens
          
 }
 
-template <class TArg>  void cProg2DOptimiser<TArg>::TranfereSol(INT2** aSol)
+template <class TArg>  void cProg2DOptimiser<TArg>::TranfereSol(int2** aSol)
 {
     Pt2di aP;
     for (aP.x=0 ; aP.x<mSz.x; aP.x++)
@@ -429,11 +429,11 @@ class cOptimLabelBinaire
         virtual ~cOptimLabelBinaire();
 
     protected :
-        static U_INT1 ToCost(double aCost);
+        static U_int1 ToCost(double aCost);
 
         Pt2di              mSz;
-        Im2D_U_INT1        mCost;  // Memorise les couts entre 0 et 1
-        TIm2D<U_INT1,INT>  mTCost;  // Memorise les couts entre 0 et 1
+        Im2D_U_int1        mCost;  // Memorise les couts entre 0 et 1
+        TIm2D<U_int1,int>  mTCost;  // Memorise les couts entre 0 et 1
         double             mRegul;
 
 

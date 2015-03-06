@@ -12,7 +12,7 @@ public :
     Pt2dr  TransOnLineEpip
     (
             Pt2dr aP,
-            REAL aParal
+            double_t aParal
             );
 
 
@@ -22,7 +22,7 @@ public :
     // Inverse est heritee  et fait appel a OwnInverse
 
 
-    Pt2dr DirEpip(Pt2dr,REAL anEpsilon); // Calcul par difference finie !
+    Pt2dr DirEpip(Pt2dr,double_t anEpsilon); // Calcul par difference finie !
 
 
     Pt2dr P0() const;
@@ -33,10 +33,10 @@ public :
 
     //     P ->  aChSacle * Pol(P/aChSacle)
     virtual EpipolaireCoordinate *
-    MapingChScale(REAL aChSacle) const = 0;
+    MapingChScale(double_t aChSacle) const = 0;
 
     // Fait heriter les parametre globaux aP0, aDirX, aTrFin
-    void HeriteChScale(EpipolaireCoordinate &,REAL aChSacle);
+    void HeriteChScale(EpipolaireCoordinate &,double_t aChSacle);
 
     Box2dr ImageOfBox(Box2dr );
     void   AddTrFinale(Pt2dr);
@@ -47,9 +47,9 @@ public :
     (
             Fonc_Num DeltaY, // rab de Y epip, exprime en coord image
             Fonc_Num Pond,   // Binarisee en 0/1 , exprime en coord image
-            REAL  aStepGr ,
+            double_t  aStepGr ,
             Box2dr aBoxIm,
-            REAL   aRatioMin = 0.2 // Ratio pour remplir la grille
+            double_t   aRatioMin = 0.2 // Ratio pour remplir la grille
             );
     virtual ~EpipolaireCoordinate();
 protected :
@@ -73,7 +73,7 @@ private :
 
 
     virtual bool OwnInverse(Pt2dr &) const ;
-    virtual void  Diff(ElMatrix<REAL> &,Pt2dr) const ;  //  => Error Fatale, for now
+    virtual void  Diff(ElMatrix<double_t> &,Pt2dr) const ;  //  => Error Fatale, for now
 
 
     Pt2dr      mP0;

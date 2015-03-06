@@ -1,5 +1,5 @@
-#ifndef _ELISE_GENERAL_BITM_CIM2DINTER_H
-#define _ELISE_GENERAL_BITM_CIM2DINTER_H
+#ifndef _ELISE_GENERAL_BITM_CIM2DintER_H
+#define _ELISE_GENERAL_BITM_CIM2DintER_H
 
 #include "general/sys_dep.h"
 

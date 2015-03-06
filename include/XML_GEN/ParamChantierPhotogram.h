@@ -2409,14 +2409,14 @@ class cTestNewGrid
         std::string & A();
         const std::string & A()const ;
 
-        Im2D_INT1 & Im();
-        const Im2D_INT1 & Im()const ;
+        Im2D_int1 & Im();
+        const Im2D_int1 & Im()const ;
 
         std::string & Z();
         const std::string & Z()const ;
     private:
         std::string mA;
-        Im2D_INT1 mIm;
+        Im2D_int1 mIm;
         std::string mZ;
 };
 cElXMLTree * ToXMLTree(const cTestNewGrid &);
@@ -2444,16 +2444,16 @@ class cGridDeform2D
         Pt2dr & Step();
         const Pt2dr & Step()const ;
 
-        Im2D_REAL8 & ImX();
-        const Im2D_REAL8 & ImX()const ;
+        Im2D_double_t8 & ImX();
+        const Im2D_double_t8 & ImX()const ;
 
-        Im2D_REAL8 & ImY();
-        const Im2D_REAL8 & ImY()const ;
+        Im2D_double_t8 & ImY();
+        const Im2D_double_t8 & ImY()const ;
     private:
         Pt2dr mOrigine;
         Pt2dr mStep;
-        Im2D_REAL8 mImX;
-        Im2D_REAL8 mImY;
+        Im2D_double_t8 mImX;
+        Im2D_double_t8 mImY;
 };
 cElXMLTree * ToXMLTree(const cGridDeform2D &);
 

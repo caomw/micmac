@@ -110,12 +110,7 @@ template <class Type> bool BadNumber(const Type & aVal) {return (std::isnan(aVal
 #endif
 
 #define ElTemplateInstantiation 1
-
-#if (SUN_WS5)
-	#define ElMemberTpl 0
-#else
-	#define ElMemberTpl 1
-#endif
+#define ElMemberTpl 1
 
 
 /*******************************************/
@@ -124,23 +119,23 @@ template <class Type> bool BadNumber(const Type & aVal) {return (std::isnan(aVal
 /*                                         */
 /*******************************************/
 
-#define U_INT  unsigned int
-#define U_INT4 unsigned  int
-#define INT    int
-#define INT4   int
-#define U_INT8 unsigned long long int
-#define _INT8   long long int // INT8 is already defined by windows.h and means "char"
-#define U_INT2 unsigned short
-#define INT2   signed short
-#define U_INT1 unsigned char
-#define INT1   signed char
+//#define U_int  unsigned int
+//#define U_int4 unsigned  int
+//#define int    int
+//#define int4   int
+//#define U_int8 unsigned long long int
+//#define _int8   long long int // int8 is already defined by windows.h and means "char"
+//#define U_int2 unsigned short
+//#define int2   signed short
+//#define U_int1 unsigned char
+//#define int1   signed char
 
-#define REAL    double
-#define REAL4   float
-#define REAL8   double
-#define REAL16  long double
+//#define double_t    double
+//#define double_t4   float
+//#define double_t8   double
+//#define double_t16  long double
 
-#define INTByte8  long long int
+//#define intByte8  long long int
 
 
 extern int TheIntFuckingReturnValue;
@@ -159,18 +154,9 @@ extern int (*system_call)( const char*cmd ); // equals ::system unless __TRACE_S
 #define  VoidFgets TheCharPtrFuckingReturnValue=::fgets
 
 
-typedef const INT * const *  Const_INT_PP ;
-typedef const REAL * const *  Const_REAL_PP ;
+//typedef const int * const *  Const_int_PP ;
+//typedef const double_t * const *  Const_double_t_PP ;
 
 extern bool MSBF_PROCESSOR();
-
-
-#if (ELISE_windows)
-#define ElIsBlank ISBLANK
-#else
-#define ElIsBlank isblank
-#endif
-
-typedef REAL8  tSysCho ;
 
 #endif /* ! _ELISE_SYS_DEP_H */

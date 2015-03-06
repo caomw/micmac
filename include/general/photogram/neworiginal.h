@@ -295,7 +295,7 @@ typedef enum
 
 
 // Donne une mesure en pixel (non distordu) de l'ecart d'appariement
-REAL EcartTotalProjection
+double_t EcartTotalProjection
 (
         const ElCamera & CamA,Pt2dr aPF2A,
         const ElCamera & CamB,Pt2dr aPF2B

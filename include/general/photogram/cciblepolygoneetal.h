@@ -22,7 +22,7 @@ public :
 
     cCiblePolygoneEtal
     (
-            tInd,Pt3dr,const cMirePolygonEtal &,INT Qual,
+            tInd,Pt3dr,const cMirePolygonEtal &,int Qual,
             cCibleCalib *,
             int anOrder
             );

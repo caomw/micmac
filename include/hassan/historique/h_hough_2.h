@@ -46,81 +46,81 @@ class H_Hough
 {
     public:
 
-      H_Hough(  REAL     pas_rho=1,
-                REAL     pas_teta=1,
-                INT      nb_min = 20,
-                REAL     debut_teta=0,
-                REAL     fin_teta = 180
+      H_Hough(  double_t     pas_rho=1,
+                double_t     pas_teta=1,
+                int      nb_min = 20,
+                double_t     debut_teta=0,
+                double_t     fin_teta = 180
              );
 
-      H_Hough(  Im2D_U_INT1 contour,
+      H_Hough(  Im2D_U_int1 contour,
                 bool        cont,
                 Output      w,
-                INT         color,
-                REAL        pas_rho=1,
-                REAL        pas_teta=1,
-                INT         nb_min = 20,
-                REAL        debut_teta=0,
-                REAL        fin_teta = 180
+                int         color,
+                double_t        pas_rho=1,
+                double_t        pas_teta=1,
+                int         nb_min = 20,
+                double_t        debut_teta=0,
+                double_t        fin_teta = 180
              );
 
-      H_Hough(  Im2D_U_INT1 image,
-                REAL        deriche,
-                REAL        hyst_bas,
-                REAL        hyst_haut,
+      H_Hough(  Im2D_U_int1 image,
+                double_t        deriche,
+                double_t        hyst_bas,
+                double_t        hyst_haut,
                 Output      w,
-                INT         color,
-                REAL        pas_rho=1,
-                REAL        pas_teta=1,
-                INT         nb_min = 20,
-                REAL        debut_teta=0,
-                REAL        fin_teta = 180
+                int         color,
+                double_t        pas_rho=1,
+                double_t        pas_teta=1,
+                int         nb_min = 20,
+                double_t        debut_teta=0,
+                double_t        fin_teta = 180
              );
 
-      void accumuler(Im2D_U_INT1 contour, bool cont = true);
+      void accumuler(Im2D_U_int1 contour, bool cont = true);
 
-      Im2D_REAL8 accumulator();
-      ElList<Pt2di> max_loc(INT nb_max = 5);
+      Im2D_double_t8 accumulator();
+      ElList<Pt2di> max_loc(int nb_max = 5);
       ElList<Pt2di> max_loc_p();
       ElList<Pt2di > droites();
-      void tracer(Output W,  INT color = 7);
-      void tracer(Output W, Pt2di p, INT color = 7);
-      void tracer(Output W, ElList<Pt2di> l, INT color = 7);
-      void tracer(Im2D_U_INT1 im);
-      INT  nb_droite();
+      void tracer(Output W,  int color = 7);
+      void tracer(Output W, Pt2di p, int color = 7);
+      void tracer(Output W, ElList<Pt2di> l, int color = 7);
+      void tracer(Im2D_U_int1 im);
+      int  nb_droite();
 
    private:
 
-     Im2D_REAL8    _accumulator;
-     Im2D_INT4     _accumulator_im;
-     Im2D_U_INT1   _contour;
-     Im1D_REAL8    _teta;
-     Im1D_REAL8    _s_teta;
-     Im1D_REAL8    _c_teta;
-     Im1D_REAL8    _moderator;
-     REAL8**       _accumulator_data;
-     INT4**        _accumulator_im_data;
-     U_INT1**      _contour_data;
-     REAL8*        _teta_data;
-     REAL8*        _s_teta_data;
-     REAL8*        _c_teta_data;
-     REAL8*        _moderator_data;
+     Im2D_double_t8    _accumulator;
+     Im2D_int4     _accumulator_im;
+     Im2D_U_int1   _contour;
+     Im1D_double_t8    _teta;
+     Im1D_double_t8    _s_teta;
+     Im1D_double_t8    _c_teta;
+     Im1D_double_t8    _moderator;
+     double_t8**       _accumulator_data;
+     int4**        _accumulator_im_data;
+     U_int1**      _contour_data;
+     double_t8*        _teta_data;
+     double_t8*        _s_teta_data;
+     double_t8*        _c_teta_data;
+     double_t8*        _moderator_data;
  
      ElList<Pt2di> _l;
-     REAL          _pas_r;
-     REAL          _pas_t;
-     REAL          _debut_teta;
-     REAL          _fin_teta;
-     REAL          _intervale_teta;
-     REAL          _merge_teta;
-     INT           _tr;
-     INT           _tt;
-     INT           _semi_tr;
-     INT           _tx;
-     INT           _ty;
-     INT           _nb_min;
+     double_t          _pas_r;
+     double_t          _pas_t;
+     double_t          _debut_teta;
+     double_t          _fin_teta;
+     double_t          _intervale_teta;
+     double_t          _merge_teta;
+     int           _tr;
+     int           _tt;
+     int           _semi_tr;
+     int           _tx;
+     int           _ty;
+     int           _nb_min;
      Pt2di         _centre;
-     INT           _nb_droite;
+     int           _nb_droite;
      ElList<Pt2di> _l_droite;
 
      void accumuler(Pt2di p);
@@ -138,37 +138,37 @@ class H_Hough_3D
     public:
 
       H_Hough_3D(
-                   REAL     pas_rho    = 1, 
-                   REAL     pas_teta   = 1, 
-                   REAL     pas_phi    = 1, 
-                   INT      nb_min     = 20, 
-                   REAL     debut_teta = 0, 
-                   REAL     fin_teta   = 180,
-                   REAL     debut_phi  = 0, 
-                   REAL     fin_phi    = 180
+                   double_t     pas_rho    = 1, 
+                   double_t     pas_teta   = 1, 
+                   double_t     pas_phi    = 1, 
+                   int      nb_min     = 20, 
+                   double_t     debut_teta = 0, 
+                   double_t     fin_teta   = 180,
+                   double_t     debut_phi  = 0, 
+                   double_t     fin_phi    = 180
                 );
 
       H_Hough_3D(
-                   Im3D_U_INT1 entrer,
+                   Im3D_U_int1 entrer,
                    Boite    sortir,
-                   REAL     pas_rho    = 1, 
-                   REAL     pas_teta   = 1, 
-                   REAL     pas_phi    = 1, 
-                   INT      nb_min     = 20, 
-                   REAL     debut_teta = 0, 
-                   REAL     fin_teta   = 180,
-                   REAL     debut_phi  = 0, 
-                   REAL     fin_phi    = 180
+                   double_t     pas_rho    = 1, 
+                   double_t     pas_teta   = 1, 
+                   double_t     pas_phi    = 1, 
+                   int      nb_min     = 20, 
+                   double_t     debut_teta = 0, 
+                   double_t     fin_teta   = 180,
+                   double_t     debut_phi  = 0, 
+                   double_t     fin_phi    = 180
              );
 
-      void accumuler(Im3D_U_INT1 entrer, INT debut = 0, INT fin = 0);
-      void accumuler(Im3D_U_INT1 entrer, Im2D_U_INT1 masq, INT debut = 0, INT fin = 0);
-//      void accumuler(Liste_Pts_REAL nuage);
+      void accumuler(Im3D_U_int1 entrer, int debut = 0, int fin = 0);
+      void accumuler(Im3D_U_int1 entrer, Im2D_U_int1 masq, int debut = 0, int fin = 0);
+//      void accumuler(Liste_Pts_double_t nuage);
 
-      Im3D_REAL8 accumulator();
-      ElList<Pt3di> max_loc(INT nb_max = 6, Output W = NULL, INT d_teta = 3, INT d_phi = 2, INT d_rho = 1); 
+      Im3D_double_t8 accumulator();
+      ElList<Pt3di> max_loc(int nb_max = 6, Output W = NULL, int d_teta = 3, int d_phi = 2, int d_rho = 1); 
       void tracer(Boite& sortir);
-      void tracer(Boite& sortir, Pt3di p, INT color = 1);
+      void tracer(Boite& sortir, Pt3di p, int color = 1);
       void tracer(Boite& sortir, ElList<Pt3di> l);
       Hplan conversion(Pt3di p);
       ElList<Hplan> conversion(ElList<Pt3di> l);
@@ -176,47 +176,47 @@ class H_Hough_3D
 
    protected:
 
-     Im3D_REAL8    _accumulator;
-     Im3D_REAL8    _accumulator_im;
-     Im1D_REAL8    _teta;
-     Im1D_REAL8    _phi;
-     Im2D_REAL8    _c_phi_s_teta;
-     Im2D_REAL8    _c_phi_c_teta;
-     Im2D_REAL8    _s_phi;
-     U_INT1***     _entrer;
-     REAL8***      _accumulator_data;
-     REAL8***      _accumulator_im_data;
-     REAL8*        _teta_data;
-     REAL8*        _phi_data;
-     REAL8**       _c_phi_s_teta_data;
-     REAL8**       _c_phi_c_teta_data;
-     REAL8**       _s_phi_data;
+     Im3D_double_t8    _accumulator;
+     Im3D_double_t8    _accumulator_im;
+     Im1D_double_t8    _teta;
+     Im1D_double_t8    _phi;
+     Im2D_double_t8    _c_phi_s_teta;
+     Im2D_double_t8    _c_phi_c_teta;
+     Im2D_double_t8    _s_phi;
+     U_int1***     _entrer;
+     double_t8***      _accumulator_data;
+     double_t8***      _accumulator_im_data;
+     double_t8*        _teta_data;
+     double_t8*        _phi_data;
+     double_t8**       _c_phi_s_teta_data;
+     double_t8**       _c_phi_c_teta_data;
+     double_t8**       _s_phi_data;
 
      ElList<Pt3di> _l;
      ElList<Hplan> _lplan;
-     REAL          _pas_r;
-     REAL          _pas_t;
-     REAL          _pas_p;
+     double_t          _pas_r;
+     double_t          _pas_t;
+     double_t          _pas_p;
 
-     REAL          _debut_teta;
-     REAL          _fin_teta;
-     REAL          _intervale_teta;
-     REAL          _merge_teta;
+     double_t          _debut_teta;
+     double_t          _fin_teta;
+     double_t          _intervale_teta;
+     double_t          _merge_teta;
 
-     REAL          _debut_phi;
-     REAL          _fin_phi;
-     REAL          _intervale_phi;
-     REAL          _merge_phi;
+     double_t          _debut_phi;
+     double_t          _fin_phi;
+     double_t          _intervale_phi;
+     double_t          _merge_phi;
 
-     INT           _tr;
-     INT           _tt;
-     INT           _tp;
-     INT           _semi_tr;
-     INT           _semi_tp;
-     INT           _tx;
-     INT           _ty;
-     INT           _tz;
-     INT           _nb_min;
+     int           _tr;
+     int           _tt;
+     int           _tp;
+     int           _semi_tr;
+     int           _semi_tp;
+     int           _tx;
+     int           _ty;
+     int           _tz;
+     int           _nb_min;
      Pt3di         _centre;
 
      void accumuler(Pt3di p);
@@ -232,36 +232,36 @@ class H_Hough_mne:public H_Hough_3D
     public:
 
       H_Hough_mne(
-                   INT      diff       = 1,
-                   REAL     pas_rho    = 1, 
-                   REAL     pas_teta   = 1, 
-                   REAL     pas_phi    = 1, 
-                   INT      nb_min     = 20, 
-                   REAL     debut_teta = 0, 
-                   REAL     fin_teta   = 180,
-                   REAL     debut_phi  = 0, 
-                   REAL     fin_phi    = 180
+                   int      diff       = 1,
+                   double_t     pas_rho    = 1, 
+                   double_t     pas_teta   = 1, 
+                   double_t     pas_phi    = 1, 
+                   int      nb_min     = 20, 
+                   double_t     debut_teta = 0, 
+                   double_t     fin_teta   = 180,
+                   double_t     debut_phi  = 0, 
+                   double_t     fin_phi    = 180
                 );
 
       H_Hough_mne(
                    Mne&     mne,
-                   INT      diff       = 1,
-                   REAL     pas_rho    = 1, 
-                   REAL     pas_teta   = 1, 
-                   REAL     pas_phi    = 1, 
-                   INT      nb_min     = 20, 
-                   REAL     debut_teta = 0, 
-                   REAL     fin_teta   = 180,
-                   REAL     debut_phi  = 0, 
-                   REAL     fin_phi    = 180
+                   int      diff       = 1,
+                   double_t     pas_rho    = 1, 
+                   double_t     pas_teta   = 1, 
+                   double_t     pas_phi    = 1, 
+                   int      nb_min     = 20, 
+                   double_t     debut_teta = 0, 
+                   double_t     fin_teta   = 180,
+                   double_t     debut_phi  = 0, 
+                   double_t     fin_phi    = 180
              );
 
-      void accumuler(Mne& mne, INT diff = 1);
-      ElList<Pt3di> max_loc(INT nb_max = 6, Output W = NULL, INT d_teta = 3, INT d_phi = 2, INT d_rho = 1); 
+      void accumuler(Mne& mne, int diff = 1);
+      ElList<Pt3di> max_loc(int nb_max = 6, Output W = NULL, int d_teta = 3, int d_phi = 2, int d_rho = 1); 
 
    protected:
 
-      INT _diff;
+      int _diff;
 };
 
 

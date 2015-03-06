@@ -44,62 +44,62 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 
 
-inline INT sub_bit(INT v,INT k0,INT k1)             
+inline int sub_bit(int v,int k0,int k1)             
         { return (v >> k0) & ((1 << (k1-k0)) -1);}
 
-inline INT set_sub_bit(INT v,INT new_v,INT k0,INT k1)             
+inline int set_sub_bit(int v,int new_v,int k0,int k1)             
 { 
-      INT masq = (1 << (k1-k0)) -1;
+      int masq = (1 << (k1-k0)) -1;
 
       return
                 (v & ~(masq << k0))  // efface les bits entre k0 et k1
               | ((new_v&masq) << k0);
 }
 
-inline INT kth_bit(INT v,INT k)             { return (v & (1<<k)) != 0 ; }
+inline int kth_bit(int v,int k)             { return (v & (1<<k)) != 0 ; }
 
-inline INT kth_bit_to_1(INT v, INT k)       { return v | (1<< k)       ; }
+inline int kth_bit_to_1(int v, int k)       { return v | (1<< k)       ; }
 
-inline INT kth_bit_to_0(INT v, INT k)       { return v & (~ (1<< k))   ; }
+inline int kth_bit_to_0(int v, int k)       { return v & (~ (1<< k))   ; }
 
-inline INT set_kth_bit_to_1(INT & v, INT k) { return v |=  1<< k       ; }
+inline int set_kth_bit_to_1(int & v, int k) { return v |=  1<< k       ; }
 
-inline INT set_kth_bit_to_0(INT & v, INT k) { return v &=  (~ (1<< k)) ; }
+inline int set_kth_bit_to_0(int & v, int k) { return v &=  (~ (1<< k)) ; }
 
-inline  INT nb_bits_to_nb_byte(INT nb_bits) { return (nb_bits + 7) / 8; }
+inline  int nb_bits_to_nb_byte(int nb_bits) { return (nb_bits + 7) / 8; }
 
 
 
-inline INT kth_bit_msbf(const U_INT1* v,INT k) 
+inline int kth_bit_msbf(const U_int1* v,int k) 
            { return (v[k/8]&(1<<(7-k%8)))!= 0;}
 
-inline INT kth_bit(const U_INT1* v,INT k) 
+inline int kth_bit(const U_int1* v,int k) 
            { return (v[k/8]&(1<<(k%8)))!= 0;}
 
-inline U_INT1 kth_bit_to_1(const U_INT1 * v, INT k)  
+inline U_int1 kth_bit_to_1(const U_int1 * v, int k)  
            { return v[k/8] | (1<< (k%8)) ;}
 
 #if (0)
-extern INT sub_bit(INT v,INT k0,INT k1);
-INT set_sub_bit(INT v,INT new_v,INT k0,INT k1);
-extern INT kth_bit(INT v,INT k);
-extern INT kth_bit_to_1(INT v, INT k);
-extern INT kth_bit_to_0(INT v, INT k);
-extern INT set_kth_bit_to_1(INT & v, INT k);
-extern INT set_kth_bit_to_0(INT & v, INT k);
-extern  INT nb_bits_to_nb_byte(INT nb_bits);
-extern INT kth_bit(const U_INT1* v,INT k) ;
-extern INT kth_bit_msbf(const U_INT1* v,INT k) ;
-extern U_INT1 kth_bit_to_1(const U_INT1 * v, INT k)  ;
+extern int sub_bit(int v,int k0,int k1);
+int set_sub_bit(int v,int new_v,int k0,int k1);
+extern int kth_bit(int v,int k);
+extern int kth_bit_to_1(int v, int k);
+extern int kth_bit_to_0(int v, int k);
+extern int set_kth_bit_to_1(int & v, int k);
+extern int set_kth_bit_to_0(int & v, int k);
+extern  int nb_bits_to_nb_byte(int nb_bits);
+extern int kth_bit(const U_int1* v,int k) ;
+extern int kth_bit_msbf(const U_int1* v,int k) ;
+extern U_int1 kth_bit_to_1(const U_int1 * v, int k)  ;
 #endif // CPP_OPTIMIZE
 
-INT inv_bits_order(INT val,INT nbb);
+int inv_bits_order(int val,int nbb);
 
 void byte_inv_2(void *);  // inverse the byte of a two byte  data
 void byte_inv_4(void *);  // inverse the byte of a four byte data
 void byte_inv_8(void *);  // inverse the byte of a eight byte data
 
-void byte_inv_tab(void *,INT byte_by_el,INT nb_el);  
+void byte_inv_tab(void *,int byte_by_el,int nb_el);  
     // inverse the byte of a four byte data
 
 

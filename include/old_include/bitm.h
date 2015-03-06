@@ -58,23 +58,23 @@ template <class Type> class El_CTypeTraits
                 typedef Type  tVal;
                 typedef Type  tBase;
                 enum   {eSizeOf = 1111};
-                static tVal  RawDataToVal(U_INT1 *);
+                static tVal  RawDataToVal(U_int1 *);
         private :
 };
 
-template <> class El_CTypeTraits<U_INT1>
+template <> class El_CTypeTraits<U_int1>
 {
         public :
-                     static const U_INT1 MaxValue() {return   UCHAR_MAX;}
-                     static const U_INT1 MinValue() {return   0;}
+                     static const U_int1 MaxValue() {return   UCHAR_MAX;}
+                     static const U_int1 MinValue() {return   0;}
                      static Fonc_Num TronqueF(Fonc_Num aFonc) {return Max(tBase(eVMin),Min(tBase(eVMax),aFonc));}
 
-static std::string   Name() {return "U_INT1";}
-                typedef INT1    tSignedVal;
-                typedef U_INT1  tUnSignedVal;
+static std::string   Name() {return "U_int1";}
+                typedef int1    tSignedVal;
+                typedef U_int1  tUnSignedVal;
 
-                typedef U_INT1  tVal;
-                typedef INT     tBase;
+                typedef U_int1  tVal;
+                typedef int     tBase;
                        static tVal Tronque(tBase aVal) {return ElMax(tBase(eVMin),ElMin(tBase(eVMax),aVal));}
 static tVal TronqueR(double aVal)
 {
@@ -85,22 +85,22 @@ static tVal TronqueR(double aVal)
                 static bool IsIntType() {return true;}
 
                 enum   {eSizeOf = 1,eVMin=0,eVMax=255,e100PozSize = 100};
-                static tVal  RawData2Val(const U_INT1 * Raw) {return  *Raw;}
-                static void Val2RawData(U_INT1 * Raw,U_INT1 val) {*Raw = val;}
-                static bool EqualsRaw2Val(const U_INT1 * Raw1,const U_INT1 * Raw2){return *Raw1==*Raw2;}
+                static tVal  RawData2Val(const U_int1 * Raw) {return  *Raw;}
+                static void Val2RawData(U_int1 * Raw,U_int1 val) {*Raw = val;}
+                static bool EqualsRaw2Val(const U_int1 * Raw1,const U_int1 * Raw2){return *Raw1==*Raw2;}
         private :
 };
 
 
-template <> class El_CTypeTraits<U_INT2>
+template <> class El_CTypeTraits<U_int2>
 {
         public :
-                     static const U_INT2 MaxValue() {return   USHRT_MAX;}
-                     static const U_INT2 MinValue() {return  0;}
+                     static const U_int2 MaxValue() {return   USHRT_MAX;}
+                     static const U_int2 MinValue() {return  0;}
                      static Fonc_Num TronqueF(Fonc_Num aFonc) {return Max(tBase(eVMin),Min(tBase(eVMax),aFonc));}
-static std::string   Name() {return "U_INT2";}
-                typedef U_INT2  tVal;
-                typedef INT     tBase;
+static std::string   Name() {return "U_int2";}
+                typedef U_int2  tVal;
+                typedef int     tBase;
                 static bool IsIntType() {return true;}
                        static tVal Tronque(tBase aVal) {return ElMax(tBase(eVMin),ElMin(tBase(eVMax),aVal));}
 static tVal TronqueR(double aVal)
@@ -111,19 +111,19 @@ static tVal TronqueR(double aVal)
 }
 
                 enum   {eSizeOf = 2,eVMin=0,eVMax=0xFFFF,e100PozSize =10000};
-                static tVal  RawData2Val(const U_INT1 * Raw)
+                static tVal  RawData2Val(const U_int1 * Raw)
                 {
                         tVal u;
-                        ((U_INT1 *)&u)[0] = Raw[0];
-                        ((U_INT1 *)&u)[1] = Raw[1];
+                        ((U_int1 *)&u)[0] = Raw[0];
+                        ((U_int1 *)&u)[1] = Raw[1];
                         return u;
                 }
-                static void Val2RawData(U_INT1 * Raw,U_INT2 val)
+                static void Val2RawData(U_int1 * Raw,U_int2 val)
                 {
-                         Raw[0] = ((U_INT1 *)&val)[0]  ;
-                         Raw[1] = ((U_INT1 *)&val)[1]  ;
+                         Raw[0] = ((U_int1 *)&val)[0]  ;
+                         Raw[1] = ((U_int1 *)&val)[1]  ;
                 }
-                static bool EqualsRaw2Val(const U_INT1 * Raw1,const U_INT1 * Raw2)
+                static bool EqualsRaw2Val(const U_int1 * Raw1,const U_int1 * Raw2)
                 {
                         return Raw1[0]==Raw2[0]&& Raw1[1]==Raw2[1];
                 }
@@ -132,22 +132,22 @@ static tVal TronqueR(double aVal)
 
 inline int AdjUC(int aV)
 {
-   return El_CTypeTraits<U_INT1>::Tronque(aV);
+   return El_CTypeTraits<U_int1>::Tronque(aV);
 }
 inline int AdjUC(double aV)
 {
-   return El_CTypeTraits<U_INT1>::Tronque(round_ni(aV));
+   return El_CTypeTraits<U_int1>::Tronque(round_ni(aV));
 }
 
-template <> class El_CTypeTraits<INT2>
+template <> class El_CTypeTraits<int2>
 {
         public :
-static std::string   Name() {return "INT2";}
-                     static const INT2 MaxValue () { return SHRT_MAX;}
-                     static const INT2 MinValue () { return SHRT_MIN;}
+static std::string   Name() {return "int2";}
+                     static const int2 MaxValue () { return SHRT_MAX;}
+                     static const int2 MinValue () { return SHRT_MIN;}
                      static Fonc_Num TronqueF(Fonc_Num aFonc) {return Max(tBase(eVMin),Min(tBase(eVMax),aFonc));}
-                typedef INT2  tVal;
-                typedef INT     tBase;
+                typedef int2  tVal;
+                typedef int     tBase;
                 static bool IsIntType() {return true;}
                        static tVal Tronque(tBase aVal) {return ElMax(tBase(eVMin),ElMin(tBase(eVMax),aVal));}
 static tVal TronqueR(double aVal)
@@ -164,18 +164,18 @@ static tVal TronqueR(double aVal)
                                 };
 };
 
-template <> class El_CTypeTraits<INT1>
+template <> class El_CTypeTraits<int1>
 {
         public :
-static std::string   Name() {return "INT1";}
-                     static const INT1 MaxValue() {return SCHAR_MAX;}
-                     static const INT1 MinValue() {return SCHAR_MIN;}
+static std::string   Name() {return "int1";}
+                     static const int1 MaxValue() {return SCHAR_MAX;}
+                     static const int1 MinValue() {return SCHAR_MIN;}
                      static Fonc_Num TronqueF(Fonc_Num aFonc) {return Max(tBase(eVMin),Min(tBase(eVMax),aFonc));}
-                typedef INT1    tSignedVal;
-                typedef U_INT1  tUnSignedVal;
+                typedef int1    tSignedVal;
+                typedef U_int1  tUnSignedVal;
 
-                typedef INT1   tVal;
-                typedef INT    tBase;
+                typedef int1   tVal;
+                typedef int    tBase;
                 static bool IsIntType() {return true;}
                        static tVal Tronque(tBase aVal) {return ElMax(tBase(eVMin),ElMin(tBase(eVMax),aVal));}
 static tVal TronqueR(double aVal)
@@ -192,15 +192,15 @@ static tVal TronqueR(double aVal)
                                 };
 };
 
-template <> class El_CTypeTraits<INT>
+template <> class El_CTypeTraits<int>
 {
         public :
-                     static const INT MaxValue (){ return INT_MAX;}
-                     static const INT MinValue (){ return INT_MIN;}
+                     static const int MaxValue (){ return int_MAX;}
+                     static const int MinValue (){ return int_MIN;}
                      static Fonc_Num TronqueF(Fonc_Num aFonc) {return aFonc;}
-static std::string   Name() {return "INT";}
-                typedef INT   tVal;
-                typedef INT   tBase;
+static std::string   Name() {return "int";}
+                typedef int   tVal;
+                typedef int   tBase;
                 static bool IsIntType() {return true;}
                        static tVal Tronque(tBase aVal) {return aVal;}
 static tVal TronqueR(double aVal) { return round_ni(aVal); }
@@ -215,15 +215,15 @@ static tVal TronqueR(double aVal) { return round_ni(aVal); }
 
 
 
-template <> class El_CTypeTraits<REAL4>
+template <> class El_CTypeTraits<double_t4>
 {
         public :
-                     static const REAL4 MaxValue (){return FLT_MAX;}
-                     static const REAL4 MinValue (){return -FLT_MAX;}
+                     static const double_t4 MaxValue (){return FLT_MAX;}
+                     static const double_t4 MinValue (){return -FLT_MAX;}
                      static Fonc_Num TronqueF(Fonc_Num aFonc) {return aFonc;}
-static std::string   Name() {return "REAL4";}
-                typedef REAL4   tVal;
-                typedef REAL8   tBase;
+static std::string   Name() {return "double_t4";}
+                typedef double_t4   tVal;
+                typedef double_t8   tBase;
                 static bool IsIntType() {return false;}
                                 enum   {
                                           eSizeOf = 4,
@@ -237,15 +237,15 @@ static tVal TronqueR(double aVal) { return  (tVal) aVal;}
 
 };
 
-template <> class El_CTypeTraits<REAL8>
+template <> class El_CTypeTraits<double_t8>
 {
         public :
-                     static REAL8 MaxValue() {return DBL_MAX;}
-                     static REAL8 MinValue() {return -DBL_MAX;}
+                     static double_t8 MaxValue() {return DBL_MAX;}
+                     static double_t8 MinValue() {return -DBL_MAX;}
                      static Fonc_Num TronqueF(Fonc_Num aFonc) {return aFonc;}
-static std::string   Name() {return "REAL8";}
-                typedef REAL8   tVal;
-                typedef REAL8   tBase;
+static std::string   Name() {return "double_t8";}
+                typedef double_t8   tVal;
+                typedef double_t8   tBase;
                 static bool IsIntType() {return false;}
                                 enum   {
                                           eSizeOf = 8,
@@ -258,12 +258,12 @@ static tVal TronqueR(double aVal) { return   aVal;}
 };
 
 
-template <> class El_CTypeTraits<REAL16>
+template <> class El_CTypeTraits<double_t16>
 {
         public :
-static std::string   Name() {return "REAL16";}
-                typedef REAL16   tVal;
-                typedef REAL16   tBase;
+static std::string   Name() {return "double_t16";}
+                typedef double_t16   tVal;
+                typedef double_t16   tBase;
                 static bool IsIntType() {return false;}
                                 enum   {
                                           eSizeOf = 16,
@@ -335,7 +335,7 @@ class GenIm : public PRC0 ,
 
        virtual Elise_Rect box() const;
        Fonc_Num  in(void);
-       Fonc_Num  in(REAL def_out);
+       Fonc_Num  in(double_t def_out);
        Fonc_Num  in_proj();  // prolongation by projection
 
     // oclip : output cliped, = ELISE select the points
@@ -349,7 +349,7 @@ class GenIm : public PRC0 ,
 
        Output    out(void);
        void * data_lin();
-       const INT * P1();
+       const int * P1();
 
 
      //    sum_eg, .. ,mul_eg : just interface function to oper_ass_eg;
@@ -372,7 +372,7 @@ class GenIm : public PRC0 ,
        GenIm(DataGenIm *);
     private :
 
-       void tiff_predictor(INT nb_el,INT nb_ch,INT max_val,bool codage);
+       void tiff_predictor(int nb_el,int nb_ch,int max_val,bool codage);
        DataGenIm * data_im();
        const DataGenIm * data_im() const;
 
@@ -408,39 +408,39 @@ class Im2DGen : public GenIm,
                 public cFoncI2D
 {
     public :
-      Neigh_Rel neigh_test_and_set(Neighbourhood,Im1D<INT4,INT> sel,Im1D<INT4,INT> update);
-      Neigh_Rel neigh_test_and_set(Neighbourhood,INT sel,INT udpate,INT v_max);
+      Neigh_Rel neigh_test_and_set(Neighbourhood,Im1D<int4,int> sel,Im1D<int4,int> update);
+      Neigh_Rel neigh_test_and_set(Neighbourhood,int sel,int udpate,int v_max);
 
       // the list of point is considered as a list of couple of value :
       //   x => values to select, y => udpating of x
-      Neigh_Rel neigh_test_and_set(Neighbourhood,ElList<Pt2di>,INT v_max);
+      Neigh_Rel neigh_test_and_set(Neighbourhood,ElList<Pt2di>,int v_max);
 
       virtual ~Im2DGen();
       virtual  GenIm::type_el TypeEl() const ;
 
       virtual Seg2d   OptimizeSegTournantSomIm
               (
-                    REAL &                 score,
+                    double_t &                 score,
                     Seg2d                  seg,
-                    INT                    NbPts,
-                    REAL                   step_init,
-                    REAL                   step_limite,
+                    int                    NbPts,
+                    double_t                   step_init,
+                    double_t                   step_limite,
                     bool                   optim_absc  = true,
                     bool                   optim_teta  = true,
                     bool  *                FreelyOpt = 0
               )  ;
 
       // DEF = erreur fatale, mais necessaire pou creer des Im2DGen
-      virtual INT     tx() const ;
-      virtual INT     ty() const ;
+      virtual int     tx() const ;
+      virtual int     ty() const ;
       Pt2di sz() const {return Pt2di(tx(),ty());}
       Box2di ImBox2d() const  {return Box2di(Pt2di(0,0),sz());}
-      Box2di ImBox2d(INT Brd) const {return Box2di(Pt2di(Brd,Brd),Pt2di(tx()-Brd,ty()-Brd));}
+      Box2di ImBox2d(int Brd) const {return Box2di(Pt2di(Brd,Brd),Pt2di(tx()-Brd,ty()-Brd));}
 
       virtual void TronqueAndSet(const Pt2di &,double aVal);
       virtual double  MoyG2() const ; // Grad au carre
-      virtual INT  vmax() const ;
-      virtual INT  vmin() const ;
+      virtual int  vmax() const ;
+      virtual int  vmin() const ;
       virtual cIm2DInter * BilinIm() ;
       virtual cIm2DInter * BiCubIm(double aCoef,double aScale=1.0) ;
 
@@ -449,11 +449,11 @@ class Im2DGen : public GenIm,
       void SetI_SVP(const Pt2di & ,int aValI) ;
       void SetR_SVP(const Pt2di & ,double aValR) ;
 
-      virtual INT     GetI(const Pt2di & ) const ;
+      virtual int     GetI(const Pt2di & ) const ;
       virtual double  GetR(const Pt2di  &) const ;
       void AssertInside(const Pt2di &) const;
       bool  Inside(const Pt2di &) const;
-      INT     GetI(const Pt2di&,int ) const ;
+      int     GetI(const Pt2di&,int ) const ;
       double  GetR(const Pt2di&,double ) const ;
       // Pas def pour les ImBits
       virtual void PutData(FILE * aFP,const Pt2di & anI,bool aModeBin) const;
@@ -504,7 +504,7 @@ template <class Type,class TyBase> class Im2D : public Im2DGen
 {
    public :
 
-      ElMatrix<REAL>  ToMatrix() const;
+      ElMatrix<double_t>  ToMatrix() const;
       typedef Type   tElem;
       typedef TyBase tBase;
       Fonc_Num FoncEtalDyn();
@@ -516,11 +516,11 @@ template <class Type,class TyBase> class Im2D : public Im2DGen
   /*
       Pt2di sz() const {return Pt2di(tx(),ty());}
       Box2di ImBox2d() const  {return Box2di(Pt2di(0,0),sz());}
-      Box2di ImBox2d(INT Brd) const {return Box2di(Pt2di(Brd,Brd),Pt2di(tx()-Brd,ty()-Brd));}
+      Box2di ImBox2d(int Brd) const {return Box2di(Pt2di(Brd,Brd),Pt2di(tx()-Brd,ty()-Brd));}
   */
 
-      INT     tx() const;
-      INT     ty() const;
+      int     tx() const;
+      int     ty() const;
       virtual void TronqueAndSet(const Pt2di &,double aVal);
 
       virtual cIm2DInter * BilinIm() ;
@@ -538,21 +538,21 @@ template <class Type,class TyBase> class Im2D : public Im2DGen
                                (const std::string &,Pt2di aSz,Fonc_Num);
 
       Im2D(); //  !! Dangereux, mais necessaire vs xml generation
-      Im2D(INT tx, INT ty);
-      Im2D(INT tx, INT ty,TyBase v_init);
-      Im2D(INT tx, INT ty,const char * v_inits);
-      Im2D(Type*,Type**,INT tx, INT ty,INT tx_phys =-1);
+      Im2D(int tx, int ty);
+      Im2D(int tx, int ty,TyBase v_init);
+      Im2D(int tx, int ty,const char * v_inits);
+      Im2D(Type*,Type**,int tx, int ty,int tx_phys =-1);
 
-      Im2D(Im2D_NoDataLin,INT tx, INT ty);
+      Im2D(Im2D_NoDataLin,int tx, int ty);
 
 
-      Fonc_Num ImGridReech(Fonc_Num aFX,Fonc_Num aFY,INT szGr,REAL def);
-      Fonc_Num ImGridReech(Fonc_Num aFX,Fonc_Num aFY,INT szGr,Pt2di aP0,Pt2di aP1,REAL def);
+      Fonc_Num ImGridReech(Fonc_Num aFX,Fonc_Num aFY,int szGr,double_t def);
+      Fonc_Num ImGridReech(Fonc_Num aFX,Fonc_Num aFY,int szGr,Pt2di aP0,Pt2di aP1,double_t def);
 
       void PutData(FILE * aFP,const Pt2di & anI,bool aModeBin) const;
       void SetI(const Pt2di & ,int aValI) ;
       void SetR(const Pt2di & ,double aValR) ;
-      INT     GetI(const Pt2di &) const ;
+      int     GetI(const Pt2di &) const ;
       double  GetR(const Pt2di &) const ;
       Im2DGen  *ImOfSameType(const Pt2di & aSz) const;
       Im2DGen * ImRotate(int aRot ) const;
@@ -560,19 +560,19 @@ template <class Type,class TyBase> class Im2D : public Im2DGen
       Type **   data() const;
       Type *    data_lin();
       const Type *    data_lin() const;
-      INT  vmax() const;
-      INT  vmin() const;
+      int  vmax() const;
+      int  vmin() const;
       double  MoyG2() const ;
       virtual  GenIm::type_el TypeEl() const ;
       void raz();
       void dup (Im2D<Type,TyBase> to_dup);
       Im2D<Type,TyBase> dup ();
-      REAL  som_rect();
-      REAL  som_rect(Pt2dr p0,Pt2dr p1,REAL def=0.0);
-      REAL  moy_rect(Pt2dr p0,Pt2dr p1,REAL def=0.0);
+      double_t  som_rect();
+      double_t  som_rect(Pt2dr p0,Pt2dr p1,double_t def=0.0);
+      double_t  moy_rect(Pt2dr p0,Pt2dr p1,double_t def=0.0);
       Im2D<Type,TyBase>  ToSom1();
 
-          Im2D<Type,TyBase> Reech(REAL aZoom);
+          Im2D<Type,TyBase> Reech(double_t aZoom);
 
 
 
@@ -580,15 +580,15 @@ template <class Type,class TyBase> class Im2D : public Im2DGen
       void auto_translate(Pt2di);
       void raz(Pt2di p0,Pt2di p1);
 
-          void SetLine(INT x0,INT y,INT nb,INT val);
+          void SetLine(int x0,int y,int nb,int val);
 
       Seg2d   OptimizeSegTournantSomIm
               (
-                    REAL &                 score,
+                    double_t &                 score,
                     Seg2d                  seg,
-                    INT                    NbPts,
-                    REAL                   step_init,
-                    REAL                   step_limite,
+                    int                    NbPts,
+                    double_t                   step_init,
+                    double_t                   step_limite,
                     bool                   optim_absc  = true,
                     bool                   optim_teta  = true,
                     bool  *                FreelyOpt = 0
@@ -605,7 +605,7 @@ template <class Type,class TyBase> class Im2D : public Im2DGen
           // ils ne sont pas au courant du changement)
           void Resize(Pt2di aSz);
 
-          Im2D<Type,TyBase> gray_im_red(INT zoom);
+          Im2D<Type,TyBase> gray_im_red(int zoom);
 
       void MulVect(Im1D<Type,TyBase> aRes,Im1D<Type,TyBase> aMat);
 
@@ -613,15 +613,15 @@ template <class Type,class TyBase> class Im2D : public Im2DGen
       DataIm2D<Type,TyBase> * di2d(){return (DataIm2D<Type,TyBase> *) (_ptr);}
 };
 
-typedef Im2D<U_INT1,INT>  Im2D_U_INT1;
-typedef Im2D<INT1,INT>    Im2D_INT1;
-typedef Im2D<U_INT2,INT>  Im2D_U_INT2;
-typedef Im2D<INT2,INT>    Im2D_INT2;
-typedef Im2D<INT4,INT>    Im2D_INT4;
+typedef Im2D<U_int1,int>  Im2D_U_int1;
+typedef Im2D<int1,int>    Im2D_int1;
+typedef Im2D<U_int2,int>  Im2D_U_int2;
+typedef Im2D<int2,int>    Im2D_int2;
+typedef Im2D<int4,int>    Im2D_int4;
 
-typedef Im2D<REAL4,REAL>  Im2D_REAL4;
-typedef Im2D<REAL8,REAL>  Im2D_REAL8;
-typedef Im2D<REAL16,REAL16> Im2D_REAL16;
+typedef Im2D<double_t4,double_t>  Im2D_double_t4;
+typedef Im2D<double_t8,double_t>  Im2D_double_t8;
+typedef Im2D<double_t16,double_t16> Im2D_double_t16;
 
 
 
@@ -645,8 +645,8 @@ template <class Type,class Type_Base> Im2D<Type,Type_Base> ImMediane
 
 template  <class Type,class Type_Base> class  TIm2D;
 
-Flux_Pts to_flux(Im2D<INT,INT> );
-Flux_Pts to_flux(Im2D<REAL,REAL> );
+Flux_Pts to_flux(Im2D<int,int> );
+Flux_Pts to_flux(Im2D<double_t,double_t> );
 
 template <const int nbb> class DataIm2D_Bits;
 
@@ -658,11 +658,11 @@ template <const int nbb> class Im2D_Bits : public Im2DGen
    public :
       Seg2d   OptimizeSegTournantSomIm
               (
-                    REAL &                 score,
+                    double_t &                 score,
                     Seg2d                  seg,
-                    INT                    NbPts,
-                    REAL                   step_init,
-                    REAL                   step_limite,
+                    int                    NbPts,
+                    double_t                   step_init,
+                    double_t                   step_limite,
                     bool                   optim_absc  = true,
                     bool                   optim_teta  = true,
                     bool  *                FreelyOpt = 0
@@ -672,23 +672,23 @@ template <const int nbb> class Im2D_Bits : public Im2DGen
       double Val(const int & x,const int & y) const;
       void SetI(const Pt2di & ,int aValI) ;
       void SetR(const Pt2di & ,double aValR) ;
-      INT     GetI(const Pt2di &) const ;
+      int     GetI(const Pt2di &) const ;
       double  GetR(const Pt2di &) const ;
-      INT     tx() const;
-      INT     ty() const;
-      Im2D_Bits(Im2D_BitsIntitDataLin,INT tx, INT ty,void * aDataLin);
-      Im2D_Bits(INT tx, INT ty);
-      Im2D_Bits(INT tx, INT ty,INT v_init);
-      Im2D_Bits(Pt2di pt, INT v_init);
-      INT  vmax() const;
-      U_INT1 **   data();
-      U_INT1 **   data() const;
-      INT    get(INT x,INT y) const;
-      INT    get_def(INT x,INT y,INT v) const;
-      void   set(INT x,INT y,INT v);
-      void   SetAll(INT);
+      int     tx() const;
+      int     ty() const;
+      Im2D_Bits(Im2D_BitsIntitDataLin,int tx, int ty,void * aDataLin);
+      Im2D_Bits(int tx, int ty);
+      Im2D_Bits(int tx, int ty,int v_init);
+      Im2D_Bits(Pt2di pt, int v_init);
+      int  vmax() const;
+      U_int1 **   data();
+      U_int1 **   data() const;
+      int    get(int x,int y) const;
+      int    get_def(int x,int y,int v) const;
+      void   set(int x,int y,int v);
+      void   SetAll(int);
 
-      Im2D<U_INT1,INT>  gray_im_red(INT & zoom);
+      Im2D<U_int1,int>  gray_im_red(int & zoom);
       Im2DGen  *ImOfSameType(const Pt2di & aSz) const;
    private :
        Im2D_Bits(DataIm2D_Bits<nbb> *);
@@ -698,7 +698,7 @@ template <const int nbb> class Im2D_Bits : public Im2DGen
 typedef Im2D_Bits<1>	  Im2D_BIN;
 
 
-template  <const int nbb> Im2D_Bits<nbb>::Im2D_Bits(INT tx,INT ty) :
+template  <const int nbb> Im2D_Bits<nbb>::Im2D_Bits(int tx,int ty) :
         Im2DGen(new DataIm2D_Bits<nbb>(tx,ty,false,0,0))
 {
 }
@@ -720,7 +720,7 @@ class cChCoord
                    TOut aImOut,Im2D_Bits<1> aMasqOut,
                    TIn aImIn,Im2D_Bits<1> aMasqIn,
                    eModeInterp            aMode,
-                   REAL aFact
+                   double_t aFact
                  );
 };
 
@@ -736,57 +736,57 @@ template <class Type,class TyBase> class Im1D : public GenIm
 {
    public :
       Type At(int aK) const;
-      explicit Im1D(INT tx);
-      Im1D(INT tx,TyBase v_init);
-      Im1D(INT tx,const char * v_init);
+      explicit Im1D(int tx);
+      Im1D(int tx,TyBase v_init);
+      Im1D(int tx,const char * v_init);
       Type *    data();
       const Type *    data() const;
-      INT     tx() const;
-      INT  vmax() const;
+      int     tx() const;
+      int  vmax() const;
       void raz();
-      void Resize(INT aTx);
+      void Resize(int aTx);
 
       // friend GenIm alloc_im1d(GenIm::type_el type_el,int tx,void * data);
       // premier parametre bidon, mais permet d'eviter des ambiguite
       // avec les syntaxes "standard"
-      Im1D(Im1D<Type,TyBase> *,INT tx,void * );
-      Im1D<Type,TyBase>  AugmentSizeTo(INT aTx,Type aValCompl = 0);
+      Im1D(Im1D<Type,TyBase> *,int tx,void * );
+      Im1D<Type,TyBase>  AugmentSizeTo(int aTx,Type aValCompl = 0);
 };
 
-typedef Im1D<U_INT1,INT>  Im1D_U_INT1;
-typedef Im1D<INT1,INT>    Im1D_INT1;
-typedef Im1D<U_INT2,INT>  Im1D_U_INT2;
-typedef Im1D<INT2,INT>    Im1D_INT2;
-typedef Im1D<INT4,INT>    Im1D_INT4;
+typedef Im1D<U_int1,int>  Im1D_U_int1;
+typedef Im1D<int1,int>    Im1D_int1;
+typedef Im1D<U_int2,int>  Im1D_U_int2;
+typedef Im1D<int2,int>    Im1D_int2;
+typedef Im1D<int4,int>    Im1D_int4;
 
-typedef Im1D<REAL4,REAL>  Im1D_REAL4;
-typedef Im1D<REAL8,REAL>  Im1D_REAL8;
+typedef Im1D<double_t4,double_t>  Im1D_double_t4;
+typedef Im1D<double_t8,double_t>  Im1D_double_t8;
 
 class Im3D_WithDataLin{};
 template <class Type,class TyBase> class Im3D : public GenIm
 {
    public :
-      Im3D(INT tx,INT ty,INT tz);
-      Im3D(INT tx,INT ty,INT tz,TyBase v_init);
-      Im3D(INT tx,INT ty,INT tz,const char * v_init);
+      Im3D(int tx,int ty,int tz);
+      Im3D(int tx,int ty,int tz,TyBase v_init);
+      Im3D(int tx,int ty,int tz,const char * v_init);
 
-      Im3D(Im3D_WithDataLin,INT tx,INT ty,INT tz,Type *);
+      Im3D(Im3D_WithDataLin,int tx,int ty,int tz,Type *);
       Type ***    data();
-      INT     tx() const;
-      INT     ty() const;
-      INT     tz() const;
-      INT  vmax() const;
+      int     tx() const;
+      int     ty() const;
+      int     tz() const;
+      int  vmax() const;
    private :
 };
 
-typedef Im3D<U_INT1,INT>  Im3D_U_INT1;
-typedef Im3D<INT1,INT>    Im3D_INT1;
-typedef Im3D<U_INT2,INT>  Im3D_U_INT2;
-typedef Im3D<INT2,INT>    Im3D_INT2;
-typedef Im3D<INT4,INT>    Im3D_INT4;
+typedef Im3D<U_int1,int>  Im3D_U_int1;
+typedef Im3D<int1,int>    Im3D_int1;
+typedef Im3D<U_int2,int>  Im3D_U_int2;
+typedef Im3D<int2,int>    Im3D_int2;
+typedef Im3D<int4,int>    Im3D_int4;
 
-typedef Im3D<REAL4,REAL>  Im3D_REAL4;
-typedef Im3D<REAL8,REAL>  Im3D_REAL8;
+typedef Im3D<double_t4,double_t>  Im3D_double_t4;
+typedef Im3D<double_t8,double_t>  Im3D_double_t8;
 
 class Data_Liste_Pts_Gen;
 
@@ -798,8 +798,8 @@ class Liste_Pts_Gen :  public PRC0
       public :
           Flux_Pts  all_pts();
           bool      empty() const;
-          INT       card() const;
-          INT       dim() const;
+          int       card() const;
+          int       dim() const;
 };
 
 template <class Type,class Type_Base> class Data_Liste_Pts;
@@ -807,9 +807,9 @@ template <class Type,class Type_Base> class Data_Liste_Pts;
 template <class Type,class Type_Base> class Liste_Pts : public Liste_Pts_Gen
 {
      public :
-        Liste_Pts(INT dim);
-        Liste_Pts(INT dim,Type **,INT nb);
-        Liste_Pts(Type * x,Type * y,INT nb);
+        Liste_Pts(int dim);
+        Liste_Pts(int dim,Type **,int nb);
+        Liste_Pts(Type * x,Type * y,int nb);
         Im2D<Type,Type_Base>  image() const;
         void add_pt(Type *);
     private :
@@ -817,27 +817,27 @@ template <class Type,class Type_Base> class Liste_Pts : public Liste_Pts_Gen
 };
 
 
-typedef Liste_Pts<U_INT1,INT>    Liste_Pts_U_INT1;
-typedef Liste_Pts<INT1,INT>      Liste_Pts_INT1;
-typedef Liste_Pts<U_INT2,INT>    Liste_Pts_U_INT2;
-typedef Liste_Pts<INT2,INT>      Liste_Pts_INT2;
-typedef Liste_Pts<INT4,INT>      Liste_Pts_INT4;
+typedef Liste_Pts<U_int1,int>    Liste_Pts_U_int1;
+typedef Liste_Pts<int1,int>      Liste_Pts_int1;
+typedef Liste_Pts<U_int2,int>    Liste_Pts_U_int2;
+typedef Liste_Pts<int2,int>      Liste_Pts_int2;
+typedef Liste_Pts<int4,int>      Liste_Pts_int4;
 
 
-typedef Liste_Pts<REAL4,REAL>      Liste_Pts_REAL4;
-typedef Liste_Pts<REAL8,REAL>      Liste_Pts_REAL8;
+typedef Liste_Pts<double_t4,double_t>      Liste_Pts_double_t4;
+typedef Liste_Pts<double_t8,double_t>      Liste_Pts_double_t8;
 
-extern Im1D_INT4  hongrois(Im2D_INT4 cost);
+extern Im1D_int4  hongrois(Im2D_int4 cost);
 
-void ALGOHONGR(Im2D_INT4,Im1D_INT4);
+void ALGOHONGR(Im2D_int4,Im1D_int4);
 
 
 extern void deriche_uc
      (
-           Im2D_REAL4  gx,
-           Im2D_REAL4  gy,
-           Im2D_U_INT1 i,
-           REAL4       alpha
+           Im2D_double_t4  gx,
+           Im2D_double_t4  gy,
+           Im2D_U_int1 i,
+           double_t4       alpha
      );
 
 
@@ -854,12 +854,12 @@ extern Im2DGen * Ptr_D2alloc_im2d(GenIm::type_el type_el,int tx,int ty);
 
 extern bool  type_im_integral(GenIm::type_el type_el);
 
-extern INT nbb_type_num(GenIm::type_el type_el);     // nb byte
+extern int nbb_type_num(GenIm::type_el type_el);     // nb byte
 extern bool msbf_type_num(GenIm::type_el type_el);   // is most signif first
 extern bool signed_type_num(GenIm::type_el type_el); // is it signed int
-extern GenIm::type_el type_u_int_of_nbb(INT nbb,bool msbf = true);
+extern GenIm::type_el type_u_int_of_nbb(int nbb,bool msbf = true);
 
-extern  GenIm::type_el type_im(bool intregral,INT nbb,bool Signed,bool msbf);
+extern  GenIm::type_el type_im(bool intregral,int nbb,bool Signed,bool msbf);
 extern  GenIm::type_el type_im(const std::string &);
 
 extern std::string eToString(const GenIm::type_el &);
@@ -867,20 +867,20 @@ extern std::string eToString(const GenIm::type_el &);
 extern std::string NamePlyOfType(GenIm::type_el);
 
 
-extern void min_max_type_num(GenIm::type_el,INT & v_min,INT &v_max);
+extern void min_max_type_num(GenIm::type_el,int & v_min,int &v_max);
 extern int  VCentrale_type_num(GenIm::type_el);
 
 Fonc_Num Tronque(GenIm::type_el,Fonc_Num);
 
 
-extern GenIm::type_el  type_of_ptr(const U_INT1 * );
-extern GenIm::type_el  type_of_ptr(const INT1   * );
-extern GenIm::type_el  type_of_ptr(const U_INT2 * );
-extern GenIm::type_el  type_of_ptr(const INT2   * );
-extern GenIm::type_el  type_of_ptr(const INT4   * );
-extern GenIm::type_el  type_of_ptr(const REAL4  * );
-extern GenIm::type_el  type_of_ptr(const REAL8  * );
-extern GenIm::type_el  type_of_ptr(const REAL16  * );
+extern GenIm::type_el  type_of_ptr(const U_int1 * );
+extern GenIm::type_el  type_of_ptr(const int1   * );
+extern GenIm::type_el  type_of_ptr(const U_int2 * );
+extern GenIm::type_el  type_of_ptr(const int2   * );
+extern GenIm::type_el  type_of_ptr(const int4   * );
+extern GenIm::type_el  type_of_ptr(const double_t4  * );
+extern GenIm::type_el  type_of_ptr(const double_t8  * );
+extern GenIm::type_el  type_of_ptr(const double_t16  * );
 
 
 template <class Type>  ElMatrix<Type> gaussj(const ElMatrix<Type>  & m);
@@ -889,22 +889,22 @@ template <class Type>  bool self_gaussj_svp(ElMatrix<Type>  & m);
 
 // Renvoie la liste des indices croissants de valeurs propres
 
-std::vector<int> jacobi(const ElMatrix<REAL>& aMatSym,ElMatrix<REAL>& aValP,
-            ElMatrix<REAL>& aVecP);
-std::vector<int> jacobi_diag(const ElMatrix<REAL>& aMatSym,ElMatrix<REAL>& aValP,
-                 ElMatrix<REAL>& aVecP);
+std::vector<int> jacobi(const ElMatrix<double_t>& aMatSym,ElMatrix<double_t>& aValP,
+            ElMatrix<double_t>& aVecP);
+std::vector<int> jacobi_diag(const ElMatrix<double_t>& aMatSym,ElMatrix<double_t>& aValP,
+                 ElMatrix<double_t>& aVecP);
 
 
-std::vector<int> jacobi(const ElMatrix<REAL16>& aMatSym,ElMatrix<REAL16>& aValP,
-            ElMatrix<REAL16>& aVecP);
-std::vector<int> jacobi_diag(const ElMatrix<REAL16>& aMatSym,ElMatrix<REAL16>& aValP,
-                 ElMatrix<REAL16>& aVecP);
+std::vector<int> jacobi(const ElMatrix<double_t16>& aMatSym,ElMatrix<double_t16>& aValP,
+            ElMatrix<double_t16>& aVecP);
+std::vector<int> jacobi_diag(const ElMatrix<double_t16>& aMatSym,ElMatrix<double_t16>& aValP,
+                 ElMatrix<double_t16>& aVecP);
 
 
-void svdcmp ( const ElMatrix<REAL> & aMat, ElMatrix<REAL> & anU,
-              ElMatrix<REAL> & aLineDiag, ElMatrix<REAL> & aV,bool direct);
-void svdcmp_diag ( const ElMatrix<REAL> & aMat, ElMatrix<REAL> & anU,
-              ElMatrix<REAL> & aDiag, ElMatrix<REAL> & aV,bool direct);
+void svdcmp ( const ElMatrix<double_t> & aMat, ElMatrix<double_t> & anU,
+              ElMatrix<double_t> & aLineDiag, ElMatrix<double_t> & aV,bool direct);
+void svdcmp_diag ( const ElMatrix<double_t> & aMat, ElMatrix<double_t> & anU,
+              ElMatrix<double_t> & aDiag, ElMatrix<double_t> & aV,bool direct);
 
 
 // L'"habituelle" decomposition QR,
@@ -916,11 +916,11 @@ std::pair<ElMatrix<double>, ElMatrix<double> > RQDecomp(const ElMatrix<double> &
 
 // Renvoie la rotation la + proche, selon un algo trouve dans Golub et base sur
 // la SVD
-ElMatrix<REAL>  NearestRotation(const ElMatrix<REAL> &);
+ElMatrix<double_t>  NearestRotation(const ElMatrix<double_t> &);
 
 
 //  Probleme de conditionnement
-void InspectPbCD(ElMatrix<REAL>);
+void InspectPbCD(ElMatrix<double_t>);
 
 // Calcule une rotation R tq R Antk = Imk;
 //   - algo : norme les vecteur
@@ -929,7 +929,7 @@ void InspectPbCD(ElMatrix<REAL>);
 
 
 
-ElMatrix<REAL> ComplemRotation
+ElMatrix<double_t> ComplemRotation
                (
                     const Pt3dr & anAnt1,
                     const Pt3dr & anAnt2,
@@ -953,31 +953,31 @@ template <class Type>  class ElMatrix
 {
       public :
 
-          void ResizeInside(INT TX,INT TY);
+          void ResizeInside(int TX,int TY);
 
-          void GetCol(INT aCol,Pt3d<Type> &) const;
-          void GetLig(INT aCol,Pt3d<Type> &) const;
+          void GetCol(int aCol,Pt3d<Type> &) const;
+          void GetLig(int aCol,Pt3d<Type> &) const;
 
-          void GetCol(INT aCol,Pt2d<Type> &) const;
-          void GetLig(INT aCol,Pt2d<Type> &) const;
+          void GetCol(int aCol,Pt2d<Type> &) const;
+          void GetLig(int aCol,Pt2d<Type> &) const;
         // Creation etc..
-          ElMatrix(INT,bool init_id = true);
-          ElMatrix(INT,INT,Type v =0);
+          ElMatrix(int,bool init_id = true);
+          ElMatrix(int,int,Type v =0);
           ElMatrix(const ElMatrix<Type> & m2);
           ElMatrix<Type> & operator = (const ElMatrix<Type> &);
           ~ElMatrix();
 
-          ElMatrix<Type> sub_mat(INT aCol, INT aLig, INT aNbCol, INT aNbLig) const;
-          ElMatrix<Type> ExtensionId(INT ExtAvant,INT ExtApres) const;
+          ElMatrix<Type> sub_mat(int aCol, int aLig, int aNbCol, int aNbLig) const;
+          ElMatrix<Type> ExtensionId(int ExtAvant,int ExtApres) const;
 
-          void set_to_size(INT TX,INT TY);
+          void set_to_size(int TX,int TY);
           void set_to_size(const ElMatrix<Type> & m2);
 
 
           // fait de la matrice une matrice de permutation de type
           // shift
-          void set_shift_mat_permut(INT ShiftPremierCol);
-          static  ElMatrix<Type>  transposition(INT aN,INT aK1,INT aK2);
+          void set_shift_mat_permut(int ShiftPremierCol);
+          static  ElMatrix<Type>  transposition(int aN,int aK1,int aK2);
 
 
 
@@ -1007,17 +1007,17 @@ template <class Type>  class ElMatrix
 
 
 
-          INT tx() const {return _tx;}
-          INT ty() const {return _ty;}
+          int tx() const {return _tx;}
+          int ty() const {return _ty;}
           Pt2di Sz() const {return Pt2di(_tx,_ty);}
 
                // Produits "scalaires"; par ex  LC = LigneColone,
-          Type ProdCC(const ElMatrix<Type> &,INT x1,INT x2) const;
-          Type ProdLL(const ElMatrix<Type> &,INT y1,INT y2) const;
-          Type ProdLC(const ElMatrix<Type> &,INT y1,INT x2) const;
+          Type ProdCC(const ElMatrix<Type> &,int x1,int x2) const;
+          Type ProdLL(const ElMatrix<Type> &,int y1,int y2) const;
+          Type ProdLC(const ElMatrix<Type> &,int y1,int x2) const;
 
-          void SetLine(INT NL,const Type *);
-          void GetLine(INT NL,Type *) const;
+          void SetLine(int NL,const Type *);
+          void GetLine(int NL,Type *) const;
 
 
         // Operation matricielles (algebriques)
@@ -1055,14 +1055,14 @@ template <class Type>  class ElMatrix
           void  SymetriseParleBas();
           ElMatrix<Type> transpose() const;
 
-          // Instantiated only for Type=REAL
+          // Instantiated only for Type=double_t
 
 
 
         // Operation matricielles (Euclidiennes)
 
-          static ElMatrix<Type> Rotation3D(Type teta,INT aNumAxeInv);
-          static ElMatrix<Type> Rotation(INT sz,Type teta,INT k1,INT k2);
+          static ElMatrix<Type> Rotation3D(Type teta,int aNumAxeInv);
+          static ElMatrix<Type> Rotation(int sz,Type teta,int k1,int k2);
           static ElMatrix<Type> Rotation(Type teta12,Type teta13,Type teta23);
           static ElMatrix<Type> Rotation(Pt3d<Type> aImI,Pt3d<Type> aImJ,Pt3d<Type> aImK);
 
@@ -1072,19 +1072,19 @@ template <class Type>  class ElMatrix
           static ElMatrix<Type> PermRot(const std::string &);  // par ex  ji-k  -i-k-j  ...
           // derivee   de rotation
           // derivee d'une rotation simple / a teta
-          static ElMatrix<Type> DerRotation(INT sz,Type teta,INT k1,INT k2);
+          static ElMatrix<Type> DerRotation(int sz,Type teta,int k1,int k2);
           static ElMatrix<Type> DDteta01(Type teta12,Type teta13,Type teta23);
           static ElMatrix<Type> DDteta02(Type teta12,Type teta13,Type teta23);
           static ElMatrix<Type> DDteta12(Type teta12,Type teta13,Type teta23);
 
           // friend  ElMatrix<Type>
 
-          ElMatrix<Type> ColSchmidtOrthog(INT iter =1) const;
-          void SetColSchmidtOrthog(INT iter =1);
+          ElMatrix<Type> ColSchmidtOrthog(int iter =1) const;
+          void SetColSchmidtOrthog(int iter =1);
           Type  L2(const ElMatrix<Type> & m2) const;
           Type  scal(const ElMatrix<Type> & m2) const;
           Type  L2() const;
-          Type NormC(INT x) const;
+          Type NormC(int x) const;
 
       private :
 
@@ -1093,7 +1093,7 @@ template <class Type>  class ElMatrix
                                const ElMatrix<Type> & m2);
 
 
-          void init(INT TX,INT TY);
+          void init(int TX,int TY);
           void dup_data(const ElMatrix<Type> & m2);
           void un_init();
           int     _tx;
@@ -1112,11 +1112,11 @@ template <class Type>  class ElMatrix
 // (la moins singuliere possible)
 // n'utilise pour ce faire que des vecteur de la base canonique
 
-void ComplBaseParLeHaut(ElMatrix<REAL> &,INT NbLigneOk);
+void ComplBaseParLeHaut(ElMatrix<double_t> &,int NbLigneOk);
 
 // FONCTION specifiques au M22, M33
 
-ElMatrix<REAL> DiffRotEn1Pt(REAL teta01,REAL teta02,REAL teta12,Pt3dr pt);
+ElMatrix<double_t> DiffRotEn1Pt(double_t teta01,double_t teta02,double_t teta12,Pt3dr pt);
 
 template <class Type> Pt2d<Type> operator *
          (const ElMatrix<Type> & M,const Pt2d<Type> &);
@@ -1126,20 +1126,20 @@ template <class Type> Pt3d<Type> operator *
 
 template <class Type> Pt2d<Type> mul32(const ElMatrix<Type>&,const Pt3d<Type> & p);
 
-template <class Type> void SetCol (ElMatrix<Type> & M,INT col,Pt3d<Type>);
-template <class Type> void SetLig (ElMatrix<Type> & M,INT Lig,Pt3d<Type>);
+template <class Type> void SetCol (ElMatrix<Type> & M,int col,Pt3d<Type>);
+template <class Type> void SetLig (ElMatrix<Type> & M,int Lig,Pt3d<Type>);
 
-template <class Type> void SetCol (ElMatrix<Type> & M,INT col,Pt2d<Type>);
-template <class Type> void SetLig (ElMatrix<Type> & M,INT Lig,Pt2d<Type>);
+template <class Type> void SetCol (ElMatrix<Type> & M,int col,Pt2d<Type>);
+template <class Type> void SetLig (ElMatrix<Type> & M,int Lig,Pt2d<Type>);
 
 template <class Type>  ElMatrix<Type> MatFromCol(Pt3d<Type>,Pt3d<Type>,Pt3d<Type>);
 template <class Type>  ElMatrix<Type> MatFromCol(Pt2d<Type>,Pt2d<Type>);
-ElMatrix<REAL> MatFromImageBase (
-                                     Pt3d<REAL> C0,Pt3d<REAL> C1,Pt3d<REAL> C2,
-                                     Pt3d<REAL> ImC0,Pt3d<REAL>,Pt3d<REAL>
+ElMatrix<double_t> MatFromImageBase (
+                                     Pt3d<double_t> C0,Pt3d<double_t> C1,Pt3d<double_t> C2,
+                                     Pt3d<double_t> ImC0,Pt3d<double_t>,Pt3d<double_t>
                                 );
 
-REAL EcartInv(const ElMatrix<REAL>& m1,const ElMatrix<REAL>& m2);
+double_t EcartInv(const ElMatrix<double_t>& m1,const ElMatrix<double_t>& m2);
 
 
 
@@ -1147,7 +1147,7 @@ template <class Type> ElMatrix<Fonc_Num>  ToMatForm(const  ElMatrix<Type> &);
 
 
 
-void AngleFromRot(const ElMatrix<REAL> & m,REAL & a,REAL & b,REAL & c);
+void AngleFromRot(const ElMatrix<double_t> & m,double_t & a,double_t & b,double_t & c);
 
 
 /*
@@ -1156,7 +1156,7 @@ void AngleFromRot(const ElMatrix<REAL> & m,REAL & a,REAL & b,REAL & c);
    appelant, il a ete decide :
 
        [1] d'appeler TplElRotation3D la classe template
-       [2] d'appeler ElRotation3D son instantiation au type REAL
+       [2] d'appeler ElRotation3D son instantiation au type double_t
 */
 
 
@@ -1202,7 +1202,7 @@ template <class Type> class TplElRotation3D
          bool              mTrueRot;
 };
 
-typedef TplElRotation3D<REAL> ElRotation3D;
+typedef TplElRotation3D<double_t> ElRotation3D;
 
    class cRepereCartesien;
 
@@ -1257,11 +1257,11 @@ template <class Type>  class ElPolynome
           Type &  operator[](int k);
           const Type &  operator[](int k) const;
           Type   at(int k) const;  // def = 0
-          INT degre() const {return (int) _coeff.size()-1;}
+          int degre() const {return (int) _coeff.size()-1;}
 
           ElPolynome();
-          ElPolynome(char *,INT degre);  // Arg 1 : bidon, pour eviter
-                                         // confusion avec ElPolynome(INT)
+          ElPolynome(char *,int degre);  // Arg 1 : bidon, pour eviter
+                                         // confusion avec ElPolynome(int)
           ElPolynome(const Type &);
           ElPolynome(const Type &,const Type &);
           ElPolynome(const Type &,const Type &,const Type &);
@@ -1271,7 +1271,7 @@ template <class Type>  class ElPolynome
           static ElPolynome FromRoots(const Type&,const Type&);
           static ElPolynome FromRoots(const Type&,const Type&,const Type&);
           static ElPolynome FromRoots(const Type&,const Type&,const Type&,const Type&);
-      friend void Reduce(ElPolynome<REAL> &); // Supprime les coeffs de degre haut nuls
+      friend void Reduce(ElPolynome<double_t> &); // Supprime les coeffs de degre haut nuls
 
      private :
           std::vector<Type> _coeff;
@@ -1284,23 +1284,23 @@ template <class Type> void  RealRootsOfRealPolynome
          std::vector<Type> &  Sols,
          const ElPolynome<Type>  &aPol,
          Type                    tol,
-         INT                     ItMax
+         int                     ItMax
      );
 
 
 void RacinesPolyneDegre2Reel
-     (REAL a0,REAL a1,REAL a2,INT & CAS,Pt2dr & X1,Pt2dr  & X2);
+     (double_t a0,double_t a1,double_t a2,int & CAS,Pt2dr & X1,Pt2dr  & X2);
 void RacineCarreesComplexe (Pt2dr X,Pt2dr &A1,Pt2dr &A2);
 void RacinesPolyneDegre3Reel
      (
-        REAL A0,REAL A1,REAL A2,REAL A3,
-        INT & CAS,
+        double_t A0,double_t A1,double_t A2,double_t A3,
+        int & CAS,
         Pt2dr & X1,Pt2dr  & X2,Pt2dr & X3
      );
 void RacinesPolyneDegre4Reel
      (
-        REAL A0,REAL A1,REAL A2,REAL A3, REAL A4,
-        INT & CAS,
+        double_t A0,double_t A1,double_t A2,double_t A3, double_t A4,
+        int & CAS,
         Pt2dr & X1,Pt2dr  & X2,Pt2dr & X3,Pt2dr & X4
      );
 
@@ -1309,7 +1309,7 @@ void RacinesPolyneDegre4Reel
 class Monome2dReal
 {
      public :
-         Monome2dReal (INT d0X,INT d0Y,REAL ampl) :
+         Monome2dReal (int d0X,int d0Y,double_t ampl) :
              mD0X  (d0X),
              mD0Y  (d0Y),
              mAmpl (ampl)
@@ -1317,27 +1317,27 @@ class Monome2dReal
          }
 
 
-         REAL   CoeffMulNewAmpl (REAL NewAmpl) const;
+         double_t   CoeffMulNewAmpl (double_t NewAmpl) const;
 
-         void SetAmpl(REAL);
-         REAL Ampl(REAL) const;
+         void SetAmpl(double_t);
+         double_t Ampl(double_t) const;
 
-         REAL operator () (Pt2dr aP) const;
+         double_t operator () (Pt2dr aP) const;
          Pt2dr grad(Pt2dr aP) const;
 
          Fonc_Num FNum() const;
-         INT DegreX() const {return mD0X;}
-         INT DegreY() const {return mD0Y;}
-         INT DegreTot() const;
+         int DegreX() const {return mD0X;}
+         int DegreY() const {return mD0Y;}
+         int DegreTot() const;
 
          void Show(bool X) const;
 
       private :
 
 
-         INT mD0X;
-         INT mD0Y;
-         REAL mAmpl;
+         int mD0X;
+         int mD0Y;
+         double_t mAmpl;
 };
 
 
@@ -1349,60 +1349,60 @@ class Polynome2dReal
             static Polynome2dReal FromVect(const std::vector<double>&,double anAmp);
 
 
-            Polynome2dReal(INT aD0,REAL anAmpl); // Contient tous les monomes, avec un coeff 1.0
-            void SetDegre1(REAL aV0,REAL aVX, REAL aVY,bool AnnulOthers = true);
+            Polynome2dReal(int aD0,double_t anAmpl); // Contient tous les monomes, avec un coeff 1.0
+            void SetDegre1(double_t aV0,double_t aVX, double_t aVY,bool AnnulOthers = true);
 
-            REAL operator () (Pt2dr aP) const;
+            double_t operator () (Pt2dr aP) const;
             Pt2dr grad(Pt2dr aP) const;
-            INT NbMonome() const;
-            const Monome2dReal &  KthMonome(INT) const;
-            INT    DegreX(INT) const;
-            INT    DegreY(INT) const;
-            INT    DegreTot(INT) const;
+            int NbMonome() const;
+            const Monome2dReal &  KthMonome(int) const;
+            int    DegreX(int) const;
+            int    DegreY(int) const;
+            int    DegreTot(int) const;
 
 
-            void SetCoeff(INT aNumMon,REAL aCoeff);
-            REAL Coeff(INT aNumMon) const;
-            REAL & Coeff(INT aNumMon) ;
-            void Show(INT aNumMon) const;
+            void SetCoeff(int aNumMon,double_t aCoeff);
+            double_t Coeff(int aNumMon) const;
+            double_t & Coeff(int aNumMon) ;
+            void Show(int aNumMon) const;
             void Show() const;
 
             Fonc_Num FNum() const;
-            REAL  Ampl() const;
+            double_t  Ampl() const;
         void write(class  ELISE_fp &) const;
         static Polynome2dReal read(class  ELISE_fp &);
 
             // return le polynome correspondant a :
             //     P ->  aChSacle * Pol(P/aChSacle)
-            Polynome2dReal MapingChScale(REAL aChSacle) const;
+            Polynome2dReal MapingChScale(double_t aChSacle) const;
 
 
             Polynome2dReal operator + (const Polynome2dReal &) const;
             Polynome2dReal operator - (const Polynome2dReal &) const;
-            Polynome2dReal operator * (REAL) const;
-            Polynome2dReal operator / (REAL) const;
-            INT DMax() const;
+            Polynome2dReal operator * (double_t) const;
+            Polynome2dReal operator / (double_t) const;
+            int DMax() const;
 
-            static  Polynome2dReal PolyDegre1(REAL aV0,REAL aVX,REAL aVY);
+            static  Polynome2dReal PolyDegre1(double_t aV0,double_t aVX,double_t aVY);
 
       private :
             Polynome2dReal
             (
                   const Polynome2dReal & aPol1,
-                  REAL aCoeff1,
+                  double_t aCoeff1,
                   const Polynome2dReal & aPol2,
-                  REAL aCoeff2
+                  double_t aCoeff2
             );
 
 
-            REAL   CoeffNewAmpl (INT k,REAL NewAmpl) const;
+            double_t   CoeffNewAmpl (int k,double_t NewAmpl) const;
 
-            void AssertIndexeValide(INT) const;
+            void AssertIndexeValide(int) const;
 
             std::vector<Monome2dReal>  mMons;
-            std::vector<REAL>  mCoeff;
-            REAL mAmpl;
-            INT mDMax;
+            std::vector<double_t>  mCoeff;
+            double_t mAmpl;
+            int mDMax;
 
 };
 
@@ -1415,8 +1415,8 @@ class Polynome2dReal
 
 void  ElFFT
       (
-          Im2D_REAL8 aReIm,
-      Im2D_REAL8 aImIm,
+          Im2D_double_t8 aReIm,
+      Im2D_double_t8 aImIm,
       bool       aDirect
       );
 
@@ -1425,25 +1425,25 @@ void  ElFFT
       // Remplit la correlation dans Im1
 void  ElFFTCorrelCirc
       (
-           Im2D_REAL8 aReIm1,
-       Im2D_REAL8 aReIm2
+           Im2D_double_t8 aReIm1,
+       Im2D_double_t8 aReIm2
       );
 
      // meme chose  mais images
      // paddee avec suffisament de 0
      // pour ne pas avoir d'effets de bord
-Im2D_REAL8   ElFFTCorrelPadded
+Im2D_double_t8   ElFFTCorrelPadded
              (
-                  Im2D_REAL8 aReIm1,
-                  Im2D_REAL8 aReIm2
+                  Im2D_double_t8 aReIm1,
+                  Im2D_double_t8 aReIm2
              );
 
 
      // idem, mais normalisee centree;
      // anEpsilon est utilisee pour les divisions
 
-Im2D_REAL8   ElFFTCorrelNCPadded
-             (Im2D_REAL8 aReIm1,Im2D_REAL8 aReIm2,REAL anEps,REAL aSurfMin=-1) ;
+Im2D_double_t8   ElFFTCorrelNCPadded
+             (Im2D_double_t8 aReIm1,Im2D_double_t8 aReIm2,double_t anEps,double_t aSurfMin=-1) ;
 
            // Quand aSurfMin est >0, et que la surface  S
            // (ou Ponderation pour ElFFTPonderedCorrelNCPadded)
@@ -1452,15 +1452,15 @@ Im2D_REAL8   ElFFTCorrelNCPadded
 
 
       // Avec Ponderation
-Im2D_REAL8   ElFFTPonderedCorrelNCPadded
+Im2D_double_t8   ElFFTPonderedCorrelNCPadded
              (
                 Fonc_Num   aF1,
                 Fonc_Num   aF2,
                 Pt2di      aSz,
                 Fonc_Num   aPds1,
                 Fonc_Num   aPds2,
-                REAL       anEps,
-                REAL       aSurfMin = -1
+                double_t       anEps,
+                double_t       aSurfMin = -1
              );
 
 
@@ -1472,13 +1472,13 @@ Im2D_REAL8   ElFFTPonderedCorrelNCPadded
     __
 */
 
-REAL ImCorrFromNrFFT(Im2D_REAL8 anIm,Pt2di aDecIm1);
+double_t ImCorrFromNrFFT(Im2D_double_t8 anIm,Pt2di aDecIm1);
 
 // Les Images donnees pour effectuer le calcul
 // sont des images FFT
-Pt2di DecIm2DecFFT(Im2D_REAL8 anImFFT,Pt2di aDecIm1);
-Pt2di DecFFT2DecIm(Im2D_REAL8 anImFFT,Pt2di aP);
-Pt2d<Fonc_Num> FN_DecFFT2DecIm(Im2D_REAL8 anIm);
+Pt2di DecIm2DecFFT(Im2D_double_t8 anImFFT,Pt2di aDecIm1);
+Pt2di DecFFT2DecIm(Im2D_double_t8 anImFFT,Pt2di aP);
+Pt2d<Fonc_Num> FN_DecFFT2DecIm(Im2D_double_t8 anIm);
 
 
 class RImGrid
@@ -1488,7 +1488,7 @@ class RImGrid
        (
            Pt2dr      anOrigine,
            Pt2dr      aStep,
-           Im2D_REAL8 anIm
+           Im2D_double_t8 anIm
        );
        RImGrid
        (
@@ -1508,9 +1508,9 @@ class RImGrid
        Pt2di SzGrid() const;
        void TranlateIn(Pt2dr);
 
-       REAL Value(Pt2dr  aRealP) const;
-       REAL ValueAndDer(Pt2dr aRealP,Pt2dr & aDer);
-       void SetValueGrid(Pt2di aP,REAL aV);
+       double_t Value(Pt2dr  aRealP) const;
+       double_t ValueAndDer(Pt2dr aRealP,Pt2dr & aDer);
+       void SetValueGrid(Pt2di aP,double_t aV);
        void ExtDef(); // Fait une extension "genre" ppv des pixels
                       // initialisee sur les pixels valant Def
 
@@ -1524,13 +1524,13 @@ class RImGrid
         static RImGrid  * read(ELISE_fp & aFile);
     const Pt2dr & Step() const;
     Pt2dr Origine() const;
-        Im2D_REAL8           DataGrid();
+        Im2D_double_t8           DataGrid();
 
         // Les conventions sont compatible avec le
         // le cas ou aChScale est une focale et Tr une
         //  coordonnees de point principal, en sortie : (X *aChScale + aTr)
-        void SetTrChScaleOut(REAL aChScale,REAL aTr);
-        void SetTrChScaleIn(REAL aChScale,Pt2dr aTr);
+        void SetTrChScaleOut(double_t aChScale,double_t aTr);
+        void SetTrChScaleIn(double_t aChScale,Pt2dr aTr);
 
     const std::string & Name() const;
 
@@ -1544,9 +1544,9 @@ class RImGrid
            Pt2dr                mP1;
            Pt2dr                mStepGr;
            Pt2di                mSzGrid;
-           REAL                 mDef;
-           Im2D_REAL8           mGrid;
-           TIm2D<REAL,REAL>*    mTim;
+           double_t                 mDef;
+           Im2D_double_t8           mGrid;
+           TIm2D<double_t,double_t>*    mTim;
        std::string          mName;
        bool                 mStepAdapted;
 
@@ -1573,15 +1573,15 @@ class PtImGrid
     const Pt2dr & Step() const;
     Pt2dr Origine() const;
 
-        Im2D_REAL8           DataGridX();
-        Im2D_REAL8           DataGridY();
+        Im2D_double_t8           DataGridX();
+        Im2D_double_t8           DataGridY();
     const std::string & Name() const ;
     const std::string & NameX() const ;
     const std::string & NameY() const ;
 
        PtImGrid (RImGrid *,RImGrid * GY,const std::string &);
-       void SetTrChScaleOut(REAL aChScale,Pt2dr aTr);
-       void SetTrChScaleIn(REAL aChScale,Pt2dr aTr);
+       void SetTrChScaleOut(double_t aChScale,Pt2dr aTr);
+       void SetTrChScaleIn(double_t aChScale,Pt2dr aTr);
 
        const Pt2dr & P0() const;
        const Pt2dr & P1() const;
@@ -1598,18 +1598,18 @@ class PtImGrid
    REMPLACE PAR cDbleGrid  dans "general/photogram.h"
 */
 
-void ShowMatr(const char * mes, ElMatrix<REAL> aMatr)  ;
+void ShowMatr(const char * mes, ElMatrix<double_t> aMatr)  ;
 
 
 /*******************************************************/
 /*                                                     */
-/*       NOYAU INTERPOLATEUR 1D                        */
+/*       NOYAU intERPOLATEUR 1D                        */
 /*                                                     */
 /*******************************************************/
 
 
 /*
-    REDEFINITION DES INTERPOLATEURS,  moins optimises mais plus
+    REDEFINITION DES intERPOLATEURS,  moins optimises mais plus
     generaux;
 
     cKernelInterpol  : Classe d'interface
@@ -1648,14 +1648,14 @@ class cCubicInterpKernel : public cKernelInterpol1D
      public :
          double  Value(double x) const ;
          // double  SzKernel() const;
-         REAL Derivee(REAL x) const;
-         void ValAndDerivee(REAL x,REAL &V,REAL &D) const;
+         double_t Derivee(double_t x) const;
+         void ValAndDerivee(double_t x,double_t &V,double_t &D) const;
          // aA = valeur de la derivee en 0
          // si vaut -0.5, reconstitue parfaitement une droite
          // doit etre comprise en 0 et -3
-         cCubicInterpKernel(REAL aA);
+         cCubicInterpKernel(double_t aA);
      private :
-         REAL mA;
+         double_t mA;
 };
 
 // Sinus Cardinal appodise avec fentre de Tukey  = Diriclet au debut
@@ -1715,9 +1715,9 @@ class cTabulKernelInterpol : public cKernelInterpol1D
         int                        mNbDisc1;
         int                        mNbValPos;
         int                        mSzTab;
-        Im1D_REAL8                 mImTab;
+        Im1D_double_t8                 mImTab;
         double *                   mTab;
-        Im1D_REAL8                 mImDer;
+        Im1D_double_t8                 mImDer;
         double *                   mDer;
 };
 
@@ -1824,7 +1824,7 @@ class cInterpolBicubique : public cInterpolateurIm2D<TypeEl>
      public :
          virtual double GetVal(TypeEl ** aTab,const Pt2dr &  aP) const ;
          virtual int  SzKernel() const;
-         cInterpolBicubique(REAL aVal);  // -0.5 val par def (droite->droite)
+         cInterpolBicubique(double_t aVal);  // -0.5 val par def (droite->droite)
    private :
         cCubicInterpKernel mCIK;
 };
@@ -1840,14 +1840,14 @@ class cInterpolSinusCardinal : public cInterpolateurIm2D<TypeEl>
     private :
         bool m_apodise;
         int m_sizeOfWindow;
-        REAL *m_tabX, *m_tabY, *m_tabTemp;
+        double_t *m_tabX, *m_tabY, *m_tabTemp;
 };
 
 template <class Type>
 Pt3dr BicubicInterpol
       (const cCubicInterpKernel & aCIK,Type ** data,Pt2dr aP);
 template <class Type>
-REAL  BicubicInterpolVal
+double_t  BicubicInterpolVal
       (const cCubicInterpKernel & aCIK,Type ** data,Pt2dr aP);
 
 
@@ -1873,15 +1873,15 @@ class  cTplCIKTabul  : public cInterpolateurIm2D<TypeEl>
            // Nombre de bits pour le codage des valeurs et de la resol
 
 
-          cTplCIKTabul(INT aNBBVal,INT aNBBResol,REAL aVal,eModeInterTabul = eTabulBicub);
+          cTplCIKTabul(int aNBBVal,int aNBBResol,double_t aVal,eModeInterTabul = eTabulBicub);
 
 
-          REAL     XofInd(INT Ind) {return Ind/REAL(mNbResol);}
+          double_t     XofInd(int Ind) {return Ind/double_t(mNbResol);}
 
-          inline tTabulCIK     InterpolateVal(TypeEl *,INT Frac) const ;
-          inline tTabulCIK     InterpolateDer(TypeEl *,INT Frac) const ;
+          inline tTabulCIK     InterpolateVal(TypeEl *,int Frac) const ;
+          inline tTabulCIK     InterpolateDer(TypeEl *,int Frac) const ;
 
-          REAL     BicubValue(TypeEl ** aTab,const Pt2dr &  aP) const ;
+          double_t     BicubValue(TypeEl ** aTab,const Pt2dr &  aP) const ;
           Pt3dr    BicubValueAndDer(TypeEl ** aTab,const Pt2dr &  aP) const ;
 
       bool OkForInterp(Pt2di aSz,Pt2dr aP) const;
@@ -1890,36 +1890,36 @@ class  cTplCIKTabul  : public cInterpolateurIm2D<TypeEl>
           int SzKernel() const;
 
        private :
-          INT            mNbResol;
-          INT            mNbVal;
-          REAL           mNbVal2;
+          int            mNbResol;
+          int            mNbVal;
+          double_t           mNbVal2;
           Im2D<tTabulCIK,tTabulCIK>  mTV;
           tTabulCIK **       mDV;
           Im2D<tTabulCIK,tTabulCIK>  mTD;
           tTabulCIK **       mDD;
 };
-typedef cTplCIKTabul<U_INT1,INT>  cCIKTabul;
+typedef cTplCIKTabul<U_int1,int>  cCIKTabul;
 
 void FiltrageImage3D
      (
-           INT StepX,INT StepY, INT StepZ,
+           int StepX,int StepY, int StepZ,
        double *  Data,
-           INT    Tx, INT    Ty, INT    Tz
+           int    Tx, int    Ty, int    Tz
      );
 
 void NoyauxFiltrageImage3D
      (
-           INT StepX,INT StepY, INT StepZ,
+           int StepX,int StepY, int StepZ,
        double *  Data,
-           INT    Tx, INT    Ty, INT    Tz
+           int    Tx, int    Ty, int    Tz
      );
 
-Im2D_U_INT1  Shading
+Im2D_U_int1  Shading
              (
                   Pt2di    aSz,
                   Fonc_Num aFMnt,
-                  INT      aNbDir,
-                  REAL Anisotropie
+                  int      aNbDir,
+                  double_t Anisotropie
              );
 
 

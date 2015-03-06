@@ -49,11 +49,11 @@ class cSFN2D : public cSimpleFoncNum
      public :
         cSFN2D();
      private :
-       virtual REAL SFN2_Calc(const Pt2dr &) const;
-       virtual REAL SFN2_Calc(const Pt2di &) const;
+       virtual double_t SFN2_Calc(const Pt2dr &) const;
+       virtual double_t SFN2_Calc(const Pt2di &) const;
                                                                                                       
-       virtual REAL SFN_Calc(const REAL *) const;
-       virtual REAL SFN_Calc(const INT *) const;
+       virtual double_t SFN_Calc(const double_t *) const;
+       virtual double_t SFN_Calc(const int *) const;
 };
 
 #endif

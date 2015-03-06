@@ -50,18 +50,18 @@ class H_Wcor: public virtual Wcor
                char * name
           );
    
-          U_INT1 radio_pt_terrain(Pt3dr);
-          U_INT1 radio_pt_terrain(Pt3dr,Im2D_U_INT1);
-          U_INT1 radio_biline_pt_terrain(Pt3dr);
-          U_INT1 radio_biline_pt_terrain(Pt3dr,Im2D_U_INT1);
-          U_INT1 radio_bicube_pt_terrain(Pt3dr);
-          U_INT1 radio_bicube_pt_terrain(Pt3dr,Im2D_U_INT1);
+          U_int1 radio_pt_terrain(Pt3dr);
+          U_int1 radio_pt_terrain(Pt3dr,Im2D_U_int1);
+          U_int1 radio_biline_pt_terrain(Pt3dr);
+          U_int1 radio_biline_pt_terrain(Pt3dr,Im2D_U_int1);
+          U_int1 radio_bicube_pt_terrain(Pt3dr);
+          U_int1 radio_bicube_pt_terrain(Pt3dr,Im2D_U_int1);
 
-          REAL   b_sur_h(Wcor Wb, REAL z1=30, REAL z2=60);
+          double_t   b_sur_h(Wcor Wb, double_t z1=30, double_t z2=60);
 
-          Pt3dr  phot_to_ter(Pt2dr p, REAL z);
+          Pt3dr  phot_to_ter(Pt2dr p, double_t z);
           Pt2dr  ter_to_phot(Pt3dr p);
-          Facette_2d terrain_to_phot( Facette_2d f, REAL z);
+          Facette_2d terrain_to_phot( Facette_2d f, double_t z);
           Facette_2d terrain_to_phot( Facette_3d f);
 
 };
@@ -83,57 +83,57 @@ class H_WcorVis :  public WcorVis
                Video_Win W
           );
 
-          void affiche_facette(Facette_2d f, INT color,  bool etiquet = false);
+          void affiche_facette(Facette_2d f, int color,  bool etiquet = false);
           void desaffiche_facette(Facette_2d f, bool etiquet = false);
 
-          void affiche_facette(Facette_3d f,INT color, bool etiquet = false);
+          void affiche_facette(Facette_3d f,int color, bool etiquet = false);
           void desaffiche_facette(Facette_3d f, bool etiquet = false);
 
-          void affiche_facette(ElList<Facette_3d>  lf,INT color, bool etiquet = false);
+          void affiche_facette(ElList<Facette_3d>  lf,int color, bool etiquet = false);
           void desaffiche_facette(ElList<Facette_3d> lf, bool etiquet = false);
 
-          void affiche_facette(ElFilo<Facette_3d>&  f_f,INT color, bool etiquet = false);
+          void affiche_facette(ElFilo<Facette_3d>&  f_f,int color, bool etiquet = false);
           void desaffiche_facette(ElFilo<Facette_3d>& f_f, bool etiquet = false);
 
-          void affiche_facette(Facette_2d f, REAL z, INT color,  bool etiquet = false);
-          void desaffiche_facette(Facette_2d f, REAL z, bool etiquet = false);
+          void affiche_facette(Facette_2d f, double_t z, int color,  bool etiquet = false);
+          void desaffiche_facette(Facette_2d f, double_t z, bool etiquet = false);
 
-          void affiche_facette(ElList<Facette_2d>  lf, REAL z, INT color,  bool etiquet = false);
-          void desaffiche_facette(ElList<Facette_2d> lf, REAL z, bool etiquet = false);
+          void affiche_facette(ElList<Facette_2d>  lf, double_t z, int color,  bool etiquet = false);
+          void desaffiche_facette(ElList<Facette_2d> lf, double_t z, bool etiquet = false);
 
-          void affiche_facette(ElFilo<Facette_2d>&  f_f, REAL z, INT color,  bool etiquet = false);
-          void desaffiche_facette(ElFilo<Facette_2d>& f_f, REAL z, bool etiquet = false);
+          void affiche_facette(ElFilo<Facette_2d>&  f_f, double_t z, int color,  bool etiquet = false);
+          void desaffiche_facette(ElFilo<Facette_2d>& f_f, double_t z, bool etiquet = false);
 
-          void affiche_graphe(H_Graphe& graphe, INT color);
+          void affiche_graphe(H_Graphe& graphe, int color);
           void desaffiche_graphe(H_Graphe& graphe);
 
-          INT  etiquet_in();
-          Im2D_U_INT2 etiquet(){return _etiquet;}
+          int  etiquet_in();
+          Im2D_U_int2 etiquet(){return _etiquet;}
 
-          U_INT1 radio_pt_terrain(Pt3dr);
-          U_INT1 radio_pt_terrain(Pt3dr,Im2D_U_INT1);
-          U_INT1 radio_biline_pt_terrain(Pt3dr);
-          U_INT1 radio_biline_pt_terrain(Pt3dr,Im2D_U_INT1);
-          U_INT1 radio_bicube_pt_terrain(Pt3dr);
-          U_INT1 radio_bicube_pt_terrain(Pt3dr,Im2D_U_INT1);
+          U_int1 radio_pt_terrain(Pt3dr);
+          U_int1 radio_pt_terrain(Pt3dr,Im2D_U_int1);
+          U_int1 radio_biline_pt_terrain(Pt3dr);
+          U_int1 radio_biline_pt_terrain(Pt3dr,Im2D_U_int1);
+          U_int1 radio_bicube_pt_terrain(Pt3dr);
+          U_int1 radio_bicube_pt_terrain(Pt3dr,Im2D_U_int1);
 
-          REAL   b_sur_h(WcorVis Wb, REAL z1=30, REAL z2=60);
+          double_t   b_sur_h(WcorVis Wb, double_t z1=30, double_t z2=60);
 
-          Pt3dr  phot_to_ter(Pt2dr p, REAL z);
+          Pt3dr  phot_to_ter(Pt2dr p, double_t z);
           Pt2dr  ter_to_phot(Pt3dr p);
-          Facette_2d terrain_to_phot( Facette_2d f, REAL z);
+          Facette_2d terrain_to_phot( Facette_2d f, double_t z);
           Facette_2d terrain_to_phot( Facette_3d f);
 
     private :
     
-          Im2D_U_INT2 _etiquet;
+          Im2D_U_int2 _etiquet;
 };
 
-extern void correlation(Im2D_U_INT1 im_a, Im2D_U_INT1 im_b, Im2D_U_INT1 masq, Im2D_REAL4 coef, INT semi_fenet, Output win = 0);
-extern void correlation_ad(Im2D_U_INT1 im_a, Im2D_U_INT1 im_b, Im2D_U_INT1 masq, Im2D_REAL4 coef, INT semi_fenet, Output win = 0);
-extern void correlation_ad_non_cent(Im2D_U_INT1 im_a, Im2D_U_INT1 im_b, Im2D_U_INT1 masq, Im2D_REAL4 coef, INT semi_fenet, Output win = 0);
-extern REAL correlation_ad_glob(Im2D_U_INT1 im_a, Im2D_U_INT1 im_b, Im2D_U_INT1 masq);
-extern REAL correlation_ad_glob_non_cent(Im2D_U_INT1 im_a, Im2D_U_INT1 im_b, Im2D_U_INT1 masq);
+extern void correlation(Im2D_U_int1 im_a, Im2D_U_int1 im_b, Im2D_U_int1 masq, Im2D_double_t4 coef, int semi_fenet, Output win = 0);
+extern void correlation_ad(Im2D_U_int1 im_a, Im2D_U_int1 im_b, Im2D_U_int1 masq, Im2D_double_t4 coef, int semi_fenet, Output win = 0);
+extern void correlation_ad_non_cent(Im2D_U_int1 im_a, Im2D_U_int1 im_b, Im2D_U_int1 masq, Im2D_double_t4 coef, int semi_fenet, Output win = 0);
+extern double_t correlation_ad_glob(Im2D_U_int1 im_a, Im2D_U_int1 im_b, Im2D_U_int1 masq);
+extern double_t correlation_ad_glob_non_cent(Im2D_U_int1 im_a, Im2D_U_int1 im_b, Im2D_U_int1 masq);
 
 
 #endif // _ELISE_GENERAL_H_CORREL_H

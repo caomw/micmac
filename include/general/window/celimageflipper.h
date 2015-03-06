@@ -53,7 +53,7 @@ class cElImageFlipper
 		     Fonc_Num aIm1,
 		     Fonc_Num aIm2
                 );
-		void Flip(INT aNbTime,REAL aCadence);
+		void Flip(int aNbTime,double_t aCadence);
 	private :
 	    Pt2di     mSz;
             Video_Win *  pW;

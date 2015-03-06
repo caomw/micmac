@@ -7,7 +7,7 @@ class cCamStenopeDistPolyn : public CamStenope
 {
 public :
     cCamStenopeDistPolyn
-    (bool isDistC2M,REAL Focale,Pt2dr Centre, const ElDistortionPolynomiale &,const std::vector<double> &);
+    (bool isDistC2M,double_t Focale,Pt2dr Centre, const ElDistortionPolynomiale &,const std::vector<double> &);
     const ElDistortionPolynomiale & DistPol() const;
 private :
     ElDistortionPolynomiale mDist;

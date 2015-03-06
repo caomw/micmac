@@ -39,12 +39,12 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 
 
-#ifndef _ELISE_SMART_POINTEUR_H
-#define _ELISE_SMART_POINTEUR_H
+#ifndef _ELISE_SMART_POintEUR_H
+#define _ELISE_SMART_POintEUR_H
 
 
 
-#if (DEBUG_INTERNAL)
+#if (DEBUG_intERNAL)
 class Memory_Counter
 {
    public :
@@ -54,9 +54,9 @@ class Memory_Counter
        Memory_Counter(void);
 
        const char * _name;
-       INT _sum_call;
-       INT _sum_size;
-       INT _sum_ptr;
+       int _sum_call;
+       int _sum_size;
+       int _sum_ptr;
 
 #if (CPP_OPTIMIZE)
        void * add(void * adr)
@@ -73,7 +73,7 @@ class Memory_Counter
        void sub(void * adr);
 #endif
 
-       void * add_sub_oks(void * adr,INT sz,INT sign);
+       void * add_sub_oks(void * adr,int sz,int sign);
 };
 
 extern Memory_Counter MC_OKS;
@@ -151,7 +151,7 @@ void verif_memory_state(All_Memo_counter);
 #define ADD_MEM_COUNT(MC,adr,sz) (MC.add_sub_oks(adr,sz,1))
 #define SUB_MEM_COUNT(MC,adr,sz) (MC.add_sub_oks(adr,sz,-1))
 
-#else   /*  DEBUG_INTERNAL */
+#else   /*  DEBUG_intERNAL */
 	//  A class to allow some check-sum on memory alloc and desalloc
 	#define SAFE_ALLOC(Type,sz) (new Type [sz])
 	#define SAFE_ALLOC1(Type) (new Type)
@@ -169,9 +169,9 @@ void verif_memory_state(All_Memo_counter);
 	typedef  void * All_Memo_counter;
 	void stow_memory_counter(All_Memo_counter &);
 	void verif_memory_state(All_Memo_counter);
-#endif /*  DEBUG_INTERNAL */
+#endif /*  DEBUG_intERNAL */
 
-void * std_dup(void * out,const void * in,INT sz_nb);
+void * std_dup(void * out,const void * in,int sz_nb);
 char * std_ch_dup(const char * ch);
 
 
@@ -219,7 +219,7 @@ char * std_ch_dup(const char * ch);
 
 *********************************************************************/
 
-#if DEBUG_SMART_POINTEUR
+#if DEBUG_SMART_POintEUR
 
 
 template <class > class Smart_Pointer;
@@ -268,7 +268,7 @@ class Smart_Pointer_Gen
      protected :
 
         Smart_Pointer_Gen(void);
-        Smart_Pointer_Gen(INT4);
+        Smart_Pointer_Gen(int4);
 
       // utilitaires  
 
@@ -285,7 +285,7 @@ class Smart_Pointer_Gen
       // champs
 
          class Memory_Seg * _zone;
-         INT4         _offset; 
+         int4         _offset; 
 
 
      private :
@@ -312,17 +312,17 @@ template <class Type> class Smart_Pointer  : public Smart_Pointer_Gen
              // ce constructeur ne sert qu'a creer le pointeur null
              // pour que, en mode debug ou non debug, on puisse toujours
              // ecrire  UChar_p (0)
-         Smart_Pointer (INT4 nb) : Smart_Pointer_Gen(nb){};
+         Smart_Pointer (int4 nb) : Smart_Pointer_Gen(nb){};
              // static car l'expansion de la macro new tab doit appeler
              // la methode sans qu'il y ait d'objet associe.
-         static Smart_Pointer<Type>   new_tab(INT4);
-         static Smart_Pointer<Type>   new_vect(INT4,INT4);
+         static Smart_Pointer<Type>   new_tab(int4);
+         static Smart_Pointer<Type>   new_vect(int4,int4);
 
          static Smart_Pointer<Type>   new_val(void);
          ~Smart_Pointer(void);
 
          friend Smart_Pointer<Type> ADRESS_OF(Type&);
-         friend Smart_Pointer<Type> STAT_PTR(Type *,INT4 nb);
+         friend Smart_Pointer<Type> STAT_PTR(Type *,int4 nb);
          Type * export(void);
 
 
@@ -333,7 +333,7 @@ template <class Type> class Smart_Pointer  : public Smart_Pointer_Gen
 
          // derereferencement
          Type & operator * (void);
-         Type & operator [] (INT4);
+         Type & operator [] (int4);
          Type * operator -> (void);
 
           //************ arithmetique ************************
@@ -343,40 +343,40 @@ template <class Type> class Smart_Pointer  : public Smart_Pointer_Gen
               // et "-" comme des friend. 
 
               // arithmetique simple
-         friend  Smart_Pointer<Type> operator + (const Smart_Pointer<Type> &,INT4);
+         friend  Smart_Pointer<Type> operator + (const Smart_Pointer<Type> &,int4);
          friend  Smart_Pointer<Type> operator + (int, const Smart_Pointer<Type> &);
-         friend  Smart_Pointer<Type> operator - (const Smart_Pointer<Type> &,INT4);
-         friend  INT4 operator - (const Smart_Pointer<Type> &,
+         friend  Smart_Pointer<Type> operator - (const Smart_Pointer<Type> &,int4);
+         friend  int4 operator - (const Smart_Pointer<Type> &,
                                  const Smart_Pointer<Type> &);
 
               // arithmetique +=, -=
-          Smart_Pointer<Type> & operator += (INT4);
-          Smart_Pointer<Type> & operator -= (INT4);
+          Smart_Pointer<Type> & operator += (int4);
+          Smart_Pointer<Type> & operator -= (int4);
 
               // arithmetique p++, ++p
 
            Smart_Pointer<Type> & operator ++ ();      // ++p
-           Smart_Pointer<Type>   operator ++ (INT4);   // p++
+           Smart_Pointer<Type>   operator ++ (int4);   // p++
            Smart_Pointer<Type> & operator -- ();      // --p
-           Smart_Pointer<Type>   operator -- (INT4);   // p--
+           Smart_Pointer<Type>   operator -- (int4);   // p--
 
               // comparaison  <, >, <=, >=
 
-           INT4  operator<  (const Smart_Pointer<Type> &);      
-           INT4  operator<= (const Smart_Pointer<Type> &);      
-           INT4  operator>  (const Smart_Pointer<Type> &);      
-           INT4  operator>= (const Smart_Pointer<Type> &);      
+           int4  operator<  (const Smart_Pointer<Type> &);      
+           int4  operator<= (const Smart_Pointer<Type> &);      
+           int4  operator>  (const Smart_Pointer<Type> &);      
+           int4  operator>= (const Smart_Pointer<Type> &);      
 
               // egalite 
 
-           INT4  operator== (const Smart_Pointer<Type> &);      
-           INT4  operator!= (const Smart_Pointer<Type> &);      
+           int4  operator== (const Smart_Pointer<Type> &);      
+           int4  operator!= (const Smart_Pointer<Type> &);      
 
 
               // le ! qui apparament fait partie des operateurs sur
               // les pointeurs, avec la semantique (! p) <=> (p == 0)
 
-           INT4  operator! ();
+           int4  operator! ();
 
             static const  Type _VAL_DEF;
             // why not " static const Type _VAL_DEF" ?
@@ -385,14 +385,14 @@ template <class Type> class Smart_Pointer  : public Smart_Pointer_Gen
 
      protected :
      private :
-         INT4  sh_ref(void);  // debug, put public when needed.
-         INT4 offset(void){return _offset;}  // debug
+         int4  sh_ref(void);  // debug, put public when needed.
+         int4 offset(void){return _offset;}  // debug
 
 };
 
 
 /*************************************************************/
-/*    SUPERIOR ORDER POINTER                                 */
+/*    SUPERIOR ORDER POintER                                 */
 /*     not implemented (specicifcally), see smart_pointeur.C */
 /*     for some remarks.                                     */
 /*************************************************************/
@@ -432,20 +432,20 @@ template <class Type> void delete_matr (Smart_Pointer<Smart_Pointer<Type> >, Pt2
 
 // #define EXPORT(p)  ((p).export())
 
-#define U_INT1_Ptr   Smart_Pointer<U_INT1>
-#define U_INT1_PPtr  Smart_Pointer<U_INT1_Ptr>
-#define U_INT2_Ptr   Smart_Pointer<U_INT2>
-#define INT4_Ptr     Smart_Pointer<INT4>
-#define INT4_PPtr    Smart_Pointer<INT4_Ptr>
-#define REAL8_Ptr    Smart_Pointer<REAL8>
-#define REAL8_PPtr   Smart_Pointer<REAL8_Ptr>
+#define U_int1_Ptr   Smart_Pointer<U_int1>
+#define U_int1_PPtr  Smart_Pointer<U_int1_Ptr>
+#define U_int2_Ptr   Smart_Pointer<U_int2>
+#define int4_Ptr     Smart_Pointer<int4>
+#define int4_PPtr    Smart_Pointer<int4_Ptr>
+#define double_t8_Ptr    Smart_Pointer<double_t8>
+#define double_t8_PPtr   Smart_Pointer<double_t8_Ptr>
 #define Pt2di_Ptr    Smart_Pointer<Pt2di>
 
 #define SMP(Un_Type)    Smart_Pointer<Un_Type>
 #define SMPP(Un_Type)   Smart_Pointer<Smart_Pointer<Un_Type> >
 
 
-#else   /* DEBUG_SMART_POINTEUR */
+#else   /* DEBUG_SMART_POintEUR */
 
 
 extern void * Elise_Calloc(size_t nmemb, size_t size);
@@ -453,15 +453,15 @@ extern void  Elise_Free(void *);
 
 
 
-extern void **  alloc_matrice(const Pt2di p1,const Pt2di p2,const INT sz);
-extern void ***  alloc_tab_matrice(const INT nb,
+extern void **  alloc_matrice(const Pt2di p1,const Pt2di p2,const int sz);
+extern void ***  alloc_tab_matrice(const int nb,
                                    const Pt2di p1,
                                    const Pt2di p2,
-                                   const INT sz);
+                                   const int sz);
 extern void *  alloc_vecteur(const int x1,const int x2,const int sz);
 extern void  delete_vecteur(void * v,const int x1,const int sz);
 extern void delete_matrice(void ** m, const Pt2di p1,const Pt2di p2,const int sz);
-extern void delete_tab_matrice(void *** m,INT nb, const Pt2di p1,const Pt2di p2,const int sz);
+extern void delete_tab_matrice(void *** m,int nb, const Pt2di p1,const Pt2di p2,const int sz);
 
 #define NEW_VECTEUR(x1,x2,type) ((type *) alloc_vecteur((x1),(x2),sizeof(type)))
 #define NEW_MATRICE(p1,p2,type) ((type **) alloc_matrice((p1),(p2),sizeof(type)))
@@ -491,7 +491,7 @@ extern void delete_tab_matrice(void *** m,INT nb, const Pt2di p1,const Pt2di p2,
 ((Type *) ADD_MEM_COUNT(MC_NEW_ONE,SAFE_ALLOC_ARG(Type,Arg),1))
 */
 
-#if (DEBUG_INTERNAL)
+#if (DEBUG_intERNAL)
     #define DELETE_TAB(p)  ((void)SUB_MEM_COUNT(MC_NTAB,p,1) ,  (delete  [] (p)))
     #define DELETE_ONE(p)      (SUB_MEM_COUNT(MC_NEW_ONE,p,1)  ,   (delete  (p)))
 #else
@@ -513,28 +513,28 @@ extern void delete_tab_matrice(void *** m,INT nb, const Pt2di p1,const Pt2di p2,
 #define ADRESS_OF(val)    (&(val))
 #define STAT_PTR(val,nb)    (val)
 
-typedef  U_INT1 *     U_INT1_Ptr; 
-typedef  U_INT1 **    U_INT1_PPtr; 
-typedef  U_INT2 *     U_INT2_Ptr; 
-typedef  INT4 *       INT4_Ptr; 
-typedef  INT4 **      INT4_PPtr; 
-typedef  REAL8 *      REAL8_Ptr; 
-typedef  REAL8 **     REAL8_PPtr; 
+typedef  U_int1 *     U_int1_Ptr; 
+typedef  U_int1 **    U_int1_PPtr; 
+typedef  U_int2 *     U_int2_Ptr; 
+typedef  int4 *       int4_Ptr; 
+typedef  int4 **      int4_PPtr; 
+typedef  double_t8 *      double_t8_Ptr; 
+typedef  double_t8 **     double_t8_PPtr; 
 typedef  Pt2di *      Pt2di_Ptr; 
 
 #define SMP(Un_Type)    Un_Type *
 #define SMPP(Un_Type)   Un_Type **
 
 
-template <class Type> Type * new_vecteur_init(INT x0,INT x1,Type v);
+template <class Type> Type * new_vecteur_init(int x0,int x1,Type v);
 
 
-#endif  /* DEBUG_SMART_POINTEUR */
-
-
-
+#endif  /* DEBUG_SMART_POintEUR */
 
 
 
 
-#endif /*! _ELISE_SMART_POINTEUR_H */
+
+
+
+#endif /*! _ELISE_SMART_POintEUR_H */

@@ -119,8 +119,8 @@ bool GradConjPrecondSolve
      (
             cVectMatMul&,
             cVectPreCond&,
-            Im1D_REAL8  aImB,
-            Im1D_REAL8  aImXSol,
+            Im1D_double_t8  aImB,
+            Im1D_double_t8  aImXSol,
             const cControleGC &
      );
 
@@ -151,7 +151,7 @@ bool GradConjPrecondSolve
                           ElMatrix<double> &aM1,
                           ElMatrix<double> &aM2,
                           const std::vector<cSsBloc> * aYVSB,
-                          const std::vector<INT> & aVIndy
+                          const std::vector<int> & aVIndy
                      );
          
 */
@@ -171,9 +171,9 @@ bool GradConjPrecondSolve
 
 // Nunerics, roots of polyonme
 
-REAL IRoots(REAL val,INT exp);
+double_t IRoots(double_t val,int exp);
 
-ElMatrix<REAL8> MatrFoncMeanSquare
+ElMatrix<double_t8> MatrFoncMeanSquare
                 (
                      Flux_Pts       flux,
                      std::list<Fonc_Num> Lfonc,
@@ -193,7 +193,7 @@ Fonc_Num ApproxFoncMeanSquare
 Fonc_Num SomPondFoncNum
          (
 		   std::   list<Fonc_Num> Lfonc,
-			  ElMatrix<REAL8>
+			  ElMatrix<double_t8>
 		 );
 
 

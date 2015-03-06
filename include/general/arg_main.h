@@ -158,9 +158,9 @@ template <> inline std::istream & ElStdRead (std::istream &is, std::vector < aTY
     return VElStdRead(is,vec,G);\
 }
 
-SPECIALIZE_ElStdRead (INT)
-SPECIALIZE_ElStdRead (std::vector <INT>)
-SPECIALIZE_ElStdRead (REAL)
+SPECIALIZE_ElStdRead (int)
+SPECIALIZE_ElStdRead (std::vector <int>)
+SPECIALIZE_ElStdRead (double_t)
 SPECIALIZE_ElStdRead (Pt2dr)
 
 
@@ -185,7 +185,7 @@ template <> inline std::istream & ElStdRead
 template <class Type> std::ostream & operator << (std::ostream &os,const std::vector<Type> & v)
 {
     os << "[";
-    for (INT k=0; k<(INT)v.size(); k++)
+    for (int k=0; k<(int)v.size(); k++)
     {
         if (k!=0) os<< ",";
         os << v[k];
@@ -217,15 +217,15 @@ typedef enum
     AMBT_Box2di,
     AMBT_Box2dr,
     AMBT_bool,
-    AMBT_INT,
-    AMBT_REAL,
+    AMBT_int,
+    AMBT_double_t,
     AMBT_Pt2di,
     AMBT_Pt2dr,
     AMBT_Pt3dr,
     AMBT_Pt3di,
     AMBT_string,
-    AMBT_U_INT1,
-    AMBT_INT1,
+    AMBT_U_int1,
+    AMBT_int1,
     AMBT_char,
     AMBT_vector_Pt2dr,
     AMBT_vector_int,
@@ -408,7 +408,7 @@ class LArgMain
 
         int Size() const;
 
-        INT  Init(int argc,char ** argv) const;
+        int  Init(int argc,char ** argv) const;
                 void  InitIfMatchEq
                       (
                           std::vector<char *> *,  // Si !=0, empile les args non consommes
@@ -479,7 +479,7 @@ void    ElInitArgMain
 void SphInitArgs(const std::string & NameFile,const LArgMain &);
 void StdInitArgsFromFile(const std::string & NameFile,const LArgMain &);
 void HdrInitArgsFromFile(const std::string & NameFile,const LArgMain &);
-INT ThomInitArgs(const std::string & NameFile,const LArgMain &);
+int ThomInitArgs(const std::string & NameFile,const LArgMain &);
 bool IsThomFile (const std::string & aName);
 
 

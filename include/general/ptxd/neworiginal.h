@@ -42,8 +42,8 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 #include <general/util.h>
 
-//#define Pt2di  Pt2d<INT>
-//#define Pt2dr  Pt2d<REAL>
+//#define Pt2di  Pt2d<int>
+//#define Pt2dr  Pt2d<double_t>
 
 class Output;
 class SegComp;
@@ -52,8 +52,8 @@ class cElTriangleComp;
 template <class Type> class Pt3d;
 
 
-inline INT  scal(INT v1 ,INT v2 ) { return v1 * v2;}
-inline REAL scal(REAL v1,REAL v2) { return v1 * v2;}
+inline int  scal(int v1 ,int v2 ) { return v1 * v2;}
+inline double_t scal(double_t v1,double_t v2) { return v1 * v2;}
 
 
 
@@ -81,11 +81,11 @@ double DMaxCoins(ElAffin2D AfC2M,Pt2dr aSzIm,Pt2dr aC);
     // When a Pt2di p is used as a ``seed'' to generate a digital line the average euclidean
     // distance d between two consecutives points is variable according to p
     // For example  : d = sqrt(2) for p = (1,1) or p = (234,234) and d = 1 for p = (-99,0)
-REAL  average_euclid_line_seed (Pt2di);
+double_t  average_euclid_line_seed (Pt2di);
 Pt2di  best_4_approx(const Pt2di & p);
 Pt2di  second_freeman_approx(Pt2di u, bool conx_8,Pt2di u1);
-INT    num_4_freeman(Pt2di);
-Pt2dr ImAppSym(REAL A,REAL B,REAL C,Pt2dr aP);
+int    num_4_freeman(Pt2di);
+Pt2dr ImAppSym(double_t A,double_t B,double_t C,Pt2dr aP);
 
 Pt2di corner_box_included(Pt2di pmin,Pt2di pmax,bool left,bool down);
 
@@ -123,7 +123,7 @@ inline Pt2dr rot90(Pt2dr p)
 {
     return Pt2dr(-p.y,p.x);
 }
-inline Pt2dr vunit(Pt2dr p,REAL & d)
+inline Pt2dr vunit(Pt2dr p,double_t & d)
 {
    d = euclid(p);
    ELISE_ASSERT((d!=0),"Null seg in vunit");
@@ -132,12 +132,12 @@ inline Pt2dr vunit(Pt2dr p,REAL & d)
 
 inline Pt2dr vunit(Pt2dr p)
 {
-   REAL d ;
+   double_t d ;
    return vunit(p,d);
 }
 
 /*
-inline Pt2dr barry(REAL pds1,const Pt2dr & p1,const Pt2dr & p2 )
+inline Pt2dr barry(double_t pds1,const Pt2dr & p1,const Pt2dr & p2 )
 {
      return p1*pds1  + p2*(1-pds1);
 }
@@ -191,7 +191,7 @@ std::ostream & operator << (std::ostream & ofs,const Box2dr  &aBox);
 
 
 
-void AdaptParamCopyTrans(INT& X0src,INT& X0dest,INT& NB,INT NbSrc,INT NbDest);
+void AdaptParamCopyTrans(int& X0src,int& X0dest,int& NB,int NbSrc,int NbDest);
 
 void AdaptParamCopyTrans(Pt2di& p0src,Pt2di& p0dest,Pt2di& sz,
                           Pt2di   SzSrc, Pt2di   SzDest);
@@ -226,7 +226,7 @@ class ElCamera;
 
 
 
-Pt3dr  tCho2double(const Pt3d<tSysCho> & aP);
+Pt3dr  tCho2double(const Pt3d<double_t> & aP);
 
 
 typedef TypeSubst<Pt2di>   Pt2diSubst;

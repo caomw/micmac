@@ -7,10 +7,10 @@ class ElQTRegionPlan
 {
       public :
 
-         virtual REAL D2(const Box2dr &) const = 0;
-         virtual REAL D2(const Pt2dr &)  const = 0;
-         virtual REAL D2(const SegComp &)  const = 0;
-         virtual REAL D2(const cElTriangleComp &)  const ; // Def = err fatale
+         virtual double_t D2(const Box2dr &) const = 0;
+         virtual double_t D2(const Pt2dr &)  const = 0;
+         virtual double_t D2(const SegComp &)  const = 0;
+         virtual double_t D2(const cElTriangleComp &)  const ; // Def = err fatale
      virtual ~ElQTRegionPlan() {}
 };
 

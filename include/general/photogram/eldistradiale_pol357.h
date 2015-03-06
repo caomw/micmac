@@ -6,7 +6,7 @@
 class ElDistRadiale_Pol357  : public ElDistRadiale_PolynImpair // polynome en r de degre 3,5,7
 {
 public :
-    ElDistRadiale_Pol357(REAL aRMax,Pt2dr centre,REAL  c3,REAL c5,REAL c7);
+    ElDistRadiale_Pol357(double_t aRMax,Pt2dr centre,double_t  c3,double_t c5,double_t c7);
 
 private  :
 };

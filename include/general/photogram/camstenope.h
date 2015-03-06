@@ -27,7 +27,7 @@ public :
     // La methode a ete definie dans la mere, il n'y a aucun interet
     // apparement a la specialiser
 
-    // REAL EcartProj(Pt2dr aPF2A,const ElCamera & CamB,Pt2dr aPF2B);
+    // double_t EcartProj(Pt2dr aPF2A,const ElCamera & CamB,Pt2dr aPF2B);
 
     // Helas, le SzIm n'est pas integre dans mes CamStenope ...
 
@@ -35,7 +35,7 @@ public :
 
 
 
-    CamStenope(bool isDistC2M,REAL Focale,Pt2dr centre,const std::vector<double>  & AFocalParam);
+    CamStenope(bool isDistC2M,double_t Focale,Pt2dr centre,const std::vector<double>  & AFocalParam);
     CamStenope(const CamStenope &,const ElRotation3D &);
 
     // Par defaut true, mais peut redefini, par exemple pour
@@ -68,24 +68,24 @@ public :
             bool TousDevant,
             const std::list<Pt3dr> & PR3 ,
             const std::list<Pt2dr> & PF2 ,
-            REAL * Ecart = 0,
-            INT  * NbSol    = 0
+            double_t * Ecart = 0,
+            int  * NbSol    = 0
             );
 
     ElRotation3D  OrientFromPtsAppui
     (
             bool TousDevant,
             const std::list<Appar23> & P32 ,
-            REAL * Ecart = 0,
-            INT  * NbSol    = 0
+            double_t * Ecart = 0,
+            int  * NbSol    = 0
             );
     ElRotation3D  CombinatoireOFPAGen
     (
             bool TousDevant,
-            INT  NbTest,
+            int  NbTest,
             const std::list<Pt3dr> & PR3 ,
             const std::list<Pt2dr> & PF2,
-            REAL * Res_Dmin,
+            double_t * Res_Dmin,
             bool   ModeRansac,
             Pt3dr * aDirApprox = 0
             );
@@ -93,19 +93,19 @@ public :
     ElRotation3D  CombinatoireOFPA
     (
             bool TousDevant,
-            INT  NbTest,
+            int  NbTest,
             const std::list<Pt3dr> & PR3 ,
             const std::list<Pt2dr> & PF2,
-            REAL * Res_Dmin,
+            double_t * Res_Dmin,
             Pt3dr * aDirApprox = 0
             );
 
     ElRotation3D  RansacOFPA
     (
             bool TousDevant,
-            INT  NbTest,
+            int  NbTest,
             const std::list<Appar23> & P23 ,
-            REAL * Res_Dmin,
+            double_t * Res_Dmin,
             Pt3dr * aDirApprox = 0
             );
 
@@ -114,9 +114,9 @@ public :
     ElRotation3D  CombinatoireOFPA
     (
             bool TousDevant,
-            INT  NbTest,
+            int  NbTest,
             const std::list<Appar23> & P32 ,
-            REAL * Res_Dmin,
+            double_t * Res_Dmin,
             Pt3dr * aDirApprox = 0
             );
 
@@ -142,7 +142,7 @@ public :
     virtual CamStenope * Dupl() const;   // OO
 
 
-    REAL Focale() const ;
+    double_t Focale() const ;
     Pt2dr PP() const ;
     Pt3dr VraiOpticalCenter() const;
     Pt3dr PseudoOpticalCenter() const;
@@ -153,8 +153,8 @@ public :
     Pt3dr ImEtZ2Terrain(const Pt2dr & aP,double aZ) const;
     void  Coins(Pt3dr &aP1, Pt3dr &aP2, Pt3dr &aP3, Pt3dr &aP4, double aZ) const;
 
-    Pt3dr  ImEtProfSpherik2Terrain(const Pt2dr & aPIm,const REAL & aProf) const; //OO
-    Pt3dr  ImDirEtProf2Terrain(const Pt2dr & aPIm,const REAL & aProf,const Pt3dr & aNormPl) const; //OO
+    Pt3dr  ImEtProfSpherik2Terrain(const Pt2dr & aPIm,const double_t & aProf) const; //OO
+    Pt3dr  ImDirEtProf2Terrain(const Pt2dr & aPIm,const double_t & aProf,const Pt3dr & aNormPl) const; //OO
     Pt3dr Im1DirEtProf2_To_Terrain  //OO
     (Pt2dr p1,const CamStenope &  ph2,double prof2,const Pt3dr & aDir) const;
     Pt3dr Im1EtProfSpherik2_To_Terrain (Pt2dr p1,const CamStenope &  ph2,double prof2) const;

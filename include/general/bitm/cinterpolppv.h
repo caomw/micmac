@@ -4,8 +4,8 @@
 #include "general/sys_dep.h"
 
 template <class TypeEl>
-#ifndef _ELISE_GENERAL_BITM_CINTERPOLPPV_H
-#define _ELISE_GENERAL_BITM_CINTERPOLPPV_H
+#ifndef _ELISE_GENERAL_BITM_CintERPOLPPV_H
+#define _ELISE_GENERAL_BITM_CintERPOLPPV_H
 
 #include "general/sys_dep.h"
 

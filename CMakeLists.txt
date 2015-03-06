@@ -61,9 +61,6 @@ option( BUILD_BENCH "compile low-level test bench" OFF )
 # Interfaces de saisie des paramètres
 option( WITH_QT5 "compile Qt interfaces" ON )
 
-# Compilateur C++11
-option( WITH_CPP11 "Compilateur C++11" ON )
-
 option( UPDATE_TRANSLATIONS "Update source translation translations/*.ts files (WARNING: make clean will delete the source .ts files! Danger!)" )
 
 # Enable Doxygen as default
@@ -73,9 +70,7 @@ option( WITH_DOXYGEN "API doc generation" ON )
 if( CMAKE_COMPILER_IS_GNUCC )
     add_definitions( -O2 -Wall )
 	set( CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined" )
-	if( ${WITH_CPP11} )
-        list( APPEND CMAKE_CXX_FLAGS "-std=c++11 -fmax-errors=10" )
-	endif()
+	set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11" )
 endif()
 
 if ( TRACE_SYSTEM )
@@ -413,6 +408,9 @@ include_directories(
 	include/general/ptxd
 	include/general/window
 	include/general/garb_coll_pub
+	include/general/operator
+	include/general/util
+	include/ext_stl
 	)
 
 
@@ -428,9 +426,9 @@ add_subdirectory( src )
 if( ${WITH_DOXYGEN} )
     find_package( Doxygen )
     if( DOXYGEN_FOUND )
-		configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY )
+		configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in ${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile @ONLY )
 		# Later
-		#add_custom_target( doc ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generating API documentation with Doxygen" VERBATIM )
+		add_custom_target( doc ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/doc COMMENT "Generating API documentation with Doxygen" VERBATIM )
     endif( DOXYGEN_FOUND )
 endif()
 

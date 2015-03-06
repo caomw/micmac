@@ -1,18 +1,18 @@
-#ifndef _ELISE_GENERAL_GEOM_VECTEUR_EVENTINTERV_H
-#define _ELISE_GENERAL_GEOM_VECTEUR_EVENTINTERV_H
+#ifndef _ELISE_GENERAL_GEOM_VECTEUR_EVENTintERV_H
+#define _ELISE_GENERAL_GEOM_VECTEUR_EVENTintERV_H
 
 #include "general/sys_dep.h"
 
 class EventInterv
 {
      public :
-       EventInterv(REAL absc,bool entr);
-       REAL absc() const;
+       EventInterv(double_t absc,bool entr);
+       double_t absc() const;
        bool entr() const;
        EventInterv();
 
      private :
-       REAL    _absc;
+       double_t    _absc;
        bool    _entr;
 };
 

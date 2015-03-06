@@ -39,8 +39,8 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 
 
-#ifndef _ELISE_X11_INTERFACE_H
-#define _ELISE_X11_INTERFACE_H
+#ifndef _ELISE_X11_intERFACE_H
+#define _ELISE_X11_intERFACE_H
 
 
 
@@ -76,7 +76,7 @@ class  Video_Display : public PRC0
          Clik   clik();
          Clik   clik_press();
          Clik   clik_release();
-		 INT  Depth() const; // Nombre de bits par pixel
+		 int  Depth() const; // Nombre de bits par pixel
 		 Pt2di  Sz() const; // Nombre de pixels
 		 bool TrueCol() const; // false si col-indexe
 
@@ -135,14 +135,14 @@ class El_Window  : public PRC0        ,
         Pt2di sz() const;
         virtual Elise_Rect box() const;
 
-        void draw_circle_loc(Pt2dr,REAL,Line_St);  // radius depends from coord
-        void draw_circle_abs(Pt2dr,REAL,Line_St);  // radius does not depend from coord
+        void draw_circle_loc(Pt2dr,double_t,Line_St);  // radius depends from coord
+        void draw_circle_abs(Pt2dr,double_t,Line_St);  // radius does not depend from coord
 
 	// Bovin, le fait via un polygone
         void draw_ellipse_loc
              (
-	        Pt2dr,REAL A,REAL B,REAL C,Line_St,
-		  INT Nb=100);  // radius does not depend from coord
+	        Pt2dr,double_t A,double_t B,double_t C,Line_St,
+		  int Nb=100);  // radius does not depend from coord
 
         void draw_seg(Pt2dr,Pt2dr,Line_St);
         void draw_rect(Pt2dr,Pt2dr,Line_St);
@@ -154,19 +154,19 @@ class El_Window  : public PRC0        ,
         void draw_poly_ferm(const std::vector<Pt2dr> &,Line_St);
 
 
-        void hach(ElFifo<Pt2dr> & poly,Pt2dr dir,REAL esp,Line_St);
-        void hach(std::vector<Pt2dr> & poly,Pt2dr dir,REAL esp,Line_St);
+        void hach(ElFifo<Pt2dr> & poly,Pt2dr dir,double_t esp,Line_St);
+        void hach(std::vector<Pt2dr> & poly,Pt2dr dir,double_t esp,Line_St);
 
 
         void draw_arrow
              (
                 Pt2dr, Pt2dr, Line_St Style_axe, Line_St Style_pointe,
-                REAL size_pointe, REAL pos = 0.5, REAL teta = (PI/4.0)
+                double_t size_pointe, double_t pos = 0.5, double_t teta = (PI/4.0)
              );
         void draw_arrow
              (
                 Pt2dr, Pt2dr, Line_St Axe_and_Pointe,
-                REAL size_pointe, REAL pos = 0.5, REAL teta = (PI/4.0)
+                double_t size_pointe, double_t pos = 0.5, double_t teta = (PI/4.0)
              );
 
 
@@ -212,8 +212,8 @@ class Video_Win   :  public El_Window
          EliseStdImageInteractor * Interactor();
 	 void  SetInteractor(EliseStdImageInteractor *);
          
-         static Video_Win  WStd(Pt2di sz,REAL zoom,bool all_pal= true,bool SetClikCoord = true);
-         static Video_Win  WStd(Pt2di sz,REAL zoom,Video_Win,bool SetClikCoord = true);
+         static Video_Win  WStd(Pt2di sz,double_t zoom,bool all_pal= true,bool SetClikCoord = true);
+         static Video_Win  WStd(Pt2di sz,double_t zoom,Video_Win,bool SetClikCoord = true);
          static Video_Win  WSzMax(Pt2dr aSzTarget,Pt2dr aSzMax);
 
          static Video_Win *  PtrWStd(Pt2di sz,bool all_pal= true,const Pt2dr & aScale=Pt2dr(1,1));
@@ -230,7 +230,7 @@ class Video_Win   :  public El_Window
                 Elise_Set_Of_Palette   ,
                 Pt2di                  ,
                 Pt2di                  ,
-                INT          border_witdh = 5
+                int          border_witdh = 5
          );
 
          typedef enum
@@ -245,7 +245,7 @@ class Video_Win   :  public El_Window
                 Video_Win   aSoeur,
                 ePosRel     aPos,
                 Pt2di       aSz,
-                INT         border_witdh = 5
+                int         border_witdh = 5
          );
 
         class HJ_PtrDisplay  display();   //  HJMPD
@@ -275,7 +275,7 @@ class Video_Win   :  public El_Window
 
         std::string GetString(const Pt2dr & aP,Col_Pal aColDr,Col_Pal aColErase);
         Clik   clik_in();
-        ElList<Pt2di> GetPolyg(Line_St,INT aButonEnd);
+        ElList<Pt2di> GetPolyg(Line_St,int aButonEnd);
 		void grab(Grab_Untill_Realeased &);
 		Video_Display    disp();
 
@@ -287,7 +287,7 @@ class Video_Win   :  public El_Window
               Pt2di p0src,
               Pt2di p0dest,
               Pt2di sz,
-              INT *** Im,
+              int *** Im,
               Elise_Palette 
            );
       	void load_image(Pt2di p0src,Pt2di p0dest,Pt2di sz); 
@@ -360,7 +360,7 @@ class ElXim : public PRC0
                  Pt2di p0src,
                  Pt2di p0dest,
                  Pt2di sz, 
-		 std::vector<Im2D_INT4> & Images,
+		 std::vector<Im2D_int4> & Images,
                  Elise_Palette
              );
 
@@ -369,9 +369,9 @@ class ElXim : public PRC0
                   Pt2di       aP0Src,
                   Pt2di       aP0Dest,
                   Pt2di       aSz,
-                  Im2D_U_INT1 anImR,
-                  Im2D_U_INT1 anImG,
-                  Im2D_U_INT1 anImB
+                  Im2D_U_int1 anImR,
+                  Im2D_U_int1 anImG,
+                  Im2D_U_int1 anImB
              );
 
 	void fill_with_el_image
@@ -379,9 +379,9 @@ class ElXim : public PRC0
                   Pt2di       aP0Src,
                   Pt2di       aP0Dest,
                   Pt2di       aSz,
-                  Im2D_U_INT1 anImR,
-                  Im2D_U_INT1 anImG,
-                  Im2D_U_INT1 anImB
+                  Im2D_U_int1 anImR,
+                  Im2D_U_int1 anImG,
+                  Im2D_U_int1 anImB
              );
 
 
@@ -400,7 +400,7 @@ class cElImageFlipper
 		     Fonc_Num aIm1,
 		     Fonc_Num aIm2
                 );
-		void Flip(INT aNbTime,REAL aCadence);
+		void Flip(int aNbTime,double_t aCadence);
 	private :
 	    Pt2di     mSz;
             Video_Win *  pW;
@@ -414,12 +414,12 @@ class Clik
 {
      public :
 
-        Clik   (Video_Win,Pt2dr,INT,U_INT state);
+        Clik   (Video_Win,Pt2dr,int,U_int state);
 
         Video_Win    _w;
         Pt2dr        _pt;
-        INT          _b;
-		U_INT 		 _state;
+        int          _b;
+		U_int 		 _state;
 
 		bool		 b1Pressed() const;
 		bool		 b2Pressed() const;
@@ -459,11 +459,11 @@ class Bitm_Win  : public El_Window
        (
            const char *,
            Elise_Set_Of_Palette,
-           Im2D_U_INT1
+           Im2D_U_int1
        );
 
 
-       Im2D_U_INT1 im() const;
+       Im2D_U_int1 im() const;
 
         Bitm_Win chc(Pt2dr tr,Pt2dr sc);
 
@@ -488,7 +488,7 @@ class  PS_Display : public PRC0
          friend class Data_Elise_PS_Win;
          friend class Data_Elise_PS_Disp;
 
-         static const REAL picaPcm; 
+         static const double_t picaPcm; 
          static const Pt2dr A4;
          static const Pt2dr A3;
          static const Pt2dr A2;
@@ -590,7 +590,7 @@ class DXF_Writer :  public PRC0
 
 
 
-#endif // _ELISE_X11_INTERFACE_H
+#endif // _ELISE_X11_intERFACE_H
 
 
 

@@ -41,12 +41,12 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 
 
-ElList<Pt2di> propagation_dynamique(Im2D_REAL8, INT domaine = 1, REAL par1 = .5, REAL par2 = .5, REAL alpha = .5);
-ElList<Pt2di> diffusion(Im2D_REAL8, INT repet, INT domaine = 1, REAL par1 = .5, REAL alpha = .5);
-ElList<Pt2di> relaxation(Im2D_REAL8, INT repet, INT domaine = 1, REAL par1 = .5, REAL alpha = .5);
+ElList<Pt2di> propagation_dynamique(Im2D_double_t8, int domaine = 1, double_t par1 = .5, double_t par2 = .5, double_t alpha = .5);
+ElList<Pt2di> diffusion(Im2D_double_t8, int repet, int domaine = 1, double_t par1 = .5, double_t alpha = .5);
+ElList<Pt2di> relaxation(Im2D_double_t8, int repet, int domaine = 1, double_t par1 = .5, double_t alpha = .5);
 
 
-Im2D_INT2   prop_dyn(Im3D_REAL8 cube, INT domaine, REAL par1=.16, REAL par2=1.5, REAL alpha = 0.75);
+Im2D_int2   prop_dyn(Im3D_double_t8 cube, int domaine, double_t par1=.16, double_t par2=1.5, double_t alpha = 0.75);
 
 #endif //_HASSAN_H_PROPAGATION_H
 

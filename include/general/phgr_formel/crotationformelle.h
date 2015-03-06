@@ -32,19 +32,19 @@ class cRotationFormelle : public cElemEqFormelle,
           Pt3d<Fonc_Num>   COpt();
 	  ElRotation3D     CurRot();
 	  void     SetCurRot(const ElRotation3D & aR2CM);
-	  ElRotation3D     CurRot(REAL aT);
+	  ElRotation3D     CurRot(double_t aT);
 
 	   ~cRotationFormelle();
 
-           INT IndexeAllocationCOpt();
+           int IndexeAllocationCOpt();
            // cRotationFormelle * RotAttach();
            eModeContrRot  ModeRot() const;
 	   void SetModeRot(eModeContrRot);
            const std::string & Name() const;
 	   virtual void SetValInitOnValCur();
 	   Pt3dr  CurCOpt() const;
-	   Pt3dr  CurCOpt(REAL aT) const;
-           INT    Degre() const;
+	   Pt3dr  CurCOpt(double_t aT) const;
+           int    Degre() const;
 
            const std::string & NameParamTime();
            void  SetFlagAnglFige(int aFlag);
@@ -58,7 +58,7 @@ class cRotationFormelle : public cElemEqFormelle,
            void SetGL(bool aModeGL);
            const ElMatrix<Fonc_Num> & MatFGL(int ForceGL);
            ElMatrix<Fonc_Num>  MatFGLComplete(int ForceGL);
-           const ElMatrix<REAL> &       MGL() const;
+           const ElMatrix<double_t> &       MGL() const;
            bool IsGL() const;
            // void InitEtatGL(bool isP);
            int NumCentre(int aK) const;
@@ -73,14 +73,14 @@ class cRotationFormelle : public cElemEqFormelle,
                 cSetEqFormelles &,
                 cRotationFormelle *,  // Rotation de ratachement eventuelle
 		const std::string & aName,
-                INT   aDegre,            // Cas des parametre variables dans le temps
+                int   aDegre,            // Cas des parametre variables dans le temps
                                          // -1 correspond au cas non employe
                 bool  aUseVraiBaseU
            );
 
 
 
-           cPolynome1VarFormel  * AllocPol(REAL * ValCste);
+           cPolynome1VarFormel  * AllocPol(double_t * ValCste);
            void AssertDegre0() const;
 
 
@@ -89,16 +89,16 @@ class cRotationFormelle : public cElemEqFormelle,
 
            std::string    mNameParamTime;
            cVarSpec       mVarTime;
-           INT            mDegre;
+           int            mDegre;
 
 
-	   REAL           mTeta01Init;
-	   REAL           mTeta02Init;
-	   REAL           mTeta12Init;
+	   double_t           mTeta01Init;
+	   double_t           mTeta02Init;
+	   double_t           mTeta12Init;
 
-	   REAL           mCurTeta01;
-	   REAL           mCurTeta02;
-	   REAL           mCurTeta12;
+	   double_t           mCurTeta01;
+	   double_t           mCurTeta02;
+	   double_t           mCurTeta12;
 
            cPolynome1VarFormel * mPolTeta01;
            cPolynome1VarFormel * mPolTeta02;
@@ -112,7 +112,7 @@ class cRotationFormelle : public cElemEqFormelle,
 
 	   Pt3dr          mCOptInit;
 	   Pt3dr          mCurCOpt;
-	   INT            mIndAllocCOpt;
+	   int            mIndAllocCOpt;
            cPolynome1VarFormel * mPolCoptX;
            cPolynome1VarFormel * mPolCoptY;
            cPolynome1VarFormel * mPolCoptZ;
@@ -132,7 +132,7 @@ class cRotationFormelle : public cElemEqFormelle,
            bool                  mModeGL;     // Mode Gimbal Lock
            // cMatr_Etat_PhgrF *    mSMatriceGL;     // Mode Gimbal Lock -Stantard
            // cMatr_Etat_PhgrF *    mPMatriceGL;     // Mode Gimbal Lock -Proj
-           ElMatrix<REAL>        mMGL;
+           ElMatrix<double_t>        mMGL;
            bool                  mVraiBaseU;
 };
 

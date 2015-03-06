@@ -24,15 +24,15 @@ class PtImGrid
     const Pt2dr & Step() const;
     Pt2dr Origine() const;
 
-        Im2D_REAL8           DataGridX();
-        Im2D_REAL8           DataGridY();
+        Im2D_double_t8           DataGridX();
+        Im2D_double_t8           DataGridY();
     const std::string & Name() const ;
     const std::string & NameX() const ;
     const std::string & NameY() const ;
 
        PtImGrid (RImGrid *,RImGrid * GY,const std::string &);
-       void SetTrChScaleOut(REAL aChScale,Pt2dr aTr);
-       void SetTrChScaleIn(REAL aChScale,Pt2dr aTr);
+       void SetTrChScaleOut(double_t aChScale,Pt2dr aTr);
+       void SetTrChScaleIn(double_t aChScale,Pt2dr aTr);
 
        const Pt2dr & P0() const;
        const Pt2dr & P1() const;

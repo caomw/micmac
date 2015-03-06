@@ -48,7 +48,7 @@ class Parametres_reconstruction_batiment
         ostream& operator >>(ostream& os);
         istream& operator <<(istream& is);
 
-        void     set_mode(INT m)              {_mode = m;}
+        void     set_mode(int m)              {_mode = m;}
         void     set_afficher(bool a)         {_afficher = a;}
         void     set_enregistrer(bool e)      {_enregistrer = e;}
         void     set_mne_noyau(bool mn)       {_mne_noyau = mn;}
@@ -63,57 +63,57 @@ class Parametres_reconstruction_batiment
         void     set_facades_file(string& ff) {_facades_file = ff;}
         void     set_batis_file(string& bf)   {_batis_file = bf;}
 
-        void     set_sdng(INT sdng)           {_sdng = sdng;}       
-        void     set_pas(REAL pxy)            {_pas = pxy;}
-        void     set_pas_z(REAL pz)           {_pas_z = pz;}
-        void     set_z_sol(REAL zs)           {_z_sol = zs;}
+        void     set_sdng(int sdng)           {_sdng = sdng;}       
+        void     set_pas(double_t pxy)            {_pas = pxy;}
+        void     set_pas_z(double_t pz)           {_pas_z = pz;}
+        void     set_z_sol(double_t zs)           {_z_sol = zs;}
 
-        void     set_seuil_pente(REAL sp)     {_seuil_pente = sp;}
-        void     set_seuil_z_min1(REAL szm1)  {_seuil_z_min1 = szm1;} 
-        void     set_seuil_z_max1(REAL szm1)  {_seuil_z_max1 = szm1;}
-        void     set_seuil_z_min2(REAL szm2)  {_seuil_z_min2 = szm2;}
-        void     set_seuil_z_max2(REAL szm2)  {_seuil_z_max2 = szm2;}
+        void     set_seuil_pente(double_t sp)     {_seuil_pente = sp;}
+        void     set_seuil_z_min1(double_t szm1)  {_seuil_z_min1 = szm1;} 
+        void     set_seuil_z_max1(double_t szm1)  {_seuil_z_max1 = szm1;}
+        void     set_seuil_z_min2(double_t szm2)  {_seuil_z_min2 = szm2;}
+        void     set_seuil_z_max2(double_t szm2)  {_seuil_z_max2 = szm2;}
 
-        void     set_long_min(REAL lm)        {_long_min = lm;}
-        void     set_d_teta_min(REAL dtm)     {_d_teta_min = dtm;}
+        void     set_long_min(double_t lm)        {_long_min = lm;}
+        void     set_d_teta_min(double_t dtm)     {_d_teta_min = dtm;}
 
-        void     set_d_teta(REAL dt)          {_d_teta = dt;}
-        void     set_d_phi(REAL dp)           {_d_phi  = dp;}
-        void     set_d_rho(REAL dr)           {_d_rho  = dr;}
-        void     set_nb_max_loc(INT nml)      {_nb_max_loc = nml;}
-        void     set_phi_min(REAL pm)         {_phi_min  = pm;}
-        void     set_phi_max(REAL pm)         {_phi_max  = pm;}
+        void     set_d_teta(double_t dt)          {_d_teta = dt;}
+        void     set_d_phi(double_t dp)           {_d_phi  = dp;}
+        void     set_d_rho(double_t dr)           {_d_rho  = dr;}
+        void     set_nb_max_loc(int nml)      {_nb_max_loc = nml;}
+        void     set_phi_min(double_t pm)         {_phi_min  = pm;}
+        void     set_phi_max(double_t pm)         {_phi_max  = pm;}
 
-        void     set_angl_min(REAL am)        {_angl_min = am;}
-        void     set_dist_min(REAL dm)        {_dist_min = dm;}
-        void     set_decal_max(REAL dm)       {_decal_max = dm;}
-        void     set_test_stab(INT ts)        {_test_stab = ts;}                    
+        void     set_angl_min(double_t am)        {_angl_min = am;}
+        void     set_dist_min(double_t dm)        {_dist_min = dm;}
+        void     set_decal_max(double_t dm)       {_decal_max = dm;}
+        void     set_test_stab(int ts)        {_test_stab = ts;}                    
         
-        void     set_nb_p_mne_min(REAL npmm)  {_nb_p_mne_min = npmm;}
-        void     set_nb_p_mne_moy(REAL npmm)  {_nb_p_mne_moy = npmm;}
-        void     set_nb_p_mne_max(REAL npmm)  {_nb_p_mne_max = npmm;}
-        void     set_nb_p_mne_pas(REAL npmp)  {_nb_p_mne_pas = npmp;}
+        void     set_nb_p_mne_min(double_t npmm)  {_nb_p_mne_min = npmm;}
+        void     set_nb_p_mne_moy(double_t npmm)  {_nb_p_mne_moy = npmm;}
+        void     set_nb_p_mne_max(double_t npmm)  {_nb_p_mne_max = npmm;}
+        void     set_nb_p_mne_pas(double_t npmp)  {_nb_p_mne_pas = npmp;}
 
-        void     set_nb_plans_min(INT npm)    {_nb_plans_min = npm;}
-        void     set_nb_plans_sup(INT nps)    {_nb_plans_sup = nps;}
+        void     set_nb_plans_min(int npm)    {_nb_plans_min = npm;}
+        void     set_nb_plans_sup(int nps)    {_nb_plans_sup = nps;}
 
-        void     set_decal_max_poids_facet_graphe(INT dm){_decal_max_poids_facet_graphe = dm;}
-        void     set_test_stab_poids_facet_graphe(INT ts){_test_stab_poids_facet_graphe = ts;}
+        void     set_decal_max_poids_facet_graphe(int dm){_decal_max_poids_facet_graphe = dm;}
+        void     set_test_stab_poids_facet_graphe(int ts){_test_stab_poids_facet_graphe = ts;}
 
-        void     set_alpha(REAL a)            {_alpha = a;}
-        void     set_seuil_sup(REAL ss)       {_seuil_sup = ss;}   
-        void     set_seuil_inf(REAL si)       {_seuil_inf = si;}
-        void     set_complexite(INT c)        {_complexite = c;}
-        void     set_beta1(REAL b1)           {_beta1 = b1;}
-        void     set_beta2(REAL b2)           {_beta2 = b2;}
-        void     set_nb_sol_gardee(INT nsg)   {_nb_sol_gardee = nsg;}
-        void     set_type_correlation(INT tc) {_type_correlation = tc;}
+        void     set_alpha(double_t a)            {_alpha = a;}
+        void     set_seuil_sup(double_t ss)       {_seuil_sup = ss;}   
+        void     set_seuil_inf(double_t si)       {_seuil_inf = si;}
+        void     set_complexite(int c)        {_complexite = c;}
+        void     set_beta1(double_t b1)           {_beta1 = b1;}
+        void     set_beta2(double_t b2)           {_beta2 = b2;}
+        void     set_nb_sol_gardee(int nsg)   {_nb_sol_gardee = nsg;}
+        void     set_type_correlation(int tc) {_type_correlation = tc;}
         void     set_prop_file(string pf)     {_prop_file = pf;}
         void     set_resolution_image(bool ri){_resolution_image = ri;}
 
 
 
-        INT      mode()            {return _mode;}
+        int      mode()            {return _mode;}
         bool     afficher()        {return _afficher;}
         bool     enregistrer()     {return _enregistrer;}
         bool     mne_noyau()       {return _mne_noyau;}
@@ -128,58 +128,58 @@ class Parametres_reconstruction_batiment
         string   facades_file()    {return _facades_file;}
         string   batis_file()      {return _batis_file;}
 
-        INT      sdng()            {return _sdng;}
-        REAL     pas()             {return _pas;}
-        REAL     pas_z()           {return _pas_z;}
-        REAL     z_sol()           {return _z_sol;}
-        REAL     seuil_pente()     {return _seuil_pente;}
-        REAL     seuil_z_min1()    {return _seuil_z_min1;}
-        REAL     seuil_z_max1()    {return _seuil_z_max1;}
-        REAL     seuil_z_min2()    {return _seuil_z_min2;}
-        REAL     seuil_z_max2()    {return _seuil_z_max2;}
-        REAL     long_min()        {return _long_min;}
-        REAL     d_teta_min()      {return _d_teta_min;}
+        int      sdng()            {return _sdng;}
+        double_t     pas()             {return _pas;}
+        double_t     pas_z()           {return _pas_z;}
+        double_t     z_sol()           {return _z_sol;}
+        double_t     seuil_pente()     {return _seuil_pente;}
+        double_t     seuil_z_min1()    {return _seuil_z_min1;}
+        double_t     seuil_z_max1()    {return _seuil_z_max1;}
+        double_t     seuil_z_min2()    {return _seuil_z_min2;}
+        double_t     seuil_z_max2()    {return _seuil_z_max2;}
+        double_t     long_min()        {return _long_min;}
+        double_t     d_teta_min()      {return _d_teta_min;}
 
-        REAL     d_teta()          {return _d_teta;}
-        REAL     d_phi()           {return _d_phi;}
-        REAL     d_rho()           {return _d_rho;}
-        INT      nb_max_loc()      {return _nb_max_loc;}
-        REAL     phi_min()         {return _phi_min;}
-        REAL     phi_max()         {return _phi_max;}
+        double_t     d_teta()          {return _d_teta;}
+        double_t     d_phi()           {return _d_phi;}
+        double_t     d_rho()           {return _d_rho;}
+        int      nb_max_loc()      {return _nb_max_loc;}
+        double_t     phi_min()         {return _phi_min;}
+        double_t     phi_max()         {return _phi_max;}
 
-        REAL     angl_min()        {return _angl_min;}
-        REAL     dist_min()        {return _dist_min;}
-        REAL     decal_max()       {return _decal_max;}
-        INT      test_stab()       {return _test_stab;}
+        double_t     angl_min()        {return _angl_min;}
+        double_t     dist_min()        {return _dist_min;}
+        double_t     decal_max()       {return _decal_max;}
+        int      test_stab()       {return _test_stab;}
 
-        REAL     nb_p_mne_min()  {return _nb_p_mne_min;}
-        REAL     nb_p_mne_moy()  {return _nb_p_mne_moy;}
-        REAL     nb_p_mne_max()  {return _nb_p_mne_max;}
-        REAL     nb_p_mne_pas()  {return _nb_p_mne_pas;}
+        double_t     nb_p_mne_min()  {return _nb_p_mne_min;}
+        double_t     nb_p_mne_moy()  {return _nb_p_mne_moy;}
+        double_t     nb_p_mne_max()  {return _nb_p_mne_max;}
+        double_t     nb_p_mne_pas()  {return _nb_p_mne_pas;}
 
-        INT      nb_plans_min()    {return _nb_plans_min;}
-        INT      nb_plans_sup()    {return _nb_plans_sup;}
+        int      nb_plans_min()    {return _nb_plans_min;}
+        int      nb_plans_sup()    {return _nb_plans_sup;}
 
-        INT      decal_max_poids_facet_graphe(){return _decal_max_poids_facet_graphe;}
-        INT      test_stab_poids_facet_graphe(){return _test_stab_poids_facet_graphe;}
+        int      decal_max_poids_facet_graphe(){return _decal_max_poids_facet_graphe;}
+        int      test_stab_poids_facet_graphe(){return _test_stab_poids_facet_graphe;}
 
-        REAL     alpha()            {return _alpha;}
-        REAL     seuil_sup()        {return _seuil_sup;}
-        REAL     seuil_inf()        {return _seuil_inf;}
-        INT      complexite()       {return _complexite;}
+        double_t     alpha()            {return _alpha;}
+        double_t     seuil_sup()        {return _seuil_sup;}
+        double_t     seuil_inf()        {return _seuil_inf;}
+        int      complexite()       {return _complexite;}
 
-        REAL     beta1()            {return _beta1;}
-        REAL     beta2()            {return _beta2;}
+        double_t     beta1()            {return _beta1;}
+        double_t     beta2()            {return _beta2;}
 
-        INT      nb_sol_gardee()    {return _nb_sol_gardee;}
-        INT      type_correlation() {return _type_correlation;}
+        int      nb_sol_gardee()    {return _nb_sol_gardee;}
+        int      type_correlation() {return _type_correlation;}
 
         string   prop_file()        {return _prop_file;}
         bool     resolution_image() {return _resolution_image;}
 
 
 
-        INT  _mode;
+        int  _mode;
         bool _afficher;
         bool _enregistrer;
         bool _mne_noyau;
@@ -195,33 +195,33 @@ class Parametres_reconstruction_batiment
         string _facades_file;
         string _batis_file;
 
-        INT  _sdng;
-        REAL _pas;
-        REAL _pas_z;
-        INT  _cor_fenet;
+        int  _sdng;
+        double_t _pas;
+        double_t _pas_z;
+        int  _cor_fenet;
 
-        REAL _z_sol;           //metre
+        double_t _z_sol;           //metre
 
                                        //parameteres de construir une boite
 
-        REAL _seuil_pente;
-        REAL _seuil_z_min1;
-        REAL _seuil_z_max1;
-        REAL _seuil_z_min2;
-        REAL _seuil_z_max2;
+        double_t _seuil_pente;
+        double_t _seuil_z_min1;
+        double_t _seuil_z_max1;
+        double_t _seuil_z_min2;
+        double_t _seuil_z_max2;
 
 
-        REAL _long_min;               //chercher des directions prinicipales
-        REAL _d_teta_min;             //chercher des directions prinicipales 
+        double_t _long_min;               //chercher des directions prinicipales
+        double_t _d_teta_min;             //chercher des directions prinicipales 
 
 
 
-        REAL _d_teta;                 //transforme de hough
-        REAL _d_phi;                  //transforme de hough
-        REAL _d_rho;                  //transforme de hough
-        INT  _nb_max_loc;             //transforme de hough
-        REAL _phi_min;                //transforme de hough
-        REAL _phi_max;                //transforme de hough
+        double_t _d_teta;                 //transforme de hough
+        double_t _d_phi;                  //transforme de hough
+        double_t _d_rho;                  //transforme de hough
+        int  _nb_max_loc;             //transforme de hough
+        double_t _phi_min;                //transforme de hough
+        double_t _phi_max;                //transforme de hough
 
 
                                  //filtrage de plans
@@ -229,39 +229,39 @@ class Parametres_reconstruction_batiment
 
 
 
-        REAL _angl_min;               //degree
-        REAL _dist_min;               //metre
-        REAL _decal_max;              //distance maximale entre un plan et un point de mne
-        INT  _test_stab;              //taille d'element de fermeture
+        double_t _angl_min;               //degree
+        double_t _dist_min;               //metre
+        double_t _decal_max;              //distance maximale entre un plan et un point de mne
+        int  _test_stab;              //taille d'element de fermeture
 
 
 
-        REAL _nb_p_mne_min;           //en sqr metre
-        REAL _nb_p_mne_moy;           //en sqr metre
-        REAL _nb_p_mne_max;           //en sqr metre
-        REAL _nb_p_mne_pas;           //en sqr metre
+        double_t _nb_p_mne_min;           //en sqr metre
+        double_t _nb_p_mne_moy;           //en sqr metre
+        double_t _nb_p_mne_max;           //en sqr metre
+        double_t _nb_p_mne_pas;           //en sqr metre
 
-        INT _nb_plans_min;
-        INT _nb_plans_sup;
+        int _nb_plans_min;
+        int _nb_plans_sup;
 
 
 
                                       //pour calculer les poids a partir de MNE
 
 
-        INT _decal_max_poids_facet_graphe;
-        INT _test_stab_poids_facet_graphe;
+        int _decal_max_poids_facet_graphe;
+        int _test_stab_poids_facet_graphe;
 
 
-        REAL _alpha;                    //optimisation noyaux et relaxation
-        REAL _seuil_sup;                //le poids minimal no risque
-        REAL _seuil_inf;                //le poids minimal no risque
-        INT _complexite;                // > 60 temp de calcul est expo
+        double_t _alpha;                    //optimisation noyaux et relaxation
+        double_t _seuil_sup;                //le poids minimal no risque
+        double_t _seuil_inf;                //le poids minimal no risque
+        int _complexite;                // > 60 temp de calcul est expo
 
-        REAL _beta1;                     //critère geo ( fenet horisntale )
-        REAL _beta2;                     //critère geo ( fenet adaptative )
-        INT _nb_sol_gardee;              // n premieres solutions ( fenet hor )
-        INT _type_correlation;           //type de correlation : 
+        double_t _beta1;                     //critère geo ( fenet horisntale )
+        double_t _beta2;                     //critère geo ( fenet adaptative )
+        int _nb_sol_gardee;              // n premieres solutions ( fenet hor )
+        int _type_correlation;           //type de correlation : 
                                              //  1 : fenet adap(cent et norm)
                                              //  2 : fenet adap(no cent et norm)
                                              //  3 : corr model(cent et norm)

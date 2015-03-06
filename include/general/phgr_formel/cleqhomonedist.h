@@ -6,7 +6,7 @@
 class  cLEqHomOneDist
 {
       public :
-         cLEqHomOneDist(REAL aDiag);
+         cLEqHomOneDist(double_t aDiag);
          void AddCple(const ElPackHomologue &);
 
          // Calcul un score, en mettant tous les parametres a leur valeur
@@ -16,22 +16,22 @@ class  cLEqHomOneDist
          cDistRadialeFormelle *    DRF();
 
 
-         REAL  NStepOpt(INT aNb,bool CentreFiged);
-         void PondereFromErreur(REAL aDCut);
+         double_t  NStepOpt(int aNb,bool CentreFiged);
+         void PondereFromErreur(double_t aDCut);
          void CloseSet();
 
       protected :
          // Met dans le systeme toute les equation de laison + contrainte
          // renvoie la moyenne des equation de liaisons
 
-         void AddLiaisonOnTop(Pt2dr aP1,Pt2dr aP2,REAL aPds);
-         REAL AddAllEquationsToSet();
+         void AddLiaisonOnTop(Pt2dr aP1,Pt2dr aP2,double_t aPds);
+         double_t AddAllEquationsToSet();
          cSetEqFormelles * Set();
 
          void AddHomogF(cHomogFormelle *);
          void AddEqF(cEqHomogFormelle *);
 
-         REAL                              mDiag;
+         double_t                              mDiag;
          std::vector<cEqHomogFormelle *>   mEqFs;
          std::vector<ElPackHomologue *>    mLiaisons;
 
@@ -41,7 +41,7 @@ class  cLEqHomOneDist
          cSetEqFormelles              mSet;
          ElDistRadiale_PolynImpair mDistInit;
          bool                      mCentreFige;
-         INT                       mDegreDRFFiged;
+         int                       mDegreDRFFiged;
          cDistRadialeFormelle *    mDRF;
 
          bool                      mDerSec;

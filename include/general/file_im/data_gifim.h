@@ -12,17 +12,17 @@ class Gif_Im : public ElGenFileIm
 
 public :
     Gif_Im(const char * name);
-    Im2D_U_INT1     im();
+    Im2D_U_int1     im();
     Disc_Pal              pal();
     Fonc_Num              in();
-    Fonc_Num              in(INT);
+    Fonc_Num              in(int);
     Pt2di                 sz();
 
     static  Output create  (
             const char *             name,
             Pt2di              sz,
             Elise_colour *     tec,
-            INT                nbb
+            int                nbb
             );
 
 

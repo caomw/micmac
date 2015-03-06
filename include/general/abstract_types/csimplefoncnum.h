@@ -49,18 +49,18 @@ class cSimpleFoncNum
      public :
        Fonc_Num ToF();
                                                                                                       
-       virtual REAL SFN_Calc(const REAL *) const;
-       virtual REAL SFN_Calc(const INT *) const;
-       virtual void AcceptDim(INT )const ; // Defaut : non
+       virtual double_t SFN_Calc(const double_t *) const;
+       virtual double_t SFN_Calc(const int *) const;
+       virtual void AcceptDim(int )const ; // Defaut : non
        virtual ~cSimpleFoncNum();
                                                                                                       
                                                                                                       
      protected :
-         cSimpleFoncNum(INT aDim);
+         cSimpleFoncNum(int aDim);
      private :
        cSimpleFoncNum(const cSimpleFoncNum &) ; // Non Impl
                                                                                                       
-       INT   mDim;
+       int   mDim;
 };
 
 #endif

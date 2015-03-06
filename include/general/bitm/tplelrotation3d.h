@@ -16,20 +16,20 @@ template <class Type> Pt3d<Type> operator *
 
 template <class Type> Pt2d<Type> mul32(const ElMatrix<Type>&,const Pt3d<Type> & p);
 
-template <class Type> void SetCol (ElMatrix<Type> & M,INT col,Pt3d<Type>);
-template <class Type> void SetLig (ElMatrix<Type> & M,INT Lig,Pt3d<Type>);
+template <class Type> void SetCol (ElMatrix<Type> & M,int col,Pt3d<Type>);
+template <class Type> void SetLig (ElMatrix<Type> & M,int Lig,Pt3d<Type>);
 
-template <class Type> void SetCol (ElMatrix<Type> & M,INT col,Pt2d<Type>);
-template <class Type> void SetLig (ElMatrix<Type> & M,INT Lig,Pt2d<Type>);
+template <class Type> void SetCol (ElMatrix<Type> & M,int col,Pt2d<Type>);
+template <class Type> void SetLig (ElMatrix<Type> & M,int Lig,Pt2d<Type>);
 
 template <class Type>  ElMatrix<Type> MatFromCol(Pt3d<Type>,Pt3d<Type>,Pt3d<Type>);
 template <class Type>  ElMatrix<Type> MatFromCol(Pt2d<Type>,Pt2d<Type>);
-ElMatrix<REAL> MatFromImageBase (
-                                     Pt3d<REAL> C0,Pt3d<REAL> C1,Pt3d<REAL> C2,
-                                     Pt3d<REAL> ImC0,Pt3d<REAL>,Pt3d<REAL>
+ElMatrix<double_t> MatFromImageBase (
+                                     Pt3d<double_t> C0,Pt3d<double_t> C1,Pt3d<double_t> C2,
+                                     Pt3d<double_t> ImC0,Pt3d<double_t>,Pt3d<double_t>
                                 );
 
-REAL EcartInv(const ElMatrix<REAL>& m1,const ElMatrix<REAL>& m2);
+double_t EcartInv(const ElMatrix<double_t>& m1,const ElMatrix<double_t>& m2);
 
 
 
@@ -37,7 +37,7 @@ template <class Type> ElMatrix<Fonc_Num>  ToMatForm(const  ElMatrix<Type> &);
 
 
 
-void AngleFromRot(const ElMatrix<REAL> & m,REAL & a,REAL & b,REAL & c);
+void AngleFromRot(const ElMatrix<double_t> & m,double_t & a,double_t & b,double_t & c);
 
 
 /*
@@ -46,7 +46,7 @@ void AngleFromRot(const ElMatrix<REAL> & m,REAL & a,REAL & b,REAL & c);
    appelant, il a ete decide :
 
        [1] d'appeler TplElRotation3D la classe template
-       [2] d'appeler ElRotation3D son instantiation au type REAL
+       [2] d'appeler ElRotation3D son instantiation au type double_t
 */
 
 

@@ -50,11 +50,11 @@ template <class Type> class PackB_IM :  public PRC0        ,
      public :
         friend class DATA_Tiff_Ifd;
 
-        PackB_IM(INT tx,INT ty,Fonc_Num,INT per=128);
+        PackB_IM(int tx,int ty,Fonc_Num,int per=128);
         Fonc_Num in();
         Output out();
         Output OutLut(Fonc_Num aLut);
-        Fonc_Num in(INT def);
+        Fonc_Num in(int def);
         Pt2di sz() const;
         virtual Elise_Rect box() const;
 
@@ -77,13 +77,13 @@ class ModelBoxSubstr
 {
      public :
 		bool MakeIt(Box2di ToAdd,Box2di ToSubstr); // return true if InterIsEmpty
-		INT NbBox() const {return mNbBox;}
-		const Box2di & Box(INT k) const {return mBoxes[k];}
+		int NbBox() const {return mNbBox;}
+		const Box2di & Box(int k) const {return mBoxes[k];}
 		ModelBoxSubstr();
 		ModelBoxSubstr(Box2di ToAdd,Box2di ToSubstr);
      private :
 		void AddBox(Pt2di p0,Pt2di p1);
-        INT    mNbBox;
+        int    mNbBox;
 		Box2di mBoxes[4];
 };
 
@@ -101,11 +101,11 @@ class ModelDiffBox
 			 return mInter;
 		}
 
-		INT    NbEnPlus()  const {return mEnPlus.NbBox();}
-		INT    NbEnMoins() const {return mEnMoins.NbBox();}
+		int    NbEnPlus()  const {return mEnPlus.NbBox();}
+		int    NbEnMoins() const {return mEnMoins.NbBox();}
 
-		const Box2di & EnPlus(INT k) const {return mEnPlus.Box(k);}
-		const Box2di & EnMoins(INT k) const {return mEnMoins.Box(k);}
+		const Box2di & EnPlus(int k) const {return mEnPlus.Box(k);}
+		const Box2di & EnMoins(int k) const {return mEnMoins.Box(k);}
 
     private :
 
@@ -117,7 +117,7 @@ class ModelDiffBox
 };
 
 
-void GetBoxUpdate(Pt2di tr,Box2di box,INT rab,Box2di & BX,Box2di & BY);
+void GetBoxUpdate(Pt2di tr,Box2di box,int rab,Box2di & BX,Box2di & BY);
 
 
 
@@ -128,36 +128,36 @@ class Visu_ElImDest
       public :
            virtual ~Visu_ElImDest();
 		   friend class ElImScroller;
-		   virtual void VerifDim(INT DimOut) =0;
+		   virtual void VerifDim(int DimOut) =0;
 
-		   void SetGamaCorr(REAL aGamaFact);
-           void write_image(INT x0src,Pt2di p0dest,INT nb,INT ** data);
+		   void SetGamaCorr(double_t aGamaFact);
+           void write_image(int x0src,Pt2di p0dest,int nb,int ** data);
 
-		   Visu_ElImDest(Pt2di aSz,INT aDimOut);
+		   Visu_ElImDest(Pt2di aSz,int aDimOut);
 
-		   void SetEtalDyn(INT aVmin,INT aVmax,bool SetUse=true);
+		   void SetEtalDyn(int aVmin,int aVmax,bool SetUse=true);
 		   void SetUseEtalDyn(bool UseEtalDyn);
-		   INT VMax() const;
-		   INT VMin() const;
+		   int VMax() const;
+		   int VMin() const;
 
 	  protected :
 		   // Visu_ElImDest();
       // private :
-           virtual void write_image_brute(INT x0src,Pt2di p0dest,INT nb,INT ** data) =0;
+           virtual void write_image_brute(int x0src,Pt2di p0dest,int nb,int ** data) =0;
 		   Visu_ElImDest(const Visu_ElImDest &);
 
-		   INT             mDimOut;
+		   int             mDimOut;
 		   Pt2di           mSz;
-		   Im2D_INT4       mBuf;
-		   INT4 **         mDataBuf;
+		   Im2D_int4       mBuf;
+		   int4 **         mDataBuf;
 		   bool            mUseEtalDyn;
-		   INT             mVMin;
-		   INT             mVMax;
-		   INT             mDiff;
+		   int             mVMin;
+		   int             mVMax;
+		   int             mDiff;
 
-		   REAL           mGama;
-		   Im1D_INT4      mImGamaCorr;
-		   INT4 *         mDataGamaCorr;
+		   double_t           mGama;
+		   Im1D_int4      mImGamaCorr;
+		   int4 *         mDataGamaCorr;
 		   bool           mUseGamaCorr;
 
 };
@@ -169,28 +169,28 @@ class Visu_ElImDest
 template <class Type> class Memory_ElImDest : public Visu_ElImDest
 {
     public :
-         Memory_ElImDest(INT NbChan,Pt2di SzTot);
+         Memory_ElImDest(int NbChan,Pt2di SzTot);
 
          void SetDec(Pt2di pt);  // ajuste le decalage de maniere a ce que pt matche mCenter
 
-//         INT NbCh() const;
+//         int NbCh() const;
 // Modif DB : pas de code trouve
 
-         std::vector<Im2D<Type,INT4> > & Images();
+         std::vector<Im2D<Type,int4> > & Images();
 //         void RazImages();
 // Modif DB : pas de code trouve
 
     private :
 
-         INT    mNbChan;
+         int    mNbChan;
          Pt2di mSzImTot;
          Pt2di mDec;
 
-         virtual void write_image_brute(INT x0src,Pt2di p0dest,INT nb,INT ** data);
-         std::vector<Im2D<Type,INT4> > mImages;
+         virtual void write_image_brute(int x0src,Pt2di p0dest,int nb,int ** data);
+         std::vector<Im2D<Type,int4> > mImages;
          Memory_ElImDest(const Memory_ElImDest &);
 
-         void VerifDim(INT DimOut);
+         void VerifDim(int DimOut);
 };
 
 
@@ -209,10 +209,10 @@ class Visu_ElImScr : public Visu_ElImDest
 		   virtual void AdaptTiffFile(Tiff_Im,bool AdaptPal,bool ForceGray);
 
 	 protected :
-	 	Visu_ElImScr(Pt2di aSz,INT aDimOut);
+	 	Visu_ElImScr(Pt2di aSz,int aDimOut);
      private :
-		   virtual void InscrustImage(std::vector<Im2D_INT4> &,Pt2di p0Src,Pt2di P0Dest,Pt2di sz,INT NbIm) = 0;
-		   virtual void InscrustImage(std::vector<Im2D_INT4> &,Pt2di p0Src,Pt2di P0Dest,Pt2di sz,INT NbIm,Elise_Palette) = 0;
+		   virtual void InscrustImage(std::vector<Im2D_int4> &,Pt2di p0Src,Pt2di P0Dest,Pt2di sz,int NbIm) = 0;
+		   virtual void InscrustImage(std::vector<Im2D_int4> &,Pt2di p0Src,Pt2di P0Dest,Pt2di sz,int NbIm,Elise_Palette) = 0;
            virtual void load_rect_image(Pt2di p0,Pt2di p1,bool Quick) =0;
            virtual void translate(Pt2di) = 0;
            virtual void write_image_out(Pt2di p0_src,Pt2di p0_dest,Pt2di sz) =0;
@@ -227,7 +227,7 @@ class VideoWin_Visu_ElImScr  : public Visu_ElImScr
          Video_Win  W() {return _w;}
 
          Pt2di SzW() {return _w.sz();}
-         VideoWin_Visu_ElImScr(Video_Win,Elise_Palette,Pt2di SzImIncr = Pt2di(1,1),INT vMin=0,INT vMax=255);
+         VideoWin_Visu_ElImScr(Video_Win,Elise_Palette,Pt2di SzImIncr = Pt2di(1,1),int vMin=0,int vMax=255);
          VideoWin_Visu_ElImScr(Video_Win,Tiff_Im,Pt2di SzImIncr = Pt2di(1,1),bool ForceGray=false);   // vMin,vMax =>Tiff_Im
 
 
@@ -240,20 +240,20 @@ class VideoWin_Visu_ElImScr  : public Visu_ElImScr
 			        Pt2di P0Src,
 					Pt2di P0Dest,
 					Pt2di Sz,
-					Im2D_U_INT1 ImR,
-					Im2D_U_INT1 ImG,
-					Im2D_U_INT1 ImB
+					Im2D_U_int1 ImR,
+					Im2D_U_int1 ImG,
+					Im2D_U_int1 ImB
 			  );
 
 	protected :
          virtual void load_rect_image(Pt2di p0,Pt2di p1,bool Quick);
      private :
-		 virtual void VerifDim(INT DimOut);
-         virtual void write_image_brute(INT  x0src,Pt2di p0dest,INT nb,INT ** data);
+		 virtual void VerifDim(int DimOut);
+         virtual void write_image_brute(int  x0src,Pt2di p0dest,int nb,int ** data);
          virtual void translate(Pt2di);
          virtual void write_image_out(Pt2di p0_src,Pt2di p0_dest,Pt2di sz);
-	 virtual void InscrustImage(std::vector<Im2D_INT4> &,Pt2di p0Src,Pt2di P0Dest,Pt2di sz,INT NbIm);
-	 virtual void InscrustImage(std::vector<Im2D_INT4> &,Pt2di p0Src,Pt2di P0Dest,Pt2di sz,INT NbIm,Elise_Palette);
+	 virtual void InscrustImage(std::vector<Im2D_int4> &,Pt2di p0Src,Pt2di P0Dest,Pt2di sz,int NbIm);
+	 virtual void InscrustImage(std::vector<Im2D_int4> &,Pt2di p0Src,Pt2di P0Dest,Pt2di sz,int NbIm,Elise_Palette);
 
 
 
@@ -291,7 +291,7 @@ class ElImScroller
 
 		virtual Output out(); //  Output::onul();
 		virtual Fonc_Num in(); // 0
-                virtual REAL  GetValPtsR(Pt2dr aP);  // Def Erreur Fatale
+                virtual double_t  GetValPtsR(Pt2dr aP);  // Def Erreur Fatale
 
                 virtual void Sauv(const std::string & aName);
                 virtual void SetPoly(Fonc_Num ,std::vector<Pt2dr>);
@@ -300,9 +300,9 @@ class ElImScroller
                  Flux_Pts ContVect2RasFlux(std::vector<Pt2dr> VPts);
 
 		// DEBUG-OPTIM-MAP ;
-		virtual REAL TimeLoadXIm() const; // 0.0
-		virtual REAL TimeUnCompr() const; // 0.0
-		virtual REAL TimeReformat() const; // 0.0
+		virtual double_t TimeLoadXIm() const; // 0.0
+		virtual double_t TimeUnCompr() const; // 0.0
+		virtual double_t TimeReformat() const; // 0.0
 
 
 
@@ -312,7 +312,7 @@ class ElImScroller
 				     (
 					Visu_ElImScr &Visu,
 					const std::string &,
-					std::vector<INT> * EchAcc =0,
+					std::vector<int> * EchAcc =0,
 					bool Adapt =false,
 					bool ForceGray =false
 			);
@@ -327,7 +327,7 @@ class ElImScroller
         void VisuIm(bool Quick);
         void VisuIm(Pt2di PW0,Pt2di PW1,bool Quick);
 
-        void set(Pt2dr tr,REAL sc,bool quick = false);
+        void set(Pt2dr tr,double_t sc,bool quick = false);
         void set_max(bool quick = false);
         void set_max_init();
         void SetSameGeom(const ElImScroller &);
@@ -335,7 +335,7 @@ class ElImScroller
 
 		ModelBoxSubstr SetDTrW(Pt2di tr);
         void SetTrU(Pt2dr tr);
-		void SetScArroundPW(Pt2dr PinvW,REAL sc,bool quick = false);
+		void SetScArroundPW(Pt2dr PinvW,double_t sc,bool quick = false);
 
         Pt2dr to_win(Pt2dr p)  const {return  (p-_tr) *_sc;}
         Pt2dr to_user(Pt2dr p) const
@@ -363,50 +363,50 @@ class ElImScroller
 
 
         void LoadXImageInVisu(Visu_ElImDest &,Pt2di p0W,Pt2di p1W,bool quick);
-        void LoadXImageInVisu(Visu_ElImDest &,Pt2di p0W,Pt2di p1W,bool quick,Pt2dr tr,REAL sc);
+        void LoadXImageInVisu(Visu_ElImDest &,Pt2di p0W,Pt2di p1W,bool quick,Pt2dr tr,double_t sc);
 
 	// Plutot utilisee pour la mise au point
         Pt2dr tr() const {return _tr;}
-        REAL sc() const {return _sc;}
-        REAL sc_abs() const {return _sc * _sc_im;}
-        REAL sc_im() const {return  _sc_im;}
+        double_t sc() const {return _sc;}
+        double_t sc_abs() const {return _sc * _sc_im;}
+        double_t sc_im() const {return  _sc_im;}
 
-		INT DimOut() const {return mDimOut;}
+		int DimOut() const {return mDimOut;}
         Visu_ElImScr &  VisuStd () { return mVisuStd;}
 
-		Pt2dr TrOfScArroundPW(Pt2dr aPinvW,REAL aNewSc);
+		Pt2dr TrOfScArroundPW(Pt2dr aPinvW,double_t aNewSc);
      protected :
 
         ElImScroller
         (
             Visu_ElImScr &Visu,
-		    INT  aDimOut,
+		    int  aDimOut,
             Pt2di SzU,
-            REAL  sc_im = 1.0
+            double_t  sc_im = 1.0
         );
 
-        REAL ScMax() const;
+        double_t ScMax() const;
 
         virtual void no_use();
 
         Pt2di           _SzW;
         Pt2di           _SzU;
-        void write_image(INT x0src,Pt2di p0dest,INT nb,INT ** data)
+        void write_image(int x0src,Pt2di p0dest,int nb,int ** data)
 		{
 				mVisuCur->write_image(x0src,p0dest,nb,data);
 		}
 		void SetVisuCur(Visu_ElImDest *);
-		REAL mTimeLoadXIm;
-		REAL mTimeReformat;
+		double_t mTimeLoadXIm;
+		double_t mTimeReformat;
 
 
 
 
      public :
 
-	    static ElImScroller * StdScrollIfExist(Visu_ElImScr &Visu,const std::string &,REAL scale,bool Adapt,bool ForceGray);
+	    static ElImScroller * StdScrollIfExist(Visu_ElImScr &Visu,const std::string &,double_t scale,bool Adapt,bool ForceGray);
      private :
-	    static ElImScroller * StdFileGenerique(Visu_ElImScr &Visu,const std::string &,INT  InvScale,bool Adapt,bool ForceGray);
+	    static ElImScroller * StdFileGenerique(Visu_ElImScr &Visu,const std::string &,int  InvScale,bool Adapt,bool ForceGray);
 
 
 
@@ -420,19 +420,19 @@ class ElImScroller
         Visu_ElImDest *  mVisuCur; // celui utilise dans  LoadXImage(Visu_ElImScr &,..)
 
 
-		INT                     mDimOut;
+		int                     mDimOut;
         Pt2dr                       _tr;
-        REAL                        _sc;
-		const REAL               _sc_im;
+        double_t                        _sc;
+		const double_t               _sc_im;
 
         bool mAlwaysQuickInZoom;
         bool mAlwaysQuick;
         bool mSetInit;
 
-        void set_geom(Pt2dr tr,REAL sc);
+        void set_geom(Pt2dr tr,double_t sc);
 		bool  image_full_in() ;
 		Pt2di PrefXim();
-        void GetIntervUpdate(INT dx,INT tx,INT &x0,INT & x1);
+        void GetIntervUpdate(int dx,int tx,int &x0,int & x1);
         enum
         {
             RabUpdate = 2
@@ -447,9 +447,9 @@ class ElPyramScroller : public ElImScroller
        const std::vector<ElImScroller *> & SubScrolls();
 
 
-		virtual REAL TimeLoadXIm() const; // 0.0
-		virtual REAL TimeUnCompr() const; // 0.0
-		virtual REAL TimeReformat() const; // 0.0
+		virtual double_t TimeLoadXIm() const; // 0.0
+		virtual double_t TimeUnCompr() const; // 0.0
+		virtual double_t TimeReformat() const; // 0.0
 		Fonc_Num in(); // 0
 
 	private :
@@ -485,13 +485,13 @@ class ElImIncruster
 				Pt2di                           SzBrd,
 				Visu_ElImScr &                  Visu,
 				const std::vector<ElImScroller*>   & Scrols,
-				INT                             NbImRab = 0
+				int                             NbImRab = 0
 			);
 
-			void SetActiveKthIm(INT Kth,bool active);
+			void SetActiveKthIm(int Kth,bool active);
 
 			void BeginIncrust();
-			void BeginIncrust(Pt2dr aPInvW,REAL aScale);
+			void BeginIncrust(Pt2dr aPInvW,double_t aScale);
 			void EndIncrust();
 
 			void IncrustOrigineAtPtW(Pt2di pt);
@@ -513,14 +513,14 @@ class ElImIncruster
 			void SetBrd(Pt2di);
 
 			Box2di BoxIncrust() const;
-			INT    NbImInMax() const;
+			int    NbImInMax() const;
 
 		protected :
 
 		private  :
 
-			Pt2dr  TrScrol(INT k);
-			REAL  ScaleScrol(INT k);
+			Pt2dr  TrScrol(int k);
+			double_t  ScaleScrol(int k);
 
 
 			void SetSize(Pt2di);
@@ -532,11 +532,11 @@ class ElImIncruster
 			void InitSz();
 
 			void IncrustOrigineAtPtW(Pt2di pt,Elise_Palette *);
-			virtual INT Filters
+			virtual int Filters
                                     (
                                           std::vector<ElImIncr_ScrAttr> & Attrs,
-                                          std::vector<Im2D_INT4> &        OutPut,
-                                          std::vector<Im2D_INT4> &        InPut,
+                                          std::vector<Im2D_int4> &        OutPut,
+                                          std::vector<Im2D_int4> &        InPut,
                                           Pt2di p0,
                                           Pt2di p1
                                     ) =0;
@@ -559,14 +559,14 @@ class ElImIncruster
 			Box2di mOldBox;
 
 
-			std::vector<Im2D_INT4>           mImagesIn;
-			std::vector<Im2D_INT4>           mImagesOut;
+			std::vector<Im2D_int4>           mImagesIn;
+			std::vector<Im2D_int4>           mImagesOut;
 
 			std::vector<ElImScroller*>       mTabScr;
 			std::vector<ElImIncr_ScrAttr>    mTabAttrScr;
 			Pt2dr  mTrScrol;
-			REAL   mScaleScrol;
-			std::vector<Memory_ElImDest<INT4> *>   mMEID;
+			double_t   mScaleScrol;
+			std::vector<Memory_ElImDest<int4> *>   mMEID;
 			Visu_ElImScr &                   mVisu;
 			bool                             mLastDecUpToDate;
                         bool                             mSynchroGeom;
@@ -579,18 +579,18 @@ class Filtr_Incr_EqDyn_Glob
 {
 	public :
          Filtr_Incr_EqDyn_Glob() ;
-         INT Filters
+         int Filters
              (
                      std::vector<ElImIncr_ScrAttr> & Attrs,
-                     std::vector<Im2D_INT4> & OutPut,
-                     std::vector<Im2D_INT4> &InPut,
-                     Pt2di p0,Pt2di p1,REAL Fact=1
+                     std::vector<Im2D_int4> & OutPut,
+                     std::vector<Im2D_int4> &InPut,
+                     Pt2di p0,Pt2di p1,double_t Fact=1
              );
 
     private :
 
-          Im1D_U_INT1 mLut;
-          U_INT1 *    mDataLut;
+          Im1D_U_int1 mLut;
+          U_int1 *    mDataLut;
 };
 
 class ConvMne_Filtr_Incr_EqDyn_Loc {};
@@ -599,18 +599,18 @@ class Filtr_Incr_EqDyn_Loc
 {
 	public :
          Filtr_Incr_EqDyn_Loc() ;
-         Filtr_Incr_EqDyn_Loc(ConvMne_Filtr_Incr_EqDyn_Loc,INT ValSpec) ;
-         INT Filters
+         Filtr_Incr_EqDyn_Loc(ConvMne_Filtr_Incr_EqDyn_Loc,int ValSpec) ;
+         int Filters
              (
                   std::vector<ElImIncr_ScrAttr> & Attrs,
-                  std::vector<Im2D_INT4> & OutPut,
-                  std::vector<Im2D_INT4> &InPut,
-                  Pt2di p0,Pt2di p1,INT Brd,REAL Fact=1
+                  std::vector<Im2D_int4> & OutPut,
+                  std::vector<Im2D_int4> &InPut,
+                  Pt2di p0,Pt2di p1,int Brd,double_t Fact=1
              );
 
     private :
          bool mConvMne;
-         INT  mValSpec;
+         int  mValSpec;
 
 };
 
@@ -618,12 +618,12 @@ class Filtr_Incr_EtalDyn
 {
 	public :
          Filtr_Incr_EtalDyn() ;
-         INT Filters
+         int Filters
              (
                   std::vector<ElImIncr_ScrAttr> & Attrs,
-                  std::vector<Im2D_INT4> & OutPut,
-                  std::vector<Im2D_INT4> &InPut,
-                  Pt2di p0,Pt2di p1,REAL Vmin,REAL Vmax
+                  std::vector<Im2D_int4> & OutPut,
+                  std::vector<Im2D_int4> &InPut,
+                  Pt2di p0,Pt2di p1,double_t Vmin,double_t Vmax
              );
 
     private :
@@ -634,12 +634,12 @@ class Filtr_Incr_NormDeriche
 {
 	public :
          Filtr_Incr_NormDeriche() ;
-         INT Filters
+         int Filters
              (
                   std::vector<ElImIncr_ScrAttr> & Attrs,
-                  std::vector<Im2D_INT4> & OutPut,
-                  std::vector<Im2D_INT4> &InPut,
-                  Pt2di p0,Pt2di p1,REAL FactDer,REAL Dyn
+                  std::vector<Im2D_int4> & OutPut,
+                  std::vector<Im2D_int4> &InPut,
+                  Pt2di p0,Pt2di p1,double_t FactDer,double_t Dyn
              );
 
     private :
@@ -650,12 +650,12 @@ class Filtr_Incr_AngDeriche
 {
 	public :
          Filtr_Incr_AngDeriche() ;
-         INT Filters
+         int Filters
              (
                   std::vector<ElImIncr_ScrAttr> & Attrs,
-                  std::vector<Im2D_INT4> & OutPut,
-                  std::vector<Im2D_INT4> &InPut,
-                  Pt2di p0,Pt2di p1,REAL FactDer
+                  std::vector<Im2D_int4> & OutPut,
+                  std::vector<Im2D_int4> &InPut,
+                  Pt2di p0,Pt2di p1,double_t FactDer
              );
 
     private :
@@ -708,18 +708,18 @@ class PopUpMenuTransp
         ElXim         mWStdIm;
         ElXim         mWAffIm;
 
-        Im2D_U_INT1   mImMotif;
-        Im2D_U_INT1   mImTransp;
+        Im2D_U_int1   mImMotif;
+        Im2D_U_int1   mImTransp;
 
-        Im2D_U_INT1   mImR;
-        Im2D_U_INT1   mImG;
-        Im2D_U_INT1   mImB;
+        Im2D_U_int1   mImR;
+        Im2D_U_int1   mImG;
+        Im2D_U_int1   mImB;
 
-        U_INT1**       mDataM;  // Motif
-        U_INT1**       mDataT;  // Transparence
-        U_INT1**       mDataR;
-        U_INT1**       mDataG;
-        U_INT1**       mDataB;
+        U_int1**       mDataM;  // Motif
+        U_int1**       mDataT;  // Transparence
+        U_int1**       mDataR;
+        U_int1**       mDataG;
+        U_int1**       mDataB;
 
         bool          mUp;
         Pt2di         mP0Cur;
@@ -783,7 +783,7 @@ class CaseGPUMT
 			const std::string & Name() const;
 
 		protected:
-			void SetFonc(Fonc_Num aFonc,Im2D_U_INT1);
+			void SetFonc(Fonc_Num aFonc,Im2D_U_int1);
 			void SetMotif(Fonc_Num aFonc);
 			void SetTransp(Fonc_Num aFonc);
 		private:
@@ -812,8 +812,8 @@ class BoolCaseGPUMT : public CaseGPUMT
 	private :
 
 			bool                         mVal;
-			Im2D_U_INT1                  mImTrue;
-			Im2D_U_INT1                  mImFalse;
+			Im2D_U_int1                  mImTrue;
+			Im2D_U_int1                  mImFalse;
 };
 
 class ChoixParmiCaseGPUMT : public CaseGPUMT
@@ -826,22 +826,22 @@ class ChoixParmiCaseGPUMT : public CaseGPUMT
 				 Pt2di anInd,
 				 Fonc_Num aFTrue,
 				 Fonc_Num aFFalse,
-				 INT  anId,  // souvent manipules par switch (Enum) {}
+				 int  anId,  // souvent manipules par switch (Enum) {}
 				 ChoixParmiCaseGPUMT * oneExcluing  // 0 pour la premiere
 			);
 			void CaseGPUMTOnSelected();
 
 			const ChoixParmiCaseGPUMT * Selected() const;
-			INT IdSelected() const;
+			int IdSelected() const;
 			virtual void ChoixParmiCaseGPUMTOnChState(bool NewState);
 
 
 	private :
 
-			INT                          mId;
+			int                          mId;
 			ChoixParmiCaseGPUMT **       mSelected;
-			Im2D_U_INT1                  mImTrue;
-			Im2D_U_INT1                  mImFalse;
+			Im2D_U_int1                  mImTrue;
+			Im2D_U_int1                  mImFalse;
 };
 
 
@@ -865,7 +865,7 @@ class BiScroller : public ElImScroller
                      const std::string &   NameGray,
                      const std::string &   NameCol,
                      Elise_colour * Cols,
-                     INT            NbCol
+                     int            NbCol
                  );
                  static  BiScroller  * RG1B2Biscroller
                  (
@@ -888,11 +888,11 @@ class BiScroller : public ElImScroller
 
                 ElImScroller & Scr1();
                 ElImScroller & Scr2();
-                Im2D_U_INT1  Im1();
-                Im2D_U_INT1  Im2();
+                Im2D_U_int1  Im1();
+                Im2D_U_int1  Im2();
 
 
-                Im2D_U_INT1 ImMasq();
+                Im2D_U_int1 ImMasq();
 
                 const std::vector<ElImScroller *> & SubScrolls();
 
@@ -904,12 +904,12 @@ class BiScroller : public ElImScroller
                      ElImScroller * ScrCol,
                      ModeFusion     aMode,
                      Elise_colour * Cols,
-                     INT            NbCol,
+                     int            NbCol,
                      const std::string &  aNameMasq
                  );
 
-                void GraySetGamaCorrec(REAL aGama);
-                void SetRGBEntry(INT Gray,INT IndCol,const Elise_colour &);
+                void GraySetGamaCorrec(double_t aGama);
+                void SetRGBEntry(int Gray,int IndCol,const Elise_colour &);
 
                 void SetImAct(bool,bool);
                 bool Im1Act() const;
@@ -925,35 +925,35 @@ class BiScroller : public ElImScroller
             private :
                    virtual void MakeOneLine
                    (
-                            U_INT1 * aDataImR,
-                            U_INT1 * aDataImG,
-                            U_INT1 * aDataImB,
-                            INT      aY,
-                            INT      anX0,
-                            INT      anX1,
-                            U_INT1 * aLineGr,
-                            U_INT1 * aLineCol
+                            U_int1 * aDataImR,
+                            U_int1 * aDataImG,
+                            U_int1 * aDataImB,
+                            int      aY,
+                            int      anX0,
+                            int      anX1,
+                            U_int1 * aLineGr,
+                            U_int1 * aLineCol
                    );
 
                    void LutMakeOneLine
                    (
-                            U_INT1 * aDataImR, U_INT1 * aDataImG, U_INT1 * aDataImB,
-                            INT anY,INT      anX0, INT      anX1,
-                            U_INT1 * aLineGr, U_INT1 * aLineCol
+                            U_int1 * aDataImR, U_int1 * aDataImG, U_int1 * aDataImB,
+                            int anY,int      anX0, int      anX1,
+                            U_int1 * aLineGr, U_int1 * aLineCol
                    );
 
                    void RG1B2MakeOneLine
                    (
-                            U_INT1 * aDataImR, U_INT1 * aDataImG, U_INT1 * aDataImB,
-                            INT anY,INT      anX0, INT      anX1,
-                            U_INT1 * aLineGr, U_INT1 * aLineCol
+                            U_int1 * aDataImR, U_int1 * aDataImG, U_int1 * aDataImB,
+                            int anY,int      anX0, int      anX1,
+                            U_int1 * aLineGr, U_int1 * aLineCol
                    );
 
                    void MasqMakeOneLine
                    (
-                            U_INT1 * aDataImR, U_INT1 * aDataImG, U_INT1 * aDataImB,
-                            INT anY,INT      anX0, INT      anX1,
-                            U_INT1 * aLineGr, U_INT1 * aLineCol
+                            U_int1 * aDataImR, U_int1 * aDataImG, U_int1 * aDataImB,
+                            int anY,int      anX0, int      anX1,
+                            U_int1 * aLineGr, U_int1 * aLineCol
                    );
 
 
@@ -965,41 +965,41 @@ class BiScroller : public ElImScroller
 						};
 
 
-                U_INT1 * RGBEntry(INT Gray,INT IndCol) {return mDataTabRGB[Gray][IndCol];}
+                U_int1 * RGBEntry(int Gray,int IndCol) {return mDataTabRGB[Gray][IndCol];}
 
 
-                Memory_ElImDest<U_INT1>   mMemGray;
+                Memory_ElImDest<U_int1>   mMemGray;
                 ElImScroller *            mScrGray;
 
-                Memory_ElImDest<U_INT1>   mMemCol;
+                Memory_ElImDest<U_int1>   mMemCol;
                 ElImScroller *            mScrCol;
                 ModeFusion                mModeFusion;
 
 				VideoWin_Visu_ElImScr &  mVideoVisu;
 
-                Im2D_U_INT1              mImGray;
-                U_INT1 **                mDataGray;
-                Im2D_U_INT1              mImCol;
-                U_INT1 **                mDataCol;
+                Im2D_U_int1              mImGray;
+                U_int1 **                mDataGray;
+                Im2D_U_int1              mImCol;
+                U_int1 **                mDataCol;
 
                 Pt2di                    mSzCols;
-                Im3D_U_INT1              mTabRGB;
-                U_INT1 ***               mDataTabRGB;
+                Im3D_U_int1              mTabRGB;
+                U_int1 ***               mDataTabRGB;
 
 
 
-                Im2D_U_INT1   mImR;
-                U_INT1 *      mDataImR;
-                Im2D_U_INT1   mImG;
-                U_INT1 *      mDataImG;
-                Im2D_U_INT1   mImB;
-                U_INT1 *      mDataImB;
+                Im2D_U_int1   mImR;
+                U_int1 *      mDataImR;
+                Im2D_U_int1   mImG;
+                U_int1 *      mDataImG;
+                Im2D_U_int1   mImB;
+                U_int1 *      mDataImB;
 
                 Pt2dr         mTr;
                 std::vector<ElImScroller *> mSubScrolls;
                 bool                           mIm1Act;
                 bool                           mIm2Act;
-                Im2D_U_INT1                    mImMasq;
+                Im2D_U_int1                    mImMasq;
 };
 
 class  EliseStdImageInteractor
@@ -1011,9 +1011,9 @@ class  EliseStdImageInteractor
           (
                  Video_Win aW,
                  ElImScroller & aScrol,
-                 INT            aButonGeom,
-                 INT            aButonZoomIn = -1,
-                 INT            aButonZoomOut = -1
+                 int            aButonGeom,
+                 int            aButonZoomIn = -1,
+                 int            aButonZoomOut = -1
           );
 
           Clik clik_press();
@@ -1025,7 +1025,7 @@ class  EliseStdImageInteractor
 
           ElSimilitude WW2UU (ElSimilitude aSim) const {return mScr.WW2UU(aSim);}
 
-          REAL  SC () {return mScr.sc();}
+          double_t  SC () {return mScr.sc();}
 
 
 
@@ -1034,15 +1034,15 @@ class  EliseStdImageInteractor
 
           Video_Win    WinEch1();
           // Uniquemement si image de Dim1
-          Im2D_U_INT1  ImEch1(bool VisuSim = true);
+          Im2D_U_int1  ImEch1(bool VisuSim = true);
 
           void SetModeReplicationPixel();
           void SetModeReplicationPixel(bool aVal);
 
-          std::vector<Pt2dr> GetPolyg(INT aCoulSom,INT aCoulEdge,
+          std::vector<Pt2dr> GetPolyg(int aCoulSom,int aCoulEdge,
                                       const std::vector<Pt2dr> &);
-          std::vector<Pt2dr> GetPolyg(INT aCoulSom,INT aCoulEdge);
-          std::vector<Pt2dr> GetPolyg(INT aCoulSom,INT aCoulEdge,const Pt2dr &);
+          std::vector<Pt2dr> GetPolyg(int aCoulSom,int aCoulEdge);
+          std::vector<Pt2dr> GetPolyg(int aCoulSom,int aCoulEdge,const Pt2dr &);
           void Refresh();
 
       protected :
@@ -1073,24 +1073,24 @@ class  EliseStdImageInteractor
 
           Video_Win          mW;
           ElImScroller &     mScr;
-          INT                mButtonGeom;
-          INT                mButtonZoomIn;
-          INT                mButtonZoomOut;
+          int                mButtonGeom;
+          int                mButtonZoomIn;
+          int                mButtonZoomOut;
           bool               mScaleMode;
           Pt2dr              mP0Grab;
           Pt2dr              mLastPGrab;
-          REAL               mScale0Grab;
-          REAL               mSpeedTranslate;  // 1.0
-          REAL               mYDoubleScale;    // 100.0
-          REAL               mScaleMax;        // 10.0
-          REAL               mScaleMin;        // 0.02
+          double_t               mScale0Grab;
+          double_t               mSpeedTranslate;  // 1.0
+          double_t               mYDoubleScale;    // 100.0
+          double_t               mScaleMax;        // 10.0
+          double_t               mScaleMin;        // 0.02
           bool               mRasterQuickZoom; // true
           Graber             *mGeoGraber;
           bool               mModeReplicationPixel;
 
           std::vector<Pt2dr> mPolygCur;
-          INT                mCoulSomPolygCur;
-          INT                mCoulEdgePolygCur;
+          int                mCoulSomPolygCur;
+          int                mCoulEdgePolygCur;
 
 
           friend class Graber;

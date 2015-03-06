@@ -7,7 +7,7 @@ class cCamStenopeDistHomogr : public CamStenope
 {
 public :
     cCamStenopeDistHomogr
-    (bool isDistC2M,REAL Focale,Pt2dr Centre, const cDistHomographie &,const std::vector<double> &);
+    (bool isDistC2M,double_t Focale,Pt2dr Centre, const cDistHomographie &,const std::vector<double> &);
     const cElHomographie & Hom() const;
 private :
     cDistHomographie   mDist;

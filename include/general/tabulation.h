@@ -55,24 +55,24 @@ extern Pt2di TAB_5_NEIGH[5];     // pts[5] = 0,0
 extern Pt2di VOIS_9[9];  // dans l'ordre de parcourt "video"
 
 
-extern INT TAB_8_FREEM_SUCC_TRIG[8];
-extern INT TAB_4_FREEM_SUCC_TRIG[4];
+extern int TAB_8_FREEM_SUCC_TRIG[8];
+extern int TAB_4_FREEM_SUCC_TRIG[4];
 
-extern INT TAB_8_FREEM_PREC_TRIG[8];
-extern INT TAB_4_FREEM_PREC_TRIG[4];
+extern int TAB_8_FREEM_PREC_TRIG[8];
+extern int TAB_4_FREEM_PREC_TRIG[4];
 
-extern INT TAB_8_FREEM_SYM[8];
-extern INT TAB_4_FREEM_SYM[4];
+extern int TAB_8_FREEM_SYM[8];
+extern int TAB_4_FREEM_SYM[4];
 
-typedef INT MAT_CODE_FREEM[3][3];
+typedef int MAT_CODE_FREEM[3][3];
 
-extern U_INT1 FLAG_FRONT_8_TRIGO[512];
-extern U_INT1 FLAG_FRONT_4_TRIGO[512];
+extern U_int1 FLAG_FRONT_8_TRIGO[512];
+extern U_int1 FLAG_FRONT_4_TRIGO[512];
 
 extern MAT_CODE_FREEM MAT_CODE_4_FREEM;
 extern MAT_CODE_FREEM MAT_CODE_8_FREEM;
 
-extern INT compute_freem_code
+extern int compute_freem_code
            (
                  //const  JYCAR
 				 MAT_CODE_FREEM &,
@@ -81,7 +81,7 @@ extern INT compute_freem_code
 
 // freeman code of points  for 8-neighboor; -2 if out, -1 if (0,0)
 
-extern INT freeman_code(Pt2di);
+extern int freeman_code(Pt2di);
 
 
 
@@ -117,21 +117,21 @@ class Config_Freeman_Or
    public :
       Config_Freeman_Or(bool v8,bool trigo);
 
-      inline Pt2di kth_p(INT k) const   { return _pts[k];}
-      inline INT    succ(INT k) const   { return _succ[k];}
-      inline INT    prec(INT k) const   { return _prec[k];}
-      inline INT     sym(INT k) const   { return _sym[k];}
-      inline INT    nb_pts()    const   { return _nb_pts;}
+      inline Pt2di kth_p(int k) const   { return _pts[k];}
+      inline int    succ(int k) const   { return _succ[k];}
+      inline int    prec(int k) const   { return _prec[k];}
+      inline int     sym(int k) const   { return _sym[k];}
+      inline int    nb_pts()    const   { return _nb_pts;}
 
-      inline INT  num_pts(Pt2di p)  const
+      inline int  num_pts(Pt2di p)  const
                   {return compute_freem_code(*_mat_code,p);}
 
    private :
       Pt2di           *  _pts ;
-      INT                _nb_pts;
-      INT             * _succ ;
-      INT             * _prec ;
-      INT             * _sym ;
+      int                _nb_pts;
+      int             * _succ ;
+      int             * _prec ;
+      int             * _sym ;
       MAT_CODE_FREEM  * _mat_code;
 };
 

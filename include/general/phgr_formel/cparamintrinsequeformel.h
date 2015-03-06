@@ -1,5 +1,5 @@
-#ifndef _ELISE_GENERAL_PHGR_FORMEL_CPARAMINTRINSEQUEFORMEL_H
-#define _ELISE_GENERAL_PHGR_FORMEL_CPARAMINTRINSEQUEFORMEL_H
+#ifndef _ELISE_GENERAL_PHGR_FORMEL_CPARAMintRINSEQUEFORMEL_H
+#define _ELISE_GENERAL_PHGR_FORMEL_CPARAMintRINSEQUEFORMEL_H
 
 #include "general/sys_dep.h"
 
@@ -58,7 +58,7 @@ class cParamIntrinsequeFormel : public cElemEqFormelle,
                                    bool  HasEqDroite  = false
                               );
 
-            REAL  CurFocale() const;
+            double_t  CurFocale() const;
             Pt2dr CurPP() const;
             const tParamAFocal  & CurAFoc() const;
             virtual cMultiContEQF  StdContraintes();
@@ -72,7 +72,7 @@ class cParamIntrinsequeFormel : public cElemEqFormelle,
             void  SetPPFFige(double aTol);
 
 
-	    INT IndPP() const;
+	    int IndPP() const;
 	    // Lorsque le PIF possede des variables d'etats et que plusieurs PIF sont
 	    // impliques dans une equation, il importe de pouvoir distinguer les variables,
 	    // d'ou le role de KCam
@@ -133,16 +133,16 @@ class cParamIntrinsequeFormel : public cElemEqFormelle,
              cCamStenopeGrid *          mCamGrid;
              bool                       mFiged;
              double                     mRayonGrid;
-             REAL                       mFocaleInit;
-	     REAL                       mCurFocale;
+             double_t                       mFocaleInit;
+	     double_t                       mCurFocale;
 	     Pt2dr                      mPPInit;
 	     Pt2dr                      mCurPP;
              tParamAFocal               mAFocInit;
              tParamAFocal               mCurAFoc;
 	     Fonc_Num                   mFFoc;
-	     INT                        mIndPP;
+	     int                        mIndPP;
 	     Pt2d<Fonc_Num>             mFPP;
-	     INT                        mIndAF;
+	     int                        mIndAF;
              std::vector<Fonc_Num>      mFAFoc;
              bool                       mParamVar;
 	     double                     mTolFoc;

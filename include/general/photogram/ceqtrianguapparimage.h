@@ -5,33 +5,33 @@
 
 class cEqTrianguApparImage
 {
-    typedef REAL tV6[6];
+    typedef double_t tV6[6];
 public :
     // Ordre des variables A.x A.y B.x etc ....
-    cEqTrianguApparImage(INT aCapa);
+    cEqTrianguApparImage(int aCapa);
     ~cEqTrianguApparImage();
     void Reset();
     void Close();
     void Add
     (
-            REAL aI,
-            REAL aJ, REAL aDxJ, REAL aDyJ,
-            REAL aPdsA, REAL aPdsB, REAL aPdsC
+            double_t aI,
+            double_t aJ, double_t aDxJ, double_t aDyJ,
+            double_t aPdsA, double_t aPdsB, double_t aPdsC
             );
 
-    void SetDer(REAL & aCste,REAL  * aDer,INT aK);
+    void SetDer(double_t & aCste,double_t  * aDer,int aK);
 
 private :
-    INT  mCapa;
-    INT  mN;     // Nombre de point
-    REAL mSI1;   // Moyenne/Somme de l'image I
-    REAL mSI2;   // Moyenne/Somme du carre l'image I
-    REAL   mSigmaI;
-    REAL mSJ1;   // Moyenne/Somme de l'image J
-    REAL mSJ2;   // Moyenne/Somme du carre de l'image J
-    REAL   mSigmaJ2;
-    REAL   mSigmaJ;
-    REAL   mSigmaJ3;
+    int  mCapa;
+    int  mN;     // Nombre de point
+    double_t mSI1;   // Moyenne/Somme de l'image I
+    double_t mSI2;   // Moyenne/Somme du carre l'image I
+    double_t   mSigmaI;
+    double_t mSJ1;   // Moyenne/Somme de l'image J
+    double_t mSJ2;   // Moyenne/Somme du carre de l'image J
+    double_t   mSigmaJ2;
+    double_t   mSigmaJ;
+    double_t   mSigmaJ3;
 
 
     tV6   mDerSJ1;     // Derivee de SJ1 / a A.x A.y B.x etc ..
@@ -39,8 +39,8 @@ private :
     tV6   mDerSigmaJ2; // Derivee SigmaJ2 = mSJ2 - Square(mSJ1)
     tV6 * mDerJk;      // mDerJk[k][0] derivee de kieme J / a A.x
 
-    REAL * mVI;
-    REAL * mVJ;
+    double_t * mVI;
+    double_t * mVJ;
 };
 
 #endif

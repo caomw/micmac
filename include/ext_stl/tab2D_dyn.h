@@ -51,7 +51,7 @@ template <class T> class cElTab2DResizeable
 
         ~cElTab2DResizeable()
         {
-             for (INT y = 0; y<mSzMax.y ; y++)
+             for (int y = 0; y<mSzMax.y ; y++)
                   delete [] mData[y];
              delete [] mData;
         }
@@ -62,7 +62,7 @@ template <class T> class cElTab2DResizeable
              mSzMax = mSz;
 
              mData = new tPtr_value_type [mSzMax.y];
-             for (INT y = 0; y<mSzMax.y ; y++)
+             for (int y = 0; y<mSzMax.y ; y++)
              {
                  mData[y] =  NewLine(mSzMax.x);
              }
@@ -72,7 +72,7 @@ template <class T> class cElTab2DResizeable
         {
             if (aSz.x > mSzMax.x)
             {
-                for (INT y = 0; y<mSzMax.y ; y++)
+                for (int y = 0; y<mSzMax.y ; y++)
                 {
                     delete [] mData[y];
                     mData[y] = NewLine(aSz.x);
@@ -83,9 +83,9 @@ template <class T> class cElTab2DResizeable
             {
                  T** aD = new tPtr_value_type [aSz.y];
 
-                 for (INT y = 0; y<mSzMax.y ; y++)
+                 for (int y = 0; y<mSzMax.y ; y++)
                      aD[y] = mData[y];
-                 for (INT y = mSzMax.y; y<aSz.y ; y++)
+                 for (int y = mSzMax.y; y<aSz.y ; y++)
                      aD[y] = NewLine(mSzMax.x);
 
                  delete [] mData;
@@ -118,10 +118,10 @@ template <class T> class cElTab2DResizeable
 
     private :
 
-        T * NewLine(INT aSz)
+        T * NewLine(int aSz)
         {
             T* aRes = new T [aSz];
-            for (INT x=0; x<aSz ; x++)
+            for (int x=0; x<aSz ; x++)
                 aRes[x] = T();
             return aRes;
         }

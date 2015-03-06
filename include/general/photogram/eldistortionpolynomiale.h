@@ -15,7 +15,7 @@ public :
     (
             const Polynome2dReal & aDistX,
             const Polynome2dReal & aDistY,
-            REAL                   anEpsilonInv = 1e-7
+            double_t                   anEpsilonInv = 1e-7
             );
     virtual Pt2dr Direct(Pt2dr) const ;  // **
 
@@ -23,20 +23,20 @@ public :
     const Polynome2dReal & DistY() const ;
     Fonc_Num FNum() const ;
 
-    ElDistortionPolynomiale (REAL anAmpl,REAL anEpsilonInv = 1e-7) ;
+    ElDistortionPolynomiale (double_t anAmpl,double_t anEpsilonInv = 1e-7) ;
 
     // par defaut appel au fonctions "Quick" (ou Quasi)
 
-    virtual void  Diff(ElMatrix<REAL> &,Pt2dr) const;  // ** differentielle
+    virtual void  Diff(ElMatrix<double_t> &,Pt2dr) const;  // ** differentielle
 
     // aPt -> aChSacle * Direct (aPt / aChSacle)
-    ElDistortionPolynomiale MapingChScale(REAL aChSacle) const;
-    virtual ElDistortion22_Gen  * D22G_ChScale(REAL aS) const; // Def erreur fatale
+    ElDistortionPolynomiale MapingChScale(double_t aChSacle) const;
+    virtual ElDistortion22_Gen  * D22G_ChScale(double_t aS) const; // Def erreur fatale
 
 private :
     Polynome2dReal mDistX;
     Polynome2dReal mDistY;
-    REAL           mEpsilon;
+    double_t           mEpsilon;
 };
 
 #endif

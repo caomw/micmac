@@ -29,7 +29,7 @@ class cElPolygone
        double DiamSimple() const;  // Suppose que existe surf englob
 
     private  :
-       cElPolygone GenOp(const cElPolygone & aPol,INT)const;
+       cElPolygone GenOp(const cElPolygone & aPol,int)const;
 
        std::list<tContour>   mContours;
        std::list<bool>       mIsHole;

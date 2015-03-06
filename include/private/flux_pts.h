@@ -37,14 +37,11 @@ English :
 
 Header-MicMac-eLiSe-25/06/2007*/
 
-
-
 #ifndef _ELISE_FLUX_PTS
 #define _ELISE_FLUX_PTS
 
 #include <general/sys_dep.h>
 #include <private/garb_coll_tpl.h>
-#include <private/flux_pts.h>
 
 #include <Pt2d>
 
@@ -85,7 +82,7 @@ Header-MicMac-eLiSe-25/06/2007*/
              integer for a set of point with integer coordinate where the
               rle coding is not appropriate;
 
-             real  for a set of point with real coordinates;
+             double_t  for a set of point with double_t coordinates;
 */
 
 
@@ -99,34 +96,34 @@ public :
 
     const RLE_Pack_Of_Pts * rle_cast () const
     {
-        ASSERT_INTERNAL(_type == rle,"RLE Convertion");
+        ASSERT_intERNAL(_type == rle,"RLE Convertion");
         return (const RLE_Pack_Of_Pts *) this;
     }
 
     const Std_Pack_Of_Pts_Gen * std_cast () const
     {
-        ASSERT_INTERNAL(_type != rle,"Std  Convertion");
+        ASSERT_intERNAL(_type != rle,"Std  Convertion");
         return (const Std_Pack_Of_Pts_Gen *) this;
     }
 
-    const Std_Pack_Of_Pts<INT> * std_cast (INT *) const
+    const Std_Pack_Of_Pts<int> * std_cast (int *) const
     {
-        ASSERT_INTERNAL(_type == integer,"Std INT Convertion");
-        return (const Std_Pack_Of_Pts<INT> *) this;
+        ASSERT_intERNAL(_type == integer,"Std int Convertion");
+        return (const Std_Pack_Of_Pts<int> *) this;
     }
 
-    const Std_Pack_Of_Pts<REAL> * std_cast (REAL *) const
+    const Std_Pack_Of_Pts<double_t> * std_cast (double_t *) const
     {
-        ASSERT_INTERNAL(_type == real,"Std REAL Convertion");
-        return (const Std_Pack_Of_Pts<REAL> *) this;
+        ASSERT_intERNAL(_type == double_t,"Std double_t Convertion");
+        return (const Std_Pack_Of_Pts<double_t> *) this;
     }
-    const Std_Pack_Of_Pts<REAL> * real_cast () const
+    const Std_Pack_Of_Pts<double_t> * double_t_cast () const
     {
-        return std_cast((REAL *) 0);
+        return std_cast((double_t *) 0);
     }
-    const Std_Pack_Of_Pts<INT> * int_cast () const
+    const Std_Pack_Of_Pts<int> * int_cast () const
     {
-        return std_cast((INT *) 0);
+        return std_cast((int *) 0);
     }
 
 
@@ -142,51 +139,51 @@ public :
     // return the type necessary to represent object
     // of both type in a  common one (+or-, max of type)
 
-    inline INT           nb(void) const {return _nb;};
-    inline INT          dim(void) const {return _dim;};
-    inline INT          pck_sz_buf(void) const {return _sz_buf;};
-    inline INT          not_full() const { return _nb < _sz_buf;}
-    inline void         set_nb(INT aNb) {_nb = aNb;};
+    inline int           nb(void) const {return _nb;};
+    inline int          dim(void) const {return _dim;};
+    inline int          pck_sz_buf(void) const {return _sz_buf;};
+    inline int          not_full() const { return _nb < _sz_buf;}
+    inline void         set_nb(int aNb) {_nb = aNb;};
     inline type_pack    type(void) const {return _type;};
 
     virtual  ~Pack_Of_Pts() ;
     virtual  void show (void) const =0; // debug purpose
 
-    virtual  void show_kth (INT k) const =0; // debug purpose
+    virtual  void show_kth (int k) const =0; // debug purpose
 
     virtual  void * adr_coord() const;
 
-    virtual  void trans(const Pack_Of_Pts *, const INT * tr) =0;
-    static Pack_Of_Pts  * new_pck(INT dim,INT sz_buf,type_pack);
+    virtual  void trans(const Pack_Of_Pts *, const int * tr) =0;
+    static Pack_Of_Pts  * new_pck(int dim,int sz_buf,type_pack);
 
     // NEW convention !! the result is the arg.
     virtual void select_tab
-    (Pack_Of_Pts * pck,const INT * tab_sel) const =0;
+    (Pack_Of_Pts * pck,const int * tab_sel) const =0;
 
-    virtual Pack_Of_Pts * dup(INT sz_buf = -1) const = 0;
+    virtual Pack_Of_Pts * dup(int sz_buf = -1) const = 0;
     virtual void  copy(const Pack_Of_Pts *)  = 0;
 
 
     void convert_from(const Pack_Of_Pts *) ;
-    virtual void  kth_pts(INT *,INT k) const = 0;
+    virtual void  kth_pts(int *,int k) const = 0;
 
-    virtual INT   proj_brd
+    virtual int   proj_brd
     (
             const Pack_Of_Pts * pck,
-            const INT * p0,
-            const INT * p1,
-            INT         rab
+            const int * p0,
+            const int * p1,
+            int         rab
             ) =0;
 protected :
 
     virtual void convert_from_rle(const RLE_Pack_Of_Pts *) ;
-    virtual void convert_from_int(const Std_Pack_Of_Pts<INT>  *) ;
-    virtual void convert_from_real(const Std_Pack_Of_Pts<REAL>  *) ;
+    virtual void convert_from_int(const Std_Pack_Of_Pts<int>  *) ;
+    virtual void convert_from_double_t(const Std_Pack_Of_Pts<double_t>  *) ;
 
-    Pack_Of_Pts (INT dim,INT _sz_buf,type_pack);
-    INT      _nb;
-    const INT      _dim;
-    const INT      _sz_buf;
+    Pack_Of_Pts (int dim,int _sz_buf,type_pack);
+    int      _nb;
+    const int      _dim;
+    const int      _sz_buf;
     type_pack      _type;
 };
 
@@ -198,14 +195,14 @@ public :
     virtual  Pack_Of_Pts * next()    =0;
     virtual  void re_start(const Pack_Of_Pts *) =0;
     virtual  ~Curser_on_PoP();
-    static   Curser_on_PoP * new_curs(INT dim,INT sz_buf,Pack_Of_Pts::type_pack);
+    static   Curser_on_PoP * new_curs(int dim,int sz_buf,Pack_Of_Pts::type_pack);
 
 protected :
-    Curser_on_PoP(INT dim,INT _sz_buf,Pack_Of_Pts::type_pack);
-    INT                       _dim;
-    INT                       _sz_buf;
+    Curser_on_PoP(int dim,int _sz_buf,Pack_Of_Pts::type_pack);
+    int                       _dim;
+    int                       _sz_buf;
     Pack_Of_Pts::type_pack    _type;
-    INT                       _nb_rest;
+    int                       _nb_rest;
 
 };
 
@@ -218,17 +215,17 @@ class RLE_Pack_Of_Pts : public Pack_Of_Pts
 public :
     virtual ~RLE_Pack_Of_Pts(void);
     virtual  void show (void) const ; // debug purpose
-    virtual  void show_kth (INT k) const; // debug purpose
-    static RLE_Pack_Of_Pts  * new_pck(INT dim,INT sz_buf);
+    virtual  void show_kth (int k) const; // debug purpose
+    static RLE_Pack_Of_Pts  * new_pck(int dim,int sz_buf);
     void set_pt0(Pt2di);
-    void set_pt0(const INT4 *);
+    void set_pt0(const int *);
 
-    inline INT4     & x0(){return _pt0[0];};
-    inline INT4      vx0() const {return _pt0[0];};
-    inline INT4     x1() const {return _pt0[0] + _nb;};
-    inline INT4 * pt0() const {return _pt0;};
+    inline int     & x0(){return _pt0[0];};
+    inline int      vx0() const {return _pt0[0];};
+    inline int     x1() const {return _pt0[0] + _nb;};
+    inline int * pt0() const {return _pt0;};
 
-    inline INT4 y() const
+    inline int y() const
     {
         ELISE_ASSERT(_dim>=2,"RLE_Pack_Of_Pts::y()");
         return _pt0[1];
@@ -239,41 +236,41 @@ public :
     // the result, is the number of point supressed at the beginig
     // of segment;
 
-    INT   clip(const RLE_Pack_Of_Pts * pck,const INT * p0,const INT * p1);
-    INT   clip(const RLE_Pack_Of_Pts * pck,Pt2di p0,Pt2di p1);
+    int   clip(const RLE_Pack_Of_Pts * pck,const int * p0,const int * p1);
+    int   clip(const RLE_Pack_Of_Pts * pck,Pt2di p0,Pt2di p1);
 
-    INT   proj_brd
+    int   proj_brd
     (
             const Pack_Of_Pts * pck,
-            const INT * p0,
-            const INT * p1,
-            INT         rab
+            const int * p0,
+            const int * p1,
+            int         rab
             );
 
     bool same_line(const RLE_Pack_Of_Pts *) const;
 
 
     // inside : boolean indicating if the set is inside the box
-    bool   inside(const INT * p0,const INT * p1) const;
-    void   Show_Outside(const INT * p0,const INT * p1) const;
-    INT   ind_outside(const INT * p0,const INT * p1) const;
+    bool   inside(const int * p0,const int * p1) const;
+    void   Show_Outside(const int * p0,const int * p1) const;
+    int   ind_outside(const int * p0,const int * p1) const;
 
 
     // following constant, a priori. used for "internally manipulated packs"
     // where size_buf is useless because pak is not exported,
 
-    static const INT _sz_buf_infinite ;
-    virtual  void  trans(const Pack_Of_Pts *, const INT * tr);
+    static const int _sz_buf_infinite ;
+    virtual  void  trans(const Pack_Of_Pts *, const int * tr);
     virtual void select_tab
-    (Pack_Of_Pts * pck,const INT * tab_sel) const ;
+    (Pack_Of_Pts * pck,const int * tab_sel) const ;
 
-    virtual Pack_Of_Pts * dup(INT sz_buf = -1) const ;
+    virtual Pack_Of_Pts * dup(int sz_buf = -1) const ;
     virtual void  copy(const Pack_Of_Pts *) ;
-    virtual void  kth_pts(INT *,INT k) const;
+    virtual void  kth_pts(int *,int k) const;
 private :
-    RLE_Pack_Of_Pts (INT dim,INT sz_buf);
-    INT4 * _pt0;
-    Tprov_INT * _tpr;
+    RLE_Pack_Of_Pts (int dim,int sz_buf);
+    int * _pt0;
+    Tprov_int * _tpr;
 
 };
 
@@ -293,14 +290,14 @@ class Flux_Pts_Computed : public Mcheck
 public :
     virtual  bool   is_rect_2d(Box2di &);
     virtual  bool   is_line_map_rect();
-    virtual  REAL   average_dist();  // to use only if is_line_map_rect -> True
+    virtual  double_t   average_dist();  // to use only if is_line_map_rect -> True
 
 
     virtual const Pack_Of_Pts * next(void) = 0;
     virtual  ~Flux_Pts_Computed();
-    inline INT                          dim(void) const {return _dim;};
+    inline int                          dim(void) const {return _dim;};
     inline  Pack_Of_Pts::type_pack     type(void) const {return _type;};
-    inline INT                       sz_buf(void) const {return _sz_buf;};
+    inline int                       sz_buf(void) const {return _sz_buf;};
     inline bool integral_flux() const {return _type != Pack_Of_Pts::real;}
 
     Flux_Pts_Computed * convert(Pack_Of_Pts::type_pack) ;
@@ -309,12 +306,12 @@ public :
 
 protected :
 
-    Flux_Pts_Computed(INT dim,Pack_Of_Pts::type_pack type,INT sz_buf);
+    Flux_Pts_Computed(int dim,Pack_Of_Pts::type_pack type,int sz_buf);
 
 private :
-    const INT                              _dim;
+    const int                              _dim;
     const Pack_Of_Pts::type_pack           _type;
-    const INT                              _sz_buf;
+    const int                              _sz_buf;
 };
 
 class RLE_Flux_Pts_Computed : public Flux_Pts_Computed
@@ -322,22 +319,22 @@ class RLE_Flux_Pts_Computed : public Flux_Pts_Computed
 public :
     static Flux_Pts_Computed * rect_2d_interface( Pt2di p0,
                                                   Pt2di p1,
-                                                  INT sz_buf
+                                                  int sz_buf
                                                   );
 
 protected :
     virtual ~RLE_Flux_Pts_Computed();
 
-    RLE_Flux_Pts_Computed(INT dim,INT sz_buf);
+    RLE_Flux_Pts_Computed(int dim,int sz_buf);
     RLE_Pack_Of_Pts * _rle_pack;
 };
 
 class RLE_Flux_Interface : public RLE_Flux_Pts_Computed
 {
     friend Flux_Pts_Computed * flx_interface
-    (INT dim, Pack_Of_Pts::type_pack type,INT sz_buf);
+    (int dim, Pack_Of_Pts::type_pack type,int sz_buf);
 private :
-    RLE_Flux_Interface(INT dim,INT sz_buf);
+    RLE_Flux_Interface(int dim,int sz_buf);
     virtual const Pack_Of_Pts * next();
 
 };
@@ -346,10 +343,10 @@ class Arg_Flux_Pts_Comp
 {
 public :
     Arg_Flux_Pts_Comp() ;
-    Arg_Flux_Pts_Comp(INT SzBuf) ;
-    inline INT sz_buf()  const { return _sz_buf;}
+    Arg_Flux_Pts_Comp(int SzBuf) ;
+    inline int sz_buf()  const { return _sz_buf;}
 private :
-    INT _sz_buf;
+    int _sz_buf;
 
 };
 
@@ -373,9 +370,9 @@ public :
 /**************************************************************/
 
 template <class Type> void bitm_marq_line 
-(Type ** im,INT tx,INT ty,Pt2di p1,Pt2di p2,INT val);
+(Type ** im,int tx,int ty,Pt2di p1,Pt2di p2,int val);
 template <class Type> void bitm_marq_line 
-(Type ** im,INT tx,INT ty,Pt2di p1,Pt2di p2,INT val,REAL width);
+(Type ** im,int tx,int ty,Pt2di p1,Pt2di p2,int val,double_t width);
 
 
 

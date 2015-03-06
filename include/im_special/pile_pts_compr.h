@@ -72,7 +72,7 @@ class ElPilePtsCompr
            }
       private :
            Pt2di            mP0;
-           vector<U_INT1>   mCodes;
+           vector<U_int1>   mCodes;
 };
 
 

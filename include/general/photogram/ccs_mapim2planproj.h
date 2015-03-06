@@ -12,7 +12,7 @@ public :
     Pt2dr Direct(Pt2dr aP) const;
 private :
     bool OwnInverse(Pt2dr & aP) const;
-    void  Diff(ElMatrix<REAL> &,Pt2dr) const;
+    void  Diff(ElMatrix<double_t> &,Pt2dr) const;
 
     CamStenope & mCam;
 };

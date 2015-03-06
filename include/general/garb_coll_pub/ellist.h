@@ -60,7 +60,7 @@ template <class Type>  class ElList :  public  PRC0
        // friend ElList <Type> ::operator  + (ElList<Type>,Type);
 
        bool                 empty() const;
-       INT                  card() const;
+       int                  card() const;
        void                 clear() {while(!empty()) pop();}
 
       ElList<Type>(RC_Object*);

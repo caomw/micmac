@@ -39,22 +39,22 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 
 
-#ifndef _ELISE_EXT_STL_INT_HEAP
-#define _ELISE_EXT_STL_INT_HEAP
+#ifndef _ELISE_EXT_STL_int_HEAP
+#define _ELISE_EXT_STL_int_HEAP
 
 #include "ext_stl/pack_list.h"
 
-template <class Type,INT NB> class ElBornedIntegerHeap
+template <class Type,int NB> class ElBornedIntegerHeap
 {
       private :
 
           ElBornedIntegerHeap(const ElBornedIntegerHeap<Type,NB> &);
 
 
-          INT     _nb_objet;
-          INT     _ind_min;
-          INT     _ind_max;
-          INT     _max_dif;
+          int     _nb_objet;
+          int     _ind_min;
+          int     _ind_max;
+          int     _max_dif;
 
           ElPackList<Type,NB>     * _objs;
           ElPackList<Type,NB>      _reserve;
@@ -70,10 +70,10 @@ template <class Type,INT NB> class ElBornedIntegerHeap
 
       public :
 
-          INT nb() { return _nb_objet;}
+          int nb() { return _nb_objet;}
           bool empty() { return _nb_objet==0;}
 
-          ElBornedIntegerHeap(INT max_dif) :
+          ElBornedIntegerHeap(int max_dif) :
              _nb_objet (0),
              _max_dif  (max_dif),
              _objs     (new   ElPackList<Type,NB> [max_dif])
@@ -83,7 +83,7 @@ template <class Type,INT NB> class ElBornedIntegerHeap
           }
 
           virtual ~ElBornedIntegerHeap(){ delete [] _objs;};
-          void push(const Type & val,INT index)
+          void push(const Type & val,int index)
           {
               if (_nb_objet == 0)
               {
@@ -113,7 +113,7 @@ template <class Type,INT NB> class ElBornedIntegerHeap
 
               _objs[mod(index,_max_dif)].push_back(val);
           }
-          bool pop(Type & val,INT & index)
+          bool pop(Type & val,int & index)
           {
             if ( _nb_objet == 0)
                return false;
@@ -130,18 +130,18 @@ template <class Type,INT NB> class ElBornedIntegerHeap
 
 //  Idem ElBornedIntegerHeap, mais sort l'element max
 
-template <class Type,INT NB> class ElMaxBornedIntegerHeap  : public ElBornedIntegerHeap<Type,NB>
+template <class Type,int NB> class ElMaxBornedIntegerHeap  : public ElBornedIntegerHeap<Type,NB>
 {
       public :
 
-         ElMaxBornedIntegerHeap(INT max_dif) :  ElBornedIntegerHeap<Type,NB> (max_dif) {}
+         ElMaxBornedIntegerHeap(int max_dif) :  ElBornedIntegerHeap<Type,NB> (max_dif) {}
 
-         void push(const Type & val,INT index)
+         void push(const Type & val,int index)
          {
                 ElBornedIntegerHeap<Type,NB>::push(val,-index);
          }
 
-          bool pop(Type & val,INT & index)
+          bool pop(Type & val,int & index)
           {
                bool res = ElBornedIntegerHeap<Type,NB>::pop(val,index);
                if (res) index = -index;
@@ -152,7 +152,7 @@ template <class Type,INT NB> class ElMaxBornedIntegerHeap  : public ElBornedInte
 };
 
 
-#endif /* ! _ELISE_EXT_STL_INT_HEAP */
+#endif /* ! _ELISE_EXT_STL_int_HEAP */
 
 
 

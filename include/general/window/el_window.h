@@ -84,14 +84,14 @@ class El_Window  : public PRC0        ,
         Pt2di sz() const;
         virtual Elise_Rect box() const;
 
-        void draw_circle_loc(Pt2dr,REAL,Line_St);  // radius depends from coord
-        void draw_circle_abs(Pt2dr,REAL,Line_St);  // radius does not depend from coord
+        void draw_circle_loc(Pt2dr,double_t,Line_St);  // radius depends from coord
+        void draw_circle_abs(Pt2dr,double_t,Line_St);  // radius does not depend from coord
 
 	// Bovin, le fait via un polygone
         void draw_ellipse_loc
              (
-	        Pt2dr,REAL A,REAL B,REAL C,Line_St,
-		  INT Nb=100);  // radius does not depend from coord
+	        Pt2dr,double_t A,double_t B,double_t C,Line_St,
+		  int Nb=100);  // radius does not depend from coord
 
         void draw_seg(Pt2dr,Pt2dr,Line_St);
         void draw_rect(Pt2dr,Pt2dr,Line_St);
@@ -103,19 +103,19 @@ class El_Window  : public PRC0        ,
         void draw_poly_ferm(const std::vector<Pt2dr> &,Line_St);
 
 
-        void hach(ElFifo<Pt2dr> & poly,Pt2dr dir,REAL esp,Line_St);
-        void hach(std::vector<Pt2dr> & poly,Pt2dr dir,REAL esp,Line_St);
+        void hach(ElFifo<Pt2dr> & poly,Pt2dr dir,double_t esp,Line_St);
+        void hach(std::vector<Pt2dr> & poly,Pt2dr dir,double_t esp,Line_St);
 
 
         void draw_arrow
              (
                 Pt2dr, Pt2dr, Line_St Style_axe, Line_St Style_pointe,
-                REAL size_pointe, REAL pos = 0.5, REAL teta = (PI/4.0)
+                double_t size_pointe, double_t pos = 0.5, double_t teta = (PI/4.0)
              );
         void draw_arrow
              (
                 Pt2dr, Pt2dr, Line_St Axe_and_Pointe,
-                REAL size_pointe, REAL pos = 0.5, REAL teta = (PI/4.0)
+                double_t size_pointe, double_t pos = 0.5, double_t teta = (PI/4.0)
              );
 
 

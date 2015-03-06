@@ -45,7 +45,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 #include <cstdlib>
 #include <list>
 
-template <const INT NBB> class  ElListAlloc
+template <const int NBB> class  ElListAlloc
 {
 	public :
 		void * get()

@@ -47,11 +47,11 @@ template <class  AttrSom,class AttrArc,class Res,class Germ>
                Res   &                            res,
                const Germ  &                      germ,
                ElSubGraphe<AttrSom,AttrArc> &     sub,
-               INT                                flag_marq
+               int                                flag_marq
          )
 {
     res.clear();
-    for (INT k=0; k< germ.nb() ; k++)
+    for (int k=0; k< germ.nb() ; k++)
     {
          ElSom<AttrSom,AttrArc> * s = germ[k];
          if ((sub.inS(*s)) && (! s->flag_kth(flag_marq)))
@@ -61,7 +61,7 @@ template <class  AttrSom,class AttrArc,class Res,class Germ>
          }
     }
 
-{    for (INT k= 0; k < res.nb(); k++)
+{    for (int k= 0; k < res.nb(); k++)
     {
          ElSom<AttrSom,AttrArc> * s1 = res[k];
          for 
@@ -89,7 +89,7 @@ template <class  AttrSom,class AttrArc,class Res>
                Res   &                            res,
                ElSom<AttrSom,AttrArc> *           g,
                ElSubGraphe<AttrSom,AttrArc> &     sub,
-               INT                                flag_marq
+               int                                flag_marq
          )
 {
     ElFilo<ElSom<AttrSom,AttrArc> *> Germ;
@@ -106,10 +106,10 @@ template <class  AttrSom,class AttrArc,class Res>
                ElSubGraphe<AttrSom,AttrArc> &     sub
          )
 {
-     INT flag_marq = g->gr().alloc_flag_som();
+     int flag_marq = g->gr().alloc_flag_som();
      comp_connexe_som_flag_alloc(res,g,sub,flag_marq);
 
-     for (INT k=0; k<res.nb() ; k++)
+     for (int k=0; k<res.nb() ; k++)
          res[k]->flag_set_kth_false(flag_marq);
      g->gr().free_flag_som(flag_marq);
 }
@@ -124,7 +124,7 @@ template <class  AttrSom,class AttrArc>
         )
 {
     aRes.clear();
-    INT flag_p = aGr.alloc_flag_som();
+    int flag_p = aGr.alloc_flag_som();
     set_flag_all_soms(aGr,flag_p,false);
     for
     (
@@ -165,12 +165,12 @@ template <class  AttrSom,class AttrArc,class Soms,class Arcs>
      arcs.clear();
      if (soms.nb() == 0) return;
 
-     INT flag_marq = soms[0]->gr().alloc_flag_som();
-{     for (INT k=0; k<soms.nb() ; k++)
+     int flag_marq = soms[0]->gr().alloc_flag_som();
+{     for (int k=0; k<soms.nb() ; k++)
          soms[k]->flag_set_kth_true(flag_marq);
 }
 
-{     for (INT k=0; k<soms.nb() ; k++)
+{     for (int k=0; k<soms.nb() ; k++)
      {
          ElSom<AttrSom,AttrArc> * s1 = soms[k];
          for 
@@ -187,7 +187,7 @@ template <class  AttrSom,class AttrArc,class Soms,class Arcs>
      }
 }
 
-{     for (INT k=0; k<soms.nb() ; k++)
+{     for (int k=0; k<soms.nb() ; k++)
          soms[k]->flag_set_kth_false(flag_marq);
 }
      soms[0]->gr().free_flag_som(flag_marq);

@@ -46,7 +46,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 class  Std_Pack_Of_Pts_Gen : public Pack_Of_Pts
 {
        public :
-            virtual void interv(const Std_Pack_Of_Pts_Gen * pck,INT n1,INT n2) = 0;
+            virtual void interv(const Std_Pack_Of_Pts_Gen * pck,int n1,int n2) = 0;
 
             // suppose the type of to_cat is the same than this
             virtual void cat_gen (const Std_Pack_Of_Pts_Gen * to_cat) = 0;
@@ -56,7 +56,7 @@ class  Std_Pack_Of_Pts_Gen : public Pack_Of_Pts
 
             
        protected :
-            Std_Pack_Of_Pts_Gen(INT dim,INT _sz_buf,type_pack);
+            Std_Pack_Of_Pts_Gen(int dim,int _sz_buf,type_pack);
 
 
 };
@@ -66,58 +66,58 @@ template <class Type> class Std_Pack_Of_Pts : public Std_Pack_Of_Pts_Gen
     public :
        virtual ~Std_Pack_Of_Pts(void);
        virtual  void show (void) const; // debug purpose
-       virtual  void show_kth (INT k) const; 
-       static Std_Pack_Of_Pts<Type>  * new_pck(INT dim,INT sz_buf);
+       virtual  void show_kth (int k) const; 
+       static Std_Pack_Of_Pts<Type>  * new_pck(int dim,int sz_buf);
 
 	   // give two dif name, elsewhere visual is confused
-       virtual void convert_from_int(const Std_Pack_Of_Pts<INT> *);
-       virtual void convert_from_real(const Std_Pack_Of_Pts<REAL> *);
+       virtual void convert_from_int(const Std_Pack_Of_Pts<int> *);
+       virtual void convert_from_real(const Std_Pack_Of_Pts<double_t> *);
        virtual void convert_from_rle(const RLE_Pack_Of_Pts *) ;
 
 
        //  _pts shoulde be private with a definition like
        // inline  Type ** pts() const {return _pts;}
-       // but I have REALLY some problem with template instatiation
+       // but I have double_tLY some problem with template instatiation
        // and g++
 
        Type ** _pts;
        virtual  void * adr_coord() const;
 
-       virtual void select_tab(Pack_Of_Pts * pck,const INT * tab_sel) const;
+       virtual void select_tab(Pack_Of_Pts * pck,const int * tab_sel) const;
 
-       void interv(const Std_Pack_Of_Pts_Gen * pck,INT n1,INT n2);
+       void interv(const Std_Pack_Of_Pts_Gen * pck,int n1,int n2);
 
        void push(Type *);
 
-       Pack_Of_Pts * dup(INT sz_buf= -1) const; // -1 => sz_buf will be set to _nb
+       Pack_Of_Pts * dup(int sz_buf= -1) const; // -1 => sz_buf will be set to _nb
 
        virtual void  copy(const Pack_Of_Pts *);
-       virtual void trans (const Pack_Of_Pts * pack, const INT * tr);
+       virtual void trans (const Pack_Of_Pts * pack, const int * tr);
 
        //  cat this at the end of res, replace res by a new set of size
        //  sz_buf (at least) if res is unsuifficient (and delete res).
        //  Return-value is the res or the eventually new set creates.
 
        Std_Pack_Of_Pts<Type> * cat_and_grow
-             (Std_Pack_Of_Pts<Type> *  res,INT new_sz_buf,bool & chang) const;
+             (Std_Pack_Of_Pts<Type> *  res,int new_sz_buf,bool & chang) const;
 
        void cat (const Std_Pack_Of_Pts<Type> * to_cat);
        virtual void cat_gen (const Std_Pack_Of_Pts_Gen * to_cat);
 
        void auto_reverse();
-       virtual void  kth_pts(INT *,INT k) const;
+       virtual void  kth_pts(int *,int k) const;
 
-       INT   proj_brd
+       int   proj_brd
              (
                       const Pack_Of_Pts * pck,
-                      const INT * p0,
-                      const INT * p1,
-                      INT         rab    // 0 for INT, 1 for real
+                      const int * p0,
+                      const int * p1,
+                      int         rab    // 0 for int, 1 for real
              );
 
        void verif_inside 
        (
-            const INT * pt_min, const INT * pt_max,
+            const int * pt_min, const int * pt_max,
             Type        rap_p0,
             Type        rap_p1
        ) const;
@@ -125,7 +125,7 @@ template <class Type> class Std_Pack_Of_Pts : public Std_Pack_Of_Pts_Gen
       virtual void rgb_bgr(const Std_Pack_Of_Pts_Gen *);
 
     private :
-       Std_Pack_Of_Pts<Type> (INT dim,INT sz_buf);
+       Std_Pack_Of_Pts<Type> (int dim,int sz_buf);
 
        // _pts[d][i] == coordinate of the ith Pts in the dth dimension
        Tab_Prov<Tab_Prov<Type> *>   * _tprov_tprov;
@@ -138,13 +138,13 @@ template <class Type> class Std_Pack_Of_Pts : public Std_Pack_Of_Pts_Gen
 };
 
 
-Std_Pack_Of_Pts<INT> * lpt_to_pack(ElList<Pt2di> l);
+Std_Pack_Of_Pts<int> * lpt_to_pack(ElList<Pt2di> l);
 
 template <class Type> class Std_Flux_Of_Points : public Flux_Pts_Computed
 {
     protected :
 
-       Std_Flux_Of_Points    (INT dim,INT sz_buf,bool sz_buf_0 = 0);
+       Std_Flux_Of_Points    (int dim,int sz_buf,bool sz_buf_0 = 0);
        virtual ~Std_Flux_Of_Points();
        Std_Pack_Of_Pts<Type>   * _pack;
 
@@ -152,24 +152,24 @@ template <class Type> class Std_Flux_Of_Points : public Flux_Pts_Computed
        static const Pack_Of_Pts::type_pack _type_pack;
 };
 
-#define Int_Pack_Of_Pts  Std_Pack_Of_Pts<INT>
-#define Real_Pack_Of_Pts Std_Pack_Of_Pts<REAL>
+#define Int_Pack_Of_Pts  Std_Pack_Of_Pts<int>
+#define Real_Pack_Of_Pts Std_Pack_Of_Pts<double_t>
 
 template <class Type> class Std_Flux_Interface : public Std_Flux_Of_Points<Type>
 {
     public :
  
        virtual const Pack_Of_Pts * next(); 
-       Std_Flux_Interface (INT dim,INT sz_buf);
+       Std_Flux_Interface (int dim,int sz_buf);
 };
 Flux_Pts_Computed * interface_flx_chc (Flux_Pts_Computed * flx,Fonc_Num_Computed * f);
 Flux_Pts_Computed * flx_interface
-                (INT dim, Pack_Of_Pts::type_pack type,INT sz_buf);
+                (int dim, Pack_Of_Pts::type_pack type,int sz_buf);
 
 Flux_Pts_Computed * flx_interface(Flux_Pts_Computed *);
 
         // Conserve, eventually the i_rect_2d properties with good parameter
-Flux_Pts_Computed * tr_flx_interface(Flux_Pts_Computed *,INT *);
+Flux_Pts_Computed * tr_flx_interface(Flux_Pts_Computed *,int *);
 
 
 
@@ -185,7 +185,7 @@ class Trace_Digital_line
 
      // fill x and y with the nb next point, where nb is the maximun
      // value <= sz_buf, return nb;
-     INT next_buf(INT *x,INT *y,INT sz_buf);
+     int next_buf(int *x,int *y,int sz_buf);
 
      void next_pt()
      {
@@ -202,7 +202,7 @@ class Trace_Digital_line
         _nb_pts--;
      }
      Pt2di pcur () { return _p_cur;}
-     INT nb_residu() {return _nb_pts;}
+     int nb_residu() {return _nb_pts;}
 
    private :
      Pt2di  _u;  // vector p1 p2
@@ -217,11 +217,11 @@ class Trace_Digital_line
      // because, _u1,_u2 is alway anti-clockwise, 
      // we always have _delta1 =< 0 and _delta2 >= 0;
 
-     INT _delta_1;
-     INT _delta_2;
-     INT _delta;
+     int _delta_1;
+     int _delta_2;
+     int _delta;
 
-     INT _nb_pts;
+     int _nb_pts;
 };
 
 

@@ -12,18 +12,18 @@ public :
     (
             const PolyDegre2XY & aPolX,
             const PolyDegre2XY & aPolY,
-            REAL EpsilonInv
+            double_t EpsilonInv
             );
 
     // par defaut appel au fonctions "Quick" (ou Quasi)
 
-    virtual void  Diff(ElMatrix<REAL> &,Pt2dr) const;  // ** differentielle
+    virtual void  Diff(ElMatrix<double_t> &,Pt2dr) const;  // ** differentielle
 
 private :
 
     PolyDegre2XY mPolX;
     PolyDegre2XY mPolY;
-    //REAL         mEpsilon;
+    //double_t         mEpsilon;
 };
 
 #endif

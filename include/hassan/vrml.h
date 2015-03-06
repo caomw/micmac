@@ -80,9 +80,9 @@ class TVRML
 {
 public:
 
-	enum BlocType { SHAPE, VIEWPOINT, BLOC };
+	enum BlocType { SHAPE, VIEWPOint, BLOC };
 
-	enum GeometryType { INDEXEDLINESET, INDEXEDFACESET, POINTSET, ELEVATIONGRID, GEOMETRY };
+	enum GeometryType { INDEXEDLINESET, INDEXEDFACESET, POintSET, ELEVATIONGRID, GEOMETRY };
 
 class TBloc
 {
@@ -639,7 +639,7 @@ public:
 
 	void SauverTRAPU(std::ofstream &fic,int const index)const;
 
-	virtual GeometryType GetType() const {return POINTSET;}
+	virtual GeometryType GetType() const {return POintSET;}
 };
 
 class TMaterial
@@ -776,7 +776,7 @@ public:
 		printf("Attention les Viewpoints ne sont pas sauvés en TRAPU;\n");
 	}
 
-	BlocType GetType()const{return VIEWPOINT;}
+	BlocType GetType()const{return VIEWPOint;}
 };
 
 class TShape: public TBloc
@@ -788,13 +788,13 @@ private:
 public:
 	TShape(TShape const &shp):appearance(shp.appearance)
 	{
-		//{ INDEXEDLINESET, INDEXEDFACESET, POINTSET, ELEVATIONGRID, GEOMETRY };
+		//{ INDEXEDLINESET, INDEXEDFACESET, POintSET, ELEVATIONGRID, GEOMETRY };
 
 		if (shp.geometry->GetType()==INDEXEDLINESET)
 			geometry= new TIndexedLineSet(*((TIndexedLineSet *)shp.geometry));
 		else if (shp.geometry->GetType()==INDEXEDFACESET)
 			geometry= new TIndexedFaceSet(*((TIndexedFaceSet *)shp.geometry));
-		else if (shp.geometry->GetType()==POINTSET)
+		else if (shp.geometry->GetType()==POintSET)
 			geometry= new TPointSet(*((TPointSet *)shp.geometry));
 		else if (shp.geometry->GetType()==ELEVATIONGRID)
 			geometry= new TElevationGrid(*((TElevationGrid *)shp.geometry));

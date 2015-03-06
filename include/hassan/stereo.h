@@ -45,28 +45,28 @@ class Stereo
 {
    public:
 
-     Im2D_U_INT1 _phot_1;
+     Im2D_U_int1 _phot_1;
      Ori3D_Std   _ori_1;
 
-     Im2D_U_INT1 _phot_2;
+     Im2D_U_int1 _phot_2;
      Ori3D_Std   _ori_2;
 
      Pt3dr       _pas_echant;
      Facette_2d  _rect;
-     REAL        _z_min;
-     REAL        _z_max;
+     double_t        _z_min;
+     double_t        _z_max;
      
-     Stereo(char* phot_1, char* ori_1, char* phot_2, char* ori_2, REAL z_min, REAL z_max);
+     Stereo(char* phot_1, char* ori_1, char* phot_2, char* ori_2, double_t z_min, double_t z_max);
 
-     Im2D_U_INT1 phot_1()     {return _phot_1;}
+     Im2D_U_int1 phot_1()     {return _phot_1;}
      Ori3D_Std   ori_1()      {return _ori_1;}
-     Im2D_U_INT1 phot_2()     {return _phot_2;}
+     Im2D_U_int1 phot_2()     {return _phot_2;}
      Ori3D_Std   ori_2()      {return _ori_2;}
 
      Pt3dr       pas_echant() {return _pas_echant;}
      Facette_2d  rect()       {return _rect;}
-     REAL        z_min()      {return _z_min;}
-     REAL        z_max()      {return _z_max;}
+     double_t        z_min()      {return _z_min;}
+     double_t        z_max()      {return _z_max;}
 };
 
 class Cadastre
@@ -78,7 +78,7 @@ class Cadastre
      Cadastre();
      Cadastre(char* f_name){};
   
-     Facette_2d operator [](INT i);
+     Facette_2d operator [](int i);
     
      bool read(char* f_name);
      bool write(char* f_name);

@@ -67,7 +67,7 @@ public :
 
 protected :
 
-    inline PRC0(){_ptr=0;};
+    inline PRC0(){_ptr=0;}
 
     //-------- data ----------
 

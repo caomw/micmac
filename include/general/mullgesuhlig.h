@@ -44,15 +44,15 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 
 int laguerre (int  n,double  a[],double  x[]);
-void mueller ( int   n, REAL  a[], REAL  zreal[], REAL  zimag[]);
+void mueller ( int   n, double_t  a[], double_t  zreal[], double_t  zimag[]);
 
 
 //===================================
 // NUMERICAL RECIPES
 //===================================
 
-template <class Type> bool gaussj_svp(Type **A,INT n);
-template <class Type> void gaussj(Type **A,INT n);
+template <class Type> bool gaussj_svp(Type **A,int n);
+template <class Type> void gaussj(Type **A,int n);
 
 
 #endif // !  _ELISE_GENERAL_MULLGESUHLIG

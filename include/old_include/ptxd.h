@@ -42,8 +42,8 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 #include <general/util.h>
 
-//#define Pt2di  Pt2d<INT>
-//#define Pt2dr  Pt2d<REAL>
+//#define Pt2di  Pt2d<int>
+//#define Pt2dr  Pt2d<double_t>
 
 class Output;
 class SegComp;
@@ -52,38 +52,38 @@ class cElTriangleComp;
 template <class Type> class Pt3d;
 
 
-inline INT  scal(INT v1 ,INT v2 ) { return v1 * v2;}
-inline REAL scal(REAL v1,REAL v2) { return v1 * v2;}
+inline int  scal(int v1 ,int v2 ) { return v1 * v2;}
+inline double_t scal(double_t v1,double_t v2) { return v1 * v2;}
 
 template <class Type> class ElStdTypeScal
 {
     public :
-        typedef ElStdTypeScal<REAL>  TypeReel;
+        typedef ElStdTypeScal<double_t>  TypeReel;
         typedef Type                 TypeScal;
         typedef Type                 TypeEff;
         typedef bool                 TypeBool;
 
-        typedef  REAL TypeScalReel;
+        typedef  double_t TypeScalReel;
         typedef  Type TypeVarProv;
-        typedef  REAL TypeVarProvReel;
+        typedef  double_t TypeVarProvReel;
 
-        static  Type RtoT(REAL);
+        static  Type RtoT(double_t);
         static  Type RTtoT(TypeScalReel);
-        static  REAL T2R (const Type & aV) {return aV;}
+        static  double_t T2R (const Type & aV) {return aV;}
         static Type  El0 () {return 0;}
 
     private :
 };
 
 
-template <> INT   ElStdTypeScal<INT>::RtoT(REAL v); //  { return round_ni(v);}
-template <> REAL  ElStdTypeScal<REAL>::RtoT(REAL v); //  { return v;}
-template <> INT   ElStdTypeScal<INT>::RTtoT(REAL v) ; // { return round_ni(v);}
-template <> REAL  ElStdTypeScal<REAL>::RTtoT(REAL v) ; // { return v;}
+template <> int   ElStdTypeScal<int>::RtoT(double_t v); //  { return round_ni(v);}
+template <> double_t  ElStdTypeScal<double_t>::RtoT(double_t v); //  { return v;}
+template <> int   ElStdTypeScal<int>::RTtoT(double_t v) ; // { return round_ni(v);}
+template <> double_t  ElStdTypeScal<double_t>::RTtoT(double_t v) ; // { return v;}
 /*
 */
-// INT totoR() {return ElStdTypeScal<INT>::RtoT(3.0);}
-// REAL totoI() {return ElStdTypeScal<REAL>::RtoT(3.0);}
+// int totoR() {return ElStdTypeScal<int>::RtoT(3.0);}
+// double_t totoI() {return ElStdTypeScal<double_t>::RtoT(3.0);}
 
 
 class Fonc_Num;
@@ -106,7 +106,7 @@ template <> class ElStdTypeScal<Fonc_Num>
 
         typedef  Symb_FNum TypeVarProvReel;
 
-        static  Fonc_Num RtoT(REAL aV);
+        static  Fonc_Num RtoT(double_t aV);
         static  Fonc_Num RTtoT(Fonc_Num);
         static  Fonc_Num T2R(Fonc_Num aV);
         static Fonc_Num  El0 ();
@@ -168,7 +168,7 @@ template <class Type> class Pt2d : public  ElStdTypeScal<Type>
    public :
 
      typedef typename TCompl<Type>::TypeCompl  tCompl;
-     typedef Pt2d<REAL>  TypeReel;
+     typedef Pt2d<double_t>  TypeReel;
      typedef Type        TypeScal;
      typedef Pt2d<Type>  TypeEff;
      static Pt2d  El0 () {return Pt2d(0,0);}
@@ -198,17 +198,17 @@ template <class Type> class Pt2d : public  ElStdTypeScal<Type>
 
 /*
 
-     Pt2d<Type>(const Pt2d<INT>& p) : x (p.x), y (p.y) {};
-     Pt2d<Type>(const Pt2d<REAL>& p): x (Pt2d<Type>::RtoT(p.x)), y (Pt2d<Type>::RtoT(p.y)) {};
+     Pt2d<Type>(const Pt2d<int>& p) : x (p.x), y (p.y) {};
+     Pt2d<Type>(const Pt2d<double_t>& p): x (Pt2d<Type>::RtoT(p.x)), y (Pt2d<Type>::RtoT(p.y)) {};
 */
 
 
-     static  Pt2d<Type>  FromPolar(REAL rho,REAL teta)
+     static  Pt2d<Type>  FromPolar(double_t rho,double_t teta)
      {
         return   Pt2d<Type>(ElStdTypeScal<Type>::RtoT(cos(teta)*rho),ElStdTypeScal<Type>::RtoT(sin(teta)*rho));
      }
 
-     static Pt2d<double> polar(const Pt2d<double> & p,REAL AngDef);
+     static Pt2d<double> polar(const Pt2d<double> & p,double_t AngDef);
 
  // Operateurs
 
@@ -284,13 +284,13 @@ template <class Type> class Pt2d : public  ElStdTypeScal<Type>
 
          // binaires,  PtxScalaire => Pt
 
-     Pt2d<Type> operator * (INT  lambda) const { return Pt2d<Type>(x*lambda,y*lambda);}
+     Pt2d<Type> operator * (int  lambda) const { return Pt2d<Type>(x*lambda,y*lambda);}
 
 
-     Pt2d<typename ElStdTypeScal<Type>::TypeScalReel> operator * (REAL lambda) const { return Pt2d<typename ElStdTypeScal<Type>::TypeScalReel>(x*lambda,y*lambda);}
+     Pt2d<typename ElStdTypeScal<Type>::TypeScalReel> operator * (double_t lambda) const { return Pt2d<typename ElStdTypeScal<Type>::TypeScalReel>(x*lambda,y*lambda);}
 
-     Pt2d<Type> operator / (INT  lambda) const { return Pt2d<Type>(x/lambda,y/lambda);}
-     Pt2d<typename ElStdTypeScal<Type>::TypeScalReel> operator / (REAL lambda) const { return Pt2d<typename ElStdTypeScal<Type>::TypeScalReel>(x/lambda,y/lambda);}
+     Pt2d<Type> operator / (int  lambda) const { return Pt2d<Type>(x/lambda,y/lambda);}
+     Pt2d<typename ElStdTypeScal<Type>::TypeScalReel> operator / (double_t lambda) const { return Pt2d<typename ElStdTypeScal<Type>::TypeScalReel>(x/lambda,y/lambda);}
 
 
       // operator * est deja surcharge
@@ -338,7 +338,7 @@ template <class Type> class Pt2d : public  ElStdTypeScal<Type>
 };
 
 template <class Type>
-Pt2d<double> Pt2d<Type>::polar( const Pt2d<double> & p,REAL AngDef )
+Pt2d<double> Pt2d<Type>::polar( const Pt2d<double> & p,double_t AngDef )
 {
     if ((p.x==0) && (p.y== 0))
         return Pt2d<double>(0,AngDef);
@@ -360,14 +360,14 @@ Type  dist48(const Pt2d<Type> & p)
 }
 
 /*
-template <> Pt2d<double>::Pt2d(const Pt2d<INT>& p) : x (p.x), y (p.y) {};
+template <> Pt2d<double>::Pt2d(const Pt2d<int>& p) : x (p.x), y (p.y) {};
 template <> Pt2d<int>::Pt2d(const Pt2d<double>& p) : x (round_ni(p.x)), y (round_ni(p.y)) {};
 
 template <> Pt2d<Fonc_Num>::Pt2d(const Pt2d<double>& p) : x (p.x), y (p.y) {};
 */
 /*
-     Pt2d<Type>(const Pt2d<INT>& p) : x (p.x), y (p.y) {};
-     Pt2d<Type>(const Pt2d<REAL>& p): x (Pt2d<Type>::RtoT(p.x)), y (Pt2d<Type>::RtoT(p.y)) {};
+     Pt2d<Type>(const Pt2d<int>& p) : x (p.x), y (p.y) {};
+     Pt2d<Type>(const Pt2d<double_t>& p): x (Pt2d<Type>::RtoT(p.x)), y (Pt2d<Type>::RtoT(p.y)) {};
 */
 
 //Rotate aPt(X,Y) with angle(rad) and center(X,Y)
@@ -424,8 +424,8 @@ template <class Type>Pt2d<Type> Sup3 (const Pt2d<Type> & p1,const Pt2d<Type> & p
 }
 
 
-typedef  Pt2d<INT> Pt2di;
-typedef  Pt2d<REAL> Pt2dr;
+typedef  Pt2d<int> Pt2di;
+typedef  Pt2d<double_t> Pt2dr;
 typedef  Pt2d<long double> Pt2dlr;
 typedef  Pt2d<float> Pt2df;
 double DMaxCoins(Pt2dr aSzIm,Pt2dr aC);
@@ -465,7 +465,7 @@ class ElSimilitude : public cElMap2D
                    );
          }
 
-         static ElSimilitude SimOfCentre(Pt2dr centre,REAL rho,REAL teta)
+         static ElSimilitude SimOfCentre(Pt2dr centre,double_t rho,double_t teta)
          {
                 return SimOfCentre
                        (
@@ -576,11 +576,11 @@ double DMaxCoins(ElAffin2D AfC2M,Pt2dr aSzIm,Pt2dr aC);
     // When a Pt2di p is used as a ``seed'' to generate a digital line the average euclidean
     // distance d between two consecutives points is variable according to p
     // For example  : d = sqrt(2) for p = (1,1) or p = (234,234) and d = 1 for p = (-99,0)
-REAL  average_euclid_line_seed (Pt2di);
+double_t  average_euclid_line_seed (Pt2di);
 Pt2di  best_4_approx(const Pt2di & p);
 Pt2di  second_freeman_approx(Pt2di u, bool conx_8,Pt2di u1);
-INT    num_4_freeman(Pt2di);
-Pt2dr ImAppSym(REAL A,REAL B,REAL C,Pt2dr aP);
+int    num_4_freeman(Pt2di);
+Pt2dr ImAppSym(double_t A,double_t B,double_t C,Pt2dr aP);
 
 Pt2di corner_box_included(Pt2di pmin,Pt2di pmax,bool left,bool down);
 
@@ -618,7 +618,7 @@ inline Pt2dr rot90(Pt2dr p)
 {
     return Pt2dr(-p.y,p.x);
 }
-inline Pt2dr vunit(Pt2dr p,REAL & d)
+inline Pt2dr vunit(Pt2dr p,double_t & d)
 {
    d = euclid(p);
    ELISE_ASSERT((d!=0),"Null seg in vunit");
@@ -627,12 +627,12 @@ inline Pt2dr vunit(Pt2dr p,REAL & d)
 
 inline Pt2dr vunit(Pt2dr p)
 {
-   REAL d ;
+   double_t d ;
    return vunit(p,d);
 }
 
 /*
-inline Pt2dr barry(REAL pds1,const Pt2dr & p1,const Pt2dr & p2 )
+inline Pt2dr barry(double_t pds1,const Pt2dr & p1,const Pt2dr & p2 )
 {
      return p1*pds1  + p2*(1-pds1);
 }
@@ -655,20 +655,20 @@ template <class Type> void assert_not_nul(const Pt2d<Type> &){}
 // angle avec vecteur (1,0), compris entre -pi et pi
 // par ex (0,1) => pi / 2, si deux arg angle de p1 vers p2
 // en fait juste encapsulation de atan2
-REAL  angle(const Pt2dr & p);
-REAL  angle(const Pt2dr & p1,const Pt2dr & p2);
+double_t  angle(const Pt2dr & p);
+double_t  angle(const Pt2dr & p1,const Pt2dr & p2);
 
 
 // La fonction polar est maintenant dans la classe Pt2d !!!
-// Pt2dr polar(const Pt2dr & p,REAL AngDef);
+// Pt2dr polar(const Pt2dr & p,double_t AngDef);
 
 // angle de droite (entre -pi/2 et pi/2),
 //  angle de droite non oriente (entre 0 et pi/2, symetrique)
 
-REAL  angle_de_droite(const Pt2dr & p);
-REAL  angle_de_droite(const Pt2dr & p1,const Pt2dr & p2);
-REAL  angle_de_droite_nor(const Pt2dr & p);
-REAL  angle_de_droite_nor(const Pt2dr & p1,const Pt2dr & p2);
+double_t  angle_de_droite(const Pt2dr & p);
+double_t  angle_de_droite(const Pt2dr & p1,const Pt2dr & p2);
+double_t  angle_de_droite_nor(const Pt2dr & p);
+double_t  angle_de_droite_nor(const Pt2dr & p1,const Pt2dr & p2);
 
 
 
@@ -681,8 +681,8 @@ std::vector<std::vector<Pt2di> > PointOfCouronnes(const std::vector<int> &Dist,b
 std::vector<std::vector<Pt2di> > StdPointOfCouronnes(int aDMax,bool AddD4First);
 
 
-#define Pt3di  Pt3d<INT>
-#define Pt3dr  Pt3d<REAL>
+#define Pt3di  Pt3d<int>
+#define Pt3dr  Pt3d<double_t>
 #define Pt3df  Pt3d<float>
 
 
@@ -840,7 +840,7 @@ inline Pt3di round_down(Pt3dr  p)
 Pt3dr vunit(const Pt3dr & p);
 
 // return rho
-REAL ToSpherique(const Pt3dr & aP,REAL & rho,REAL & teta,REAL & phi);
+double_t ToSpherique(const Pt3dr & aP,double_t & rho,double_t & teta,double_t & phi);
 
 template <class Type> void  corner_boxes
                             (
@@ -856,8 +856,8 @@ extern std::ostream & operator << (std::ostream & ofs,const Pt3di  &p);
 extern std::istream & operator >> (std::istream & ifs,Pt3dr  &p);
 extern std::istream & operator >> (std::istream & ifs,Pt3di  &p);
 
-#define Pt4di  Pt4d<INT>
-#define Pt4dr  Pt4d<REAL>
+#define Pt4di  Pt4d<int>
+#define Pt4dr  Pt4d<double_t>
 
 
 template <class Type> class Pt4d
@@ -907,12 +907,12 @@ class Interval
 {
    public :
 
-     REAL _v0;   // begin
-     REAL _v1;   // end
+     double_t _v0;   // begin
+     double_t _v1;   // end
 
-     Interval(REAL v0,REAL v1);
+     Interval(double_t v0,double_t v1);
      Interval();
-     REAL dist(const Interval &);
+     double_t dist(const Interval &);
 };
 
 
@@ -961,7 +961,7 @@ template <class Type> class Box2d
 
      Type   hauteur() const { return _p1.y-_p0.y;}
      Type   largeur() const { return _p1.x-_p0.x;}
-     REAL  diam() const{return euclid(_p0,_p1);}
+     double_t  diam() const{return euclid(_p0,_p1);}
      Type surf() {return hauteur() * largeur();}
      Type x(int i) const {return i ? _p1.x : _p0.x;}
      Type y(int i) const {return i ? _p1.y : _p0.y;}
@@ -979,11 +979,11 @@ template <class Type> class Box2d
      Box2d(){};
      Box2d(Type);
      Box2d(Pt2d<Type>);
-     Box2d(const Pt2d<Type> *,INT aNb);
+     Box2d(const Pt2d<Type> *,int aNb);
      Box2d(Pt2di,Pt2di);
      Box2d(Pt2dr,Pt2dr);  // cast up and down
      Box2d(Pt2dlr,Pt2dlr);  // cast up and down
-     Box2d(const Type *,const Type *,INT);
+     Box2d(const Type *,const Type *,int);
      bool include_in(const Box2d<Type> & b2) const;
      Box2d<Type>  erode(Pt2d<Type>) const;
      Box2d<Type>  dilate(Pt2d<Type>) const;
@@ -1024,7 +1024,7 @@ template <class Type> class Box2d
 
           // generaux
 
-          INT  freeman_pos(const Pt2dr & pt) const;
+          int  freeman_pos(const Pt2dr & pt) const;
 
           // box point
 
@@ -1036,39 +1036,39 @@ template <class Type> class Box2d
      bool   Include(const SegComp &) const;
      bool   Include(const Seg2d &) const;
      bool   Include(const cElTriangleComp &) const;
-     REAL8  SquareDist(const Pt2dr &) const;
-     REAL8  SquareDist(const SegComp &) const;
-     REAL8  SquareDist(const Seg2d &) const;
-     REAL8  SquareDist(const Box2d<Type> &) const;
+     double_t8  SquareDist(const Pt2dr &) const;
+     double_t8  SquareDist(const SegComp &) const;
+     double_t8  SquareDist(const Seg2d &) const;
+     double_t8  SquareDist(const Box2d<Type> &) const;
 
      void   QSplit(QBox &) const; // Split in 4 box (for Q-Tree)
      void   QSplitWithRab(QBox &,Type aRab) const; // Split in 4 box (for Q-Tree)
      void   Corners(P4 &) const; // Split in 4 box (for Q-Tree)
 
-      void PtsDisc(std::vector<Pt2dr> &,INT aNbPts);
+      void PtsDisc(std::vector<Pt2dr> &,int aNbPts);
    private :
-        typedef REAL8 (Box2d<Type>:: * R_fonc_Pt2dr)(const Pt2dr &) const;
+        typedef double_t8 (Box2d<Type>:: * R_fonc_Pt2dr)(const Pt2dr &) const;
 
-        REAL  Freem0SquareDist(const Pt2dr &) const;
-        REAL  Freem1SquareDist(const Pt2dr &) const;
-        REAL  Freem2SquareDist(const Pt2dr &) const;
-        REAL  Freem3SquareDist(const Pt2dr &) const;
-        REAL  Freem4SquareDist(const Pt2dr &) const;
-        REAL  Freem5SquareDist(const Pt2dr &) const;
-        REAL  Freem6SquareDist(const Pt2dr &) const;
-        REAL  Freem7SquareDist(const Pt2dr &) const;
-        REAL  Freem8SquareDist(const Pt2dr &) const;
+        double_t  Freem0SquareDist(const Pt2dr &) const;
+        double_t  Freem1SquareDist(const Pt2dr &) const;
+        double_t  Freem2SquareDist(const Pt2dr &) const;
+        double_t  Freem3SquareDist(const Pt2dr &) const;
+        double_t  Freem4SquareDist(const Pt2dr &) const;
+        double_t  Freem5SquareDist(const Pt2dr &) const;
+        double_t  Freem6SquareDist(const Pt2dr &) const;
+        double_t  Freem7SquareDist(const Pt2dr &) const;
+        double_t  Freem8SquareDist(const Pt2dr &) const;
 
         friend  class BoxFreemanCompil<Type>;
-        REAL8  SquareDist(const Pt2dr &,INT c) const;
+        double_t8  SquareDist(const Pt2dr &,int c) const;
 
         static R_fonc_Pt2dr _Tab_FreemSquareDist[9];
 };
 
 
 
-typedef Box2d<INT> Box2di;
-typedef Box2d<REAL>  Box2dr;
+typedef Box2d<int> Box2di;
+typedef Box2d<double_t>  Box2dr;
 Pt2di BoxPClipedIntervC(const Box2di &,const Pt2di &);
 
 extern std::istream & operator >> (std::istream & ifs,Box2dr  &aBox);
@@ -1084,7 +1084,7 @@ std::ostream & operator << (std::ostream & ofs,const Box2dr  &aBox);
 
 
 
-void AdaptParamCopyTrans(INT& X0src,INT& X0dest,INT& NB,INT NbSrc,INT NbDest);
+void AdaptParamCopyTrans(int& X0src,int& X0dest,int& NB,int NbSrc,int NbDest);
 
 void AdaptParamCopyTrans(Pt2di& p0src,Pt2di& p0dest,Pt2di& sz,
                           Pt2di   SzSrc, Pt2di   SzDest);
@@ -1399,7 +1399,7 @@ class cGeoRefRasterFile
         double      mResolZ;
 };
 
-Pt3dr  tCho2double(const Pt3d<tSysCho> & aP);
+Pt3dr  tCho2double(const Pt3d<double_t> & aP);
 
 
 typedef TypeSubst<Pt2di>   Pt2diSubst;

@@ -84,12 +84,12 @@ typedef enum
 class cParamRechCible
 {
      public :
-        cParamRechCible(bool StepInit,INT SzW,REAL DistConf,REAL EllipseConf);
+        cParamRechCible(bool StepInit,int SzW,double_t DistConf,double_t EllipseConf);
 
 	bool  mStepInit;
-	INT   mSzW;
-	REAL  mDistConf;
-	REAL  mEllipseConf;
+	int   mSzW;
+	double_t  mDistConf;
+	double_t  mEllipseConf;
 	eUseCibleInit  mUseCI;
 };
 
@@ -100,12 +100,12 @@ class cParamEtal : public cComplParamEtalPoly
 	   static cParamEtal FromStr(const std::string & aName);
 	   cParamEtal ParamRatt();  // Si a un nom de ratt
 
-	   INT Zoom() const;
+	   int Zoom() const;
 	   const std::string & Directory() const;
 	   const std::string & NameFile() const;
 	   const std::string & PrefixeTiff() const;
 	   const std::string & PostfixeTiff() const;
-	   REAL   FocaleInit() const;
+	   double_t   FocaleInit() const;
 	   Pt2di  SzIm() const;
 
 	   std::string NameTiff(const std::string Im) const;
@@ -117,7 +117,7 @@ class cParamEtal : public cComplParamEtalPoly
 
 	   const std::vector<std::string>  & ImagesInit() const;
 	   const std::vector<std::string>  & AllImagesCibles() const;
-	   REAL SeuilCorrel() const;
+	   double_t SeuilCorrel() const;
 
 	   std::string NameCible3DPolygone() const;
 	   std::string NameImPolygone() const;
@@ -130,17 +130,17 @@ class cParamEtal : public cComplParamEtalPoly
 
 	   const std::string & NameCamera() const;
 
-	   INT   EgelsConvImage();
+	   int   EgelsConvImage();
 	   Pt3dr CibDirU() const;
 	   Pt3dr CibDirV() const;
-	   INT  CibleDeTest ()   const;
+	   int  CibleDeTest ()   const;
 	   const std::string  &  ImDeTest() const;
-	   bool  AcceptCible(INT) const;
-	   const std::vector<INT>  &  CiblesRejetees() const;
+	   bool  AcceptCible(int) const;
+	   const std::vector<int>  &  CiblesRejetees() const;
 	   bool CDistLibre(bool Def) const;
-	   INT  DegDist() const;
+	   int  DegDist() const;
 	   bool MakeImagesCibles() const;
-           REAL SeuilCoupure () const;
+           double_t SeuilCoupure () const;
 
            bool InvYPointe() const;
 
@@ -201,24 +201,24 @@ class cParamEtal : public cComplParamEtalPoly
 	   std::string               mNameFile;
 	   std::string               mPrefixe;
 	   std::string               mPostfixe;
-	   REAL                      mFocaleInit;
-	   INT                       mZoom;
+	   double_t                      mFocaleInit;
+	   int                       mZoom;
 	   Pt2di                     mSzIm;
 	   cParamRechCible           mPRCInit;
 	   cParamRechCible           mPRCDrad;
-	   REAL                      mSeuilCorrel;
-	   INT                       mEgelsConvImage;
+	   double_t                      mSeuilCorrel;
+	   int                       mEgelsConvImage;
 	   Pt3dr                     mCibDirU;
 	   Pt3dr                     mCibDirV;
-	   INT                       mCibleDeTest;
+	   int                       mCibleDeTest;
 	   std::string               mImDeTest;
-	   std::vector<INT>          mCiblesRejetees;
-	   INT                       mCDistLibre;
-	   INT                       mDegDist;
-	   INT                       mMakeImageCibles;
-           REAL                      mSeuilCoupure;
-           INT                       mInvYPointe;
-           INT                       mRabExportGrid;
+	   std::vector<int>          mCiblesRejetees;
+	   int                       mCDistLibre;
+	   int                       mDegDist;
+	   int                       mMakeImageCibles;
+           double_t                      mSeuilCoupure;
+           int                       mInvYPointe;
+           int                       mRabExportGrid;
 	   // Par defaut calcule sur le nom de la premiere image
 	   
 	   cNameSpaceEqF::eTypeSysResol  mTypeSysResolve;

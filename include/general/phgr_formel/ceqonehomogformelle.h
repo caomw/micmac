@@ -16,9 +16,9 @@ class cEqOneHomogFormelle : public  cNameSpaceEqF ,
           );
 
          // WithD2 : avec derivees secondes
-          REAL AddLiaisonP1P2(Pt2dr P1, Pt2dr aP2, REAL aPds,bool WithD2);
-          Pt2dr StdAddLiaisonP1P2(Pt2dr P1,Pt2dr P2,REAL aPds,bool WithD2); // Version moderne type camera
-          REAL ResiduNonSigneP1P2(Pt2dr aP1,Pt2dr aP2);
+          double_t AddLiaisonP1P2(Pt2dr P1, Pt2dr aP2, double_t aPds,bool WithD2);
+          Pt2dr StdAddLiaisonP1P2(Pt2dr P1,Pt2dr P2,double_t aPds,bool WithD2); // Version moderne type camera
+          double_t ResiduNonSigneP1P2(Pt2dr aP1,Pt2dr aP2);
           Pt2dr  PtResidu(Pt2dr aP1,Pt2dr aP2);
 
           cHomogFormelle&       HF();
@@ -37,8 +37,8 @@ class cEqOneHomogFormelle : public  cNameSpaceEqF ,
               ~cOneHEq();
               cOneHEq(Fonc_Num F,cEqOneHomogFormelle &,bool isX,bool Code2Gen);
 
-              REAL AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,REAL aPds,bool WithD2);
-              REAL ResiduSigneP1P2(Pt2dr aP1,Pt2dr aP2);
+              double_t AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,double_t aPds,bool WithD2);
+              double_t ResiduSigneP1P2(Pt2dr aP1,Pt2dr aP2);
               void  InitPts(Pt2dr P1,Pt2dr P2);
           };
           friend struct cOneHEq;

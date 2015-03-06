@@ -10,7 +10,7 @@ public :
     ~cMappingEpipCoord();
 private :
     virtual bool IsEpipId() const;
-    EpipolaireCoordinate * MapingChScale(REAL aChSacle) const;
+    EpipolaireCoordinate * MapingChScale(double_t aChSacle) const;
     Pt2dr ToCoordEpipol(Pt2dr aPInit) const ;
     Pt2dr ToCoordInit(Pt2dr aPEpi) const ;
 

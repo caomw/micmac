@@ -88,7 +88,7 @@ template <class Obj,class Prim,class FPrim>
                        cTplResRVoisin<Obj>  &,
                        const Box2dr         &,
                        const ElQTRegionPlan &,
-                       REAL                 d2
+                       double_t                 d2
                   ) =0;
 
           virtual ElQTArbre *  remove
@@ -127,7 +127,7 @@ template <class Obj,class Prim,class FPrim>
                        cTplResRVoisin<Obj>  &,
                        const Box2dr         &,
                        const ElQTRegionPlan &,
-                       REAL                 d2
+                       double_t                 d2
                   );
 
           virtual ElQTArbre<Obj,Prim,FPrim> *    remove
@@ -142,7 +142,7 @@ template <class Obj,class Prim,class FPrim>
 
       private :
          ElQTArbre<Obj,Prim,FPrim> *  _fils[4];
-         ElQTArbre<Obj,Prim,FPrim> * FilsKInit(INT k)
+         ElQTArbre<Obj,Prim,FPrim> * FilsKInit(int k)
          {
             if (! _fils[k]) 
                _fils[k] = new ElQTFeuille<Obj,Prim,FPrim>;
@@ -176,7 +176,7 @@ template <class Obj,class Prim,class FPrim>
                        cTplResRVoisin<Obj>  &,
                        const Box2dr         &,
                        const ElQTRegionPlan &,
-                       REAL                 d2
+                       double_t                 d2
                  );
 
           virtual ElQTArbre<Obj,Prim,FPrim> *    remove
@@ -192,7 +192,7 @@ template <class Obj,class Prim,class FPrim>
       private :
          typedef typename ElSlist<Obj>::iterator  liter;
 
-         INT       _nb_obj;               
+         int       _nb_obj;               
          ElSlist<Obj> _l_obj;
 	
 
@@ -227,7 +227,7 @@ template <class Obj,class Prim,class FPrim>
 template <class Obj,class Prim,class FPrim>
          ElQTBranche<Obj,Prim,FPrim>::ElQTBranche()
 {
-    for (INT k= 0; k< 4 ; k++)
+    for (int k= 0; k< 4 ; k++)
         _fils[k] = 0;
 }
 
@@ -235,7 +235,7 @@ template <class Obj,class Prim,class FPrim>
 template <class Obj,class Prim,class FPrim>
          ElQTBranche<Obj,Prim,FPrim>::~ElQTBranche()
 {
-    for (INT k= 0; k< 4 ; k++)
+    for (int k= 0; k< 4 ; k++)
         if ( _fils[k])
            delete _fils[k];
 }
@@ -252,7 +252,7 @@ template <class Obj,class Prim,class FPrim>
      Box2dr qb[4];
      box.QSplit(qb);
 
-     for (INT k= 0; k< 4 ; k++)
+     for (int k= 0; k< 4 ; k++)
         if (qb[k].Intersecte(prim))
         {
             FilsKInit(k);
@@ -273,7 +273,7 @@ template <class Obj,class Prim,class FPrim>
      Box2dr qb[4];
      box.QSplit(qb);
 
-     for (INT k= 0; k< 4 ; k++)
+     for (int k= 0; k< 4 ; k++)
         if (_fils[k] && qb[k].Intersecte(prim))
             _fils[k] = _fils[k]->remove(arg,obj,prim,qb[k]);
      return this;
@@ -283,7 +283,7 @@ template <class Obj,class Prim,class FPrim>
          void  ElQTBranche<Obj,Prim,FPrim>::clear(ElQT<Obj,Prim,FPrim> & qt)
 {
 
-     for (INT k= 0; k< 4 ; k++)
+     for (int k= 0; k< 4 ; k++)
         if (_fils[k])
             _fils[k]->clear(qt);
 }
@@ -299,13 +299,13 @@ template <class Obj,class Prim,class FPrim>
                        cTplResRVoisin<Obj>             &    TheSet,
                        const Box2dr         &    box ,
                        const ElQTRegionPlan &    reg,
-                       REAL                      d2
+                       double_t                      d2
                )
 {
      Box2dr qb[4];
      box.QSplit(qb);
 
-     for (INT k= 0; k< 4 ; k++)
+     for (int k= 0; k< 4 ; k++)
         if (_fils[k] && (reg.D2(qb[k]) < d2))
             _fils[k]->RVoisins(arg,TheSet,qb[k],reg,d2);
 
@@ -387,7 +387,7 @@ template <class Obj,class Prim,class FPrim>
                        cTplResRVoisin<Obj>             &    TheSet,
                        const Box2dr         &    b   ,
                        const ElQTRegionPlan &    reg,
-                       REAL                      d2
+                       double_t                      d2
                 )
 {
 
@@ -416,8 +416,8 @@ template <class Obj,class Prim,class FPrim>
           (
                 const FPrim & FPRIM,
                 Box2dr        BOX,
-                INT           NBOBJMAX,
-                REAL          SzMin
+                int           NBOBJMAX,
+                double_t          SzMin
           ) :
           ElQdtGen(BOX,NBOBJMAX,SzMin),
           _fprim    (FPRIM),
@@ -449,7 +449,7 @@ template <class Obj,class Prim,class FPrim>
               (
                        cTplResRVoisin<Obj>             & TheSet,
                        const ElQTRegionPlan & reg,
-                       REAL                   d
+                       double_t                   d
               )
 {
     typename ElClassQT<Obj,Prim,FPrim>::ArgRequette arg(*this);
@@ -462,7 +462,7 @@ template <class Obj,class Prim,class FPrim>
               (
                        cTplResRVoisin<Obj> & aRes,
                        Pt2dr                  pt,
-                       REAL                   d
+                       double_t                   d
               )
 {
     RVoisins(aRes,ElQTRegPt(pt),d);
@@ -473,7 +473,7 @@ template <class Obj,class Prim,class FPrim>
               (
                        std::set<Obj>             & TheSet,
                        Pt2dr                  pt,
-                       REAL                   d
+                       double_t                   d
               )
 {
     cTplSetResRVoisin<Obj>  aRes(TheSet);
@@ -488,7 +488,7 @@ template <class Obj,class Prim,class FPrim>
               (
                        cTplResRVoisin<Obj> & aRes,
                        Box2dr                  pt,
-                       REAL                   d
+                       double_t                   d
               )
 {
     RVoisins(aRes,ElQTRegBox(pt),d);
@@ -499,7 +499,7 @@ template <class Obj,class Prim,class FPrim>
               (
                        std::set<Obj>             & TheSet,
                        Box2dr                 box,
-                       REAL                   d
+                       double_t                   d
               )
 {
     cTplSetResRVoisin<Obj>  aRes(TheSet);
@@ -515,7 +515,7 @@ template <class Obj,class Prim,class FPrim>
               (
                        cTplResRVoisin<Obj> & aRes,
                        Seg2d                  pt,
-                       REAL                   d
+                       double_t                   d
               )
 {
     RVoisins(aRes,ElQTRegSeg(pt),d);
@@ -526,7 +526,7 @@ template <class Obj,class Prim,class FPrim>
               (
                        std::set<Obj>             & TheSet,
                        Seg2d                  seg,
-                       REAL                   d
+                       double_t                   d
               )
 {
     cTplSetResRVoisin<Obj>  aRes(TheSet);

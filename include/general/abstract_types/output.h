@@ -46,19 +46,61 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 #include <PRC0>
 #include <Fonc_Num>
+#include <OperAssocMixte>
+#include <TypeSubst>
 
 class Output : public  PRC0
 {
-     friend class Pipe_Out_Not_Comp;
-     friend class CatCoord_Out_Not_Comp;
-     public :
-        ~Output();
-        Output(class Output_Not_Comp *);
-        Output(class Liste_Pts_Gen);
-        class Output_Computed * compute (const class Arg_Output_Comp &);
-        static Output onul(INT dim = 1);
-        Output chc(Fonc_Num);
-     private :
+    friend class Pipe_Out_Not_Comp;
+    friend class CatCoord_Out_Not_Comp;
+public :
+    ~Output() {}
+    Output(class Output_Not_Comp *);
+    Output(class Liste_Pts_Gen);
+    class Output_Computed * compute (const class Arg_Output_Comp &);
+    static Output onul(int dim = 1);
+    Output chc(Fonc_Num);
+
+    static   Output Virgule(Output,Output);
+    static   Output Virgule(Output,Output,Output);
+    static   Output Virgule(Output,Output,Output,Output);
+    static   Output Virgule(Output,Output,Output,Output,Output);
+    static   Output Virgule(Output,Output,Output,Output,Output,Output);
+
+    //static   Output operator | (Output,Output);
+
+    // operator mixing output and function
+
+    //static   Output operator << (Output,Fonc_Num);
+
+    static Output Filtre_Out_RedBin   (Output anOut);
+    static Output Filtre_Out_RedBin_X (Output anOut);
+    static Output Filtre_Out_RedBin_Y (Output anOut);
+    static Output Filtre_Out_RedBin_Gen(Output anOut,bool aRedX,bool aRedY);
+
+    //  REDUCTION
+//    static Output  reduc(const OperAssocMixte &,Type &);
+//    static Output  reduc(const OperAssocMixte &,Type *,int nb);
+
+    //  The sigma function is just a syntactic shugar that is rewriten as follow :
+    //     sigma(v) ==> reduc(OpSum,v)
+    //
+
+//    static Output  sigma(Type &);
+//    static Output  sigma(Type *,int nb);
+
+//    static Output  VMax(Type &);
+//    static Output  VMax(Type *,int nb);
+
+//    static Output  VMin(Type &);
+//    static Output  VMin(Type *,int nb);
+
+
+//    static Output  WhichMax(Type &);
+//    static Output  WhichMax(Type *,int nb);
+
+//    static Output  WhichMin(Type &);
+//    static Output  WhichMin(Type *,int nb);
 };
 
 #endif

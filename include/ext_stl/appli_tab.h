@@ -134,10 +134,10 @@ template <class T> class cVectOfSMV
         (
               int  aX0,
               int  aX1,
-              INT2 * aBoxXMin,
-              INT2 * aBoxYMin,
-              INT2 * aBoxXMax,
-              INT2 * aBoxYMax,
+              int2 * aBoxXMin,
+              int2 * aBoxYMin,
+              int2 * aBoxXMax,
+              int2 * aBoxYMax,
               const T & aVinit
         ) 
         {
@@ -163,10 +163,10 @@ template <class T> class cVectOfSMV
         (
                 int  aX0,
                 int  aX1,
-                INT2 * aBoxXMin,
-                INT2 * aBoxYMin,
-                INT2 * aBoxXMax,
-                INT2 * aBoxYMax,
+                int2 * aBoxXMin,
+                int2 * aBoxYMin,
+                int2 * aBoxXMax,
+                int2 * aBoxYMax,
                 const T & aVinit,
                 sMatrixCellCost<ushort>    &poInitCost,
                 uint2                   &ptTer
@@ -207,10 +207,10 @@ template <class T> class cMatrOfSMV
         cMatrOfSMV
         (
               Box2di aBox,
-              INT2 ** aBoxXMin,
-              INT2 ** aBoxYMin,
-              INT2 ** aBoxXMax,
-              INT2 ** aBoxYMax,
+              int2 ** aBoxXMin,
+              int2 ** aBoxYMin,
+              int2 ** aBoxXMax,
+              int2 ** aBoxYMax,
               const T & aVinit
         )
         {
@@ -231,10 +231,10 @@ template <class T> class cMatrOfSMV
         cMatrOfSMV
         (
               Box2di aBox,
-              INT2 ** aBoxXMin,
-              INT2 ** aBoxYMin,
-              INT2 ** aBoxXMax,
-              INT2 ** aBoxYMax,
+              int2 ** aBoxXMin,
+              int2 ** aBoxYMin,
+              int2 ** aBoxXMax,
+              int2 ** aBoxYMax,
               const T & aVinit,
               sMatrixCellCost<ushort>    &poInitCost
         )

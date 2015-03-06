@@ -47,7 +47,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 class NROptF1vND
 {
      public :
-          virtual REAL NRF1v(REAL) = 0;
+          virtual double_t NRF1v(double_t) = 0;
           virtual bool NROptF1vContinue() const;
           virtual ~NROptF1vND();
           NROptF1vND(int aNbIterMax=-1);
@@ -57,7 +57,7 @@ class NROptF1vND
           // Golden search for mimimum
           //+++++++++++++++++++++++++++
 
-          REAL golden(REAL ax,REAL bx,REAL cx,REAL tol,REAL * xmin);
+          double_t golden(double_t ax,double_t bx,double_t cx,double_t tol,double_t * xmin);
 
           //+++++++++++++++++++++++++++
           // Brent search for mimimum
@@ -71,12 +71,12 @@ class NROptF1vND
           //++++++++++++++++++++++++++++++++++++++++++++++++
           // Van Wijngaarden-Deker-Brent search for root
           //++++++++++++++++++++++++++++++++++++++++++++++++
-          // REAL zbrent(REAL ax,REAL bx,REAL tol,INT ITMAX=100);
+          // double_t zbrent(double_t ax,double_t bx,double_t tol,int ITMAX=100);
 
 
                   // NR interface
-          void mnbrack( REAL *ax,REAL *bx,REAL *cx,
-                        REAL *fa,REAL * fb,REAL *fc
+          void mnbrack( double_t *ax,double_t *bx,double_t *cx,
+                        double_t *fa,double_t * fb,double_t *fc
                       );
      protected :
          int mNbIter;
@@ -88,12 +88,12 @@ class NROptF1vND
 
           // precondition :
           // f(ax) > f(bx), f(cx) > f(bx),  bx entre ax et cx 
-          virtual REAL PrivBrent
+          virtual double_t PrivBrent
                   (
-                    REAL ax,REAL bx,REAL cx,
-                    REAL tol,
-                    REAL * xmin,
-                    INT ITMAX=100
+                    double_t ax,double_t bx,double_t cx,
+                    double_t tol,
+                    double_t * xmin,
+                    int ITMAX=100
                );
 
 };

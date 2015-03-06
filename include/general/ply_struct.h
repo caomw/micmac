@@ -4,18 +4,18 @@
 #define PLY_START_TYPE 0
 #define PLY_CHAR       1
 #define PLY_SHORT      2
-#define PLY_INT        3
+#define PLY_int        3
 #define PLY_UCHAR      4
 #define PLY_USHORT     5
-#define PLY_UINT       6
+#define PLY_Uint       6
 #define PLY_FLOAT      7
 #define PLY_DOUBLE     8
-#define PLY_INT_8      9
-#define PLY_UINT_8     10
-#define PLY_INT_16     11
-#define PLY_UINT_16    12
-#define PLY_INT_32     13
-#define PLY_UINT_32    14
+#define PLY_int_8      9
+#define PLY_Uint_8     10
+#define PLY_int_16     11
+#define PLY_Uint_16    12
+#define PLY_int_32     13
+#define PLY_Uint_32    14
 #define PLY_FLOAT_32   15
 #define PLY_FLOAT_64   16
 

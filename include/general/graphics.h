@@ -68,9 +68,9 @@ class Col_Pal : public PRC0
     private :
 
 
-        Col_Pal(Elise_Palette,INT);
-        Col_Pal(Elise_Palette,INT,INT);
-        Col_Pal(Elise_Palette,INT,INT,INT);
+        Col_Pal(Elise_Palette,int);
+        Col_Pal(Elise_Palette,int,int);
+        Col_Pal(Elise_Palette,int,int,int);
 
 };
 
@@ -79,7 +79,7 @@ class Line_St : public PRC0
 {
     public :
       Line_St(Col_Pal);
-      Line_St(Col_Pal ,REAL width);
+      Line_St(Col_Pal ,double_t width);
       class Data_Line_St * dlst() const {return SAFE_DYNC(Data_Line_St *,_ptr);}
       Col_Pal col() const ;
 

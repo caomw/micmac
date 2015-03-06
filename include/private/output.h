@@ -52,15 +52,15 @@ class Output_Computed : public Mcheck
                 const Pack_Of_Pts * pts,
                 const Pack_Of_Pts * vals
            ) = 0;
-           inline INT    dim_consumed(){ return _dim_consumed;}
+           inline int    dim_consumed(){ return _dim_consumed;}
 
            virtual ~Output_Computed();
       protected :
 
-           Output_Computed(INT  dim_consumed);
+           Output_Computed(int  dim_consumed);
 
       private :
-          INT          _dim_consumed;
+          int          _dim_consumed;
 };
 
 
@@ -106,8 +106,8 @@ extern Output_Computed * clip_out_put
                  (
                        Output_Computed * o,
                        const Arg_Output_Comp & arg,
-                       const INT * p0,
-                       const INT * p1
+                       const int * p0,
+                       const int * p1
                   );
 
 extern Output_Computed * clip_out_put

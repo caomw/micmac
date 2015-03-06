@@ -67,9 +67,9 @@ class Col_Pal : public PRC0
     private :
 
 
-        Col_Pal(Elise_Palette,INT);
-        Col_Pal(Elise_Palette,INT,INT);
-        Col_Pal(Elise_Palette,INT,INT,INT);
+        Col_Pal(Elise_Palette,int);
+        Col_Pal(Elise_Palette,int,int);
+        Col_Pal(Elise_Palette,int,int,int);
 
 };
 

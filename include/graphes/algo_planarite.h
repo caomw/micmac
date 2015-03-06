@@ -52,7 +52,7 @@ template <class  AttrSom,class AttrArc>
                                    )
 {
 
-      REAL teta = trigo ? 10 : -10;
+      double_t teta = trigo ? 10 : -10;
       ElSom<AttrSom,AttrArc> * as1 = &(a.s1());
       ElSom<AttrSom,AttrArc> * succ = as1;
       ElSom<AttrSom,AttrArc> & s2 = a.s2();
@@ -70,7 +70,7 @@ template <class  AttrSom,class AttrArc>
            ElSom<AttrSom,AttrArc> & s3 = (*it).s2();
            if (&s3 != as1)
            {
-               REAL new_teta = angle(v12,sub.pt(s3)-p2);
+               double_t new_teta = angle(v12,sub.pt(s3)-p2);
                if (trigo ? (new_teta < teta) : (new_teta > teta))
                {
                    teta = new_teta;
@@ -106,7 +106,7 @@ template <class  AttrSom,class AttrArc>
       ElArc<AttrSom,AttrArc> * a0 =  &arc_init;
       ElArc<AttrSom,AttrArc> * a  = a0;
 
-      INT cpt = 2*arc_init.s1().gr().nb_som();
+      int cpt = 2*arc_init.s1().gr().nb_som();
       do
       {
             a = succ_trigo(*a,sub);
@@ -128,7 +128,7 @@ template <class  AttrSom,class AttrArc>
                ElPartition<ElArc<AttrSom,AttrArc> *>  &  part
          )
 {
-      INT flag = gr.alloc_flag_arc();
+      int flag = gr.alloc_flag_arc();
       bool OK = true;
 
       part.clear();
@@ -153,13 +153,13 @@ template <class  AttrSom,class AttrArc>
                      if (! face_trigo(a,sub,part.filo())) OK = false;
                      part.close_cur();
                      ElSubFilo<ElArc<AttrSom,AttrArc> *> NewF = part.top();
-                     for (INT k=0; k<NewF.nb() ; k++)
+                     for (int k=0; k<NewF.nb() ; k++)
                          NewF[k]->flag_set_kth_true(flag);
                  }
            }
       }
       ElFilo<ElArc<AttrSom,AttrArc> *> & all = part.filo();
-      for (INT k=0; k<all.nb() ; k++)
+      for (int k=0; k<all.nb() ; k++)
            all[k]->flag_set_kth_false(flag);
       gr.free_flag_arc(flag);
       return OK;
@@ -173,12 +173,12 @@ template <class  AttrSom,class AttrArc>
                ElPartition<ElArc<AttrSom,AttrArc> *>  &        in
          )
 {
-     INT flag = gr.alloc_flag_arc();
+     int flag = gr.alloc_flag_arc();
 
      out.clear();
-	 INT ka;
+	 int ka;
 
-     for (INT kf =0 ; kf < in.nb() ; kf++)
+     for (int kf =0 ; kf < in.nb() ; kf++)
      {
           ElSubFilo<ElArc<AttrSom,AttrArc> *> face = in[kf];
           for ( ka =0 ; ka<face.nb() ; ka++)
@@ -186,7 +186,7 @@ template <class  AttrSom,class AttrArc>
      }
 
 
-{     for (INT kf =0 ; kf < in.nb() ; kf++)
+{     for (int kf =0 ; kf < in.nb() ; kf++)
      {
           ElSubFilo<ElArc<AttrSom,AttrArc> *> face = in[kf];
           for ( ka =0 ; ka<face.nb() ; ka++)

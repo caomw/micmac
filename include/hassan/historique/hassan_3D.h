@@ -57,7 +57,7 @@ class Data_Hdroite : public RC_Object
       Pt3dr _p1;
       Pt3dr _ray;
       bool  _nu;
-      REAL  _dist;
+      double_t  _dist;
       
       void p0(Pt3dr p);
       void p1(Pt3dr p);
@@ -77,34 +77,34 @@ class Hdroite : public PRC0
       bool  empty();
       Hdroite* ptr();
       
-      REAL         distance();
-      REAL         distance(Pt3dr p);
-      static REAL  distance(Hdroite& d1, Hdroite& d2);
-      REAL         distance(Hdroite& d);
+      double_t         distance();
+      double_t         distance(Pt3dr p);
+      static double_t  distance(Hdroite& d1, Hdroite& d2);
+      double_t         distance(Hdroite& d);
       
-      bool         appartenir_drt(Pt3dr p, REAL precision);
-      bool         appartenir_seg(Pt3dr p, REAL precision);
+      bool         appartenir_drt(Pt3dr p, double_t precision);
+      bool         appartenir_seg(Pt3dr p, double_t precision);
       bool         espace_seg(Pt3dr p);
       
       Pt3dr        project_pt_drt(Pt3dr p);
       Pt3dr        rayon_ort(Hdroite& d);
       Hdroite      droite_ort(Hdroite& d);
       
-      void         trans_p0(REAL dist);
-      void         trans_p1(REAL dist);
-      void         trans(REAL dist);
+      void         trans_p0(double_t dist);
+      void         trans_p1(double_t dist);
+      void         trans(double_t dist);
       void         trans(Pt3dr dif);
-      void         trans(Pt3dr& p,REAL dist);
+      void         trans(Pt3dr& p,double_t dist);
       
-      void         rot(Pt3dr& p, REAL alpha);   //alpha en degree
-      void         rot(Hdroite& d, REAL alpha);
+      void         rot(Pt3dr& p, double_t alpha);   //alpha en degree
+      void         rot(Hdroite& d, double_t alpha);
       
-      Pt3dr         coord(REAL t);
+      Pt3dr         coord(double_t t);
       ElList<Pt3di> flux();
-      Liste_Pts_INT2 flux_el();
+      Liste_Pts_int2 flux_el();
       
-      bool         inter_drt(Hdroite& d, REAL dist, Pt3dr& p);
-      bool         inter_seg(Hdroite& d, REAL dist, Pt3dr& p);
+      bool         inter_drt(Hdroite& d, double_t dist, Pt3dr& p);
+      bool         inter_seg(Hdroite& d, double_t dist, Pt3dr& p);
       bool         intersect(Facette_2D f);
       bool         intersect(Facette_3d f);
       ElList<Facette_2D> partition_z(Facette_2D f);
@@ -137,7 +137,7 @@ class Data_Hplan : public RC_Object
       Pt3dr _r_x;
       Pt3dr _r_y;
       Pt3dr _r_z;
-      REAL _poids;
+      double_t _poids;
       bool  _nu;
       
       void trans(Pt3dr p);
@@ -158,29 +158,29 @@ class Hplan : public PRC0
       Pt3dr ray_x();
       Pt3dr ray_y();
       Pt3dr ray_z();
-      REAL  rho();
-      REAL  poids(){return dtd()->_poids;}
-      void  set_poids(REAL poids) {dtd()->_poids = poids;}
+      double_t  rho();
+      double_t  poids(){return dtd()->_poids;}
+      void  set_poids(double_t poids) {dtd()->_poids = poids;}
       bool  empty();
       Hplan* ptr();
       
-      REAL         distance(Pt3dr p);                         //positive ou negative
-      REAL         distance(Facette_3d f);                    //distance moyenne
+      double_t         distance(Pt3dr p);                         //positive ou negative
+      double_t         distance(Facette_3d f);                    //distance moyenne
       
-      bool         appartenir_plan(Pt3dr p, REAL precision);
+      bool         appartenir_plan(Pt3dr p, double_t precision);
       bool         into_trian(Pt3dr p);                       //l'appartenance est deja testee
-      bool         appartenir_trian(Pt3dr p, REAL precision);
+      bool         appartenir_trian(Pt3dr p, double_t precision);
       bool         espace_trian(Pt3dr p);
       
       Pt3dr        project_pt_plan(Pt3dr p);
       
       void         trans(Pt3dr dif);                           //dans l'espace
-      void         trans(REAL dist1, REAL dist2);              //dans le plan
-      void         rot_x(REAL alpha);                          //alpha en degree
-      void         rot_y(REAL alpha);              
-      void         rot_z(REAL alpha);              
-      void         rot_d(Hdroite d, REAL alpha);
-      bool         balancer(Hdroite d, REAL alpha);
+      void         trans(double_t dist1, double_t dist2);              //dans le plan
+      void         rot_x(double_t alpha);                          //alpha en degree
+      void         rot_y(double_t alpha);              
+      void         rot_z(double_t alpha);              
+      void         rot_d(Hdroite d, double_t alpha);
+      bool         balancer(Hdroite d, double_t alpha);
       
       Pt3dr         coord(Pt2dr p);                            // plan to espace
       Pt2dr         coord(Pt3dr p);                            //appartenance stisfaite
@@ -194,8 +194,8 @@ class Hplan : public PRC0
       bool          coord_y(ElList<Pt3dr> lp);
       bool          coord_z(ElList<Pt3dr> lp);
       
-      Liste_Pts_INT2 flux();
-      Liste_Pts_INT2 flux(Facette_3d f, bool contour = false);
+      Liste_Pts_int2 flux();
+      Liste_Pts_int2 flux(Facette_3d f, bool contour = false);
       
       bool          intersect(Hdroite d, Pt3dr& p);
       bool          intersect(Hdroite d, Pt2dr& p);
@@ -203,20 +203,20 @@ class Hplan : public PRC0
       
       bool          conforme(Hplan& pl){ return ( ptr() == pl.ptr() ); }
 
-      Facette_3d    projection( Facette_2D f, Hdroite drt, REAL z = 0.);
+      Facette_3d    projection( Facette_2D f, Hdroite drt, double_t z = 0.);
 
       bool               intersect(Hplan& pl, Hdroite& d);
       ElList<Facette_3d> partage(Facette_3d f);
       ElList<Facette_3d> partage(ElList<Facette_3d> lf);
-      INT                haut_milieu_bas(Facette_3d f);       // 1 : haut, 2 : milieu, 3 : bas
+      int                haut_milieu_bas(Facette_3d f);       // 1 : haut, 2 : milieu, 3 : bas
       ElList<Facette_3d> haut(ElList<Facette_3d> lf);
       ElList<Facette_3d> milieu(ElList<Facette_3d> lf);
       ElList<Facette_3d> bas(ElList<Facette_3d> lf);
-      bool               touch(Facette_3d f, REAL dist = 0);
+      bool               touch(Facette_3d f, double_t dist = 0);
       bool               intersect(Facette_3d f);
       ElList<Facette_3d> no_touch(ElList<Facette_3d> lf);
 
-      REAL               angle_normale(Hplan& pl);
+      double_t               angle_normale(Hplan& pl);
       
    private:
    
@@ -231,39 +231,39 @@ class Hcamera
    
       Hplan        _plan;
       Hplan        _plan_init;
-      Im2D_U_INT1  _iphoto;
-      Im2D_REAL8   _z_buf;
-      REAL         _dist_focal;
-      REAL         _resolu_film;
+      Im2D_U_int1  _iphoto;
+      Im2D_double_t8   _z_buf;
+      double_t         _dist_focal;
+      double_t         _resolu_film;
       Pt2dr        _p0ph;
       Pt3dr        _cent_opt;
       Pt3dr        _trans;
  
       Hcamera();
-      Hcamera(Hplan pl, Pt2di size, REAL resolu_film = .0003);
+      Hcamera(Hplan pl, Pt2di size, double_t resolu_film = .0003);
       
-      void        resolution(REAL r){_resolu_film = r;}
+      void        resolution(double_t r){_resolu_film = r;}
       
-      void        zoom(REAL zo){_dist_focal *= (1+zo);_cent_opt = _plan.p0() - _plan.ray_z() * _dist_focal;}
-      void        trans_x(REAL dx){_trans.x +=dx;_plan.trans(Pt3dr(dx,0,0));} 
-      void        trans_y(REAL dy){_trans.y +=dy;_plan.trans(Pt3dr(0,dy,0));}
-      void        trans_z(REAL dz){_trans.z +=dz;_plan.trans(Pt3dr(0,0,dz));}
+      void        zoom(double_t zo){_dist_focal *= (1+zo);_cent_opt = _plan.p0() - _plan.ray_z() * _dist_focal;}
+      void        trans_x(double_t dx){_trans.x +=dx;_plan.trans(Pt3dr(dx,0,0));} 
+      void        trans_y(double_t dy){_trans.y +=dy;_plan.trans(Pt3dr(0,dy,0));}
+      void        trans_z(double_t dz){_trans.z +=dz;_plan.trans(Pt3dr(0,0,dz));}
       void        trans(Pt3dr dif){_trans = _trans + dif;_plan.trans(dif);}
       void        trans_phot(Pt2di dif){_p0ph = _p0ph + (Pt2dr)dif * _resolu_film;}   
-      void        rot_x(REAL alpha){_plan.rot_x(alpha);}    
-      void        rot_y(REAL alpha){_plan.rot_y(alpha);}     
-      void        rot_z(REAL alpha){_plan.rot_z(alpha);} 
+      void        rot_x(double_t alpha){_plan.rot_x(alpha);}    
+      void        rot_y(double_t alpha){_plan.rot_y(alpha);}     
+      void        rot_z(double_t alpha){_plan.rot_z(alpha);} 
                     
-      Im2D_U_INT1 photo(){return _iphoto;}
-      INT         tx(){return _iphoto.tx();} 
-      INT         ty(){return _iphoto.ty();} 
+      Im2D_U_int1 photo(){return _iphoto;}
+      int         tx(){return _iphoto.tx();} 
+      int         ty(){return _iphoto.ty();} 
       Pt3dr       trans(){return _trans;}
       Pt2di       trans_phot(){return _p0ph;} 
-      REAL        resolution(){return _resolu_film;}       
+      double_t        resolution(){return _resolu_film;}       
       
       void effacer();
-      Pt3dr projter(Pt3dr p, U_INT1 v);
-      void projter(Facette_3d f,U_INT1 v, bool lin=true);
+      Pt3dr projter(Pt3dr p, U_int1 v);
+      void projter(Facette_3d f,U_int1 v, bool lin=true);
       void projter(Facette_3d f,Boite b, bool lin=true);
       void afficher(Video_Win); 
 };
@@ -274,29 +274,29 @@ class Camera
 {
    public :
       
-      Camera(  Video_Win W, INT nb_color, ElList<Pt3dr> pts, bool avant_arrier = false);
-      Camera(  Video_Win W, INT nb_color, ElList<Facette_3d> lface, bool avant_arrier = false);
-      Camera(  Video_Win W, INT nb_color, ElFilo<Facette_3d>& lface, bool avant_arrier = false);
+      Camera(  Video_Win W, int nb_color, ElList<Pt3dr> pts, bool avant_arrier = false);
+      Camera(  Video_Win W, int nb_color, ElList<Facette_3d> lface, bool avant_arrier = false);
+      Camera(  Video_Win W, int nb_color, ElFilo<Facette_3d>& lface, bool avant_arrier = false);
 
    private :
       
-      REAL _m00, _m01, _m02, _m03;
-      REAL _m10, _m11, _m12, _m13;
-      REAL _m20, _m21, _m22, _m23;
-      REAL _m30, _m31, _m32, _m33;
-      REAL _zoom;
-      REAL _teta;
-      REAL _phi;
-      REAL _rho;
-      REAL _d_zoom;
-      REAL _d_teta;
-      REAL _d_phi;
-      REAL _d_rho;
-      REAL _x_c;
-      REAL _y_c;
-      REAL _z_c;
-      INT  _tx_1_2;
-      INT  _ty_1_2;
+      double_t _m00, _m01, _m02, _m03;
+      double_t _m10, _m11, _m12, _m13;
+      double_t _m20, _m21, _m22, _m23;
+      double_t _m30, _m31, _m32, _m33;
+      double_t _zoom;
+      double_t _teta;
+      double_t _phi;
+      double_t _rho;
+      double_t _d_zoom;
+      double_t _d_teta;
+      double_t _d_phi;
+      double_t _d_rho;
+      double_t _x_c;
+      double_t _y_c;
+      double_t _z_c;
+      int  _tx_1_2;
+      int  _ty_1_2;
       bool _avant_arrier;
 
       ElList<Pt3dr> _donnees;
@@ -305,7 +305,7 @@ class Camera
       ElList<Pt2di> _donnees_p;
       ElList<ElList<Pt2di> > _ll;
 
-      INT       _nb_color;
+      int       _nb_color;
       Video_Win _W;
 
                                       // mouvement de camera
@@ -330,15 +330,15 @@ class Camera
       void zoom_adjuster();
       Pt2di projeter(Pt3dr p) {
                                  return Pt2di(
-                                                (INT)(_m00 * p.x + _m01 * p.y + _m02 * p.z + _m03),
-                                                (INT)(_m10 * p.x + _m11 * p.y + _m12 * p.z + _m13)
+                                                (int)(_m00 * p.x + _m01 * p.y + _m02 * p.z + _m03),
+                                                (int)(_m10 * p.x + _m11 * p.y + _m12 * p.z + _m13)
                                              );
                               }
 
                                         // afficahge et desaffichage
 
       void afficher_pts();
-      void afficher_face( INT color = 2);
+      void afficher_face( int color = 2);
       void afficher();
       void desafficher_pts();
       void desafficher_face();

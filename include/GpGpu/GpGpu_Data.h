@@ -582,13 +582,13 @@ TPL_T bool CData3D<T>::ReallocIf(uint dim1D)
 TPL_T inline bool CData3D<T>::ReallocIfDim(uint2 dim,uint l)
 {
 
-//    DUMP_UINT2(dim)
-//    DUMP_UINT2(struct2DLayered::GetMaxDimension())
-//            DUMP_UINT(l)
-//            DUMP_UINT(struct2DLayered::GetNbLayer())
+//    DUMP_Uint2(dim)
+//    DUMP_Uint2(struct2DLayered::GetMaxDimension())
+//            DUMP_Uint(l)
+//            DUMP_Uint(struct2DLayered::GetNbLayer())
     if( oI(struct2DLayered::GetMaxDimension(),dim) || l > struct2DLayered::GetNbLayer())
     {
-//        printf("REALLOC :\n");
+//        printf("double_tLOC :\n");
 
         return CData3D<T>::Realloc(dim,l);
     }
@@ -604,10 +604,10 @@ TPL_T inline bool CData3D<T>::ReallocIf(uint2 dim, uint l)
 {
     //if( size(dim) * l * sizeof(T) > CData3D<T>::GetSizeofMalloc())
 
-//    printf("REALLOC IF ========================================= BEGIN\n");
-//    DUMP_UINT2(dim)
-//    DUMP_UINT(l)
-//    DUMP_UINT(struct2DLayered::GetMaxSize())
+//    printf("double_tLOC IF ========================================= BEGIN\n");
+//    DUMP_Uint2(dim)
+//    DUMP_Uint(l)
+//    DUMP_Uint(struct2DLayered::GetMaxSize())
 //    OutputInfo();
     if( size(dim) * l > struct2DLayered::GetMaxSize())//|| l > struct2DLayered::GetNbLayer())
     {

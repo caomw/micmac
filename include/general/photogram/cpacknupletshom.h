@@ -23,7 +23,7 @@ public :
     const_iterator begin() const;
     iterator       end();
     const_iterator end() const;
-    INT size() const ;
+    int size() const ;
     void clear();
 
     void AddNuplet(const cNupletPtsHomologues &);

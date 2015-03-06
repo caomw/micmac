@@ -59,8 +59,8 @@ class Br_Vect_Action : public RC_Object
         virtual void action
                      (
                           const ElFifo<Pt2di> &,
-                          const ElFifo<INT>   *,
-                          INT               nb_atr
+                          const ElFifo<int>   *,
+                          int               nb_atr
                      ) =0;
 
 };
@@ -82,7 +82,7 @@ class Cont_Vect_Action
 
 };            
 
-void explore_cyle (Cont_Vect_Action  * act,ElFifo<Pt2di> & pts,Im2D_U_INT1 im);
+void explore_cyle (Cont_Vect_Action  * act,ElFifo<Pt2di> & pts,Im2D_U_int1 im);
 Fonc_Num  cont_vect(Fonc_Num f,Cont_Vect_Action * act,bool cx8);
 
 
@@ -106,24 +106,24 @@ class ArgAPP
 
         ArgAPP
         (
-                REAL prec,
-                INT nb_jump,
+                double_t prec,
+                int nb_jump,
                 ModeCout mcout,
                 ModeSeg mseg,
                 bool    freem_sup = true,
-                INT nb_step = 100000
+                int nb_step = 100000
          ) ;
 
 
 
 
-        REAL      _prec;
-        INT       _nb_jump;
+        double_t      _prec;
+        int       _nb_jump;
         ModeCout  _mcout;
         ModeSeg   _mseg;
         bool      _freem_sup;
-        INT       _nb_step;
-	REAL      mDMax;
+        int       _nb_step;
+	double_t      mDMax;
 
 	bool InitWithEnvConv() const;
 	void SetInitWithEnvConv();
@@ -132,9 +132,9 @@ class ArgAPP
 	bool      mInitWithEnvConv;
 };
 
-void approx_poly(ElFifo<INT> & res,const ElFifo<Pt2di> &,ArgAPP arg);
-void approx_poly(ElFifo<INT> & res,const ElFifo<Pt2dr> &,ArgAPP arg);
-std::vector<INT>  approx_poly(const std::vector<Pt2dr> &,bool circ,ArgAPP arg);
+void approx_poly(ElFifo<int> & res,const ElFifo<Pt2di> &,ArgAPP arg);
+void approx_poly(ElFifo<int> & res,const ElFifo<Pt2dr> &,ArgAPP arg);
+std::vector<int>  approx_poly(const std::vector<Pt2dr> &,bool circ,ArgAPP arg);
 
 
 
@@ -143,25 +143,25 @@ std::vector<INT>  approx_poly(const std::vector<Pt2dr> &,bool circ,ArgAPP arg);
 /*                 RASTER / VECTEUR                         */
 /*                                                          */
 /************************************************************/
-REAL FixedSomSegDr 
+double_t FixedSomSegDr 
      ( 
-          Im2D<INT1,INT> im, 
+          Im2D<int1,int> im, 
           Pt2dr p1, 
           Pt2dr p2, 
-          INT NBPts, 
-          REAL DefOut
+          int NBPts, 
+          double_t DefOut
     );
 
 
 template <class Type,class TypeBase>
 Seg2d   OptimizeSegTournantSomIm
         (
-             REAL &                 score,
+             double_t &                 score,
              Im2D<Type,TypeBase>    im,
              Seg2d                  seg,
-             INT                    NbPts,
-             REAL                   step_init,
-             REAL                   step_limite,
+             int                    NbPts,
+             double_t                   step_init,
+             double_t                   step_limite,
              bool                   optim_absc  = true,
              bool                   optim_teta  = true,
 			 bool   *               FreelyOpt = 0
@@ -170,34 +170,34 @@ Seg2d   OptimizeSegTournantSomIm
 
 Pt2dr  prolongt_std_uni_dir
        (
-            Im2D<INT1,INT>    im,
+            Im2D<int1,int>    im,
             const Seg2d   &   seg,
-            REAL              step,
-            REAL              vlim
+            double_t              step,
+            double_t              vlim
        );
 
 Seg2d  prolongt_std_bi_dir
        (
-            Im2D<INT1,INT>    im,
+            Im2D<int1,int>    im,
             const Seg2d   &   seg,
-            REAL              step,
-            REAL              vlim
+            double_t              step,
+            double_t              vlim
        );
 
 Seg2d  retract_std_bi_dir
        (
-            Im2D<INT1,INT>    im,
+            Im2D<int1,int>    im,
             const Seg2d   &   seg,
-            REAL              step,
-            REAL              vlim
+            double_t              step,
+            double_t              vlim
        );
 
 Seg2d  retr_prol_std_bi_dir
        (
-            Im2D<INT1,INT>    im,
+            Im2D<int1,int>    im,
             const Seg2d   &   seg,
-            REAL              step,
-            REAL              vlim
+            double_t              step,
+            double_t              vlim
        );
 
 
@@ -208,10 +208,10 @@ class  Optim2DParam
      public :
          virtual ~Optim2DParam() {}
          Pt2dr   param() { return _param;}
-         REAL    ScOpt() {return mScOpt;}
+         double_t    ScOpt() {return mScOpt;}
          void  optim();
          void  optim(Pt2dr aValInit);
-         REAL  def_out() {return _def_out;}
+         double_t  def_out() {return _def_out;}
 
 
          bool  FreelyOptimized()
@@ -225,35 +225,35 @@ class  Optim2DParam
      protected :
          Optim2DParam
          (
-              REAL    step_lim,
-              REAL    def_out,  // Valeur tjs < ou > a la val cur
-              REAL    epsilon, //  les dif < espilon sont negligee
+              double_t    step_lim,
+              double_t    def_out,  // Valeur tjs < ou > a la val cur
+              double_t    epsilon, //  les dif < espilon sont negligee
               bool    Maxim,   
-              REAL    lambda = 0.5,
+              double_t    lambda = 0.5,
               bool    optim_p1 = true,
               bool    optim_p2 = true
          );
-         void set(REAL aStepInit,INT aSzVInit);
+         void set(double_t aStepInit,int aSzVInit);
 
 
      private :
-         virtual REAL Op2DParam_ComputeScore(REAL,REAL) = 0;
+         virtual double_t Op2DParam_ComputeScore(double_t,double_t) = 0;
          void  optim_step_fixed ();
 
-         REAL       _step_lim;
-         REAL       _step_cur;
+         double_t       _step_lim;
+         double_t       _step_cur;
          Pt2dr      _param;
-         REAL       _def_out;
-         REAL       _epsilon;
+         double_t       _def_out;
+         double_t       _epsilon;
          bool       _Maxim;
-         REAL       _lambda;
+         double_t       _lambda;
          bool       _optim_p1;
          bool       _optim_p2;
 
          bool       mFreelyOpt;
-         REAL       mStepInit;
-         INT        mSzVoisInit;
-         REAL       mScOpt;
+         double_t       mStepInit;
+         int        mSzVoisInit;
+         double_t       mScOpt;
 };
 
 
@@ -267,31 +267,31 @@ template <class Type> class OptimTranslationCorrelation : public Optim2DParam
 
            OptimTranslationCorrelation
            (
-                  REAL    aStepLim,
-                  REAL    aStepInit,
-                  INT     aSzVoisInit,
-                  Im2D<Type,INT> aF1,
-                  Im2D<Type,INT> aF2,
-                  REAL aSzVignette,
-                  REAL aStepIm
+                  double_t    aStepLim,
+                  double_t    aStepInit,
+                  int     aSzVoisInit,
+                  Im2D<Type,int> aF1,
+                  Im2D<Type,int> aF2,
+                  double_t aSzVignette,
+                  double_t aStepIm
             );
             void SetP0Im1(Pt2dr  aP0Im1);
 
-            REAL mSc;
+            double_t mSc;
 
       private :
 
-           REAL ScoreFonc(REAL,REAL);
-//           REAL ScoreOptim(REAL,REAL);
+           double_t ScoreFonc(double_t,double_t);
+//           double_t ScoreOptim(double_t,double_t);
 // Modif DB
-           REAL Op2DParam_ComputeScore(REAL,REAL);
+           double_t Op2DParam_ComputeScore(double_t,double_t);
 
-           Im2D<Type,INT> mIm1;
-           Im2D<Type,INT> mIm2;
+           Im2D<Type,int> mIm1;
+           Im2D<Type,int> mIm2;
 
            Pt2dr   mP0Im1;
-           REAL    mSzVignette;
-           REAL    mStepIm;
+           double_t    mSzVignette;
+           double_t    mStepIm;
 
            TImageFixedCorrelateurSubPix<Type> & mQuickCorrel;
            bool  mCanUseICorrel;

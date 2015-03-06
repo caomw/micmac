@@ -49,11 +49,11 @@ Header-MicMac-eLiSe-25/06/2007*/
 class Elise_Rect
 {
    public :
-     INT _p0[Elise_Std_Max_Dim];
-     INT _p1[Elise_Std_Max_Dim];
-     INT _dim;
+     int _p0[Elise_Std_Max_Dim];
+     int _p1[Elise_Std_Max_Dim];
+     int _dim;
      Elise_Rect (Pt2di,Pt2di);
-     Elise_Rect (const INT *,const INT*,INT);
+     Elise_Rect (const int *,const int*,int);
      Box2dr ToBoxR() const;
 };
 

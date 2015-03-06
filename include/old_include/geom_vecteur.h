@@ -50,14 +50,14 @@ class Seg2d
 {
    public :
 
-     Seg2d(REAL x1,REAL y1,REAL x2,REAL y2);
+     Seg2d(double_t x1,double_t y1,double_t x2,double_t y2);
      Seg2d(Pt2dr,Pt2dr);
      Seg2d();  // create an empty seg
 
     Seg2d reverse() const {assert_non_empty(); return Seg2d(p1(),p0());}
 
      Seg2d clip(Box2dr) const;
-     Seg2d clip(Box2dr,REAL,REAL,bool IsSeg) const;
+     Seg2d clip(Box2dr,double_t,double_t,bool IsSeg) const;
      Seg2d clipDroite(Box2dr) const;
      Seg2d clip(Box2di) const;
 
@@ -65,10 +65,10 @@ class Seg2d
      inline Pt2dr p0() const {assert_non_empty();  return _pts[0];}
      inline Pt2dr p1() const {assert_non_empty();  return _pts[1];}
 
-     inline REAL x0() const {assert_non_empty();  return _pts[0].x;}
-     inline REAL x1() const {assert_non_empty();  return _pts[1].x;}
-     inline REAL y0() const {assert_non_empty();  return _pts[0].y;}
-     inline REAL y1() const {assert_non_empty();  return _pts[1].y;}
+     inline double_t x0() const {assert_non_empty();  return _pts[0].x;}
+     inline double_t x1() const {assert_non_empty();  return _pts[1].x;}
+     inline double_t y0() const {assert_non_empty();  return _pts[0].y;}
+     inline double_t y1() const {assert_non_empty();  return _pts[1].y;}
 
      inline Pt2dr milieu() const {assert_non_empty();  return (_pts[1]+_pts[0])/2.0;}
 
@@ -76,11 +76,11 @@ class Seg2d
 
      inline Seg2d trans(Pt2dr tr) const {assert_non_empty();  return Seg2d(_pts[0]+tr,_pts[1]+tr);}
 
-      REAL AbsiceInterDroiteHoriz(REAL anOrdonnee) const;
+      double_t AbsiceInterDroiteHoriz(double_t anOrdonnee) const;
 
    protected :
 
-    inline Pt2dr kpts(INT k) const {return _pts[k];}
+    inline Pt2dr kpts(int k) const {return _pts[k];}
 
      void assert_non_empty() const
      {
@@ -140,41 +140,41 @@ class SegComp : public Seg2d
              ) const;
 
 
-        REAL ordonnee(Pt2dr pt) const;
-        REAL ordonnee(Pt3dr pt) const;  // Point Projectif
+        double_t ordonnee(Pt2dr pt) const;
+        double_t ordonnee(Pt3dr pt) const;  // Point Projectif
         Fonc_Num ordonnee(Pt3d<Fonc_Num> pt) const;  // Point Projectif Formel
-        REAL  abscisse(Pt2dr pt) const;
+        double_t  abscisse(Pt2dr pt) const;
 
-        REAL  abscisse_proj_seg(Pt2dr pt) const;  // clippee dans [0 lenght]
-        REAL  recouvrement_seg(const Seg2d &) const;  // clippee dans [0 lenght]
+        double_t  abscisse_proj_seg(Pt2dr pt) const;  // clippee dans [0 lenght]
+        double_t  recouvrement_seg(const Seg2d &) const;  // clippee dans [0 lenght]
 
         Pt2dr to_rep_loc(Pt2dr) const;
         Pt2dr from_rep_loc(Pt2dr) const;
 
-        REAL  length()   const  {return _length;}
+        double_t  length()   const  {return _length;}
         Pt2dr tangente() const  {return _tangente;}
         Pt2dr normale()  const  {return _normale;}
-        REAL  c()        const  {return _c;}
+        double_t  c()        const  {return _c;}
 
         bool in_bande(Pt2dr pt,ModePrim) const;
 
-        bool BoxContains(Pt2dr pt,REAL DLong,REAL DLarg) const;
-        bool BoxContains(const Seg2d & ,REAL DLong,REAL DLarg) const;
+        bool BoxContains(Pt2dr pt,double_t DLong,double_t DLarg) const;
+        bool BoxContains(const Seg2d & ,double_t DLong,double_t DLarg) const;
 
    //=========   DISTANCES   ==============
 
-        REAL square_dist_droite(Pt2dr pt) const;
-        REAL square_dist_demi_droite(Pt2dr pt) const;
-        REAL square_dist_seg(Pt2dr pt) const;
-        REAL square_dist(ModePrim  mode,Pt2dr   pt) const;
+        double_t square_dist_droite(Pt2dr pt) const;
+        double_t square_dist_demi_droite(Pt2dr pt) const;
+        double_t square_dist_seg(Pt2dr pt) const;
+        double_t square_dist(ModePrim  mode,Pt2dr   pt) const;
 
-        REAL dist_droite(Pt2dr pt) const;
-        REAL dist_demi_droite(Pt2dr pt) const;
-        REAL dist_seg(Pt2dr pt) const;
-        REAL dist(ModePrim  mode,Pt2dr   pt) const;
+        double_t dist_droite(Pt2dr pt) const;
+        double_t dist_demi_droite(Pt2dr pt) const;
+        double_t dist_seg(Pt2dr pt) const;
+        double_t dist(ModePrim  mode,Pt2dr   pt) const;
 
-        REAL square_dist(ModePrim,const SegComp &,ModePrim) const;
-        REAL dist(ModePrim,const SegComp &,ModePrim) const;
+        double_t square_dist(ModePrim,const SegComp &,ModePrim) const;
+        double_t dist(ModePrim,const SegComp &,ModePrim) const;
 
    //=========   DISTANCES DE HAUSSDORF   ==============
 
@@ -183,15 +183,15 @@ class SegComp : public Seg2d
         // dans les version assym, il s'agit de la dist du point de la premiere
         // le pus loin de la deuxieme.
 
-        REAL  square_haussdorf_seg_assym(const SegComp &) const;
-        REAL  square_haussdorf_seg_sym(const SegComp &) const;
-        REAL  square_haussdorf_droite_assym(const SegComp &) const;
+        double_t  square_haussdorf_seg_assym(const SegComp &) const;
+        double_t  square_haussdorf_seg_sym(const SegComp &) const;
+        double_t  square_haussdorf_droite_assym(const SegComp &) const;
 
               // max de "square_haussdorf_droite_assym" dans
               // les 2 sens, donc pas vraiment une distance de haussdorf
               //  au sens mathematique du terme
 
-        REAL  square_haussdorf_droite_sym(const SegComp &) const;
+        double_t  square_haussdorf_droite_sym(const SegComp &) const;
 
    //=========   PROJECTIONS   ==============
 
@@ -201,7 +201,7 @@ class SegComp : public Seg2d
         Pt2dr  proj_ortho(ModePrim,Pt2dr pt) const;
         Seg2d  proj_ortho(ModePrim,const SegComp &,ModePrim) const;
 
-   //=========   INTERSECTION   ==============
+   //=========   intERSECTION   ==============
 
         Pt2dr   inter(const SegComp &,bool &) const;  // droite
         Pt2dr   inter(ModePrim,const SegComp &,ModePrim,bool &) const;
@@ -210,7 +210,7 @@ class SegComp : public Seg2d
              (
                  ModePrim,
                  const ElFifo<Pt2dr> &,
-                 ElFifo<INT>  &,   // index
+                 ElFifo<int>  &,   // index
                  ElFifo<Pt2dr> &   // resultats
              );
 
@@ -220,18 +220,18 @@ class SegComp : public Seg2d
      protected :
 
         Pt2dr _tangente;
-        REAL  _length;
+        double_t  _length;
         Pt2dr _normale;
-        REAL  _c;
-        REAL  _a1;   // abscisse p1, dans le repere de la droite
+        double_t  _c;
+        double_t  _a1;   // abscisse p1, dans le repere de la droite
 
-        REAL   _square_dist(ModePrim m1,const SegComp & s2,ModePrim m2) const;
+        double_t   _square_dist(ModePrim m1,const SegComp & s2,ModePrim m2) const;
         void   proj_ortho
                (
                    ModePrim,
                    const SegComp &,
                    ModePrim,
-                   REAL & dmin,
+                   double_t & dmin,
                    Pt2dr & p0min,
                    Pt2dr & p1min
                ) const;
@@ -243,7 +243,7 @@ class cElTriangleComp
 {
     public :
         cElTriangleComp(Pt2dr aP0,Pt2dr aP1,Pt2dr aP2);
-            REAL square_dist(Pt2dr pt) const;
+            double_t square_dist(Pt2dr pt) const;
 
         bool Inside(const Pt2dr &) const;
 
@@ -265,7 +265,7 @@ class cElTriangleComp
 
 
         Pt3dr  CoordBarry(const Pt2dr &) const;
-        Pt2dr  FromCoordBarry(REAL,REAL,REAL) const;
+        Pt2dr  FromCoordBarry(double_t,double_t,double_t) const;
 
         static void Test();
 
@@ -377,8 +377,8 @@ template <class Type> class Mat_Inertie
                   "som pds = 0 in Mat_Inertie::normalize"
              );
 
-              typename Type::TypeReel::TypeEff  S1 =  _s1 / (REAL) _s;
-              typename Type::TypeReel::TypeEff  S2 =  _s2 / (REAL) _s;
+              typename Type::TypeReel::TypeEff  S1 =  _s1 / (double_t) _s;
+              typename Type::TypeReel::TypeEff  S2 =  _s2 / (double_t) _s;
 
 
 #if ( ELISE_windows & ELISE_MinGW )
@@ -390,13 +390,13 @@ template <class Type> class Mat_Inertie
                          _s,
                          S1,
                          S2,
-                         _s11/(REAL)_s  -scal(S1,S1),
-                         _s12/(REAL)_s  -scal(S1,S2),
-                         _s22/(REAL)_s  -scal(S2,S2)
+                         _s11/(double_t)_s  -scal(S1,S1),
+                         _s12/(double_t)_s  -scal(S1,S2),
+                         _s22/(double_t)_s  -scal(S2,S2)
                     );
        }
 
-       REAL  correlation(REAL epsilon = 1e-14)
+       double_t  correlation(double_t epsilon = 1e-14)
        {
            #if ( ELISE_windows & ELISE_MinGW )
              Mat_Inertie<typename  Type::TypeReel> m =  normalize();
@@ -406,7 +406,7 @@ template <class Type> class Mat_Inertie
              return m.s12() / sqrt(ElMax(epsilon,m.s11()*m.s22()));
        }
 
-       REAL  correlation_with_def(REAL aDef)
+       double_t  correlation_with_def(double_t aDef)
        {
             #if ( ELISE_windows & ELISE_MinGW )
               Mat_Inertie<typename  Type::TypeReel> m =  normalize();
@@ -420,8 +420,8 @@ template <class Type> class Mat_Inertie
 
 
        typename Type::TypeScal S0() const {return _s;}
-       typename Type::TypeReel::TypeEff  V2toV1(const typename Type::TypeReel::TypeEff & aV2,REAL epsilon = 1e-14);
-       typename Type::TypeReel::TypeEff  V1toV2(const typename Type::TypeReel::TypeEff & aV2,REAL epsilon = 1e-14);
+       typename Type::TypeReel::TypeEff  V2toV1(const typename Type::TypeReel::TypeEff & aV2,double_t epsilon = 1e-14);
+       typename Type::TypeReel::TypeEff  V1toV2(const typename Type::TypeReel::TypeEff & aV2,double_t epsilon = 1e-14);
 
 
     private :
@@ -435,15 +435,15 @@ template <class Type> class Mat_Inertie
            typename Type::TypeScal         _s22;
 };
 
-REAL   surf_or_poly(const ElFifo<Pt2dr> &);
-REAL   surf_or_poly(const std::vector<Pt2dr> &);
-REAL   perimetre_poly(const std::vector<Pt2dr> &);
+double_t   surf_or_poly(const ElFifo<Pt2dr> &);
+double_t   surf_or_poly(const std::vector<Pt2dr> &);
+double_t   perimetre_poly(const std::vector<Pt2dr> &);
 Pt2dr  barrycentre(const ElFifo<Pt2dr> &);
 Pt2dr  barrycentre(const std::vector<Pt2dr> &);
-REAL   SquareDistPointPoly(const ElFifo<Pt2dr> & f,Pt2dr pt);
+double_t   SquareDistPointPoly(const ElFifo<Pt2dr> & f,Pt2dr pt);
 bool   PointInPoly(const ElFifo<Pt2dr> & f,Pt2dr pt);
 bool   PointInPoly(const std::vector<Pt2dr> & f,Pt2dr pt);
-bool   PointInterieurPoly(const ElFifo<Pt2dr> & f,Pt2dr pt,REAL d);
+bool   PointInterieurPoly(const ElFifo<Pt2dr> & f,Pt2dr pt,double_t d);
 void   BoxPts(ElFifo<Pt2dr> & pts,Pt2dr & p0,Pt2dr & p1);
 Box2dr BoxPts(const std::vector<Pt2dr> & pts);
 
@@ -457,8 +457,8 @@ void PtsOfSquare(ElFifo<Pt2dr> & pts,Pt2dr p0,Pt2dr p1);
 
 
 
-#define IMat_Inertie  Mat_Inertie<ElStdTypeScal<INT> >
-#define RMat_Inertie  Mat_Inertie<ElStdTypeScal<REAL> >
+#define IMat_Inertie  Mat_Inertie<ElStdTypeScal<int> >
+#define RMat_Inertie  Mat_Inertie<ElStdTypeScal<double_t> >
 
 inline Pt2dr MatCdg(const RMat_Inertie& aMat)
 {
@@ -471,19 +471,19 @@ inline double ValQuad(const RMat_Inertie& aMat,const Pt2dr aP)
          +    aMat.s22() * ElSquare(aP.y);
 }
 
-template <class Type> REAL square_dist_droite(const SegComp &, const Mat_Inertie<Type> &);
-template <class Type> Seg2d seg_mean_square(const Mat_Inertie<Type> &,REAL norm = 1.0);
+template <class Type> double_t square_dist_droite(const SegComp &, const Mat_Inertie<Type> &);
+template <class Type> Seg2d seg_mean_square(const Mat_Inertie<Type> &,double_t norm = 1.0);
 
 
 void env_conv
      (
-         ElFifo<INT> &          ind,
+         ElFifo<int> &          ind,
          const ElFilo<Pt2di> &  pts,
          bool                   env_min
      );
 void env_conv
      (
-         ElFifo<INT> &          ind,
+         ElFifo<int> &          ind,
          const ElFilo<Pt2dr> &  pts,
          bool                   env_min
      );
@@ -493,13 +493,13 @@ void env_conv
 class EventInterv
 {
      public :
-       EventInterv(REAL absc,bool entr);
-       REAL absc() const;
+       EventInterv(double_t absc,bool entr);
+       double_t absc() const;
        bool entr() const;
        EventInterv();
 
      private :
-       REAL    _absc;
+       double_t    _absc;
        bool    _entr;
 };
 
@@ -547,10 +547,10 @@ class ElQTRegionPlan
 {
       public :
 
-         virtual REAL D2(const Box2dr &) const = 0;
-         virtual REAL D2(const Pt2dr &)  const = 0;
-         virtual REAL D2(const SegComp &)  const = 0;
-         virtual REAL D2(const cElTriangleComp &)  const ; // Def = err fatale
+         virtual double_t D2(const Box2dr &) const = 0;
+         virtual double_t D2(const Pt2dr &)  const = 0;
+         virtual double_t D2(const SegComp &)  const = 0;
+         virtual double_t D2(const cElTriangleComp &)  const ; // Def = err fatale
      virtual ~ElQTRegionPlan() {}
 };
 
@@ -559,10 +559,10 @@ class ElQTRegPt : public ElQTRegionPlan
 {
       public :
 
-         virtual REAL D2(const Box2dr &)  const ;
-         virtual REAL D2(const Pt2dr & )  const ;
-         virtual REAL D2(const SegComp &)  const;
-         virtual REAL D2(const cElTriangleComp &)  const ; // Implantee
+         virtual double_t D2(const Box2dr &)  const ;
+         virtual double_t D2(const Pt2dr & )  const ;
+         virtual double_t D2(const SegComp &)  const;
+         virtual double_t D2(const cElTriangleComp &)  const ; // Implantee
 
          ElQTRegPt (Pt2dr);
      virtual ~ElQTRegPt() {}
@@ -576,9 +576,9 @@ class ElQTRegSeg : public ElQTRegionPlan
 {
       public :
 
-         virtual REAL D2(const Box2dr &)  const ;
-         virtual REAL D2(const Pt2dr & )  const ;
-         virtual REAL D2(const SegComp &)  const;
+         virtual double_t D2(const Box2dr &)  const ;
+         virtual double_t D2(const Pt2dr & )  const ;
+         virtual double_t D2(const SegComp &)  const;
 
          ElQTRegSeg (Seg2d);
      virtual ~ElQTRegSeg() {}
@@ -591,9 +591,9 @@ class ElQTRegBox : public ElQTRegionPlan
 {
       public :
 
-         virtual REAL D2(const Box2dr &)  const ;
-         virtual REAL D2(const Pt2dr & )  const ;
-         virtual REAL D2(const SegComp &)  const;
+         virtual double_t D2(const Box2dr &)  const ;
+         virtual double_t D2(const Pt2dr & )  const ;
+         virtual double_t D2(const SegComp &)  const;
          ElQTRegBox (const Box2dr &box);
      virtual ~ElQTRegBox() {}
       private :
@@ -610,22 +610,22 @@ class ElQdtGen
 {
       public  :
 
-          INT NbObjMax() const { return _NbObjMax;}
-          INT SzMin()    const { return _SzMin;}
+          int NbObjMax() const { return _NbObjMax;}
+          int SzMin()    const { return _SzMin;}
 
       protected :
 
           ElQdtGen
           (
                      Box2dr        box,
-                     INT           NbObjMax,
-                     REAL          SzMin
+                     int           NbObjMax,
+                     double_t          SzMin
           );
 
 
           Box2dr                        _box;
-          INT                           _NbObjMax;
-          INT                           _SzMin;
+          int                           _NbObjMax;
+          int                           _SzMin;
 
      private :
           static Box2dr BoxQdt(const Box2dr &);
@@ -642,7 +642,7 @@ class ElQdtGen
 class cRapOnZ;
 
 
-Pt3dr   norm_or_poly(const ElFifo<Pt3dr> &,REAL * surf =0);
+Pt3dr   norm_or_poly(const ElFifo<Pt3dr> &,double_t * surf =0);
 
 struct cResOptInterFaisceaux
 {
@@ -666,16 +666,16 @@ class ElSeg3D
           Pt3dr  Tgt() const;
           Pt3dr  TgNormee() const;
           Pt3dr  ProjOrtho(Pt3dr aP0) const;  // A la droite
-          REAL   DistDoite(Pt3dr aP0) const;
-          Pt3dr  PtOfAbsc(REAL anAbsc) const;
-          REAL   AbscOfProj(Pt3dr aP) const;
+          double_t   DistDoite(Pt3dr aP0) const;
+          Pt3dr  PtOfAbsc(double_t anAbsc) const;
+          double_t   AbscOfProj(Pt3dr aP) const;
 
 
           static ElSeg3D  CombinL1(const std::vector<Pt3dr> & aV);
           static ElSeg3D  CreateL2(const std::vector<Pt3dr> & aV);
           double  SomDistDroite(const std::vector<Pt3dr> & aV) const;
 
-          void   AbscissesPseudoInter(REAL &anAbsc1,REAL & anAbsc2,const ElSeg3D & aS2);
+          void   AbscissesPseudoInter(double_t &anAbsc1,double_t & anAbsc2,const ElSeg3D & aS2);
 
           Pt3dr  PseudoInter(const ElSeg3D & aS2);
 
@@ -717,7 +717,7 @@ class cElPlan3D
               ElSeg3D Inter(const cElPlan3D&,bool &OK) const;
 
           // Plante si Plan Vertical
-          REAL   ZOfXY(Pt2dr aP) const;
+          double_t   ZOfXY(Pt2dr aP) const;
           Pt3dr  AddZ(Pt2dr aP) const;
 
              // void L1Ameliore(const std::vector<Pt3dr> & aVP,int aNbMax=-1);
@@ -736,7 +736,7 @@ class cElPlan3D
           // Le plan est donne par son equation normale
           // mScal + mNorm.P = 0
           Pt3dr mNorm;
-          REAL mScal;
+          double_t mScal;
           Pt3dr mP0;
           Pt3dr mU;
           Pt3dr mV;
@@ -756,16 +756,16 @@ class cInterfSystemeCoordonne3D
 
 void TestInterPolyCercle();
 
-REAL SurfIER (Pt2dr,REAL,REAL,REAL,Pt2dr,Pt2dr);
-REAL DerASurfIER (Pt2dr,REAL,REAL,REAL,Pt2dr,Pt2dr);
-REAL DerBSurfIER (Pt2dr,REAL,REAL,REAL,Pt2dr,Pt2dr);
-REAL DerCSurfIER (Pt2dr,REAL,REAL,REAL,Pt2dr,Pt2dr);
-REAL DerCElXSurfIER (Pt2dr,REAL,REAL,REAL,Pt2dr,Pt2dr);
-REAL DerCElYSurfIER (Pt2dr,REAL,REAL,REAL,Pt2dr,Pt2dr);
-REAL DerP0XSurfIER (Pt2dr,REAL,REAL,REAL,Pt2dr,Pt2dr);
-REAL DerP0YSurfIER (Pt2dr,REAL,REAL,REAL,Pt2dr,Pt2dr);
-REAL DerP1XSurfIER (Pt2dr,REAL,REAL,REAL,Pt2dr,Pt2dr);
-REAL DerP1YSurfIER (Pt2dr,REAL,REAL,REAL,Pt2dr,Pt2dr);
+double_t SurfIER (Pt2dr,double_t,double_t,double_t,Pt2dr,Pt2dr);
+double_t DerASurfIER (Pt2dr,double_t,double_t,double_t,Pt2dr,Pt2dr);
+double_t DerBSurfIER (Pt2dr,double_t,double_t,double_t,Pt2dr,Pt2dr);
+double_t DerCSurfIER (Pt2dr,double_t,double_t,double_t,Pt2dr,Pt2dr);
+double_t DerCElXSurfIER (Pt2dr,double_t,double_t,double_t,Pt2dr,Pt2dr);
+double_t DerCElYSurfIER (Pt2dr,double_t,double_t,double_t,Pt2dr,Pt2dr);
+double_t DerP0XSurfIER (Pt2dr,double_t,double_t,double_t,Pt2dr,Pt2dr);
+double_t DerP0YSurfIER (Pt2dr,double_t,double_t,double_t,Pt2dr,Pt2dr);
+double_t DerP1XSurfIER (Pt2dr,double_t,double_t,double_t,Pt2dr,Pt2dr);
+double_t DerP1YSurfIER (Pt2dr,double_t,double_t,double_t,Pt2dr,Pt2dr);
 Fonc_Num    FN_SurfIER
             (
                 Pt2d<Fonc_Num> aCel,
@@ -779,34 +779,34 @@ Fonc_Num    FN_SurfIER
 
 void ImRON2ParmEllipse
      (
-         REAL & A,
-         REAL & B,
-         REAL & C,
+         double_t & A,
+         double_t & B,
+         double_t & C,
          const Pt2dr & aV0,
          const Pt2dr & aV1
      );
 
-Box2dr BoxEllipse(Pt2dr aCenter,REAL A,REAL B,REAL C);
+Box2dr BoxEllipse(Pt2dr aCenter,double_t A,double_t B,double_t C);
 
      // return faux si pas Ellispe physique (ie pas deux VP pos)
 bool EllipseEq2ParamPhys
      (
-        REAL  & V1,
-        REAL  & V2,
-        REAL  & teta,
-        REAL  A,
-        REAL  B,
-        REAL  C
+        double_t  & V1,
+        double_t  & V2,
+        double_t  & teta,
+        double_t  A,
+        double_t  B,
+        double_t  C
      );
 
 void InvertParamEllipse
      (
-        REAL & A,  REAL & B,  REAL & C ,
-        REAL  A0,  REAL  B0,  REAL   C0
+        double_t & A,  double_t & B,  double_t & C ,
+        double_t  A0,  double_t  B0,  double_t   C0
      );
 
 
-REAL  SimilariteEllipse(REAL A1,REAL B1,REAL C1,REAL A2,REAL B2,REAL C2);
+double_t  SimilariteEllipse(double_t A1,double_t B1,double_t C1,double_t A2,double_t B2,double_t C2);
 
 
 /*************************************************************/
@@ -853,12 +853,12 @@ class cGridNuageP3D
          Pt2di aP0 = Pt2di(0,0)
             );
         Pt2di Sz() const;
-        INT   Cpt(Pt2di) const;
+        int   Cpt(Pt2di) const;
         Pt3dr P3D(Pt2di) const;
 
         std::string NameShade() const;
-        Im2D_U_INT1   ImShade();
-        Im2D_INT1     ImCpt();
+        Im2D_U_int1   ImShade();
+        Im2D_int1     ImCpt();
 
         // Profondeur dans la direction moyenne
         Fonc_Num FProfDMoyH();
@@ -872,14 +872,14 @@ class cGridNuageP3D
         Pt2di         mSz;
         Pt2di         mP0;
 
-        Im2D_REAL4    mImX;
-        REAL4 **      mDX;
-        Im2D_REAL4    mImY;
-        REAL4 **      mDY;
-        Im2D_REAL4    mImZ;
-        REAL4 **      mDZ;
-        Im2D_INT1     mImCpt;
-        Im2D_U_INT1   mImShade;
+        Im2D_double_t4    mImX;
+        double_t4 **      mDX;
+        Im2D_double_t4    mImY;
+        double_t4 **      mDY;
+        Im2D_double_t4    mImZ;
+        double_t4 **      mDZ;
+        Im2D_int1     mImCpt;
+        Im2D_U_int1   mImShade;
         cMailageSphere  mMSph;
 };
 
@@ -914,11 +914,11 @@ class cElNuageLaser
        void Debug(const std::string & aName);
 
 
-       REAL   ZMin () const;
-       REAL   ZMax () const;
+       double_t   ZMin () const;
+       double_t   ZMax () const;
        Box2dr Box() const;
 
-       void  AddQt(INT aNbObjMaxParFeuille,REAL aDistPave);
+       void  AddQt(int aNbObjMaxParFeuille,double_t aDistPave);
 
        void ParseNuage(cResReqNuageLaser & aResParse,Box2dr aBox);
 
@@ -927,8 +927,8 @@ class cElNuageLaser
 
        std::vector<Pt3dr>  mVPts;
 
-       REAL                mZMax;
-       REAL                mZMin;
+       double_t                mZMax;
+       double_t                mZMin;
        Pt2dr               mPInf;
        Pt2dr               mPSup;
        cQtcElNuageLaser *  mQt;
@@ -963,7 +963,7 @@ class cElPolygone
        double DiamSimple() const;  // Suppose que existe surf englob
 
     private  :
-       cElPolygone GenOp(const cElPolygone & aPol,INT)const;
+       cElPolygone GenOp(const cElPolygone & aPol,int)const;
 
        std::list<tContour>   mContours;
        std::list<bool>       mIsHole;

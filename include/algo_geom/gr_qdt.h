@@ -58,8 +58,8 @@ template <class AttrSom,class AttrArc,class QtArc>
                     ElSom<AttrSom,AttrArc> *       s2,
                     ElSubGraphe<AttrSom,AttrArc> & sgr,
                     QtArc                        & qt,
-                    REAL    epsilon  ,//             = 0.0,
-                    REAL    ang      //              =  -1
+                    double_t    epsilon  ,//             = 0.0,
+                    double_t    ang      //              =  -1
                );
 
 #if (0)

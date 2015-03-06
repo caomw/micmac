@@ -11,13 +11,13 @@ public :
 
     virtual Pt2dr Proj(Pt3dr) const = 0;
     virtual Pt3dr DirRayon(Pt2dr) const = 0;
-    virtual void  Diff(ElMatrix<REAL> &,Pt3dr) const = 0;  // differentielle
+    virtual void  Diff(ElMatrix<double_t> &,Pt3dr) const = 0;  // differentielle
 
 
     virtual void Rayon(Pt2dr,Pt3dr &p0,Pt3dr & p1) const = 0;
 
     // Interfaces simplifiee
-    ElMatrix<REAL> Diff(Pt3dr)const ;
+    ElMatrix<double_t> Diff(Pt3dr)const ;
 
     virtual ~ElProj32() {}
 };

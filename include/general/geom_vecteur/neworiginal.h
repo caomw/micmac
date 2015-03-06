@@ -53,15 +53,15 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 
 
-REAL   surf_or_poly(const ElFifo<Pt2dr> &);
-REAL   surf_or_poly(const std::vector<Pt2dr> &);
-REAL   perimetre_poly(const std::vector<Pt2dr> &);
+double_t   surf_or_poly(const ElFifo<Pt2dr> &);
+double_t   surf_or_poly(const std::vector<Pt2dr> &);
+double_t   perimetre_poly(const std::vector<Pt2dr> &);
 Pt2dr  barrycentre(const ElFifo<Pt2dr> &);
 Pt2dr  barrycentre(const std::vector<Pt2dr> &);
-REAL   SquareDistPointPoly(const ElFifo<Pt2dr> & f,Pt2dr pt);
+double_t   SquareDistPointPoly(const ElFifo<Pt2dr> & f,Pt2dr pt);
 bool   PointInPoly(const ElFifo<Pt2dr> & f,Pt2dr pt);
 bool   PointInPoly(const std::vector<Pt2dr> & f,Pt2dr pt);
-bool   PointInterieurPoly(const ElFifo<Pt2dr> & f,Pt2dr pt,REAL d);
+bool   PointInterieurPoly(const ElFifo<Pt2dr> & f,Pt2dr pt,double_t d);
 void   BoxPts(ElFifo<Pt2dr> & pts,Pt2dr & p0,Pt2dr & p1);
 Box2dr BoxPts(const std::vector<Pt2dr> & pts);
 
@@ -75,8 +75,8 @@ void PtsOfSquare(ElFifo<Pt2dr> & pts,Pt2dr p0,Pt2dr p1);
 
 
 
-#define IMat_Inertie  Mat_Inertie<ElStdTypeScal<INT> >
-#define RMat_Inertie  Mat_Inertie<ElStdTypeScal<REAL> >
+#define IMat_Inertie  Mat_Inertie<ElStdTypeScal<int> >
+#define RMat_Inertie  Mat_Inertie<ElStdTypeScal<double_t> >
 
 inline Pt2dr MatCdg(const RMat_Inertie& aMat)
 {
@@ -89,19 +89,19 @@ inline double ValQuad(const RMat_Inertie& aMat,const Pt2dr aP)
          +    aMat.s22() * ElSquare(aP.y);
 }
 
-template <class Type> REAL square_dist_droite(const SegComp &, const Mat_Inertie<Type> &);
-template <class Type> Seg2d seg_mean_square(const Mat_Inertie<Type> &,REAL norm = 1.0);
+template <class Type> double_t square_dist_droite(const SegComp &, const Mat_Inertie<Type> &);
+template <class Type> Seg2d seg_mean_square(const Mat_Inertie<Type> &,double_t norm = 1.0);
 
 
 void env_conv
      (
-         ElFifo<INT> &          ind,
+         ElFifo<int> &          ind,
          const ElFilo<Pt2di> &  pts,
          bool                   env_min
      );
 void env_conv
      (
-         ElFifo<INT> &          ind,
+         ElFifo<int> &          ind,
          const ElFilo<Pt2dr> &  pts,
          bool                   env_min
      );
@@ -141,7 +141,7 @@ void env_conv
 class cRapOnZ;
 
 
-Pt3dr   norm_or_poly(const ElFifo<Pt3dr> &,REAL * surf =0);
+Pt3dr   norm_or_poly(const ElFifo<Pt3dr> &,double_t * surf =0);
 
 struct cResOptInterFaisceaux
 {
@@ -164,16 +164,16 @@ struct cResOptInterFaisceaux
 
 void TestInterPolyCercle();
 
-REAL SurfIER (Pt2dr,REAL,REAL,REAL,Pt2dr,Pt2dr);
-REAL DerASurfIER (Pt2dr,REAL,REAL,REAL,Pt2dr,Pt2dr);
-REAL DerBSurfIER (Pt2dr,REAL,REAL,REAL,Pt2dr,Pt2dr);
-REAL DerCSurfIER (Pt2dr,REAL,REAL,REAL,Pt2dr,Pt2dr);
-REAL DerCElXSurfIER (Pt2dr,REAL,REAL,REAL,Pt2dr,Pt2dr);
-REAL DerCElYSurfIER (Pt2dr,REAL,REAL,REAL,Pt2dr,Pt2dr);
-REAL DerP0XSurfIER (Pt2dr,REAL,REAL,REAL,Pt2dr,Pt2dr);
-REAL DerP0YSurfIER (Pt2dr,REAL,REAL,REAL,Pt2dr,Pt2dr);
-REAL DerP1XSurfIER (Pt2dr,REAL,REAL,REAL,Pt2dr,Pt2dr);
-REAL DerP1YSurfIER (Pt2dr,REAL,REAL,REAL,Pt2dr,Pt2dr);
+double_t SurfIER (Pt2dr,double_t,double_t,double_t,Pt2dr,Pt2dr);
+double_t DerASurfIER (Pt2dr,double_t,double_t,double_t,Pt2dr,Pt2dr);
+double_t DerBSurfIER (Pt2dr,double_t,double_t,double_t,Pt2dr,Pt2dr);
+double_t DerCSurfIER (Pt2dr,double_t,double_t,double_t,Pt2dr,Pt2dr);
+double_t DerCElXSurfIER (Pt2dr,double_t,double_t,double_t,Pt2dr,Pt2dr);
+double_t DerCElYSurfIER (Pt2dr,double_t,double_t,double_t,Pt2dr,Pt2dr);
+double_t DerP0XSurfIER (Pt2dr,double_t,double_t,double_t,Pt2dr,Pt2dr);
+double_t DerP0YSurfIER (Pt2dr,double_t,double_t,double_t,Pt2dr,Pt2dr);
+double_t DerP1XSurfIER (Pt2dr,double_t,double_t,double_t,Pt2dr,Pt2dr);
+double_t DerP1YSurfIER (Pt2dr,double_t,double_t,double_t,Pt2dr,Pt2dr);
 Fonc_Num    FN_SurfIER
             (
                 Pt2d<Fonc_Num> aCel,
@@ -187,34 +187,34 @@ Fonc_Num    FN_SurfIER
 
 void ImRON2ParmEllipse
      (
-         REAL & A,
-         REAL & B,
-         REAL & C,
+         double_t & A,
+         double_t & B,
+         double_t & C,
          const Pt2dr & aV0,
          const Pt2dr & aV1
      );
 
-Box2dr BoxEllipse(Pt2dr aCenter,REAL A,REAL B,REAL C);
+Box2dr BoxEllipse(Pt2dr aCenter,double_t A,double_t B,double_t C);
 
      // return faux si pas Ellispe physique (ie pas deux VP pos)
 bool EllipseEq2ParamPhys
      (
-        REAL  & V1,
-        REAL  & V2,
-        REAL  & teta,
-        REAL  A,
-        REAL  B,
-        REAL  C
+        double_t  & V1,
+        double_t  & V2,
+        double_t  & teta,
+        double_t  A,
+        double_t  B,
+        double_t  C
      );
 
 void InvertParamEllipse
      (
-        REAL & A,  REAL & B,  REAL & C ,
-        REAL  A0,  REAL  B0,  REAL   C0
+        double_t & A,  double_t & B,  double_t & C ,
+        double_t  A0,  double_t  B0,  double_t   C0
      );
 
 
-REAL  SimilariteEllipse(REAL A1,REAL B1,REAL C1,REAL A2,REAL B2,REAL C2);
+double_t  SimilariteEllipse(double_t A1,double_t B1,double_t C1,double_t A2,double_t B2,double_t C2);
 
 
 /*************************************************************/

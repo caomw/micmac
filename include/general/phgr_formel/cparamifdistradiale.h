@@ -29,7 +29,7 @@ class cParamIFDistRadiale : public cParamIntrinsequeFormel
                     void  SetCDistPPLie(double aTol=cContrainteEQF::theContrStricte);
 
 
-           void SetDRFDegreFige(INT aDF,double aTol=cContrainteEQF::theContrStricte);
+           void SetDRFDegreFige(int aDF,double aTol=cContrainteEQF::theContrStricte);
 	   virtual void SetValInitOnValCur();
 
       protected :

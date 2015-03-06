@@ -45,42 +45,42 @@ class Mne
 {
    public:
 
-     Im2D_INT2 _mne;
+     Im2D_int2 _mne;
      Pt3dr     _orig;
      Pt3dr     _ray_x;
      Pt3dr     _ray_y;
      Pt3dr     _ray_z;
      Pt3dr     _pas;
-     INT       _label_interdit;
-     REAL      _z_min;
-     REAL      _z_max;
+     int       _label_interdit;
+     double_t      _z_min;
+     double_t      _z_max;
      bool      _trapu;
      Pt2dr     _cor_trapu;
 
      Mne();
 
      Mne(
-           Im2D_INT2 mne,
+           Im2D_int2 mne,
            Pt3dr p0,
            Pt3dr vect_x,
            Pt3dr le_pas,
-           INT   val_interdite
+           int   val_interdite
         );
 
      Mne(
-           Im2D_INT2 mne,
+           Im2D_int2 mne,
            Pt3dr p0,
            Pt3dr vect_x,
            Pt3dr vect_y,
            Pt3dr le_pas,
-           INT   val_interdite
+           int   val_interdite
         );
 
      Mne(
            Boite& b_mne
         );
     
-     Mne( Cub3DTer c_ter, REAL pas_z );
+     Mne( Cub3DTer c_ter, double_t pas_z );
 
 
      Mne(
@@ -108,13 +108,13 @@ class Mne
      Pt3dr ray_y();
      Pt3dr ray_z();
      Pt3dr pas();
-     INT   label_interdit();
-     REAL  z_min();
-     REAL  z_max();
-     REAL  z_volume();
-     REAL  z_interval();
-     INT   tx();
-     INT   ty();
+     int   label_interdit();
+     double_t  z_min();
+     double_t  z_max();
+     double_t  z_volume();
+     double_t  z_interval();
+     int   tx();
+     int   ty();
 
      void          initialiser();
      void          deplace_orig(Pt3dr p);
@@ -142,25 +142,25 @@ class Mne
      void       terr_to_mne(ElFilo<Facette_3d>& f_f);
      void       terr_to_mne(H_Graphe& graphe);
 
-     INT       mne(INT x, INT y);
-     Im2D_INT2 mne(){return _mne;}
+     int       mne(int x, int y);
+     Im2D_int2 mne(){return _mne;}
 
      void           facette_to_points(Facette_2d f, ElFilo<Pt3dr>& f_p);  //facette en reference terrain
 
-     Liste_Pts_INT2 intersection(Facette_3d f, INT decal = 0);
-     REAL           poids_gaussian(Facette_3d f, REAL sigma = 1, INT distance = 3);
-     REAL           poids(Facette_3d f, INT decal = 0 , INT test_stab = 0);
-     REAL           filtrer(ElFilo<Facette_3d>& f_f, REAL seuil = 30, INT decal = 0, INT test_stab = 0);  //f_f en reference terrain
-     REAL           distance_volumique(Mne& mne);    //très particulière
-     REAL           distance_max(Mne& mne);    //très particulière
-     void           distance_surface_volumique(Mne& mne, REAL& dist, REAL& surf);    //très particulière
+     Liste_Pts_int2 intersection(Facette_3d f, int decal = 0);
+     double_t           poids_gaussian(Facette_3d f, double_t sigma = 1, int distance = 3);
+     double_t           poids(Facette_3d f, int decal = 0 , int test_stab = 0);
+     double_t           filtrer(ElFilo<Facette_3d>& f_f, double_t seuil = 30, int decal = 0, int test_stab = 0);  //f_f en reference terrain
+     double_t           distance_volumique(Mne& mne);    //très particulière
+     double_t           distance_max(Mne& mne);    //très particulière
+     void           distance_surface_volumique(Mne& mne, double_t& dist, double_t& surf);    //très particulière
 
-     bool  mediane(Facette_2d f, INT2& z);
-     bool  mediane(Facette_2d f, REAL& z);
+     bool  mediane(Facette_2d f, int2& z);
+     bool  mediane(Facette_2d f, double_t& z);
 
-     void  afficher(Output out, INT nb_color);
-     void  afficher(Output out, INT nb_color, Pt2di p0, Pt2di p1);
-     void  afficher(Facette_3d f, INT decal_max, Output out, INT nb_color);  //decal_max : distance d'un point de la facette
+     void  afficher(Output out, int nb_color);
+     void  afficher(Output out, int nb_color, Pt2di p0, Pt2di p1);
+     void  afficher(Facette_3d f, int decal_max, Output out, int nb_color);  //decal_max : distance d'un point de la facette
 };
 
 #endif   //_HASSAN_MNE_H

@@ -10,7 +10,7 @@ public :
     Pt2dr Direct(Pt2dr) const;    // -> DistDirect() = M2C
     bool OwnInverse(Pt2dr &) const ;
     const ElCamera & mCam;
-    void  Diff(ElMatrix<REAL> & aMat,Pt2dr aP) const;
+    void  Diff(ElMatrix<double_t> & aMat,Pt2dr aP) const;
 
 private :
     bool mUseRay;

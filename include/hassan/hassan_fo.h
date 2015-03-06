@@ -47,28 +47,28 @@ Header-MicMac-eLiSe-25/06/2007*/
 /**************** Fonction special *******************/
 /*****************************************************/
 
-extern bool resoud_syst_lin(int n, REAL*tab);
-extern bool resoud_syst_lin(int n, REAL4*tab);
-extern bool resoud_syst_lin_koleski(int n, REAL4*tab);
+extern bool resoud_syst_lin(int n, double_t*tab);
+extern bool resoud_syst_lin(int n, double_t4*tab);
+extern bool resoud_syst_lin_koleski(int n, double_t4*tab);
 
-extern bool moindre_carre(INT n, INT m, REAL* tab);  
-extern bool moindre_carre(INT n, INT m, REAL* tab, REAL* poids, REAL* param);   
+extern bool moindre_carre(int n, int m, double_t* tab);  
+extern bool moindre_carre(int n, int m, double_t* tab, double_t* poids, double_t* param);   
 
 
 
 extern bool egal(Pt3dr p1, Pt3dr p2);
 extern bool intersect(Pt2dr p0,Pt2dr p1,Pt2dr p2,Pt2dr p3,Pt2dr& p_int);
 
-extern ElList<Pt2di>   isolement3(Im2D_U_INT1 im,Im2D<INT,INT> im_reg, Output w,INT nb_colour);
-extern ElList<Pt2di>   isolement2(Im2D_U_INT1 im, Im2D<INT,INT> im_reg, Output w);
-extern ElList<Pt2di>   isolement(Im2D_U_INT1 im, Im2D<INT,INT> im_reg, Output w);
-extern ElList<Hregion> isolement(Im2D_U_INT1 im, Output w);
+extern ElList<Pt2di>   isolement3(Im2D_U_int1 im,Im2D<int,int> im_reg, Output w,int nb_colour);
+extern ElList<Pt2di>   isolement2(Im2D_U_int1 im, Im2D<int,int> im_reg, Output w);
+extern ElList<Pt2di>   isolement(Im2D_U_int1 im, Im2D<int,int> im_reg, Output w);
+extern ElList<Hregion> isolement(Im2D_U_int1 im, Output w);
 
 
 extern int   fonccomp8(const void* , const void* );
 extern int   fonccomp(const void* , const void* );
-extern int   fonccomp_INT(const void* , const void* );
-extern REAL4 median(Im2D_REAL4 , Facette_2d , REAL,REAL);
+extern int   fonccomp_int(const void* , const void* );
+extern double_t4 median(Im2D_double_t4 , Facette_2d , double_t,double_t);
 
 
 extern void affich_facette(Facette_2d f,Output w,int pal);
@@ -77,70 +77,70 @@ extern void affich_facette(ElList<Facette_2d>l,Output w,int pal);
 extern void affich_facette(ElList<Facette_2d>l,Output w,Fonc_Num fn);
 
 
-extern Pt3dr phot_to_terrain(Pt2di p2, REAL z, Wcor w);
-extern Pt2di phot_to_phot(Pt2di p2, REAL z, Wcor wa,Wcor wb);
+extern Pt3dr phot_to_terrain(Pt2di p2, double_t z, Wcor w);
+extern Pt2di phot_to_phot(Pt2di p2, double_t z, Wcor wa,Wcor wb);
 extern Pt3dr phot_phot_to_terrain(Wcor Wa, Pt2di pa, Wcor Wb, Pt2di pb);
 
 
 extern Pt2di              terrain_to_phot(Pt3dr, Wcor);
 
-extern Pt2di              terrain_to_imagette(Pt2dr pt, Pt2dr p0, Pt2dr v, REAL pas);
-extern Facette_2d         terrain_to_imagette(Facette_2d f, Pt2dr p0, Pt2dr v, REAL pas);
+extern Pt2di              terrain_to_imagette(Pt2dr pt, Pt2dr p0, Pt2dr v, double_t pas);
+extern Facette_2d         terrain_to_imagette(Facette_2d f, Pt2dr p0, Pt2dr v, double_t pas);
 
 extern Facette_2d         terrain_to_ortho(Facette_2d f, Pt2dr p0, Pt2dr d);
 extern ElList<Facette_2d> terrain_to_ortho(ElList<Facette_2d> l, Pt2dr p0, Pt2dr d);
 
 extern Facette_2d         terrain_to_phot(Facette_3d f,Wcor w);
 extern ElList<Facette_2d> terrain_to_phot(ElList<Facette_3d> lf,Wcor w);
-extern Facette_2d         terrain_to_phot(Facette_2d f,Wcor w, REAL z_ter);
+extern Facette_2d         terrain_to_phot(Facette_2d f,Wcor w, double_t z_ter);
 
 extern Facette_2d         ortho_to_terrain(Facette_2d f, Pt2dr p0, Pt2dr d);
 extern ElList<Facette_2d> ortho_to_terrain(ElList<Facette_2d> l, Pt2dr p0, Pt2dr d);
 
-extern Facette_2d         phot_to_terrain(Facette_2d f,Wcor w, REAL z_ter);
+extern Facette_2d         phot_to_terrain(Facette_2d f,Wcor w, double_t z_ter);
 
 
 extern Pt3dr              carte_to_terrain(Pt3dr p,Wcor w);
-extern Facette_2d         carte_to_terrain(Facette_2d f,Wcor w, REAL z_lamb);
-extern ElList<Facette_2d> carte_to_terrain(ElList<Facette_2d>l,Wcor w, REAL z_lamb);
+extern Facette_2d         carte_to_terrain(Facette_2d f,Wcor w, double_t z_lamb);
+extern ElList<Facette_2d> carte_to_terrain(ElList<Facette_2d>l,Wcor w, double_t z_lamb);
 
-extern Facette_2d         carte_to_ortho(Facette_2d f,Wcor w,REAL z_lamb, Pt2dr p0, Pt2dr d);
-extern ElList<Facette_2d> carte_to_ortho(ElList<Facette_2d> l,Wcor w,REAL z_lamb, Pt2dr p0, Pt2dr d);
+extern Facette_2d         carte_to_ortho(Facette_2d f,Wcor w,double_t z_lamb, Pt2dr p0, Pt2dr d);
+extern ElList<Facette_2d> carte_to_ortho(ElList<Facette_2d> l,Wcor w,double_t z_lamb, Pt2dr p0, Pt2dr d);
 
 extern bool               mnt_oliv(Pt3dr& p, Wcor w);
 
-extern void               facette_to_polygone(Facette_2d f, Im2D_U_INT1 im);
+extern void               facette_to_polygone(Facette_2d f, Im2D_U_int1 im);
 extern Facette_2d         seg_to_pt(ElList<Facette_2d>lsegf);
 
-extern void       recal_xy(Pt2di& p0, Pt2di& p1,REAL t);
-extern void       recal_xy(Pt2dr& p0, Pt2dr& p1,REAL t);
-extern void       recal_xy(Pt2dr& p0, Pt2dr& p1, Pt2dr& p2, REAL t);
-extern Pt2dr      recal_xy(Pt2dr  p0, Pt2dr  p1, Pt2dr  p2, REAL t1, REAL t2);
-extern Facette_2d recal_xy(Facette_2d f,REAL dist);
+extern void       recal_xy(Pt2di& p0, Pt2di& p1,double_t t);
+extern void       recal_xy(Pt2dr& p0, Pt2dr& p1,double_t t);
+extern void       recal_xy(Pt2dr& p0, Pt2dr& p1, Pt2dr& p2, double_t t);
+extern Pt2dr      recal_xy(Pt2dr  p0, Pt2dr  p1, Pt2dr  p2, double_t t1, double_t t2);
+extern Facette_2d recal_xy(Facette_2d f,double_t dist);
 extern Facette_2d recal_xyz( WcorVis Wa, 
                              WcorVis Wb,
-                             Im2D_U_INT1 gradg,
-                             Im2D_U_INT1 gradd,
+                             Im2D_U_int1 gradg,
+                             Im2D_U_int1 gradd,
                              Facette_2d f, 
-                             REAL z, 
-                             REAL dz,  
-                             REAL dxy,
-                             REAL pas,
-                             REAL param_xy=1.5,
-                             REAL param_z=1
+                             double_t z, 
+                             double_t dz,  
+                             double_t dxy,
+                             double_t pas,
+                             double_t param_xy=1.5,
+                             double_t param_z=1
                            );
 
-extern Facette_2d recal_seg_xy(Facette_2d f,REAL dist);
-extern Facette_3d recal_seg_z(Facette_3d  f,REAL dist);
+extern Facette_2d recal_seg_xy(Facette_2d f,double_t dist);
+extern Facette_3d recal_seg_z(Facette_3d  f,double_t dist);
 
-extern REAL4 median_recal(Im2D_U_INT1 grad, Facette_2d f);
-extern REAL4 moyen_recal(Im2D_U_INT1 grad, Facette_2d f);
+extern double_t4 median_recal(Im2D_U_int1 grad, Facette_2d f);
+extern double_t4 moyen_recal(Im2D_U_int1 grad, Facette_2d f);
 
-extern Facette_2d seg_recal(Facette_2d f, Im2D_U_INT1 grad, REAL dist);
-extern Facette_3d seg_recal(Facette_2d sega, Facette_2d segb, WcorVis Wa, WcorVis Wb,REAL z_lamb_0,REAL z_lamb_1);
-extern REAL scor(Facette_2d f, WcorVis W, REAL4 z,Im2D_U_INT1 grad);
-extern REAL scor(Facette_3d f, WcorVis W,Im2D_U_INT1 grad);
-extern REAL scor(Facette_3d f, WcorVis W1, Im2D_U_INT1 grad1, WcorVis W2, Im2D_U_INT1 grad2);
+extern Facette_2d seg_recal(Facette_2d f, Im2D_U_int1 grad, double_t dist);
+extern Facette_3d seg_recal(Facette_2d sega, Facette_2d segb, WcorVis Wa, WcorVis Wb,double_t z_lamb_0,double_t z_lamb_1);
+extern double_t scor(Facette_2d f, WcorVis W, double_t4 z,Im2D_U_int1 grad);
+extern double_t scor(Facette_3d f, WcorVis W,Im2D_U_int1 grad);
+extern double_t scor(Facette_3d f, WcorVis W1, Im2D_U_int1 grad1, WcorVis W2, Im2D_U_int1 grad2);
 
 
 
@@ -164,25 +164,25 @@ template <class type1, class type2> void ouverture(Im3D<type1, type2> Im, Pt3di 
 template <class type1, class type2> void fermeture(Im3D<type1, type2> Im, Pt3di p); 
 template<class type1, class type2>  void affich_Im2D(  Im2D<type1 , type2> im,
                                                        Output w,
-                                                       INT nb_color
+                                                       int nb_color
                                                     );
 
 template <class type1, class type2> void affich_Im3D( Im3D<type1, type2> im,
                                                       Output w,
-                                                      INT color,
-                                                      INT n_colone,
-                                                      INT dierect = 1      //1 : x, 2 : y et 3 : z
+                                                      int color,
+                                                      int n_colone,
+                                                      int dierect = 1      //1 : x, 2 : y et 3 : z
                                                     );
 
 
-extern Im2D_REAL4 norm_gradient_deriche(Im2D_U_INT1 im, REAL alpha);
+extern Im2D_double_t4 norm_gradient_deriche(Im2D_U_int1 im, double_t alpha);
 
 
 //co_aligner les segments de facette ayant de meme direction
 
 extern Facette_2d co_aligner(Facette_2d f);
-extern Facette_3d co_aligner(Facette_3d f, REAL precision);
-extern void       co_aligner(ElFilo<Facette_3d>& filo, REAL precision);
+extern Facette_3d co_aligner(Facette_3d f, double_t precision);
+extern void       co_aligner(ElFilo<Facette_3d>& filo, double_t precision);
 
 
 //   correlation    
@@ -203,7 +203,7 @@ extern Fonc_Num Hcorcont(Fonc_Num f1,Fonc_Num f2,Fonc_Num f3,Pt2di p);
 
 //   filtrage moindre carres avec une contrainte de region de l'image gauche    
 
-extern Fonc_Num Hmdcar(Fonc_Num f1,Fonc_Num f2,Pt2di p,INT nParam);
+extern Fonc_Num Hmdcar(Fonc_Num f1,Fonc_Num f2,Pt2di p,int nParam);
 
 
 
@@ -212,7 +212,7 @@ extern Fonc_Num Hmdcar(Fonc_Num f1,Fonc_Num f2,Pt2di p,INT nParam);
 //      1-region de l'image gauche 
 //      2-poid de coef de cor   
 
-extern Fonc_Num Hmdcarp(Fonc_Num f1,Fonc_Num f2,Fonc_Num f3,Pt2di p,INT nParam);
+extern Fonc_Num Hmdcarp(Fonc_Num f1,Fonc_Num f2,Fonc_Num f3,Pt2di p,int nParam);
 extern Disc_Pal palette_64();
 
 #endif // _HASSANL_HASSAN_FO_H

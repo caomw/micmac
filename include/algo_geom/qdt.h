@@ -55,7 +55,7 @@ Header-MicMac-eLiSe-25/06/2007*/
       template <class Type>  bool Box2d<Type>::Include(const class SegComp & seg) const
          Necessaire pour savoir si l'element est inclus dans le qdt
 
-      virtual REAL ElQTRegionPlan::D2(const Pt2dr &)  const = 0;
+      virtual double_t ElQTRegionPlan::D2(const Pt2dr &)  const = 0;
 
       La fonction D2 doit etre redefinie sur les primitives pour lequelles
       on veut acceder a R Voisin
@@ -108,8 +108,8 @@ template <class Obj,class Prim,class FPrim>
             (
                 const FPrim & fprim,
                 Box2dr        box,
-                INT           NbObjMax,
-                REAL          SzMin
+                int           NbObjMax,
+                double_t          SzMin
             );
 
                 // insert : renvoie true si l'objet est effectivement inclu
@@ -123,13 +123,13 @@ template <class Obj,class Prim,class FPrim>
 
             Obj  NearestObj(Pt2dr,double aDistInit,double aDistMax);
 
-            void RVoisins(std::set<Obj> &,Pt2dr   pt,REAL d);
-            void RVoisins(std::set<Obj> &,Seg2d   pt,REAL d);
-            void RVoisins(std::set<Obj> &,Box2dr  pt,REAL d);
+            void RVoisins(std::set<Obj> &,Pt2dr   pt,double_t d);
+            void RVoisins(std::set<Obj> &,Seg2d   pt,double_t d);
+            void RVoisins(std::set<Obj> &,Box2dr  pt,double_t d);
 
-            void RVoisins(cTplResRVoisin<Obj> &,Pt2dr   pt,REAL d);
-            void RVoisins(cTplResRVoisin<Obj> &,Seg2d    pt,REAL d);
-            void RVoisins(cTplResRVoisin<Obj> &,Box2dr   pt,REAL d);
+            void RVoisins(cTplResRVoisin<Obj> &,Pt2dr   pt,double_t d);
+            void RVoisins(cTplResRVoisin<Obj> &,Seg2d    pt,double_t d);
+            void RVoisins(cTplResRVoisin<Obj> &,Box2dr   pt,double_t d);
 
             void remove(const Obj & obj);
             void clear();
@@ -156,7 +156,7 @@ template <class Obj,class Prim,class FPrim>
                   (
                        cTplResRVoisin<Obj>  &,
                        const ElQTRegionPlan &,
-                       REAL                 d
+                       double_t                 d
                   );
 
            void           KPPVois

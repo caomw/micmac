@@ -1,5 +1,5 @@
-#ifndef _ELISE_GENERAL_BITM_CTABULKERNELINTERPOL_H
-#define _ELISE_GENERAL_BITM_CTABULKERNELINTERPOL_H
+#ifndef _ELISE_GENERAL_BITM_CTABULKERNELintERPOL_H
+#define _ELISE_GENERAL_BITM_CTABULKERNELintERPOL_H
 
 #include "general/sys_dep.h"
 
@@ -20,9 +20,9 @@ class cTabulKernelInterpol : public cKernelInterpol1D
         int                        mNbDisc1;
         int                        mNbValPos;
         int                        mSzTab;
-        Im1D_REAL8                 mImTab;
+        Im1D_double_t8                 mImTab;
         double *                   mTab;
-        Im1D_REAL8                 mImDer;
+        Im1D_double_t8                 mImDer;
         double *                   mDer;
 };
 

@@ -16,7 +16,7 @@ public :
     (
             std::list<Pt3dr>&  res,  // liste de triplets de prof de champs
             Pt3dr p1,Pt3dr p2,Pt3dr p3, // points de projection
-            REAL d12, REAL d13, REAL d23
+            double_t d12, double_t d13, double_t d23
             );
 };
 

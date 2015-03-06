@@ -51,8 +51,8 @@ class Cub3DTer
          (
                Pt3dr pz0,
                Pt3dr pz1,
-               REAL pas_z,
-               REAL pas_xy,
+               double_t pas_z,
+               double_t pas_xy,
                const char *data_dir,
                bool        RVB
          );
@@ -79,47 +79,47 @@ class Cub3DTer
          Ori3D_Std     std_or (char *name);
 
          Flux_Pts r2d();
-         INT sz_ixy() const { return ElMax(_sz_im.x,_sz_im.y);}
-         INT sz_ix() const  { return _sz_im.x;}
-         INT sz_iy() const  { return _sz_im.y;}
-         INT sz_iz() const  { return _sz_im.z;}
+         int sz_ixy() const { return ElMax(_sz_im.x,_sz_im.y);}
+         int sz_ix() const  { return _sz_im.x;}
+         int sz_iy() const  { return _sz_im.y;}
+         int sz_iz() const  { return _sz_im.z;}
          Pt3di sz_image() const  { return _sz_im;}
 
          Pt3dr pz0() const  { return _pz0;}
          Pt3dr pz1() const  { return _pz1;}
 
-         REAL  pas_z() const { return _pas_z;}
-         REAL  pas_xy() const{ return _pas_xy;}
+         double_t  pas_z() const { return _pas_z;}
+         double_t  pas_xy() const{ return _pas_xy;}
 
-         REAL x0() const { return _pz0.x;}
-         REAL y0() const { return _pz0.y;}
-         REAL z0() const { return _pz0.z;}
+         double_t x0() const { return _pz0.x;}
+         double_t y0() const { return _pz0.y;}
+         double_t z0() const { return _pz0.z;}
 
-         Im3D<U_INT1,INT>  cub_ui1();
-         Im3D<U_INT1,INT>  cub_ui1(char * name);
-         Im2D_REAL4        plan_r4();
+         Im3D<U_int1,int>  cub_ui1();
+         Im3D<U_int1,int>  cub_ui1(char * name);
+         Im2D_double_t4        plan_r4();
 
 
-         Im2D_U_INT1  proj_min_max(Im3D<U_INT1,INT>,bool mode_min);
-         Im2D_U_INT1  proj_min_max(char *,bool mode_min);
+         Im2D_U_int1  proj_min_max(Im3D<U_int1,int>,bool mode_min);
+         Im2D_U_int1  proj_min_max(char *,bool mode_min);
 
-         Im2D_U_INT2  z_proj(Im3D<U_INT1,INT>,Im2D_U_INT1);
-         Im2D_U_INT2  z_proj_min_max(Im3D<U_INT1,INT>,bool mode_min);
-         Im2D_U_INT2  z_proj_min_max(char *,bool mode_min);
+         Im2D_U_int2  z_proj(Im3D<U_int1,int>,Im2D_U_int1);
+         Im2D_U_int2  z_proj_min_max(Im3D<U_int1,int>,bool mode_min);
+         Im2D_U_int2  z_proj_min_max(char *,bool mode_min);
 
          const char * data_dir() { return _ddir;}
 
          bool     exist_file(const char * name);
          Elise_File_Im   fcub(const char * name,bool create = false);
          Elise_File_Im   fcar(const char * name,GenIm::type_el,bool create = false);
-         Im1D_INT4       histo(char * name);
-         Im1D_U_INT1     lut_eg_dyn(char * name);
+         Im1D_int4       histo(char * name);
+         Im1D_U_int1     lut_eg_dyn(char * name);
 
     private :
          Pt3dr _pz0;
          Pt3dr _pz1;
-         REAL  _pas_z;
-         REAL  _pas_xy;
+         double_t  _pas_z;
+         double_t  _pas_xy;
          const char * _ddir;
 
          Pt3di    _sz_im;
@@ -145,9 +145,9 @@ class Wcor
           virtual Pt2di clik();
 
 
-          void load_z(REAL z);
-          Fonc_Num load_grad_polar_z(REAL z,REAL def,REAL fact_norm);
-          void lissage_can(REAL fact);
+          void load_z(double_t z);
+          Fonc_Num load_grad_polar_z(double_t z,double_t def,double_t fact_norm);
+          void lissage_can(double_t fact);
 
           virtual Output vgray();
           virtual Output vdisc();
@@ -160,21 +160,21 @@ class Wcor
 
      //  protected :
 
-          Im2D_U_INT1 iphot();
-          Im2D_U_INT1 ipred();
-          Im2D_U_INT1 ipgreen();
-          Im2D_U_INT1 ipblue();
+          Im2D_U_int1 iphot();
+          Im2D_U_int1 ipred();
+          Im2D_U_int1 ipgreen();
+          Im2D_U_int1 ipblue();
 
-          Im2D_U_INT1 itred();
-          Im2D_U_INT1 itgreen();
-          Im2D_U_INT1 itblue();
+          Im2D_U_int1 itred();
+          Im2D_U_int1 itgreen();
+          Im2D_U_int1 itblue();
 
-          Im2D_U_INT1 iter();
-          Im2D_INT1   igx();
-          Im2D_INT1   igy();
+          Im2D_U_int1 iter();
+          Im2D_int1   igx();
+          Im2D_int1   igy();
 
-          Im2D_U_INT1   ngrad();
-          Im2D_U_INT1   agrad();
+          Im2D_U_int1   ngrad();
+          Im2D_U_int1   agrad();
 
           Ori3D_Std      _o3;
           Cub3DTer      _c3d;
@@ -194,8 +194,8 @@ class Wcor
           Pt2dr ter_to_phot_loc(Pt3dr);
           Pt2dr carte_to_phot_loc(Pt3dr);
 
-          ElList<Facette_2D> select_inside_phot(ElList<Facette_2D>,REAL z0,REAL z1,REAL rab);
-          bool      inside_phot(Pt2dr, REAL rab);
+          ElList<Facette_2D> select_inside_phot(ElList<Facette_2D>,double_t z0,double_t z1,double_t rab);
+          bool      inside_phot(Pt2dr, double_t rab);
 
           bool   rgb(){return _c3d.rgb();}
 
@@ -204,26 +204,26 @@ class Wcor
               void assert_gray();
               void assert_rgb();
 
-              Im2D_U_INT1  init_im_ui1(Im2D_U_INT1 &,INT szx,INT szy);
-              Im2D_INT1    init_im_i1(Im2D_INT1 &,INT szx,INT szy);
+              Im2D_U_int1  init_im_ui1(Im2D_U_int1 &,int szx,int szy);
+              Im2D_int1    init_im_i1(Im2D_int1 &,int szx,int szy);
 
-              Im2D_U_INT1 _iphot;
-              Im2D_U_INT1 _ipred;
-              Im2D_U_INT1 _ipgreen;
-              Im2D_U_INT1 _ipblue;
-
-
-              Im2D_U_INT1 _iter;
-              Im2D_U_INT1 _itred;
-              Im2D_U_INT1 _itgreen;
-              Im2D_U_INT1 _itblue;
+              Im2D_U_int1 _iphot;
+              Im2D_U_int1 _ipred;
+              Im2D_U_int1 _ipgreen;
+              Im2D_U_int1 _ipblue;
 
 
+              Im2D_U_int1 _iter;
+              Im2D_U_int1 _itred;
+              Im2D_U_int1 _itgreen;
+              Im2D_U_int1 _itblue;
 
-              Im2D_U_INT1 _agrad;
-              Im2D_U_INT1 _ngrad;
-              Im2D_INT1 _igx;
-              Im2D_INT1 _igy;
+
+
+              Im2D_U_int1 _agrad;
+              Im2D_U_int1 _ngrad;
+              Im2D_int1 _igx;
+              Im2D_int1 _igy;
 };
 
 
@@ -239,7 +239,7 @@ class WcorVis : public Wcor
                char * name,
                Video_Display,
                Elise_Set_Of_Palette,
-               INT  zoom = 1
+               int  zoom = 1
           );
 
           WcorVis
@@ -259,14 +259,14 @@ class WcorVis : public Wcor
                     Col_Pal
                );
 
-          void draw_point_ter(Pt3dr centre,REAL radius,Col_Pal);
+          void draw_point_ter(Pt3dr centre,double_t radius,Col_Pal);
           virtual Output vgray();
           virtual Output vrgb();
           virtual Output vbicol();
           virtual Output vdisc();
 
-          Im2D_U_INT1 shading(Im2D_U_INT2 mnt,REAL Pglob);
-          void persp(Im2D_U_INT2 mnt,Pt2di dir,REAL tgt);
+          Im2D_U_int1 shading(Im2D_U_int2 mnt,double_t Pglob);
+          void persp(Im2D_U_int2 mnt,Pt2di dir,double_t tgt);
 
 
 //       private :
@@ -277,17 +277,17 @@ class WcorVis : public Wcor
 class COST_dz
 {
      public :
-          virtual REAL cost
+          virtual double_t cost
                        (
-                            REAL dz_ter,
-                            INT idz,
-                            REAL pente,
-                            REAL  corr_moy
+                            double_t dz_ter,
+                            int idz,
+                            double_t pente,
+                            double_t  corr_moy
                        )  = 0 ;
 
-          COST_dz   (REAL cdz)  : _cout_dz(cdz) {}
+          COST_dz   (double_t cdz)  : _cout_dz(cdz) {}
           virtual ~COST_dz(){}
-          REAL   _cout_dz;
+          double_t   _cout_dz;
 };
 
 class Arg_Prg_Dyn
@@ -303,13 +303,13 @@ class Arg_Prg_Dyn
          Arg_Prg_Dyn
          (
               Pt2di                    p_thresh,
-              REAL                 fact_mul_cts,
+              double_t                 fact_mul_cts,
               Cub3DTer                      c3d,
               char  *                      name,
               COST_dz *               calc_cost,
-              REAL                   max_dz_ter,
-              INT2  **                    zcont,
-              Im2D_INT2                      zc
+              double_t                   max_dz_ter,
+              int2  **                    zcont,
+              Im2D_int2                      zc
 
          );
 
@@ -336,9 +336,9 @@ class Arg_Prg_Dyn
 
 
          Cub3DTer               _c3d;
-         Im3D<U_INT1,INT>      _ic3;
-         Im1D_U_INT1           _lut_thr;
-         Im2D_INT4             _cost;
+         Im3D<U_int1,int>      _ic3;
+         Im1D_U_int1           _lut_thr;
+         Im2D_int4             _cost;
 
 
         // arguments donnes en coord terrain, converti en coordonnees cube
@@ -347,19 +347,19 @@ class Arg_Prg_Dyn
 
 
 
-         REAL       _fact_mul_cts;
+         double_t       _fact_mul_cts;
          COST_dz    *_calc_cost;
-         REAL        _max_dz_ter;
+         double_t        _max_dz_ter;
 
     public :
  
-         REAL                _pas_z;
-         REAL               _pas_xy;
-         INT                _max_dz;
-         INT  *            _cost_dz;
-         INT2 **            _z_cont;
-         Im2D_INT2              _zc;  // to conserve ref on _z_cont
-         REAL             _corr_moy;
+         double_t                _pas_z;
+         double_t               _pas_xy;
+         int                _max_dz;
+         int  *            _cost_dz;
+         int2 **            _z_cont;
+         Im2D_int2              _zc;  // to conserve ref on _z_cont
+         double_t             _corr_moy;
 };
 
 
@@ -370,30 +370,30 @@ class CUTS
         CUTS (Cub3DTer,char * name);
         virtual ~CUTS(){}
 
-        void set_im3(Im3D<U_INT1,INT>);
-        void set_cut(Pt2di p1,Pt2di p2,INT2 ** z_cont);
-        void load_cut(INT2 ** z_cont);
-        void use_cont(INT2 ** z_cont,INT);
-        void set_cut_rev(CUTS &,INT2 **);
+        void set_im3(Im3D<U_int1,int>);
+        void set_cut(Pt2di p1,Pt2di p2,int2 ** z_cont);
+        void load_cut(int2 ** z_cont);
+        void use_cont(int2 ** z_cont,int);
+        void set_cut_rev(CUTS &,int2 **);
         Pt3dr clik_to_ter(Pt2di cl);
 
         virtual Output vgray();
         virtual Output vdisc();
 
-        void compute_prg(INT * cost,INT zmax);
+        void compute_prg(int * cost,int zmax);
 
         Flux_Pts r2d();
 
         char *           _name;
         Cub3DTer          _c3d;
-        Im3D<U_INT1,INT>  _ic3;
-        INT             _sz_xy;
-        INT             _nb_xy;
-        INT               _nbz;
-        Im1D_INT2           _x;
-        Im1D_INT2           _y;
-        Im2D_INT4         _cor;
-        Im2D_INT4    _cost_prg;
+        Im3D<U_int1,int>  _ic3;
+        int             _sz_xy;
+        int             _nb_xy;
+        int               _nbz;
+        Im1D_int2           _x;
+        Im1D_int2           _y;
+        Im2D_int4         _cor;
+        Im2D_int4    _cost_prg;
         bool              _init;
         bool          _init_cub;
 };
@@ -406,7 +406,7 @@ class CUTS_Vis : public CUTS
         CUTS_Vis
         (
             Cub3DTer                      ,
-            INT                       zoom,
+            int                       zoom,
             Video_Display                 ,
             Elise_Set_Of_Palette          ,
             char  *                   name,
@@ -417,7 +417,7 @@ class CUTS_Vis : public CUTS
         virtual Output vgray();
         virtual Output vdisc();
 
-        INT               _z;
+        int               _z;
         Video_Win         _W;
 };
 

@@ -76,9 +76,9 @@ template <class tElem> class  TImageFixedCorrelateurSubPix
            (
                  tIm  anIm1,
                  tIm  anIm2,
-                 REAL aSzVign,
-                 REAL aStep,
-                 REAL aDefOut
+                 double_t aSzVign,
+                 double_t aStep,
+                 double_t aDefOut
            )  :
               mIm1    (anIm1),
               mIm2    (anIm2),
@@ -86,9 +86,9 @@ template <class tElem> class  TImageFixedCorrelateurSubPix
 	      mBicub     (0),
 	      mModeBicub (false)
            {
-               INT NbPts = round_up(aSzVign/aStep);
-               for (INT iX=-NbPts; iX<=NbPts ; iX++)
-                   for (INT iY=-NbPts; iY<=NbPts ; iY++)
+               int NbPts = round_up(aSzVign/aStep);
+               for (int iX=-NbPts; iX<=NbPts ; iX++)
+                   for (int iY=-NbPts; iY<=NbPts ; iY++)
                    {
                       mPts1.push_back(tPF(Pt2dr(iX*aStep,iY*aStep)));
                       mPts2.push_back(mPts1.back());
@@ -98,7 +98,7 @@ template <class tElem> class  TImageFixedCorrelateurSubPix
                mP1_I1 = mPts1.back();
                mP0_I2 = mP0_I1;
                mP1_I2 = mP1_I1;
-               mNbPts = INT(mPts1.size());
+               mNbPts = int(mPts1.size());
            }
 
 	    void SetModeBicub(bool ModeBic)
@@ -110,7 +110,7 @@ template <class tElem> class  TImageFixedCorrelateurSubPix
 		mModeBicub  = ModeBic;
 	    }
 
-           void  SetDistDiffVgn2(Pt2dr aP1C,const ElDistortion22_Gen & aDist,REAL E)
+           void  SetDistDiffVgn2(Pt2dr aP1C,const ElDistortion22_Gen & aDist,double_t E)
            {
                // Pt2dr aP2C = aDist.Direct(aP1C);
                Pt2dr aGx = (aDist.Direct(aP1C+Pt2dr(E,0))-aDist.Direct(aP1C+Pt2dr(-E,0))) / (2*E);
@@ -118,7 +118,7 @@ template <class tElem> class  TImageFixedCorrelateurSubPix
                Pt2dr aP0(0,0);
                Pt2dr aP1(0,0);
 
-               for (INT aK=0; aK<mNbPts ; aK++)
+               for (int aK=0; aK<mNbPts ; aK++)
                {
                     Pt2dr  aD1 = mPts1[aK].Pt2drConv();
                     Pt2dr  aD2  = aGx *aD1.x + aGy*aD1.y;
@@ -131,7 +131,7 @@ template <class tElem> class  TImageFixedCorrelateurSubPix
            }
 
            // Correlation ou les valeurs sont arrondie en reel
-           REAL icorrel(Pt2dr aPr1,Pt2dr aPr2)
+           double_t icorrel(Pt2dr aPr1,Pt2dr aPr2)
            {
                  tPF aP1 (aPr1);
                  tPF aP2 (aPr2);
@@ -141,7 +141,7 @@ template <class tElem> class  TImageFixedCorrelateurSubPix
 
                  IMat_Inertie aMat;
 
-                 for ( INT aK=0; aK<mNbPts; aK++)
+                 for ( int aK=0; aK<mNbPts; aK++)
                  {
                      aMat.add_pt_en_place
                      (
@@ -155,7 +155,7 @@ template <class tElem> class  TImageFixedCorrelateurSubPix
            }
 
            // Correlation ou les valeurs sont arrondie en reel
-           REAL rcorrel(Pt2dr aPr1,Pt2dr aPr2)
+           double_t rcorrel(Pt2dr aPr1,Pt2dr aPr2)
            {
 
                  tPF aP1 (aPr1);
@@ -166,7 +166,7 @@ template <class tElem> class  TImageFixedCorrelateurSubPix
 
                  RMat_Inertie aMat;
 
-                 for ( INT aK=0; aK<mNbPts; aK++)
+                 for ( int aK=0; aK<mNbPts; aK++)
                  {
                      aMat.add_pt_en_place
                      (
@@ -177,7 +177,7 @@ template <class tElem> class  TImageFixedCorrelateurSubPix
                  return aMat.correlation();
            }
 
-           INT NbPts() const { return (INT) mPts1.size();}
+           int NbPts() const { return (int) mPts1.size();}
 
 
 protected:
@@ -186,12 +186,12 @@ protected:
            tTIm             mIm2;
            std::vector<tPF> mPts1;
            std::vector<tPF> mPts2;
-           REAL             mDefOut;
+           double_t             mDefOut;
            tPF              mP0_I1;
            tPF              mP1_I1;
            tPF              mP0_I2;
            tPF              mP1_I2;
-           INT              mNbPts;
+           int              mNbPts;
 	   cCIKTabul*       mBicub;
 	   bool             mModeBicub;
 };
@@ -207,8 +207,8 @@ template <class tElem> class OptCorrSubPix_Diff :
            (
                  typename TImageFixedCorrelateurSubPix<tElem>::tIm  anIm1,
                  typename TImageFixedCorrelateurSubPix<tElem>::tIm  anIm2,
-                 REAL aSzVign,
-                 REAL aStep,
+                 double_t aSzVign,
+                 double_t aStep,
                  Pt3dr aPtOut
            )  :
               TImageFixedCorrelateurSubPix<tElem> 
@@ -239,7 +239,7 @@ template <class tElem> class OptCorrSubPix_Diff :
 		 s2X = 0; s2Y = 0; sXY = 0;
 		 s1  = 0; s12 = 0; s1X = 0; s1Y = 0;
 
-                 for ( INT aK =0; aK<this->mNbPts; aK++)
+                 for ( int aK =0; aK<this->mNbPts; aK++)
                  {
                      typename TImageFixedCorrelateurSubPix<tElem>::tPF PLoc2 = aP2+this->mPts2[aK];
                      Pt3dr aGr;
@@ -248,25 +248,25 @@ template <class tElem> class OptCorrSubPix_Diff :
 		    else
                          aGr = Pt3dr(TImageFixedCorrelateurSubPix<tElem>::tGet::geti_gv(this->mIm2,PLoc2));
 
-		     s2  += (INT)aGr.z;
-		     s22 += (INT)ElSquare(aGr.z);
-		     sX  += (INT)aGr.x;
-		     sXX += (INT)ElSquare(aGr.x);
-		     sY  += (INT)aGr.y;
-		     sYY += (INT)ElSquare(aGr.y);
+		     s2  += (int)aGr.z;
+		     s22 += (int)ElSquare(aGr.z);
+		     sX  += (int)aGr.x;
+		     sXX += (int)ElSquare(aGr.x);
+		     sY  += (int)aGr.y;
+		     sYY += (int)ElSquare(aGr.y);
 
-		     s2X += (INT)( aGr.z * aGr.x );
-		     s2Y += (INT)( aGr.z * aGr.y );
-		     sXY += (INT)( aGr.x * aGr.y );
+		     s2X += (int)( aGr.z * aGr.x );
+		     s2Y += (int)( aGr.z * aGr.y );
+		     sXY += (int)( aGr.x * aGr.y );
 
-                     INT aV1   = TImageFixedCorrelateurSubPix<tElem>::tGet::geti(this->mIm1,aP1+this->mPts1[aK]);
+                     int aV1   = TImageFixedCorrelateurSubPix<tElem>::tGet::geti(this->mIm1,aP1+this->mPts1[aK]);
 		     s1 += aV1;
-		     s12 += (INT)( aV1 * aGr.z );
-		     s1X += (INT)( aV1 * aGr.x );
-		     s1Y += (INT)( aV1 * aGr.y );
+		     s12 += (int)( aV1 * aGr.z );
+		     s1X += (int)( aV1 * aGr.x );
+		     s1Y += (int)( aV1 * aGr.y );
                  }
 
-		 REAL rNbPts = this->mNbPts;
+		 double_t rNbPts = this->mNbPts;
 
 		 mDVar[IndI2][IndI2] = s22 -s2*(s2/rNbPts);
 		 mDVar[IndGx][IndGx] = sXX -sX*(sX/rNbPts);
@@ -301,18 +301,18 @@ template <class tElem> class OptCorrSubPix_Diff :
      private :
 
            Pt3dr          mPtOut;
-	   INT s2;  INT s22;
-	   INT sX;  INT sXX;
-	   INT sY;  INT sYY;
-	   INT s2X; INT s2Y; INT sXY;
-	   INT s1 ; INT s12; INT s1X; INT s1Y;
+	   int s2;  int s22;
+	   int sX;  int sXX;
+	   int sY;  int sYY;
+	   int s2X; int s2Y; int sXY;
+	   int s1 ; int s12; int s1X; int s1Y;
 
-	   Im2D_REAL8 mVar;
-	   REAL8 **   mDVar;
-	   Im1D_REAL8 mCov;
-	   REAL8*     mDCov;
-	   Im1D_REAL8 mSol;
-	   REAL8*     mDSol;
+	   Im2D_double_t8 mVar;
+	   double_t8 **   mDVar;
+	   Im1D_double_t8 mCov;
+	   double_t8*     mDCov;
+	   Im1D_double_t8 mSol;
+	   double_t8*     mDSol;
 };
 
 

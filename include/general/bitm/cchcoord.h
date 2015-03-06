@@ -3,7 +3,7 @@
 
 #include "general/sys_dep.h"
 
-template  <const int nbb> Im2D_Bits<nbb>::Im2D_Bits(INT tx,INT ty) :
+template  <const int nbb> Im2D_Bits<nbb>::Im2D_Bits(int tx,int ty) :
         Im2DGen(new DataIm2D_Bits<nbb>(tx,ty,false,0,0))
 {
 }
@@ -35,7 +35,7 @@ class cChCoord
                    TOut aImOut,Im2D_Bits<1> aMasqOut,
                    TIn aImIn,Im2D_Bits<1> aMasqIn,
                    eModeInterp            aMode,
-                   REAL aFact
+                   double_t aFact
                  );
 };
 

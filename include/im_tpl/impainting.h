@@ -39,8 +39,8 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 
 
-#ifndef _ELISE_IMTPL_IMPAINTING_H_
-#define _ELISE_IMTPL_IMPAINTING_H_
+#ifndef _ELISE_IMTPL_IMPAintING_H_
+#define _ELISE_IMTPL_IMPAintING_H_
 
 /*
     Impainting est un peu prétentieux, il s'agit de combler des trous dans une image (mais sans idee de realisme).
@@ -71,8 +71,8 @@ template  <class Type,class Type_Base>  class cImpainting
          TIm2DBits<1>             mTMaskFinal;
          TIm2D <Type,Type_Base>   mTImVal;
          Pt2di                    mSz;
-         Im2D<REAL4,REAL8>        mImBuf;
-         TIm2D<REAL4,REAL8>       mTImBuf;
+         Im2D<double_t4,double_t8>        mImBuf;
+         TIm2D<double_t4,double_t8>       mTImBuf;
 
          std::vector<Pt2di>       mVPts;
          int                      mNbPts;
@@ -178,11 +178,11 @@ cImpainting<Type,Type_Base>::cImpainting
    }
    mNbPts = mVPts.size();
 }
-Im2D_REAL4 RecursiveImpaint
+Im2D_double_t4 RecursiveImpaint
      (
-          Im2D_REAL4 aFlMaskInit,
-          Im2D_REAL4 aFlMaskFinal,
-          Im2D_REAL4 aFlIm,
+          Im2D_double_t4 aFlMaskInit,
+          Im2D_double_t4 aFlMaskFinal,
+          Im2D_double_t4 aFlIm,
           int        aDeZoom,
           int        aZoomCible
      );
@@ -196,11 +196,11 @@ Im2D<TypeIn,TypeOut> ImpaintL2
          int                    aDezoom = 16
      )
 {
-   Im2D_REAL4  aFlRes = RecursiveImpaint
+   Im2D_double_t4  aFlRes = RecursiveImpaint
                          (
-                             Conv2Type(aB1MaskInit,(Im2D_REAL4*)0),
-                             Conv2Type(aB1MaskFinal,(Im2D_REAL4*)0),
-                             Conv2Type(anIn,(Im2D_REAL4*)0),
+                             Conv2Type(aB1MaskInit,(Im2D_double_t4*)0),
+                             Conv2Type(aB1MaskFinal,(Im2D_double_t4*)0),
+                             Conv2Type(anIn,(Im2D_double_t4*)0),
                              1,
                              aDezoom
                          );
@@ -232,7 +232,7 @@ template <class Type,class TypeBase> Im2D<Type,TypeBase>  BouchePPV(Im2D<Type,Ty
 
 
 
-#endif  //  _ELISE_IMTPL_IMPAINTING_H_
+#endif  //  _ELISE_IMTPL_IMPAintING_H_
 
 
 

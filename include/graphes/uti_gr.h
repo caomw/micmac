@@ -47,7 +47,7 @@ template <class AttrSom,class AttrArc>
               (
                     ElGraphe<AttrSom,AttrArc> &          gr,
                     ElSubGraphe<AttrSom,AttrArc> &       sub,
-                    INT                                  flag,
+                    int                                  flag,
                     bool                                 val
               )
 {
@@ -66,7 +66,7 @@ template <class AttrSom,class AttrArc>
          void set_flag_all_soms
               (
                     ElGraphe<AttrSom,AttrArc> &          gr,
-                    INT                                  flag,
+                    int                                  flag,
                     bool                                 val
               )
 {
@@ -80,7 +80,7 @@ template <class AttrSom,class AttrArc>
               (
                     ElGraphe<AttrSom,AttrArc> &          gr,
                     ElSubGraphe<AttrSom,AttrArc> &       sub,
-                    INT                                  flag,
+                    int                                  flag,
                     bool                                 val
               )
 {
@@ -109,7 +109,7 @@ template <class AttrSom,class AttrArc>
          void set_flag_all_arcs
               (
                     ElGraphe<AttrSom,AttrArc> &          gr,
-                    INT                                  flag,
+                    int                                  flag,
                     bool                                 val
               )
 {

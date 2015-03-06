@@ -57,18 +57,18 @@ class TFX
 {
     public :
 
-        typedef INT OutputFonc;
+        typedef int OutputFonc;
         TFX(){}
-        INT get(const Pt2di & p) {return p.x;}
+        int get(const Pt2di & p) {return p.x;}
 };
 
 class TFY
 {
     public :
 
-        typedef INT OutputFonc;
+        typedef int OutputFonc;
         TFY(){}
-        INT get(const Pt2di & p) {return p.y;}
+        int get(const Pt2di & p) {return p.y;}
 };
 
 

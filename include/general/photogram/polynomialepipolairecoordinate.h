@@ -13,8 +13,8 @@ public :
             Pt2dr aP0,
             Pt2dr aDirX,
             const Polynome2dReal & aPolY,
-            REAL                   anAmpl,
-            INT                    DeltaDegreInv = 2,
+            double_t                   anAmpl,
+            int                    DeltaDegreInv = 2,
             Pt2dr                  aTrFin = Pt2dr(0,0)
             );
 
@@ -26,13 +26,13 @@ public :
     void write(class  ELISE_fp & aFile) const;
     static PolynomialEpipolaireCoordinate read(ELISE_fp & aFile);
     //     P ->  aChSacle * Pol(P/aChSacle)
-    EpipolaireCoordinate * MapingChScale(REAL aChSacle) const;
-    PolynomialEpipolaireCoordinate * PolMapingChScale(REAL aChSacle) const;
+    EpipolaireCoordinate * MapingChScale(double_t aChSacle) const;
+    PolynomialEpipolaireCoordinate * PolMapingChScale(double_t aChSacle) const;
 
 private :
 
-    INT DeltaDegre() const;
-    REAL AmplInv() const;
+    int DeltaDegre() const;
+    double_t AmplInv() const;
 
     Polynome2dReal  mPolToYEpip;
     Polynome2dReal  mPolToYInit;

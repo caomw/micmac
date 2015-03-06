@@ -7,37 +7,37 @@ class cEqEllipseImage : public cElemEqFormelle,
 	                public cObjFormel2Destroy
 {
       public :
-          REAL GraySynt(REAL aX,REAL aY);
-          REAL AddEq(REAL aX,REAL aY,REAL aGray,REAL Pds=1, bool WithD2=false);
+          double_t GraySynt(double_t aX,double_t aY);
+          double_t AddEq(double_t aX,double_t aY,double_t aGray,double_t Pds=1, bool WithD2=false);
 	  Pt2dr CurCentre() const;
-	  REAL  CurA() const;
-	  REAL  CurB() const;
-	  REAL  CurC() const;
-	  REAL  CurLarg() const;
-	  REAL  CurBlanc() const;
-	  REAL  CurNoir() const;
+	  double_t  CurA() const;
+	  double_t  CurB() const;
+	  double_t  CurC() const;
+	  double_t  CurLarg() const;
+	  double_t  CurBlanc() const;
+	  double_t  CurNoir() const;
 	  bool OkCurEllispe() const;
 
 	  void SetCentre(Pt2dr);
-	  void SetA(REAL);
-	  void SetB(REAL);
-	  void SetC(REAL);
-	  void SetLarg(REAL);
-	  void SetBlanc(REAL);
-	  void SetNoir(REAL);
+	  void SetA(double_t);
+	  void SetB(double_t);
+	  void SetC(double_t);
+	  void SetLarg(double_t);
+	  void SetBlanc(double_t);
+	  void SetNoir(double_t);
 
           cMultiContEQF  ContrFigeABC();
           cMultiContEQF  ContrFigeLarg();
 
 	  const cMirePolygonEtal & Mire() const;
 	  // Si Fact > 1 donne ellipse plus grande
-	  Box2dr  BoxCurEllipse(REAL Fact=1.0) const;
-	  REAL SurfIER(Pt2dr aP,REAL Fact=1.0,REAL Larg=-1) const;
+	  Box2dr  BoxCurEllipse(double_t Fact=1.0) const;
+	  double_t SurfIER(Pt2dr aP,double_t Fact=1.0,double_t Larg=-1) const;
 
       private :
 	  struct  cVarRay
 	  {
-		  cVarRay(INT aNum);
+		  cVarRay(int aNum);
 
 		  cVarSpec    mFRay;
 		  double *    mAdrVar;
@@ -51,12 +51,12 @@ class cEqEllipseImage : public cElemEqFormelle,
              cSetEqFormelles &,
 	     const cMirePolygonEtal &,
              Pt2dr aCentre,
-             REAL  anA,
-             REAL  aB,
-             REAL  aC,
-             REAL  aLarg,
-             REAL  aBlanc,
-             REAL  aNoir,
+             double_t  anA,
+             double_t  aB,
+             double_t  aC,
+             double_t  aLarg,
+             double_t  aBlanc,
+             double_t  aNoir,
 	     bool  Code2Gen
           );
 	               
@@ -65,21 +65,21 @@ class cEqEllipseImage : public cElemEqFormelle,
           std::string mNameType;
           cSetEqFormelles &       mEq;
           AllocateurDInconnues &  mAlloc;
-	  INT   mI0;
-	  INT   mIndCentre;
+	  int   mI0;
+	  int   mIndCentre;
           Pt2dr mCentre;
           Pt2d<Fonc_Num> fCentre;
-	  INT      mIndA;
-          REAL     mA;
+	  int      mIndA;
+          double_t     mA;
           Fonc_Num fA;
-	  INT      mIndB;
-          REAL     mB;
+	  int      mIndB;
+          double_t     mB;
           Fonc_Num fB;
-	  INT      mIndC;
-          REAL     mC;
+	  int      mIndC;
+          double_t     mC;
           Fonc_Num fC;
-	  INT      mIndLarg;
-          REAL     mLarg;
+	  int      mIndLarg;
+          double_t     mLarg;
           Fonc_Num fLarg;
           Pt2d<Fonc_Num> fPLarg;
           std::string mNPX;
@@ -89,11 +89,11 @@ class cEqEllipseImage : public cElemEqFormelle,
           Pt2d<Fonc_Num> fCPIX;
           Pt2d<Fonc_Num> fP0;
           Pt2d<Fonc_Num> fP1;
-	  INT       mIndBlanc;
-          REAL      mBlanc;
+	  int       mIndBlanc;
+          double_t      mBlanc;
           Fonc_Num  fBlanc;
-	  INT       mIndNoir;
-          REAL      mNoir;
+	  int       mIndNoir;
+          double_t      mNoir;
           Fonc_Num  fNoir;
           std::string mNGR;
           Fonc_Num    fGray;

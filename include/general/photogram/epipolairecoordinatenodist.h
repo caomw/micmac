@@ -15,7 +15,7 @@ private :
     virtual Pt2dr ToCoordEpipol(Pt2dr aPInit) const ;
     virtual Pt2dr ToCoordInit(Pt2dr aPEpi) const ;
     virtual EpipolaireCoordinate *
-    MapingChScale(REAL aChSacle) const;
+    MapingChScale(double_t aChSacle) const;
 };
 
 #endif

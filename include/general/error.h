@@ -65,13 +65,13 @@ extern cElErrorHandlor * TheCurElErrorHandlor;
 class cGenSysSurResol;
 class cSetEqFormelles;
 
-REAL16 PartieFrac(const REAL16 &);
+double_t16 PartieFrac(const double_t16 &);
 // Class faite pour tester la repetitivite (determinise) de l'execution d'un programme
 class cMajickChek
 {
     public :
         cMajickChek();
-        void AddDouble(const REAL16&);
+        void AddDouble(const double_t16&);
 
         void Add(const Pt3dr &);
         void Add(const ElRotation3D &);
@@ -83,13 +83,13 @@ class cMajickChek
         std::string ShortMajId();
         std::string MajId();
     private :
-        char sMajAscii[1+2*sizeof(REAL16)];
+        char sMajAscii[1+2*sizeof(double_t16)];
 
-        void Add1Double(REAL16 & Target,const REAL16 &);
+        void Add1Double(double_t16 & Target,const double_t16 &);
 
-        REAL16 mCheck1;
-        REAL16 mCheckInv;
-        REAL16 mCheck2;
+        double_t16 mCheck1;
+        double_t16 mCheckInv;
+        double_t16 mCheck2;
         bool   mGotNan;
         bool   mGotInf;
 };
@@ -101,18 +101,18 @@ class ElEM   // Elise Erreur Message
 
       public :
 
-         inline ElEM(REAL16 i)
+         inline ElEM(double_t16 i)
          {
                _type   = _real;
                _data.r = i;
          }
-         inline ElEM(INT i)
+         inline ElEM(int i)
          {
                _type   = _int;
                _data.i = i;
          }
 
-         inline ElEM(REAL  r)
+         inline ElEM(double_t  r)
          {
                _type   = _real;
                _data.r = r;
@@ -136,21 +136,21 @@ class ElEM   // Elise Erreur Message
                _data.s = s;
          }
 
-         inline  ElEM(const class Pack_Of_Pts *  pack,INT k)
+         inline  ElEM(const class Pack_Of_Pts *  pack,int k)
          {
                _type      = _pt_pck;
                _data.pack = pack;
                _data_2.i  = k;
          }
 
-         inline  ElEM(const INT *  pts,INT d)
+         inline  ElEM(const int *  pts,int d)
          {
                _type      = _tab_int;
                _data.Pi = pts;
                _data_2.i  = d;
          }
 
-         inline  ElEM(const REAL *  pts,INT d)
+         inline  ElEM(const double_t *  pts,int d)
          {
                _type      = _tab_real;
                _data.Pr = pts;
@@ -181,19 +181,19 @@ class ElEM   // Elise Erreur Message
 
           union
           {
-             INT       i;
-             REAL      r;
+             int       i;
+             double_t      r;
              const class Pack_Of_Pts *   pack;
              const char *    s;
-             const INT *    Pi;
-             const REAL *    Pr;
+             const int *    Pi;
+             const double_t *    Pr;
              const Box2di    *  box;
              const Pt2di *      pt;
           }  _data;
 
           union
           {
-             INT       i;
+             int       i;
           }  _data_2;
 
 
@@ -240,7 +240,7 @@ private :
 
           static void display(const char *);
 
-          static INT _nb;
+          static int _nb;
           static ElEM _stack[100];
 };
 extern  Elise_Pile_Mess_0 EEM0;

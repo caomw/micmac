@@ -28,8 +28,8 @@ template <class Type,class Type_Base> Im2D<Type,Type_Base> ImMediane
 
 template  <class Type,class Type_Base> class  TIm2D;
 
-Flux_Pts to_flux(Im2D<INT,INT> );
-Flux_Pts to_flux(Im2D<REAL,REAL> );
+Flux_Pts to_flux(Im2D<int,int> );
+Flux_Pts to_flux(Im2D<double_t,double_t> );
 
 template <const int nbb> class DataIm2D_Bits;
 
@@ -46,11 +46,11 @@ template <const int nbb> class Im2D_Bits : public Im2DGen
    public :
       Seg2d   OptimizeSegTournantSomIm
               (
-                    REAL &                 score,
+                    double_t &                 score,
                     Seg2d                  seg,
-                    INT                    NbPts,
-                    REAL                   step_init,
-                    REAL                   step_limite,
+                    int                    NbPts,
+                    double_t                   step_init,
+                    double_t                   step_limite,
                     bool                   optim_absc  = true,
                     bool                   optim_teta  = true,
                     bool  *                FreelyOpt = 0
@@ -60,23 +60,23 @@ template <const int nbb> class Im2D_Bits : public Im2DGen
       double Val(const int & x,const int & y) const;
       void SetI(const Pt2di & ,int aValI) ;
       void SetR(const Pt2di & ,double aValR) ;
-      INT     GetI(const Pt2di &) const ;
+      int     GetI(const Pt2di &) const ;
       double  GetR(const Pt2di &) const ;
-      INT     tx() const;
-      INT     ty() const;
-      Im2D_Bits(Im2D_BitsIntitDataLin,INT tx, INT ty,void * aDataLin);
-      Im2D_Bits(INT tx, INT ty);
-      Im2D_Bits(INT tx, INT ty,INT v_init);
-      Im2D_Bits(Pt2di pt, INT v_init);
-      INT  vmax() const;
-      U_INT1 **   data();
-      U_INT1 **   data() const;
-      INT    get(INT x,INT y) const;
-      INT    get_def(INT x,INT y,INT v) const;
-      void   set(INT x,INT y,INT v);
-      void   SetAll(INT);
+      int     tx() const;
+      int     ty() const;
+      Im2D_Bits(Im2D_BitsIntitDataLin,int tx, int ty,void * aDataLin);
+      Im2D_Bits(int tx, int ty);
+      Im2D_Bits(int tx, int ty,int v_init);
+      Im2D_Bits(Pt2di pt, int v_init);
+      int  vmax() const;
+      U_int1 **   data();
+      U_int1 **   data() const;
+      int    get(int x,int y) const;
+      int    get_def(int x,int y,int v) const;
+      void   set(int x,int y,int v);
+      void   SetAll(int);
 
-      Im2D<U_INT1,INT>  gray_im_red(INT & zoom);
+      Im2D<U_int1,int>  gray_im_red(int & zoom);
       Im2DGen  *ImOfSameType(const Pt2di & aSz) const;
    private :
        Im2D_Bits(DataIm2D_Bits<nbb> *);

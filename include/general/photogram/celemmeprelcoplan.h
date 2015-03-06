@@ -17,9 +17,9 @@ public :
 
     bool PhysOk() const;
     void Show() const;
-    REAL AngTot() const;
-    REAL Ang1() const;
-    REAL Ang2() const;
+    double_t AngTot() const;
+    double_t Ang1() const;
+    double_t Ang2() const;
     const ElRotation3D & Rot() const;
 
     double TestSol() const;
@@ -31,14 +31,14 @@ public :
     //  Distance entre le centre optique et l'image "reciproque"
     //  du centre camera 1 sur le plan, permet de normalisee
     //  les bases
-    REAL DPlan() const;
+    double_t DPlan() const;
 
 
     // "Vraie" distance min entre le plan et
     double DistanceEuclid() const;
 
     // Idem camera2
-    REAL DPlan2() ;
+    double_t DPlan2() ;
     // Point du plan, ayant P1 comme image  par cam1
     // (en coord camera 1)
     Pt3dr ImCam1(Pt2dr aP1);
@@ -60,7 +60,7 @@ private :
     // (en coord camera 1)
     Pt3dr ImCam2(Pt2dr aP2);
 
-    REAL AngleNormale(Pt3dr);
+    double_t AngleNormale(Pt3dr);
 
 
     cElHomographie mHom;
@@ -80,11 +80,11 @@ private :
     Pt3dr          mCZCMur;
     Pt3dr          mCOptC1;
     Pt3dr          mCOptC2;
-    REAL           mProfC1;
-    REAL           mProfC2;
-    REAL           mAng1;
-    REAL           mAng2;
-    REAL           mAngTot;
+    double_t           mProfC1;
+    double_t           mProfC2;
+    double_t           mAng1;
+    double_t           mAng2;
+    double_t           mAngTot;
     double         mDEuclidP;
 };
 

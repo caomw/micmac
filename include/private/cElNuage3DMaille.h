@@ -102,7 +102,7 @@ class cArgAuxBasc
     public :
        cArgAuxBasc(Pt2di aSz);
 
-       Im2D_U_INT1  mImInd;
+       Im2D_U_int1  mImInd;
        Im2D_Bits<1> mImTriInv;
 };
 
@@ -111,7 +111,7 @@ class cArgAuxBasc_Sec : public cArgAuxBasc
     public :
        cArgAuxBasc_Sec(Pt2di aSz);
 
-       Im2D_REAL4  mImZ;
+       Im2D_double_t4  mImZ;
 };
 
 
@@ -121,20 +121,20 @@ class cRawNuage
         cRawNuage(Pt2di aSz);
         void SetPt(const  Pt2di & anI,const Pt3dr & aP);
         Pt3dr GetPt(const Pt2di & anI) const;
-        Im2D_REAL4 ImX();
-        Im2D_REAL4 ImY();
-        Im2D_REAL4 ImZ();
+        Im2D_double_t4 ImX();
+        Im2D_double_t4 ImY();
+        Im2D_double_t4 ImZ();
 /*
 */
     private :
-        Im2D_REAL4          mImX;
-        TIm2D<REAL4,REAL8>  mTX;
+        Im2D_double_t4          mImX;
+        TIm2D<double_t4,double_t8>  mTX;
 
-        Im2D_REAL4 mImY;
-        TIm2D<REAL4,REAL8>  mTY;
+        Im2D_double_t4 mImY;
+        TIm2D<double_t4,double_t8>  mTY;
 
-        Im2D_REAL4 mImZ;
-        TIm2D<REAL4,REAL8>  mTZ;
+        Im2D_double_t4 mImZ;
+        TIm2D<double_t4,double_t8>  mTZ;
 };
 
 
@@ -296,7 +296,7 @@ class cElNuage3DMaille : public cCapture3D
                                         bool SupprTriInv,
                                         double aCoeffEtire = -1
                                       ) const;
-        Im2D_U_INT1  ImEtirement();
+        Im2D_U_int1  ImEtirement();
         // A ete modifier pour debut de dessin  en perspective, le premier
         // cArgAuxBasc permet de memoriser le ZMAX (car ZBuf remet a 0) et le deuxieme
         // permet de memoriser la deuxieme valeur pour eventuelle transparence
@@ -464,7 +464,7 @@ class cElNuage3DMaille : public cCapture3D
         void   FinishBasculeInThis
                (
                     cBasculeNuage &  aBasc,
-                   Im2D_REAL4 aMntBasc,
+                   Im2D_double_t4 aMntBasc,
                    Pt2di anOfOut,
                    bool SupprTriInv,
                    double aCoeffEtire,
@@ -489,7 +489,7 @@ class cElNuage3DMaille : public cCapture3D
                                         const Box2dr &Box,
                                         double aScale,
                                         const cXML_ParamNuage3DMaille &,
-                                        Im2D_REAL4 anImPds,
+                                        Im2D_double_t4 anImPds,
                                         std::vector<Im2DGen*> aVNew,
                                         std::vector<Im2DGen*> aVOld
                                    ) = 0;
@@ -541,7 +541,7 @@ class cElNuage3DMaille : public cCapture3D
         Im2D_Bits<1>                 mImDefInterp;
         TIm2DBits<1>                 mTImDefInterp;
         ElCamera *                   mCam;
-        Im2D_U_INT1                  mImEtire;
+        Im2D_U_int1                  mImEtire;
 
 
        // En general egale a mImDef, peut etre diff pour nuage en "peau de leopard"
@@ -561,8 +561,8 @@ class cElNuage3DMaille : public cCapture3D
 
 
         bool                             mGenerMesh;
-        Im2D_INT4                        mNumPts;
-        TIm2D<INT4,INT>                  mTNumP;
+        Im2D_int4                        mNumPts;
+        TIm2D<int4,int>                  mTNumP;
         int                              mNbTri;
         mutable bool                     mResolGlobCalc;
         mutable double                   mResolGlob;
@@ -597,7 +597,7 @@ class cZBuffer
 
         // Fait le basculement "standard" ou l'interpolateur est
         // une triangulation
-        Im2D_REAL4 Basculer
+        Im2D_double_t4 Basculer
                    (
                        Pt2di & aOffset_Out_00,
                        Pt2di aP0In,
@@ -606,20 +606,20 @@ class cZBuffer
                        bool  * Ok  = 0
                    );
 
-        Im2D_REAL4 ZCaches
+        Im2D_double_t4 ZCaches
                    (
-                       Im2D_REAL4 aMnt,
+                       Im2D_double_t4 aMnt,
                        Pt2di aOffset_Out_00,
                        Pt2di aP0In,
                        Pt2di aP1In,
                        float aDef
                    );
-        Im2D_REAL4 ZCaches(Pt2di aP0In,Pt2di aP1In,float aDef);
+        Im2D_double_t4 ZCaches(Pt2di aP0In,Pt2di aP1In,float aDef);
 
         // Initialise d'abord un basculement "standard", ensuite utilise
         // un schema iteratif, pour calculer le basculement d'un
         // interploateur specifie par ZInterpofXY
-        Im2D_REAL4 BasculerAndInterpoleInverse
+        Im2D_double_t4 BasculerAndInterpoleInverse
                    (
                        Pt2di & aOffset_Out_00,
                        Pt2di aP0In,
@@ -651,7 +651,7 @@ class cZBuffer
 
 
         void InitDynEtirement(double);
-        Im2D_U_INT1    ImEtirement();
+        Im2D_U_int1    ImEtirement();
         void SetEpsilonInterpoleInverse(double anEps);
 
         Pt3dr InverseProjDisc(const Pt3dr &) const;
@@ -690,27 +690,27 @@ class cZBuffer
         Pt2di mSzRes;
 
 
-        Im2D_REAL4 mRes;
+        Im2D_double_t4 mRes;
         float ** mDataRes;
         Im2D_Bits<1> mImOkTer;
         TIm2DBits<1> mTImOkTer;
         Im2D_Bits<1> mImTriInv;
         double       mDynEtire;
-        Im2D_U_INT1  mImEtirement;
+        Im2D_U_int1  mImEtirement;
 
 
         bool         mWihBuf;
         bool         mBufDone;
 
-        Im2D<tElZB,REAL8>   mImX3;
+        Im2D<tElZB,double_t8>   mImX3;
         tElZB **     mDX3;
-        TIm2D<tElZB,REAL8>  mTX3;
-        Im2D<tElZB,REAL8>   mImY3;
+        TIm2D<tElZB,double_t8>  mTX3;
+        Im2D<tElZB,double_t8>   mImY3;
         tElZB **     mDY3;
-        TIm2D<tElZB,REAL8>  mTY3;
-        Im2D<tElZB,REAL8>   mImZ3;
+        TIm2D<tElZB,double_t8>  mTY3;
+        Im2D<tElZB,double_t8>   mImZ3;
         tElZB **     mDZ3;
-        TIm2D<tElZB,REAL8>  mTZ3;
+        TIm2D<tElZB,double_t8>  mTZ3;
         Pt2di        mP0In;
         Pt2di        mSzIn;
 
@@ -718,10 +718,10 @@ class cZBuffer
 
         //    (A B)  est l'inverse de la matrice qui envoie un pixe (1,0) (0,1) Z=Moyen vers l'espace d'arrivee
         //    (C D)
-        TIm2D<REAL8,REAL8>   mTImDef_00;
-        TIm2D<REAL8,REAL8>   mTImDef_10;
-        TIm2D<REAL8,REAL8>   mTImDef_01;
-        TIm2D<REAL8,REAL8>   mTImDef_11;
+        TIm2D<double_t8,double_t8>   mTImDef_00;
+        TIm2D<double_t8,double_t8>   mTImDef_10;
+        TIm2D<double_t8,double_t8>   mTImDef_01;
+        TIm2D<double_t8,double_t8>   mTImDef_11;
 };
 
 class cArgBacule
@@ -733,7 +733,7 @@ class cArgBacule
         double       mDynEtir;
         bool         mAutoResize;
         Box2di *     mBoxClipIn;
-        Im2D_U_INT1  mResEtir;
+        Im2D_U_int1  mResEtir;
 };
 
 cElNuage3DMaille *  BasculeNuageAutoReSize

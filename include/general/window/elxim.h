@@ -64,7 +64,7 @@ class ElXim : public PRC0
                  Pt2di p0src,
                  Pt2di p0dest,
                  Pt2di sz, 
-		 std::vector<Im2D_INT4> & Images,
+		 std::vector<Im2D_int4> & Images,
                  Elise_Palette
              );
 
@@ -73,9 +73,9 @@ class ElXim : public PRC0
                   Pt2di       aP0Src,
                   Pt2di       aP0Dest,
                   Pt2di       aSz,
-                  Im2D_U_INT1 anImR,
-                  Im2D_U_INT1 anImG,
-                  Im2D_U_INT1 anImB
+                  Im2D_U_int1 anImR,
+                  Im2D_U_int1 anImG,
+                  Im2D_U_int1 anImB
              );
 
 	void fill_with_el_image
@@ -83,9 +83,9 @@ class ElXim : public PRC0
                   Pt2di       aP0Src,
                   Pt2di       aP0Dest,
                   Pt2di       aSz,
-                  Im2D_U_INT1 anImR,
-                  Im2D_U_INT1 anImG,
-                  Im2D_U_INT1 anImB
+                  Im2D_U_int1 anImR,
+                  Im2D_U_int1 anImG,
+                  Im2D_U_int1 anImB
              );
 
 

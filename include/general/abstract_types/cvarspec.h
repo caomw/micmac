@@ -47,8 +47,8 @@ Header-MicMac-eLiSe-25/06/2007*/
 class cVarSpec : public  Fonc_Num
 {
      public :
-         cVarSpec(REAL aVal,const std::string & = "");
-         void Set(REAL aVal);
+         cVarSpec(double_t aVal,const std::string & = "");
+         void Set(double_t aVal);
          double * AdrVal() const;
 
          const std::string & Name() const;
@@ -58,8 +58,8 @@ class cVarSpec : public  Fonc_Num
 
 
          friend class Fonc_Num;
-         INT IndexeDeriv();
-         static INT TheCptIndexeNumerotation;
+         int IndexeDeriv();
+         static int TheCptIndexeNumerotation;
 };
 
 #endif

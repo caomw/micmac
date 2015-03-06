@@ -9,27 +9,27 @@ class cEqFormelleLineaire
 	     friend class cSetEqFormelles;
 	     void AddEqNonIndexee
 		  (
-                        REAL Cste,
-                        REAL * Val,
-                        REAL aPds,
-                        const std::vector<INT>  & VIncs
+                        double_t Cste,
+                        double_t * Val,
+                        double_t aPds,
+                        const std::vector<int>  & VIncs
                    );
 	     void AddEqIndexee
 		  (
-                        REAL Cste,
-                        REAL * Val,
-                        REAL aPds,
-                        const std::vector<INT>  & VIncs
+                        double_t Cste,
+                        double_t * Val,
+                        double_t aPds,
+                        const std::vector<int>  & VIncs
                    );
 
 
      private :
 	     cEqFormelleLineaire(const cEqFormelleLineaire &); // NI
-	     cEqFormelleLineaire(cSetEqFormelles &,INT aNbInc,INT aNbVT,bool GenCode);
+	     cEqFormelleLineaire(cSetEqFormelles &,int aNbInc,int aNbVT,bool GenCode);
 	     static cAllocNameFromInt    TheNK;
 	     static std::string          TheNameCste;
 
-	     INT                         mNbInc;
+	     int                         mNbInc;
 	     cSetEqFormelles &           mSet;
 	     std::vector<cIncIntervale>  mIntervs;
 	     cIncListInterv              mLInterv;

@@ -59,9 +59,9 @@ template <class tElem> class  cTplImageCorrelateurSubPix
            (
                  tIm  anIm1,
                  tIm  anIm2,
-                 REAL aSzVign,
-                 REAL aStep,
-                 REAL aDefOut
+                 double_t aSzVign,
+                 double_t aStep,
+                 double_t aDefOut
            )  :
               mIm1    (anIm1),
               mIm2    (anIm2),
@@ -69,9 +69,9 @@ template <class tElem> class  cTplImageCorrelateurSubPix
               mBCKernel  (-0.5),
 	      mModeBicub (false)
            {
-               INT NbPts = round_up(aSzVign/aStep);
-               for (INT iX=-NbPts; iX<=NbPts ; iX++)
-                   for (INT iY=-NbPts; iY<=NbPts ; iY++)
+               int NbPts = round_up(aSzVign/aStep);
+               for (int iX=-NbPts; iX<=NbPts ; iX++)
+                   for (int iY=-NbPts; iY<=NbPts ; iY++)
                    {
                       mPts1.push_back(Pt2dr(iX*aStep,iY*aStep));
                       mPts2.push_back(mPts1.back());
@@ -81,7 +81,7 @@ template <class tElem> class  cTplImageCorrelateurSubPix
                mP1_I1 = mPts1.back();
                mP0_I2 = mP0_I1;
                mP1_I2 = mP1_I1;
-               mNbPts = INT(mPts1.size());
+               mNbPts = int(mPts1.size());
            }
 
 	    void SetModeBicub(bool ModeBic)
@@ -89,7 +89,7 @@ template <class tElem> class  cTplImageCorrelateurSubPix
 		mModeBicub  = ModeBic;
 	    }
 
-           void  SetDistDiffVgn2(Pt2dr aP1C,const ElDistortion22_Gen & aDist,REAL E)
+           void  SetDistDiffVgn2(Pt2dr aP1C,const ElDistortion22_Gen & aDist,double_t E)
            {
                // Pt2dr aP2C = aDist.Direct(aP1C);
                Pt2dr aGx = (aDist.Direct(aP1C+Pt2dr(E,0))-aDist.Direct(aP1C+Pt2dr(-E,0))) / (2*E);
@@ -97,7 +97,7 @@ template <class tElem> class  cTplImageCorrelateurSubPix
                Pt2dr aP0(0,0);
                Pt2dr aP1(0,0);
 
-               for (INT aK=0; aK<mNbPts ; aK++)
+               for (int aK=0; aK<mNbPts ; aK++)
                {
                     Pt2dr  aD1 = mPts1[aK];
                     Pt2dr  aD2  = aGx *aD1.x + aGy*aD1.y;
@@ -110,7 +110,7 @@ template <class tElem> class  cTplImageCorrelateurSubPix
            }
 
            // Correlation ou les valeurs sont arrondie en reel
-           REAL icorrel(Pt2dr aPr1,Pt2dr aPr2)
+           double_t icorrel(Pt2dr aPr1,Pt2dr aPr2)
            {
                  Pt2dr aP1 (aPr1);
                  Pt2dr aP2 (aPr2);
@@ -120,7 +120,7 @@ template <class tElem> class  cTplImageCorrelateurSubPix
 
                  IMat_Inertie aMat;
 
-                 for ( INT aK=0; aK<mNbPts; aK++)
+                 for ( int aK=0; aK<mNbPts; aK++)
                  {
                      aMat.add_pt_en_place
                      (
@@ -134,7 +134,7 @@ template <class tElem> class  cTplImageCorrelateurSubPix
            }
 
            // Correlation ou les valeurs sont arrondie en reel
-           REAL rcorrel(Pt2dr aPr1,Pt2dr aPr2)
+           double_t rcorrel(Pt2dr aPr1,Pt2dr aPr2)
            {
 
                  Pt2dr aP1 (aPr1);
@@ -145,7 +145,7 @@ template <class tElem> class  cTplImageCorrelateurSubPix
 
                  RMat_Inertie aMat;
 
-                 for ( INT aK=0; aK<mNbPts; aK++)
+                 for ( int aK=0; aK<mNbPts; aK++)
                  {
                      aMat.add_pt_en_place
                      (
@@ -156,7 +156,7 @@ template <class tElem> class  cTplImageCorrelateurSubPix
                  return aMat.correlation();
            }
 
-           INT NbPts() const { return mPts1.size();}
+           int NbPts() const { return mPts1.size();}
 
 
        protected :
@@ -180,12 +180,12 @@ template <class tElem> class  cTplImageCorrelateurSubPix
            tTIm               mIm2;
            std::vector<Pt2dr> mPts1;
            std::vector<Pt2dr> mPts2;
-           REAL               mDefOut;
+           double_t               mDefOut;
            Pt2dr              mP0_I1;
            Pt2dr              mP1_I1;
            Pt2dr              mP0_I2;
            Pt2dr              mP1_I2;
-           INT                mNbPts;
+           int                mNbPts;
            cCubicInterpKernel mBCKernel;
 	   bool               mModeBicub;
 };
@@ -208,12 +208,12 @@ struct cBufResMomentCor2DLSQ
 
        Pt3dr          mPtOut;
        bool           mIsOk;
-       Im2D_REAL8 mVar;
-       REAL8 **   mDVar;
-       Im1D_REAL8 mCov;
-       REAL8*     mDCov;
-       Im1D_REAL8 mSol;
-       REAL8*     mDSol;
+       Im2D_double_t8 mVar;
+       double_t8 **   mDVar;
+       Im1D_double_t8 mCov;
+       double_t8*     mDCov;
+       Im1D_double_t8 mSol;
+       double_t8*     mDSol;
 };
 
 
@@ -229,7 +229,7 @@ struct  cMomentCor2DLSQ
 		 s2X = 0; s2Y = 0; sXY = 0;
 		 s1  = 0; s12 = 0; s1X = 0; s1Y = 0;
         }
-        void Cumul(INT aS,const cMomentCor2DLSQ & aMom)
+        void Cumul(int aS,const cMomentCor2DLSQ & aMom)
         {
            mNb += aS * aMom.mNb;
 
@@ -250,7 +250,7 @@ struct  cMomentCor2DLSQ
            s1Y += aS * aMom.s1Y;
         }
 
-        void Add(INT aS,REAL aV1,Pt3dr aGr)
+        void Add(int aS,double_t aV1,Pt3dr aGr)
         {
              mNb += aS;
              s2  += aS* aGr.z;
@@ -299,12 +299,12 @@ struct  cMomentCor2DLSQ
                  return aRes;
         }
 
-        REAL mNb;
-	REAL s2;  REAL s22;
-	REAL sX;  REAL sXX;
-	REAL sY;  REAL sYY;
-	REAL s2X; REAL s2Y; REAL sXY;
-	REAL s1 ; REAL s12; REAL s1X; REAL s1Y;
+        double_t mNb;
+	double_t s2;  double_t s22;
+	double_t sX;  double_t sXX;
+	double_t sY;  double_t sYY;
+	double_t s2X; double_t s2Y; double_t sXY;
+	double_t s1 ; double_t s12; double_t s1X; double_t s1Y;
 };
 
 
@@ -322,8 +322,8 @@ template <class tElem> class cTplDiffCorrelSubPix :
            (
                  typename cTplImageCorrelateurSubPix<tElem>::tIm  anIm1,
                  typename cTplImageCorrelateurSubPix<tElem>::tIm  anIm2,
-                 REAL aSzVign,
-                 REAL aStep,
+                 double_t aSzVign,
+                 double_t aStep,
                  Pt3dr aPtOut
            )  :
               cTplImageCorrelateurSubPix<tElem> 
@@ -341,7 +341,7 @@ template <class tElem> class cTplDiffCorrelSubPix :
 
                  mMom.Init();
 
-                 for ( INT aK =0; aK<this->mNbPts; aK++)
+                 for ( int aK =0; aK<this->mNbPts; aK++)
                  {
                     Pt2dr PLoc2 = aP2+this->mPts2[aK];
                     Pt3dr aGr;
@@ -386,8 +386,8 @@ template <class tElem> class cTplDiffCorrelSubPix :
            (
                  typename cTplImageCorrelateurSubPix<tElem>::tIm  anIm1,
                  typename cTplImageCorrelateurSubPix<tElem>::tIm  anIm2,
-                 REAL aSzVign,
-                 REAL aStep,
+                 double_t aSzVign,
+                 double_t aStep,
                  Pt3dr aPtOut
            )  :
               cTplImageCorrelateurSubPix<tElem> 
@@ -417,7 +417,7 @@ template <class tElem> class cTplDiffCorrelSubPix :
 		 s2X = 0; s2Y = 0; sXY = 0;
 		 s1  = 0; s12 = 0; s1X = 0; s1Y = 0;
 
-                 for ( INT aK =0; aK<this->mNbPts; aK++)
+                 for ( int aK =0; aK<this->mNbPts; aK++)
                  {
                     Pt2dr PLoc2 = aP2+this->mPts2[aK];
                     Pt3dr aGr;
@@ -438,14 +438,14 @@ template <class tElem> class cTplDiffCorrelSubPix :
 		     s2Y +=  aGr.z * aGr.y;
 		     sXY +=  aGr.x * aGr.y;
 
-                     REAL aV1   =  this->mIm1.getr(aP1+this->mPts1[aK]);
+                     double_t aV1   =  this->mIm1.getr(aP1+this->mPts1[aK]);
 // cTplImageCorrelateurSubPix<tElem>::tGet::geti(this->mIm1,aP1+this->mPts1[aK]);
 		     s1 += aV1;
 		     s12 += aV1 * aGr.z;
 		     s1X += aV1 * aGr.x;
 		     s1Y += aV1 * aGr.y;
                  }
-		 REAL rNbPts = this->mNbPts;
+		 double_t rNbPts = this->mNbPts;
 
 		 mDVar[IndI2][IndI2] = s22 -s2*(s2/rNbPts);
 		 mDVar[IndGx][IndGx] = sXX -sX*(sX/rNbPts);
@@ -478,19 +478,19 @@ template <class tElem> class cTplDiffCorrelSubPix :
 
      private :
 
-	   REAL s2;  REAL s22;
-	   REAL sX;  REAL sXX;
-	   REAL sY;  REAL sYY;
-	   REAL s2X; REAL s2Y; REAL sXY;
-	   REAL s1 ; REAL s12; REAL s1X; REAL s1Y;
+	   double_t s2;  double_t s22;
+	   double_t sX;  double_t sXX;
+	   double_t sY;  double_t sYY;
+	   double_t s2X; double_t s2Y; double_t sXY;
+	   double_t s1 ; double_t s12; double_t s1X; double_t s1Y;
 
            Pt3dr          mPtOut;
-	   Im2D_REAL8 mVar;
-	   REAL8 **   mDVar;
-	   Im1D_REAL8 mCov;
-	   REAL8*     mDCov;
-	   Im1D_REAL8 mSol;
-	   REAL8*     mDSol;
+	   Im2D_double_t8 mVar;
+	   double_t8 **   mDVar;
+	   Im1D_double_t8 mCov;
+	   double_t8*     mDCov;
+	   Im1D_double_t8 mSol;
+	   double_t8*     mDSol;
 };
 */
 

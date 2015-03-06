@@ -47,13 +47,13 @@ class Recalage
 
      Recalage(
                  Facette_2d f,
-                 REAL z_min,
-                 REAL z_max,
-                 REAL alpha_max,    //en degree
-                 REAL d_alpha       //en degree
+                 double_t z_min,
+                 double_t z_max,
+                 double_t alpha_max,    //en degree
+                 double_t d_alpha       //en degree
              );
 
-     virtual REAL merite(Hplan plan){return 0;}
+     virtual double_t merite(Hplan plan){return 0;}
      Hplan recaler(Hplan plan);
      void  recaler(ElFilo<Hplan>& pl_f);
      virtual ~Recalage(){}
@@ -62,12 +62,12 @@ class Recalage
    protected:
 
      Facette_2d _f;
-     REAL _z_min;
-     REAL _z_max;
+     double_t _z_min;
+     double_t _z_max;
      Pt3dr _orig;
-     REAL  _d_max;
-     REAL  _delta;
-     REAL  _epsilon;
+     double_t  _d_max;
+     double_t  _delta;
+     double_t  _epsilon;
 
 };
 
@@ -80,13 +80,13 @@ class Recalage_coef:public Recalage
      Recalage_coef(
                      Boite& b_c,
                      Facette_2d f,
-                     REAL z_min,
-                     REAL z_max,
-                     REAL alpha_max,    //en degree
-                     REAL d_alpha       //en degree
+                     double_t z_min,
+                     double_t z_max,
+                     double_t alpha_max,    //en degree
+                     double_t d_alpha       //en degree
                   );
 
-     virtual REAL merite(Hplan plan);
+     virtual double_t merite(Hplan plan);
      virtual ~Recalage_coef(){}
 
    private:
@@ -104,7 +104,7 @@ class Recalage_contour: public Recalage
       Recalage_contour(
                       );
       
-     virtual REAL merite(Hplan plan);
+     virtual double_t merite(Hplan plan);
      virtual ~Recalage_contour(){}
 
    private:
@@ -120,7 +120,7 @@ class Recalage_mne: public Recalage
       Recalage_mne(
                   );
       
-     virtual REAL merite(Hplan plan);
+     virtual double_t merite(Hplan plan);
      virtual ~Recalage_mne(){}
 
    private:
@@ -136,7 +136,7 @@ class Recalage_coef_mne: public Recalage
       Recalage_coef_mne(
                        );
       
-     virtual REAL merite(Hplan plan);
+     virtual double_t merite(Hplan plan);
      virtual ~Recalage_coef_mne(){}
 
    private:
@@ -148,29 +148,29 @@ class Recalage_coef_mne: public Recalage
 
 Hplan recalage(   Hplan pl_f,
                  Facette_2d f,
-                 REAL z_min,
-                 REAL z_max,
+                 double_t z_min,
+                 double_t z_max,
                  Boite& b_c,
-                 REAL d_teta     = 10,
-                 REAL d_phi      = 5,
-                 REAL d_rho      = .4,
-                 REAL delta_teta = 1,
-                 REAL delta_phi  = 1,
-                 REAL delta_rho  = .1
+                 double_t d_teta     = 10,
+                 double_t d_phi      = 5,
+                 double_t d_rho      = .4,
+                 double_t delta_teta = 1,
+                 double_t delta_phi  = 1,
+                 double_t delta_rho  = .1
              );
 
 
 void recalage(   ElFilo<Hplan>& pl_f,
                  Facette_2d f,
-                 REAL z_min,
-                 REAL z_max,
+                 double_t z_min,
+                 double_t z_max,
                  Boite& b_c,
-                 REAL d_teta     = 10,
-                 REAL d_phi      = 5,
-                 REAL d_rho      = .4,
-                 REAL delta_teta = 1,
-                 REAL delta_phi  = 1,
-                 REAL delta_rho  = .1
+                 double_t d_teta     = 10,
+                 double_t d_phi      = 5,
+                 double_t d_rho      = .4,
+                 double_t delta_teta = 1,
+                 double_t delta_phi  = 1,
+                 double_t delta_rho  = .1
              );
 
 

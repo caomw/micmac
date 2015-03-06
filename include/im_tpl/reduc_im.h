@@ -59,11 +59,11 @@ template <class TypeIn,class TypeOut> class   cReducImCenteredFact2
     TIm2D<TypeIn ,tBaseIn>  aTIn(anImIn);
     
 
-    for (INT aX=0 ; aX < aSzR.x ; aX++)
-        for (INT aY =0 ; aY< aSzR.y ; aY++)
+    for (int aX=0 ; aX < aSzR.x ; aX++)
+        for (int aY =0 ; aY< aSzR.y ; aY++)
         {
-               INT X2 = aX * 2;
-               INT Y2 = aY * 2;
+               int X2 = aX * 2;
+               int Y2 = aY * 2;
 
 	       if ( (X2>=1) && (X2 <(aSzIn.x-1)) &&  (Y2>=1) && (Y2 <(aSzIn.y-1)))
 	       {
@@ -102,10 +102,10 @@ template <class TypeIn,class TypeOut> class   cReducImCenteredFact2
 }
 };
 
-template <class TypeIm> TypeIm ReducItered(TypeIm aIm,INT aNbIter)
+template <class TypeIm> TypeIm ReducItered(TypeIm aIm,int aNbIter)
 {
     typedef typename TypeIm::tElem tElem;
-    for (INT aK=0 ; aK<aNbIter ; aK++)
+    for (int aK=0 ; aK<aNbIter ; aK++)
        aIm =cReducImCenteredFact2<tElem,tElem>::DoRed(aIm);
    return aIm;
 }

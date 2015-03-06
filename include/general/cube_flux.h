@@ -48,20 +48,20 @@ class cNappe2DGen
 {
       public :
 
-         INT Sz() const   {return mSz;}
-	 INT YMin(INT anX)  const {return mDataYMin[anX];}
-	 INT YMax(INT anX)  const {return mDataYMax[anX];}
-	 INT NbObj () const {return mNbObj;}
+         int Sz() const   {return mSz;}
+	 int YMin(int anX)  const {return mDataYMin[anX];}
+	 int YMax(int anX)  const {return mDataYMax[anX];}
+	 int NbObj () const {return mNbObj;}
 
-	 INT NbInCol(const INT & anX) const 
+	 int NbInCol(const int & anX) const 
 	 {
               return YMax(anX)-YMin(anX);
 	 }
 
 
 
-         void Resize(INT  aSz,Fonc_Num aYMin,Fonc_Num aYMax);
-         cNappe2DGen(INT  aSz,Fonc_Num aYMin,Fonc_Num aYMax);
+         void Resize(int  aSz,Fonc_Num aYMin,Fonc_Num aYMax);
+         cNappe2DGen(int  aSz,Fonc_Num aYMin,Fonc_Num aYMax);
 
 	 bool Inside(Pt2di aPt) const
 	 {
@@ -71,13 +71,13 @@ class cNappe2DGen
                     &&  (aPt.y< mDataYMax[aPt.x]);
 	 }
 
-	 INT OffsetPt(Pt2di aPt) const 
+	 int OffsetPt(Pt2di aPt) const 
 	 {
               return mDataOffset[aPt.x] +aPt.y;
 	 }
 
 	 // Offset de la colone pour y=0
-	 INT OffsetCol(INT anX) const 
+	 int OffsetCol(int anX) const 
 	 {
               return mDataOffset[anX];
 	 }
@@ -85,14 +85,14 @@ class cNappe2DGen
       private :
 
 
-         INT         mSz;
-	 Im1D_INT4   mIYMin;
-	 INT4 *      mDataYMin;
-	 Im1D_INT4   mIYMax;
-	 INT4 *      mDataYMax;
-         Im1D_INT4   mIOffset;
-         INT4  *     mDataOffset;
-         INT         mNbObj;
+         int         mSz;
+	 Im1D_int4   mIYMin;
+	 int4 *      mDataYMin;
+	 Im1D_int4   mIYMax;
+	 int4 *      mDataYMax;
+         Im1D_int4   mIOffset;
+         int4  *     mDataOffset;
+         int         mNbObj;
 };
 
 
@@ -104,10 +104,10 @@ template <class Type> class cTplNape2D : public cNappe2DGen
 	~cTplNape2D() {delete [] mData;}
         cTplNape2D
 	(
-	     INT      aSz,
+	     int      aSz,
 	     Fonc_Num aYMin,
 	     Fonc_Num aYMax,
-             INT      aNbObjMin=0
+             int      aNbObjMin=0
 	)  :
 	 cNappe2DGen(aSz,aYMin,aYMax),
                     mNbObjMem (ElMax(NbObj(),aNbObjMin)),
@@ -116,9 +116,9 @@ template <class Type> class cTplNape2D : public cNappe2DGen
 	}
 	Type & El(Pt2di aPt) {return mData[OffsetPt(aPt)];}
 	// Retourne l'adresse de la colonne pour y = 0
-	Type * Colum(INT anX) {return mData+OffsetCol(anX);}
+	Type * Colum(int anX) {return mData+OffsetCol(anX);}
 
-         void Resize(INT aSz,Fonc_Num aZMin,Fonc_Num aZMax)
+         void Resize(int aSz,Fonc_Num aZMin,Fonc_Num aZMax)
 	 {
              cNappe2DGen::Resize(aSz,aZMin,aZMax);
 	     if (NbObj() > mNbObjMem)
@@ -130,7 +130,7 @@ template <class Type> class cTplNape2D : public cNappe2DGen
 	 }
 
       private :
-	INT     mNbObjMem;
+	int     mNbObjMem;
         Type  * mData;
 };
 
@@ -142,11 +142,11 @@ class cNappe3DGen
       public :
 
          Pt2di Sz() const   {return mSz;}
-	 INT tx()     const {return mSz.x;}
-	 INT ty()     const {return mSz.y;}
-	 INT ZMin(Pt2di aP)  const {return mDataZMin[aP.y][aP.x];}
-	 INT ZMax(Pt2di aP)  const {return mDataZMax[aP.y][aP.x];}
-	 INT NbObj () const {return mNbObj;}
+	 int tx()     const {return mSz.x;}
+	 int ty()     const {return mSz.y;}
+	 int ZMin(Pt2di aP)  const {return mDataZMin[aP.y][aP.x];}
+	 int ZMax(Pt2di aP)  const {return mDataZMax[aP.y][aP.x];}
+	 int NbObj () const {return mNbObj;}
 
 	 Fonc_Num ZMin(){return mIZMin.in();}
 	 Fonc_Num ZMax(){return mIZMax.in();}
@@ -180,21 +180,21 @@ class cNappe3DGen
                     &&  (aPt.y<mSz.y);
 	 }
 
-	 INT OffsetPt(const Pt3di & aPt) const 
+	 int OffsetPt(const Pt3di & aPt) const 
 	 {
               return mDataOffset[aPt.y][aPt.x] +aPt.z;
 	 }
 
-	 INT OffsetPMin(const Pt2di & aPt) const 
+	 int OffsetPMin(const Pt2di & aPt) const 
 	 {
               return mDataOffset[aPt.y][aPt.x] +ZMin(aPt);
 	 }
-	 INT OffsetPMax(const Pt2di & aPt) const 
+	 int OffsetPMax(const Pt2di & aPt) const 
 	 {
               return mDataOffset[aPt.y][aPt.x] +ZMax(aPt)-1;
 	 }
 
-	 INT NbInCol(const Pt2di & aPt) const 
+	 int NbInCol(const Pt2di & aPt) const 
 	 {
               return ZMax(aPt)-ZMin(aPt);
 	 }
@@ -203,16 +203,16 @@ class cNappe3DGen
 
 
          Pt2di       mSz;
-	 Im2D_INT2   mIZMin;
-	 INT2 *      mLineZMin;
-	 INT2 **     mDataZMin;
-	 Im2D_INT2   mIZMax;
-	 INT2 *      mLineZMax;
-	 INT2 **     mDataZMax;
-         Im2D_INT4   mIOffset;
-	 INT4 *      mLineOffset;
-         INT4 **     mDataOffset;
-         INT         mNbObj;
+	 Im2D_int2   mIZMin;
+	 int2 *      mLineZMin;
+	 int2 **     mDataZMin;
+	 Im2D_int2   mIZMax;
+	 int2 *      mLineZMax;
+	 int2 **     mDataZMax;
+         Im2D_int4   mIOffset;
+	 int4 *      mLineOffset;
+         int4 **     mDataOffset;
+         int         mNbObj;
 };
 
 
@@ -232,7 +232,7 @@ template <class Type> class cTplNape3D : public cNappe3DGen
 	     Pt2di aSz,
 	     Fonc_Num aZMin,
 	     Fonc_Num aZMax,
-             INT      aNbObjMin=0
+             int      aNbObjMin=0
 	)  :
 	 cNappe3DGen(aSz,aZMin,aZMax),
                     mNbObjMem (ElMax(NbObj(),aNbObjMin)),
@@ -243,7 +243,7 @@ template <class Type> class cTplNape3D : public cNappe3DGen
 	Type & El(const Pt3di & aPt) {return mData[OffsetPt(aPt)];}
 	Type & El0(const Pt2di & aPt) {return mData[OffsetPMin(aPt)];}
 	Type & El1(const Pt2di & aPt) {return mData[OffsetPMax(aPt)];}
-	Type & El(INT  aK)   {return mData[aK];}
+	Type & El(int  aK)   {return mData[aK];}
 
          void Resize(Pt2di aSz,Fonc_Num aZMin,Fonc_Num aZMax)
 	 {
@@ -257,7 +257,7 @@ template <class Type> class cTplNape3D : public cNappe3DGen
 	 }
 
       private :
-	INT     mNbObjMem;
+	int     mNbObjMem;
         Type  * mData;
         cTplNape3D(const cTplNape3D&);
 };
@@ -265,13 +265,13 @@ template <class Type> class cTplNape3D : public cNappe3DGen
 struct cCoxAlgoGenRelVois{
 	 
 
-	cCoxAlgoGenRelVois(Pt3di,bool,bool,INT,bool,INT);
+	cCoxAlgoGenRelVois(Pt3di,bool,bool,int,bool,int);
 		 Pt3di mPt;
 		 bool  mVert;
 		 bool  mDirect;
-		 INT   mNumFlow;
+		 int   mNumFlow;
 		 bool  mV4;
-		 INT   mSym;
+		 int   mSym;
 	 } ;
 class cCoxAlgoGen
 {
@@ -279,8 +279,8 @@ class cCoxAlgoGen
    
          cCoxAlgoGen
          (
-	     INT aCostRegul,
-	     INT aCostV8,
+	     int aCostRegul,
+	     int aCostV8,
              Pt2di aSz
          );
 
@@ -290,16 +290,16 @@ class cCoxAlgoGen
        void NewOrder(Pt2di aP0,Pt2di aP1);
 
 
-       INT    mCostV4;
-       INT    mCostV8;
-       INT    mOrder;
+       int    mCostV4;
+       int    mCostV8;
+       int    mOrder;
 
-       INT    mDx;
-       INT    mDy;
-       INT    mX0;
-       INT    mX1;
-       INT    mY0;
-       INT    mY1;
+       int    mDx;
+       int    mDy;
+       int    mX0;
+       int    mX1;
+       int    mY0;
+       int    mY1;
 };
 
 
@@ -329,34 +329,34 @@ class cLineMapRect
 class cInterfaceCoxAlgo
 {
     public :
-         virtual void SetCost(Pt3di aP, INT aCost) = 0;
-         virtual INT PccMaxFlow() =0;
-         virtual INT NbChem() =0;
+         virtual void SetCost(Pt3di aP, int aCost) = 0;
+         virtual int PccMaxFlow() =0;
+         virtual int NbChem() =0;
 	 virtual void Reinit() =0;
 	 virtual ~cInterfaceCoxAlgo();
-	 virtual Im2D_INT2  Sol(INT aDef) =0;
+	 virtual Im2D_int2  Sol(int aDef) =0;
 
          static  cInterfaceCoxAlgo * StdNewOne        
                  (
                           Pt2di    aSz,
                           Fonc_Num aZMin,
                           Fonc_Num aZMax,
-                          INT      aCostRegul,
+                          int      aCostRegul,
                           bool     V8 = false
                     ) ;
 
 };
 
 
-Im2D_INT2  TestCoxRoy
+Im2D_int2  TestCoxRoy
            (
-                INT         aSzV,
-                Im2D_U_INT1 imG1,
-                Im2D_U_INT1 imG2,
+                int         aSzV,
+                Im2D_U_int1 imG1,
+                Im2D_U_int1 imG2,
                 Pt2di       aP0,
                 Pt2di       aP1,
-                INT         aParMin,
-                INT         aParMax
+                int         aParMin,
+                int         aParMax
            );
 
 

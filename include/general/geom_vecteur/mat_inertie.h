@@ -95,8 +95,8 @@ template <class Type> class Mat_Inertie
                   "som pds = 0 in Mat_Inertie::normalize"
              );
 
-              typename Type::TypeReel::TypeEff  S1 =  _s1 / (REAL) _s;
-              typename Type::TypeReel::TypeEff  S2 =  _s2 / (REAL) _s;
+              typename Type::TypeReel::TypeEff  S1 =  _s1 / (double_t) _s;
+              typename Type::TypeReel::TypeEff  S2 =  _s2 / (double_t) _s;
 
 
 #if ( ELISE_windows & ELISE_MinGW )
@@ -108,13 +108,13 @@ template <class Type> class Mat_Inertie
                          _s,
                          S1,
                          S2,
-                         _s11/(REAL)_s  -scal(S1,S1),
-                         _s12/(REAL)_s  -scal(S1,S2),
-                         _s22/(REAL)_s  -scal(S2,S2)
+                         _s11/(double_t)_s  -scal(S1,S1),
+                         _s12/(double_t)_s  -scal(S1,S2),
+                         _s22/(double_t)_s  -scal(S2,S2)
                     );
        }
 
-       REAL  correlation(REAL epsilon = 1e-14)
+       double_t  correlation(double_t epsilon = 1e-14)
        {
            #if ( ELISE_windows & ELISE_MinGW )
              Mat_Inertie<typename  Type::TypeReel> m =  normalize();
@@ -124,7 +124,7 @@ template <class Type> class Mat_Inertie
              return m.s12() / sqrt(ElMax(epsilon,m.s11()*m.s22()));
        }
 
-       REAL  correlation_with_def(REAL aDef)
+       double_t  correlation_with_def(double_t aDef)
        {
             #if ( ELISE_windows & ELISE_MinGW )
               Mat_Inertie<typename  Type::TypeReel> m =  normalize();
@@ -138,8 +138,8 @@ template <class Type> class Mat_Inertie
 
 
        typename Type::TypeScal S0() const {return _s;}
-       typename Type::TypeReel::TypeEff  V2toV1(const typename Type::TypeReel::TypeEff & aV2,REAL epsilon = 1e-14);
-       typename Type::TypeReel::TypeEff  V1toV2(const typename Type::TypeReel::TypeEff & aV2,REAL epsilon = 1e-14);
+       typename Type::TypeReel::TypeEff  V2toV1(const typename Type::TypeReel::TypeEff & aV2,double_t epsilon = 1e-14);
+       typename Type::TypeReel::TypeEff  V1toV2(const typename Type::TypeReel::TypeEff & aV2,double_t epsilon = 1e-14);
 
 
     private :

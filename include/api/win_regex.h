@@ -131,11 +131,11 @@ typedef unsigned reg_syntax_t;
 /* If this bit is set, either \{...\} or {...} defines an
      interval, depending on RE_NO_BK_BRACES. 
    If not set, \{, \}, {, and } are literals.  */
-#define RE_INTERVALS (RE_HAT_LISTS_NOT_NEWLINE << 1)
+#define RE_intERVALS (RE_HAT_LISTS_NOT_NEWLINE << 1)
 
 /* If this bit is set, +, ? and | aren't recognized as operators.
    If not set, they are.  */
-#define RE_LIMITED_OPS (RE_INTERVALS << 1)
+#define RE_LIMITED_OPS (RE_intERVALS << 1)
 
 /* If this bit is set, newline is an alternation operator.
    If not set, newline is literal.  */
@@ -191,7 +191,7 @@ extern reg_syntax_t re_syntax_options;
 
 #define RE_SYNTAX_GREP							\
   (RE_BK_PLUS_QM              | RE_CHAR_CLASSES				\
-   | RE_HAT_LISTS_NOT_NEWLINE | RE_INTERVALS				\
+   | RE_HAT_LISTS_NOT_NEWLINE | RE_intERVALS				\
    | RE_NEWLINE_ALT)
 
 #define RE_SYNTAX_EGREP							\
@@ -201,7 +201,7 @@ extern reg_syntax_t re_syntax_options;
    | RE_NO_BK_VBAR)
 
 #define RE_SYNTAX_POSIX_EGREP						\
-  (RE_SYNTAX_EGREP | RE_INTERVALS | RE_NO_BK_BRACES)
+  (RE_SYNTAX_EGREP | RE_intERVALS | RE_NO_BK_BRACES)
 
 /* P1003.2/D11.2, section 4.20.7.1, lines 5078ff.  */
 #define RE_SYNTAX_ED RE_SYNTAX_POSIX_BASIC
@@ -211,7 +211,7 @@ extern reg_syntax_t re_syntax_options;
 /* Syntax bits common to both basic and extended POSIX regex syntax.  */
 #define _RE_SYNTAX_POSIX_COMMON						\
   (RE_CHAR_CLASSES | RE_DOT_NEWLINE      | RE_DOT_NOT_NULL		\
-   | RE_INTERVALS  | RE_NO_EMPTY_RANGES)
+   | RE_intERVALS  | RE_NO_EMPTY_RANGES)
 
 #define RE_SYNTAX_POSIX_BASIC						\
   (_RE_SYNTAX_POSIX_COMMON | RE_BK_PLUS_QM)
@@ -353,10 +353,10 @@ struct re_pattern_buffer
 
         /* If REGS_UNALLOCATED, allocate space in the `regs' structure
              for `max (RE_NREGS, re_nsub + 1)' groups.
-           If REGS_REALLOCATE, reallocate space if necessary.
+           If REGS_double_tLOCATE, reallocate space if necessary.
            If REGS_FIXED, use what's there.  */
 #define REGS_UNALLOCATED 0
-#define REGS_REALLOCATE 1
+#define REGS_double_tLOCATE 1
 #define REGS_FIXED 2
   unsigned regs_allocated : 2;
 
@@ -526,7 +526,7 @@ extern int re_exec _RE_ARGS ((const char *));
 #define ISGRAPH(c) (isascii (c) && isprint (c) && !isspace (c))
 #endif
 
-#define ISPRINT(c) (isascii (c) && isprint (c))
+#define ISPRint(c) (isascii (c) && isprint (c))
 #define ISDIGIT(c) (isascii (c) && isdigit (c))
 #define ISALNUM(c) (isascii (c) && isalnum (c))
 #define ISALPHA(c) (isascii (c) && isalpha (c))

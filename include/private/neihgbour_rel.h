@@ -50,17 +50,17 @@ class Data_Neighbourood  :  public RC_Object
     friend  class Simple_Neigh_Rel_Comp;
 
     public :
-           inline INT nb_neigh() const {return _nb_neigh;}
-           inline INT ** coord() const {return _coord;}
+           inline int nb_neigh() const {return _nb_neigh;}
+           inline int ** coord() const {return _coord;}
         
     private :
 
-        INT _dim;
-        INT _nb_neigh;
+        int _dim;
+        int _nb_neigh;
                             // the point {0,0,0 ...} is added as a ``hidden'' neigboor,
                             // this is usefull for some internal computation
-        INT ** _coord;      // coord[_dim][_nb_neigh +1]
-        INT ** _tr_coord;   // coord[_nb_neigh +1][_dim]
+        int ** _coord;      // coord[_dim][_nb_neigh +1]
+        int ** _tr_coord;   // coord[_nb_neigh +1][_dim]
 
 
 
@@ -69,9 +69,9 @@ class Data_Neighbourood  :  public RC_Object
 
         void init_tr(); //  init _tr_coord from _coord + init the hidden neighboor
 
-        void init(INT dim,INT nb);
-        Data_Neighbourood(Im2D<INT4,INT>);
-        Data_Neighbourood(Pt2di *,INT nb);
+        void init(int dim,int nb);
+        Data_Neighbourood(Im2D<int4,int>);
+        Data_Neighbourood(Pt2di *,int nb);
 };
 
 
@@ -95,17 +95,17 @@ class Neigh_Rel_Compute : public Mcheck
      virtual const Pack_Of_Pts *  
              neigh_in_num_dir(  const Pack_Of_Pts *,
                                 char ** _is_neigh,
-                                INT &   num_dir) = 0;
+                                int &   num_dir) = 0;
      Neigh_Rel_Compute(const Arg_Neigh_Rel_Comp &,
                        Data_Neighbourood *,
                        Pack_Of_Pts::type_pack,
-                       INT Sz_buf);
+                       int Sz_buf);
 
      inline Pack_Of_Pts::type_pack type_pack() const { return _type_pack;}
-     inline INT nb_neigh() const { return _neigh->_nb_neigh;}
+     inline int nb_neigh() const { return _neigh->_nb_neigh;}
 
      inline Data_Neighbourood   * neigh() const { return _neigh;}
-     inline INT sz_buf() const {return _sz_buf;}
+     inline int sz_buf() const {return _sz_buf;}
 
      virtual ~Neigh_Rel_Compute(); 
 
@@ -119,7 +119,7 @@ class Neigh_Rel_Compute : public Mcheck
    private :
 
        
-       INT          _sz_buf;
+       int          _sz_buf;
 };
 
 

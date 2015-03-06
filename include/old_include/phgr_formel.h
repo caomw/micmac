@@ -170,22 +170,22 @@ class cIncIntervale
        typedef std::string tId;
 
        cIncIntervale(bool isTmp,const tId & anId,cSetEqFormelles     &,int aNbInc=-1);
-       cIncIntervale(const tId & anId,INT anI0,INT anI1,bool isTmp=false);
+       cIncIntervale(const tId & anId,int anI0,int anI1,bool isTmp=false);
     // Copie, avec renommage
        cIncIntervale(const cIncIntervale &,const tId &);
 
        void SetName(const tId &);
-       void SetI0I1Alloc(INT I0,INT I1);
+       void SetI0I1Alloc(int I0,int I1);
 
-       INT I0Alloc()  const ;
-       INT I1Alloc()  const ;
+       int I0Alloc()  const ;
+       int I1Alloc()  const ;
        int NumBlocAlloc() const {return mNumBlocAlloc;}
-       INT I0Solve()  const ;
-       INT I1Solve()  const ;
+       int I0Solve()  const ;
+       int I1Solve()  const ;
        int NumBlocSolve() const {return mNumBlocSolve;}
 
 
-       INT Sz()  const ;
+       int Sz()  const ;
        const tId & Id() const;
        void Close();
        void SetNumAlloc(int aNum);
@@ -202,10 +202,10 @@ class cIncIntervale
        bool IsTmp() const;
     private :
 
-       INT mI0Alloc;
-       INT mI1Alloc;
-       INT mI0Solve;
-       INT mI1Solve;
+       int mI0Alloc;
+       int mI1Alloc;
+       int mI0Solve;
+       int mI1Solve;
 
        cSetEqFormelles     * mSet;
        tId                    mId;
@@ -280,16 +280,16 @@ class  cIncListInterv
 
        cIncListInterv();
        bool Equal(const cIncListInterv&) const;
-       cIncListInterv(bool isTmp,const cIncIntervale::tId & anId,INT anI0,INT anI1);
+       cIncListInterv(bool isTmp,const cIncIntervale::tId & anId,int anI0,int anI1);
 
        ~cIncListInterv();
        void AddInterv(const cIncIntervale &,bool CanOverlap=false);
        void ResetInterv(const cIncIntervale &);
        bool IsConnexe0N() const;
 
-       INT I0Min() const;
-       INT I1Max() const;
-       INT Surf()  const;
+       int I0Min() const;
+       int I1Max() const;
+       int Surf()  const;
        const cIncIntervale & FindEquiv(const cIncIntervale &) const;
 
        const cMapIncInterv &Map() const;
@@ -301,9 +301,9 @@ class  cIncListInterv
        // cIncListInterv  (const cIncListInterv &) ; // Un imlemanted
        void operator = (const cIncListInterv &) ; // Un imlemanted
 
-       INT          mI0Min;
-       INT          mI1Max;
-       INT          mSurf;
+       int          mI0Min;
+       int          mI1Max;
+       int          mSurf;
        cMapIncInterv mMap;
        bool          mMayOverlap;  // Est-ce que l'overlap est possible
 };
@@ -439,8 +439,8 @@ class  cElemEqFormelle :  public cNameSpaceEqF
             const  cIncIntervale & IncInterv() const;
             cIncIntervale & IncInterv() ;
             tContFcteur & AllFonct();
-	    void  AddFoncRappInit(cMultiContEQF &,INT i0,INT i1,double aTol);
-            REAL AddRappViscosite
+	    void  AddFoncRappInit(cMultiContEQF &,int i0,int i1,double aTol);
+            double_t AddRappViscosite
                  (
                       const std::string  & aContexte,
                       bool OnCur,
@@ -450,19 +450,19 @@ class  cElemEqFormelle :  public cNameSpaceEqF
                  );
 
 
-            // void AddFoncRappOnCur(cMultiContEQF &,INT i0,INT i1,double * aTol );
+            // void AddFoncRappOnCur(cMultiContEQF &,int i0,int i1,double * aTol );
 
             void AssertClosed();
             void AssertUnClosed();
             void AssertSameSet(const cElemEqFormelle &);
 
-	    virtual void SetValAndInit(REAL,INT IndGlob);
+	    virtual void SetValAndInit(double_t,int IndGlob);
 	    // Les contraintes se referent au valeur init,
 	    // d'ou l'interet eventuel de les remettre sur 
 	    // sur les valeur courantes si c'est elles que l'on
 	    // veut figer
 	    virtual void SetValInitOnValCur();
-	    INT NbInc();
+	    int NbInc();
 
 
         protected :
@@ -472,14 +472,14 @@ class  cElemEqFormelle :  public cNameSpaceEqF
             // Au cas ou des inconnues ont ete modifiee,
             // remet a jour mSet.Alloc()
             void ReinitOnCur();
-            tContFcteur  FoncRapp(INT i0,INT i1,const double * vals);
-            tContFcteur  FoncRappInit(INT i0,INT i1);
+            tContFcteur  FoncRapp(int i0,int i1,const double * vals);
+            tContFcteur  FoncRappInit(int i0,int i1);
 
             cSetEqFormelles & mSet;
             // Foncteur de Rappel sur Valeur Init
-            INT                    mNumInc0;
+            int                    mNumInc0;
             cIncIntervale          mIncInterv;
-            INT                    mNumIncN;
+            int                    mNumIncN;
 
             tContFcteur                mFoncRap;
             tContFcteur                mAllFonct;
@@ -494,18 +494,18 @@ class  cElemEqFormelle :  public cNameSpaceEqF
 class cEqFPtLiaison
 {
      public  :
-          virtual REAL AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,REAL aPds,bool WithD2) = 0;
-          REAL AddPackLiaisonP1P2
+          virtual double_t AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,double_t aPds,bool WithD2) = 0;
+          double_t AddPackLiaisonP1P2
 	       (
 		    const ElPackHomologue & aPack,
 		    bool WithD2,
 		    cElStatErreur * = 0,
-                    REAL aPdsGlob  = 1.0,
-		    REAL * SomPdsTot = 0
+                    double_t aPdsGlob  = 1.0,
+		    double_t * SomPdsTot = 0
 	       );
-	  virtual REAL ResiduNonSigneP1P2(Pt2dr aP1,Pt2dr aP2) = 0;
+	  virtual double_t ResiduNonSigneP1P2(Pt2dr aP1,Pt2dr aP2) = 0;
 	  void PondereFromResidu
-	       (ElPackHomologue & aPack,REAL Ecart,REAL Coupure = -1);
+	       (ElPackHomologue & aPack,double_t Ecart,double_t Coupure = -1);
 
 
           ElPackHomologue & StdPack();
@@ -526,9 +526,9 @@ class cEqFPtLiaison
 class cSignedEqFPtLiaison  : public cEqFPtLiaison
 {
      public :
-	  virtual REAL ResiduSigneP1P2(Pt2dr aP1,Pt2dr aP2) = 0;
+	  virtual double_t ResiduSigneP1P2(Pt2dr aP1,Pt2dr aP2) = 0;
 	  // Par Defaut, renvoie la valeur abs    
-	  REAL ResiduNonSigneP1P2(Pt2dr aP1,Pt2dr aP2) ;
+	  double_t ResiduNonSigneP1P2(Pt2dr aP1,Pt2dr aP2) ;
      private :
 };
 
@@ -550,7 +550,7 @@ class cManipOrdInc
         
         cManipOrdInc();
         void Init(const std::vector<cIncIntervale *> &aBlocsIncAlloc);
-        Im1D_REAL8 ReordonneSol(Im1D_REAL8 aIm);
+        Im1D_double_t8 ReordonneSol(Im1D_double_t8 aIm);
         std::vector<cIncIntervale *> &  BlocsIncSolve();
         std::vector<int>             &  I02NblSolve();
         std::vector<int>             &  Alloc2Solve();
@@ -604,9 +604,9 @@ class cSetEqFormelles : public cNameSpaceEqF
 
               cGenSysSurResol * Sys();
 	      cFormQuadCreuse*  FQC();  // Evtlt 0
-              cEqFormelleLineaire * NewEqLin(INT aNInc,INT aNbVt,bool GenCode = false);
-              cEqCorrelGrid * NewEqCorrelGrid(INT aNbPix, bool Im2MoyVar, bool GenCode = false);
-	      cEqCorrelGrid * ReuseEqCorrelGrid(INT aNbPix, bool Im2MoyVar);
+              cEqFormelleLineaire * NewEqLin(int aNInc,int aNbVt,bool GenCode = false);
+              cEqCorrelGrid * NewEqCorrelGrid(int aNbPix, bool Im2MoyVar, bool GenCode = false);
+	      cEqCorrelGrid * ReuseEqCorrelGrid(int aNbPix, bool Im2MoyVar);
 
 
               // Valeur par defaut, correspondant ancienne
@@ -616,12 +616,12 @@ class cSetEqFormelles : public cNameSpaceEqF
               //
               cTriangulFormelle * NewTriangulFormelle
                                  ( int aDim,
-				   const std::list<Pt2dr> &,REAL Dmax,
+				   const std::list<Pt2dr> &,double_t Dmax,
                                   ElDistortion22_Gen * PosInit= 0
                                   );
               cTriangulFormelle * NewTriangulFormelle
                                   ( int aDim,
-				    Box2dr aBox,INT aNb,REAL Dmax,
+				    Box2dr aBox,int aNb,double_t Dmax,
                                     ElDistortion22_Gen * PosInit= 0
                                   );
               cTriangulFormelle * NewTriangulFormelleUnitaire(int aDim);
@@ -692,7 +692,7 @@ class cSetEqFormelles : public cNameSpaceEqF
               cRotationFormelle * NewRotationEvol
                                   (
                                         ElRotation3D aRC2MInit,
-                                        INT aDegre,
+                                        int aDegre,
                                         const std::string & aName = ""
                                   );
 
@@ -721,8 +721,8 @@ class cSetEqFormelles : public cNameSpaceEqF
                 cEqEllipseImage * NewEqElIm
                 (
 	           const cMirePolygonEtal &,
-                   Pt2dr aCentre, REAL  anA, REAL  aB, REAL  aC,
-                   REAL  aLarg, REAL  aBlanc, REAL  aNoir,
+                   Pt2dr aCentre, double_t  anA, double_t  aB, double_t  aC,
+                   double_t  aLarg, double_t  aBlanc, double_t  aNoir,
 		   bool  Code2Gen = false
                 );
                 cAppuiGridEq * NewEqAppuiGrid
@@ -773,8 +773,8 @@ class cSetEqFormelles : public cNameSpaceEqF
 
 		cLIParam_Image *  NewLIParamImage
                                  (
-                                    Im2D_REAL4 anIm,
-                                    REAL  aZoom,
+                                    Im2D_double_t4 anIm,
+                                    double_t  aZoom,
                                     CamStenope & aCam,
                                     cNameSpaceEqF::eModeContrRot
                                  );
@@ -782,7 +782,7 @@ class cSetEqFormelles : public cNameSpaceEqF
                                    ( cRotationFormelle * aRotPts,
 			             bool Multi,
 			             bool Normalize,
-				     INT aNbPts,
+				     int aNbPts,
 				     cLIParam_Image &,cLIParam_Image &,
 				     bool GenCode = false);
 	               
@@ -815,46 +815,46 @@ class cSetEqFormelles : public cNameSpaceEqF
 	  // VAddEqFonctToSys est la plus utile,
 	  // AddEqFonctToSys est connservee pour compatibilite
 
-	  const std::vector<REAL> & VAddEqFonctToSys
+	  const std::vector<double_t> & VAddEqFonctToSys
                (
                   cElCompiledFonc * aFonct,
                   const std::vector<double> & aVPds,
                   bool WithDerSec
                );
-	  const std::vector<REAL> & VAddEqFonctToSys
+	  const std::vector<double_t> & VAddEqFonctToSys
                (
                   cElCompiledFonc * aFonct,
-                  REAL aPds,
+                  double_t aPds,
                   bool WithDerSec
                );
 
 
 
-          REAL AddEqFonctToSys
+          double_t AddEqFonctToSys
                (
                   cElCompiledFonc * aFonct,
-                  REAL aPds,
+                  double_t aPds,
                   bool WithDerSec
                );
 
-	   const std::vector<REAL> & AddEqIndexeToSys
+	   const std::vector<double_t> & AddEqIndexeToSys
 		                     (  
                                          cElCompiledFonc * aFonct,
-                                         REAL aPds,const std::vector<INT>  & VIncs
+                                         double_t aPds,const std::vector<int>  & VIncs
 				     );
 	  
-          REAL ResiduSigne ( cElCompiledFonc * aFonct);
-	  const std::vector<REAL> & VResiduSigne ( cElCompiledFonc * aFonct);
+          double_t ResiduSigne ( cElCompiledFonc * aFonct);
+	  const std::vector<double_t> & VResiduSigne ( cElCompiledFonc * aFonct);
 
 
-          REAL AddEqFonctToSys
+          double_t AddEqFonctToSys
                (
                   const tContFcteur &,
-                  REAL aPds,
+                  double_t aPds,
                   bool WithDerSec
                );
 
-          void Reinit(INT k0,INT k1);
+          void Reinit(int k0,int k1);
           void AddElem(cElemEqFormelle & anEq);
           void  AddObj2Kill(cObjFormel2Destroy *);
 
@@ -872,12 +872,12 @@ class cSetEqFormelles : public cNameSpaceEqF
           int   Alloc2Solve(const int aK){return mMOI.Alloc2Solve()[aK];}
           void TestPbFaisceau(bool doCheck,bool doSVD,bool doV0);
         private :
-           Im1D_REAL8 ReordonneSol(Im1D_REAL8 aIm);
+           Im1D_double_t8 ReordonneSol(Im1D_double_t8 aIm);
            void NumeroteBloc();
 
 
            cEqCorrelGrid * NewEqCorrelGridGen
-		              (INT aNbPix, bool Im2MoyVar, bool GenCode,bool Reuse);
+		              (int aNbPix, bool Im2MoyVar, bool GenCode,bool Reuse);
 	  friend class cParamIntrinsequeFormel;  // pour AddCamFormelle
           void  AddCamFormelle(cCameraFormelle  *,const std::string &);
 
@@ -886,7 +886,7 @@ class cSetEqFormelles : public cNameSpaceEqF
           void UpdateFctr();
           AllocateurDInconnues  & mAlloc;
           tContFcteur             mLFoncteurs;
-          INT                     mNbVar;
+          int                     mNbVar;
           // L2SysSurResol *      mSys;
           cGenSysSurResol *       mSys;
 	  cFormQuadCreuse*        mFQC;
@@ -907,7 +907,7 @@ class cSetEqFormelles : public cNameSpaceEqF
 		                        ElRotation3D aRC2MInit,
                                         cRotationFormelle *  , // Rot Attach
 		                        const std::string & aName ,
-                                        INT   aDegre,
+                                        int   aDegre,
                                         bool aVraiBaseU
                                );
 
@@ -927,8 +927,8 @@ class cSetEqFormelles : public cNameSpaceEqF
           // std::vector<int>              mAlloc2Solve;
           // std::vector<int>              mSolve2Alloc;
           cManipOrdInc                  mMOI;
-          Im1D_REAL8                    mSolQuad;
-          Im1D_REAL8                    mCurSol;
+          Im1D_double_t8                    mSolQuad;
+          Im1D_double_t8                    mCurSol;
 
 
           cSetEqFormelles(const cSetEqFormelles &); // N.I.
@@ -1050,9 +1050,9 @@ class cDistRadialeFormelle : public cElemEqFormelle,
            void ReinitDist(const ElDistRadiale_PolynImpair & );
            cMultiContEQF      StdContraintes() ;
 	   void SetCentreFige(bool);
-           void SetDegreFige(INT aDF,double aTol=cContrainteEQF::theContrStricte);
+           void SetDegreFige(int aDF,double aTol=cContrainteEQF::theContrStricte);
 
-	   INT   IndCentre() const;
+	   int   IndCentre() const;
 
            cDistModStdPhpgr & DistCurStd();
            const cDistModStdPhpgr & DistCurStd() const;
@@ -1073,7 +1073,7 @@ class cDistRadialeFormelle : public cElemEqFormelle,
 	   void  AddContrCoeff(cMultiContEQF & aContr);
 
            cMultiContEQF   CentreFRapInit() ;
-           cMultiContEQF   CoeffsRapInit(INT aCoef0);
+           cMultiContEQF   CoeffsRapInit(int aCoef0);
            cDistRadialeFormelle
            (
                 bool closeEEF,
@@ -1086,12 +1086,12 @@ class cDistRadialeFormelle : public cElemEqFormelle,
 
 
 	   bool                       mCentreFige;
-	   INT                        mDegreFige;
+	   int                        mDegreFige;
            cDistModStdPhpgr           &mDistInitStd;
            cDistModStdPhpgr           &mCurDistStd;
 	   ElDistRadiale_PolynImpair& mDistInit;
 	   ElDistRadiale_PolynImpair& mCurDist;
-	   INT                        mIndCentre;
+	   int                        mIndCentre;
            Pt2d<Fonc_Num>             mFCentre;
            std::vector<Fonc_Num>      mFCoeffs;
 
@@ -1157,7 +1157,7 @@ class cParamIntrinsequeFormel : public cElemEqFormelle,
                                    bool  HasEqDroite  = false
                               );
 
-            REAL  CurFocale() const;
+            double_t  CurFocale() const;
             Pt2dr CurPP() const;
             const tParamAFocal  & CurAFoc() const;
             virtual cMultiContEQF  StdContraintes();
@@ -1171,7 +1171,7 @@ class cParamIntrinsequeFormel : public cElemEqFormelle,
             void  SetPPFFige(double aTol);
 
 
-	    INT IndPP() const;
+	    int IndPP() const;
 	    // Lorsque le PIF possede des variables d'etats et que plusieurs PIF sont
 	    // impliques dans une equation, il importe de pouvoir distinguer les variables,
 	    // d'ou le role de KCam
@@ -1232,16 +1232,16 @@ class cParamIntrinsequeFormel : public cElemEqFormelle,
              cCamStenopeGrid *          mCamGrid;
              bool                       mFiged;
              double                     mRayonGrid;
-             REAL                       mFocaleInit;
-	     REAL                       mCurFocale;
+             double_t                       mFocaleInit;
+	     double_t                       mCurFocale;
 	     Pt2dr                      mPPInit;
 	     Pt2dr                      mCurPP;
              tParamAFocal               mAFocInit;
              tParamAFocal               mCurAFoc;
 	     Fonc_Num                   mFFoc;
-	     INT                        mIndPP;
+	     int                        mIndPP;
 	     Pt2d<Fonc_Num>             mFPP;
-	     INT                        mIndAF;
+	     int                        mIndAF;
              std::vector<Fonc_Num>      mFAFoc;
              bool                       mParamVar;
 	     double                     mTolFoc;
@@ -1307,7 +1307,7 @@ class cParamIFDistRadiale : public cParamIntrinsequeFormel
                     void  SetCDistPPLie(double aTol=cContrainteEQF::theContrStricte);
 
 
-           void SetDRFDegreFige(INT aDF,double aTol=cContrainteEQF::theContrStricte);
+           void SetDRFDegreFige(int aDF,double aTol=cContrainteEQF::theContrStricte);
 	   virtual void SetValInitOnValCur();
 
       protected :
@@ -1385,17 +1385,17 @@ class  cPolynome1VarFormel
         (
                 cSetEqFormelles    &,
                 cVarSpec           aVarTime,
-                REAL *             aV0,
-                INT                aDegre
+                double_t *             aV0,
+                int                aDegre
         );
         Fonc_Num  Fonc();
-        REAL  Val(REAL aTime);
+        double_t  Val(double_t aTime);
 
      private :
-        REAL *                  mV0;
-        INT                     mDegre;
+        double_t *                  mV0;
+        int                     mDegre;
         Fonc_Num                mFonc;
-        std::vector<REAL>       mValsCur;
+        std::vector<double_t>       mValsCur;
 
         cPolynome1VarFormel(const cPolynome1VarFormel &);  // Non Implemante
         void    operator = (const cPolynome1VarFormel &);  // Non Implemante
@@ -1435,19 +1435,19 @@ class cRotationFormelle : public cElemEqFormelle,
           Pt3d<Fonc_Num>   COpt();
 	  ElRotation3D     CurRot();
 	  void     SetCurRot(const ElRotation3D & aR2CM);
-	  ElRotation3D     CurRot(REAL aT);
+	  ElRotation3D     CurRot(double_t aT);
 
 	   ~cRotationFormelle();
 
-           INT IndexeAllocationCOpt();
+           int IndexeAllocationCOpt();
            // cRotationFormelle * RotAttach();
            eModeContrRot  ModeRot() const;
 	   void SetModeRot(eModeContrRot);
            const std::string & Name() const;
 	   virtual void SetValInitOnValCur();
 	   Pt3dr  CurCOpt() const;
-	   Pt3dr  CurCOpt(REAL aT) const;
-           INT    Degre() const;
+	   Pt3dr  CurCOpt(double_t aT) const;
+           int    Degre() const;
 
            const std::string & NameParamTime();
            void  SetFlagAnglFige(int aFlag);
@@ -1461,7 +1461,7 @@ class cRotationFormelle : public cElemEqFormelle,
            void SetGL(bool aModeGL);
            const ElMatrix<Fonc_Num> & MatFGL(int ForceGL);
            ElMatrix<Fonc_Num>  MatFGLComplete(int ForceGL);
-           const ElMatrix<REAL> &       MGL() const;
+           const ElMatrix<double_t> &       MGL() const;
            bool IsGL() const;
            // void InitEtatGL(bool isP);
            int NumCentre(int aK) const;
@@ -1476,14 +1476,14 @@ class cRotationFormelle : public cElemEqFormelle,
                 cSetEqFormelles &,
                 cRotationFormelle *,  // Rotation de ratachement eventuelle
 		const std::string & aName,
-                INT   aDegre,            // Cas des parametre variables dans le temps
+                int   aDegre,            // Cas des parametre variables dans le temps
                                          // -1 correspond au cas non employe
                 bool  aUseVraiBaseU
            );
 
 
 
-           cPolynome1VarFormel  * AllocPol(REAL * ValCste);
+           cPolynome1VarFormel  * AllocPol(double_t * ValCste);
            void AssertDegre0() const;
 
 
@@ -1492,16 +1492,16 @@ class cRotationFormelle : public cElemEqFormelle,
 
            std::string    mNameParamTime;
            cVarSpec       mVarTime;
-           INT            mDegre;
+           int            mDegre;
 
 
-	   REAL           mTeta01Init;
-	   REAL           mTeta02Init;
-	   REAL           mTeta12Init;
+	   double_t           mTeta01Init;
+	   double_t           mTeta02Init;
+	   double_t           mTeta12Init;
 
-	   REAL           mCurTeta01;
-	   REAL           mCurTeta02;
-	   REAL           mCurTeta12;
+	   double_t           mCurTeta01;
+	   double_t           mCurTeta02;
+	   double_t           mCurTeta12;
 
            cPolynome1VarFormel * mPolTeta01;
            cPolynome1VarFormel * mPolTeta02;
@@ -1515,7 +1515,7 @@ class cRotationFormelle : public cElemEqFormelle,
 
 	   Pt3dr          mCOptInit;
 	   Pt3dr          mCurCOpt;
-	   INT            mIndAllocCOpt;
+	   int            mIndAllocCOpt;
            cPolynome1VarFormel * mPolCoptX;
            cPolynome1VarFormel * mPolCoptY;
            cPolynome1VarFormel * mPolCoptZ;
@@ -1535,7 +1535,7 @@ class cRotationFormelle : public cElemEqFormelle,
            bool                  mModeGL;     // Mode Gimbal Lock
            // cMatr_Etat_PhgrF *    mSMatriceGL;     // Mode Gimbal Lock -Stantard
            // cMatr_Etat_PhgrF *    mPMatriceGL;     // Mode Gimbal Lock -Proj
-           ElMatrix<REAL>        mMGL;
+           ElMatrix<double_t>        mMGL;
            bool                  mVraiBaseU;
 };
 
@@ -1586,7 +1586,7 @@ class cCameraFormelle :  public cNameSpaceEqF ,
 	  // static void GenAllCode();
 
 	  // Le resultat est un point renvoyant le vecteur de residu
-	  Pt2dr  AddAppui(Pt3dr aP,Pt2dr aPIm,REAL aPds);
+	  Pt2dr  AddAppui(Pt3dr aP,Pt2dr aPIm,double_t aPds);
 	         // Donne le residu mais n'ajoute pas au systeme
 	  Pt2dr  ResiduAppui(Pt3dr aP,Pt2dr aPIm);
 
@@ -1623,8 +1623,8 @@ class cCameraFormelle :  public cNameSpaceEqF ,
                       cIncListInterv & LInterv();
 
 		      // Si P <0, n'ajoute pas au sys
-		      Pt2dr Residu(Pt3dr aP1,Pt2dr aP2,REAL Pds);
-		      Pt2dr ResiduPInc(Pt2dr aP2,REAL Pds,const cParamPtProj & aPPP);
+		      Pt2dr Residu(Pt3dr aP1,Pt2dr aP2,double_t Pds);
+		      Pt2dr ResiduPInc(Pt2dr aP2,double_t Pds,const cParamPtProj & aPPP);
 		  private :
 
                       cCameraFormelle & mCam;
@@ -1726,9 +1726,9 @@ class cCpleCamFormelle : public cNameSpaceEqF,
           friend class cSetEqFormelles;
 	  static void GenAllCode();
          // WithD2 : avec derivees secondes
-          REAL AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,REAL aPds,bool WithD2);
+          double_t AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,double_t aPds,bool WithD2);
 
-          REAL ResiduSigneP1P2(Pt2dr P1,Pt2dr P2); 
+          double_t ResiduSigneP1P2(Pt2dr P1,Pt2dr P2); 
 	  // Pondere en 1 / (1+ square(Residu/Ecart))
 	  // Si Residu > Coupure > 0 , poids = 0
 
@@ -1786,8 +1786,8 @@ class cEqHomogFormelle : public  cNameSpaceEqF ,
           );
 
          // WithD2 : avec derivees secondes
-          REAL AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,REAL aPds,bool WithD2);
-	  REAL ResiduNonSigneP1P2(Pt2dr aP1,Pt2dr aP2);
+          double_t AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,double_t aPds,bool WithD2);
+	  double_t ResiduNonSigneP1P2(Pt2dr aP1,Pt2dr aP2);
 	  Pt2dr  PtResidu(Pt2dr aP1,Pt2dr aP2);
 
           cHomogFormelle&       HF1();
@@ -1795,10 +1795,10 @@ class cEqHomogFormelle : public  cNameSpaceEqF ,
           cDistRadialeFormelle& DRF();
           cSetEqFormelles &       Set();
 
-          void StdRepondere(ElPackHomologue &,REAL aCoeff);
-          void StdRepondere(REAL aCoeff);
-          REAL MoyErreur(ElPackHomologue &);
-          REAL MoyErreur();
+          void StdRepondere(ElPackHomologue &,double_t aCoeff);
+          void StdRepondere(double_t aCoeff);
+          double_t MoyErreur(ElPackHomologue &);
+          double_t MoyErreur();
 
       private :
           struct cEq
@@ -1813,8 +1813,8 @@ class cEqHomogFormelle : public  cNameSpaceEqF ,
 
 	      ~cEq();
               cEq(Fonc_Num F,cEqHomogFormelle &,bool isX,bool Code2Gen);
-              REAL AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,REAL aPds,bool WithD2);
-	      REAL ResiduSigneP1P2(Pt2dr aP1,Pt2dr aP2);
+              double_t AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,double_t aPds,bool WithD2);
+	      double_t ResiduSigneP1P2(Pt2dr aP1,Pt2dr aP2);
           };
           friend struct cEq;
 
@@ -1848,9 +1848,9 @@ class cEqOneHomogFormelle : public  cNameSpaceEqF ,
           );
 
          // WithD2 : avec derivees secondes
-          REAL AddLiaisonP1P2(Pt2dr P1, Pt2dr aP2, REAL aPds,bool WithD2);
-          Pt2dr StdAddLiaisonP1P2(Pt2dr P1,Pt2dr P2,REAL aPds,bool WithD2); // Version moderne type camera
-          REAL ResiduNonSigneP1P2(Pt2dr aP1,Pt2dr aP2);
+          double_t AddLiaisonP1P2(Pt2dr P1, Pt2dr aP2, double_t aPds,bool WithD2);
+          Pt2dr StdAddLiaisonP1P2(Pt2dr P1,Pt2dr P2,double_t aPds,bool WithD2); // Version moderne type camera
+          double_t ResiduNonSigneP1P2(Pt2dr aP1,Pt2dr aP2);
           Pt2dr  PtResidu(Pt2dr aP1,Pt2dr aP2);
 
           cHomogFormelle&       HF();
@@ -1869,8 +1869,8 @@ class cEqOneHomogFormelle : public  cNameSpaceEqF ,
               ~cOneHEq();
               cOneHEq(Fonc_Num F,cEqOneHomogFormelle &,bool isX,bool Code2Gen);
 
-              REAL AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,REAL aPds,bool WithD2);
-              REAL ResiduSigneP1P2(Pt2dr aP1,Pt2dr aP2);
+              double_t AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,double_t aPds,bool WithD2);
+              double_t ResiduSigneP1P2(Pt2dr aP1,Pt2dr aP2);
               void  InitPts(Pt2dr P1,Pt2dr P2);
           };
           friend struct cOneHEq;
@@ -1905,9 +1905,9 @@ class cEqHomogFormelle : public  cNameSpaceEqF ,
           );
 
          // WithD2 : avec derivees secondes
-          REAL AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,REAL aPds,bool WithD2);
-          Pt2dr StdAddLiaisonP1P2(Pt2dr P1,Pt2dr P2,REAL aPds,bool WithD2); // Version moderne type camera
-	  REAL ResiduNonSigneP1P2(Pt2dr aP1,Pt2dr aP2);
+          double_t AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,double_t aPds,bool WithD2);
+          Pt2dr StdAddLiaisonP1P2(Pt2dr P1,Pt2dr P2,double_t aPds,bool WithD2); // Version moderne type camera
+	  double_t ResiduNonSigneP1P2(Pt2dr aP1,Pt2dr aP2);
 	  Pt2dr  PtResidu(Pt2dr aP1,Pt2dr aP2);
 
           cHomogFormelle&       HF1();
@@ -1916,10 +1916,10 @@ class cEqHomogFormelle : public  cNameSpaceEqF ,
           cDistRadialeFormelle*   DRF();
           cSetEqFormelles &       Set();
 
-          void StdRepondere(ElPackHomologue &,REAL aCoeff);
-          void StdRepondere(REAL aCoeff);
-          REAL MoyErreur(ElPackHomologue &);
-          REAL MoyErreur();
+          void StdRepondere(ElPackHomologue &,double_t aCoeff);
+          void StdRepondere(double_t aCoeff);
+          double_t MoyErreur(ElPackHomologue &);
+          double_t MoyErreur();
 
       private :
           Pt2d<Fonc_Num> ComposeDRF (Pt2d<Fonc_Num> aP);
@@ -1935,8 +1935,8 @@ class cEqHomogFormelle : public  cNameSpaceEqF ,
 
 	      ~cEq();
               cEq(Fonc_Num F,cEqHomogFormelle &,bool isX,bool Code2Gen);
-              REAL AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,REAL aPds,bool WithD2);
-	      REAL ResiduSigneP1P2(Pt2dr aP1,Pt2dr aP2);
+              double_t AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,double_t aPds,bool WithD2);
+	      double_t ResiduSigneP1P2(Pt2dr aP1,Pt2dr aP2);
           };
           friend struct cEq;
 
@@ -1972,7 +1972,7 @@ class cEqHomogFormelle : public  cNameSpaceEqF ,
 class  cLEqHomOneDist
 {
       public :
-         cLEqHomOneDist(REAL aDiag);
+         cLEqHomOneDist(double_t aDiag);
          void AddCple(const ElPackHomologue &);
 
          // Calcul un score, en mettant tous les parametres a leur valeur
@@ -1982,22 +1982,22 @@ class  cLEqHomOneDist
          cDistRadialeFormelle *    DRF();
 
 
-         REAL  NStepOpt(INT aNb,bool CentreFiged);
-         void PondereFromErreur(REAL aDCut);
+         double_t  NStepOpt(int aNb,bool CentreFiged);
+         void PondereFromErreur(double_t aDCut);
          void CloseSet();
 
       protected :
          // Met dans le systeme toute les equation de laison + contrainte
          // renvoie la moyenne des equation de liaisons
 
-         void AddLiaisonOnTop(Pt2dr aP1,Pt2dr aP2,REAL aPds);
-         REAL AddAllEquationsToSet();
+         void AddLiaisonOnTop(Pt2dr aP1,Pt2dr aP2,double_t aPds);
+         double_t AddAllEquationsToSet();
          cSetEqFormelles * Set();
 
          void AddHomogF(cHomogFormelle *);
          void AddEqF(cEqHomogFormelle *);
 
-         REAL                              mDiag;
+         double_t                              mDiag;
          std::vector<cEqHomogFormelle *>   mEqFs;
          std::vector<ElPackHomologue *>    mLiaisons;
 
@@ -2007,7 +2007,7 @@ class  cLEqHomOneDist
          cSetEqFormelles              mSet;
          ElDistRadiale_PolynImpair mDistInit;
          bool                      mCentreFige;
-         INT                       mDegreDRFFiged;
+         int                       mDegreDRFFiged;
          cDistRadialeFormelle *    mDRF;
 
          bool                      mDerSec;
@@ -2029,14 +2029,14 @@ class cDistFormelPolXY  : public cNameSpaceEqF
            ~cDistFormelPolXY();
            Pt2d<Fonc_Num> operator () (Pt2d<Fonc_Num> aP);
               
-           INT Degre() const;
+           int Degre() const;
            cMultiContEQF      StdContraintes() ;
-           void SetFige(INT DegreMax,bool Std);
+           void SetFige(int DegreMax,bool Std);
 	              
 	   ElDistortionPolynomiale DistCur() const;
        private :
-           INT              mDegre;
-           INT              mDegreFige;
+           int              mDegre;
+           int              mDegreFige;
            cPolynFormelXY * mPolX;
            cPolynFormelXY * mPolY;
 };
@@ -2049,7 +2049,7 @@ class cParamIFDistPolynXY : public cParamIntrinsequeFormel
           virtual ~cParamIFDistPolynXY();
 
           cMultiContEQF      StdContraintes() ;
-          void SetFige(INT DegreMax);
+          void SetFige(int DegreMax);
 	   ElDistortionPolynomiale DistCur() const;
 
 	  friend class cSetEqFormelles;
@@ -2205,14 +2205,14 @@ class cTriangulFormelle : public ElDistortion22_Gen,
 	// Renvoie un sommet aS2 tq (aS1 aS2) soit horizontal et assez grand
 	// virtual cTFI_AttrSom  & SomVecHorz(cTFI_AttrSom & aS1) =0;
 	// 
-	// INT 
+	// int 
 
           cSetEqFormelles & Set();
 	  // Contraintes pour bloquer un mouvement de rotation
           cMultiContEQF      ContraintesRot() ;
 	  // Contraintes pour bloquer tous les sommets
           cMultiContEQF      ContraintesAll() ;
-	  virtual void SetTolMax(REAL) =0;
+	  virtual void SetTolMax(double_t) =0;
           const  std::vector<cTFI_Triangle *> & VTri() const;
 
 	  void AssertD2() const;
@@ -2225,7 +2225,7 @@ class cTriangulFormelle : public ElDistortion22_Gen,
       private :
 	  virtual cTFI_AttrSom * SomCentral() = 0;
 	  virtual cTFI_AttrSom * VecHorz() = 0;
-	  void  Diff(ElMatrix<REAL> &,Pt2dr) const ; // Non implantee
+	  void  Diff(ElMatrix<double_t> &,Pt2dr) const ; // Non implantee
 
 	  double  mTrianFTol;
 };
@@ -2250,7 +2250,7 @@ class cAppuiGridEq : public cNameSpaceEqF,
 {
      public :
 	  void   GenCode();
-	  Pt2dr  AddAppui(Pt3dr aP,Pt2dr aPIm,REAL aPds);
+	  Pt2dr  AddAppui(Pt3dr aP,Pt2dr aPIm,double_t aPds);
 	         // Donne le residu mais n'ajoute pas au systeme
 	  Pt2dr  ResiduAppui(Pt3dr aP,Pt2dr aPIm);
 
@@ -2290,8 +2290,8 @@ class cCpleGridEq : public cNameSpaceEqF,
                     public cObjFormel2Destroy
 {
       public :
-          REAL AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,REAL aPds,bool WithD2);
-          REAL ResiduSigneP1P2(Pt2dr P1,Pt2dr P2); 
+          double_t AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,double_t aPds,bool WithD2);
+          double_t ResiduSigneP1P2(Pt2dr P1,Pt2dr P2); 
 
 	  void   GenCode();
 	  // static void   GenAllCode();
@@ -2346,37 +2346,37 @@ class cEqEllipseImage : public cElemEqFormelle,
 	                public cObjFormel2Destroy
 {
       public :
-          REAL GraySynt(REAL aX,REAL aY);
-          REAL AddEq(REAL aX,REAL aY,REAL aGray,REAL Pds=1, bool WithD2=false);
+          double_t GraySynt(double_t aX,double_t aY);
+          double_t AddEq(double_t aX,double_t aY,double_t aGray,double_t Pds=1, bool WithD2=false);
 	  Pt2dr CurCentre() const;
-	  REAL  CurA() const;
-	  REAL  CurB() const;
-	  REAL  CurC() const;
-	  REAL  CurLarg() const;
-	  REAL  CurBlanc() const;
-	  REAL  CurNoir() const;
+	  double_t  CurA() const;
+	  double_t  CurB() const;
+	  double_t  CurC() const;
+	  double_t  CurLarg() const;
+	  double_t  CurBlanc() const;
+	  double_t  CurNoir() const;
 	  bool OkCurEllispe() const;
 
 	  void SetCentre(Pt2dr);
-	  void SetA(REAL);
-	  void SetB(REAL);
-	  void SetC(REAL);
-	  void SetLarg(REAL);
-	  void SetBlanc(REAL);
-	  void SetNoir(REAL);
+	  void SetA(double_t);
+	  void SetB(double_t);
+	  void SetC(double_t);
+	  void SetLarg(double_t);
+	  void SetBlanc(double_t);
+	  void SetNoir(double_t);
 
           cMultiContEQF  ContrFigeABC();
           cMultiContEQF  ContrFigeLarg();
 
 	  const cMirePolygonEtal & Mire() const;
 	  // Si Fact > 1 donne ellipse plus grande
-	  Box2dr  BoxCurEllipse(REAL Fact=1.0) const;
-	  REAL SurfIER(Pt2dr aP,REAL Fact=1.0,REAL Larg=-1) const;
+	  Box2dr  BoxCurEllipse(double_t Fact=1.0) const;
+	  double_t SurfIER(Pt2dr aP,double_t Fact=1.0,double_t Larg=-1) const;
 
       private :
 	  struct  cVarRay
 	  {
-		  cVarRay(INT aNum);
+		  cVarRay(int aNum);
 
 		  cVarSpec    mFRay;
 		  double *    mAdrVar;
@@ -2390,12 +2390,12 @@ class cEqEllipseImage : public cElemEqFormelle,
              cSetEqFormelles &,
 	     const cMirePolygonEtal &,
              Pt2dr aCentre,
-             REAL  anA,
-             REAL  aB,
-             REAL  aC,
-             REAL  aLarg,
-             REAL  aBlanc,
-             REAL  aNoir,
+             double_t  anA,
+             double_t  aB,
+             double_t  aC,
+             double_t  aLarg,
+             double_t  aBlanc,
+             double_t  aNoir,
 	     bool  Code2Gen
           );
 	               
@@ -2404,21 +2404,21 @@ class cEqEllipseImage : public cElemEqFormelle,
           std::string mNameType;
           cSetEqFormelles &       mEq;
           AllocateurDInconnues &  mAlloc;
-	  INT   mI0;
-	  INT   mIndCentre;
+	  int   mI0;
+	  int   mIndCentre;
           Pt2dr mCentre;
           Pt2d<Fonc_Num> fCentre;
-	  INT      mIndA;
-          REAL     mA;
+	  int      mIndA;
+          double_t     mA;
           Fonc_Num fA;
-	  INT      mIndB;
-          REAL     mB;
+	  int      mIndB;
+          double_t     mB;
           Fonc_Num fB;
-	  INT      mIndC;
-          REAL     mC;
+	  int      mIndC;
+          double_t     mC;
           Fonc_Num fC;
-	  INT      mIndLarg;
-          REAL     mLarg;
+	  int      mIndLarg;
+          double_t     mLarg;
           Fonc_Num fLarg;
           Pt2d<Fonc_Num> fPLarg;
           std::string mNPX;
@@ -2428,11 +2428,11 @@ class cEqEllipseImage : public cElemEqFormelle,
           Pt2d<Fonc_Num> fCPIX;
           Pt2d<Fonc_Num> fP0;
           Pt2d<Fonc_Num> fP1;
-	  INT       mIndBlanc;
-          REAL      mBlanc;
+	  int       mIndBlanc;
+          double_t      mBlanc;
           Fonc_Num  fBlanc;
-	  INT       mIndNoir;
-          REAL      mNoir;
+	  int       mIndNoir;
+          double_t      mNoir;
           Fonc_Num  fNoir;
           std::string mNGR;
           Fonc_Num    fGray;
@@ -2464,11 +2464,11 @@ class cLIParam_Image : public cObjFormel2Destroy
 		cRotationFormelle & Rot();
 		cSetEqFormelles & Set();
 		void UpdateCam();
-		Im2D_REAL4 Im();
+		Im2D_double_t4 Im();
 	        Pt2dr  Ray2Im(Pt3dr);
 	        Pt3dr  Im2Ray(Pt2dr);
 
-		void SetImZ(Im2D_REAL4 anIm,REAL aZ);
+		void SetImZ(Im2D_double_t4 anIm,double_t aZ);
 
 
 	private  :
@@ -2477,8 +2477,8 @@ class cLIParam_Image : public cObjFormel2Destroy
 		cLIParam_Image
 	        (
 		    cSetEqFormelles &,
-		    Im2D_REAL4   anIm,
-		    REAL         aZoom,
+		    Im2D_double_t4   anIm,
+		    double_t         aZoom,
 		    CamStenope & aCam,
                     cNameSpaceEqF::eModeContrRot
 		);
@@ -2487,8 +2487,8 @@ class cLIParam_Image : public cObjFormel2Destroy
 		cLIParam_Image (const cLIParam_Image &); // NI
 		cSetEqFormelles &    mSet;
 		cRotationFormelle *  pRot;
-		Im2D_REAL4           mIm;
-		REAL                 mZoom;
+		Im2D_double_t4           mIm;
+		double_t                 mZoom;
 		CamStenope &        mCam;
 };
 
@@ -2503,13 +2503,13 @@ class cLI_MakeEqIm
 	           const std::string &      aPref,
 		   cLIParam_Image &              anIm,
                    bool Normalize, // Si faux pas de normalisation Moy/Ect
-		   INT        aNbPts,
+		   int        aNbPts,
                    cRotationFormelle * aRotPts
 	      );
 	      Fonc_Num     FRad();
-	      Fonc_Num              KthRad(INT aK);
+	      Fonc_Num              KthRad(int aK);
               void InitAdr(cElCompiledFonc *);
-	      bool  InitEquations(std::vector<Pt3dr>,INT Offset,const ElRotation3D &);
+	      bool  InitEquations(std::vector<Pt3dr>,int Offset,const ElRotation3D &);
 
 
               struct  cPts
@@ -2517,7 +2517,7 @@ class cLI_MakeEqIm
                     cPts
                     ( 
                           const std::string &   aPref,
-                          INT,
+                          int,
                           cRotationFormelle &,
                           cRotationFormelle * aRotPts
                     );
@@ -2553,7 +2553,7 @@ class cLI_MakeEqIm
 	      Fonc_Num              mMoy;
 	      Fonc_Num              mEct;
 	      Fonc_Num              mRadC;
-              ElMatrix<REAL>        mMat;
+              ElMatrix<double_t>        mMat;
               bool                  mNormalize;
 };
 
@@ -2562,17 +2562,17 @@ class cEqVueLaserImage : public cObjFormel2Destroy
 {
 	public :
 		friend class cSetEqFormelles;
-		REAL AddAllEquations(std::vector<Pt3dr>,REAL aPds,REAL aTime=0);
+		double_t AddAllEquations(std::vector<Pt3dr>,double_t aPds,double_t aTime=0);
 	private:
 
-                ElRotation3D       CurRotPtsOfT(REAL aT);
+                ElRotation3D       CurRotPtsOfT(double_t aT);
                 void Update_0F2D();
 	        cEqVueLaserImage
 	        (
                         cRotationFormelle * aRotPts,
                         bool Multi,
                         bool Normal, // Si faux pas de normalisation Moy/Ect
-                        INT aNbPts,
+                        int aNbPts,
                         cLIParam_Image &,
                         cLIParam_Image &,
                         bool GenCode = false
@@ -2588,7 +2588,7 @@ class cEqVueLaserImage : public cObjFormel2Destroy
 		cIncListInterv     mLInterv;
 		cElCompiledFonc *  mFoncEq;
                 bool               mMulti;
-                REAL *             mAdrTimeRot;
+                double_t *             mAdrTimeRot;
                 bool               mNormalize;
 
 };
@@ -2599,7 +2599,7 @@ struct  cElemEqCorrelGrid
             cElemEqCorrelGrid
             (
 	         cSetEqFormelles & aSet,
-		 INT               aNum,
+		 int               aNum,
                  bool              GenCode
             );
 	    void InitAdr(cElCompiledFonc *,bool Im2MoyVar);
@@ -2628,21 +2628,21 @@ class cEqCorrelGrid  : public cObjFormel2Destroy
 {
 	public :
             friend class cSetEqFormelles;
-	    static std::string NameType(INT aNbPix,bool Im2MoyVar);
-	    cElemEqCorrelGrid & KthElem(INT aK);
+	    static std::string NameType(int aNbPix,bool Im2MoyVar);
+	    cElemEqCorrelGrid & KthElem(int aK);
             cElCompiledFonc * Fctr();
 	private :
 	    cEqCorrelGrid(const cEqCorrelGrid &); // Not Impl
 	    cEqCorrelGrid
             (
 	        cSetEqFormelles & aSet,
-	        INT aNbPix,
+	        int aNbPix,
 		bool Im2MoyVar,
 		bool GenCode
             );
 	    cSetEqFormelles &              mSet;
             cIncListInterv                 mLInterv;
-	    INT                            mNbPix;
+	    int                            mNbPix;
 	    std::vector<cElemEqCorrelGrid> mVPix;
 	    bool                           mIm2MoyVar;
 	    bool                           mGenCode;
@@ -2690,26 +2690,26 @@ class cGridIncImageMnt  : public cObjFormel2Destroy
 	     Fonc_Num  fSupI1I2();
 	     void SauvAll(const std::string & aPrefix);
 
-	     void OneStepEqCorrel(REAL aPds,INT aSzVgn,bool Im2Var,INT anEcart=1);
-	     void OneStepRegulD2 (REAL aPds);
-	     void OneStepRegulD1 (REAL aPds);
-	     void OneStepRapCur  (REAL aPds);
+	     void OneStepEqCorrel(double_t aPds,int aSzVgn,bool Im2Var,int anEcart=1);
+	     void OneStepRegulD2 (double_t aPds);
+	     void OneStepRegulD1 (double_t aPds);
+	     void OneStepRapCur  (double_t aPds);
 
 	     void SolveSys();
-	     void InitIncs(REAL);
-	     void SetEps(REAL);
+	     void InitIncs(double_t);
+	     void SetEps(double_t);
 
-             Im2D_REAL8   CurZ();
+             Im2D_double_t8   CurZ();
 
 	protected :
-	     inline REAL CurZ(Pt2di aP) const;
-	     inline REAL XHomZ0(Pt2di aP) const;
-	     inline REAL YHomZ0(Pt2di aP) const;
-	     inline REAL Hom_dXdZ(Pt2di aP) const;
-	     inline REAL Hom_dYdZ(Pt2di aP) const;
+	     inline double_t CurZ(Pt2di aP) const;
+	     inline double_t XHomZ0(Pt2di aP) const;
+	     inline double_t YHomZ0(Pt2di aP) const;
+	     inline double_t Hom_dXdZ(Pt2di aP) const;
+	     inline double_t Hom_dYdZ(Pt2di aP) const;
 	     inline Pt2dr  HomOfZ0(Pt2di aP) const;
 	     inline Pt2dr DerZ(Pt2di aP) const;
-	     inline Pt2dr HomOfZ(Pt2di aP,REAL aZ) const;
+	     inline Pt2dr HomOfZ(Pt2di aP,double_t aZ) const;
 	     inline Pt2dr HomOfCurZ(Pt2di aP) const;
 
 	     void SetSizeGeom();
@@ -2717,36 +2717,36 @@ class cGridIncImageMnt  : public cObjFormel2Destroy
 
 
 	     Pt2di        mSzI1;
-             Im2D_REAL8   mCurZ;
-	     REAL8 **     mDCurZ;
+             Im2D_double_t8   mCurZ;
+	     double_t8 **     mDCurZ;
 
-             Im2D_REAL4   mXHomZ0;
-	     REAL4 **     mDXHomZ0;
-             Im2D_REAL4   mYHomZ0;
-	     REAL4 **     mDYHomZ0;
+             Im2D_double_t4   mXHomZ0;
+	     double_t4 **     mDXHomZ0;
+             Im2D_double_t4   mYHomZ0;
+	     double_t4 **     mDYHomZ0;
 
-             Im2D_REAL4   mHom_dXdZ;
-	     REAL4 **     mDHom_dXdZ;
-             Im2D_REAL4   mHom_dYdZ;
-	     REAL4 **     mDHom_dYdZ;
+             Im2D_double_t4   mHom_dXdZ;
+	     double_t4 **     mDHom_dXdZ;
+             Im2D_double_t4   mHom_dYdZ;
+	     double_t4 **     mDHom_dYdZ;
 
-             Im2D_U_INT1  mIm1;
-	     U_INT1 **    mDIm1;
+             Im2D_U_int1  mIm1;
+	     U_int1 **    mDIm1;
 
 	     Pt2di        mSzI2;
-             Im2D_U_INT1  mIm2;
-	     U_INT1 **    mDIm2;
+             Im2D_U_int1  mIm2;
+	     U_int1 **    mDIm2;
 
-             Im2D_REAL4   mI2G1;
-	     REAL4 **     mDI2G1;
-             Im2D_REAL4   mDi2g1Dz;
-	     REAL4 **     mDDi2g1Dz;
-             Im2D_U_INT1  mOK;
-             U_INT1 **    mDOK;
+             Im2D_double_t4   mI2G1;
+	     double_t4 **     mDI2G1;
+             Im2D_double_t4   mDi2g1Dz;
+	     double_t4 **     mDDi2g1Dz;
+             Im2D_U_int1  mOK;
+             U_int1 **    mDOK;
  
 	     cSetEqFormelles  * pSetIncs;
-	     Im2D_INT4          mNumsZInc;
-	     INT4 **            mDNZI;
+	     Im2D_int4          mNumsZInc;
+	     int4 **            mDNZI;
 
 	     cElCompiledFonc * pRegD1;
 	     cElCompiledFonc * pRegD2;
@@ -2761,27 +2761,27 @@ class cEqFormelleLineaire
 	     friend class cSetEqFormelles;
 	     void AddEqNonIndexee
 		  (
-                        REAL Cste,
-                        REAL * Val,
-                        REAL aPds,
-                        const std::vector<INT>  & VIncs
+                        double_t Cste,
+                        double_t * Val,
+                        double_t aPds,
+                        const std::vector<int>  & VIncs
                    );
 	     void AddEqIndexee
 		  (
-                        REAL Cste,
-                        REAL * Val,
-                        REAL aPds,
-                        const std::vector<INT>  & VIncs
+                        double_t Cste,
+                        double_t * Val,
+                        double_t aPds,
+                        const std::vector<int>  & VIncs
                    );
 
 
      private :
 	     cEqFormelleLineaire(const cEqFormelleLineaire &); // NI
-	     cEqFormelleLineaire(cSetEqFormelles &,INT aNbInc,INT aNbVT,bool GenCode);
+	     cEqFormelleLineaire(cSetEqFormelles &,int aNbInc,int aNbVT,bool GenCode);
 	     static cAllocNameFromInt    TheNK;
 	     static std::string          TheNameCste;
 
-	     INT                         mNbInc;
+	     int                         mNbInc;
 	     cSetEqFormelles &           mSet;
 	     std::vector<cIncIntervale>  mIntervs;
 	     cIncListInterv              mLInterv;

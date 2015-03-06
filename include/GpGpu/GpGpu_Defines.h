@@ -10,11 +10,11 @@ typedef unsigned char pixel;
 #define NOPAGLOCKMEM false
 #define WARPSIZE    32
 #define SIZERING    2
-#define INTDEFAULT	-64
+#define intDEFAULT	-64
 #define SAMPLETERR	4
-#define INTERZ		8
+#define intERZ		8
 #define NEAREST		0
-#define LINEARINTER	1
+#define LINEARintER	1
 #define BICUBIC		2
 #define NSTREAM		1
 #define DISPLAYOUTPUT
@@ -157,16 +157,16 @@ void dump_variable(const char* var,const char* nameVariable)
 #define DUMPI(varname)  dump_Type(varname);
 
 
-//#define CUDA_DUMP_INT(varname) if(!threadIdx.x) printf("%s = %d\n", #varname, varname);
-//#define CUDA_DUMP_INT_ALL(varname) printf("%s = %d\n", #varname, varname);
+//#define CUDA_DUMP_int(varname) if(!threadIdx.x) printf("%s = %d\n", #varname, varname);
+//#define CUDA_DUMP_int_ALL(varname) printf("%s = %d\n", #varname, varname);
 
-//#define DUMP_UINT(varname) printf("%s = %u\n", #varname, varname);
-//#define DUMP_UINT2(varname) printf("%s = [%u,%u]\n", #varname, varname.x,varname.y);
-//#define DUMP_INT2(varname) printf("%s = [%d,%d]\n", #varname, varname.x,varname.y);
-//#define DUMP_INT(varname) printf("%s = %d\n", #varname, varname);
+//#define DUMP_Uint(varname) printf("%s = %u\n", #varname, varname);
+//#define DUMP_Uint2(varname) printf("%s = [%u,%u]\n", #varname, varname.x,varname.y);
+//#define DUMP_int2(varname) printf("%s = [%d,%d]\n", #varname, varname.x,varname.y);
+//#define DUMP_int(varname) printf("%s = %d\n", #varname, varname);
 //#define DUMP_FLOAT2(varname) printf("%s = [%f,%f]\n", #varname, varname.x,varname.y);
 //#define DUMP_FLOAT(varname) printf("%s = %f\n", #varname, varname);
-//#define DUMP_POINTER(varname) printf("%s = %p\n", #varname, varname);
+//#define DUMP_POintER(varname) printf("%s = %p\n", #varname, varname);
 #define DUMP_LINE printf("-----------------------------------\n");
 #define DUMP_END printf("\n");
 

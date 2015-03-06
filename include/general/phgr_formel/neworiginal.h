@@ -271,7 +271,7 @@ struct  cElemEqCorrelGrid
             cElemEqCorrelGrid
             (
 	         cSetEqFormelles & aSet,
-		 INT               aNum,
+		 int               aNum,
                  bool              GenCode
             );
 	    void InitAdr(cElCompiledFonc *,bool Im2MoyVar);

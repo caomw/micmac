@@ -117,6 +117,6 @@ Im2D_Bits<1> MasqImThom
         Box2di &
         );
 
-void ThomCorrigeCourrantObscur(Im2D_U_INT2,const Box2di&);
+void ThomCorrigeCourrantObscur(Im2D_U_int2,const Box2di&);
 
 #endif  //  _ELISE_FILEIM_H

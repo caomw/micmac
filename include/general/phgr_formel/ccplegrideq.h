@@ -8,8 +8,8 @@ class cCpleGridEq : public cNameSpaceEqF,
                     public cObjFormel2Destroy
 {
       public :
-          REAL AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,REAL aPds,bool WithD2);
-          REAL ResiduSigneP1P2(Pt2dr P1,Pt2dr P2); 
+          double_t AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,double_t aPds,bool WithD2);
+          double_t ResiduSigneP1P2(Pt2dr P1,Pt2dr P2); 
 
 	  void   GenCode();
 	  // static void   GenAllCode();

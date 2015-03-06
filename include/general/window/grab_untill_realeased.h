@@ -39,8 +39,8 @@ English :
 Header-MicMac-eLiSe-25/06/2007*/
 
 
-#ifndef _ELISE_GENERAL_WINDOW_GRAB_UNTILL_REALEASED_H
-#define _ELISE_GENERAL_WINDOW_GRAB_UNTILL_REALEASED_H
+#ifndef _ELISE_GENERAL_WINDOW_GRAB_UNTILL_double_tEASED_H
+#define _ELISE_GENERAL_WINDOW_GRAB_UNTILL_double_tEASED_H
 
 #include "general/sys_dep.h"
 

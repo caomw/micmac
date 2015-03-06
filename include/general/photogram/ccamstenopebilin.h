@@ -11,7 +11,7 @@ class cCamStenopeBilin : public CamStenope
 public :
     cCamStenopeBilin
     (
-            REAL Focale,
+            double_t Focale,
             Pt2dr Centre,
             const  cDistorBilin & aDBL
             );

@@ -19,11 +19,11 @@ template <class Type>  class ElPolynome
           Type &  operator[](int k);
           const Type &  operator[](int k) const;
           Type   at(int k) const;  // def = 0
-          INT degre() const {return (int) _coeff.size()-1;}
+          int degre() const {return (int) _coeff.size()-1;}
 
           ElPolynome();
-          ElPolynome(char *,INT degre);  // Arg 1 : bidon, pour eviter
-                                         // confusion avec ElPolynome(INT)
+          ElPolynome(char *,int degre);  // Arg 1 : bidon, pour eviter
+                                         // confusion avec ElPolynome(int)
           ElPolynome(const Type &);
           ElPolynome(const Type &,const Type &);
           ElPolynome(const Type &,const Type &,const Type &);
@@ -33,7 +33,7 @@ template <class Type>  class ElPolynome
           static ElPolynome FromRoots(const Type&,const Type&);
           static ElPolynome FromRoots(const Type&,const Type&,const Type&);
           static ElPolynome FromRoots(const Type&,const Type&,const Type&,const Type&);
-      friend void Reduce(ElPolynome<REAL> &); // Supprime les coeffs de degre haut nuls
+      friend void Reduce(ElPolynome<double_t> &); // Supprime les coeffs de degre haut nuls
 
      private :
           std::vector<Type> _coeff;

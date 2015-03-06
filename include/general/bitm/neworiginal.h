@@ -58,11 +58,11 @@ class cIm2DInter;
 
 inline int AdjUC(int aV)
 {
-   return El_CTypeTraits<U_INT1>::Tronque(aV);
+   return El_CTypeTraits<U_int1>::Tronque(aV);
 }
 inline int AdjUC(double aV)
 {
-   return El_CTypeTraits<U_INT1>::Tronque(round_ni(aV));
+   return El_CTypeTraits<U_int1>::Tronque(round_ni(aV));
 }
 
 
@@ -115,15 +115,15 @@ class Im2D_NoDataLin{};
 */
 
 
-typedef Im2D<U_INT1,INT>  Im2D_U_INT1;
-typedef Im2D<INT1,INT>    Im2D_INT1;
-typedef Im2D<U_INT2,INT>  Im2D_U_INT2;
-typedef Im2D<INT2,INT>    Im2D_INT2;
-typedef Im2D<INT4,INT>    Im2D_INT4;
+typedef Im2D<U_int1,int>  Im2D_U_int1;
+typedef Im2D<int1,int>    Im2D_int1;
+typedef Im2D<U_int2,int>  Im2D_U_int2;
+typedef Im2D<int2,int>    Im2D_int2;
+typedef Im2D<int4,int>    Im2D_int4;
 
-typedef Im2D<REAL4,REAL>  Im2D_REAL4;
-typedef Im2D<REAL8,REAL>  Im2D_REAL8;
-typedef Im2D<REAL16,REAL16> Im2D_REAL16;
+typedef Im2D<double_t4,double_t>  Im2D_double_t4;
+typedef Im2D<double_t8,double_t>  Im2D_double_t8;
+typedef Im2D<double_t16,double_t16> Im2D_double_t16;
 
 
 
@@ -145,14 +145,14 @@ GenIm alloc_im1d(GenIm::type_el type_el,int tx,void * data);
 
 class Im3D_WithDataLin{};
 
-typedef Im3D<U_INT1,INT>  Im3D_U_INT1;
-typedef Im3D<INT1,INT>    Im3D_INT1;
-typedef Im3D<U_INT2,INT>  Im3D_U_INT2;
-typedef Im3D<INT2,INT>    Im3D_INT2;
-typedef Im3D<INT4,INT>    Im3D_INT4;
+typedef Im3D<U_int1,int>  Im3D_U_int1;
+typedef Im3D<int1,int>    Im3D_int1;
+typedef Im3D<U_int2,int>  Im3D_U_int2;
+typedef Im3D<int2,int>    Im3D_int2;
+typedef Im3D<int4,int>    Im3D_int4;
 
-typedef Im3D<REAL4,REAL>  Im3D_REAL4;
-typedef Im3D<REAL8,REAL>  Im3D_REAL8;
+typedef Im3D<double_t4,double_t>  Im3D_double_t4;
+typedef Im3D<double_t8,double_t>  Im3D_double_t8;
 
 class Data_Liste_Pts_Gen;
 
@@ -161,27 +161,27 @@ template <class Type,class Type_Base> class Data_Liste_Pts;
 
 
 
-typedef Liste_Pts<U_INT1,INT>    Liste_Pts_U_INT1;
-typedef Liste_Pts<INT1,INT>      Liste_Pts_INT1;
-typedef Liste_Pts<U_INT2,INT>    Liste_Pts_U_INT2;
-typedef Liste_Pts<INT2,INT>      Liste_Pts_INT2;
-typedef Liste_Pts<INT4,INT>      Liste_Pts_INT4;
+typedef Liste_Pts<U_int1,int>    Liste_Pts_U_int1;
+typedef Liste_Pts<int1,int>      Liste_Pts_int1;
+typedef Liste_Pts<U_int2,int>    Liste_Pts_U_int2;
+typedef Liste_Pts<int2,int>      Liste_Pts_int2;
+typedef Liste_Pts<int4,int>      Liste_Pts_int4;
 
 
-typedef Liste_Pts<REAL4,REAL>      Liste_Pts_REAL4;
-typedef Liste_Pts<REAL8,REAL>      Liste_Pts_REAL8;
+typedef Liste_Pts<double_t4,double_t>      Liste_Pts_double_t4;
+typedef Liste_Pts<double_t8,double_t>      Liste_Pts_double_t8;
 
-extern Im1D_INT4  hongrois(Im2D_INT4 cost);
+extern Im1D_int4  hongrois(Im2D_int4 cost);
 
-void ALGOHONGR(Im2D_INT4,Im1D_INT4);
+void ALGOHONGR(Im2D_int4,Im1D_int4);
 
 
 extern void deriche_uc
      (
-           Im2D_REAL4  gx,
-           Im2D_REAL4  gy,
-           Im2D_U_INT1 i,
-           REAL4       alpha
+           Im2D_double_t4  gx,
+           Im2D_double_t4  gy,
+           Im2D_U_int1 i,
+           double_t4       alpha
      );
 
 
@@ -198,12 +198,12 @@ extern Im2DGen * Ptr_D2alloc_im2d(GenIm::type_el type_el,int tx,int ty);
 
 extern bool  type_im_integral(GenIm::type_el type_el);
 
-extern INT nbb_type_num(GenIm::type_el type_el);     // nb byte
+extern int nbb_type_num(GenIm::type_el type_el);     // nb byte
 extern bool msbf_type_num(GenIm::type_el type_el);   // is most signif first
 extern bool signed_type_num(GenIm::type_el type_el); // is it signed int
-extern GenIm::type_el type_u_int_of_nbb(INT nbb,bool msbf = true);
+extern GenIm::type_el type_u_int_of_nbb(int nbb,bool msbf = true);
 
-extern  GenIm::type_el type_im(bool intregral,INT nbb,bool Signed,bool msbf);
+extern  GenIm::type_el type_im(bool intregral,int nbb,bool Signed,bool msbf);
 extern  GenIm::type_el type_im(const std::string &);
 
 extern std::string eToString(const GenIm::type_el &);
@@ -211,20 +211,20 @@ extern std::string eToString(const GenIm::type_el &);
 extern std::string NamePlyOfType(GenIm::type_el);
 
 
-extern void min_max_type_num(GenIm::type_el,INT & v_min,INT &v_max);
+extern void min_max_type_num(GenIm::type_el,int & v_min,int &v_max);
 extern int  VCentrale_type_num(GenIm::type_el);
 
 Fonc_Num Tronque(GenIm::type_el,Fonc_Num);
 
 
-extern GenIm::type_el  type_of_ptr(const U_INT1 * );
-extern GenIm::type_el  type_of_ptr(const INT1   * );
-extern GenIm::type_el  type_of_ptr(const U_INT2 * );
-extern GenIm::type_el  type_of_ptr(const INT2   * );
-extern GenIm::type_el  type_of_ptr(const INT4   * );
-extern GenIm::type_el  type_of_ptr(const REAL4  * );
-extern GenIm::type_el  type_of_ptr(const REAL8  * );
-extern GenIm::type_el  type_of_ptr(const REAL16  * );
+extern GenIm::type_el  type_of_ptr(const U_int1 * );
+extern GenIm::type_el  type_of_ptr(const int1   * );
+extern GenIm::type_el  type_of_ptr(const U_int2 * );
+extern GenIm::type_el  type_of_ptr(const int2   * );
+extern GenIm::type_el  type_of_ptr(const int4   * );
+extern GenIm::type_el  type_of_ptr(const double_t4  * );
+extern GenIm::type_el  type_of_ptr(const double_t8  * );
+extern GenIm::type_el  type_of_ptr(const double_t16  * );
 
 
 template <class Type>  ElMatrix<Type> gaussj(const ElMatrix<Type>  & m);
@@ -233,22 +233,22 @@ template <class Type>  bool self_gaussj_svp(ElMatrix<Type>  & m);
 
 // Renvoie la liste des indices croissants de valeurs propres
 
-std::vector<int> jacobi(const ElMatrix<REAL>& aMatSym,ElMatrix<REAL>& aValP,
-            ElMatrix<REAL>& aVecP);
-std::vector<int> jacobi_diag(const ElMatrix<REAL>& aMatSym,ElMatrix<REAL>& aValP,
-                 ElMatrix<REAL>& aVecP);
+std::vector<int> jacobi(const ElMatrix<double_t>& aMatSym,ElMatrix<double_t>& aValP,
+            ElMatrix<double_t>& aVecP);
+std::vector<int> jacobi_diag(const ElMatrix<double_t>& aMatSym,ElMatrix<double_t>& aValP,
+                 ElMatrix<double_t>& aVecP);
 
 
-std::vector<int> jacobi(const ElMatrix<REAL16>& aMatSym,ElMatrix<REAL16>& aValP,
-            ElMatrix<REAL16>& aVecP);
-std::vector<int> jacobi_diag(const ElMatrix<REAL16>& aMatSym,ElMatrix<REAL16>& aValP,
-                 ElMatrix<REAL16>& aVecP);
+std::vector<int> jacobi(const ElMatrix<double_t16>& aMatSym,ElMatrix<double_t16>& aValP,
+            ElMatrix<double_t16>& aVecP);
+std::vector<int> jacobi_diag(const ElMatrix<double_t16>& aMatSym,ElMatrix<double_t16>& aValP,
+                 ElMatrix<double_t16>& aVecP);
 
 
-void svdcmp ( const ElMatrix<REAL> & aMat, ElMatrix<REAL> & anU,
-              ElMatrix<REAL> & aLineDiag, ElMatrix<REAL> & aV,bool direct);
-void svdcmp_diag ( const ElMatrix<REAL> & aMat, ElMatrix<REAL> & anU,
-              ElMatrix<REAL> & aDiag, ElMatrix<REAL> & aV,bool direct);
+void svdcmp ( const ElMatrix<double_t> & aMat, ElMatrix<double_t> & anU,
+              ElMatrix<double_t> & aLineDiag, ElMatrix<double_t> & aV,bool direct);
+void svdcmp_diag ( const ElMatrix<double_t> & aMat, ElMatrix<double_t> & anU,
+              ElMatrix<double_t> & aDiag, ElMatrix<double_t> & aV,bool direct);
 
 
 // L'"habituelle" decomposition QR,
@@ -260,11 +260,11 @@ std::pair<ElMatrix<double>, ElMatrix<double> > RQDecomp(const ElMatrix<double> &
 
 // Renvoie la rotation la + proche, selon un algo trouve dans Golub et base sur
 // la SVD
-ElMatrix<REAL>  NearestRotation(const ElMatrix<REAL> &);
+ElMatrix<double_t>  NearestRotation(const ElMatrix<double_t> &);
 
 
 //  Probleme de conditionnement
-void InspectPbCD(ElMatrix<REAL>);
+void InspectPbCD(ElMatrix<double_t>);
 
 // Calcule une rotation R tq R Antk = Imk;
 //   - algo : norme les vecteur
@@ -273,7 +273,7 @@ void InspectPbCD(ElMatrix<REAL>);
 
 
 
-ElMatrix<REAL> ComplemRotation
+ElMatrix<double_t> ComplemRotation
                (
                     const Pt3dr & anAnt1,
                     const Pt3dr & anAnt2,
@@ -300,14 +300,14 @@ void MakeRONWith1Vect(Pt3dr & aV1,Pt3dr & aV2,Pt3dr & aV3);
 // (la moins singuliere possible)
 // n'utilise pour ce faire que des vecteur de la base canonique
 
-void ComplBaseParLeHaut(ElMatrix<REAL> &,INT NbLigneOk);
+void ComplBaseParLeHaut(ElMatrix<double_t> &,int NbLigneOk);
 
 // FONCTION specifiques au M22, M33
 
-ElMatrix<REAL> DiffRotEn1Pt(REAL teta01,REAL teta02,REAL teta12,Pt3dr pt);
+ElMatrix<double_t> DiffRotEn1Pt(double_t teta01,double_t teta02,double_t teta12,Pt3dr pt);
 
 
-typedef TplElRotation3D<REAL> ElRotation3D;
+typedef TplElRotation3D<double_t> ElRotation3D;
 
    class cRepereCartesien;
 
@@ -344,8 +344,8 @@ template <class Type>  class ElPolynome;
 
 void  ElFFT
       (
-          Im2D_REAL8 aReIm,
-      Im2D_REAL8 aImIm,
+          Im2D_double_t8 aReIm,
+      Im2D_double_t8 aImIm,
       bool       aDirect
       );
 
@@ -354,25 +354,25 @@ void  ElFFT
       // Remplit la correlation dans Im1
 void  ElFFTCorrelCirc
       (
-           Im2D_REAL8 aReIm1,
-       Im2D_REAL8 aReIm2
+           Im2D_double_t8 aReIm1,
+       Im2D_double_t8 aReIm2
       );
 
      // meme chose  mais images
      // paddee avec suffisament de 0
      // pour ne pas avoir d'effets de bord
-Im2D_REAL8   ElFFTCorrelPadded
+Im2D_double_t8   ElFFTCorrelPadded
              (
-                  Im2D_REAL8 aReIm1,
-                  Im2D_REAL8 aReIm2
+                  Im2D_double_t8 aReIm1,
+                  Im2D_double_t8 aReIm2
              );
 
 
      // idem, mais normalisee centree;
      // anEpsilon est utilisee pour les divisions
 
-Im2D_REAL8   ElFFTCorrelNCPadded
-             (Im2D_REAL8 aReIm1,Im2D_REAL8 aReIm2,REAL anEps,REAL aSurfMin=-1) ;
+Im2D_double_t8   ElFFTCorrelNCPadded
+             (Im2D_double_t8 aReIm1,Im2D_double_t8 aReIm2,double_t anEps,double_t aSurfMin=-1) ;
 
            // Quand aSurfMin est >0, et que la surface  S
            // (ou Ponderation pour ElFFTPonderedCorrelNCPadded)
@@ -381,15 +381,15 @@ Im2D_REAL8   ElFFTCorrelNCPadded
 
 
       // Avec Ponderation
-Im2D_REAL8   ElFFTPonderedCorrelNCPadded
+Im2D_double_t8   ElFFTPonderedCorrelNCPadded
              (
                 Fonc_Num   aF1,
                 Fonc_Num   aF2,
                 Pt2di      aSz,
                 Fonc_Num   aPds1,
                 Fonc_Num   aPds2,
-                REAL       anEps,
-                REAL       aSurfMin = -1
+                double_t       anEps,
+                double_t       aSurfMin = -1
              );
 
 
@@ -401,13 +401,13 @@ Im2D_REAL8   ElFFTPonderedCorrelNCPadded
     __
 */
 
-REAL ImCorrFromNrFFT(Im2D_REAL8 anIm,Pt2di aDecIm1);
+double_t ImCorrFromNrFFT(Im2D_double_t8 anIm,Pt2di aDecIm1);
 
 // Les Images donnees pour effectuer le calcul
 // sont des images FFT
-Pt2di DecIm2DecFFT(Im2D_REAL8 anImFFT,Pt2di aDecIm1);
-Pt2di DecFFT2DecIm(Im2D_REAL8 anImFFT,Pt2di aP);
-Pt2d<Fonc_Num> FN_DecFFT2DecIm(Im2D_REAL8 anIm);
+Pt2di DecIm2DecFFT(Im2D_double_t8 anImFFT,Pt2di aDecIm1);
+Pt2di DecFFT2DecIm(Im2D_double_t8 anImFFT,Pt2di aP);
+Pt2d<Fonc_Num> FN_DecFFT2DecIm(Im2D_double_t8 anIm);
 
 
 
@@ -417,18 +417,18 @@ Pt2d<Fonc_Num> FN_DecFFT2DecIm(Im2D_REAL8 anIm);
    REMPLACE PAR cDbleGrid  dans "general/photogram.h"
 */
 
-void ShowMatr(const char * mes, ElMatrix<REAL> aMatr)  ;
+void ShowMatr(const char * mes, ElMatrix<double_t> aMatr)  ;
 
 
 /*******************************************************/
 /*                                                     */
-/*       NOYAU INTERPOLATEUR 1D                        */
+/*       NOYAU intERPOLATEUR 1D                        */
 /*                                                     */
 /*******************************************************/
 
 
 /*
-    REDEFINITION DES INTERPOLATEURS,  moins optimises mais plus
+    REDEFINITION DES intERPOLATEURS,  moins optimises mais plus
     generaux;
 
     cKernelInterpol  : Classe d'interface
@@ -471,28 +471,28 @@ void ShowMatr(const char * mes, ElMatrix<REAL> aMatr)  ;
 // arrondis)
 
 
-typedef cTplCIKTabul<U_INT1,INT>  cCIKTabul;
+typedef cTplCIKTabul<U_int1,int>  cCIKTabul;
 
 void FiltrageImage3D
      (
-           INT StepX,INT StepY, INT StepZ,
+           int StepX,int StepY, int StepZ,
        double *  Data,
-           INT    Tx, INT    Ty, INT    Tz
+           int    Tx, int    Ty, int    Tz
      );
 
 void NoyauxFiltrageImage3D
      (
-           INT StepX,INT StepY, INT StepZ,
+           int StepX,int StepY, int StepZ,
        double *  Data,
-           INT    Tx, INT    Ty, INT    Tz
+           int    Tx, int    Ty, int    Tz
      );
 
-Im2D_U_INT1  Shading
+Im2D_U_int1  Shading
              (
                   Pt2di    aSz,
                   Fonc_Num aFMnt,
-                  INT      aNbDir,
-                  REAL Anisotropie
+                  int      aNbDir,
+                  double_t Anisotropie
              );
 
 

@@ -55,7 +55,7 @@ class NROptF1vDer;
 class NROptF1vND
 {
      public :
-          virtual REAL NRF1v(REAL) = 0;
+          virtual double_t NRF1v(double_t) = 0;
           virtual bool NROptF1vContinue() const;
           virtual ~NROptF1vND();
           NROptF1vND(int aNbIterMax=-1);
@@ -65,7 +65,7 @@ class NROptF1vND
           // Golden search for mimimum
           //+++++++++++++++++++++++++++
 
-          REAL golden(REAL ax,REAL bx,REAL cx,REAL tol,REAL * xmin);
+          double_t golden(double_t ax,double_t bx,double_t cx,double_t tol,double_t * xmin);
 
           //+++++++++++++++++++++++++++
           // Brent search for mimimum
@@ -79,12 +79,12 @@ class NROptF1vND
           //++++++++++++++++++++++++++++++++++++++++++++++++
           // Van Wijngaarden-Deker-Brent search for root
           //++++++++++++++++++++++++++++++++++++++++++++++++
-          // REAL zbrent(REAL ax,REAL bx,REAL tol,INT ITMAX=100);
+          // double_t zbrent(double_t ax,double_t bx,double_t tol,int ITMAX=100);
 
 
                   // NR interface
-          void mnbrack( REAL *ax,REAL *bx,REAL *cx,
-                        REAL *fa,REAL * fb,REAL *fc
+          void mnbrack( double_t *ax,double_t *bx,double_t *cx,
+                        double_t *fa,double_t * fb,double_t *fc
                       );
      protected :
          int mNbIter;
@@ -96,12 +96,12 @@ class NROptF1vND
 
           // precondition :
           // f(ax) > f(bx), f(cx) > f(bx),  bx entre ax et cx 
-          virtual REAL PrivBrent
+          virtual double_t PrivBrent
                   (
-                    REAL ax,REAL bx,REAL cx,
-                    REAL tol,
-                    REAL * xmin,
-                    INT ITMAX=100
+                    double_t ax,double_t bx,double_t cx,
+                    double_t tol,
+                    double_t * xmin,
+                    int ITMAX=100
                );
 
 };
@@ -111,7 +111,7 @@ class NROptF1vND
 class NROptF1vDer : public NROptF1vND
 {
      public :
-          virtual REAL DerNRF1v(REAL) = 0;
+          virtual double_t DerNRF1v(double_t) = 0;
 
           //+++++++++++++++++++++++++++
           // Brent search for minimum
@@ -122,15 +122,15 @@ class NROptF1vDer : public NROptF1vND
           // Van Wijngaarden-Deker-Brent recherche de racines
           // en utilisant les derivees
           //++++++++++++++++++++++++++++++++++++++++++++++++
-          REAL rtsafe(REAL ax,REAL bx,REAL tol,INT ITMAX=100);
+          double_t rtsafe(double_t ax,double_t bx,double_t tol,int ITMAX=100);
 
      private :
-          REAL PrivBrent  // Retourne la valeur de F au min
+          double_t PrivBrent  // Retourne la valeur de F au min
                (
-                   REAL ax,REAL bx,REAL cx,
-                   REAL tol,
-                   REAL * xmin,  // retourne xmin
-                   INT ITMAX=100
+                   double_t ax,double_t bx,double_t cx,
+                   double_t tol,
+                   double_t * xmin,  // retourne xmin
+                   int ITMAX=100
                );
 };
 
@@ -139,19 +139,19 @@ template <class Type> class FoncNVarND
 {
     public :
 
-       FoncNVarND(INT NbVar);
+       FoncNVarND(int NbVar);
        virtual ~FoncNVarND();
 
-       virtual REAL ValFNV(const Type *  v) = 0;
-       INT NbVar() const;
-       INT powel(Type *,REAL ftol,INT ITMAX = 200);
+       virtual double_t ValFNV(const Type *  v) = 0;
+       int NbVar() const;
+       int powel(Type *,double_t ftol,int ITMAX = 200);
 
     protected :
 
-       const INT           _NbVar;
+       const int           _NbVar;
 
-       inline REAL NRValFNV(const Type *);  // Just Recall ValFNV with NR convention
-       void powel(Type *,REAL ftol,int *iter,REAL * fret,INT ITMAX = 200);
+       inline double_t NRValFNV(const Type *);  // Just Recall ValFNV with NR convention
+       void powel(Type *,double_t ftol,int *iter,double_t * fret,int ITMAX = 200);
 };
 
 template <class Type> class  FoncNVarDer : public FoncNVarND<Type>
@@ -159,13 +159,13 @@ template <class Type> class  FoncNVarDer : public FoncNVarND<Type>
     public :
        virtual void GradFNV(Type *grad,const Type *   v) = 0;
 
-       FoncNVarDer(INT NbVar);
-       INT GradConj(Type *p,REAL ftol,INT ITMAX);
+       FoncNVarDer(int NbVar);
+       int GradConj(Type *p,double_t ftol,int ITMAX);
 
 
     protected :
        void NRGradFNV(const Type *,Type *);  // Just Recall ValFNV
-       void GradConj(Type *p,REAL ftol,INT *iter,REAL *fret,INT ITMAX);
+       void GradConj(Type *p,double_t ftol,int *iter,double_t *fret,int ITMAX);
 
 };
 
@@ -175,36 +175,36 @@ class GaussjPrec
 {
       public :
 
-          GaussjPrec(INT n,INT m);
+          GaussjPrec(int n,int m);
           bool init_rec();
           void amelior_sol();
-          REAL ecart() const;
-          REAL ecart_inv() const;
+          double_t ecart() const;
+          double_t ecart_inv() const;
           void set_size_nm(int n,int m);
           void set_size_m(int);
 
-          ElMatrix<REAL> & M()     {return _M;}
-          ElMatrix<REAL> & b()     {return _b;}
-          ElMatrix<REAL> & Minv()  {return _Minv;}
-          ElMatrix<REAL> & x ()    {return _x;}
+          ElMatrix<double_t> & M()     {return _M;}
+          ElMatrix<double_t> & b()     {return _b;}
+          ElMatrix<double_t> & Minv()  {return _Minv;}
+          ElMatrix<double_t> & x ()    {return _x;}
 
 
-          void SelfSetMatrixInverse(ElMatrix<REAL> & aM,INT aNbIter);
+          void SelfSetMatrixInverse(ElMatrix<double_t> & aM,int aNbIter);
 
       private :
 
       // resoud _M * _x = _b
           void set_ecart();
 
-          INT            _n;
-          INT            _m;
+          int            _n;
+          int            _m;
 
-          ElMatrix<REAL> _M;
-          ElMatrix<REAL> _Minv;
-          ElMatrix<REAL> _b;
-          ElMatrix<REAL> _x;
-          ElMatrix<REAL> _eps;
-          ElMatrix<REAL> _ec;
+          ElMatrix<double_t> _M;
+          ElMatrix<double_t> _Minv;
+          ElMatrix<double_t> _b;
+          ElMatrix<double_t> _x;
+          ElMatrix<double_t> _eps;
+          ElMatrix<double_t> _ec;
 };                
 
 class AllocateurDInconnues;
@@ -227,33 +227,33 @@ class AllocateurDInconnues
         void AssertUsable(const cStateAllocI &) const;
         void RestoreState(const cStateAllocI &);
         AllocateurDInconnues();
-        Fonc_Num        NewF(REAL *);
-        INT             NewInc(REAL *);
-        Pt3d<Fonc_Num>  NewPt3(REAL *,REAL*,REAL*);
+        Fonc_Num        NewF(double_t *);
+        int             NewInc(double_t *);
+        Pt3d<Fonc_Num>  NewPt3(double_t *,double_t*,double_t*);
         Pt3d<Fonc_Num>            NewPt3(Pt3dr &);
-        Pt2d<Fonc_Num>            NewPt2(REAL*,REAL*);
+        Pt2d<Fonc_Num>            NewPt2(double_t*,double_t*);
         Pt2d<Fonc_Num>            NewPt2(Pt2dr &);
 
         std::vector<Fonc_Num>            NewVectInc(std::vector<double> &);
 
-        TplElRotation3D<Fonc_Num> NewRot(REAL *,REAL*,REAL*,REAL *,REAL*,REAL*);
-        INT CurInc() const;
+        TplElRotation3D<Fonc_Num> NewRot(double_t *,double_t*,double_t*,double_t *,double_t*,double_t*);
+        int CurInc() const;
 
 	PtsKD PInits();
-	void SetVars(const REAL * aSol);
-	double  GetVar(INT aK) const;
-	double * GetAdrVar(INT aK);
-	void  SetVar(double aVal,INT aK);
-	void  SetVarPt(Pt2dr  aVal,INT aK);
-	REAL * ValsVar();
-        void Reinit(INT aK);
+	void SetVars(const double_t * aSol);
+	double  GetVar(int aK) const;
+	double * GetAdrVar(int aK);
+	void  SetVar(double aVal,int aK);
+	void  SetVarPt(Pt2dr  aVal,int aK);
+	double_t * ValsVar();
+        void Reinit(int aK);
 
       private :
-	void PushVar(REAL *);
-	std::vector<REAL *>  mAdrVar;
-	std::vector<REAL  >  mValsVar;
-        INT GetNewInc();
-        INT mIdInc;
+	void PushVar(double_t *);
+	std::vector<double_t *>  mAdrVar;
+	std::vector<double_t  >  mValsVar;
+        int GetNewInc();
+        int mIdInc;
         AllocateurDInconnues (const AllocateurDInconnues &);
         void operator = (const AllocateurDInconnues &);
 };
@@ -272,15 +272,15 @@ class ElGrowingSetInd
      public :
          // Partie typedef
 
-            typedef INT key_type;
-            typedef INT value_type;
-            typedef std::vector<INT>::const_iterator const_iterator;
+            typedef int key_type;
+            typedef int value_type;
+            typedef std::vector<int>::const_iterator const_iterator;
 
          // "Big Three"
             ElGrowingSetInd
             (
-                 INT aCapa, 
-                 REAL aRatioEncombr = 0.1 // Pour dimensionner mIndexes, Pas Fondamental.
+                 int aCapa, 
+                 double_t aRatioEncombr = 0.1 // Pour dimensionner mIndexes, Pas Fondamental.
             );
             ~ElGrowingSetInd();
             /// ElGrowingSetInd(const ElGrowingSetInd &); => en private, non implante
@@ -293,7 +293,7 @@ class ElGrowingSetInd
 
          // Partie set classique
             void clear();
-            void insert(const INT&) ;
+            void insert(const int&) ;
             int size() const;
 
 
@@ -302,16 +302,16 @@ class ElGrowingSetInd
          */
 
      private :
-         inline void AssertValideIndexe(INT anIndexe) const;
-         inline bool PrivMember(INT anIndexe) const;
-         inline void PrivSet(INT anIndexe,bool) ;
+         inline void AssertValideIndexe(int anIndexe) const;
+         inline bool PrivMember(int anIndexe) const;
+         inline void PrivSet(int anIndexe,bool) ;
          ElGrowingSetInd(const ElGrowingSetInd &);  // Non implante
 
-         INT         mCapa;
-         std::vector<INT>  mIndexes;
+         int         mCapa;
+         std::vector<int>  mIndexes;
          Im2D_Bits<1>      mBuzyIndexes;
 
-         // void erase(const INT&);  a definir dans une classe derivee, "non growing"
+         // void erase(const int&);  a definir dans une classe derivee, "non growing"
 };
 
 class ElSignedGrowingSetInd 
@@ -334,7 +334,7 @@ class cElMatCreuseGen
 
         // true si sait inverser non iterativement (cas cholesky),
        // Defaut false
-        virtual bool DirectInverse(const tSysCho *,tSysCho *);
+        virtual bool DirectInverse(const double_t *,double_t *);
 
       //========= Optimisations possibles =======================
 
@@ -346,7 +346,7 @@ class cElMatCreuseGen
 
                  // Optimise , defaut erreur
          virtual void Indexee_EcrireDansMatrWithQuad
-	      (   ElMatrix<tSysCho> &aMatr,
+	      (   ElMatrix<double_t> &aMatr,
                   const std::vector<cSsBloc> &  aVx,
                   const std::vector<cSsBloc> &  aVy
               )   const;
@@ -354,8 +354,8 @@ class cElMatCreuseGen
         virtual void SoutraitProduc3x3
                      (
                           bool                   Sym,
-                          ElMatrix<tSysCho> &aM1,
-                          ElMatrix<tSysCho> &aM2,
+                          ElMatrix<double_t> &aM1,
+                          ElMatrix<double_t> &aM2,
                           const std::vector<cSsBloc> * aYVSB
                      );
          virtual void Indexee_QuadSet0 (const std::vector<cSsBloc> & aVIndx,
@@ -366,7 +366,7 @@ class cElMatCreuseGen
                         const std::vector<cSsBloc> * aVSB,
                         double *  FullCoeff,
                         int aNbTot,
-			REAL aPds,tSysCho * aDataLin,REAL aB);
+			double_t aPds,double_t * aDataLin,double_t aB);
 
          //=====================================
 
@@ -380,52 +380,52 @@ class cElMatCreuseGen
                       const  std::vector<int> &              I2Bloc
                 );
 
-	 static cElMatCreuseGen * StdNewOne(INT aNbCol,INT aNbLign,bool Fixe);
+	 static cElMatCreuseGen * StdNewOne(int aNbCol,int aNbLign,bool Fixe);
 	 virtual ~cElMatCreuseGen();
 
-         virtual void  MulVect(tSysCho * out,const tSysCho * in) const = 0;
-         // virtual void  tMulVect(REAL * out,const REAL * in) const = 0;
-         Im1D<tSysCho,tSysCho> MulVect(Im1D<tSysCho,tSysCho>) const;
+         virtual void  MulVect(double_t * out,const double_t * in) const = 0;
+         // virtual void  tMulVect(double_t * out,const double_t * in) const = 0;
+         Im1D<double_t,double_t> MulVect(Im1D<double_t,double_t>) const;
          void  MulVect8(double * out,const double * in) ;
 
-	 void AddElem(INT aX,INT aY,REAL);
+	 void AddElem(int aX,int aY,double_t);
 
 
-	 virtual tSysCho   LowGetElem(INT aX,INT aY) const =0;
-	 virtual void    LowSetElem(INT aX,INT aY,const tSysCho &) =0;
+	 virtual double_t   LowGetElem(int aX,int aY) const =0;
+	 virtual void    LowSetElem(int aX,int aY,const double_t &) =0;
 
 
 
-	 void LowAddElem(INT aX,INT aY,REAL) ;
+	 void LowAddElem(int aX,int aY,double_t) ;
 
 	 virtual void Reset()= 0; // Remet tous les elements a 0
 
 	 virtual void AddLineInd
 		      (
-		          INT aKY,
-		          INT aY,
-			  REAL aCyP,
-			  const std::vector<INT> & aVInd,
-			  REAL * aCoeff
+		          int aKY,
+		          int aY,
+			  double_t aCyP,
+			  const std::vector<int> & aVInd,
+			  double_t * aCoeff
 		      );
-	 virtual void SetOffsets(const std::vector<INT> & aVIndexes);
+	 virtual void SetOffsets(const std::vector<int> & aVIndexes);
 	 virtual void   EqMatIndexee
                         (
-                           const std::vector<INT> & aVInd,
-		           REAL aPds,REAL ** aMat
+                           const std::vector<int> & aVInd,
+		           double_t aPds,double_t ** aMat
                         );
           virtual void PrecCondQuad(double *); // Def erreur
 
           virtual void PrepPreCond();
           virtual void  VPCDo(double * out,double * in);
       protected :
-         cElMatCreuseGen(bool OptSym,INT aNbCol,INT aNbLign);
+         cElMatCreuseGen(bool OptSym,int aNbCol,int aNbLign);
       // private :
 
          bool mOptSym;
-         INT  mNbCol;
-         INT  mNbLig;
-	 Im1D_REAL8         mDiagPreCond;
+         int  mNbCol;
+         int  mNbLig;
+	 Im1D_double_t8         mDiagPreCond;
          double *           mDDPrec;
 };
 
@@ -466,7 +466,7 @@ class cGenSysSurResol
 {
      public :
 
-           ElMatrix<tSysCho>  MatQuad() const;
+           ElMatrix<double_t>  MatQuad() const;
 
           virtual double CoeffNorm() const;
 
@@ -474,8 +474,8 @@ class cGenSysSurResol
           void VerifGlob(const std::vector<cSsBloc> &,bool doCheck,bool doSVD,bool doV0);
           void BasicVerifMatPos(const std::vector<cSsBloc> &,int );
 
-          void VerifMatPos(ElMatrix<tSysCho>,ElMatrix<tSysCho>  aLambda,cTestPbChol & aTPC,const std::vector<cSsBloc> &);
-          void VerifMatPos(const ElMatrix<tSysCho> & ,const ElMatrix<tSysCho> & aLambda,cTestPbChol & aTPC,const std::vector<cSsBloc> &,const std::vector<cSsBloc> &);
+          void VerifMatPos(ElMatrix<double_t>,ElMatrix<double_t>  aLambda,cTestPbChol & aTPC,const std::vector<cSsBloc> &);
+          void VerifMatPos(const ElMatrix<double_t> & ,const ElMatrix<double_t> & aLambda,cTestPbChol & aTPC,const std::vector<cSsBloc> &,const std::vector<cSsBloc> &);
 
  // Mode 0 =  Null ou non   *-
          void ShowGSR(int aMode);
@@ -483,9 +483,9 @@ class cGenSysSurResol
          virtual void VerifGSS(const std::string & aMes) ;
 
          bool  OptSym() const;
-         virtual void AddOneBloc(const cSsBloc &,const cSsBloc &, REAL aPds,REAL * aCoeff);
-         virtual void AddOneBlocDiag(const cSsBloc &, REAL aPds,REAL * aCoeff);
-         virtual void AddOneBlocCste(const cSsBloc &, REAL aPds,REAL * aCoeff,REAL aB);
+         virtual void AddOneBloc(const cSsBloc &,const cSsBloc &, double_t aPds,double_t * aCoeff);
+         virtual void AddOneBlocDiag(const cSsBloc &, double_t aPds,double_t * aCoeff);
+         virtual void AddOneBlocCste(const cSsBloc &, double_t aPds,double_t * aCoeff,double_t aB);
 
 
         // void toto(const std::vector<cSsBloc>  &);
@@ -493,15 +493,15 @@ class cGenSysSurResol
          virtual ~cGenSysSurResol();
          cGenSysSurResol(bool CstrAssumed,bool OptSym,bool GereNonSym,bool GereBloc);
 
-         Im1D_REAL8  GSSR_Solve(bool * aResOk) ;
+         Im1D_double_t8  GSSR_Solve(bool * aResOk) ;
          void GSSR_Reset(bool WithCstr) ;
 
      //           aPds (aCoeff . X = aB) 
          void GSSR_AddNewEquation 
               (
-                   REAL aPds,
-                   REAL * aCoeff,
-                   REAL aB,
+                   double_t aPds,
+                   double_t * aCoeff,
+                   double_t aB,
                    double * aCoordCur  // Pour les contra univ, peut etre NULL
                );
 
@@ -509,15 +509,15 @@ class cGenSysSurResol
      //   en Ax et B de la forme
      //       Ax* Xi + B = Yi
      //   Typiquement pour fitter une droite
-	void GSSR_Add_EqFitDroite(REAL aXi,REAL aYi,REAL aPds=1.0);
-	void GSSR_SolveEqFitDroite(REAL & aAx,REAL &aB,bool * Ok=0);
+	void GSSR_Add_EqFitDroite(double_t aXi,double_t aYi,double_t aPds=1.0);
+	void GSSR_SolveEqFitDroite(double_t & aAx,double_t &aB,bool * Ok=0);
 
      //  Pour resoudre, de maniere  simplifiee, une equation 
      //   en Ax et By et C de la forme
      //       Ax* Xi + By * Yi + C = Zi
      //   Typiquement pour fitter un plan
-	void GSSR_Add_EqFitPlan(REAL aXi,REAL aYi,REAL aZi,REAL aPds=1.0);
-	void GSSR_SolveEqFitPlan(REAL & aAx,REAL &aB,REAL & aC,bool * Ok=0);
+	void GSSR_Add_EqFitPlan(double_t aXi,double_t aYi,double_t aZi,double_t aPds=1.0);
+	void GSSR_SolveEqFitPlan(double_t & aAx,double_t &aB,double_t & aC,bool * Ok=0);
 
 
      // Pour calculer des pseudo-intersection de droite ou de plan 3D
@@ -527,10 +527,10 @@ class cGenSysSurResol
 	 //  Ajoute une contrainte, sous la forme aC. X = aE 
 	 //  sous laquelle sera resolu le systeme
 	 //  L'ensemble des contrainte doit forme un systeme libre
-         // void GSSR_AddContrainte (REAL * aC,REAL aE);
-         void GSSR_AddContrainteIndexee (const std::vector<int> & aVI,REAL * aC,REAL aE);
+         // void GSSR_AddContrainte (double_t * aC,double_t aE);
+         void GSSR_AddContrainteIndexee (const std::vector<int> & aVI,double_t * aC,double_t aE);
 
-	 virtual INT NbVar() const = 0;
+	 virtual int NbVar() const = 0;
 
 	 // Renvoie true, deviendra virtuelle
 	 virtual bool  	AcceptContrainteNonUniV() const;
@@ -545,9 +545,9 @@ class cGenSysSurResol
 	 virtual bool GSSR_UseEqMatIndexee();
 	 void GSSR_EqMatIndexee
                       (
-                           const std::vector<INT> & aVInd,
-		           REAL aPds,REAL ** aMat,
-			   REAL * aVect,REAL aCste
+                           const std::vector<int> & aVInd,
+		           double_t aPds,double_t ** aMat,
+			   double_t * aVect,double_t aCste
                       );
 
 
@@ -555,43 +555,43 @@ class cGenSysSurResol
 	 void GSSR_AddNewEquation_Indexe( const std::vector<cSsBloc> *aVSB,
                                           double *  FullCoeff,
                                           int aNbTot,
-                                          const std::vector<INT> & aVInd ,
-			                REAL aPds,REAL * aCoeff,REAL aB);
+                                          const std::vector<int> & aVInd ,
+			                double_t aPds,double_t * aCoeff,double_t aB);
          // GSSR_AddNewEquation_Indexe fait des pretraitement de prise en compte des contraintes
          // qu'on ne doit pas faire toujours
 	 void Basic_GSSR_AddNewEquation_Indexe(
                                         const std::vector<cSsBloc> * aVSB,
                                         double *  FullCoeff,
                                         int aNbTot,
-                                        const std::vector<INT> & aVInd ,
-			                REAL aPds,REAL * aCoeff,REAL aB);
+                                        const std::vector<int> & aVInd ,
+			                double_t aPds,double_t * aCoeff,double_t aB);
 
          // Def = Erreur fatale, n'a pas de sens pout systeme L1
-         virtual tSysCho   GetElemQuad(int i,int j) const;
-         virtual void  SetElemQuad(int i,int j,const tSysCho& );
-         virtual tSysCho  GetElemLin(int i) const;
-         virtual void  SetElemLin(int i,const tSysCho& ) ;
+         virtual double_t   GetElemQuad(int i,int j) const;
+         virtual void  SetElemQuad(int i,int j,const double_t& );
+         virtual double_t  GetElemLin(int i) const;
+         virtual void  SetElemLin(int i,const double_t& ) ;
 
 	 // Pour ces 4 Fon, Def, utilise GetElemQuad-GetElemLin
 
 /*
          virtual void Indexee_EcrireDansMatrColWithLin
-	      (ElMatrix<double> &aMatr,const std::vector<INT> & aVInd) const;
+	      (ElMatrix<double> &aMatr,const std::vector<int> & aVInd) const;
 */
          virtual void Indexee_EcrireDansMatrWithQuad
-	      (  ElMatrix<tSysCho> &aMatr,
-	         const std::vector<INT> & aVIndx,
-		 const std::vector<INT> & aVIndy
+	      (  ElMatrix<double_t> &aMatr,
+	         const std::vector<int> & aVIndx,
+		 const std::vector<int> & aVIndy
               )   const;
-         virtual void Indexee_LinSet0  (const std::vector<INT> & aVInd);
-         virtual void Indexee_QuadSet0 (const std::vector<INT> & aVIndx,
-	                                const std::vector<INT> & aVIndy);
+         virtual void Indexee_LinSet0  (const std::vector<int> & aVInd);
+         virtual void Indexee_QuadSet0 (const std::vector<int> & aVIndx,
+	                                const std::vector<int> & aVIndy);
 
 
          virtual void Indexee_EcrireDansMatrColWithLin
-	      (ElMatrix<tSysCho> &aMatr,const std::vector<cSsBloc> &  aVx) const;
+	      (ElMatrix<double_t> &aMatr,const std::vector<cSsBloc> &  aVx) const;
          virtual void Indexee_EcrireDansMatrWithQuad
-	      (   ElMatrix<tSysCho> &aMatr,
+	      (   ElMatrix<double_t> &aMatr,
                   const std::vector<cSsBloc> &  aVx,
                   const std::vector<cSsBloc> &  aVy
               )   const;
@@ -604,31 +604,31 @@ class cGenSysSurResol
 
 
          virtual void Indexee_UpdateLinWithMatrCol
-	      (const ElMatrix<tSysCho> &aMatr,const std::vector<INT> & aVInd);
+	      (const ElMatrix<double_t> &aMatr,const std::vector<int> & aVInd);
          virtual void Indexee_UpdateQuadWithMatr
-	      (  const ElMatrix<tSysCho> &aMatr,
-	         const std::vector<INT> & aVIndx,
-		 const std::vector<INT> & aVIndy
+	      (  const ElMatrix<double_t> &aMatr,
+	         const std::vector<int> & aVIndx,
+		 const std::vector<int> & aVIndy
               )  ;
 
          virtual void Indexee_SoustraitMatrColInLin
-	      (const ElMatrix<tSysCho> &aMatr,const std::vector<cSsBloc> & aVInd);
+	      (const ElMatrix<double_t> &aMatr,const std::vector<cSsBloc> & aVInd);
          virtual void Indexee_SoustraitMatrInQuad
-	      (  const ElMatrix<tSysCho> &aMatr,
-	         const std::vector<INT> & aVIndx,
-		 const std::vector<INT> & aVIndy
+	      (  const ElMatrix<double_t> &aMatr,
+	         const std::vector<int> & aVIndx,
+		 const std::vector<int> & aVIndy
               )  ;
 
         virtual void SoutraitProduc3x3
                      (
                           bool                   Sym,
-                          ElMatrix<tSysCho> &aM1,
-                          ElMatrix<tSysCho> &aM2,
+                          ElMatrix<double_t> &aM1,
+                          ElMatrix<double_t> &aM2,
                           const std::vector<cSsBloc> * aYVSB
                      );
          
 
-         virtual void Indexee_QuadSetId (const std::vector<INT> & aVIndxy);
+         virtual void Indexee_QuadSetId (const std::vector<int> & aVIndxy);
 
          void  SetPhaseEquation(const std::vector<int> *);
 
@@ -636,9 +636,9 @@ class cGenSysSurResol
      protected :
 	 virtual void V_GSSR_EqMatIndexee
                       (
-                           const std::vector<INT> & aVInd,
-		           REAL aPds,REAL ** aMat,
-			   REAL * aVect,REAL aCste
+                           const std::vector<int> & aVInd,
+		           double_t aPds,double_t ** aMat,
+			   double_t * aVect,double_t aCste
                       );
 	 // Def = erreur fatale
 	 virtual void V_GSSR_AddNewEquation_Indexe
@@ -646,13 +646,13 @@ class cGenSysSurResol
                         const std::vector<cSsBloc> * aVSB,
                         double *  FullCoeff,
                         int aNbTot,
-                        const std::vector<INT> & aVInd ,
-			REAL aPds,REAL * aCoeff,REAL aB);
+                        const std::vector<int> & aVInd ,
+			double_t aPds,double_t * aCoeff,double_t aB);
  
-         virtual Im1D_REAL8  V_GSSR_Solve(bool * aResOk) = 0;
+         virtual Im1D_double_t8  V_GSSR_Solve(bool * aResOk) = 0;
          virtual void V_GSSR_Reset() = 0;
          virtual void V_GSSR_AddNewEquation
-		      (REAL aPds,REAL * aCoeff,REAL aB) = 0;
+		      (double_t aPds,double_t * aCoeff,double_t aB) = 0;
 
 
          bool  mCstrAssumed;
@@ -669,17 +669,17 @@ class cGenSysSurResol
 
 
 
-	 INT   mNbContrainte;
-	 INT   mLineCC;
+	 int   mNbContrainte;
+	 int   mLineCC;
 //  Gestion des contraintes, ancienne mode
-	 ElMatrix<REAL> mC;
-	 ElMatrix<REAL> mE;
-	 ElMatrix<REAL> mtL;
-	 ElMatrix<REAL> mtLC;
-	 ElMatrix<REAL> mtLCE;
+	 ElMatrix<double_t> mC;
+	 ElMatrix<double_t> mE;
+	 ElMatrix<double_t> mtL;
+	 ElMatrix<double_t> mtLC;
+	 ElMatrix<double_t> mtLCE;
 
-	 ElMatrix<REAL> mSol;
-	 ElMatrix<REAL> mCSol;
+	 ElMatrix<double_t> mSol;
+	 ElMatrix<double_t> mCSol;
 
          GaussjPrec     mGP;
 // Gestion des contraintes , nouvelle prise en compte specifique des contraintes
@@ -687,24 +687,24 @@ class cGenSysSurResol
          bool        mNewCstrIsInit;
          bool        mNewCstrIsTraitee;
          bool        mUseSpeciCstrUniVar;  // a priori tjs true, false permet de revenir en arriere
-         Im1D_REAL8  mValCstr;
+         Im1D_double_t8  mValCstr;
          double *    mDValCstr;
-         Im1D_U_INT1 mIsCstr;
-         U_INT1 *    mDIsCstr;
+         Im1D_U_int1 mIsCstr;
+         U_int1 *    mDIsCstr;
 };
 
 
 class cVectMatMul
 {
     public :
-       virtual void VMMDo(Im1D_REAL8 in,Im1D_REAL8 out) = 0;
+       virtual void VMMDo(Im1D_double_t8 in,Im1D_double_t8 out) = 0;
        virtual ~cVectMatMul();
 };
 // Meme classe a priori que cVectMatMul, mais comme les matrice doivent en heriter deux fois ....
 class cVectPreCond
 {
     public :
-       virtual void VPCDo(Im1D_REAL8 in,Im1D_REAL8 out) = 0;
+       virtual void VPCDo(Im1D_double_t8 in,Im1D_double_t8 out) = 0;
        virtual ~cVectPreCond();
 };
 
@@ -720,8 +720,8 @@ bool GradConjPrecondSolve
      (
             cVectMatMul&,
             cVectPreCond&,
-            Im1D_REAL8  aImB,
-            Im1D_REAL8  aImXSol,
+            Im1D_double_t8  aImB,
+            Im1D_double_t8  aImXSol,
             const cControleGC &
      );
 
@@ -729,7 +729,7 @@ bool GradConjPrecondSolve
 
 class cFormQuadCreuse : public cVectMatMul,
                         public cVectPreCond,
-                        public FoncNVarDer<REAL>,
+                        public FoncNVarDer<double_t>,
                         public cGenSysSurResol
 {
       // mVO + mFLin . X + 1/2 tX mMat X
@@ -739,40 +739,40 @@ class cFormQuadCreuse : public cVectMatMul,
          virtual void VerifGSS(const std::string & aMes) ;
          
 	  bool  	AcceptContrainteNonUniV() const;
-          cFormQuadCreuse(INT aNbVar,cElMatCreuseGen * aMatCr);
+          cFormQuadCreuse(int aNbVar,cElMatCreuseGen * aMatCr);
 	  void AddDiff(Fonc_Num,const ElGrowingSetInd &);
 	  void AddDiff(Fonc_Num);
 	  virtual ~cFormQuadCreuse();
 
-          virtual void GradFNV(REAL *grad,const REAL *   v) ;
-          virtual REAL ValFNV(const REAL *  v) ;
+          virtual void GradFNV(double_t *grad,const double_t *   v) ;
+          virtual double_t ValFNV(const double_t *  v) ;
  
-	 void SetOffsets(const std::vector<INT> & aVIndexes);
+	 void SetOffsets(const std::vector<int> & aVIndexes);
 	 bool GSSR_UseEqMatIndexee();
          // aCste + aVect . X + 1/2 tX aMat X
 	 void V_GSSR_EqMatIndexee
                       (
-                           const std::vector<INT> & aVInd,
-		           REAL aPds,REAL ** aMat,
-			   REAL * aVect,REAL aCste
+                           const std::vector<int> & aVInd,
+		           double_t aPds,double_t ** aMat,
+			   double_t * aVect,double_t aCste
                       );
-         virtual tSysCho   GetElemQuad(int i,int j) const;
-         virtual void  SetElemQuad(int i,int j,const tSysCho& );
-         virtual tSysCho  GetElemLin(int i) const;
-         virtual void  SetElemLin(int i,const tSysCho& ) ;
+         virtual double_t   GetElemQuad(int i,int j) const;
+         virtual void  SetElemQuad(int i,int j,const double_t& );
+         virtual double_t  GetElemLin(int i) const;
+         virtual void  SetElemLin(int i,const double_t& ) ;
 
 
          virtual void SoutraitProduc3x3
                      (
                           bool                   Sym,
-                          ElMatrix<tSysCho> &aM1,
-                          ElMatrix<tSysCho> &aM2,
+                          ElMatrix<double_t> &aM1,
+                          ElMatrix<double_t> &aM2,
                           const std::vector<cSsBloc> * aYVSB
                      );
            
          virtual void Indexee_EcrireDansMatrWithQuad
                       (
-                             ElMatrix<tSysCho> &aMatr,
+                             ElMatrix<double_t> &aMatr,
                              const std::vector<cSsBloc> &  aVx,
                              const std::vector<cSsBloc> &  aVy
                       )  const;
@@ -787,8 +787,8 @@ class cFormQuadCreuse : public cVectMatMul,
 
          
       private :
-           void VMMDo(Im1D_REAL8 in,Im1D_REAL8 out);
-           void VPCDo(Im1D_REAL8 in,Im1D_REAL8 out);
+           void VMMDo(Im1D_double_t8 in,Im1D_double_t8 out);
+           void VPCDo(Im1D_double_t8 in,Im1D_double_t8 out);
 
 
 
@@ -799,20 +799,20 @@ class cFormQuadCreuse : public cVectMatMul,
                         const std::vector<cSsBloc> * aVSB,
                         double *  FullCoeff,
                         int aNbTot,
-                        const std::vector<INT> & aVInd ,
-			REAL aPds,REAL * aCoeff,REAL aB);
-	 virtual INT NbVar() const ;
-         virtual Im1D_REAL8  V_GSSR_Solve(bool * aResOk) ;
+                        const std::vector<int> & aVInd ,
+			double_t aPds,double_t * aCoeff,double_t aB);
+	 virtual int NbVar() const ;
+         virtual Im1D_double_t8  V_GSSR_Solve(bool * aResOk) ;
          virtual void V_GSSR_Reset() ;
          virtual void V_GSSR_AddNewEquation
-		      (REAL aPds,REAL * aCoeff,REAL aB) ;
+		      (double_t aPds,double_t * aCoeff,double_t aB) ;
 
-	  INT                mNbVar;
-	  REAL               mV0;
-	  Im1D<tSysCho,tSysCho>  mFLin;
-	  tSysCho *          mDataLin;
-	  Im1D_REAL8         mVGrad;
-	  REAL8 *            mDataGrad;
+	  int                mNbVar;
+	  double_t               mV0;
+	  Im1D<double_t,double_t>  mFLin;
+	  double_t *          mDataLin;
+	  Im1D_double_t8         mVGrad;
+	  double_t8 *            mDataGrad;
 	  cElMatCreuseGen *  mMat;
 	  ElGrowingSetInd *  mEGSI;
 	  PtsKD           *  mP000;
@@ -847,7 +847,7 @@ class cFormQuadCreuse : public cVectMatMul,
                           ElMatrix<double> &aM1,
                           ElMatrix<double> &aM2,
                           const std::vector<cSsBloc> * aYVSB,
-                          const std::vector<INT> & aVIndy
+                          const std::vector<int> & aVIndy
                      );
          
 */
@@ -886,64 +886,64 @@ class L2SysSurResol : public cGenSysSurResol
 
    //===================================================
 
-         Im1D_REAL8  V_GSSR_Solve(bool * aResOk);
+         Im1D_double_t8  V_GSSR_Solve(bool * aResOk);
          void V_GSSR_Reset();
-         void V_GSSR_AddNewEquation(REAL aPds,REAL * aCoeff,REAL aB);
+         void V_GSSR_AddNewEquation(double_t aPds,double_t * aCoeff,double_t aB);
 
-         void AddTermLineaire(INT aK,REAL aVal);
-         void AddTermQuad(INT aK1,INT aK2,REAL aVal);
+         void AddTermLineaire(int aK,double_t aVal);
+         void AddTermQuad(int aK1,int aK2,double_t aVal);
 
 
 
-        L2SysSurResol (INT aNbVar,bool IsSym=true);
-        void SetSize(INT aNbVar);
-        void GetMatr(ElMatrix<REAL> & M,ElMatrix<REAL> & tB);
+        L2SysSurResol (int aNbVar,bool IsSym=true);
+        void SetSize(int aNbVar);
+        void GetMatr(ElMatrix<double_t> & M,ElMatrix<double_t> & tB);
 
      // Ajoute   :  
      //           aPds (aCoeff . X = aB) 
 
-        void AddEquation(REAL aPds,REAL * aCoeff,REAL aB);
+        void AddEquation(double_t aPds,double_t * aCoeff,double_t aB);
         void Reset();
-        Im1D_REAL8  Solve(bool * aResOk);
+        Im1D_double_t8  Solve(bool * aResOk);
         Pt3d<double>  Solve3x3Sym(bool * OK);
 
-	INT NbVar() const;
+	int NbVar() const;
 
 
 	 virtual bool GSSR_UseEqMatIndexee();
          // aCste + aVect . X + 1/2 tX aMat X
 	 virtual void V_GSSR_EqMatIndexee
                       (
-                           const std::vector<INT> & aVInd,
-		           REAL aPds,REAL ** aMat,
-			   REAL * aVect,REAL aCste
+                           const std::vector<int> & aVInd,
+		           double_t aPds,double_t ** aMat,
+			   double_t * aVect,double_t aCste
                       );
-         virtual tSysCho   GetElemQuad(int i,int j) const;
-         virtual void  SetElemQuad(int i,int j,const tSysCho& );
-         virtual tSysCho  GetElemLin(int i) const;
-         virtual void  SetElemLin(int i,const tSysCho& ) ;
+         virtual double_t   GetElemQuad(int i,int j) const;
+         virtual void  SetElemQuad(int i,int j,const double_t& );
+         virtual double_t  GetElemLin(int i) const;
+         virtual void  SetElemLin(int i,const double_t& ) ;
 
-	  Im2D_REAL8   tLi_Li(); // Sigma des trans(Li) Li
+	  Im2D_double_t8   tLi_Li(); // Sigma des trans(Li) Li
 
      private :
 	  virtual void V_GSSR_AddNewEquation_Indexe
                       (  const std::vector<cSsBloc> * aVSB,
                         double *  FullCoeff,
                         int aNbTot,
-		         const std::vector<INT> & aVInd ,
-			REAL aPds,REAL * aCoeff,REAL aB);
+		         const std::vector<int> & aVInd ,
+			double_t aPds,double_t * aCoeff,double_t aB);
 
-        INT          mNbVar;
-	Im2D_REAL8   mtLi_Li; // Sigma des trans(Li) Li
-        REAL8 **     mDatatLi_Li;
-	Im2D_REAL8   mInvtLi_Li;    // Inverse Sigma des trans(Li) Li
-        REAL8 **     mDataInvtLi_Li;
-        Im1D_REAL8   mbi_Li;  // Sigma des bi * Li
-        REAL8 *      mDatabi_Li;
-        REAL8        mBibi;
-        Im1D_REAL8   mSolL2;
-        REAL8 *      mDataSolL2;
-        INT          mNbEq; // Debug
+        int          mNbVar;
+	Im2D_double_t8   mtLi_Li; // Sigma des trans(Li) Li
+        double_t8 **     mDatatLi_Li;
+	Im2D_double_t8   mInvtLi_Li;    // Inverse Sigma des trans(Li) Li
+        double_t8 **     mDataInvtLi_Li;
+        Im1D_double_t8   mbi_Li;  // Sigma des bi * Li
+        double_t8 *      mDatabi_Li;
+        double_t8        mBibi;
+        Im1D_double_t8   mSolL2;
+        double_t8 *      mDataSolL2;
+        int          mNbEq; // Debug
         double       mMaxBibi; // Debug
 };
 
@@ -956,15 +956,15 @@ class L2SysSurResol : public cGenSysSurResol
 class  SystLinSurResolu : public cGenSysSurResol  // Herite en tant que Solveur L1
 {
 	public :
-               Im1D_REAL8  V_GSSR_Solve(bool * aResOk);
+               Im1D_double_t8  V_GSSR_Solve(bool * aResOk);
                void V_GSSR_Reset();
-               void V_GSSR_AddNewEquation(REAL aPds,REAL * aCoeff,REAL aB);
-	        INT NbVar() const;
+               void V_GSSR_AddNewEquation(double_t aPds,double_t * aCoeff,double_t aB);
+	        int NbVar() const;
 
-               SystLinSurResolu(INT NbVar,INT NbEq);
+               SystLinSurResolu(int NbVar,int NbEq);
 
-                  void SetSize(INT NbVar,INT NbEq);
-			void SetNbEquation(INT aNbEq);
+                  void SetSize(int NbVar,int NbEq);
+			void SetNbEquation(int aNbEq);
 			void SetNoEquation();
 
 
@@ -972,70 +972,70 @@ class  SystLinSurResolu : public cGenSysSurResol  // Herite en tant que Solveur 
 			     (
                                    Fonc_Num      aFonc,
                                    const PtsKD & aPts,
-                                   REAL          aPds = 1.0
+                                   double_t          aPds = 1.0
                              );
 			void PushEquation
 			     (
-                                   Im1D_REAL8    aFormLin,
-				   REAL          aValue,
-                                   REAL          aPds = 1.0
+                                   Im1D_double_t8    aFormLin,
+				   double_t          aValue,
+                                   double_t          aPds = 1.0
                              );
 			void PopEquation();
 			void PushEquation
 			     (
-                                   REAL8 *       aFormLin,
-				   REAL          aValue,
-                                   REAL          aPds = 1.0
+                                   double_t8 *       aFormLin,
+				   double_t          aValue,
+                                   double_t          aPds = 1.0
                              );
 
-			Im1D_REAL8  L1Solve();
+			Im1D_double_t8  L1Solve();
 			// Si Ok ==0, matrice sing => erreur fatale
-			Im1D_REAL8  L2Solve(bool *Ok); 
+			Im1D_double_t8  L2Solve(bool *Ok); 
 
 			// Non Pondere, signe
-			REAL Residu(Im1D_REAL8,INT iEq) const; 
+			double_t Residu(Im1D_double_t8,int iEq) const; 
 			// Pondere :
-			REAL L2SomResiduPond(Im1D_REAL8)const; 
-			INT NbEq() const;
+			double_t L2SomResiduPond(Im1D_double_t8)const; 
+			int NbEq() const;
 
-			REAL Pds(INT iEq) const;
-			REAL CoefLin(INT iVar,INT iEq) const;
-			REAL CoefCste(INT iEq) const;
+			double_t Pds(int iEq) const;
+			double_t CoefLin(int iVar,int iEq) const;
+			double_t CoefCste(int iEq) const;
 
-			REAL Residu(const REAL *,INT iEq) const; 
+			double_t Residu(const double_t *,int iEq) const; 
 		protected :
 		private :
 
                         void AdjustSizeCapa();
 			void BarrodaleSetSize();
 			void L2SetSize();
-			void AssertIndexEqValide(INT IndEq) const;
-			void AssertIndexVarValide(INT IndEq) const;
-			void AssertIndexGoodNbVar(INT aNbVar) const;
+			void AssertIndexEqValide(int IndEq) const;
+			void AssertIndexVarValide(int IndEq) const;
+			void AssertIndexGoodNbVar(int aNbVar) const;
 
 
-			INT          mNbVarCur;
-			INT          mNbEqCur;
-			INT          mNbVarCapa;
-			INT          mNbEqCapa;
+			int          mNbVarCur;
+			int          mNbEqCur;
+			int          mNbVarCapa;
+			int          mNbEqCapa;
 
-			Im2D_REAL8   mA;  // mA.data() [IEqu][Ivar]
-			REAL8 **     mDataA;
-			Im1D_REAL8   mB;
-			REAL8 *      mDataB;
-			Im1D_REAL8   mPds;
-			REAL8 *      mDataPds;
+			Im2D_double_t8   mA;  // mA.data() [IEqu][Ivar]
+			double_t8 **     mDataA;
+			Im1D_double_t8   mB;
+			double_t8 *      mDataB;
+			Im1D_double_t8   mPds;
+			double_t8 *      mDataPds;
 
 
 			// variables tempo pour  L1 Barrodale
-			Im1D_REAL8   mBarodA;
-			REAL8 *      mDataBarodA;
-			Im1D_REAL8   mBarodB;
-			REAL8 *      mDataBarodB;
-			Im1D_REAL8   mBarodSOL;
-			REAL8 *      mDataBarodSOL;
-			Im1D_REAL8   mBarodRESIDU;
-			REAL8 *      mDataBarodRESIDU;
+			Im1D_double_t8   mBarodA;
+			double_t8 *      mDataBarodA;
+			Im1D_double_t8   mBarodB;
+			double_t8 *      mDataBarodB;
+			Im1D_double_t8   mBarodSOL;
+			double_t8 *      mDataBarodSOL;
+			Im1D_double_t8   mBarodRESIDU;
+			double_t8 *      mDataBarodRESIDU;
 		
 			// variables tempo pour  L2-Gaussj
 			// Pour resoudre au moindre carre
@@ -1044,12 +1044,12 @@ class  SystLinSurResolu : public cGenSysSurResol  // Herite en tant que Solveur 
                          L2SysSurResol mL2;
 		
 /*
-			 Im2D_REAL8   mtLi_Li; // Sigma des trans(Li) Li
-                         REAL8 **     mDatatLi_Li;
-			 Im1D_REAL8   mbi_Li;  // Sigma des bi * Li
-                         REAL8 *      mDatabi_Li;
-			 Im1D_REAL8   mSolL2;
-                         REAL8 *      mDataSolL2;
+			 Im2D_double_t8   mtLi_Li; // Sigma des trans(Li) Li
+                         double_t8 **     mDatatLi_Li;
+			 Im1D_double_t8   mbi_Li;  // Sigma des bi * Li
+                         double_t8 *      mDatabi_Li;
+			 Im1D_double_t8   mSolL2;
+                         double_t8 *      mDataSolL2;
 */
 
 };
@@ -1058,28 +1058,28 @@ class  SystLinSurResolu : public cGenSysSurResol  // Herite en tant que Solveur 
 class cOptimSommeFormelle
 {
      public :
-	 cOptimSommeFormelle(INT aNbVar);
+	 cOptimSommeFormelle(int aNbVar);
 	 ~cOptimSommeFormelle();
 	 void Add(Fonc_Num,bool CasSpecQuad = true);
 
-	 INT GradConjMin(REAL *,REAL ftol,INT ITMAX);
-	 INT GradConjMin(PtsKD & ,REAL ftol,INT ITMAX);
+	 int GradConjMin(double_t *,double_t ftol,int ITMAX);
+	 int GradConjMin(PtsKD & ,double_t ftol,int ITMAX);
 	 void Show() ; // Debug purpose
-	 INT Dim() const;
+	 int Dim() const;
 
-         REAL ValFNV(const REAL *  v) ;
-         void GradFNV(REAL *grad,const REAL *   v);
+         double_t ValFNV(const double_t *  v) ;
+         void GradFNV(double_t *grad,const double_t *   v);
 
      private :
 	 cOptimSommeFormelle(const cOptimSommeFormelle &); // Undef 
 
-	 class cMin : public FoncNVarDer<REAL> 
+	 class cMin : public FoncNVarDer<double_t> 
 	 {
               public :
                  cMin(cOptimSommeFormelle &);
               private :
-                 REAL ValFNV(const REAL *  v) ;
-                 void GradFNV(REAL *grad,const REAL *   v);
+                 double_t ValFNV(const double_t *  v) ;
+                 void GradFNV(double_t *grad,const double_t *   v);
 
 		 cOptimSommeFormelle & mOSF;
 	 };
@@ -1088,9 +1088,9 @@ class cOptimSommeFormelle
 
 
 
-	 void SetPts(const REAL *);
+	 void SetPts(const double_t *);
   
-         INT                   mNbVar;
+         int                   mNbVar;
 	 std::vector<Fonc_Num> mTabDP;
 	 Fonc_Num              mSomme;
 	 ElGrowingSetInd       mSetInd;
@@ -1109,136 +1109,136 @@ class Optim_L1FormLin
         // Flin de taille (N+1,M)
 
 
-        Optim_L1FormLin (const ElMatrix<REAL> &Flin );
+        Optim_L1FormLin (const ElMatrix<double_t> &Flin );
 
-        ElMatrix<REAL> Solve();
+        ElMatrix<double_t> Solve();
 
         static void bench();
-        REAL score(const ElMatrix<REAL> & M); // M : (1,N)
+        double_t score(const ElMatrix<double_t> & M); // M : (1,N)
 
 
-        ElMatrix<REAL> MpdSolve();
-        ElMatrix<REAL> BarrodaleSolve();
+        ElMatrix<double_t> MpdSolve();
+        ElMatrix<double_t> BarrodaleSolve();
 
      private :
 
        class  AbscD1
        {
            public :
-               AbscD1(ElMatrix<REAL> & sc,INT ind);
+               AbscD1(ElMatrix<double_t> & sc,int ind);
 
-               REAL _x0;
-               REAL _pds;
-               INT  _k;
+               double_t _x0;
+               double_t _pds;
+               int  _k;
               inline bool operator < (const AbscD1 &) const;
        };
 
-        REAL EcartVar(INT v);
-        INT RandF();
-        bool get_sol_adm(ElFilo<INT> & SubSet);
-        void BenchCombin(REAL val);
-        REAL MinCombin();
+        double_t EcartVar(int v);
+        int RandF();
+        bool get_sol_adm(ElFilo<int> & SubSet);
+        void BenchCombin(double_t val);
+        double_t MinCombin();
         void MinCombin
              (
-                   ElFilo<INT> & CurSubset, ElFilo<INT> & BestSet,
-                   REAL & ScMin,INT NbVarPos,INT CurVarPos
+                   ElFilo<int> & CurSubset, ElFilo<int> & BestSet,
+                   double_t & ScMin,int NbVarPos,int CurVarPos
              );
 
-        REAL score(ElFilo<INT> & SubSet);
-        REAL Kth_score(const ElMatrix<REAL> & M,INT k); // M : (N,1)
+        double_t score(ElFilo<int> & SubSet);
+        double_t Kth_score(const ElMatrix<double_t> & M,int k); // M : (N,1)
 
         bool ExploreChVARBov
              (
-                ElFilo<INT> & SubSet,
-                REAL        & sc_min,
-                INT kv
+                ElFilo<int> & SubSet,
+                double_t        & sc_min,
+                int kv
              );
         bool ExploreChVAR
              (
-                ElFilo<INT> & SubSet,
-                REAL        & sc_min,
-                INT kv
+                ElFilo<int> & SubSet,
+                double_t        & sc_min,
+                int kv
              );
 
 
 
 
 
-        bool Sol(const  ElFilo<INT> & SubSet);
+        bool Sol(const  ElFilo<int> & SubSet);
 
-        INT _NbVar;
-        INT _NbForm;
-		INT _NbStep;
+        int _NbVar;
+        int _NbForm;
+		int _NbStep;
 
-        ElMatrix<REAL> _Flin;
+        ElMatrix<double_t> _Flin;
 
         GaussjPrec     _GP;
-        ElMatrix<REAL> & _MGauss;
-        ElMatrix<REAL> & _MVGauss;
-        ElMatrix<REAL> & _Sol;                           
+        ElMatrix<double_t> & _MGauss;
+        ElMatrix<double_t> & _MVGauss;
+        ElMatrix<double_t> & _Sol;                           
 
-        ElMatrix<REAL> _SolDirRech;
-        ElMatrix<REAL> _Scal1D;
+        ElMatrix<double_t> _SolDirRech;
+        ElMatrix<double_t> _Scal1D;
 
-        ElMatrix<REAL>    _BestSol;
+        ElMatrix<double_t>    _BestSol;
         bool              _bench_comb_made;
         std::vector<AbscD1>    _vad1;
 
-        static Optim_L1FormLin RandOLF(INT NbVar,INT NbForm,INT Nb0 = 0);
-        static void BenchRand(INT NbVar,INT NbForm,INT NbTest,bool Comb);
+        static Optim_L1FormLin RandOLF(int NbVar,int NbForm,int Nb0 = 0);
+        static void BenchRand(int NbVar,int NbForm,int NbTest,bool Comb);
 
-        static void BenchRandComb(INT NbVar,INT NbForm);
+        static void BenchRandComb(int NbVar,int NbForm);
         static void BenchRandComb();
 
 
 
         // Pour le bench "dur" sur les minimum  locaux 
 
-        void SubsetOfFlags(ElFilo<INT> & Subset,INT flag);
+        void SubsetOfFlags(ElFilo<int> & Subset,int flag);
 
         void CombinConjMinLoc
              (
-                ElFilo<REAL>&  dic,
-                ElFilo<INT> &  Subset,
-                ElFilo<INT> &  FlagPos,
-                INT            FlagSubset,
-                INT            NbVarPos,
-                INT            CurVarPos
+                ElFilo<double_t>&  dic,
+                ElFilo<int> &  Subset,
+                ElFilo<int> &  FlagPos,
+                int            FlagSubset,
+                int            NbVarPos,
+                int            CurVarPos
              );
 
 
-        void show_flag(INT flag);
+        void show_flag(int flag);
 
-        REAL TestNeighConjMinLoc(INT FlagSubset,ElFilo<REAL>&  dic);
+        double_t TestNeighConjMinLoc(int FlagSubset,ElFilo<double_t>&  dic);
 
         void CombinConjMinLoc
              (
-                ElFilo<REAL>&  dic,
-                ElFilo<INT> &  Subset,
-                ElFilo<INT> &  FlagPos
+                ElFilo<double_t>&  dic,
+                ElFilo<int> &  Subset,
+                ElFilo<int> &  FlagPos
              );
         static void CombinConjMinLoc
                     (
-                         INT N,
-                         INT M,
-                         ElFilo<REAL>&  dic,
-                         ElFilo<INT> &  Subset,
-                         ElFilo<INT> &  FlagPos,
-						 INT            Nb0 = 0
+                         int N,
+                         int M,
+                         ElFilo<double_t>&  dic,
+                         ElFilo<int> &  Subset,
+                         ElFilo<int> &  FlagPos,
+						 int            Nb0 = 0
                     );
         static void CombinConjMinLoc();
 
 		void One_bench_craig();
 		static  void bench_craig();
-		static  void rand_bench_craig(INT N,INT M);
+		static  void rand_bench_craig(int N,int M);
         
 };                      
 
 // Nunerics, roots of polyonme
 
-REAL IRoots(REAL val,INT exp);
+double_t IRoots(double_t val,int exp);
 
-ElMatrix<REAL8> MatrFoncMeanSquare
+ElMatrix<double_t8> MatrFoncMeanSquare
                 (
                      Flux_Pts       flux,
                      std::list<Fonc_Num> Lfonc,
@@ -1258,7 +1258,7 @@ Fonc_Num ApproxFoncMeanSquare
 Fonc_Num SomPondFoncNum
          (
 		   std::   list<Fonc_Num> Lfonc,
-			  ElMatrix<REAL8>
+			  ElMatrix<double_t8>
 		 );
 template <class Type> class cMSymCoffact3x3
 {

@@ -17,8 +17,8 @@ public :
 
 
 
-    const REAL & Pds() const ;
-    REAL & Pds() ;
+    const double_t & Pds() const ;
+    double_t & Pds() ;
 
     cNupletPtsHomologues(int aNb,double aPds=1.0);
     int NbPts() const;
@@ -37,7 +37,7 @@ public :
 private :
     void AssertD2() const;
     std::vector<Pt2dr> mPts;
-    REAL  mPds;
+    double_t  mPds;
     // Gestion super bas-niveau avec des flag de bits pour etre compatible avec la structure physique faite
     // quand on ne contenait que des points ....
     int   mFlagDr;

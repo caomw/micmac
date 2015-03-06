@@ -126,7 +126,7 @@ TClRedirOut<F,O> TRedir(O o,F f) { return TClRedirOut<F,O>(o,f);}
 template <class Type> class TClPushPt
 {
      public :
-        typedef INT ValOut;
+        typedef int ValOut;
 
         TClPushPt( ElFilo<Type> & f) : _f(f) {}
 

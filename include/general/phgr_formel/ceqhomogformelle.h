@@ -19,9 +19,9 @@ class cEqHomogFormelle : public  cNameSpaceEqF ,
           );
 
          // WithD2 : avec derivees secondes
-          REAL AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,REAL aPds,bool WithD2);
-          Pt2dr StdAddLiaisonP1P2(Pt2dr P1,Pt2dr P2,REAL aPds,bool WithD2); // Version moderne type camera
-	  REAL ResiduNonSigneP1P2(Pt2dr aP1,Pt2dr aP2);
+          double_t AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,double_t aPds,bool WithD2);
+          Pt2dr StdAddLiaisonP1P2(Pt2dr P1,Pt2dr P2,double_t aPds,bool WithD2); // Version moderne type camera
+	  double_t ResiduNonSigneP1P2(Pt2dr aP1,Pt2dr aP2);
 	  Pt2dr  PtResidu(Pt2dr aP1,Pt2dr aP2);
 
           cHomogFormelle&       HF1();
@@ -30,10 +30,10 @@ class cEqHomogFormelle : public  cNameSpaceEqF ,
           cDistRadialeFormelle*   DRF();
           cSetEqFormelles &       Set();
 
-          void StdRepondere(ElPackHomologue &,REAL aCoeff);
-          void StdRepondere(REAL aCoeff);
-          REAL MoyErreur(ElPackHomologue &);
-          REAL MoyErreur();
+          void StdRepondere(ElPackHomologue &,double_t aCoeff);
+          void StdRepondere(double_t aCoeff);
+          double_t MoyErreur(ElPackHomologue &);
+          double_t MoyErreur();
 
       private :
           Pt2d<Fonc_Num> ComposeDRF (Pt2d<Fonc_Num> aP);
@@ -49,8 +49,8 @@ class cEqHomogFormelle : public  cNameSpaceEqF ,
 
 	      ~cEq();
               cEq(Fonc_Num F,cEqHomogFormelle &,bool isX,bool Code2Gen);
-              REAL AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,REAL aPds,bool WithD2);
-	      REAL ResiduSigneP1P2(Pt2dr aP1,Pt2dr aP2);
+              double_t AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,double_t aPds,bool WithD2);
+	      double_t ResiduSigneP1P2(Pt2dr aP1,Pt2dr aP2);
           };
           friend struct cEq;
 

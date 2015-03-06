@@ -10,11 +10,11 @@ class cLIParam_Image : public cObjFormel2Destroy
 		cRotationFormelle & Rot();
 		cSetEqFormelles & Set();
 		void UpdateCam();
-		Im2D_REAL4 Im();
+		Im2D_double_t4 Im();
 	        Pt2dr  Ray2Im(Pt3dr);
 	        Pt3dr  Im2Ray(Pt2dr);
 
-		void SetImZ(Im2D_REAL4 anIm,REAL aZ);
+		void SetImZ(Im2D_double_t4 anIm,double_t aZ);
 
 
 	private  :
@@ -23,8 +23,8 @@ class cLIParam_Image : public cObjFormel2Destroy
 		cLIParam_Image
 	        (
 		    cSetEqFormelles &,
-		    Im2D_REAL4   anIm,
-		    REAL         aZoom,
+		    Im2D_double_t4   anIm,
+		    double_t         aZoom,
 		    CamStenope & aCam,
                     cNameSpaceEqF::eModeContrRot
 		);
@@ -33,8 +33,8 @@ class cLIParam_Image : public cObjFormel2Destroy
 		cLIParam_Image (const cLIParam_Image &); // NI
 		cSetEqFormelles &    mSet;
 		cRotationFormelle *  pRot;
-		Im2D_REAL4           mIm;
-		REAL                 mZoom;
+		Im2D_double_t4           mIm;
+		double_t                 mZoom;
 		CamStenope &        mCam;
 };
 

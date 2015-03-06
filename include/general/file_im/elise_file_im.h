@@ -21,12 +21,12 @@ public :
     Elise_File_Im
     (
             const char *     name,
-            INT        dim,        // 2 for usual images
-            INT *      sz,         // tx,ty for usual images
-            GenIm::type_el,        // U_INT1,INT ....
-            INT        dim_out,    // 1 for gray level, 3 for RVB ...
+            int        dim,        // 2 for usual images
+            int *      sz,         // tx,ty for usual images
+            GenIm::type_el,        // U_int1,int ....
+            int        dim_out,    // 1 for gray level, 3 for RVB ...
             tFileOffset        offset_0,   // size of header to pass
-            INT        _szd0 = -1,  // see just down
+            int        _szd0 = -1,  // see just down
             bool       create = false      // if does not exist
             );
 
@@ -53,8 +53,8 @@ public :
     Elise_File_Im
     (
             const char *     name,
-            INT        sz,      // tx,ty for usual images
-            GenIm::type_el,      // U_INT1,INT ....
+            int        sz,      // tx,ty for usual images
+            GenIm::type_el,      // U_int1,int ....
             tFileOffset    offset_0 = 0,  // size of header to pass
             bool       create = false      // if does not exist
             );
@@ -63,7 +63,7 @@ public :
     (
             const char *     name,
             Pt2di       sz,      // tx,ty for usual images
-            GenIm::type_el,      // U_INT1,INT ....
+            GenIm::type_el,      // U_int1,int ....
             tFileOffset    offset_0 = 0,  // size of header to pass
             bool       create = false      // if does not exist
             );
@@ -73,7 +73,7 @@ public :
     (
             const char *     name,
             Pt3di       sz,      // tx,ty for usual images
-            GenIm::type_el,      // U_INT1,INT ....
+            GenIm::type_el,      // U_int1,int ....
             tFileOffset    offset_0 = 0,  // size of header to pass
             bool       create = false      // if does not exist
             );
@@ -83,7 +83,7 @@ public :
      */
 
     Fonc_Num in();
-    Fonc_Num in(REAL);
+    Fonc_Num in(double_t);
 
     // Image file are, by default, always cliped when used as
     // output.
@@ -108,8 +108,8 @@ private  :
             char **   comment,
             Pt2di  sz,
             GenIm::type_el,
-            INT    dim,
-            INT    mode_pnm
+            int    dim,
+            int    mode_pnm
             );
     Data_Elise_File_Im * defi() const
     {

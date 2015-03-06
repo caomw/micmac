@@ -123,7 +123,7 @@ class Plot_1d : public PRC0
 };
 
         //======================
-        // INT values args
+        // int values args
         //======================
 
 class PlModePl : public Arg_Opt_Plot1d  // origin of y
@@ -139,19 +139,19 @@ class PlModePl : public Arg_Opt_Plot1d  // origin of y
 class PlOriY : public Arg_Opt_Plot1d  // origin of y
 {
       public :
-        PlOriY (REAL);
+        PlOriY (double_t);
 };
 
 class PlScaleY : public Arg_Opt_Plot1d  // origin of y
 {
       public :
-        PlScaleY (REAL);
+        PlScaleY (double_t);
 };
 
 class PlStepX : public Arg_Opt_Plot1d  // step in x
 {
       public :
-        PlStepX (REAL);
+        PlStepX (double_t);
 };
 
        //======================
@@ -162,7 +162,7 @@ class PlBoxSty : public Arg_Opt_Plot1d  // boxe style
 {
       public :
         PlBoxSty (Line_St);
-        PlBoxSty (Col_Pal,INT);
+        PlBoxSty (Col_Pal,int);
 };
 
 
@@ -171,7 +171,7 @@ class PlotLinSty : public Arg_Opt_Plot1d // plot style
 {
       public :
         PlotLinSty (Line_St);
-        PlotLinSty (Col_Pal,INT);
+        PlotLinSty (Col_Pal,int);
 
 };
 
@@ -179,7 +179,7 @@ class PlAxeSty : public Arg_Opt_Plot1d  // axes styles
 {
       public :
         PlAxeSty (Line_St);
-        PlAxeSty (Col_Pal,INT);
+        PlAxeSty (Col_Pal,int);
 };
 
        //======================
@@ -246,7 +246,7 @@ class PlAutoClear : public Arg_Opt_Plot1d  // y clipping
 class PlIntervBoxX : public Arg_Opt_Plot1d   // box
 {
       public :
-        PlIntervBoxX(REAL,REAL);
+        PlIntervBoxX(double_t,double_t);
         PlIntervBoxX(Interval);
 };
 
@@ -254,7 +254,7 @@ class PlIntervBoxX : public Arg_Opt_Plot1d   // box
 class PlIntervPlotX : public Arg_Opt_Plot1d   // box
 {
       public :
-        PlIntervPlotX(REAL,REAL);
+        PlIntervPlotX(double_t,double_t);
         PlIntervPlotX(Interval);
 };
 
@@ -270,7 +270,7 @@ class PlBox : public Arg_Opt_Plot1d   // box
 {
       public :
         PlBox(Pt2dr,Pt2dr);
-        PlBox(REAL x0,REAL y0,REAL x1,REAL y1);
+        PlBox(double_t x0,double_t y0,double_t x1,double_t y1);
 };
 
 

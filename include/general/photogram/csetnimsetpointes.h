@@ -1,5 +1,5 @@
-#ifndef _ELISE_GENERAL_PHOTOGRAM_CSETNIMSETPOINTES_H
-#define _ELISE_GENERAL_PHOTOGRAM_CSETNIMSETPOINTES_H
+#ifndef _ELISE_GENERAL_PHOTOGRAM_CSETNIMSETPOintES_H
+#define _ELISE_GENERAL_PHOTOGRAM_CSETNIMSETPOintES_H
 
 #include "general/sys_dep.h"
 
@@ -14,7 +14,7 @@ public :
             );
     typedef std::list<cSetPointes1Im> tCont;
     tCont  & Pointes() ;
-    INT NbPointes();
+    int NbPointes();
 private :
     tCont mLPointes;
 

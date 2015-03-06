@@ -63,7 +63,7 @@ class cGlobXmlGen
 {
     public :
     cGlobXmlGen();
-    INT1   mPrec;  // Gere la precision dans l'ecriture des fichiers
+    int1   mPrec;  // Gere la precision dans l'ecriture des fichiers
 };
 
 class cElXMLTree;
@@ -74,7 +74,7 @@ std::list<std::string>  ListFileMatch
                         (
                             const std::string & aDir,
                             const std::string & aPattern,
-                            INT NivMax,
+                            int NivMax,
                             bool NameComplet = true // Si Oui inclu la dir dans les noms de fichier
                         );
 
@@ -82,7 +82,7 @@ std::list<std::string>  RegexListFileMatch
                         (
                             const std::string & aDir,
                             const std::string & aPattern,
-                            INT NivMax,
+                            int NivMax,
                             bool NameComplet = true // Si Oui inclu la dir dans les noms de fichier a matcher sur le pattern
                         );
 
@@ -112,14 +112,14 @@ class ElResParseDir
 
         const char * name () const;
         bool  is_dir() const;
-        INT   level () const;
-        const char * sub (INT lev) const;
+        int   level () const;
+        const char * sub (int lev) const;
 
     private :
 
         const char * _name;
         bool   _is_dir;
-        INT    _level;
+        int    _level;
         const char  *(  _sub[level_max+1]);
 };
 
@@ -135,7 +135,7 @@ void ElParseDir
     (
         const char * ndir,
         ElActionParseDir &,
-        INT    NivMax = ElResParseDir::level_max 
+        int    NivMax = ElResParseDir::level_max 
     );
 
 
@@ -196,25 +196,25 @@ class  ELISE_fp
         ELISE_fp(eModeBinTxt ModeBin=eTxtOnPremierLigne);
         ELISE_fp(const char *,mode_open,bool svp = false,eModeBinTxt  =eTxtOnPremierLigne);
 
-        U_INT1 read_U_INT1();
-        U_INT2 read_U_INT2();
-        INT2 read_INT2();
-        INT4   read_INT4();
+        U_int1 read_U_int1();
+        U_int2 read_U_int2();
+        int2 read_int2();
+        int4   read_int4();
         tFileOffset read_FileOffset4();
         tFileOffset read_FileOffset8();
-        REAL4   read_REAL4();
-        REAL8   read_REAL8();
+        double_t4   read_double_t4();
+        double_t8   read_double_t8();
 
         const std::string & NameFile() const {return  mNameFile;}
 
 
         void write_FileOffset4(tFileOffset);
         void write_FileOffset8(tFileOffset);
-        void write_U_INT1(INT);
-        void write_U_INT2(INT);
-        void write_INT4(INT);
-        void write_REAL4(REAL4);
-        void write_REAL8(REAL8);
+        void write_U_int1(int);
+        void write_U_int2(int);
+        void write_int4(int);
+        void write_double_t4(double_t4);
+        void write_double_t8(double_t8);
 
         void write(const std::string &);
         void write(const bool &);
@@ -224,10 +224,10 @@ class  ELISE_fp
         void write(const Seg2d &);
         void write(const std::list<Seg2d> &);
         void write(const std::list<std::string> &);
-        void write(const REAL8 &);
-        void write(const REAL4 &);
-        void write(const INT4 &);
-        void write(const std::vector<REAL8> &);
+        void write(const double_t8 &);
+        void write(const double_t4 &);
+        void write(const int4 &);
+        void write(const std::vector<double_t8> &);
         void write(const std::vector<int> &);
         void write(const std::vector<Pt2di> &);
         void write(const Polynome2dReal &);
@@ -242,19 +242,19 @@ class  ELISE_fp
 
         void write(const Pt3df &);
         void write(const Pt3dr &);
-        void write(const ElMatrix<REAL> &);
+        void write(const ElMatrix<double_t> &);
         void write(const ElRotation3D &);
 
 
         Pt3dr read(Pt3dr *);
         Pt3df read(Pt3df *);
-        ElMatrix<REAL> read(ElMatrix<REAL> *);
+        ElMatrix<double_t> read(ElMatrix<double_t> *);
         ElRotation3D   read(ElRotation3D *);
 
         // En gal, les ptr ne sont pas utilise (sert pour les tpl)
         Polynome2dReal   read(Polynome2dReal *);
-        REAL8            read(REAL8 *);
-        INT4            read(INT4 *);
+        double_t8            read(double_t8 *);
+        int4            read(int4 *);
         Pt2dr            read(Pt2dr *);
         Pt2df            read(Pt2df *);
         Pt2di            read(Pt2di *);
@@ -265,7 +265,7 @@ class  ELISE_fp
                 (PolynomialEpipolaireCoordinate *);
         CpleEpipolaireCoord * read(CpleEpipolaireCoord *);
         std::list<Seg2d> read(std::list<Seg2d> *);
-        std::vector<REAL8> read(std::vector<REAL8> *);
+        std::vector<double_t8> read(std::vector<double_t8> *);
         std::vector<int> read(std::vector<int> *);
         std::vector<Pt2di> read(std::vector<Pt2di> *);
         ElCplePtsHomologues read(ElCplePtsHomologues *);
@@ -274,16 +274,16 @@ class  ELISE_fp
 
 
 
-        U_INT1 lsb_read_U_INT1();
-        U_INT2 lsb_read_U_INT2();
-        INT4   lsb_read_INT4();
-        U_INT1 msb_read_U_INT1();
-        U_INT2 msb_read_U_INT2();
-        INT4   msb_read_INT4();
+        U_int1 lsb_read_U_int1();
+        U_int2 lsb_read_U_int2();
+        int4   lsb_read_int4();
+        U_int1 msb_read_U_int1();
+        U_int2 msb_read_U_int2();
+        int4   msb_read_int4();
 
 
 
-        void lsb_write_U_INT2(INT);
+        void lsb_write_U_int2(int);
 
         void set_byte_ordered(bool);
         bool byte_ordered() const { return _byte_ordered;}
@@ -330,12 +330,12 @@ class  ELISE_fp
         void write_dummy(tFileOffset  nb);  // write nb byte (when you just need
                                     // to extend size of file
         tFileOffset tell();
-        INT  fgetc(); // name it fgetc because getc is a macro 
+        int  fgetc(); // name it fgetc because getc is a macro 
 
                 
                 // get the next line in the file
         bool fgets( std::string &s, bool & endof );
-        //bool fgets(char *,INT sz_buf,bool & endof,bool svp = false); TEST_OVERFLOW
+        //bool fgets(char *,int sz_buf,bool & endof,bool svp = false); TEST_OVERFLOW
 
         // Renvoie false en fin de fichier, renvoie un ligne ascii "standard" (Tab-> space ..)
         // Buf a 2000
@@ -379,7 +379,7 @@ template <class Type> void  ReadPtr(ELISE_fp & aFile,tFileOffset aNb,Type * aPtr
 bool FileStrictPlusRecent(const std::string & aF1,const std::string & aF2);
 
 
-INT sizeofile (const char * nom);
+int sizeofile (const char * nom);
 typedef long int  FILE_offset;
 
 FILE  * FopenNN
@@ -397,8 +397,8 @@ FILE  * FopenNN
 class Flux_Of_Byte  : public Mcheck
 {
     public :
-        virtual U_INT1 Getc()       = 0;
-        virtual void Putc(U_INT1) = 0;
+        virtual U_int1 Getc()       = 0;
+        virtual void Putc(U_int1) = 0;
         virtual ~Flux_Of_Byte();
         virtual tFileOffset  tell() = 0;
 
@@ -413,8 +413,8 @@ class UnPacked_FOB  : public Flux_Of_Byte
     public :
         UnPacked_FOB(class Packed_Flux_Of_Byte *,bool to_flush);
         virtual ~UnPacked_FOB();
-        virtual U_INT1 Getc();
-        virtual void Putc(U_INT1);
+        virtual U_int1 Getc();
+        virtual void Putc(U_int1);
         virtual tFileOffset  tell();
 
     private :
@@ -432,10 +432,10 @@ class Packed_Flux_Of_Byte : public Mcheck
         virtual ~Packed_Flux_Of_Byte();
         virtual bool      compressed() const = 0;
 
-        virtual tFileOffset Read(U_INT1 * res,tFileOffset nb) = 0;
+        virtual tFileOffset Read(U_int1 * res,tFileOffset nb) = 0;
 
         // def value : fatal error 
-        virtual tFileOffset Write(const U_INT1 * res,tFileOffset nb);
+        virtual tFileOffset Write(const U_int1 * res,tFileOffset nb);
         virtual tRelFileOffset Rseek(tRelFileOffset nb) ;  // only forward, nb relative
                                     // to curent position
 
@@ -447,14 +447,14 @@ class Packed_Flux_Of_Byte : public Mcheck
             // some things like run over  padding 
 
 
-        inline INT sz_el() const {return _sz_el;}
+        inline int sz_el() const {return _sz_el;}
 
         virtual tFileOffset         tell()=0;   // debug pupose
 
         
     protected :
-        Packed_Flux_Of_Byte(INT sz_el);
-        INT     _sz_el;
+        Packed_Flux_Of_Byte(int sz_el);
+        int     _sz_el;
     private :
 };
 
@@ -469,7 +469,7 @@ class Std_Packed_Flux_Of_Byte : public Packed_Flux_Of_Byte
         Std_Packed_Flux_Of_Byte
         (
                 const char * name,
-                INT sz_el,
+                int sz_el,
                 tFileOffset off_0,
                 ELISE_fp::mode_open
         );
@@ -482,8 +482,8 @@ class Std_Packed_Flux_Of_Byte : public Packed_Flux_Of_Byte
     private :
         virtual bool      compressed()  const;
 
-        virtual tFileOffset Read(U_INT1 * res,tFileOffset  nb) ;
-        virtual tFileOffset Write(const U_INT1 * res,tFileOffset  nb);
+        virtual tFileOffset Read(U_int1 * res,tFileOffset  nb) ;
+        virtual tFileOffset Write(const U_int1 * res,tFileOffset  nb);
         virtual tRelFileOffset Rseek(tRelFileOffset  nb) ;  // forward or backward, nb relative
                                     // to curent position, in szel
 
@@ -498,12 +498,12 @@ class Mem_Packed_Flux_Of_Byte : public Packed_Flux_Of_Byte
 
         // return the number of bits really readen
 
-        Mem_Packed_Flux_Of_Byte (INT sz_init,INT sz_el);
+        Mem_Packed_Flux_Of_Byte (int sz_init,int sz_el);
 
         virtual ~Mem_Packed_Flux_Of_Byte();
 
         tFileOffset nbbyte () const {return _nb* tFileOffset(sz_el());}
-        INT operator [] (tFileOffset k)
+        int operator [] (tFileOffset k)
         {
             El_Internal.ElAssert
             (
@@ -516,17 +516,17 @@ class Mem_Packed_Flux_Of_Byte : public Packed_Flux_Of_Byte
 
     private :
         virtual tFileOffset         tell();   // debug pupose
-        virtual tFileOffset Write(const U_INT1 * res,tFileOffset nb);
+        virtual tFileOffset Write(const U_int1 * res,tFileOffset nb);
         virtual bool      compressed()  const;
 
         // For now, I do not need it, so : not implanted 
         // But can, of course, be added
 
-        virtual tFileOffset Read(U_INT1 * res,tFileOffset nb) ;
+        virtual tFileOffset Read(U_int1 * res,tFileOffset nb) ;
 
         tFileOffset        _nb;
         tFileOffset        _sz;
-        U_INT1 *   _data;
+        U_int1 *   _data;
 };
 
 
@@ -542,10 +542,10 @@ class  BitsPacked_PFOB : public Packed_Flux_Of_Byte
     BitsPacked_PFOB
     (
             Packed_Flux_Of_Byte *,
-            INT nbb,
+            int nbb,
             bool msbf,
             bool read_mode,
-            INT  nb_el
+            int  nb_el
     );
     virtual tFileOffset         tell();   // debug pupose
 
@@ -553,12 +553,12 @@ class  BitsPacked_PFOB : public Packed_Flux_Of_Byte
 
     virtual bool      compressed()  const;
 
-    INT set_kieme_val (INT byte,INT val,INT k)
+    int set_kieme_val (int byte,int val,int k)
     {
         return _tbb.set_kieme_val(byte,val,k);
     }
 
-    inline INT kieme_val (INT byte,INT k)
+    inline int kieme_val (int byte,int k)
     {
             return _tbb.kieme_val(byte,k);
     }
@@ -567,27 +567,27 @@ class  BitsPacked_PFOB : public Packed_Flux_Of_Byte
 
 
     Packed_Flux_Of_Byte * _pfob;
-    INT _nb_pb; // nb per byte
-    INT _v_max; 
+    int _nb_pb; // nb per byte
+    int _v_max; 
     bool _read_mode;
     bool _pf_compr;
     const Tabul_Bits_Gen & _tbb;
 
-    U_INT1 _v_buf;
-    INT    _i_buf;  // index of val buffered in v_buf
+    U_int1 _v_buf;
+    int    _i_buf;  // index of val buffered in v_buf
     tFileOffset    _nb_el;
 
     void flush_write();
 
     virtual void  AseekFp(tFileOffset nb) ; 
-    virtual tFileOffset Read(U_INT1 * res,tFileOffset nb) ;
-    virtual tFileOffset Write(const U_INT1 * res,tFileOffset nb) ;
+    virtual tFileOffset Read(U_int1 * res,tFileOffset nb) ;
+    virtual tFileOffset Write(const U_int1 * res,tFileOffset nb) ;
     virtual tRelFileOffset Rseek(tRelFileOffset nb) ;  
     
     private :
     
-    tFileOffset _Read(U_INT1 * res,tFileOffset nb) ;
-    tFileOffset _Write(const U_INT1 * res,tFileOffset nb) ;
+    tFileOffset _Read(U_int1 * res,tFileOffset nb) ;
+    tFileOffset _Write(const U_int1 * res,tFileOffset nb) ;
     tRelFileOffset _Rseek(tRelFileOffset nb) ;  
 
 };
@@ -600,7 +600,7 @@ class  BitsPacked_PFOB : public Packed_Flux_Of_Byte
 class Flux_Of_VarLI :  public Mcheck
 {
     public :
-        virtual INT   nexti(INT nb_bits) = 0;
+        virtual int   nexti(int nb_bits) = 0;
         virtual void  reset() = 0; 
         virtual ~Flux_Of_VarLI();
 
@@ -629,11 +629,11 @@ class Flux_Of_VarLI :  public Mcheck
 class MSBitFirst_Flux_Of_VarLI  :  public Flux_Of_VarLI
 {
     public :
-        virtual INT nexti(INT nb);
+        virtual int nexti(int nb);
         MSBitFirst_Flux_Of_VarLI(Flux_Of_Byte *,bool flx_flush);
 
-        INT     _last_bit_read;
-        U_INT1  _last_char_read;
+        int     _last_bit_read;
+        U_int1  _last_char_read;
         virtual void  reset();
 
 };
@@ -651,31 +651,31 @@ class MSBitFirst_Flux_Of_VarLI  :  public Flux_Of_VarLI
 class LSBitFirst_Flux_Of_VarLI  :  public Flux_Of_VarLI
 {
     public :
-        virtual INT nexti(INT nb);
+        virtual int nexti(int nb);
         LSBitFirst_Flux_Of_VarLI(Flux_Of_Byte *,bool flx_flush);
 
-        INT     _last_bit_read;
-        U_INT1  _last_char_read;
+        int     _last_bit_read;
+        U_int1  _last_char_read;
         virtual void  reset();
 };
 
 class Flux_OutVarLI  :  public Mcheck
 {
     public :
-        virtual INT puti(INT nb,INT nbb) = 0;
+        virtual int puti(int nb,int nbb) = 0;
         static Flux_OutVarLI * new_flx(Flux_Of_Byte *,bool msbf,bool flx_flush);
         virtual  ~Flux_OutVarLI();
         virtual void  reset() = 0;
 
         tFileOffset  tell();
-        INT kth();
+        int kth();
 
     protected :
         Flux_OutVarLI(Flux_Of_Byte *,bool flx_flush);
 
         Flux_Of_Byte * _flx;
-        INT     _bit_to_write;
-        U_INT1  _char_to_write;
+        int     _bit_to_write;
+        U_int1  _char_to_write;
         bool    _flx_flush;
 
     private :
@@ -684,7 +684,7 @@ class Flux_OutVarLI  :  public Mcheck
 class MSBF_Flux_OutVarLI  :  public Flux_OutVarLI
 {
     public :
-        virtual INT puti(INT val,INT nb);
+        virtual int puti(int val,int nb);
         MSBF_Flux_OutVarLI(Flux_Of_Byte *,bool flx_flush);
 
         virtual void  reset();
@@ -693,7 +693,7 @@ class MSBF_Flux_OutVarLI  :  public Flux_OutVarLI
 class LSBF_Flux_OutVarLI  :  public Flux_OutVarLI
 {
     public :
-        virtual INT puti(INT val,INT nb);
+        virtual int puti(int val,int nb);
         LSBF_Flux_OutVarLI(Flux_Of_Byte *,bool flx_flush);
 
         virtual void  reset();
@@ -726,13 +726,13 @@ public :
             bool read,
             bool msbf,               // is it a most sign bit first flow
             LZW_Protocols::mode,     // fixes some option of LZW protocol
-            INT nb_bit_init          // number of bits of initial LZW tables
+            int nb_bit_init          // number of bits of initial LZW tables
                                     // pass 8 with tiff is required
         );
 
-        virtual tFileOffset Read(U_INT1 * res,tFileOffset nb);
-        virtual tFileOffset Write(const U_INT1 * res,tFileOffset nb);
-        void Write(const INT * res,tFileOffset nb); // convert to U_INT1 *
+        virtual tFileOffset Read(U_int1 * res,tFileOffset nb);
+        virtual tFileOffset Write(const U_int1 * res,tFileOffset nb);
+        void Write(const int * res,tFileOffset nb); // convert to U_int1 *
         virtual tRelFileOffset Rseek(tRelFileOffset nb);
         void    assert_end_code(); 
         void    reset();
@@ -742,7 +742,7 @@ public :
 private :
         void init();
     virtual bool      compressed() const ;
-        U_INT1  *            _buf;
+        U_int1  *            _buf;
         tFileOffset                        _nb_buffered;
         tFileOffset                        _deb_buffered;
         Flux_Of_VarLI   *          _flxi;
@@ -762,11 +762,11 @@ public :
         (
             Packed_Flux_Of_Byte *,          // compressed flow
             bool read,
-            INT  tx
+            int  tx
         );
 
-        virtual tFileOffset Read(U_INT1 * res,tFileOffset nb);
-        virtual tFileOffset Write(const U_INT1 * res,tFileOffset nb);
+        virtual tFileOffset Read(U_int1 * res,tFileOffset nb);
+        virtual tFileOffset Write(const U_int1 * res,tFileOffset nb);
         void    reset();
 
         virtual tFileOffset  tell();
@@ -776,9 +776,9 @@ private :
 
     Packed_Flux_Of_Byte *    _flx;
     bool                     _read;
-    U_INT1      *            _buf;
-    INT                      _tx;
-    INT                      _n;
+    U_int1      *            _buf;
+    int                      _tx;
+    int                      _n;
 };
 
 template <class Type> class cTplHuffmanTree;
@@ -799,15 +799,15 @@ class Huffman_FOB_Codec : public Mcheck
             bool    flush_flx
         );
 
-        inline INT getbit();
-        INT geti(INT nbb);
+        inline int getbit();
+        int geti(int nbb);
 
-        const cTplHuffmanTree<INT>  *    get(const cTplHuffmanTree<INT>  *);
-        inline void put(const cTplHuffmanTree<INT>  * ht);
+        const cTplHuffmanTree<int>  *    get(const cTplHuffmanTree<int>  *);
+        inline void put(const cTplHuffmanTree<int>  * ht);
         void reset();
         bool                  _read;
 
-        inline void put(INT val,INT nbb);
+        inline void put(int val,int nbb);
 
         void show(); // debug
 
@@ -817,8 +817,8 @@ class Huffman_FOB_Codec : public Mcheck
 
         Packed_Flux_Of_Byte * _flx;
         Flux_OutVarLI       * _flx_varli;
-        INT                   _kth;
-        U_INT1                _v_buf;
+        int                   _kth;
+        U_int1                _v_buf;
         bool                  _msbf;
         bool                  _flush_flx;
 
@@ -839,14 +839,14 @@ class Huff_Ccitt_1D_Codec : public Huffman_FOB_Codec
             bool    flush_flx
         );
 
-        void read(U_INT1 * res,INT nb_tot);
-        void write(const U_INT1 * res,INT nb_tot);
+        void read(U_int1 * res,int nb_tot);
+        void write(const U_int1 * res,int nb_tot);
 
     protected :
 
 
-        int   get_length(INT coul);
-        void  put_length(INT l,INT coul);
+        int   get_length(int coul);
+        void  put_length(int l,int coul);
 
 
         typedef enum
@@ -861,7 +861,7 @@ class Huff_Ccitt_1D_Codec : public Huffman_FOB_Codec
 
     private :
 
-        void  put_length_partial(INT l,const class HuffmanCodec * h);
+        void  put_length_partial(int l,const class HuffmanCodec * h);
 
         const class HuffmanCodec *  _hw;  // white run lenght Huff tree
         const class HuffmanCodec *  _hb;  // black ...
@@ -877,14 +877,14 @@ class  Huff_Ccitt_2D_T6 : public Huff_Ccitt_1D_Codec
             bool    read,
             bool    msbf,
             bool    flush_flx,
-            INT     sz_buf
+            int     sz_buf
         );
 
-        void new_block(INT tx);
+        void new_block(int tx);
         void end_block(bool phys_end_block);
 
-        void read(U_INT1 * res);
-        void write(const U_INT1 * val);
+        void read(U_int1 * res);
+        void write(const U_int1 * val);
 
 
         virtual ~Huff_Ccitt_2D_T6();
@@ -892,17 +892,17 @@ class  Huff_Ccitt_2D_T6 : public Huff_Ccitt_1D_Codec
 
         void uncomp_line();
 
-        INT            _tx;
-        INT            _coul;
-        INT           _a0;
-        INT           _a1;
-        INT           _a2;
-        INT           _b1;
-        INT           _b2;
+        int            _tx;
+        int            _coul;
+        int           _a0;
+        int           _a1;
+        int           _a2;
+        int           _b1;
+        int           _b2;
         bool          _eofb;
 
-        U_INT1 *      _prec;
-        U_INT1 *      _cur;
+        U_int1 *      _prec;
+        U_int1 *      _cur;
 
         void  calc_b1();
         void  calc_b2();
@@ -911,9 +911,9 @@ class  Huff_Ccitt_2D_T6 : public Huff_Ccitt_1D_Codec
 
         const class HuffmanCodec *  _hvert;
         const class HuffmanCodec *  _huc;
-        const cTplHuffmanTree<INT>   *  _ht_pass;
-        const cTplHuffmanTree<INT>   *  _ht_horz;
-        const cTplHuffmanTree<INT>   *  _ht_eofb;
+        const cTplHuffmanTree<int>   *  _ht_pass;
+        const cTplHuffmanTree<int>   *  _ht_horz;
+        const cTplHuffmanTree<int>   *  _ht_eofb;
 };
 
 
@@ -921,8 +921,8 @@ class MPD_CCIT_T6 : public Huff_Ccitt_2D_T6
 {
 
     public :
-        void write(const U_INT1 * vals);
-        void read(U_INT1 * vals);
+        void write(const U_int1 * vals);
+        void read(U_int1 * vals);
 
 
         MPD_CCIT_T6
@@ -931,36 +931,36 @@ class MPD_CCIT_T6 : public Huff_Ccitt_2D_T6
             bool                    read,
             bool                    msbf,
             bool                    flush_flx,
-            INT                     sz_buf,
-            INT                     nbb
+            int                     sz_buf,
+            int                     nbb
         );
         virtual ~MPD_CCIT_T6();
     private :
 
-        U_INT1 * _vals;
-        inline INT end_pl_gray(INT a);
-        inline INT end_pl_pure_black(INT a);
-        inline INT end_pl_white(INT a);
+        U_int1 * _vals;
+        inline int end_pl_gray(int a);
+        inline int end_pl_pure_black(int a);
+        inline int end_pl_white(int a);
 
-        void put_length_gray(INT l);
-        void put_plage_gray(INT a1,INT a2);
-        INT get_length_gray();
-        INT get_plage_gray(INT a,bool last);
+        void put_length_gray(int l);
+        void put_plage_gray(int a1,int a2);
+        int get_length_gray();
+        int get_plage_gray(int a,bool last);
 
-        INT      _nbb;
-        INT      _vmax;  // (1<<nbb) -1
-        U_INT1 * _bin;
+        int      _nbb;
+        int      _vmax;  // (1<<nbb) -1
+        U_int1 * _bin;
 
         const class HuffmanCodec * _hmpd;
-        const cTplHuffmanTree<INT>   * _ht_huf_bl;
+        const cTplHuffmanTree<int>   * _ht_huf_bl;
 
-        // (! VISUAL)  static const INT max_l_gr = 4;
+        // (! VISUAL)  static const int max_l_gr = 4;
                 enum
                 {
                         max_l_gr = 4 
                 };
 
-        INT _line; // debug
+        int _line; // debug
 };
 
 
@@ -980,31 +980,31 @@ protected :
     
         // --------  def value : N fread with a sufficient local buffer 
 
-                    virtual void seek_in_line(Fich_Im2d *,INT x0,INT x1);
+                    virtual void seek_in_line(Fich_Im2d *,int x0,int x1);
 
 
         // --------  def value : n call to seek_in_line
 
                     virtual void seek_pack_line
-                                (Fich_Im2d *,INT y0,INT y1,bool read_mode);
+                                (Fich_Im2d *,int y0,int y1,bool read_mode);
 
 
         // --------  def value :  fread of sz_el
     
                     virtual void read_seg
-                        (class Fich_Im2d *,void * buf,INT x0,INT x1);
+                        (class Fich_Im2d *,void * buf,int x0,int x1);
                     virtual void write_seg
-                        (class Fich_Im2d *,void * buf,INT x0,INT x1);
+                        (class Fich_Im2d *,void * buf,int x0,int x1);
 
         // --------  def value : do nothing;  
         //           is sent each time a new line appears in the same tile
         //           example of use : Tiff differential predictor
 
-                    virtual  void r_new_line(Fich_Im2d *,INT y);
-                    virtual  void w_new_line(Fich_Im2d *,INT y);
+                    virtual  void r_new_line(Fich_Im2d *,int y);
+                    virtual  void w_new_line(Fich_Im2d *,int y);
 
-                    virtual  void r_end_line(Fich_Im2d *,INT y);
-                    virtual  void w_end_line(Fich_Im2d *,INT y);
+                    virtual  void r_end_line(Fich_Im2d *,int y);
+                    virtual  void w_end_line(Fich_Im2d *,int y);
 
 
         // -------- this message is send the fisrt time the tiles is used. 
@@ -1039,14 +1039,14 @@ protected :
         Packed_Flux_Of_Byte  * _pfob;
                             //  open _fp (for example in use_this_tile)
 
-        INT  _n_tile;      //  number of tile : 0,1 ....
-        INT  _sz_tile_log;     //  size of tile  : fich->_sz_til.x except for last tile
-        INT  _sz_tile_phys;     //  size of tile  : fich->_sz_til.x except for last tile
-        INT  _last_til_Y;       //  numero en Y de la derniere dalle lue
-        INT  _last_x;
-        INT  _last_y;
+        int  _n_tile;      //  number of tile : 0,1 ....
+        int  _sz_tile_log;     //  size of tile  : fich->_sz_til.x except for last tile
+        int  _sz_tile_phys;     //  size of tile  : fich->_sz_til.x except for last tile
+        int  _last_til_Y;       //  numero en Y de la derniere dalle lue
+        int  _last_x;
+        int  _last_y;
 
-        static const INT NO_LAST_TIL_Y;
+        static const int NO_LAST_TIL_Y;
         
 };
 
@@ -1057,18 +1057,18 @@ template <class Type> class Fonc_Fich_Im2d;
 class Fich_Im2d : public Mcheck
 {
     friend class Tile_F2d;
-    friend class Fonc_Fich_Im2d<INT>;
-    friend class Fonc_Fich_Im2d<REAL>;
+    friend class Fonc_Fich_Im2d<int>;
+    friend class Fonc_Fich_Im2d<double_t>;
     friend class Out_Fich_Im2d;
 
     public :
 
         inline bool integral_type() const {return _integral_type;}
-        inline INT * tab_or() {return  _tab_or;}
-        inline INT * tab_sz() {return  _tab_sz;}
-        void    init_tile(Tile_F2d *,INT kth,INT padding,bool clip_last);
+        inline int * tab_or() {return  _tab_or;}
+        inline int * tab_sz() {return  _tab_sz;}
+        void    init_tile(Tile_F2d *,int kth,int padding,bool clip_last);
 
-        inline INT dim_out() const{ return _dim_out;}
+        inline int dim_out() const{ return _dim_out;}
 
     protected :
 
@@ -1081,8 +1081,8 @@ class Fich_Im2d : public Mcheck
             char *                  usr_buf,
             Pt2di                   sz_file,
             Pt2di                   sz_tiles,
-            INT                     sz_el,
-            INT                     dim_out,
+            int                     sz_el,
+            int                     dim_out,
             bool                    integral,
             bool                    compressed,
             const char *            name
@@ -1105,21 +1105,21 @@ class Fich_Im2d : public Mcheck
                 );
 
 
-        INT      _sz_el;    // in general : number of channel * sizeof channel elt 
+        int      _sz_el;    // in general : number of channel * sizeof channel elt 
                             //  for exemple, with a 16 bits RGB => = 2;
 
 
-        INT      _dim_out;  // number of channel
+        int      _dim_out;  // number of channel
         Pt2di    _sz_file;
         Pt2di    _sz_til;
-        INT   _sztx;  // sz_til.x
+        int   _sztx;  // sz_til.x
 
-        INT _tab_sz[2];
-        INT _tab_or[2];
+        int _tab_sz[2];
+        int _tab_or[2];
 
-        INT            _nb_tiles;
+        int            _nb_tiles;
         Tile_F2d  **   _tiles;  // This is inherited class job to intialize each _tiles[i]
-                                // by init_tile(Tile_F2d *,INT kth)
+                                // by init_tile(Tile_F2d *,int kth)
         Tprov_char *   _tprov_name;
         char *         _name;
         char *          _buf;  // rather a void*, but need some arithmetics on it
@@ -1157,11 +1157,11 @@ class Std_Bitm_Fich_Im_2d : public Fich_Im2d
             Flux_Pts_Computed * flx,
             Pt2di           sz_file,
             Pt2di           sz_tiles,
-            INT             dim_out,
+            int             dim_out,
             const char *    name,
             GenIm           gi,
             bool            compressed,
-            INT             sz_el_spec = -1,
+            int             sz_el_spec = -1,
             r_special_transf  = 0,
             w_special_transf  = 0
         );
@@ -1190,7 +1190,7 @@ Fonc_Num_Computed * fonc_num_std_f2d
                         const Arg_Fonc_Num_Comp &,
                         Fich_Im2d *,
                         bool      with_def_val,
-                        REAL      def_val
+                        double_t      def_val
                     );
 
 Output_Computed * out_std_f2d
@@ -1203,28 +1203,28 @@ Output_Computed * out_std_f2d
 void PackBitsUCompr
     (
         Packed_Flux_Of_Byte * pfob,
-        U_INT1 * res,
-        INT nb_tot
+        U_int1 * res,
+        int nb_tot
     );
-INT PackBitsCompr
+int PackBitsCompr
     (
         Packed_Flux_Of_Byte * pfob,
-        const U_INT1 * line,
-        INT nb_tot
+        const U_int1 * line,
+        int nb_tot
     );
 
 
 void PackBitsUCompr_B2
     (
         Packed_Flux_Of_Byte * pfob,
-        U_INT1 * res,
-        INT nb_tot
+        U_int1 * res,
+        int nb_tot
     );
-INT PackBitsCompr_B2
+int PackBitsCompr_B2
     (
         Packed_Flux_Of_Byte * pfob,
-        const U_INT1 * line,
-        INT nb_tot
+        const U_int1 * line,
+        int nb_tot
     );
 
 
@@ -1243,7 +1243,7 @@ class ElDataGenFileIm :  public  RC_Object
             (
                 int          dim,
                 const int *  sz,
-                INT          nb_channel,
+                int          nb_channel,
                 bool         signedtype,
                 bool         integral,
                 int          nbbits,
@@ -1256,7 +1256,7 @@ class ElDataGenFileIm :  public  RC_Object
         // caracteristique logique :
         int        _dim;
         int *      _sz;
-        INT        _nb_channel;
+        int        _nb_channel;
 
         
         // caracteristique de la taille de representation
@@ -1270,7 +1270,7 @@ class ElDataGenFileIm :  public  RC_Object
         bool       _compressed;
 
         virtual   Fonc_Num in()      = 0;
-        virtual   Fonc_Num in(REAL) = 0;
+        virtual   Fonc_Num in(double_t) = 0;
         virtual   Output out()     = 0;
 };
 
@@ -1294,8 +1294,8 @@ class  Martin_Schindler_RCODE
 {
     public :
 
-        typedef U_INT4 code_value;
-        typedef U_INT4 freq;
+        typedef U_int4 code_value;
+        typedef U_int4 freq;
 
         enum
         {
@@ -1303,17 +1303,17 @@ class  Martin_Schindler_RCODE
             SHIFT_BITS =  CODE_BITS -9,
             EXTRA_BITS =  ((CODE_BITS-2) % 8 + 1)
         };
-        static const U_INT4 Top_value;
-        static const U_INT4 Bottom_value;
+        static const U_int4 Top_value;
+        static const U_int4 Bottom_value;
 
     protected :
 
-        U_INT4 low;       // low end of interval
-        U_INT4 range;     // length of interval
-        U_INT4 help;      // bytes_to_follow resp. intermediate value
+        U_int4 low;       // low end of interval
+        U_int4 range;     // length of interval
+        U_int4 help;      // bytes_to_follow resp. intermediate value
         unsigned char buffer;   // buffer for input/output
         //  the following is used only when encoding
-        U_INT4 bytecount;     // counter for outputed bytes
+        U_int4 bytecount;     // counter for outputed bytes
 };
 
 
@@ -1334,7 +1334,7 @@ class MS_RANGE_ENCODER :
         /* Start the encoder                                         */
         /* c is written as first byte in the datastream (header,...) */
 
-        void start_encoding(U_INT1 c);
+        void start_encoding(U_int1 c);
 
         /* Encode a symbol using frequencies                         */
         /* sy_f is the interval length (frequency of the symbol)     */
@@ -1358,7 +1358,7 @@ class MS_RANGE_ENCODER :
 
         Flux_OutVarLI   * _flxo;
         void enc_normalize();
-        void outbyte(INT x);
+        void outbyte(int x);
 };                                                  
                                                                         
 
@@ -1370,7 +1370,7 @@ class MS_RANGE_DECODER :
             _flxi (flxi)
         {}
 
-        U_INT1 start_decoding();
+        U_int1 start_decoding();
         void dec_normalize();
         freq decode_culfreq(freq tot_f);
         freq decode_culshift(freq tot_f);
@@ -1391,27 +1391,27 @@ class  cMS_SimpleArithmEncoder
     public :
         cMS_SimpleArithmEncoder
         (
-            const std::vector<REAL> & aVProbas ,
-            INT               aNbBits,
+            const std::vector<double_t> & aVProbas ,
+            int               aNbBits,
             Flux_OutVarLI *,
             char  aV0
             
         );
 
-        void PushCode(INT aCode);
-        const std::vector<INT> &  Cumuls() const;
-        const std::vector<INT> &  Freqs() const;
-        INT   Tot () const;
+        void PushCode(int aCode);
+        const std::vector<int> &  Cumuls() const;
+        const std::vector<int> &  Freqs() const;
+        int   Tot () const;
         void  Done();
         
     private :
 
         MS_RANGE_ENCODER  mEnc;
-        INT               mNbBits;
-        INT               mTot;
-        INT               mNbVals;
-        std::vector<INT>  mFreqs;
-        std::vector<INT>  mCumuls;
+        int               mNbBits;
+        int               mTot;
+        int               mNbVals;
+        std::vector<int>  mFreqs;
+        std::vector<int>  mCumuls;
 };
 
 class  cMS_SimpleArithmDecoder 
@@ -1419,22 +1419,22 @@ class  cMS_SimpleArithmDecoder
     public :
         cMS_SimpleArithmDecoder
         (
-                const std::vector<INT> &  Cumuls,
+                const std::vector<int> &  Cumuls,
                 Flux_Of_VarLI *
         );
 
-        INT   Dec();
+        int   Dec();
         void  Done();
-        U_INT1  V0();
+        U_int1  V0();
     private :
         MS_RANGE_DECODER     mDec;
-        INT                  mNbVals;
-        INT                  mP2;
-        INT                  mNbBits;
-        std::vector<U_INT1>  mVDecod;
-        std::vector<INT>     mFreqs;
-        std::vector<INT>     mCumuls;
-        U_INT1               mV0;
+        int                  mNbVals;
+        int                  mP2;
+        int                  mNbBits;
+        std::vector<U_int1>  mVDecod;
+        std::vector<int>     mFreqs;
+        std::vector<int>     mCumuls;
+        U_int1               mV0;
 };
 
 
@@ -1530,7 +1530,7 @@ class cElXMLFileIn
                 void PutCpleHom(const ElCplePtsHomologues &,const std::string & = "CpleHom");
                 void PutPackHom(const ElPackHomologue &,const std::string & = "ListeCpleHom");
 
-                void PutTabInt(const std::vector<INT> &,const std::string & );
+                void PutTabInt(const std::vector<int> &,const std::string & );
 
                 class cTag{
                         public :
@@ -1551,7 +1551,7 @@ class cElXMLFileIn
                 void PutTagEnd(const std::string &,bool SimpleTag=false);
 
                 FILE *      mFp;
-                INT         mCurIncr;
+                int         mCurIncr;
                 std::string mStrIncr;
 };
 
@@ -1681,8 +1681,8 @@ class cElXMLTree
         void ShowAscendance(FILE * aFile);
         void ShowOpeningTag(FILE * aFile);
 
-        void Show(const std::string & mIncr,FILE *,INT aCpt,INT aLevelMin,bool isTermOnLine,const cElXMLTreeFilter &);
-        void Show(const std::string & mIncr,FILE *,INT aCpt,INT aLevelMin,bool isTermOnLine);
+        void Show(const std::string & mIncr,FILE *,int aCpt,int aLevelMin,bool isTermOnLine,const cElXMLTreeFilter &);
+        void Show(const std::string & mIncr,FILE *,int aCpt,int aLevelMin,bool isTermOnLine);
 
             void StdShow(const std::string & aNameFile);
 
@@ -1787,7 +1787,7 @@ class cElXMLTree
         const std::string & ValAttr(const std::string &,
                                     const std::string * Def) const;
         void GetAll(const std::string & ,std::list<cElXMLTree *> &,bool byAttr,int aDepthMax=1000000);
-        INT Profondeur () const;
+        int Profondeur () const;
 
         cElXMLTree
         (  bool DoFileFinclu,

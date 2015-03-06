@@ -47,32 +47,32 @@ Header-MicMac-eLiSe-25/06/2007*/
 class PtsKD
 {
   public :
-    PtsKD(INT dim);
-    PtsKD(REAL * v,INT dim);
+    PtsKD(int dim);
+    PtsKD(double_t * v,int dim);
     PtsKD(const PtsKD &);
     void operator = (const PtsKD &);
     
     
     ~PtsKD();
-    const REAL  & operator ()(INT k) const
+    const double_t  & operator ()(int k) const
     {
       ELISE_ASSERT((k>=0)&&(k<_dim),"Out of Range in PtsKD(int)");
       return _x[k];
     }
     
-    REAL  & operator ()(INT k)
+    double_t  & operator ()(int k)
     {
       ELISE_ASSERT((k>=0)&&(k<_dim),"Out of Range in PtsKD(int)");
       return _x[k];
     }
-    REAL * AdrX0() {return _x;}
+    double_t * AdrX0() {return _x;}
     
     
-    INT Dim() const {return _dim;}
+    int Dim() const {return _dim;}
   private :
-      void init(INT Dim);
-      REAL * _x;
-      INT    _dim;
+      void init(int Dim);
+      double_t * _x;
+      int    _dim;
 };
 
 #endif

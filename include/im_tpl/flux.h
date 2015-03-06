@@ -100,7 +100,7 @@ class TFlux_BordRect2d
       private :
           Pt2di _p0;
           Pt2di _p1;
-          INT   _k;
+          int   _k;
 };
 
 

@@ -66,7 +66,7 @@ template <class Type>  class ElList :  public  PRC0
        // friend ElList <Type> ::operator  + (ElList<Type>,Type);
 
        bool                 empty() const;
-       INT                  card() const;
+       int                  card() const;
        void                 clear() {while(!empty()) pop();}
 
       ElList<Type>(RC_Object*);
@@ -98,8 +98,8 @@ template  <class Type> class Data_Tab_CPT_REF;
 
 
 /*
-const INT Elise_Std_Max_Dim = 20;
-const INT Elise_Std_Max_Buf = 500;
+const int Elise_Std_Max_Dim = 20;
+const int Elise_Std_Max_Buf = 500;
 */
 enum {
     Elise_Std_Max_Dim = 20,
@@ -113,11 +113,11 @@ template  <class Type> class Tab_CPT_REF : public PRC0
 
            Tab_CPT_REF(Type p0,Type p1,Type p2);
            Tab_CPT_REF(Type p0,Type p1,Type p2,Type p3);
-           Tab_CPT_REF(const Type *objects,INT nb);
-           Tab_CPT_REF(INT nb);
+           Tab_CPT_REF(const Type *objects,int nb);
+           Tab_CPT_REF(int nb);
 
-           INT   nb();
-           Type & operator [](INT i);
+           int   nb();
+           Type & operator [](int i);
            void  push(Type);
 
      private :

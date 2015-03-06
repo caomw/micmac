@@ -25,11 +25,11 @@ class cElNuageLaser
        void Debug(const std::string & aName);
 
 
-       REAL   ZMin () const;
-       REAL   ZMax () const;
+       double_t   ZMin () const;
+       double_t   ZMax () const;
        Box2dr Box() const;
 
-       void  AddQt(INT aNbObjMaxParFeuille,REAL aDistPave);
+       void  AddQt(int aNbObjMaxParFeuille,double_t aDistPave);
 
        void ParseNuage(cResReqNuageLaser & aResParse,Box2dr aBox);
 
@@ -38,8 +38,8 @@ class cElNuageLaser
 
        std::vector<Pt3dr>  mVPts;
 
-       REAL                mZMax;
-       REAL                mZMin;
+       double_t                mZMax;
+       double_t                mZMin;
        Pt2dr               mPInf;
        Pt2dr               mPSup;
        cQtcElNuageLaser *  mQt;

@@ -7,23 +7,23 @@
 /*         polar-def                 */
 /*===================================*/
 
-class Polar_Def_Opun : public Simple_OP_UN<REAL>
+class Polar_Def_Opun : public Simple_OP_UN<double_t>
 {
 
 public :
-	Polar_Def_Opun(REAL teta_def) : _teta_def (teta_def) {}
+	Polar_Def_Opun(double_t teta_def) : _teta_def (teta_def) {}
 
-	static Fonc_Num polar(Fonc_Num f,REAL teta0);
+	static Fonc_Num polar(Fonc_Num f,double_t teta0);
 
 private  :
 	virtual void calc_buf
 		(
-		REAL **,
-		REAL**,
-		INT,
+		double_t **,
+		double_t**,
+		int,
 		const Arg_Comp_Simple_OP_UN  &
 		);
-	REAL _teta_def;
+	double_t _teta_def;
 
 };
 

@@ -140,9 +140,9 @@ Header-MicMac-eLiSe-25/06/2007*/
 /*  `pointlist':  An array of point coordinates.  The first point's x        */
 /*    coordinate is at index [0] and its y coordinate at index [1], followed */
 /*    by the coordinates of the remaining points.  Each point occupies two   */
-/*    REALs.                                                                 */
+/*    double_ts.                                                                 */
 /*  `pointattributelist':  An array of point attributes.  Each point's       */
-/*    attributes occupy `numberofpointattributes' REALs.                     */
+/*    attributes occupy `numberofpointattributes' double_ts.                     */
 /*  `pointmarkerlist':  An array of point markers; one int per point.        */
 /*                                                                           */
 /*  `trianglelist':  An array of triangle corners.  The first triangle's     */
@@ -151,8 +151,8 @@ Header-MicMac-eLiSe-25/06/2007*/
 /*    represents a nonlinear element.  Each triangle occupies                */
 /*    `numberofcorners' ints.                                                */
 /*  `triangleattributelist':  An array of triangle attributes.  Each         */
-/*    triangle's attributes occupy `numberoftriangleattributes' REALs.       */
-/*  `trianglearealist':  An array of triangle area constraints; one REAL per */
+/*    triangle's attributes occupy `numberoftriangleattributes' double_ts.       */
+/*  `trianglearealist':  An array of triangle area constraints; one double_t per */
 /*    triangle.  Input only.                                                 */
 /*  `neighborlist':  An array of triangle neighbors; three ints per          */
 /*    triangle.  Output only.                                                */
@@ -164,14 +164,14 @@ Header-MicMac-eLiSe-25/06/2007*/
 /*                                                                           */
 /*  `holelist':  An array of holes.  The first hole's x and y coordinates    */
 /*    are at indices [0] and [1], followed by the remaining holes.  Two      */
-/*    REALs per hole.  Input only, although the pointer is copied to the     */
+/*    double_ts per hole.  Input only, although the pointer is copied to the     */
 /*    output structure for your convenience.                                 */
 /*                                                                           */
 /*  `regionlist':  An array of regional attributes and area constraints.     */
 /*    The first constraint's x and y coordinates are at indices [0] and [1], */
 /*    followed by the regional attribute and index [2], followed by the      */
 /*    maximum area at index [3], followed by the remaining area constraints. */
-/*    Four REALs per area constraint.  Note that each regional attribute is  */
+/*    Four double_ts per area constraint.  Note that each regional attribute is  */
 /*    used only if you select the `A' switch, and each area constraint is    */
 /*    used only if you select the `a' switch (with no number following), but */
 /*    omitting one of these switches does not change the memory layout.      */
@@ -187,7 +187,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 /*    Voronoi diagrams.  The first normal vector's x and y magnitudes are    */
 /*    at indices [0] and [1], followed by the remaining vectors.  For each   */
 /*    finite edge in a Voronoi diagram, the normal vector written is the     */
-/*    zero vector.  Two REALs per edge.  Output only.                        */
+/*    zero vector.  Two double_ts per edge.  Output only.                        */
 /*                                                                           */
 /*                                                                           */
 /*  Any input fields that Triangle will examine must be initialized.         */
@@ -292,15 +292,15 @@ public :
 
   triangulateio();
   
-  REAL *pointlist;                                               /* In / out */
-  REAL *pointattributelist;                                      /* In / out */
+  double_t *pointlist;                                               /* In / out */
+  double_t *pointattributelist;                                      /* In / out */
   int *pointmarkerlist;                                          /* In / out */
   int numberofpoints;                                            /* In / out */
   int numberofpointattributes;                                   /* In / out */
 
   int *trianglelist;                                             /* In / out */
-  REAL *triangleattributelist;                                   /* In / out */
-  REAL *trianglearealist;                                         /* In only */
+  double_t *triangleattributelist;                                   /* In / out */
+  double_t *trianglearealist;                                         /* In only */
   int *neighborlist;                                             /* Out only */
   int numberoftriangles;                                         /* In / out */
   int numberofcorners;                                           /* In / out */
@@ -310,15 +310,15 @@ public :
   int *segmentmarkerlist;                                        /* In / out */
   int numberofsegments;                                          /* In / out */
 
-  REAL *holelist;                        /* In / pointer to array copied out */
+  double_t *holelist;                        /* In / pointer to array copied out */
   int numberofholes;                                      /* In / copied out */
 
-  REAL *regionlist;                      /* In / pointer to array copied out */
+  double_t *regionlist;                      /* In / pointer to array copied out */
   int numberofregions;                                    /* In / copied out */
 
   int *edgelist;                                                 /* Out only */
   int *edgemarkerlist;            /* Not used with Voronoi diagram; out only */
-  REAL *normlist;                /* Used only with Voronoi diagram; out only */
+  double_t *normlist;                /* Used only with Voronoi diagram; out only */
   int numberofedges;                                             /* Out only */
 
 private :
@@ -353,17 +353,17 @@ template <class AttrSom,class AttrArc> class  ShewShuckTriangul
 
      private :
 
-         INT num_shew(const ElSom<AttrSom,AttrArc> & s)
+         int num_shew(const ElSom<AttrSom,AttrArc> & s)
          {
 		return _num_shew[s.num()];
          }
 
 
           ElGraphe<AttrSom,AttrArc> &      _gr;
-          ElFilo<REAL>                     _xy_in;
-          ElFilo<REAL>                     _attr_pt_in;
-          ElFilo<INT>                      _num_shew;
-          ElFilo<INT>                      _pslg_in;
+          ElFilo<double_t>                     _xy_in;
+          ElFilo<double_t>                     _attr_pt_in;
+          ElFilo<int>                      _num_shew;
+          ElFilo<int>                      _pslg_in;
           ElFilo<ElSom<AttrSom,AttrArc> *> _num_to_som;
           virtual void arc_tri
                        (
@@ -429,7 +429,7 @@ template <class AttrSom,class AttrArc>
     _attr_pt_in.clear(); // [1]
     _num_to_som.clear();
     {
-       INT NumSom = 0;
+       int NumSom = 0;
        for 
        (
               ElSomIterator<AttrSom,AttrArc> sit = _gr.begin(SubGr) ;
@@ -563,10 +563,10 @@ template <class AttrSom,class AttrArc>
    {
       cout << "Shew " << in.numberofpoints << " => " << out.numberofpoints << "\n";
 
-      for (INT Ke =0 ; Ke<out.numberofedges ; Ke++)
+      for (int Ke =0 ; Ke<out.numberofedges ; Ke++)
       {
-          INT ks1 = out.edgelist[2*Ke];
-          INT ks2 = out.edgelist[2*Ke+1];
+          int ks1 = out.edgelist[2*Ke];
+          int ks2 = out.edgelist[2*Ke+1];
           if (
                     (ks1 >=0) && (ks2 >=0) 
                  && (ks1<in.numberofpoints) && (ks2<in.numberofpoints)
@@ -755,9 +755,9 @@ void triangulate(char *, struct triangulateio *, struct triangulateio *,
 /* #define SINGLE */
 
 #ifdef SINGLE
-#define REAL float
+#define double_t float
 #else /* not SINGLE */
-#define REAL double
+#define double_t double
 #endif /* not SINGLE */
 
 #include <cstdio>
@@ -890,7 +890,7 @@ int trbid(void)
 
   in.numberofpoints = 4;
   in.numberofpointattributes = 1;
-  in.pointlist = (REAL *) malloc(in.numberofpoints * 2 * sizeof(REAL));
+  in.pointlist = (double_t *) malloc(in.numberofpoints * 2 * sizeof(double_t));
   in.pointlist[0] = 0.0;
   in.pointlist[1] = 0.0;
   in.pointlist[2] = 1.0;
@@ -899,9 +899,9 @@ int trbid(void)
   in.pointlist[5] = 9.0;
   in.pointlist[6] = 0.0;
   in.pointlist[7] = 10.0;
-  in.pointattributelist = (REAL *) malloc(in.numberofpoints *
+  in.pointattributelist = (double_t *) malloc(in.numberofpoints *
                                           in.numberofpointattributes *
-                                          sizeof(REAL));
+                                          sizeof(double_t));
   in.pointattributelist[0] = 0.0;
   in.pointattributelist[1] = 1.0;
   in.pointattributelist[2] = 11.0;
@@ -938,10 +938,10 @@ int trbid(void)
   in.numberofholes = 0;
 
   in.numberofregions = 0;
-  in.regionlist = (REAL *) NULL;;
+  in.regionlist = (double_t *) NULL;;
 #if(0)
   in.numberofregions = 1;
-  in.regionlist = (REAL *) malloc(in.numberofregions * 4 * sizeof(REAL));
+  in.regionlist = (double_t *) malloc(in.numberofregions * 4 * sizeof(double_t));
   in.regionlist[0] = 0.5;
   in.regionlist[1] = 5.0;
   in.regionlist[2] = 7.0;            /* Regional attribute (for whole mesh). */
@@ -955,13 +955,13 @@ int trbid(void)
   /* Make necessary initializations so that Triangle can return a */
   /*   triangulation in `mid' and a voronoi diagram in `vorout'.  */
 
-  mid.pointlist = (REAL *) NULL;            /* Not needed if -N switch used. */
+  mid.pointlist = (double_t *) NULL;            /* Not needed if -N switch used. */
   /* Not needed if -N switch used or number of point attributes is zero: */
-  mid.pointattributelist = (REAL *) NULL;
+  mid.pointattributelist = (double_t *) NULL;
   mid.pointmarkerlist = (int *) NULL; /* Not needed if -N or -B switch used. */
   mid.trianglelist = (int *) NULL;          /* Not needed if -E switch used. */
   /* Not needed if -E switch used or number of triangle attributes is zero: */
-  mid.triangleattributelist = (REAL *) NULL;
+  mid.triangleattributelist = (double_t *) NULL;
   mid.neighborlist = (int *) NULL;         /* Needed only if -n switch used. */
   /* Needed only if segments are output (-p or -c) and -P not used: */
   mid.segmentlist = (int *) NULL;
@@ -970,11 +970,11 @@ int trbid(void)
   mid.edgelist = (int *) NULL;             /* Needed only if -e switch used. */
   mid.edgemarkerlist = (int *) NULL;   /* Needed if -e used and -B not used. */
 
-  vorout.pointlist = (REAL *) NULL;        /* Needed only if -v switch used. */
+  vorout.pointlist = (double_t *) NULL;        /* Needed only if -v switch used. */
   /* Needed only if -v switch used and number of attributes is not zero: */
-  vorout.pointattributelist = (REAL *) NULL;
+  vorout.pointattributelist = (double_t *) NULL;
   vorout.edgelist = (int *) NULL;          /* Needed only if -v switch used. */
-  vorout.normlist = (REAL *) NULL;         /* Needed only if -v switch used. */
+  vorout.normlist = (double_t *) NULL;         /* Needed only if -v switch used. */
 
   /* Triangulate the points.  Switches are chosen to read and write a  */
   /*   PSLG (p), preserve the convex hull (c), number everything from  */
@@ -996,19 +996,19 @@ int trbid(void)
   /*   refining the triangulation.                               */
 
   /* Needed only if -r and -a switches used: */
-  mid.trianglearealist = (REAL *) malloc(mid.numberoftriangles * sizeof(REAL));
+  mid.trianglearealist = (double_t *) malloc(mid.numberoftriangles * sizeof(double_t));
   mid.trianglearealist[0] = 3.0;
   mid.trianglearealist[1] = 1.0;
 
   /* Make necessary initializations so that Triangle can return a */
   /*   triangulation in `out'.                                    */
 
-  out.pointlist = (REAL *) NULL;            /* Not needed if -N switch used. */
+  out.pointlist = (double_t *) NULL;            /* Not needed if -N switch used. */
   /* Not needed if -N switch used or number of attributes is zero: */
-  out.pointattributelist = (REAL *) NULL;
+  out.pointattributelist = (double_t *) NULL;
   out.trianglelist = (int *) NULL;          /* Not needed if -E switch used. */
   /* Not needed if -E switch used or number of triangle attributes is zero: */
-  out.triangleattributelist = (REAL *) NULL;
+  out.triangleattributelist = (double_t *) NULL;
 
   /* Refine the triangulation according to the attached */
   /*   triangle area constraints.                       */
@@ -1053,15 +1053,15 @@ struct triangulateio init_trio_shew(void)
 {
      struct triangulateio res;
 
-     res.pointlist                   = (REAL *) NULL;
-     res.pointattributelist          = (REAL *) NULL;
+     res.pointlist                   = (double_t *) NULL;
+     res.pointattributelist          = (double_t *) NULL;
      res.pointmarkerlist             = (int *) NULL;
      res.numberofpoints              = 0;
      res.numberofpointattributes     = 0;
     
      res.trianglelist                = (int *)  NULL;
-     res.triangleattributelist       = (REAL *) NULL;
-     res.trianglearealist            = (REAL *) NULL;
+     res.triangleattributelist       = (double_t *) NULL;
+     res.trianglearealist            = (double_t *) NULL;
      res.neighborlist                = (int  *) NULL;
      res.numberoftriangles           = 0;
      res.numberofcorners             = 0;
@@ -1071,16 +1071,16 @@ struct triangulateio init_trio_shew(void)
      res.segmentmarkerlist           = (int *) NULL;
      res.numberofsegments            = 0;
      
-     res.holelist                    = (REAL *) NULL;
+     res.holelist                    = (double_t *) NULL;
      res.numberofholes               = 0;
 
-     res.regionlist                  = (REAL *) NULL;
+     res.regionlist                  = (double_t *) NULL;
      res.numberofregions             = 0;
 
 
      res.edgelist                    = (int *) NULL;
      res.edgemarkerlist              = (int *) NULL;
-     res.normlist                    = (REAL *) NULL;
+     res.normlist                    = (double_t *) NULL;
      res.numberofedges               = 0;
 
      return res;
@@ -1101,13 +1101,13 @@ void add_predicat_booleen(char * ch,BOOLEEN test,CONST char * opt)
 
 void shewchuk_add_arc FONC_4
      (
-          INT              ,nb,
-          INT Ptr          ,tarc,
+          int              ,nb,
+          int Ptr          ,tarc,
           VALEUR Ptr Ptr   ,tabsom,
-          INT              ,flag
+          int              ,flag
      )
 {
-       INT i,k1,k2;
+       int i,k1,k2;
        VALEUR Ptr s1,Ptr s2,Ptr arc;
 
        for (i=0 ; i<nb ; i++)
@@ -1139,11 +1139,11 @@ void  trmain FONC_2 (VALEUR Ptr,gr,VALEUR Ptr,cl_arg)
   VALEUR Ptr Ptr SPsom,Ptr Ptr SP0,Ptr Ptr SParc;
   VALEUR Ptr grvor;
   ARG_CHEM_GR arg_ch;
-  INT nb_som,nb_arc;
+  int nb_som,nb_arc;
   char  LignCom[300];
-  INT Ptr etat;
+  int Ptr etat;
   BOOLEEN env_conv,add_arc_tri,debug,pslg,voronoi,steiner,autonet_stein,check;
-  INT     flag_arc_tri,flag_steiner,flag_inf_vor;
+  int     flag_arc_tri,flag_steiner,flag_inf_vor;
   DOUBLE  ang_min,surf_max;
 
 
@@ -1219,10 +1219,10 @@ void  trmain FONC_2 (VALEUR Ptr,gr,VALEUR Ptr,cl_arg)
 
 
   in.numberofpoints = nb_som;
-  in.pointlist = (REAL *) malloc(in.numberofpoints * 2 * sizeof(REAL));
+  in.pointlist = (double_t *) malloc(in.numberofpoints * 2 * sizeof(double_t));
 
   in.numberofpointattributes = 1;
-  in.pointattributelist = (REAL *) malloc(in.numberofpoints * 1 * sizeof(REAL));
+  in.pointattributelist = (double_t *) malloc(in.numberofpoints * 1 * sizeof(double_t));
   {
      int i;
      DOUBLE x,y;
@@ -1244,7 +1244,7 @@ void  trmain FONC_2 (VALEUR Ptr,gr,VALEUR Ptr,cl_arg)
   if(pslg)
   {
       VALEUR Ptr s1,Ptr s2,Ptr arc;
-      INT i;
+      int i;
 
       SParc = PILE_EVAL +1;   
       nb_arc = empiler_all_arcs(gr,&arg_ch,Faux);
@@ -1470,7 +1470,7 @@ void  trmain FONC_2 (VALEUR Ptr,gr,VALEUR Ptr,cl_arg)
 
   in.numberofpoints = 4;
   in.numberofpointattributes = 1;
-  in.pointlist = (REAL *) malloc(in.numberofpoints * 2 * sizeof(REAL));
+  in.pointlist = (double_t *) malloc(in.numberofpoints * 2 * sizeof(double_t));
   in.pointlist[0] = 0.0;
   in.pointlist[1] = 0.0;
   in.pointlist[2] = 1.0;
@@ -1479,9 +1479,9 @@ void  trmain FONC_2 (VALEUR Ptr,gr,VALEUR Ptr,cl_arg)
   in.pointlist[5] = 9.0;
   in.pointlist[6] = 0.0;
   in.pointlist[7] = 10.0;
-  in.pointattributelist = (REAL *) malloc(in.numberofpoints *
+  in.pointattributelist = (double_t *) malloc(in.numberofpoints *
                                           in.numberofpointattributes *
-                                          sizeof(REAL));
+                                          sizeof(double_t));
   in.pointattributelist[0] = 0.0;
   in.pointattributelist[1] = 1.0;
   in.pointattributelist[2] = 11.0;
@@ -1508,10 +1508,10 @@ void  trmain FONC_2 (VALEUR Ptr,gr,VALEUR Ptr,cl_arg)
   in.numberofholes = 0;
 
   in.numberofregions = 0;
-  in.regionlist = (REAL *) NULL;;
+  in.regionlist = (double_t *) NULL;;
 #if(0)
   in.numberofregions = 1;
-  in.regionlist = (REAL *) malloc(in.numberofregions * 4 * sizeof(REAL));
+  in.regionlist = (double_t *) malloc(in.numberofregions * 4 * sizeof(double_t));
   in.regionlist[0] = 0.5;
   in.regionlist[1] = 5.0;
   in.regionlist[2] = 7.0;            /* Regional attribute (for whole mesh). */
@@ -1525,13 +1525,13 @@ void  trmain FONC_2 (VALEUR Ptr,gr,VALEUR Ptr,cl_arg)
   /* Make necessary initializations so that Triangle can return a */
   /*   triangulation in `mid' and a voronoi diagram in `vorout'.  */
 
-  mid.pointlist = (REAL *) NULL;            /* Not needed if -N switch used. */
+  mid.pointlist = (double_t *) NULL;            /* Not needed if -N switch used. */
   /* Not needed if -N switch used or number of point attributes is zero: */
-  mid.pointattributelist = (REAL *) NULL;
+  mid.pointattributelist = (double_t *) NULL;
   mid.pointmarkerlist = (int *) NULL; /* Not needed if -N or -B switch used. */
   mid.trianglelist = (int *) NULL;          /* Not needed if -E switch used. */
   /* Not needed if -E switch used or number of triangle attributes is zero: */
-  mid.triangleattributelist = (REAL *) NULL;
+  mid.triangleattributelist = (double_t *) NULL;
   mid.neighborlist = (int *) NULL;         /* Needed only if -n switch used. */
   /* Needed only if segments are output (-p or -c) and -P not used: */
   mid.segmentlist = (int *) NULL;
@@ -1540,11 +1540,11 @@ void  trmain FONC_2 (VALEUR Ptr,gr,VALEUR Ptr,cl_arg)
   mid.edgelist = (int *) NULL;             /* Needed only if -e switch used. */
   mid.edgemarkerlist = (int *) NULL;   /* Needed if -e used and -B not used. */
 
-  vorout.pointlist = (REAL *) NULL;        /* Needed only if -v switch used. */
+  vorout.pointlist = (double_t *) NULL;        /* Needed only if -v switch used. */
   /* Needed only if -v switch used and number of attributes is not zero: */
-  vorout.pointattributelist = (REAL *) NULL;
+  vorout.pointattributelist = (double_t *) NULL;
   vorout.edgelist = (int *) NULL;          /* Needed only if -v switch used. */
-  vorout.normlist = (REAL *) NULL;         /* Needed only if -v switch used. */
+  vorout.normlist = (double_t *) NULL;         /* Needed only if -v switch used. */
 
   /* Triangulate the points.  Switches are chosen to read and write a  */
   /*   PSLG (p), preserve the convex hull (c), number everything from  */
@@ -1566,19 +1566,19 @@ void  trmain FONC_2 (VALEUR Ptr,gr,VALEUR Ptr,cl_arg)
   /*   refining the triangulation.                               */
 
   /* Needed only if -r and -a switches used: */
-  mid.trianglearealist = (REAL *) malloc(mid.numberoftriangles * sizeof(REAL));
+  mid.trianglearealist = (double_t *) malloc(mid.numberoftriangles * sizeof(double_t));
   mid.trianglearealist[0] = 3.0;
   mid.trianglearealist[1] = 1.0;
 
   /* Make necessary initializations so that Triangle can return a */
   /*   triangulation in `out'.                                    */
 
-  out.pointlist = (REAL *) NULL;            /* Not needed if -N switch used. */
+  out.pointlist = (double_t *) NULL;            /* Not needed if -N switch used. */
   /* Not needed if -N switch used or number of attributes is zero: */
-  out.pointattributelist = (REAL *) NULL;
+  out.pointattributelist = (double_t *) NULL;
   out.trianglelist = (int *) NULL;          /* Not needed if -E switch used. */
   /* Not needed if -E switch used or number of triangle attributes is zero: */
-  out.triangleattributelist = (REAL *) NULL;
+  out.triangleattributelist = (double_t *) NULL;
 
   /* Refine the triangulation according to the attached */
   /*   triangle area constraints.                       */

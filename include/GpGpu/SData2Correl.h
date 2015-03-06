@@ -31,7 +31,7 @@ struct cellules
 
     cellules():
         Zone(MAXIRECT),
-        Dz(INTERZ)
+        Dz(intERZ)
     {}
 };
 

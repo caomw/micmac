@@ -25,10 +25,10 @@ public :
     static cElHomographie RansacInitH(const ElPackHomologue & aPack,int aNbRansac,int aNbMaxPts);
 
     static cElHomographie Id();
-    static cElHomographie Homotie(Pt2dr aP,REAL aSc);  // -> tr + aSc * P
-    static cElHomographie FromMatrix(const ElMatrix<REAL> &);
+    static cElHomographie Homotie(Pt2dr aP,double_t aSc);  // -> tr + aSc * P
+    static cElHomographie FromMatrix(const ElMatrix<double_t> &);
 
-    void ToMatrix(ElMatrix<REAL> &) const;
+    void ToMatrix(ElMatrix<double_t> &) const;
 
     cElHomographie
     (
@@ -41,7 +41,7 @@ public :
     cElHomographie Inverse() const;
     cElHomographie operator * (const cElHomographie &) const;
     //     P ->  aChSacle * Pol(P/aChSacle)
-    cElHomographie MapingChScale(REAL aChSacle) const;
+    cElHomographie MapingChScale(double_t aChSacle) const;
     void write(class  ELISE_fp & aFile) const;
     static cElHomographie read(ELISE_fp & aFile);
 
@@ -54,7 +54,7 @@ public :
     const cElComposHomographie & HZ() const;
 
     // Renvoie sa representation matricielle en coordonnees homogenes
-    ElMatrix<REAL>  MatCoordHom() const;
+    ElMatrix<double_t>  MatCoordHom() const;
     static cElHomographie  RobustInit(double * aQuality,const ElPackHomologue & aPack,bool & Ok ,int aNbTestEstim, double aPerc,int aNbMaxPts);
 
     static cElHomographie SomPondHom(const std::vector<cElHomographie> & aVH,const std::vector<double> & aVP);

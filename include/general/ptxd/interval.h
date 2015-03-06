@@ -39,8 +39,8 @@ English :
 Header-MicMac-eLiSe-25/06/2007*/
 
 
-#ifndef _ELISE_GENERAL_PTXD_INTERVAL_H
-#define _ELISE_GENERAL_PTXD_INTERVAL_H
+#ifndef _ELISE_GENERAL_PTXD_intERVAL_H
+#define _ELISE_GENERAL_PTXD_intERVAL_H
 
 #include "general/sys_dep.h"
 
@@ -48,12 +48,12 @@ class Interval
 {
    public :
 
-     REAL _v0;   // begin
-     REAL _v1;   // end
+     double_t _v0;   // begin
+     double_t _v1;   // end
 
-     Interval(REAL v0,REAL v1);
+     Interval(double_t v0,double_t v1);
      Interval();
-     REAL dist(const Interval &);
+     double_t dist(const Interval &);
 };
 
 #endif

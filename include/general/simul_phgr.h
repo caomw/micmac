@@ -75,7 +75,7 @@ class cSimulCamera
 	     static cSimulCamera * NewSimCamRad
 		                   (
                                        const cCapteur &,
-				       REAL Focale,
+				       double_t Focale,
 				       Pt2dr Centre, 
 				       ElDistRadiale_PolynImpair
 				   );

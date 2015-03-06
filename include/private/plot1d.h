@@ -90,7 +90,7 @@ class Data_Param_Plot_1d : public RC_Object
              void show_axes(bool auto_flush = true);
              void show_box(bool auto_flush = true);
              void plot(Fonc_Num f);
-             void plot(REAL * x ,REAL * y,INT nb);
+             void plot(double_t * x ,double_t * y,int nb);
              void show_habillage();
 
              Flux_Pts all_pts();
@@ -116,9 +116,9 @@ class Data_Param_Plot_1d : public RC_Object
          Fill_St      _plot_fill_style;    // def value colour of _axes_styles
 
          Box2dr      _box;      // def values =  w.box()
-         REAL        _x_step;   // def values =   1.0
-         REAL        _y_scale;  // relative to x_scale, def value = 1.0
-         REAL        _ori_y;    // relative to box def value = 0.5
+         double_t        _x_step;   // def values =   1.0
+         double_t        _y_scale;  // relative to x_scale, def value = 1.0
+         double_t        _ori_y;    // relative to box def value = 0.5
                                 // set 0.0 for a function > 0
 
          bool         _show_axes; // def value = false

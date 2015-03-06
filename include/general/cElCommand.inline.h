@@ -10,7 +10,7 @@ template <class T> T & cElCommandToken::specialize() { return *((T *)this); }
 
 template <class T> const T & cElCommandToken::specialize() const { return *((const T *)this); }
 
-U_INT8 cElCommandToken::raw_size() const { return string_raw_size( str() )+4; } // 4 = type size
+U_int8 cElCommandToken::raw_size() const { return string_raw_size( str() )+4; } // 4 = type size
 
 void cElCommandToken::trace( std::ostream &io_ostream ) const
 {
@@ -155,11 +155,11 @@ cElRegEx::cElRegEx( const std::string i_fullregex ):cElFilename(i_fullregex){}
 // related functions
 //-------------------------------------------
 
-U_INT8 string_raw_size( const std::string &i_str ){ return 4+i_str.length(); }
+U_int8 string_raw_size( const std::string &i_str ){ return 4+i_str.length(); }
 
 std::string read_string( std::istream &io_istream, std::vector<char> &io_buffer, bool i_reverseByteOrder )
 {
-   U_INT4 ui;
+   U_int4 ui;
    io_istream.read( (char*)(&ui), 4 );
    if ( i_reverseByteOrder ) byte_inv_4( &ui );
    io_buffer.resize(ui);
@@ -169,21 +169,21 @@ std::string read_string( std::istream &io_istream, std::vector<char> &io_buffer,
 
 void write_string( const std::string &str, std::ostream &io_ostream, bool i_reverseByteOrder )
 {
-   U_INT4 ui = str.size();
+   U_int4 ui = str.size();
    if ( i_reverseByteOrder ) byte_inv_4( &ui );
    io_ostream.write( (char*)(&ui), 4 );
    io_ostream.write( str.c_str(), ui );
 }
 
 // int4<->raw
-void int4_to_raw_data( const INT4 &i_v, bool i_reverseByteOrder, char *&o_rawData )
+void int4_to_raw_data( const int4 &i_v, bool i_reverseByteOrder, char *&o_rawData )
 {
    memcpy( o_rawData, &i_v, 4 );
    if ( i_reverseByteOrder ) byte_inv_4( &o_rawData );
    o_rawData += 4;
 }
 
-void int4_from_raw_data( char const *&io_rawData, bool i_reverseByteOrder, INT4 &o_v )
+void int4_from_raw_data( char const *&io_rawData, bool i_reverseByteOrder, int4 &o_v )
 {
    memcpy( &o_v, io_rawData, 4 );
    if ( i_reverseByteOrder ) byte_inv_4( &o_v );
@@ -191,14 +191,14 @@ void int4_from_raw_data( char const *&io_rawData, bool i_reverseByteOrder, INT4 
 }
 
 // uint4<->raw
-void uint4_to_raw_data( const U_INT4 &i_v, bool i_reverseByteOrder, char *&o_rawData )
+void uint4_to_raw_data( const U_int4 &i_v, bool i_reverseByteOrder, char *&o_rawData )
 {
    memcpy( o_rawData, &i_v, 4 );
    if ( i_reverseByteOrder ) byte_inv_4( &o_rawData );
    o_rawData += 4;
 }
 
-void uint4_from_raw_data( const char *&io_rawData, bool i_reverseByteOrder, U_INT4 &o_v )
+void uint4_from_raw_data( const char *&io_rawData, bool i_reverseByteOrder, U_int4 &o_v )
 {
    memcpy( &o_v, io_rawData, 4 );
    if ( i_reverseByteOrder ) byte_inv_4( &o_v );

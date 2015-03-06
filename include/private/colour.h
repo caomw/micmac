@@ -64,14 +64,14 @@ class Data_Elise_Palette : public RC_Object
      public :
          TYOFPAL::t typal() {return _typal;}
           
-         INT     i1() const {return _i1;}
-         INT     i2()  const{return _i2;}
-         INT     nb()  const{return _nb;}
+         int     i1() const {return _i1;}
+         int     i2()  const{return _i2;}
+         int     nb()  const{return _nb;}
 
-         virtual Elise_colour kth_col(INT i) = 0;
-         virtual Elise_colour rkth_col(INT i,REAL);
+         virtual Elise_colour kth_col(int i) = 0;
+         virtual Elise_colour rkth_col(int i,double_t);
 
-         virtual void to_rgb(INT ** rgb,INT ** input,INT nb) ;
+         virtual void to_rgb(int ** rgb,int ** input,int nb) ;
 
 
          virtual bool is_gray_pal();
@@ -81,66 +81,66 @@ class Data_Elise_Palette : public RC_Object
          // to have a single lut for 
          // "lut : values to [0-nb["  o "lut [0 nb[ to pixel indexes"
 
-         virtual INT compr_indice(INT i) const; 
+         virtual int compr_indice(int i) const; 
 
          virtual void verif_out_put(const Arg_Output_Comp &);
 
-         virtual void verif_values_out(Const_INT_PP,INT nb) const = 0;
+         virtual void verif_values_out(Const_int_PP,int nb) const = 0;
 
          // lutage return a data close to what is needed for
          // example in Ximage; out will have  exactly 
          // the size needed by display-depth
 
          virtual void lutage (class Data_Elise_Raster_D *,
-                              U_INT1 * out,INT x0,INT x1,
-                              U_INT2 * lut,
-                              Const_INT_PP vals,INT x0_val) const = 0;
+                              U_int1 * out,int x0,int x1,
+                              U_int2 * lut,
+                              Const_int_PP vals,int x0_val) const = 0;
 
-         // ilutage return a set of INT independantly of 
+         // ilutage return a set of int independantly of 
          // display's depth
 
          void ilutage (class Data_Elise_Raster_D *,
-                              INT * out,INT nb,
-                              U_INT2 * lut,
-                              Const_INT_PP vals);
+                              int * out,int nb,
+                              U_int2 * lut,
+                              Const_int_PP vals);
 
  
-         // out is 1-D, U_INT1; if display is an indexed colour
+         // out is 1-D, U_int1; if display is an indexed colour
          // call the standard lut, else if the palette is mono-dim
          // just copy the results; else generate an error
 
          void clutage (class Data_Elise_Raster_D *,
-                              U_INT1 * out,INT x0,INT x1,
-                              U_INT2 * lut,
-                              Const_INT_PP vals,INT x0_val) const;
+                              U_int1 * out,int x0,int x1,
+                              U_int2 * lut,
+                              Const_int_PP vals,int x0_val) const;
 
 
 
-        INT  ilutage(class Data_Elise_Raster_D *, U_INT2 * lut,const INT * col);
-        void verif_value_out(const INT *);
+        int  ilutage(class Data_Elise_Raster_D *, U_int2 * lut,const int * col);
+        void verif_value_out(const int *);
    
-         virtual INT dim_pal() const = 0;
+         virtual int dim_pal() const = 0;
          // With PS file, for example, bi -color palette generates RGB values
          // (PS-image do not handle 2 components); default : call "dim_pal"
-         virtual INT ps_dim_out() const;
+         virtual int ps_dim_out() const;
 
      protected :
 
 
          virtual    ~Data_Elise_Palette();
-         Data_Elise_Palette(TYOFPAL::t,int NB,INT N1,INT N2);
+         Data_Elise_Palette(TYOFPAL::t,int NB,int N1,int N2);
 
-         INT                 _nb;
-         INT                 _i1;
-         INT                 _i2;
+         int                 _nb;
+         int                 _i1;
+         int                 _i2;
          TYOFPAL::t          _typal;
 
-         inline     void ok_ind_col(INT i);
+         inline     void ok_ind_col(int i);
 
 
          virtual class Elise_PS_Palette * ps_comp(const char * name);
          virtual void  ps_end(class Elise_PS_Palette *,std::ofstream &);
-         virtual void _inst_to_rgb(INT ** rgb,INT ** input,INT nb) = 0;
+         virtual void _inst_to_rgb(int ** rgb,int ** input,int nb) = 0;
 };
 
 
@@ -167,7 +167,7 @@ class  Data_Disp_Pallete
      friend class Data_Disp_Set_Of_Pal;
 
      public :
-            inline U_INT2  * lut_compr() const {return _lut_compr;}
+            inline U_int2  * lut_compr() const {return _lut_compr;}
             inline Data_Elise_Palette * dep_of_ddp() {return _dep;}
      private :
 
@@ -179,9 +179,9 @@ class  Data_Disp_Pallete
 
        Data_Elise_Palette * _dep;
 
-       U_INT2   * _lut_compr;
-       INT      _i1;
-       INT      _i2;
+       U_int2   * _lut_compr;
+       int      _i1;
+       int      _i2;
 };
 
 class Data_Disp_Set_Of_Pal : public RC_Object
@@ -194,8 +194,8 @@ class Data_Disp_Set_Of_Pal : public RC_Object
              return (_last_dep==pal) ? _last_ddp : _priv_ddp_of_dep(pal,svp);
          }
 
-         inline  INT nb() { return _nb;}
-         inline  Data_Disp_Pallete * kth_ddp(INT i) { return _ddp + i;}
+         inline  int nb() { return _nb;}
+         inline  Data_Disp_Pallete * kth_ddp(int i) { return _ddp + i;}
          inline  Elise_Set_Of_Palette  esop() {return _esop;}
 
          Data_Disp_Set_Of_Pal
@@ -211,14 +211,14 @@ class Data_Disp_Set_Of_Pal : public RC_Object
 
          
 
-         INT get_tab_col(Elise_colour *,INT nb_max);
+         int get_tab_col(Elise_colour *,int nb_max);
 
      private :
 
 
          Elise_Set_Of_Palette                     _esop;
          Data_Disp_Pallete                       * _ddp;
-         INT                                        _nb;
+         int                                        _nb;
          Data_Disp_Pallete                       * _last_ddp;
          Data_Elise_Palette                      * _last_dep;
          class Data_Elise_Raster_D              * _derd;

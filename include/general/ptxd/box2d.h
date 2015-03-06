@@ -50,6 +50,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 #include <Flux_Pts>
 #include <SegComp>
 #include <cElTriangleComp>
+#include <BoxFreemanCompil>
 
 template <class Type> class Box2d
 {
@@ -79,7 +80,7 @@ template <class Type> class Box2d
 
      Type   hauteur() const { return _p1.y-_p0.y;}
      Type   largeur() const { return _p1.x-_p0.x;}
-     REAL  diam() const{return euclid(_p0,_p1);}
+     double_t  diam() const{return euclid(_p0,_p1);}
      Type surf() {return hauteur() * largeur();}
      Type x(int i) const {return i ? _p1.x : _p0.x;}
      Type y(int i) const {return i ? _p1.y : _p0.y;}
@@ -97,11 +98,11 @@ template <class Type> class Box2d
      Box2d(){}
      Box2d(Type);
      Box2d(Pt2d<Type>);
-     Box2d(const Pt2d<Type> *,INT aNb);
+     Box2d(const Pt2d<Type> *,int aNb);
      Box2d(Pt2di,Pt2di);
      Box2d(Pt2dr,Pt2dr);  // cast up and down
      Box2d(Pt2dlr,Pt2dlr);  // cast up and down
-     Box2d(const Type *,const Type *,INT);
+     Box2d(const Type *,const Type *,int);
      bool include_in(const Box2d<Type> & b2) const;
      Box2d<Type>  erode(Pt2d<Type>) const;
      Box2d<Type>  dilate(Pt2d<Type>) const;
@@ -142,7 +143,7 @@ template <class Type> class Box2d
 
           // generaux
 
-          INT  freeman_pos(const Pt2dr & pt) const;
+          int  freeman_pos(const Pt2dr & pt) const;
 
           // box point
 
@@ -154,36 +155,36 @@ template <class Type> class Box2d
      bool   Include(const SegComp &) const;
      bool   Include(const Seg2d &) const;
      bool   Include(const cElTriangleComp &) const;
-     REAL8  SquareDist(const Pt2dr &) const;
-     REAL8  SquareDist(const SegComp &) const;
-     REAL8  SquareDist(const Seg2d &) const;
-     REAL8  SquareDist(const Box2d<Type> &) const;
+     double_t  SquareDist(const Pt2dr &) const;
+     double_t  SquareDist(const SegComp &) const;
+     double_t  SquareDist(const Seg2d &) const;
+     double_t  SquareDist(const Box2d<Type> &) const;
 
      void   QSplit(QBox &) const; // Split in 4 box (for Q-Tree)
      void   QSplitWithRab(QBox &,Type aRab) const; // Split in 4 box (for Q-Tree)
      void   Corners(P4 &) const; // Split in 4 box (for Q-Tree)
 
-      void PtsDisc(std::vector<Pt2dr> &,INT aNbPts);
+      void PtsDisc(std::vector<Pt2dr> &,int aNbPts);
    private :
-        typedef REAL8 (Box2d<Type>:: * R_fonc_Pt2dr)(const Pt2dr &) const;
+        typedef double_t (Box2d<Type>:: * R_fonc_Pt2dr)(const Pt2dr &) const;
 
-        REAL  Freem0SquareDist(const Pt2dr &) const;
-        REAL  Freem1SquareDist(const Pt2dr &) const;
-        REAL  Freem2SquareDist(const Pt2dr &) const;
-        REAL  Freem3SquareDist(const Pt2dr &) const;
-        REAL  Freem4SquareDist(const Pt2dr &) const;
-        REAL  Freem5SquareDist(const Pt2dr &) const;
-        REAL  Freem6SquareDist(const Pt2dr &) const;
-        REAL  Freem7SquareDist(const Pt2dr &) const;
-        REAL  Freem8SquareDist(const Pt2dr &) const;
+        double_t  Freem0SquareDist(const Pt2dr &) const;
+        double_t  Freem1SquareDist(const Pt2dr &) const;
+        double_t  Freem2SquareDist(const Pt2dr &) const;
+        double_t  Freem3SquareDist(const Pt2dr &) const;
+        double_t  Freem4SquareDist(const Pt2dr &) const;
+        double_t  Freem5SquareDist(const Pt2dr &) const;
+        double_t  Freem6SquareDist(const Pt2dr &) const;
+        double_t  Freem7SquareDist(const Pt2dr &) const;
+        double_t  Freem8SquareDist(const Pt2dr &) const;
 
         friend  class BoxFreemanCompil<Type>;
-        REAL8  SquareDist(const Pt2dr &,INT c) const;
+        double_t  SquareDist(const Pt2dr &,int c) const;
 
         static R_fonc_Pt2dr _Tab_FreemSquareDist[9];
 };
 
-typedef Box2d<INT> Box2di;
-typedef Box2d<REAL> Box2dr;
+typedef Box2d<int> Box2di;
+typedef Box2d<double_t> Box2dr;
 
 #endif

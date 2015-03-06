@@ -47,53 +47,57 @@ Header-MicMac-eLiSe-25/06/2007*/
 #include <Pt2d>
 #include <PRC0>
 
+#include <string>
+#include <vector>
+
 class cElCompileFN;
 class ElGrowingSetInd;
+class PtsKD;
 
 class Fonc_Num : public  PRC0
 {
    friend class Arg_FNOPB;
 
    public :
-     REAL ValFoncGen(Pt2di) const;  
-     REAL ValFoncGenR(Pt2dr) const;  
+     double ValFoncGen(Pt2di) const;
+     double ValFoncGenR(Pt2dr) const;
           // valable qqsoit la fonction, assez long
-         // REAL ValFonc(const class PtsKD &) const; pour les fonction analytique
+         // double ValFonc(const class PtsKD &) const; pour les fonction analytique
 
      std::string NameCpp();
      bool        HasNameCpp();
      void        SetNameCpp(const std::string &);
 
-     ~Fonc_Num();
-     Fonc_Num(INT);
-     Fonc_Num(INT,INT);
+     ~Fonc_Num() {}
+     Fonc_Num(int);
+     Fonc_Num(int,int);
      Fonc_Num(Pt2di);
-     Fonc_Num(INT,INT,INT);
-     Fonc_Num(INT,INT,INT,INT);
-     Fonc_Num(REAL);
-     Fonc_Num(REAL,REAL);
+     Fonc_Num(int,int,int);
+     Fonc_Num(int,int,int,int);
+     Fonc_Num(double);
+     Fonc_Num(double,double);
      Fonc_Num(Pt2dr);
-     Fonc_Num(REAL,REAL,REAL);
-     Fonc_Num(REAL,REAL,REAL,REAL);
+     Fonc_Num(double,double,double);
+     Fonc_Num(double,double,double,double);
      Fonc_Num(class Fonc_Num_Not_Comp *);
 
      void compile(cElCompileFN &);
      bool integral_fonc (bool integral_flux) const ;
-     INT dimf_out() const;
-     REAL ValFonc(const class PtsKD &) const;
-     Fonc_Num deriv(INT kth) const;
+     int dimf_out() const;
+     double ValFonc(const class PtsKD &) const;
+     Fonc_Num deriv(int kth) const;
      Fonc_Num deriv(class cVarSpec ) const;
-     INT DegrePoly() const; // retourne  conventionnellement -1 si pas polynome
+     int DegrePoly() const; // retourne  conventionnellement -1 si pas polynome
 
      void VarDerNN(ElGrowingSetInd &) const; // Remplit l'indexe des variable a derivee non nulle
-	 REAL ValDeriv(const  PtsKD &  pts,INT k) const;
-	 INT  NumCoord() const; // En qq sorte la fonc inverse de kth_coord, 
+         double ValDeriv(const  PtsKD &  pts,int k) const;
+         int  NumCoord() const; // En qq sorte la fonc inverse de kth_coord,
 	                        // => Erreur si pas une fonc coord
      void show(std::ostream & os) const;
      bool is0() const;
      bool is1() const;
-     bool IsCsteRealDim1(REAL & aVal) const;
-     bool IsCsteRealDim1(INT  & aVal) const;
+     bool IsCstedoubleDim1(double & aVal) const;
+     bool IsCstedoubleDim1(int  & aVal) const;
 
      Fonc_Num operator [] (Fonc_Num);
      
@@ -102,7 +106,7 @@ class Fonc_Num : public  PRC0
      Fonc_Num v2();     // = kth_proj(*this,2);
 
      Fonc_Num permut(const std::vector<int>&  kth) const;
-     Fonc_Num kth_proj(INT kth) const;
+     Fonc_Num kth_proj(int kth) const;
      Fonc_Num shift_coord(int shift) const;
 
 
@@ -113,8 +117,8 @@ class Fonc_Num : public  PRC0
   //  private :
 
      static const Fonc_Num No_Fonc; // used as defualt values for some foncs,
-                                    // really point to 0 !
-     bool really_a_fonc() const;  // does it point to non 0
+                                    // doublely point to 0 !
+     bool doublely_a_fonc() const;  // does it point to non 0
 
 
    //  Permet de comparer formellement deux expression formelle 
@@ -132,7 +136,7 @@ class Fonc_Num : public  PRC0
                    eIsUnknown
                 }  tKindOfExpr;
 
-       INT CmpFormel(const Fonc_Num &) const;
+       int CmpFormel(const Fonc_Num &) const;
        tKindOfExpr KindOfExpr() const;
        bool IsVarSpec() const;
        bool IsAtom() const;
@@ -142,7 +146,7 @@ class Fonc_Num : public  PRC0
 
    protected :
      class cTagCsteDer {};
-     Fonc_Num (cTagCsteDer,REAL aVal,INT anInd,const std::string & );
+     Fonc_Num (cTagCsteDer,double aVal,int anInd,const std::string & );
 };
 
 #endif

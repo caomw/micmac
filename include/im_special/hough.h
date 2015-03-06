@@ -64,9 +64,9 @@ class ElHough : public Mcheck
 		// Fonction relativement couteuses car font appel a des transfo de
 		// hough
 
-		virtual REAL DynamicModeValues() = 0;
-		virtual REAL DynamicModeGradient() = 0;
-		REAL Dynamic(tModeAccum) ;
+		virtual double_t DynamicModeValues() = 0;
+		virtual double_t DynamicModeGradient() = 0;
+		double_t Dynamic(tModeAccum) ;
 
 
 		static void BenchPolygoneClipBandeVert();
@@ -76,13 +76,13 @@ class ElHough : public Mcheck
 		Pt2di SzTR() const {return Pt2di(mNbTeta,mNbRho);}
 		Pt2di SzTR_Tot() const {return Pt2di(NbTetaTot(),mNbRho);}
 
-		INT NbX() const {return mNbX;}
-		INT NbY() const {return mNbY;}
-		INT NbTeta() const {return mNbTeta;}
-		INT NbRho() const {return mNbRho;}
-		virtual INT NbRabTeta() const =0;
-		virtual INT NbRabRho()  const =0;
-		INT NbTetaTot()  const {return NbTeta()+2*NbRabTeta();}
+		int NbX() const {return mNbX;}
+		int NbY() const {return mNbY;}
+		int NbTeta() const {return mNbTeta;}
+		int NbRho() const {return mNbRho;}
+		virtual int NbRabTeta() const =0;
+		virtual int NbRabRho()  const =0;
+		int NbTetaTot()  const {return NbTeta()+2*NbRabTeta();}
 
                 typedef enum
                 {
@@ -95,70 +95,70 @@ class ElHough : public Mcheck
             static ElHough * NewOne
                              (
                                   Pt2di Sz,     // taille en XY
-                                  REAL StepRho,  // Pas en pixel
-                                  REAL StepTeta, // Pas en equiv pixel pour la diag
+                                  double_t StepRho,  // Pas en pixel
+                                  double_t StepTeta, // Pas en equiv pixel pour la diag
                                   Mode,          // mode d'accum
-                                  REAL RabRho,   // rab en pixel sur l'accum
-                                  REAL RabTeta   // rab en radian sur l'accum
+                                  double_t RabRho,   // rab en pixel sur l'accum
+                                  double_t RabTeta   // rab en radian sur l'accum
                               );
             static ElHough * NewOne(const std::string &);
 
-            virtual Im2D_INT4 PdsInit() = 0;
-            virtual INT NbCel() const = 0;
+            virtual Im2D_int4 PdsInit() = 0;
+            virtual int NbCel() const = 0;
             virtual void write_to_file(const std::string & name) const = 0 ;
 
 
             // ON PASSE L'IMAGE de POIDS CA RETOURNE L'ACCUMULATEUR
-            virtual Im2D_INT4 Pds(Im2D_U_INT1) =0;
+            virtual Im2D_int4 Pds(Im2D_U_int1) =0;
 
             // ON PASSE L'IMAGE CA RETOURNE L'ACCUMULATEUR, CA UTILISE l'ANGLE DU GRAD, il
             // doit etre reetale entre 0 et 256
             //
-            virtual Im2D_INT4 PdsAng(Im2D_U_INT1 aImPds,Im2D_U_INT1 aImTeta,REAL Incert,bool IsGrad=true) =0;
+            virtual Im2D_int4 PdsAng(Im2D_U_int1 aImPds,Im2D_U_int1 aImTeta,double_t Incert,bool IsGrad=true) =0;
 
             virtual Seg2d Grid_Hough2Euclid(Pt2dr) const = 0;
             virtual Pt2dr Grid_Euclid2Hough(Seg2d) const = 0;
             virtual  void CalcMaxLoc
                      (   
-                         Im2D_INT4,
+                         Im2D_int4,
                          std::vector<Pt2di> & Pts, 
-                         REAL VoisRho, 
-                         REAL VoisTeta, 
-                         REAL Vmin
+                         double_t VoisRho, 
+                         double_t VoisTeta, 
+                         double_t Vmin
                      ) = 0;  
 
             virtual bool BandeConnectedVsup
                          (
                               Pt2di       p1,
                               Pt2di       p2,
-                              Im2D_INT4   Im,
-                              INT         VInf,
-                              REAL        Tol
+                              Im2D_int4   Im,
+                              int         VInf,
+                              double_t        Tol
                          ) = 0;
              virtual void FiltrMaxLoc_BCVS
                           (
                                 std::vector<Pt2di> & Pts,
-                                Im2D_INT4 Im,
-                                REAL  FactInf,
-                                REAL  TolGeom,
-                                REAL   VoisRho,
-                                REAL   VoisTeta
+                                Im2D_int4 Im,
+                                double_t  FactInf,
+                                double_t  TolGeom,
+                                double_t   VoisRho,
+                                double_t   VoisTeta
                           ) = 0;         
 
             virtual ~ElHough();
 
 
      protected :
-		ElHough(Pt2di Sz,REAL StepTeta);
-		void SetNbRho(INT);
-        REAL LongEstimTeta() const;
+		ElHough(Pt2di Sz,double_t StepTeta);
+		void SetNbRho(int);
+        double_t LongEstimTeta() const;
 
-		REAL       mStepTetaInit;
+		double_t       mStepTetaInit;
      private :
-		const INT  mNbX;
-		const INT  mNbY;
-		const INT  mNbTeta;
-		INT        mNbRho;
+		const int  mNbX;
+		const int  mNbY;
+		const int  mNbTeta;
+		int        mNbRho;
 		Mode       mMode;
 
          // Non Implem
@@ -167,7 +167,7 @@ class ElHough : public Mcheck
 };               
 
 
-void ElSegMerge(std::vector<Seg2d> & VecInits,REAL dLong,REAL dLarg);
+void ElSegMerge(std::vector<Seg2d> & VecInits,double_t dLong,double_t dLarg);
 
 
 
@@ -177,7 +177,7 @@ class ElHoughFiltSeg // : public ElHoughFiltSeg
 {
       public :
 
-         ElHoughFiltSeg(REAL Step,REAL Width,REAL LentghMax,Pt2di SzBox);
+         ElHoughFiltSeg(double_t Step,double_t Width,double_t LentghMax,Pt2di SzBox);
          virtual ~ElHoughFiltSeg();
          void SetSeg(const SegComp &);
 
@@ -192,49 +192,49 @@ class ElHoughFiltSeg // : public ElHoughFiltSeg
 
           Pt2di SzMax() const;
           Pt2di SzCur() const;
-          INT   YCentreCur() const ; 
+          int   YCentreCur() const ; 
    
-          void GenPrgDynGet(std::vector<Seg2d> &,REAL dMin);
+          void GenPrgDynGet(std::vector<Seg2d> &,double_t dMin);
 
 
 
-		  // Marche pour Im2D_U_INT1 et Im2D_INT1, car fait appel OptimSeg ...
-          Seg2d ExtendSeg(SegComp s0,REAL DeltaMin,Im2DGen & Im);
+		  // Marche pour Im2D_U_int1 et Im2D_int1, car fait appel OptimSeg ...
+          Seg2d ExtendSeg(SegComp s0,double_t DeltaMin,Im2DGen & Im);
 
-          REAL Step() const {return mStep;}
+          double_t Step() const {return mStep;}
 
-          virtual REAL CostState(bool IsSeg,INT Abcisse) = 0;
-          virtual REAL CostChange ( bool IsSeg, INT Abcisse, INT Abcisse2); 
-          virtual REAL AverageCostChange () = 0; 
+          virtual double_t CostState(bool IsSeg,int Abcisse) = 0;
+          virtual double_t CostChange ( bool IsSeg, int Abcisse, int Abcisse2); 
+          virtual double_t AverageCostChange () = 0; 
           virtual bool ExtrFree(); // return false
-          virtual REAL CostNeutre() ;  // 0.5
+          virtual double_t CostNeutre() ;  // 0.5
 
 
-		  void ExtendImage_proj(Im2D_U_INT1,INT Delta = (1<<30));
+		  void ExtendImage_proj(Im2D_U_int1,int Delta = (1<<30));
       protected  :
 
           Seg2d OneExtendSeg (bool& Ok,SegComp s0,Im2DGen & Im);
-          void MakeIm(Im2D_U_INT1 Res,Im2D_U_INT1 InPut,U_INT1 def);
-          void MakeIm(Im2D_INT1 Res,Im2D_INT1 InPut,INT1 def);
+          void MakeIm(Im2D_U_int1 Res,Im2D_U_int1 InPut,U_int1 def);
+          void MakeIm(Im2D_int1 Res,Im2D_int1 InPut,int1 def);
 		  virtual void UpdateSeg() = 0;
 
       // private :
 
-         void VerifSize(Im2D_U_INT1 anIm);
-         void VerifSize(Im2D_INT1 anIm);
-         void VerifSize(Im1D_U_INT1 anIm);
+         void VerifSize(Im2D_U_int1 anIm);
+         void VerifSize(Im2D_int1 anIm);
+         void VerifSize(Im1D_U_int1 anIm);
 
-/*          static const INT  NbBits = 8; */
+/*          static const int  NbBits = 8; */
 	 enum { NbBits = 8 };
          
-         REAL                    mStep;
-         REAL                    mWidthMax;
-         REAL                    mLengthMax;
-         INT                     mNbXMax;
-         INT                     mNbYMax;
+         double_t                    mStep;
+         double_t                    mWidthMax;
+         double_t                    mLengthMax;
+         int                     mNbXMax;
+         int                     mNbYMax;
 
-         REAL                    mLength;
-         INT                     mNbX;
+         double_t                    mLength;
+         int                     mNbX;
 
          Pt2dr                        mInvTgtSeg;
          Pt2dr                        mCS2Loc;
@@ -242,7 +242,7 @@ class ElHoughFiltSeg // : public ElHoughFiltSeg
          Pt2dr                        mCS2Abs;
          Pt2dr                        mP02Abs;
          EHFS_PrgDyn *                mPrgDyn;
-         std::vector<std::pair<INT,INT> >  mVPairI;
+         std::vector<std::pair<int,int> >  mVPairI;
          std::vector<Seg2d>           mVSegsExt;
 		 Box2di                       mBox;
 
@@ -256,29 +256,29 @@ class EHFS_ScoreIm : public ElHoughFiltSeg
 
           EHFS_ScoreIm
 		  (
-		       REAL         Step,
-			   REAL         Width,
-			   REAL         LentghMax,
-			   Im2D_U_INT1  ImGlob,
-			   REAL         CostChg,
-			   REAL         VMinRadiom = 255.0
+		       double_t         Step,
+			   double_t         Width,
+			   double_t         LentghMax,
+			   Im2D_U_int1  ImGlob,
+			   double_t         CostChg,
+			   double_t         VMinRadiom = 255.0
 		  );
 
-          Im2D_U_INT1  ImLoc();
-		  void ExtendImage_proj(INT Delta = (1<<30));
+          Im2D_U_int1  ImLoc();
+		  void ExtendImage_proj(int Delta = (1<<30));
 
 	  private :
 
-          virtual REAL CostState(bool IsSeg,INT Abcisse);
-          virtual REAL AverageCostChange ();
+          virtual double_t CostState(bool IsSeg,int Abcisse);
+          virtual double_t AverageCostChange ();
 
 		  void UpdateSeg();
 
-          Im2D_U_INT1             mImLoc;
-		  U_INT1 *                mGainIfSeg;
-          Im2D_U_INT1             mImGlob;
-          REAL                    mCostChg;      
-		  REAL                    mVminRadiom;
+          Im2D_U_int1             mImLoc;
+		  U_int1 *                mGainIfSeg;
+          Im2D_U_int1             mImGlob;
+          double_t                    mCostChg;      
+		  double_t                    mVminRadiom;
 };
 
 
@@ -291,73 +291,73 @@ class EHFS_ScoreGrad : public ElHoughFiltSeg
 
           EHFS_ScoreGrad
 		  (
-		       REAL         Step,
-			   REAL         Width,
-			   REAL         LentghMax,
-			   Im2D_INT1    ImGlobGX,
-			   Im2D_INT1    ImGlobGY,
-			   REAL         CostChg,
-			   REAL         EcarTeta,
-			   REAL         EcarMaxLoc,
-			   REAL         SeuilGrad
+		       double_t         Step,
+			   double_t         Width,
+			   double_t         LentghMax,
+			   Im2D_int1    ImGlobGX,
+			   Im2D_int1    ImGlobGY,
+			   double_t         CostChg,
+			   double_t         EcarTeta,
+			   double_t         EcarMaxLoc,
+			   double_t         SeuilGrad
 		  );
 
-          Im2D_U_INT1 ImLocGRho();
-          Im2D_U_INT1 ImLocGTeta();
-          Im1D_U_INT1 ImMaxLoc();
+          Im2D_U_int1 ImLocGRho();
+          Im2D_U_int1 ImLocGTeta();
+          Im1D_U_int1 ImMaxLoc();
 
-		  void TestGain(INT x);
+		  void TestGain(int x);
 
       private  :
 
-          void MakeImGradXY ( Im2D_INT1 OutGx, Im2D_INT1 OutGy,
-                              Im2D_INT1 InPutGx, Im2D_INT1 InPutGy,
-                              INT1 def
+          void MakeImGradXY ( Im2D_int1 OutGx, Im2D_int1 OutGy,
+                              Im2D_int1 InPutGx, Im2D_int1 InPutGy,
+                              int1 def
                             );
 
           void MakeImGradRhoTeta
-                            ( Im2D_U_INT1 OutRho, Im2D_U_INT1 OutTeta,
-                              Im2D_INT1 InPutGx, Im2D_INT1 InPutGy,
-                              INT1 def
+                            ( Im2D_U_int1 OutRho, Im2D_U_int1 OutTeta,
+                              Im2D_int1 InPutGx, Im2D_int1 InPutGy,
+                              int1 def
                             );
 
-          void   MakeImMaxLoc(Im1D_U_INT1 ImMaxLoc,Im2D_U_INT1 InRho);
+          void   MakeImMaxLoc(Im1D_U_int1 ImMaxLoc,Im2D_U_int1 InRho);
 
 		  void MakeGainIfSeg();
 
-         virtual REAL CostState(bool IsSeg,INT Abcisse);
-         virtual REAL AverageCostChange();
+         virtual double_t CostState(bool IsSeg,int Abcisse);
+         virtual double_t AverageCostChange();
 
 		 void UpdateSeg();
 
-         Im2D_INT1        mImLocGX;
-         Im2D_INT1        mImLocGY;
-         Im2D_U_INT1      mImLocGRho;
-		 U_INT1 **        mDataLocRho;
-         Im2D_U_INT1      mImLocGTeta;
-		 U_INT1 **        mDataLocTeta;
-         Im1D_U_INT1      mImYMaxLoc;
-	     U_INT1 *         mDataYMaxLoc;
+         Im2D_int1        mImLocGX;
+         Im2D_int1        mImLocGY;
+         Im2D_U_int1      mImLocGRho;
+		 U_int1 **        mDataLocRho;
+         Im2D_U_int1      mImLocGTeta;
+		 U_int1 **        mDataLocTeta;
+         Im1D_U_int1      mImYMaxLoc;
+	     U_int1 *         mDataYMaxLoc;
 
-         Im2D_INT1        mImGlobGX;
-         Im2D_INT1        mImGlobGY;
+         Im2D_int1        mImGlobGX;
+         Im2D_int1        mImGlobGY;
 
-		 REAL             mCostChgt;
+		 double_t             mCostChgt;
 
-		 //REAL             mEcarTeta;
-         Im1D_REAL8       mPdsTeta;
-         REAL8 *          mDataPdsTeta;
+		 //double_t             mEcarTeta;
+         Im1D_double_t8       mPdsTeta;
+         double_t8 *          mDataPdsTeta;
 
-		 //REAL8            mEcarMaxLoc;
-         Im1D_REAL8       mPdsMaxLoc;
-         REAL8 *          mDataPdsMaxLoc;
+		 //double_t8            mEcarMaxLoc;
+         Im1D_double_t8       mPdsMaxLoc;
+         double_t8 *          mDataPdsMaxLoc;
 
-		 //REAL8            mSeuilGrad;
-         Im1D_REAL8       mPdsRho;
-         REAL8 *          mDataPdsRho;    
+		 //double_t8            mSeuilGrad;
+         Im1D_double_t8       mPdsRho;
+         double_t8 *          mDataPdsRho;    
 
-         Im1D_REAL8       mGainIfSeg;
-		 REAL8 *          mDataGainIfSeg;
+         Im1D_double_t8       mGainIfSeg;
+		 double_t8 *          mDataGainIfSeg;
 };
 
 

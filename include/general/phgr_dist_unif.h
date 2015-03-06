@@ -102,7 +102,7 @@ class  cDist_Param_Unif_Gen : public ElDistortion22_Gen
 	const Pt2dr  & SzIm() const;
 
 	virtual int TypeModele() const = 0;  // En fait un enum
-        virtual void  Diff(ElMatrix<REAL> &,Pt2dr) const ;
+        virtual void  Diff(ElMatrix<double_t> &,Pt2dr) const ;
 
 
     protected :
@@ -163,7 +163,7 @@ template <class TDistR,class TDistF,const int NbVar,const int NbState>
 class cCamera_Param_Unif_Gen :  public CamStenope
 {
     public :
-        cCamera_Param_Unif_Gen(bool isDistC2M,REAL Focale, Pt2dr PP,const tParamAFocal  &);
+        cCamera_Param_Unif_Gen(bool isDistC2M,double_t Focale, Pt2dr PP,const tParamAFocal  &);
 	~cCamera_Param_Unif_Gen();
 	virtual cDist_Param_Unif_Gen & DistUnifGen() = 0;
 	virtual const cDist_Param_Unif_Gen & DistUnifGen() const = 0;
@@ -193,7 +193,7 @@ template <class TDistR,class TDistF,const int NbVar,const int NbState>
            cCamera_Param_Unif
 	   (
 	            bool isDistC2M,
-	            REAL Focale, 
+	            double_t Focale, 
 		    Pt2dr PP,
 		    Pt2dr aSzIm,
                     const tParamAFocal  &,

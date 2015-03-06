@@ -46,50 +46,50 @@ class BoiteR : public PRC0
 {
    public :
 
-       Im3D_REAL8  _boite;
-       Im2D_INT2  _masq;
-       REAL8***   _boite_d;
-       INT2**     _masq_d;
+       Im3D_double_t8  _boite;
+       Im2D_int2  _masq;
+       double_t8***   _boite_d;
+       int2**     _masq_d;
        Pt3dr      _p0;
        Pt3dr      _pas;
        Pt3dr      _d1;
        Pt3dr      _d2;
        Pt3dr      _d3;
-       INT        _tx;
-       INT        _ty;
-       INT        _tz;
+       int        _tx;
+       int        _ty;
+       int        _tz;
        
        BoiteR(); 
        BoiteR(Boite& b);
        
-       Im3D_REAL8  boite()                          { return _boite;};
-       REAL8       boite(INT x,INT y,INT z)         { return _boite.data()[z][y][x]; };
-       REAL8       boite(Pt3di p)                   { return _boite.data()[p.z][p.y][p.x]; };
-       void        boite(INT x,INT y,INT z,REAL8 v) { _boite.data()[z][y][x] = v; };
-       void        boite(Pt3di p, REAL8 v)          { _boite.data()[p.z][p.y][p.x] = v; };
+       Im3D_double_t8  boite()                          { return _boite;};
+       double_t8       boite(int x,int y,int z)         { return _boite.data()[z][y][x]; };
+       double_t8       boite(Pt3di p)                   { return _boite.data()[p.z][p.y][p.x]; };
+       void        boite(int x,int y,int z,double_t8 v) { _boite.data()[z][y][x] = v; };
+       void        boite(Pt3di p, double_t8 v)          { _boite.data()[p.z][p.y][p.x] = v; };
        
-       Im2D_INT2   masq()                           { return _masq; };
-       INT2        masq(INT x,INT y)                { return _masq.data()[y][x]; };
-       INT2        masq(Pt2di p)                    { return _masq.data()[p.y][p.x]; };
-       void        masq(INT x,INT y, INT2 v)        { _masq.data()[y][x]=v; };
-       void        masq(Pt2di p, INT2 v)            { _masq.data()[p.y][p.x]=v; };
-       void        masq(Im2D_INT2 masq)             { ELISE_COPY(_masq.all_pts(),masq.in(0),_masq.out()); };
+       Im2D_int2   masq()                           { return _masq; };
+       int2        masq(int x,int y)                { return _masq.data()[y][x]; };
+       int2        masq(Pt2di p)                    { return _masq.data()[p.y][p.x]; };
+       void        masq(int x,int y, int2 v)        { _masq.data()[y][x]=v; };
+       void        masq(Pt2di p, int2 v)            { _masq.data()[p.y][p.x]=v; };
+       void        masq(Im2D_int2 masq)             { ELISE_COPY(_masq.all_pts(),masq.in(0),_masq.out()); };
        
-       INT   tx()  { return _tx;  };
-       INT   ty()  { return _ty;  };
-       INT   tz()  { return _tz;  };
+       int   tx()  { return _tx;  };
+       int   ty()  { return _ty;  };
+       int   tz()  { return _tz;  };
        Pt3dr p0()  { return _p0;  };
        Pt3dr pas() { return _pas; };
        Pt3dr d1()  { return _d1;  };
        Pt3dr d2()  { return _d2;  };
        Pt3dr d3()  { return _d3;  };
 
-       void   initialiser(REAL8 v=0)                { ELISE_COPY(_boite.all_pts(), 0., _boite.out()); };
+       void   initialiser(double_t8 v=0)                { ELISE_COPY(_boite.all_pts(), 0., _boite.out()); };
 
        void correl(  Boite& b_g, 
                      Boite& b_d, 
-                     INT semi_fenet, 
-                     INT dif_ng=40 
+                     int semi_fenet, 
+                     int dif_ng=40 
                   );
 
        void max_z();

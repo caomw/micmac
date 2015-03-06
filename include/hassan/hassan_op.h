@@ -44,7 +44,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 /*    correlation  entre deux images                                       */
 /***************************************************************************/
 
-class H_Oper_Correl_Im : public Simple_OPBuf1<REAL,REAL>
+class H_Oper_Correl_Im : public Simple_OPBuf1<double_t,double_t>
 {
    public :
         H_Oper_Correl_Im (){}
@@ -52,8 +52,8 @@ class H_Oper_Correl_Im : public Simple_OPBuf1<REAL,REAL>
    private :
        void  calc_buf
                      (
-                           REAL ** output,
-                           REAL *** input
+                           double_t ** output,
+                           double_t *** input
                      );
 };
 
@@ -62,7 +62,7 @@ class H_Oper_Correl_Im : public Simple_OPBuf1<REAL,REAL>
 /*    correlation avec une contriante de region de l'image gauche          */
 /***************************************************************************/
 
-class H_Oper_Correl : public Simple_OPBuf1<REAL,REAL>
+class H_Oper_Correl : public Simple_OPBuf1<double_t,double_t>
 {
    public :
         H_Oper_Correl (){}
@@ -70,8 +70,8 @@ class H_Oper_Correl : public Simple_OPBuf1<REAL,REAL>
    private :
        void  calc_buf
                      (
-                           REAL ** output,
-                           REAL *** input
+                           double_t ** output,
+                           double_t *** input
                      );
 };
 
@@ -79,7 +79,7 @@ class H_Oper_Correl : public Simple_OPBuf1<REAL,REAL>
 /*    correlation avec une contriante de region de l'image gauche          */
 /***************************************************************************/
 
-class H_Oper_Correl_Cont : public Simple_OPBuf1<REAL,REAL>
+class H_Oper_Correl_Cont : public Simple_OPBuf1<double_t,double_t>
 {
    public :
         H_Oper_Correl_Cont (){}
@@ -87,8 +87,8 @@ class H_Oper_Correl_Cont : public Simple_OPBuf1<REAL,REAL>
    private :
        void  calc_buf
                      (
-                           REAL ** output,
-                           REAL *** input
+                           double_t ** output,
+                           double_t *** input
                      );
 };
 
@@ -96,21 +96,21 @@ class H_Oper_Correl_Cont : public Simple_OPBuf1<REAL,REAL>
 /*    filtrage selon les moindres carrees avec une contrainte de region    */
 /***************************************************************************/
 
-class H_Oper_Md_Car : public Simple_OPBuf1<REAL,REAL>
+class H_Oper_Md_Car : public Simple_OPBuf1<double_t,double_t>
 {
    public :
-        H_Oper_Md_Car (INT param) : _param(param),_tab (0){}
+        H_Oper_Md_Car (int param) : _param(param),_tab (0){}
 	virtual ~H_Oper_Md_Car();
-        virtual  Simple_OPBuf1<REAL,REAL> * dup_comp();   
+        virtual  Simple_OPBuf1<double_t,double_t> * dup_comp();   
      
    private :
        void  calc_buf
                      (
-                           REAL ** output,
-                           REAL *** input
+                           double_t ** output,
+                           double_t *** input
                      );
-	INT _param;
-        REAL  *_tab;
+	int _param;
+        double_t  *_tab;
 };  
 
 
@@ -121,32 +121,32 @@ class H_Oper_Md_Car : public Simple_OPBuf1<REAL,REAL>
 class Moind_Car
 {
    public:
-      Moind_Car(INT param = 1);
+      Moind_Car(int param = 1);
       ~Moind_Car();
 
-      void push(REAL * v_point, REAL poid=1);      
-      void push(Pt3dr p, REAL poid=1);     
-      void enlev(Pt3dr p, REAL poid=1);
+      void push(double_t * v_point, double_t poid=1);      
+      void push(Pt3dr p, double_t poid=1);     
+      void enlev(Pt3dr p, double_t poid=1);
       void mis_en_zero();
       bool calc();
       bool statu();
-      REAL get_param(INT i);
-      REAL get_z(Pt2dr p);
-      REAL get_z(Pt3dr p);
-      REAL get_mq();
+      double_t get_param(int i);
+      double_t get_z(Pt2dr p);
+      double_t get_z(Pt3dr p);
+      double_t get_mq();
 
    private:
-      REAL ** _tab;
-      REAL *  _buf;
-      REAL *  _prm;
-      REAL *  _vect;
-      REAL    _poid;
-      REAL    _residu;
+      double_t ** _tab;
+      double_t *  _buf;
+      double_t *  _prm;
+      double_t *  _vect;
+      double_t    _poid;
+      double_t    _residu;
       bool    _statu;
-      INT     _param; 
-      INT     _n; 
+      int     _param; 
+      int     _n; 
       void    ajout();  
-      void    vect(Pt3dr p, REAL poid);    
+      void    vect(Pt3dr p, double_t poid);    
 };
 
 
@@ -155,18 +155,18 @@ class Moind_Car
 /*    filtrage selon les moindres carrees avec une contrainte de region et poid de coef de corr  */
 /*************************************************************************************************/
 
-class H_Oper_Md_Car_Poid : public Simple_OPBuf1<REAL,REAL>
+class H_Oper_Md_Car_Poid : public Simple_OPBuf1<double_t,double_t>
 {
    public :
-        H_Oper_Md_Car_Poid (INT param):_param(param),_mc(param){}
+        H_Oper_Md_Car_Poid (int param):_param(param),_mc(param){}
      
    private :
        void  calc_buf
                      (
-                           REAL ** output,
-                           REAL *** input
+                           double_t ** output,
+                           double_t *** input
                      );
-      INT _param;
+      int _param;
       Moind_Car _mc;
 };  
 

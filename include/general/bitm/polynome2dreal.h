@@ -1,5 +1,5 @@
-#ifndef _ELISE_GENERAL_BITM_POLYNOME2DREAL_H
-#define _ELISE_GENERAL_BITM_POLYNOME2DREAL_H
+#ifndef _ELISE_GENERAL_BITM_POLYNOME2Ddouble_t_H
+#define _ELISE_GENERAL_BITM_POLYNOME2Ddouble_t_H
 
 #include "general/sys_dep.h"
 
@@ -10,60 +10,60 @@ class Polynome2dReal
             static Polynome2dReal FromVect(const std::vector<double>&,double anAmp);
 
 
-            Polynome2dReal(INT aD0,REAL anAmpl); // Contient tous les monomes, avec un coeff 1.0
-            void SetDegre1(REAL aV0,REAL aVX, REAL aVY,bool AnnulOthers = true);
+            Polynome2dReal(int aD0,double_t anAmpl); // Contient tous les monomes, avec un coeff 1.0
+            void SetDegre1(double_t aV0,double_t aVX, double_t aVY,bool AnnulOthers = true);
 
-            REAL operator () (Pt2dr aP) const;
+            double_t operator () (Pt2dr aP) const;
             Pt2dr grad(Pt2dr aP) const;
-            INT NbMonome() const;
-            const Monome2dReal &  KthMonome(INT) const;
-            INT    DegreX(INT) const;
-            INT    DegreY(INT) const;
-            INT    DegreTot(INT) const;
+            int NbMonome() const;
+            const Monome2dReal &  KthMonome(int) const;
+            int    DegreX(int) const;
+            int    DegreY(int) const;
+            int    DegreTot(int) const;
 
 
-            void SetCoeff(INT aNumMon,REAL aCoeff);
-            REAL Coeff(INT aNumMon) const;
-            REAL & Coeff(INT aNumMon) ;
-            void Show(INT aNumMon) const;
+            void SetCoeff(int aNumMon,double_t aCoeff);
+            double_t Coeff(int aNumMon) const;
+            double_t & Coeff(int aNumMon) ;
+            void Show(int aNumMon) const;
             void Show() const;
 
             Fonc_Num FNum() const;
-            REAL  Ampl() const;
+            double_t  Ampl() const;
         void write(class  ELISE_fp &) const;
         static Polynome2dReal read(class  ELISE_fp &);
 
             // return le polynome correspondant a :
             //     P ->  aChSacle * Pol(P/aChSacle)
-            Polynome2dReal MapingChScale(REAL aChSacle) const;
+            Polynome2dReal MapingChScale(double_t aChSacle) const;
 
 
             Polynome2dReal operator + (const Polynome2dReal &) const;
             Polynome2dReal operator - (const Polynome2dReal &) const;
-            Polynome2dReal operator * (REAL) const;
-            Polynome2dReal operator / (REAL) const;
-            INT DMax() const;
+            Polynome2dReal operator * (double_t) const;
+            Polynome2dReal operator / (double_t) const;
+            int DMax() const;
 
-            static  Polynome2dReal PolyDegre1(REAL aV0,REAL aVX,REAL aVY);
+            static  Polynome2dReal PolyDegre1(double_t aV0,double_t aVX,double_t aVY);
 
       private :
             Polynome2dReal
             (
                   const Polynome2dReal & aPol1,
-                  REAL aCoeff1,
+                  double_t aCoeff1,
                   const Polynome2dReal & aPol2,
-                  REAL aCoeff2
+                  double_t aCoeff2
             );
 
 
-            REAL   CoeffNewAmpl (INT k,REAL NewAmpl) const;
+            double_t   CoeffNewAmpl (int k,double_t NewAmpl) const;
 
-            void AssertIndexeValide(INT) const;
+            void AssertIndexeValide(int) const;
 
             std::vector<Monome2dReal>  mMons;
-            std::vector<REAL>  mCoeff;
-            REAL mAmpl;
-            INT mDMax;
+            std::vector<double_t>  mCoeff;
+            double_t mAmpl;
+            int mDMax;
 
 };
 

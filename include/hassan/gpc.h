@@ -96,7 +96,7 @@ Copyright: (C) 1997-1999, Advanced Interfaces Group,
 typedef enum                        /* Set operation type                */
 {
   GPC_DIFF,                         /* Difference                        */
-  GPC_INT,                          /* Intersection                      */
+  GPC_int,                          /* Intersection                      */
   GPC_XOR,                          /* Exclusive or                      */
   GPC_UNION                         /* Union                             */
 } gpc_op;

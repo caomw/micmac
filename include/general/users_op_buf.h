@@ -60,13 +60,13 @@ class   Arg_Comp_Simple_OP_UN
             int dim_out()  const { return _dim_out;}
 
             Arg_Comp_Simple_OP_UN
-            (bool integer_fonc,int dim_in,int dim_out,INT sz_buf);
+            (bool integer_fonc,int dim_in,int dim_out,int sz_buf);
 
         private :
             //const bool      _integer;
-            const INT        _dim_in;
-            const INT       _dim_out;
-            const INT       _sz_buf;
+            const int        _dim_in;
+            const int       _dim_out;
+            const int       _sz_buf;
 
 };
 
@@ -81,7 +81,7 @@ template <class  Type> class Simple_OP_UN : public RC_Object
                       (
                            Type ** output,
                            Type ** input,
-                           INT        nb,
+                           int        nb,
                            const Arg_Comp_Simple_OP_UN  &
                       ) ;
 
@@ -97,18 +97,18 @@ template <class  Type> class Simple_OP_UN : public RC_Object
 
 Fonc_Num  create_users_oper
           (
-              Simple_OP_UN<INT> *,
-              Simple_OP_UN<REAL> *,
+              Simple_OP_UN<int> *,
+              Simple_OP_UN<double_t> *,
               Fonc_Num,
-              INT   dim_out
+              int   dim_out
           );
 
 
 
            // some example
 
-Fonc_Num ecart_circ(Fonc_Num f,REAL per = 2*PI);
-Fonc_Num grad_bilin(Fonc_Num f,Im2D_U_INT1 b);
+Fonc_Num ecart_circ(Fonc_Num f,double_t per = 2*PI);
+Fonc_Num grad_bilin(Fonc_Num f,Im2D_U_int1 b);
 Fonc_Num its_to_rgb(Fonc_Num f);
 Fonc_Num rgb_to_its(Fonc_Num f);
 Fonc_Num mpeg_rgb_to_yuv(Fonc_Num f);
@@ -118,17 +118,17 @@ Fonc_Num mpeg_yuv_to_rgb(Fonc_Num f);
 
 
 typedef  void  (* Simple_OPUn_I_calc)
-               (     INT ** out_put,
-                     INT ** in_put,
-                     INT,
+               (     int ** out_put,
+                     int ** in_put,
+                     int,
                      const Arg_Comp_Simple_OP_UN&
                 );
 
 typedef  void  (* Simple_OPUn_R_calc)
                (
-                      REAL ** out_put,
-                      REAL ** in_put,
-                      INT,
+                      double_t ** out_put,
+                      double_t ** in_put,
+                      int,
                       const Arg_Comp_Simple_OP_UN&
                 );
 
@@ -138,7 +138,7 @@ Fonc_Num  create_users_oper
               Simple_OPUn_I_calc,
               Simple_OPUn_R_calc,
               Fonc_Num,
-              INT   dim_out
+              int   dim_out
           );
 
 //================================================================================
@@ -158,14 +158,14 @@ class   Arg_Comp_Simple_OP_BIN
             int sz_buf() const { return _sz_buf;}
 
             Arg_Comp_Simple_OP_BIN
-            (bool integer_fonc,int dim_in1,INT dim_in2,int dim_out,INT sz_buf);
+            (bool integer_fonc,int dim_in1,int dim_in2,int dim_out,int sz_buf);
 
         private :
             //const bool    _integer;
-            const INT     _dim_in1;
-            const INT     _dim_in2;
-            const INT     _dim_out;
-            const INT     _sz_buf;
+            const int     _dim_in1;
+            const int     _dim_in2;
+            const int     _dim_out;
+            const int     _sz_buf;
 
 };
 
@@ -184,7 +184,7 @@ template <class  Type> class Simple_OP_BIN : public RC_Object
                            Type ** output,
                            Type ** in1,
                            Type ** in2,
-                           INT        nb,
+                           int        nb,
                            const Arg_Comp_Simple_OP_BIN  &
                       );
 
@@ -200,11 +200,11 @@ template <class  Type> class Simple_OP_BIN : public RC_Object
 
 Fonc_Num  create_users_oper
           (
-              Simple_OP_BIN<INT> *,
-              Simple_OP_BIN<REAL> *,
+              Simple_OP_BIN<int> *,
+              Simple_OP_BIN<double_t> *,
               Fonc_Num f1,
               Fonc_Num f2,
-              INT   dim_out
+              int   dim_out
           );
 
            // some example
@@ -212,19 +212,19 @@ Fonc_Num  create_users_oper
 
 
 typedef  void  (* Simple_OPBin_I_calc)
-               (     INT ** out_put,
-                     INT ** i1,
-                     INT ** i2,
-                     INT,
+               (     int ** out_put,
+                     int ** i1,
+                     int ** i2,
+                     int,
                      const Arg_Comp_Simple_OP_BIN&
                 );
 
 typedef  void  (* Simple_OPBin_R_calc)
                (
-                      REAL ** out_put,
-                      REAL ** i1,
-                      REAL ** i2,
-                      INT,
+                      double_t ** out_put,
+                      double_t ** i1,
+                      double_t ** i2,
+                      int,
                       const Arg_Comp_Simple_OP_BIN&
                 );
 
@@ -235,7 +235,7 @@ Fonc_Num  create_users_oper
               Simple_OPBin_R_calc,
               Fonc_Num,
               Fonc_Num,
-              INT   dim_out
+              int   dim_out
           );
 
 
@@ -259,17 +259,17 @@ class   Arg_Comp_Op_Buf1
                     bool    integer_fonc,
                     int     dim_in,
                     int     dim_out,
-                    INT     x0,
-                    INT     x1,
+                    int     x0,
+                    int     x1,
                     Box2di  box
             );
 
         private :
             const bool      _integer;
-            const INT        _dim_in;
-            const INT       _dim_out;
-            const INT       _x0;
-            const INT       _x1;
+            const int        _dim_in;
+            const int       _dim_out;
+            const int       _x0;
+            const int       _x1;
             Box2di          _box;
 
 };
@@ -287,63 +287,63 @@ class Simple_OPBuf_Gen : public RC_Object
 {
     public :
 
-       friend class Simple_Buffered_Op_Comp<INT,INT>;
-       friend class Simple_Buffered_Op_Comp<INT,INT1>;
-       friend class Simple_Buffered_Op_Comp<INT,U_INT1>;
-       friend class Simple_Buffered_Op_Comp<INT,U_INT2>;
-       friend class Simple_Buffered_Op_Comp<REAL,REAL4>;
-       friend class Simple_Buffered_Op_Comp<REAL,REAL>;
+       friend class Simple_Buffered_Op_Comp<int,int>;
+       friend class Simple_Buffered_Op_Comp<int,int1>;
+       friend class Simple_Buffered_Op_Comp<int,U_int1>;
+       friend class Simple_Buffered_Op_Comp<int,U_int2>;
+       friend class Simple_Buffered_Op_Comp<double_t,double_t4>;
+       friend class Simple_Buffered_Op_Comp<double_t,double_t>;
 
 
      //  caracteristique de la fonction :
 
-         INT      dim_in() const { return _dim_in;}
-         INT      dim_out()  const { return _dim_out;}
+         int      dim_in() const { return _dim_in;}
+         int      dim_out()  const { return _dim_out;}
          bool     integral () const { return _integral;}
 
      // valeurs evolaunt avec y 
 
         // valeur liees au y absolu
-           INT  ycur ()      const  { return _ycur;}
+           int  ycur ()      const  { return _ycur;}
            bool first_line()  const { return _first_line;}
 
         //  Certain filtres "sophistique", tel que le skel, on besoin
         //  de fonctionner par paquet de lignes afin d'etres efficaces
         // valeur liees au y dans un paquet
 
-            INT   y_in_pack ()  const       { return  _y_in_pack;}
+            int   y_in_pack ()  const       { return  _y_in_pack;}
             bool first_line_in_pack() const {  return  _y_in_pack == 0;}
-            INT   nb_pack_y ()  const { return   _nb_pack_y;}
+            int   nb_pack_y ()  const { return   _nb_pack_y;}
 
 
       // rectangle sur lequel est renvoye  le filtre
 
-       INT  x0   ()  const   {return _x0;}
-       INT  x1   ()  const   {return _x1;}
-       INT  y0   ()  const   {return _y0;}
-       INT  y1   ()  const   {return _y1;}
+       int  x0   ()  const   {return _x0;}
+       int  x1   ()  const   {return _x1;}
+       int  y0   ()  const   {return _y0;}
+       int  y1   ()  const   {return _y1;}
 
 
 
-       INT  tx() { return _x1-_x0;}
+       int  tx() { return _x1-_x0;}
 
      //  taille du voisinage 
-       INT  dx0 ()  const    {return _dx0;};
-       INT  dx1 ()  const    {return _dx1;};
-       INT  dy0 ()  const    {return _dy0;};
-       INT  dy1 ()  const    {return _dy1;};
+       int  dx0 ()  const    {return _dx0;};
+       int  dx1 ()  const    {return _dx1;};
+       int  dy0 ()  const    {return _dy0;};
+       int  dy1 ()  const    {return _dy1;};
 
 
     // rectangle sur lequel  la fonction en entree 
     // est definie 
 
-       INT  x0Buf ()  const  {return _x0Buf;}   ; // _x0 + _dx0
-       INT  x1Buf ()  const  {return _x1Buf;}   ; // _x1 + _dx1
-       INT  y0Buf ()  const  {return _y0Buf;}   ; //  _dy0
-       INT  y1Buf ()  const  {return _y1Buf;}   ; //  _dy1 +1
+       int  x0Buf ()  const  {return _x0Buf;}   ; // _x0 + _dx0
+       int  x1Buf ()  const  {return _x1Buf;}   ; // _x1 + _dx1
+       int  y0Buf ()  const  {return _y0Buf;}   ; //  _dy0
+       int  y1Buf ()  const  {return _y1Buf;}   ; //  _dy1 +1
 
-       INT  SzXBuf ()  const  {return _x1Buf-_x0Buf;}  
-       INT  SzYBuf ()  const  {return _y1Buf-_y0Buf;}  
+       int  SzXBuf ()  const  {return _x1Buf-_x0Buf;}  
+       int  SzYBuf ()  const  {return _y1Buf-_y0Buf;}  
 
 
     // If you wish value to be clipped out of rectangle of use
@@ -352,35 +352,35 @@ class Simple_OPBuf_Gen : public RC_Object
 
     private :
 
-       INT     _x0;
-       INT     _x1;
-       INT     _dx0;
-       INT     _dx1;
-       INT     _dy0;
-       INT     _dy1;
+       int     _x0;
+       int     _x1;
+       int     _dx0;
+       int     _dx1;
+       int     _dy0;
+       int     _dy1;
 
-       INT     _y0;
-       INT     _y1;
-       INT     _ycur;
+       int     _y0;
+       int     _y1;
+       int     _ycur;
 
 
-       INT     _x0Buf; // _x0 + _dx0
-       INT     _x1Buf; // _x1 + _dx1
-       INT     _y0Buf; //  _dx0
-       INT     _y1Buf; //  _dy1 +1
+       int     _x0Buf; // _x0 + _dx0
+       int     _x1Buf; // _x1 + _dx1
+       int     _y0Buf; //  _dx0
+       int     _y1Buf; //  _dy1 +1
        bool    _first_line;
 
-       INT     _nb_pack_y;
-       INT     _y_in_pack;
+       int     _nb_pack_y;
+       int     _y_in_pack;
 
-       INT      _dim_in;
-       INT      _dim_out;
+       int      _dim_in;
+       int      _dim_out;
        bool     _integral;
 
 
     public :
 
-	   // static const INT   DefNbPackY  = 1;
+	   // static const int   DefNbPackY  = 1;
 	   //	   static const bool  DefOptNPY   = true;
 	   // static const bool  DefCatInit  = false;
 	   enum 
@@ -432,7 +432,7 @@ template  <class  Tout,class Tin> void Simple_OPBuf1<Tout,Tin>::SetImageOnBufEnt
 {
     Tin ** aDataIm = anIm.data();
     
-    for (INT y=0; y<SzYBuf() ; y++)
+    for (int y=0; y<SzYBuf() ; y++)
         aDataIm[y] = aData[y+y0Buf()]+x0Buf();
 }
 
@@ -440,54 +440,54 @@ template  <class  Tout,class Tin> void Simple_OPBuf1<Tout,Tin>::SetImageOnBufEnt
 
 Fonc_Num  create_op_buf_simple_tpl
           (
-                 Simple_OPBuf1<INT,INT> *,
-                 Simple_OPBuf1<REAL,REAL> *,
+                 Simple_OPBuf1<int,int> *,
+                 Simple_OPBuf1<double_t,double_t> *,
                  Fonc_Num,
-                 INT                 dim_out,
+                 int                 dim_out,
                  Box2di              side,
-                 INT                 nb_pack_y =        Simple_OPBuf_Gen::DefNbPackY,
+                 int                 nb_pack_y =        Simple_OPBuf_Gen::DefNbPackY,
 				 bool                OptimizeNbPackY =  Simple_OPBuf_Gen::DefOptNPY,
 				 bool                aCatFoncInit =     Simple_OPBuf_Gen::DefCatInit
           );
 
 Fonc_Num  create_op_buf_simple_tpl
           (
-                 Simple_OPBuf1<INT,U_INT1> *,
+                 Simple_OPBuf1<int,U_int1> *,
                  Fonc_Num,
-                 INT                 dim_out,
+                 int                 dim_out,
                  Box2di              side,
-                 INT                 nb_pack_y =        Simple_OPBuf_Gen::DefNbPackY,
+                 int                 nb_pack_y =        Simple_OPBuf_Gen::DefNbPackY,
 				 bool                OptimizeNbPackY =  Simple_OPBuf_Gen::DefOptNPY,
 				 bool                aCatFoncInit =     Simple_OPBuf_Gen::DefCatInit
           );
 
 Fonc_Num  create_op_buf_simple_tpl
           (
-                 Simple_OPBuf1<INT,U_INT2> *,
+                 Simple_OPBuf1<int,U_int2> *,
                  Fonc_Num,
-                 INT                 dim_out,
+                 int                 dim_out,
                  Box2di              side,
-                 INT                 nb_pack_y =        Simple_OPBuf_Gen::DefNbPackY,
+                 int                 nb_pack_y =        Simple_OPBuf_Gen::DefNbPackY,
 				 bool                OptimizeNbPackY =  Simple_OPBuf_Gen::DefOptNPY,
 				 bool                aCatFoncInit =     Simple_OPBuf_Gen::DefCatInit
           );
 
 Fonc_Num  create_op_buf_simple_tpl
           (
-                 Simple_OPBuf1<INT,INT1> *,
+                 Simple_OPBuf1<int,int1> *,
                  Fonc_Num,
-                 INT                 dim_out,
+                 int                 dim_out,
                  Box2di              side,
-                 INT                 nb_pack_y =        Simple_OPBuf_Gen::DefNbPackY,
+                 int                 nb_pack_y =        Simple_OPBuf_Gen::DefNbPackY,
 				 bool                OptimizeNbPackY =  Simple_OPBuf_Gen::DefOptNPY,
 				 bool                aCatFoncInit =     Simple_OPBuf_Gen::DefCatInit
           );
 
 
 
-Fonc_Num integr_grad (Fonc_Num f,INT v_min,Im1D_INT4 pond);
+Fonc_Num integr_grad (Fonc_Num f,int v_min,Im1D_int4 pond);
 
-Fonc_Num reduc_binaire_gen (Fonc_Num f,bool aRedX,bool aRedY,int aDiv,bool HasValSpec, REAL aValSpec);
+Fonc_Num reduc_binaire_gen (Fonc_Num f,bool aRedX,bool aRedY,int aDiv,bool HasValSpec, double_t aValSpec);
 Fonc_Num reduc_binaire (Fonc_Num f);
 Fonc_Num reduc_binaire_X (Fonc_Num f);
 Fonc_Num reduc_binaire_Y (Fonc_Num f);
@@ -497,15 +497,15 @@ extern const Pt2di som_masq_Centered;
 Fonc_Num som_masq 
          (
             Fonc_Num f,
-            Im2D_REAL8 filtr,
+            Im2D_double_t8 filtr,
             Pt2di dec = som_masq_Centered
           );
 
 Fonc_Num rle_som_masq_binaire  
          (
              Fonc_Num f,
-             Im2D_U_INT1  filtr,
-             REAL val_out,
+             Im2D_U_int1  filtr,
+             double_t val_out,
              Pt2di dec = som_masq_Centered
          );
 
@@ -514,16 +514,16 @@ Fonc_Num rle_som_masq_binaire
 
 
 
-Fonc_Num label_maj (Fonc_Num label,INT vmax,Box2di,Fonc_Num f = 1);
-Fonc_Num dilate_label (Fonc_Num label,const Chamfer& chamf,INT dmax);
+Fonc_Num label_maj (Fonc_Num label,int vmax,Box2di,Fonc_Num f = 1);
+Fonc_Num dilate_label (Fonc_Num label,const Chamfer& chamf,int dmax);
 
 // Permet de definir une fonction qui est egale a f, sauf en
 // certain point ou les valeurs sont tabulees dans une liste
 // (les deux premier coordonnes sont x et y, les autre la valeur associees)
 
-Fonc_Num fonc_a_trou(Fonc_Num f,Liste_Pts<INT,INT> l);
-Fonc_Num fonc_a_trou(Fonc_Num f,Liste_Pts<U_INT2,INT> l);
-Fonc_Num fonc_a_trou(Fonc_Num f,Liste_Pts<INT2,INT> l);
+Fonc_Num fonc_a_trou(Fonc_Num f,Liste_Pts<int,int> l);
+Fonc_Num fonc_a_trou(Fonc_Num f,Liste_Pts<U_int2,int> l);
+Fonc_Num fonc_a_trou(Fonc_Num f,Liste_Pts<int2,int> l);
 
 // Soit une fonction f de dim 2 en sortie, soient (rho,teta) les valeur
 //  renvoie 1 si rho est un maxima dans la dierction de teta 
@@ -539,17 +539,17 @@ Fonc_Num fonc_a_trou(Fonc_Num f,Liste_Pts<INT2,INT> l);
 Fonc_Num  MaxLocDir
           (
 		          Fonc_Num f,
-				  REAL OuvAng,
+				  double_t OuvAng,
 				  bool OrientedMaxLoc = MaxLocDir_Def_OrientedMaxLoc,
-				  REAL RhoCalc =        MaxLocDir_Def_RhoCalc,
+				  double_t RhoCalc =        MaxLocDir_Def_RhoCalc,
 				  bool aCatInit =       Simple_OPBuf_Gen::DefCatInit 
 		);
 Fonc_Num  RMaxLocDir
           (
 		          Fonc_Num f,
-				  REAL OuvAng,
+				  double_t OuvAng,
 				  bool OrientedMaxLoc = MaxLocDir_Def_OrientedMaxLoc,
-				  REAL RhoCalc =        MaxLocDir_Def_RhoCalc,
+				  double_t RhoCalc =        MaxLocDir_Def_RhoCalc,
 				  bool aCatInit =       Simple_OPBuf_Gen::DefCatInit 
 		);
 
@@ -559,15 +559,15 @@ Fonc_Num  RMaxLocDir
 
 typedef  void  (* Simple_OPBuf1_I_calc) 
                (
-                    INT ** out_put,
-                    INT *** in_put,
+                    int ** out_put,
+                    int *** in_put,
                     const Simple_OPBuf_Gen &
                );
 
 typedef  void  (* Simple_OPBuf1_R_calc)
                (
-                    REAL ** out_put,
-                    REAL *** in_put,
+                    double_t ** out_put,
+                    double_t *** in_put,
                     const Simple_OPBuf_Gen &
                );
 
@@ -577,7 +577,7 @@ Fonc_Num  create_op_buf_simple_tpl
               Simple_OPBuf1_I_calc,
               Simple_OPBuf1_R_calc,
               Fonc_Num,
-              INT                 dim_out,
+              int                 dim_out,
               Box2di              side,
 			  bool                aCatFoncInit =     Simple_OPBuf_Gen::DefCatInit
           );

@@ -55,13 +55,13 @@ class Rectang_Object
 
      Fonc_Num  inside() const ;
      Flux_Pts all_pts() const ;
-     Flux_Pts interior(INT) const ;
-     Flux_Pts border(INT) const ;
+     Flux_Pts interior(int) const ;
+     Flux_Pts border(int) const ;
 
      // only for objects known to be of dimention 1
-     Flux_Pts lmr_all_pts(INT) const ;   // lmr = linear map rect
-     INT  x0() const ;
-     INT  x1() const ;
+     Flux_Pts lmr_all_pts(int) const ;   // lmr = linear map rect
+     int  x0() const ;
+     int  x1() const ;
 
      // only for objects known to be of dimention 2
      Pt2di  p0() const ;

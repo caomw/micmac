@@ -12,9 +12,9 @@ class cCpleCamFormelle : public cNameSpaceEqF,
           friend class cSetEqFormelles;
 	  static void GenAllCode();
          // WithD2 : avec derivees secondes
-          REAL AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,REAL aPds,bool WithD2);
+          double_t AddLiaisonP1P2(Pt2dr P1,Pt2dr P2,double_t aPds,bool WithD2);
 
-          REAL ResiduSigneP1P2(Pt2dr P1,Pt2dr P2); 
+          double_t ResiduSigneP1P2(Pt2dr P1,Pt2dr P2); 
 	  // Pondere en 1 / (1+ square(Residu/Ecart))
 	  // Si Residu > Coupure > 0 , poids = 0
 

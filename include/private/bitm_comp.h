@@ -46,7 +46,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 /*                                                                     */
 /***********************************************************************/
 
-extern INT  PTS_00000000000000[];
+extern int  PTS_00000000000000[];
 
 class   ImOutNotComp : public  Output_Not_Comp
 {
@@ -145,17 +145,17 @@ class ImInNotComp : public Fonc_Num_Not_Comp
        public :
 
            virtual  Fonc_Num_Computed * compute(const Arg_Fonc_Num_Comp &);
-           ImInNotComp(DataGenIm *,GenIm ,bool,REAL def);
+           ImInNotComp(DataGenIm *,GenIm ,bool,double_t def);
 
        private :
  
              bool                 _with_def_value;
-             REAL                 _def_value;
+             double_t                 _def_value;
              DataGenIm *          _gi;
              GenIm               _pgi;
 
              virtual  bool  integral_fonc (bool integral_flux) const ;
-             virtual  INT  dimf_out () const ;
+             virtual  int  dimf_out () const ;
              void VarDerNN(ElGrowingSetInd &)const ;
 
 };
@@ -215,7 +215,7 @@ template <class TypeBase> class ImInInteger :
 /***********************************************************************/
 
 
-class ImInReal : public Fonc_Num_Comp_TPL <REAL>
+class ImInReal : public Fonc_Num_Comp_TPL <double_t>
 {
     public :
         virtual const Pack_Of_Pts * values(const Pack_Of_Pts * pts);

@@ -47,26 +47,26 @@ Header-MicMac-eLiSe-25/06/2007*/
 template <class Type> class ElStdTypeScal
 {
     public :
-        typedef ElStdTypeScal<REAL>  TypeReel;
+        typedef ElStdTypeScal<double>  TypeReel;
         typedef Type                 TypeScal;
         typedef Type                 TypeEff;
         typedef bool                 TypeBool;
 
-        typedef  REAL TypeScalReel;
+        typedef  double TypeScalReel;
         typedef  Type TypeVarProv;
-        typedef  REAL TypeVarProvReel;
+        typedef  double TypeVarProvReel;
 
-        static  Type RtoT(REAL);
+        static  Type RtoT(double);
         static  Type RTtoT(TypeScalReel);
-        static  REAL T2R (const Type & aV) {return aV;}
+        static  double T2R (const Type & aV) {return aV;}
         static Type  El0 () {return 0;}
 
     private :
 };
 
-template <> INT   ElStdTypeScal<INT>::RtoT(REAL v); //  { return round_ni(v);}
-template <> REAL  ElStdTypeScal<REAL>::RtoT(REAL v); //  { return v;}
-template <> INT   ElStdTypeScal<INT>::RTtoT(REAL v) ; // { return round_ni(v);}
-template <> REAL  ElStdTypeScal<REAL>::RTtoT(REAL v) ; // { return v;}
+template <> int   ElStdTypeScal<int>::RtoT(double v); //  { return round_ni(v);}
+template <> double  ElStdTypeScal<double>::RtoT(double v); //  { return v;}
+template <> int   ElStdTypeScal<int>::RTtoT(double v) ; // { return round_ni(v);}
+template <> double  ElStdTypeScal<double>::RTtoT(double v) ; // { return v;}
 
 #endif

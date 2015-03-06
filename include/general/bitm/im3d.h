@@ -6,16 +6,16 @@
 template <class Type,class TyBase> class Im3D : public GenIm
 {
    public :
-      Im3D(INT tx,INT ty,INT tz);
-      Im3D(INT tx,INT ty,INT tz,TyBase v_init);
-      Im3D(INT tx,INT ty,INT tz,const char * v_init);
+      Im3D(int tx,int ty,int tz);
+      Im3D(int tx,int ty,int tz,TyBase v_init);
+      Im3D(int tx,int ty,int tz,const char * v_init);
 
-      Im3D(Im3D_WithDataLin,INT tx,INT ty,INT tz,Type *);
+      Im3D(Im3D_WithDataLin,int tx,int ty,int tz,Type *);
       Type ***    data();
-      INT     tx() const;
-      INT     ty() const;
-      INT     tz() const;
-      INT  vmax() const;
+      int     tx() const;
+      int     ty() const;
+      int     tz() const;
+      int  vmax() const;
    private :
 };
 

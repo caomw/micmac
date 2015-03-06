@@ -13,12 +13,12 @@ class cGridNuageP3D
          Pt2di aP0 = Pt2di(0,0)
             );
         Pt2di Sz() const;
-        INT   Cpt(Pt2di) const;
+        int   Cpt(Pt2di) const;
         Pt3dr P3D(Pt2di) const;
 
         std::string NameShade() const;
-        Im2D_U_INT1   ImShade();
-        Im2D_INT1     ImCpt();
+        Im2D_U_int1   ImShade();
+        Im2D_int1     ImCpt();
 
         // Profondeur dans la direction moyenne
         Fonc_Num FProfDMoyH();
@@ -32,14 +32,14 @@ class cGridNuageP3D
         Pt2di         mSz;
         Pt2di         mP0;
 
-        Im2D_REAL4    mImX;
-        REAL4 **      mDX;
-        Im2D_REAL4    mImY;
-        REAL4 **      mDY;
-        Im2D_REAL4    mImZ;
-        REAL4 **      mDZ;
-        Im2D_INT1     mImCpt;
-        Im2D_U_INT1   mImShade;
+        Im2D_double_t4    mImX;
+        double_t4 **      mDX;
+        Im2D_double_t4    mImY;
+        double_t4 **      mDY;
+        Im2D_double_t4    mImZ;
+        double_t4 **      mDZ;
+        Im2D_int1     mImCpt;
+        Im2D_U_int1   mImShade;
         cMailageSphere  mMSph;
 };
 

@@ -41,7 +41,7 @@ class cCameraFormelle :  public cNameSpaceEqF ,
 	  // static void GenAllCode();
 
 	  // Le resultat est un point renvoyant le vecteur de residu
-	  Pt2dr  AddAppui(Pt3dr aP,Pt2dr aPIm,REAL aPds);
+	  Pt2dr  AddAppui(Pt3dr aP,Pt2dr aPIm,double_t aPds);
 	         // Donne le residu mais n'ajoute pas au systeme
 	  Pt2dr  ResiduAppui(Pt3dr aP,Pt2dr aPIm);
 
@@ -83,8 +83,8 @@ class cCameraFormelle :  public cNameSpaceEqF ,
                       cIncListInterv & LInterv();
 
 		      // Si P <0, n'ajoute pas au sys
-		      Pt2dr Residu(Pt3dr aP1,Pt2dr aP2,REAL Pds);
-		      Pt2dr ResiduPInc(Pt2dr aP2,REAL Pds,const cParamPtProj & aPPP);
+		      Pt2dr Residu(Pt3dr aP1,Pt2dr aP2,double_t Pds);
+		      Pt2dr ResiduPInc(Pt2dr aP2,double_t Pds,const cParamPtProj & aPPP);
 		  private :
 
                       cCameraFormelle & mCam;

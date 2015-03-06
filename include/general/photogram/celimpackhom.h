@@ -22,11 +22,11 @@ private :
     void VerifInd(Pt2di aP,int aK);
 
     Pt2di      mSz;
-    Im2D_REAL4 mImX1;
-    Im2D_REAL4 mImY1;
-    std::vector<Im2D_REAL4> mImXn;
-    std::vector<Im2D_REAL4> mImYn;
-    std::vector<Im2D_REAL4> mImPdsN;
+    Im2D_double_t4 mImX1;
+    Im2D_double_t4 mImY1;
+    std::vector<Im2D_double_t4> mImXn;
+    std::vector<Im2D_double_t4> mImYn;
+    std::vector<Im2D_double_t4> mImPdsN;
 
 };
 

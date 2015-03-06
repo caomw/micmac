@@ -6,9 +6,9 @@
 class cSignedEqFPtLiaison  : public cEqFPtLiaison
 {
      public :
-	  virtual REAL ResiduSigneP1P2(Pt2dr aP1,Pt2dr aP2) = 0;
+	  virtual double_t ResiduSigneP1P2(Pt2dr aP1,Pt2dr aP2) = 0;
 	  // Par Defaut, renvoie la valeur abs    
-	  REAL ResiduNonSigneP1P2(Pt2dr aP1,Pt2dr aP2) ;
+	  double_t ResiduNonSigneP1P2(Pt2dr aP1,Pt2dr aP2) ;
      private :
 };
 

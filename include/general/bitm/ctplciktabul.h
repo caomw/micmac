@@ -12,7 +12,7 @@ Pt3dr BicubicInterpol
 #include "general/sys_dep.h"
 
 template <class Type>
-REAL  BicubicInterpolVal
+double_t  BicubicInterpolVal
       (const cCubicInterpKernel & aCIK,Type ** data,Pt2dr aP);
 
 
@@ -48,15 +48,15 @@ class  cTplCIKTabul  : public cInterpolateurIm2D<TypeEl>
            // Nombre de bits pour le codage des valeurs et de la resol
 
 
-          cTplCIKTabul(INT aNBBVal,INT aNBBResol,REAL aVal,eModeInterTabul = eTabulBicub);
+          cTplCIKTabul(int aNBBVal,int aNBBResol,double_t aVal,eModeInterTabul = eTabulBicub);
 
 
-          REAL     XofInd(INT Ind) {return Ind/REAL(mNbResol);}
+          double_t     XofInd(int Ind) {return Ind/double_t(mNbResol);}
 
-          inline tTabulCIK     InterpolateVal(TypeEl *,INT Frac) const ;
-          inline tTabulCIK     InterpolateDer(TypeEl *,INT Frac) const ;
+          inline tTabulCIK     InterpolateVal(TypeEl *,int Frac) const ;
+          inline tTabulCIK     InterpolateDer(TypeEl *,int Frac) const ;
 
-          REAL     BicubValue(TypeEl ** aTab,const Pt2dr &  aP) const ;
+          double_t     BicubValue(TypeEl ** aTab,const Pt2dr &  aP) const ;
           Pt3dr    BicubValueAndDer(TypeEl ** aTab,const Pt2dr &  aP) const ;
 
       bool OkForInterp(Pt2di aSz,Pt2dr aP) const;
@@ -65,9 +65,9 @@ class  cTplCIKTabul  : public cInterpolateurIm2D<TypeEl>
           int SzKernel() const;
 
        private :
-          INT            mNbResol;
-          INT            mNbVal;
-          REAL           mNbVal2;
+          int            mNbResol;
+          int            mNbVal;
+          double_t           mNbVal2;
           Im2D<tTabulCIK,tTabulCIK>  mTV;
           tTabulCIK **       mDV;
           Im2D<tTabulCIK,tTabulCIK>  mTD;

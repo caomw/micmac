@@ -46,45 +46,45 @@ Header-MicMac-eLiSe-25/06/2007*/
 class Histograme
 {
       Output _out;
-      INT    _col_fon;
-      INT    _col_line;
+      int    _col_fon;
+      int    _col_line;
 
-      INT    _tx;
-      INT    _ty;
-      REAL8  _v_max;
-      REAL8  _v_min;
+      int    _tx;
+      int    _ty;
+      double_t8  _v_max;
+      double_t8  _v_min;
 
     public:
 
-      Histograme(Output out, INT color,  INT tx = 100, INT ty = 100, REAL8 v_max = 1, REAL v_min = 0)
+      Histograme(Output out, int color,  int tx = 100, int ty = 100, double_t8 v_max = 1, double_t v_min = 0)
            : _out(out), _col_fon(color/2), _col_line(color), _tx(tx), _ty(ty), _v_max(v_max), _v_min(v_min)
       {
          dessin_grille();
       }
 
-      void dessin_grille(INT nb = 10);
-      void dessin(Im1D_REAL8 hist, bool relatif = true);
-      void dessin(REAL8* hist, INT tx = 1, bool relatif = true);
-      void dessin_accumulatif(REAL8* hist, INT tx = 1, bool relatif = true);
+      void dessin_grille(int nb = 10);
+      void dessin(Im1D_double_t8 hist, bool relatif = true);
+      void dessin(double_t8* hist, int tx = 1, bool relatif = true);
+      void dessin_accumulatif(double_t8* hist, int tx = 1, bool relatif = true);
 
-      void set_tx_ty(INT tx, INT ty){_tx = tx; _ty = ty;}
-      void set_v_max(REAL8 v_max){_v_max = v_max;}
-      void set_v_min(REAL8 v_min){_v_min = v_min;}
-      void set_col_line(INT col){_col_line = col;}
+      void set_tx_ty(int tx, int ty){_tx = tx; _ty = ty;}
+      void set_v_max(double_t8 v_max){_v_max = v_max;}
+      void set_v_min(double_t8 v_min){_v_min = v_min;}
+      void set_col_line(int col){_col_line = col;}
 
-      REAL8 v_min(){return _v_min;}
-      REAL8 v_max(){return _v_max;}
+      double_t8 v_min(){return _v_min;}
+      double_t8 v_max(){return _v_max;}
       
 };
 
 
-extern void lisse_histo(Im1D_REAL8 hist, INT semi_fenet);
-extern void dessin_histo(Im1D_REAL8 hist, Output out, INT coulor,  INT x, INT y, bool grille = true);
-extern void dessin_histo(Im1D_REAL8 hist, Output out, INT coulor,  INT x, INT y, REAL val_max, bool grille = true);
+extern void lisse_histo(Im1D_double_t8 hist, int semi_fenet);
+extern void dessin_histo(Im1D_double_t8 hist, Output out, int coulor,  int x, int y, bool grille = true);
+extern void dessin_histo(Im1D_double_t8 hist, Output out, int coulor,  int x, int y, double_t val_max, bool grille = true);
 
-extern void dessin_histo(Im1D_REAL8 hist, Output out, INT coulor,  INT x, INT y, REAL val_max, REAL val_min, bool grille = true);
+extern void dessin_histo(Im1D_double_t8 hist, Output out, int coulor,  int x, int y, double_t val_max, double_t val_min, bool grille = true);
 
-extern void dessin_diagrame(ElFilo<Pt2di>& f_p, Output out, INT color, INT color_grille, INT tx, INT ty, bool grille = true);
+extern void dessin_diagrame(ElFilo<Pt2di>& f_p, Output out, int color, int color_grille, int tx, int ty, bool grille = true);
 
 
 #endif // _HASSAN_HISTOGRAME_H

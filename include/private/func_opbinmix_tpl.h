@@ -47,8 +47,8 @@ template <class Type> class OP_Bin_Comp_TPL : public Fonc_Num_Comp_TPL<Type>
            Fonc_Num_Computed * _f0;
            Fonc_Num_Computed * _f1;
 
-           INT                 _dim_0;
-           INT                 _dim_1;
+           int                 _dim_0;
+           int                 _dim_1;
 
 
            OP_Bin_Comp_TPL
@@ -88,20 +88,20 @@ template <class TOut,class TIn>
          (       const Arg_Fonc_Num_Comp &,
                  Fonc_Num_Computed * f,
                  Flux_Pts_Computed * flx,
-                 void  (* fonc) (TOut *,const TIn *,INT)
+                 void  (* fonc) (TOut *,const TIn *,int)
          );
 
       private :
-         void  (* _fonc) (TOut *,const TIn *,INT);
+         void  (* _fonc) (TOut *,const TIn *,int);
 
 };
 
 /******************************************************************/
 
-typedef  void (* FONC_NAIRE_RR)(REAL** ,REAL** , INT);
-typedef  void (* FONC_NAIRE_II )(INT ** ,INT ** , INT);
-typedef  void (* FONC_NAIRE_IR )(INT ** ,REAL**, INT);
-typedef  void (* FONC_NAIRE_RI )(REAL** ,INT **, INT);
+typedef  void (* FONC_NAIRE_RR)(double_t** ,double_t** , int);
+typedef  void (* FONC_NAIRE_II )(int ** ,int ** , int);
+typedef  void (* FONC_NAIRE_IR )(int ** ,double_t**, int);
+typedef  void (* FONC_NAIRE_RI )(double_t** ,int **, int);
 
 extern Fonc_Num op_un_3d_real(Fonc_Num f,FONC_NAIRE_RR frr);
 

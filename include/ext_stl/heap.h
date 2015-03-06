@@ -66,7 +66,7 @@ template <class Type,class Compare, class TParam=DefaultParamHeap<Type> > class 
 {
     public :
 
-        ElHeap(Compare inferior,INT capa = 2) :
+        ElHeap(Compare inferior,int capa = 2) :
            _inferior    (inferior)
         {
 		mEls.reserve(capa);
@@ -115,7 +115,7 @@ template <class Type,class Compare, class TParam=DefaultParamHeap<Type> > class 
              return true;
         }
         void clear() { mEls.clear();}
-        INT nb() {return (int) mEls.size();}
+        int nb() {return (int) mEls.size();}
         bool empty() {return mEls.empty();}
 
         const std::vector<Type> & Els() {return mEls;}
@@ -123,9 +123,9 @@ template <class Type,class Compare, class TParam=DefaultParamHeap<Type> > class 
 
 	std::vector<Type> mEls;
 
-        static INT  Fils(INT i) { return   (i+1)/2-1;}
-        static INT  Pere1(INT i){ return   i*2+1;}
-        static INT  Pere2(INT i){ return   i*2+2;}
+        static int  Fils(int i) { return   (i+1)/2-1;}
+        static int  Pere1(int i){ return   i*2+1;}
+        static int  Pere2(int i){ return   i*2+2;}
         void ResetIndex(int aK)
         {
               TParam::SetIndex(mEls[aK],aK);
@@ -150,17 +150,17 @@ template <class Type,class Compare, class TParam=DefaultParamHeap<Type> > class 
             }
         }
 
-        void heap_up(INT KV)
+        void heap_up(int KV)
         {
             for(;;)
             {
-                INT ind_plus_petit = KV;
+                int ind_plus_petit = KV;
 
-                INT p1 = Pere1(KV);
+                int p1 = Pere1(KV);
                 if ((p1 < nb()) && _inferior(mEls[p1],mEls[ind_plus_petit]))
                     ind_plus_petit = p1;
 
-                INT p2 = Pere2(KV);
+                int p2 = Pere2(KV);
                 if ((p2 < nb()) && _inferior(mEls[p2],mEls[ind_plus_petit]))
                     ind_plus_petit = p2;
 
@@ -174,7 +174,7 @@ template <class Type,class Compare, class TParam=DefaultParamHeap<Type> > class 
             }
         }
 
-        bool heap_down(INT KV)
+        bool heap_down(int KV)
         {
             bool SthDone = false;
             while ((KV>0)&& _inferior(mEls[KV],mEls[Fils(KV)]))
@@ -199,7 +199,7 @@ template <class Type,class Compare> class ElHeap : private ElFifo<Type>
 {
     public :
 
-        ElHeap(Compare inferior,INT capa = 2) :
+        ElHeap(Compare inferior,int capa = 2) :
            ElFifo<Type> (capa),
            _inferior    (inferior)
         {
@@ -221,14 +221,14 @@ template <class Type,class Compare> class ElHeap : private ElFifo<Type>
              return true;
         }
         void clear() { _nb = 0;}
-        INT nb() {return _nb;}
+        int nb() {return _nb;}
         bool empty() {return nb() ==0;}
 
    private :
 
-        static INT  Fils(INT i) { return   (i+1)/2-1;}
-        static INT  Pere1(INT i){ return   i*2+1;}
-        static INT  Pere2(INT i){ return   i*2+2;}
+        static int  Fils(int i) { return   (i+1)/2-1;}
+        static int  Pere1(int i){ return   i*2+1;}
+        static int  Pere2(int i){ return   i*2+2;}
 
 
         Compare       _inferior;
@@ -236,17 +236,17 @@ template <class Type,class Compare> class ElHeap : private ElFifo<Type>
         // do not exist
         ElHeap(const ElHeap<Type,Compare> &);
 
-        void heap_up(INT KV)
+        void heap_up(int KV)
         {
             for(;;)
             {
-                INT ind_plus_petit = KV;
+                int ind_plus_petit = KV;
 
-                INT p1 = Pere1(KV);
+                int p1 = Pere1(KV);
                 if ((p1 < _nb) && _inferior(_tab[p1],_tab[ind_plus_petit]))
                     ind_plus_petit = p1;
 
-                INT p2 = Pere2(KV);
+                int p2 = Pere2(KV);
                 if ((p2 < _nb) && _inferior(_tab[p2],_tab[ind_plus_petit]))
                     ind_plus_petit = p2;
 
@@ -260,7 +260,7 @@ template <class Type,class Compare> class ElHeap : private ElFifo<Type>
             }
         }
 
-        void heap_down(INT KV)
+        void heap_down(int KV)
         {
             while ((KV>0)&& _inferior(_tab[KV],_tab[Fils(KV)]))
             {
@@ -274,7 +274,7 @@ template <class Type,class Compare> class ElHeap : private ElFifo<Type>
 {
     public :
 
-        ElHeap(Compare inferior,INT capa = 2) :
+        ElHeap(Compare inferior,int capa = 2) :
            ElFifo<Type> (capa),
            _inferior    (inferior)
         {
@@ -297,14 +297,14 @@ template <class Type,class Compare> class ElHeap : private ElFifo<Type>
              return true;
         }
         void clear() { _nb = 1;}
-        INT nb() {return _nb-1;}
+        int nb() {return _nb-1;}
         bool empty() {return nb() ==0;}
 
    private :
 
-        static INT  Fils(INT i) { return   i/2;}
-        static INT  Pere1(INT i){ return   i*2;}
-        static INT  Pere2(INT i){ return   i*2+1;}
+        static int  Fils(int i) { return   i/2;}
+        static int  Pere1(int i){ return   i*2;}
+        static int  Pere2(int i){ return   i*2+1;}
 
 
         Compare       _inferior;
@@ -312,17 +312,17 @@ template <class Type,class Compare> class ElHeap : private ElFifo<Type>
         // do not exist
         ElHeap(const ElHeap<Type,Compare> &);
 
-        void heap_up(INT KV)
+        void heap_up(int KV)
         {
             for(;;)
             {
-                INT ind_plus_petit = KV;
+                int ind_plus_petit = KV;
 
-                INT p1 = Pere1(KV);
+                int p1 = Pere1(KV);
                 if ((p1 < _nb) && _inferior(_tab[p1],_tab[ind_plus_petit]))
                     ind_plus_petit = p1;
 
-                INT p2 = Pere2(KV);
+                int p2 = Pere2(KV);
                 if ((p2 < _nb) && _inferior(_tab[p2],_tab[ind_plus_petit]))
                     ind_plus_petit = p2;
 
@@ -336,7 +336,7 @@ template <class Type,class Compare> class ElHeap : private ElFifo<Type>
             }
         }
 
-        void heap_down(INT KV)
+        void heap_down(int KV)
         {
             while ((KV>1)&& _inferior(_tab[KV],_tab[Fils(KV)]))
             {

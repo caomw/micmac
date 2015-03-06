@@ -1,28 +1,43 @@
-#ifndef _ELISE_GENERAL_OPTIM_OPTIM_L1FORMLIN_H
-#define _ELISE_GENERAL_OPTIM_OPTIM_L1FORMLIN_H
+/*Header-MicMac-eLiSe-25/06/2007
 
-#include "general/sys_dep.h"
+    MicMac : Multi Image Correspondances par Methodes Automatiques de Correlation
+    eLiSe  : ELements of an Image Software Environnement
 
-class Optim_L1FormLin
-{
-     public :
-
-        // Soit N le nombre de variable et M le nombre de contrainte
-        // Flin de taille (N+1,M)
+    www.micmac.ign.fr
 
 
-        Optim_L1FormLin (const ElMatrix<REAL> &Flin );
+    Copyright : Institut Geographique National
+    Author : Marc Pierrot Deseilligny
+    Contributors : Gregoire Maillet, Didier Boldo.
+    Refactoring: Helio Chissini de Castro <helio@kde.org>
 
-        ElMatrix<REAL> Solve();
+[1] M. Pierrot-Deseilligny, N. Paparoditis.
+    "A multiresolution and optimization-based image matching approach:
+    An application to surface reconstruction from SPOT5-HRS stereo imagery."
+    In IAPRS vol XXXVI-1/W41 in ISPRS Workshop On Topographic Mapping From Space
+    (With Special Emphasis on Small Satellites), Ankara, Turquie, 02-2006.
 
-        static void bench();
-        REAL score(const ElMatrix<REAL> & M); // M : (1,N)
+[2] M. Pierrot-Deseilligny, "MicMac, un lociel de mise en correspondance
+    d'images, adapte au contexte geograhique" to appears in
+    Bulletin d'information de l'Institut Geographique National, 2007.
+
+Francais :
+
+   MicMac est un logiciel de mise en correspondance d'image adapte
+   au contexte de recherche en information geographique. Il s'appuie sur
+   la bibliotheque de manipulation d'image eLiSe. Il est distibue sous la
+   licences Cecill-B.  Voir en bas de fichier et  http://www.cecill.info.
 
 
-        ElMatrix<REAL> MpdSolve();
-        ElMatrix<REAL> BarrodaleSolve();
+English :
 
-     private :
+    MicMac is an open source software specialized in image matching
+    for research in geographic information. MicMac is built on the
+    eLiSe image library. MicMac is governed by the  "Cecill-B licence".
+    See below and http://www.cecill.info.
+
+Header-MicMac-eLiSe-25/06/2007*/
+
 
 #ifndef _ELISE_GENERAL_OPTIM_ABSCD1_H
 #define _ELISE_GENERAL_OPTIM_ABSCD1_H
@@ -32,112 +47,112 @@ class Optim_L1FormLin
        class  AbscD1
        {
            public :
-               AbscD1(ElMatrix<REAL> & sc,INT ind);
+               AbscD1(ElMatrix<double_t> & sc,int ind);
 
-               REAL _x0;
-               REAL _pds;
-               INT  _k;
+               double_t _x0;
+               double_t _pds;
+               int  _k;
               inline bool operator < (const AbscD1 &) const;
        };
 
-        REAL EcartVar(INT v);
-        INT RandF();
-        bool get_sol_adm(ElFilo<INT> & SubSet);
-        void BenchCombin(REAL val);
-        REAL MinCombin();
+        double_t EcartVar(int v);
+        int RandF();
+        bool get_sol_adm(ElFilo<int> & SubSet);
+        void BenchCombin(double_t val);
+        double_t MinCombin();
         void MinCombin
              (
-                   ElFilo<INT> & CurSubset, ElFilo<INT> & BestSet,
-                   REAL & ScMin,INT NbVarPos,INT CurVarPos
+                   ElFilo<int> & CurSubset, ElFilo<int> & BestSet,
+                   double_t & ScMin,int NbVarPos,int CurVarPos
              );
 
-        REAL score(ElFilo<INT> & SubSet);
-        REAL Kth_score(const ElMatrix<REAL> & M,INT k); // M : (N,1)
+        double_t score(ElFilo<int> & SubSet);
+        double_t Kth_score(const ElMatrix<double_t> & M,int k); // M : (N,1)
 
         bool ExploreChVARBov
              (
-                ElFilo<INT> & SubSet,
-                REAL        & sc_min,
-                INT kv
+                ElFilo<int> & SubSet,
+                double_t        & sc_min,
+                int kv
              );
         bool ExploreChVAR
              (
-                ElFilo<INT> & SubSet,
-                REAL        & sc_min,
-                INT kv
+                ElFilo<int> & SubSet,
+                double_t        & sc_min,
+                int kv
              );
 
 
 
 
 
-        bool Sol(const  ElFilo<INT> & SubSet);
+        bool Sol(const  ElFilo<int> & SubSet);
 
-        INT _NbVar;
-        INT _NbForm;
-		INT _NbStep;
+        int _NbVar;
+        int _NbForm;
+		int _NbStep;
 
-        ElMatrix<REAL> _Flin;
+        ElMatrix<double_t> _Flin;
 
         GaussjPrec     _GP;
-        ElMatrix<REAL> & _MGauss;
-        ElMatrix<REAL> & _MVGauss;
-        ElMatrix<REAL> & _Sol;                           
+        ElMatrix<double_t> & _MGauss;
+        ElMatrix<double_t> & _MVGauss;
+        ElMatrix<double_t> & _Sol;                           
 
-        ElMatrix<REAL> _SolDirRech;
-        ElMatrix<REAL> _Scal1D;
+        ElMatrix<double_t> _SolDirRech;
+        ElMatrix<double_t> _Scal1D;
 
-        ElMatrix<REAL>    _BestSol;
+        ElMatrix<double_t>    _BestSol;
         bool              _bench_comb_made;
         std::vector<AbscD1>    _vad1;
 
-        static Optim_L1FormLin RandOLF(INT NbVar,INT NbForm,INT Nb0 = 0);
-        static void BenchRand(INT NbVar,INT NbForm,INT NbTest,bool Comb);
+        static Optim_L1FormLin RandOLF(int NbVar,int NbForm,int Nb0 = 0);
+        static void BenchRand(int NbVar,int NbForm,int NbTest,bool Comb);
 
-        static void BenchRandComb(INT NbVar,INT NbForm);
+        static void BenchRandComb(int NbVar,int NbForm);
         static void BenchRandComb();
 
 
 
         // Pour le bench "dur" sur les minimum  locaux 
 
-        void SubsetOfFlags(ElFilo<INT> & Subset,INT flag);
+        void SubsetOfFlags(ElFilo<int> & Subset,int flag);
 
         void CombinConjMinLoc
              (
-                ElFilo<REAL>&  dic,
-                ElFilo<INT> &  Subset,
-                ElFilo<INT> &  FlagPos,
-                INT            FlagSubset,
-                INT            NbVarPos,
-                INT            CurVarPos
+                ElFilo<double_t>&  dic,
+                ElFilo<int> &  Subset,
+                ElFilo<int> &  FlagPos,
+                int            FlagSubset,
+                int            NbVarPos,
+                int            CurVarPos
              );
 
 
-        void show_flag(INT flag);
+        void show_flag(int flag);
 
-        REAL TestNeighConjMinLoc(INT FlagSubset,ElFilo<REAL>&  dic);
+        double_t TestNeighConjMinLoc(int FlagSubset,ElFilo<double_t>&  dic);
 
         void CombinConjMinLoc
              (
-                ElFilo<REAL>&  dic,
-                ElFilo<INT> &  Subset,
-                ElFilo<INT> &  FlagPos
+                ElFilo<double_t>&  dic,
+                ElFilo<int> &  Subset,
+                ElFilo<int> &  FlagPos
              );
         static void CombinConjMinLoc
                     (
-                         INT N,
-                         INT M,
-                         ElFilo<REAL>&  dic,
-                         ElFilo<INT> &  Subset,
-                         ElFilo<INT> &  FlagPos,
-						 INT            Nb0 = 0
+                         int N,
+                         int M,
+                         ElFilo<double_t>&  dic,
+                         ElFilo<int> &  Subset,
+                         ElFilo<int> &  FlagPos,
+						 int            Nb0 = 0
                     );
         static void CombinConjMinLoc();
 
 		void One_bench_craig();
 		static  void bench_craig();
-		static  void rand_bench_craig(INT N,INT M);
+		static  void rand_bench_craig(int N,int M);
         
 };                      
 

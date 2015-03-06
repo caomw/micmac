@@ -143,9 +143,9 @@ template <class Obj>  class ElSlist : public  Mcheck
                    pop_front(Reserve);
          }
 
-         INT remove(const Obj & obj,ElSlist * Reserve =0)
+         int remove(const Obj & obj,ElSlist * Reserve =0)
          {
-              INT res =0;
+              int res =0;
               while (_node && (_node->_obj == obj))
               {
                    pop_front(Reserve);

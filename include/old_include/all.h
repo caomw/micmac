@@ -182,22 +182,22 @@ using namespace std;
 #include <string>
 
 #if (Compiler_Gpp2_7_2 || MACHINE_BLERIOT)
-template <class Type> Type & AT(std::vector<Type> & V,const INT & K)
+template <class Type> Type & AT(std::vector<Type> & V,const int & K)
 {
-   assert((K>=0)&&(K<INT(V.size())));
+   assert((K>=0)&&(K<int(V.size())));
    return V[K];
 }
-template <class Type> const Type & AT(const std::vector<Type> & V,const INT & K)
+template <class Type> const Type & AT(const std::vector<Type> & V,const int & K)
 {
-   assert((K>=0)&&(K<INT(V.size())));
+   assert((K>=0)&&(K<int(V.size())));
    return V[K];
 }
 #else
-template <class Type> Type & AT(std::vector<Type> & V,const INT & K)
+template <class Type> Type & AT(std::vector<Type> & V,const int & K)
 {
     return V.at(K);
 }
-template <class Type> const Type & AT(const std::vector<Type> & V,const INT & K) 
+template <class Type> const Type & AT(const std::vector<Type> & V,const int & K) 
 {
     return V.at(K);
 }

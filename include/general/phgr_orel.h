@@ -53,8 +53,8 @@ class cIncCpleCamera;
 class cFonctrPond
 {
      public :
-         cFonctrPond(cElCompiledFonc * aFctr,REAL aPds);
-         REAL                 mPds;
+         cFonctrPond(cElCompiledFonc * aFctr,double_t aPds);
+         double_t                 mPds;
          cElCompiledFonc *    mFctr;
 };
 
@@ -71,7 +71,7 @@ class cIncParamIntrinseque
     // Transforme un point (formel) en pixel (== dist non) , en une direction (formelle), 
     // dans le repere camera
 
-         Pt3d<Fonc_Num>  DirRayon(Pt2d<Fonc_Num> aPCam,INT aNumParam);
+         Pt3d<Fonc_Num>  DirRayon(Pt2d<Fonc_Num> aPCam,int aNumParam);
 
          virtual ~cIncParamIntrinseque();
 
@@ -87,7 +87,7 @@ class cIncParamIntrinseque
          static cIncParamIntrinseque  * NewOneNoDist
          (
              AllocateurDInconnues  &     anAlloc,
-             REAL                        aFocale,
+             double_t                        aFocale,
              bool                        isFocaleFree,
              Pt2dr                       aPP,
              bool                        isPPFree,
@@ -95,11 +95,11 @@ class cIncParamIntrinseque
              ElDistRadiale_PolynImpair * aDist = 0
          );
 
-	 void InitFoncteur(cElCompiledFonc &,INT aNum);
+	 void InitFoncteur(cElCompiledFonc &,int aNum);
          AllocateurDInconnues & Alloc();
 
          cIncEnsembleCamera * Ensemble();
-	 REAL   CurFocale() const;
+	 double_t   CurFocale() const;
 	 Pt2dr  CurPP()     const;
 
          ElDistRadiale_PolynImpair   CurDR() const;
@@ -114,13 +114,13 @@ class cIncParamIntrinseque
          void CurSetRappelCrd();
          void InitSetRappelCrd();
 
-         void SetRappelFocal(REAL);
+         void SetRappelFocal(double_t);
          void CurSetRappelFocal();
          void InitSetRappelFocal();
 
-         void SetRappelCoeffDist(INT aK,REAL);
-         void CurSetRappelCoeffDist(INT aK);
-         void InitSetRappelCoeffDist(INT aK);
+         void SetRappelCoeffDist(int aK,double_t);
+         void CurSetRappelCoeffDist(int aK);
+         void InitSetRappelCoeffDist(int aK);
 
      protected :
 
@@ -132,7 +132,7 @@ class cIncParamIntrinseque
          cIncParamIntrinseque 
          (
              AllocateurDInconnues  &     anAlloc,
-             REAL                        aFocale,
+             double_t                        aFocale,
              bool                        isFocaleFree,
              Pt2dr                       aPP,
              bool                        isPPFree,
@@ -163,18 +163,18 @@ class cIncParamIntrinseque
           std::string            mNamePPy;
 
           bool                   mIsFFree;
-          REAL                   mFocale;
-          REAL                   mFocaleInit;
+          double_t                   mFocale;
+          double_t                   mFocaleInit;
           bool                   mIsPPFree;
           Pt2dr                  mPP;
-          INT                    mIndFoc;
+          int                    mIndFoc;
           Fonc_Num               fFocale;
           Pt2d<Fonc_Num>         fPP;
           cNumVarLoc             mNVL[2];
 	  bool                        mWithDR;
           ElDistRadiale_PolynImpair   mDR;
           ElDistRadiale_PolynImpair   mDRInit;
-          INT                         mIndCrd;
+          int                         mIndCrd;
           Pt2d<Fonc_Num>              mCentreDR;
 	  std::vector<Fonc_Num>       mCoeffDR;
 
@@ -210,9 +210,9 @@ class cIncParamExtrinseque
 
        // Omega() * P + Tr() : transforme un point (formel) des coordonnees camera
        //  en un point formel coord monde
-         virtual ElMatrix<Fonc_Num> & Omega(INT aNum) =0 ;
-         virtual Pt3d<Fonc_Num>     & Tr(INT aNum) =0 ;
-	 virtual  void InitFoncteur(cElCompiledFonc &,INT aNum) =0;
+         virtual ElMatrix<Fonc_Num> & Omega(int aNum) =0 ;
+         virtual Pt3d<Fonc_Num>     & Tr(int aNum) =0 ;
+	 virtual  void InitFoncteur(cElCompiledFonc &,int aNum) =0;
  
 
           AllocateurDInconnues & Alloc();
@@ -302,9 +302,9 @@ class cIncParamCamera
            bool SameIntrinseque(const cIncParamCamera &) const;
 
 
-           Pt3d<Fonc_Num>  DirRayon(Pt2d<Fonc_Num> aPCam,INT aNumParamI,INT aNumParamE);
+           Pt3d<Fonc_Num>  DirRayon(Pt2d<Fonc_Num> aPCam,int aNumParamI,int aNumParamE);
 
-           Pt3d<Fonc_Num>  VecteurBase(INT Num1,cIncParamCamera &,INT Num2);
+           Pt3d<Fonc_Num>  VecteurBase(int Num1,cIncParamCamera &,int Num2);
 
 
            const  cIncIntervale & III() const;
@@ -313,7 +313,7 @@ class cIncParamCamera
            cIncIntervale & IIE() ;
 
            std::string NameType (bool SameIntr);
-	   void InitFoncteur(cElCompiledFonc &,INT aNumI,INT aNumE);
+	   void InitFoncteur(cElCompiledFonc &,int aNumI,int aNumE);
           AllocateurDInconnues & Alloc();
           cIncEnsembleCamera * Ensemble();
 
@@ -349,11 +349,11 @@ class cIncCpleCamera
 	 double ValEqCoPlan(const Pt2dr & aP1,const Pt2dr & aP2);
 	 // retourne le residu, signe, non pondere
 	 double DevL1AddEqCoPlan
-		 (const Pt2dr & aP1,const Pt2dr & aP2,REAL aPds,
+		 (const Pt2dr & aP1,const Pt2dr & aP2,double_t aPds,
                   cGenSysSurResol &);
 
          double Dev2AddEqCoPlan ( const Pt2dr & aP1, const Pt2dr & aP2,
-            REAL aPds, L2SysSurResol & aSys);
+            double_t aPds, L2SysSurResol & aSys);
 
 
 	 // Reinitialise mFoncteur a partir des valeurs de Alloc()
@@ -374,7 +374,7 @@ class cIncCpleCamera
                            cIncParamExtrinseque::tPosition aPos1,
                            bool  aFocFree1,
                            bool  aPPFree1,
-			   INT   aDegreDR1,
+			   int   aDegreDR1,
                            cIncParamExtrinseque::tPosition aPos2,
                            const char * Name = 0
                      );
@@ -396,12 +396,12 @@ class cIncCpleCamera
                            cIncParamExtrinseque::tPosition aPos1,
                            bool  aFocFree1,
                            bool  aPPFree1,
-			   INT   aDegreDR1,
+			   int   aDegreDR1,
                            cIncParamExtrinseque::tPosition aPos2,
                            bool aSameIntr,
                            bool  aFocFree2,
                            bool  aPPFree2,
-			   INT   aDegreDR2,
+			   int   aDegreDR2,
                            const char * Name = 0
                      );
 
@@ -427,8 +427,8 @@ class cIncCpleCamera
 
 
           bool            mSameIntr;
-          INT             mNumIntr2; // Est-ce que possede ses propre variable locale
-          INT             mNumExtr2; // Est-ce que possede ses propre variable locale
+          int             mNumIntr2; // Est-ce que possede ses propre variable locale
+          int             mNumExtr2; // Est-ce que possede ses propre variable locale
           Pt2d<Fonc_Num>  mP1;
           Pt2d<Fonc_Num>  mP2;
           Pt3d<Fonc_Num>  mDRay1;
@@ -470,7 +470,7 @@ class cIncEnsembleCamera
 
          cIncParamIntrinseque  *  NewParamIntrinseque
                                   (
-                                      REAL     aFocale,
+                                      double_t     aFocale,
                                       bool     isFocaleFree,
                                       Pt2dr    aPP,
                                       bool     isPPFree,
@@ -496,21 +496,21 @@ class cIncEnsembleCamera
 
          void SetL2Opt(bool L2Opt);
 
-         REAL AddEqCoPlan(cIncCpleCamera &,const Pt2dr &,const Pt2dr &,REAL aPds);
-         void AddEqRappelCentreDR(cIncParamIntrinseque & aParamI, REAL aPds);
+         double_t AddEqCoPlan(cIncCpleCamera &,const Pt2dr &,const Pt2dr &,double_t aPds);
+         void AddEqRappelCentreDR(cIncParamIntrinseque & aParamI, double_t aPds);
 
          void ResetEquation();
          void ItereLineaire();  // Ne remplit pas la matrice
          void OneItereDevL1(bool WithFaux);  // Vide et  Remplit la matrice
 
-	 void StdAddEq(cElCompiledFonc *,REAL aP);
+	 void StdAddEq(cElCompiledFonc *,double_t aP);
 
 
          void OptLineaireOnDirL2(std::list<cIncSetLiaison *> *  aListSL,const std::vector<cFonctrPond> &);
-         void OptimPowel(std::list<cIncSetLiaison *> * ,const std::vector<cFonctrPond> &,REAL tol,INT ItMax);
+         void OptimPowel(std::list<cIncSetLiaison *> * ,const std::vector<cFonctrPond> &,double_t tol,int ItMax);
          void OptimJacobi(std::list<cIncSetLiaison *> *  aListSL,const std::vector<cFonctrPond> &);
 
-         Im1D_REAL8 CurVals();
+         Im1D_double_t8 CurVals();
          void SetPtCur(const double * aPt);
 
      private :
@@ -518,13 +518,13 @@ class cIncEnsembleCamera
         friend class  cIEC_OptimCurDir;
         friend class  cIEC_OptimPowel;
 
-         REAL ScoreLambda(REAL);
-         void SetLambda(REAL aLambda);
+         double_t ScoreLambda(double_t);
+         void SetLambda(double_t aLambda);
          void SetImState0();
          void SetCurDir(const double * aDir);
-         REAL ScoreCur(bool WithFAux);
-         REAL ScoreCurGen(bool WithFAux,bool CumulDeriv);
-         INT  NbVal();
+         double_t ScoreCur(bool WithFAux);
+         double_t ScoreCurGen(bool WithFAux,bool CumulDeriv);
+         int  NbVal();
 
 
 
@@ -560,14 +560,14 @@ class cIncEnsembleCamera
 
          std::list<cIncSetLiaison *> *  mListSl;
          std::vector<cFonctrPond>       mFoncsAux;
-         Im1D_REAL8                     mImState0;
-         Im1D_REAL8                     mImDir;
+         Im1D_double_t8                     mImState0;
+         Im1D_double_t8                     mImDir;
 
-         ElMatrix<REAL>                 mMatrL2;
-         ElMatrix<REAL>                 mMatrtB;
-         ElMatrix<REAL>                 mMatrValP;
-         ElMatrix<REAL>                 mMatrVecP;
-         ElMatrix<REAL>                 mtBVecP;
+         ElMatrix<double_t>                 mMatrL2;
+         ElMatrix<double_t>                 mMatrtB;
+         ElMatrix<double_t>                 mMatrValP;
+         ElMatrix<double_t>                 mMatrVecP;
+         ElMatrix<double_t>                 mtBVecP;
 };
 
 
@@ -576,7 +576,7 @@ class cIncSetLiaison
 {
      public :
         cIncSetLiaison(cIncCpleCamera * aCple);
-        void AddCple(Pt2dr aP1,Pt2dr aP2,REAL aPds);
+        void AddCple(Pt2dr aP1,Pt2dr aP2,double_t aPds);
         ElPackHomologue & Pack();
         cIncCpleCamera *  Cple();
      private :

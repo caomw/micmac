@@ -44,8 +44,8 @@ class Garb_Coll_Pub {
 	public:
 
 /*
-const INT Elise_Std_Max_Dim = 20;
-const INT Elise_Std_Max_Buf = 500;
+const int Elise_Std_Max_Dim = 20;
+const int Elise_Std_Max_Buf = 500;
 */
 enum {
     Elise_Std_Max_Dim = 20,

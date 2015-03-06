@@ -28,7 +28,7 @@ public :
             const char *     name                   ,
             Pt2di            sz                     ,
             GenIm::type_el   type                   ,
-            INT              dim_out                ,
+            int              dim_out                ,
             Pt2di            sz_tiles               ,
             bool             clip_last_tile = DefCLT,         // false ,
             bool             chunk          = DefChunk,       // true  ,
@@ -38,7 +38,7 @@ public :
             );
 
     Fonc_Num in();
-    Fonc_Num in(REAL def_out);
+    Fonc_Num in(double_t def_out);
     Output out();
 
     static Elise_Tiled_File_Im_2D HDR(const std::string & aNameHdr);

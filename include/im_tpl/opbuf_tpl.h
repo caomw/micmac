@@ -110,7 +110,7 @@ class  cTplOpbBufImage
                       CumulLine(mY0CurIn,-1);
                       // Permuation circulaire du "Buffer de lignes"
                       tElPtr aL0 = mMatElem[mY0CurIn];
-                      for (INT aYIn = mY0CurIn  ; aYIn<mY1CurIn ; aYIn++)
+                      for (int aYIn = mY0CurIn  ; aYIn<mY1CurIn ; aYIn++)
                           mMatElem[aYIn] = mMatElem[aYIn+1];
                        mMatElem[mY1CurIn] = aL0;
 
@@ -173,7 +173,7 @@ class  cTplOpbBufImage
             int       mX1CurIn;
             int       mNbXIn;
             int       mNbWX;
-            INT       mCurYIn;
+            int       mCurYIn;
 
             tElem **  mMatElem;
             tCumul *  mVCumul;
@@ -280,12 +280,12 @@ struct cArgOBICorrelMoindreCarres
          cArgOBICorrelMoindreCarres
          (
               const ElDistortion22_Gen & aDist1to2,
-              REAL            aVBiCub,
+              double_t            aVBiCub,
               tImage          aIm1,
               Im2D_Bits<1>    aMasq1,
               tImage          aIm2,
               Im2D_Bits<1>    aMasq2,
-              INT             aSzV
+              int             aSzV
          )  :
             mDist1to2 (aDist1to2),
             mBCKernel (aVBiCub),
@@ -304,7 +304,7 @@ struct cArgOBICorrelMoindreCarres
          Pt2dr   P1toP2(Pt2di aP1)   {return mDist1to2.Direct(aP1);}
          bool    IsOkP1(Pt2di aP1)   {return mMasq1.get(aP1,0);}
          bool    IsOkP2(Pt2dr aP2)   {return mMasq2.get(round_ni(aP2),0);}
-         REAL    Im1(Pt2di aP1)      {return mIm1[aP1.y][aP1.x];}
+         double_t    Im1(Pt2di aP1)      {return mIm1[aP1.y][aP1.x];}
          Pt3dr   Im2AndG2(Pt2dr aP2) {return BicubicInterpol(mBCKernel,mIm2,aP2);}
 
 

@@ -237,7 +237,7 @@ class cEqCalibCroisee : public cNameSpaceEqF,
             virtual ~cEqCalibCroisee();
 	    // WithD2 = Derivee seconde, quasi obsolete (plus de derivee seconde calculee
 	    // aujourd'hui dans les codes formels
-            const std::vector<REAL> &     AddObservation
+            const std::vector<double_t> &     AddObservation
 	         (Pt2dr aPIm1,Pt3dr aDir2,double aPds=1.0,bool WithD2=false);
         private :
             friend class cSetEqFormelles;
@@ -313,7 +313,7 @@ class cEqDirecteDistorsion : public cNameSpaceEqF,
             virtual ~cEqDirecteDistorsion();
 	    // WithD2 = Derivee seconde, quasi obsolete (plus de derivee seconde calculee
 	    // aujourd'hui dans les codes formels
-            const std::vector<REAL> &     AddObservation
+            const std::vector<double_t> &     AddObservation
 	         (Pt2dr aPIm1,Pt2dr aDir2,double aPds=1.0,bool WithD2=false);
         private :
             friend class cSetEqFormelles;
@@ -553,11 +553,11 @@ class cBufSubstIncTmp
           int mNbY;  // Non Tmp
 	  // Les noms des matrices sont ceux utilis\'es dans
 	  // la doc micmac
-	  ElMatrix<tSysCho>   mA;
-	  ElMatrix<tSysCho>   mB;
-	  ElMatrix<tSysCho>   mBp;  // B', en general t B  ...
-	  ElMatrix<tSysCho>   mBpL;  // mBp * mLambda-1
-	  ElMatrix<tSysCho>   mLambda;  // B', en general t B  ...
+	  ElMatrix<double_t>   mA;
+	  ElMatrix<double_t>   mB;
+	  ElMatrix<double_t>   mBp;  // B', en general t B  ...
+	  ElMatrix<double_t>   mBpL;  // mBp * mLambda-1
+	  ElMatrix<double_t>   mLambda;  // B', en general t B  ...
 };
 
 

@@ -42,10 +42,10 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_PRIVATE_MORPHO_H
 #define _ELISE_PRIVATE_MORPHO_H
 
-Liste_Pts_U_INT2 Skeleton
+Liste_Pts_U_int2 Skeleton
 (
-     U_INT1 **    result,
-     U_INT1 **    image,
+     U_int1 **    result,
+     U_int1 **    image,
      int                 tx,
      int                 ty,
      int                 surf_threshlod,
@@ -54,35 +54,35 @@ Liste_Pts_U_INT2 Skeleton
      bool                prolgt_extre,
      bool                Withresult,
      bool                cx8,
-     U_INT2 **           tmp
+     U_int2 **           tmp
 );
 
-Fonc_Num binarize(Fonc_Num f,INT val,bool neg = false);
+Fonc_Num binarize(Fonc_Num f,int val,bool neg = false);
 
 
-Liste_Pts_U_INT2 Skeleton
+Liste_Pts_U_int2 Skeleton
 (
-     U_INT1 **  skel,
-     U_INT1 **  image,
-     INT        tx,
-     INT        ty,
+     U_int1 **  skel,
+     U_int1 **  image,
+     int        tx,
+     int        ty,
      L_ArgSkeleton  larg
 );
 
 class Data_ArgSkeleton
 {
       public :
-          Data_ArgSkeleton(INT tx,INT ty,L_ArgSkeleton);
+          Data_ArgSkeleton(int tx,int ty,L_ArgSkeleton);
 
-          INT        _tx;
-          INT        _ty;
-          REAL       _ang;
-          INT        _surf;
+          int        _tx;
+          int        _ty;
+          double_t       _ang;
+          int        _surf;
           bool       _skel_of_disk;
           bool       _prolgt_extre;
           bool       _result;
           bool       _cx8;
-          U_INT2 **  _tmp;
+          U_int2 **  _tmp;
 };
 
 
@@ -174,11 +174,11 @@ class SkVein
         static ldir * (BitsOfFlag[256]);
 
         // for a given flag,  the number of bits active
-        static U_INT1    NbBitFlag[256];
+        static U_int1    NbBitFlag[256];
         // for a given flag,  =1 if NbBitFlag == 1 and 0 elsewhere
-        static U_INT1    FlagIsSing[256];
+        static U_int1    FlagIsSing[256];
 
-        static U_INT1    UniqueBits[256];
+        static U_int1    UniqueBits[256];
 
         class cc_vflag
         {
@@ -203,10 +203,10 @@ class SkVein
         static int v4x[4];
         static int v4y[4];
 
-        static U_INT1 flag_dsym[8];
-        static U_INT1 dir_sym[8];
-        static U_INT1 dir_suc[8];
-        static U_INT1 dir_pred[8];
+        static U_int1 flag_dsym[8];
+        static U_int1 dir_sym[8];
+        static U_int1 dir_suc[8];
+        static U_int1 dir_pred[8];
 
 
 // Bench purpose
@@ -222,14 +222,14 @@ class SkVein
 class  SKVRLE
 {
      public :
-        inline SKVRLE(INT x0,INT x1);
+        inline SKVRLE(int x0,int x1);
         inline SKVRLE();
-        inline INT x0();
-        inline INT x1();
-        inline INT nbx();
+        inline int x0();
+        inline int x1();
+        inline int nbx();
 
      private :
-        INT _x0,_x1;
+        int _x0,_x1;
 };
 
 template <class Type> class SkVeinIm : public SkVein
@@ -248,17 +248,17 @@ template <class Type> class SkVeinIm : public SkVein
           void binarize(ElPartition<SKVRLE> &,Type val);
           void dist32(ElPartition<SKVRLE> &,int vmax = max_val-1);
           void pdsd32vein1l
-              (INT4 * pds,ElPartition<SKVRLE> &,INT4 y,INT4 *def);
+              (int4 * pds,ElPartition<SKVRLE> &,int4 y,int4 *def);
           void d32_veinerize 
-               (ElPartition<SKVRLE> &,SkVeinIm<U_INT1>  veines,bool cx8);
+               (ElPartition<SKVRLE> &,SkVeinIm<U_int1>  veines,bool cx8);
           void reset();
           void perm_circ_lines();
 
           void push_extr(ElPartition<SKVRLE> &,ElFifo<Pt2di> &);
-          void push_extr(ElPartition<SKVRLE> &,ElFifo<Pt2di> &,U_INT2 ** som);
+          void push_extr(ElPartition<SKVRLE> &,ElFifo<Pt2di> &,U_int2 ** som);
 
           void get_arc_sym(ElFifo<Pt2di> &);
-          bool get_arc_sym(INT4 x,INT4 y);
+          bool get_arc_sym(int4 x,int4 y);
           void  prolong_extre(ElPartition<SKVRLE> &);
           Pt2di  prolong_extre(int x,int y,int k);
           void  prolong_extre_rec(int x,int y,int k,int & nb,ElFifo<Pt3di> &f);
@@ -266,17 +266,17 @@ template <class Type> class SkVeinIm : public SkVein
           void  pruning
           (
                   ElPartition<SKVRLE> &,
-                  SkVeinIm<U_INT1>  veines,
-                  U_INT2 **         som,
+                  SkVeinIm<U_int1>  veines,
+                  U_int2 **         som,
                   double            ang,
-                  INT4              surf,
+                  int4              surf,
                   bool              skp,
                   ElFifo<Pt3di> &    Fgermes
           );
 
           void  isolated_points
           (
-                  SkVeinIm<U_INT1>  veines,
+                  SkVeinIm<U_int1>  veines,
                   ElFifo<Pt3di> &    Fgermes
           );
 
@@ -286,14 +286,14 @@ template <class Type> class SkVeinIm : public SkVein
      // private :
 
          Type **           _d;
-         INT4     _tx;
-         INT4     _ty;
+         int4     _tx;
+         int4     _ty;
          bool           _free;
 
         // to pass as paremeter in calc_surf
         double _ang;
-        INT4   _surf;
-        U_INT1  ** _dvein;
+        int4   _surf;
+        U_int1  ** _dvein;
 };
 
 

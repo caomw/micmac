@@ -7,7 +7,7 @@ class cElTriangleComp
 {
     public :
         cElTriangleComp(Pt2dr aP0,Pt2dr aP1,Pt2dr aP2);
-            REAL square_dist(Pt2dr pt) const;
+            double_t square_dist(Pt2dr pt) const;
 
         bool Inside(const Pt2dr &) const;
 
@@ -29,7 +29,7 @@ class cElTriangleComp
 
 
         Pt3dr  CoordBarry(const Pt2dr &) const;
-        Pt2dr  FromCoordBarry(REAL,REAL,REAL) const;
+        Pt2dr  FromCoordBarry(double_t,double_t,double_t) const;
 
         static void Test();
 

@@ -50,8 +50,8 @@ class Neighbourhood : public PRC0
      friend class B2d_Spec_Neigh_Not_Comp;
 
      public :
-         Neighbourhood (Im2D<INT4,INT>);
-         Neighbourhood (Pt2di *,INT nb);
+         Neighbourhood (Im2D<int4,int>);
+         Neighbourhood (Pt2di *,int nb);
 
          static Neighbourhood   v4();
          static Neighbourhood   v8();

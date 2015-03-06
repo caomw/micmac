@@ -69,7 +69,7 @@ class EliseCorrelation  // + ou - name space
     public :
 
 	 // Permet de rajouter du flou dans les images
-          static Fonc_Num FoncLissee(Fonc_Num ,Pt2di aSz,REAL  FactLissage,INT aNbStep,bool aUseVou,INT  aVout);
+          static Fonc_Num FoncLissee(Fonc_Num ,Pt2di aSz,double_t  FactLissage,int aNbStep,bool aUseVou,int  aVout);
 
          // Pour rechecher au hasard, en aveugle une translation approximative
 
@@ -78,29 +78,29 @@ class EliseCorrelation  // + ou - name space
                                   Fonc_Num f1,
                                   Fonc_Num f2,
                                   Pt2di aSz,
-                                  REAL  aRatioBord,
-                                  REAL  FactLissage,
-			          INT   aNbStepLiss = 2,
-			          REAL   anEpsilon = 1e-5,
+                                  double_t  aRatioBord,
+                                  double_t  FactLissage,
+			          int   aNbStepLiss = 2,
+			          double_t   anEpsilon = 1e-5,
                                   bool   aUseVout = false,
-                                  INT    aVout    = 0
+                                  int    aVout    = 0
                             );
 
-         static  Im2D_REAL8 ImCorrelComplete
+         static  Im2D_double_t8 ImCorrelComplete
                             (
                                   Fonc_Num f1,
                                   Fonc_Num f2,
                                   Pt2di aSz,
-                                  REAL  aRatioBord,
-                                  REAL  FactLissage,
-			          INT   aNbStepLiss = 2,
-			          REAL   anEpsilon = 1e-5,
+                                  double_t  aRatioBord,
+                                  double_t  FactLissage,
+			          int   aNbStepLiss = 2,
+			          double_t   anEpsilon = 1e-5,
                                   bool   aUseVout = false,
-                                  INT    aVout    = 0
+                                  int    aVout    = 0
                             );
 
-          static Im2D_REAL8 ImLissee(Fonc_Num ,Pt2di aSz,REAL  FactLissage,
-                                       INT aNbStep,bool aUseVou,INT  aVout);
+          static Im2D_double_t8 ImLissee(Fonc_Num ,Pt2di aSz,double_t  FactLissage,
+                                       int aNbStep,bool aUseVou,int  aVout);
      private :
 };
 
@@ -108,8 +108,8 @@ class EliseCorrelation  // + ou - name space
 class TabuledCollecPt2di
 {
     public :
-         TabuledCollecPt2di(Pt2di aP0,Pt2di aP1,REAL aRatio = 0.1);
-         INT  NbPres (Pt2di,INT aDef) const;
+         TabuledCollecPt2di(Pt2di aP0,Pt2di aP1,double_t aRatio = 0.1);
+         int  NbPres (Pt2di,int aDef) const;
          void Add (Pt2di) ;
          void clear();
 
@@ -119,14 +119,14 @@ class TabuledCollecPt2di
 
        bool  InDom(Pt2di) const;
 
-       typedef U_INT2      tElem;
+       typedef U_int2      tElem;
        tElem &   Val(Pt2di);
        const tElem &   Val(Pt2di) const;
 
        Pt2di                mP0;
        Pt2di                mP1;
        Pt2di                mSz;
-       Im2D<tElem,INT>      mIm;
+       Im2D<tElem,int>      mIm;
        tElem **             mCpt;
        std::vector<Pt2di>   mVPts;
 };
@@ -146,11 +146,11 @@ class EliseDecCor2D
            Pt2dr RDec(Pt2di aP) const;
            void  SetDec(Pt2di aP,Pt2dr aVal);
 	private :
-	   typedef REAL4 tElem;
+	   typedef double_t4 tElem;
 
-           Im2D<tElem,REAL>  mDecX;
+           Im2D<tElem,double_t>  mDecX;
            tElem **          mDataX;
-           Im2D<tElem,REAL>  mDecY;
+           Im2D<tElem,double_t>  mDecY;
            tElem **          mDataY;
 };
 
@@ -160,39 +160,39 @@ class EliseCorrel2D
 {
     public :
 
-	   typedef REAL4  tElem;
-	   typedef U_INT1 tElInit;
-	   typedef INT    tBaseElInit;
+	   typedef double_t4  tElem;
+	   typedef U_int1 tElInit;
+	   typedef int    tBaseElInit;
    // Calcule le deplacement qui envoie l'image 2 dans Image 1
            EliseCorrel2D
            (
                  Fonc_Num f1,
                  Fonc_Num f2,
                  Pt2di aSz,
-                 INT   aSzVgn,
+                 int   aSzVgn,
                  bool  aUseVOut,   // Faut-il utiliser le param aVOut comme valeur d'exclusion de la correl init
-                 INT   aVOut,
+                 int   aVOut,
                  bool  WithPreCompute,
                  bool  WithDec
            );
 
           void SetSzI12(Pt2di aSz);
 
-          void InitFromSousResol(EliseCorrel2D &,INT aRatio);
+          void InitFromSousResol(EliseCorrel2D &,int aRatio);
 
          
          Pt2di TrInitFromScratch
                (
-		     INT   aZoomOverRes,
-                     REAL  aRatioBord,
-                     REAL  FactLissage
+		     int   aZoomOverRes,
+                     double_t  aRatioBord,
+                     double_t  FactLissage
                );
 
-           void ComputeCorrelMax(Pt2di aDec,INT Incert);
+           void ComputeCorrelMax(Pt2di aDec,int Incert);
            Pt2dr Homol(Pt2di aP) const;
            Fonc_Num DecIn();
            Output   DecOut();
-           Box2di BoxOk(Pt2di aDec,INT anIncert);
+           Box2di BoxOk(Pt2di aDec,int anIncert);
 
            Fonc_Num CorrelMax();
            Fonc_Num Fonc1();
@@ -200,20 +200,20 @@ class EliseCorrel2D
 
            void RaffineFromVois     
                 (
-                   INT anIncert,
+                   int anIncert,
                    Pt2di aDecGlob,
-                   INT aNbVoisRech,  // Nomb des voisin explore
-                   INT  aSzExt,      // dilatation du vois
+                   int aNbVoisRech,  // Nomb des voisin explore
+                   int  aSzExt,      // dilatation du vois
                    bool enParal
                );
 
 
-            Im2D_REAL4  SubPixelaire(Pt2di aDecGlob,REAL aStepLim,INT aSzV);
-            Im2D_REAL4  DiffSubPixelaire(Pt2di aDecGlob,INT aSzV);
-            INT SzV() const;
-            REAL Correl(Pt2di aPIm1,Pt2di aPIm2) const;
+            Im2D_double_t4  SubPixelaire(Pt2di aDecGlob,double_t aStepLim,int aSzV);
+            Im2D_double_t4  DiffSubPixelaire(Pt2di aDecGlob,int aSzV);
+            int SzV() const;
+            double_t Correl(Pt2di aPIm1,Pt2di aPIm2) const;
 
-            REAL CorrelStdIDec(Pt2di aPIm1) const;
+            double_t CorrelStdIDec(Pt2di aPIm1) const;
 
             bool WithPrec() const {return mWithPreCompute;}
             bool WithDec() const {return mWithDec;}
@@ -222,7 +222,7 @@ class EliseCorrel2D
            Im2D<tElInit,tBaseElInit>  I2() { return mI2;}
 
            void SetI1GeomRadiomI2();
-           Im2D<tElem,REAL> I1GeomRadiomI2() {return mI1GeomRadiomI2;}
+           Im2D<tElem,double_t> I1GeomRadiomI2() {return mI1GeomRadiomI2;}
 
 
           bool InImage(Pt2di aP);
@@ -233,25 +233,25 @@ class EliseCorrel2D
 
            void RaffineFromVois     
                 (
-                   INT anIncert,
+                   int anIncert,
                    Pt2di aDecGlob,  // Utilise pour : zone de recherche + optimiser,
                                     // en conjonction avec incert,  la taille du Set de point (TabuledCollecPt2di)
 	           EliseDecCor2D  &  mDecOut,
 	           const EliseDecCor2D  &  mDecIn,
-                   INT aNbVoisRech,  
-                   INT  aSzExt     
+                   int aNbVoisRech,  
+                   int  aSzExt     
                 );
 
            bool OKPtCorrel(Pt2di aP0) const;
-           REAL CorrelBrute(Pt2di aPIm1,Pt2di aPIm2) const;
+           double_t CorrelBrute(Pt2di aPIm1,Pt2di aPIm2) const;
 
 
            void ComputeCorrel(Pt2di aDec);
            void ComputeICorrel
            (
-                Im2D_INT4  aSom12,
-                Im2D_INT4  aBuf,
-                Im2D_REAL4 aRes,
+                Im2D_int4  aSom12,
+                Im2D_int4  aBuf,
+                Im2D_double_t4 aRes,
                 Pt2di      aP0I1,
                 Pt2di      aP0I2,
                 Pt2di      aSz
@@ -259,7 +259,7 @@ class EliseCorrel2D
 
 
            void SetFoncs(Fonc_Num f1,Fonc_Num f2);
-           void SetSzVign(INT aSzV);
+           void SetSzVign(int aSzV);
            Fonc_Num Moy(Fonc_Num );
 
            Pt2di      mSzIm;
@@ -273,9 +273,9 @@ class EliseCorrel2D
            void InitImOk(Im2D_Bits<1>,Im2D<tElInit,tBaseElInit>);
 
 	   EliseDecCor2D     mDec;
-           Im2D<tElem,REAL>  mCorrelMax;
+           Im2D<tElem,double_t>  mCorrelMax;
 
-           Im2D<tElem,REAL>   mCorrel;
+           Im2D<tElem,double_t>   mCorrel;
            Pt2di              mSzI12;
            Im2D<tElInit,tBaseElInit>  mI1;
            tElInit **         mDataI1;
@@ -286,95 +286,95 @@ class EliseCorrel2D
            tElInit **         mDataI2;
            Im2D_Bits<1>       mIsImOk2;
            
-           Im2D<tElem,REAL>  mS1;
+           Im2D<tElem,double_t>  mS1;
            tElem **          mDataS1;
-           Im2D<tElem,REAL>  mS2;
+           Im2D<tElem,double_t>  mS2;
            tElem **          mDataS2;
-           Im2D<tElem,REAL>  mS11;
+           Im2D<tElem,double_t>  mS11;
            tElem **          mDataS11;
-           Im2D<tElem,REAL>  mS22;
+           Im2D<tElem,double_t>  mS22;
            tElem **          mDataS22;
 
 
   // im1 en geom 2 (compte tenu de la correlation) avec
   // correction affine de la radiometrie
-           Im2D<tElem,REAL>  mI1GeomRadiomI2;
+           Im2D<tElem,double_t>  mI1GeomRadiomI2;
            tElem **                 mD1GRI2;
            
 
 
-           INT        mSzV;
-           INT        mNbVois;
+           int        mSzV;
+           int        mNbVois;
            bool       mUseVOut;
-           INT        mVOut;
+           int        mVOut;
 };
 
 
 void Somme_12_2_22
      (
-          Im2D_INT4 aSom12,
-          Im2D_INT4 aSom2,
-          Im2D_INT4 aSom22,
-          Im2D_INT4 aBuf,
-          Im2D_U_INT1 anIm1,
-          Im2D_U_INT1 anIm2,
+          Im2D_int4 aSom12,
+          Im2D_int4 aSom2,
+          Im2D_int4 aSom22,
+          Im2D_int4 aBuf,
+          Im2D_U_int1 anIm1,
+          Im2D_U_int1 anIm2,
           Pt2di     aP0,
           Pt2di     aP1,
-          INT       aNb
+          int       aNb
      );
 
 void Somme__1_11
      (
-          Im2D_INT4 aSom,
-          Im2D_INT4 aSom1,
-          Im2D_INT4 aSom11,
-          Im2D_INT4 aBuf,
-          Im2D_U_INT1 anIm1,
+          Im2D_int4 aSom,
+          Im2D_int4 aSom1,
+          Im2D_int4 aSom11,
+          Im2D_int4 aBuf,
+          Im2D_U_int1 anIm1,
           Pt2di     aP0,
           Pt2di     aP1,
-          INT       aNb
+          int       aNb
      );
 
 void Somme_Sup0_1_11
      (
-          Im2D_INT4 aSom0,
-          Im2D_INT4 aSom1,
-          Im2D_INT4 aSom11,
-          Im2D_INT4 aBuf,
-          Im2D_U_INT1 anIm1,
+          Im2D_int4 aSom0,
+          Im2D_int4 aSom1,
+          Im2D_int4 aSom11,
+          Im2D_int4 aBuf,
+          Im2D_U_int1 anIm1,
           Pt2di     aP0,
           Pt2di     aP1,
-          INT       aNb
+          int       aNb
      );
 
 void Somme__1_2_11_12_22
      (
-          Im2D_INT4 aSom,
-          Im2D_INT4 aSom1,
-          Im2D_INT4 aSom2,
-          Im2D_INT4 aSom11,
-          Im2D_INT4 aSom12,
-          Im2D_INT4 aSom22,
-          Im2D_INT4 aBuf,
-          Im2D_U_INT1 anIm1,
-          Im2D_U_INT1 anIm2,
-          Im2D_U_INT1 aPond,
+          Im2D_int4 aSom,
+          Im2D_int4 aSom1,
+          Im2D_int4 aSom2,
+          Im2D_int4 aSom11,
+          Im2D_int4 aSom12,
+          Im2D_int4 aSom22,
+          Im2D_int4 aBuf,
+          Im2D_U_int1 anIm1,
+          Im2D_U_int1 anIm2,
+          Im2D_U_int1 aPond,
           Pt2di       aP0,
           Pt2di       aP1,
-          INT         aNb
+          int         aNb
      );
 
 
 
 void Somme_12
      (
-          Im2D_INT4 aSom12,
-          Im2D_INT4 aBuf,
-          Im2D_U_INT1 anIm1,
-          Im2D_U_INT1 anIm2,
+          Im2D_int4 aSom12,
+          Im2D_int4 aBuf,
+          Im2D_U_int1 anIm1,
+          Im2D_U_int1 anIm2,
           Pt2di     aP0,
           Pt2di     aP1,
-          INT       aNb
+          int       aNb
      );
 
 

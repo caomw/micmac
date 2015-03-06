@@ -47,38 +47,38 @@ class H_Graphe : public Camera_V
 
 
       ElFilo<Pt3dr>           _sommet;
-      ElFilo<INT>             _sommet_flag;
-      ElFilo<INT>             _sommet_enleve;
+      ElFilo<int>             _sommet_flag;
+      ElFilo<int>             _sommet_enleve;
 
-      ElFilo<INT>             _segment_0;
-      ElFilo<INT>             _segment_1;
-      ElFilo<INT>             _segment_flag;
-      ElFilo<INT>             _segment_enleve;
-      ElFilo< ElFilo<INT>* >  _segment_facette;
-      ElFilo< ElFilo<INT>* >  _seg_facet_droite;
-      ElFilo< ElFilo<INT>* >  _seg_facet_gauche;
-      ElFilo<INT>             _seg_discontinuite;
-      ElFilo<REAL>            _seg_long;
-      ElFilo<REAL>            _seg_poids;
+      ElFilo<int>             _segment_0;
+      ElFilo<int>             _segment_1;
+      ElFilo<int>             _segment_flag;
+      ElFilo<int>             _segment_enleve;
+      ElFilo< ElFilo<int>* >  _segment_facette;
+      ElFilo< ElFilo<int>* >  _seg_facet_droite;
+      ElFilo< ElFilo<int>* >  _seg_facet_gauche;
+      ElFilo<int>             _seg_discontinuite;
+      ElFilo<double_t>            _seg_long;
+      ElFilo<double_t>            _seg_poids;
 
-      ElFilo< ElFilo<INT>* >  _facette;
-      ElFilo<INT>             _facette_flag;
-      ElFilo<INT>             _facette_plan;
-      ElFilo<INT>             _facette_enleve;
-      ElFilo<REAL>            _facette_surface;
-      ElFilo<REAL>            _facette_poids;
+      ElFilo< ElFilo<int>* >  _facette;
+      ElFilo<int>             _facette_flag;
+      ElFilo<int>             _facette_plan;
+      ElFilo<int>             _facette_enleve;
+      ElFilo<double_t>            _facette_surface;
+      ElFilo<double_t>            _facette_poids;
 
 
       Pt2di*                  _p_proj;
-      INT                     _col1;
-      INT                     _col2;
-      INT                     _col3;
-      INT                     _col4;
-      INT                     _col5;
+      int                     _col1;
+      int                     _col2;
+      int                     _col3;
+      int                     _col4;
+      int                     _col5;
 
 
-      H_Graphe(  Video_Win W, INT nb_color, ElFilo<Facette_3d> & f_f, REAL element_petit = .00001 );     //.1 metre
-      H_Graphe(  H_Graphe& graphe,  ElFilo<INT>& sous_ensemble );    //sans traiter la continuite 
+      H_Graphe(  Video_Win W, int nb_color, ElFilo<Facette_3d> & f_f, double_t element_petit = .00001 );     //.1 metre
+      H_Graphe(  H_Graphe& graphe,  ElFilo<int>& sous_ensemble );    //sans traiter la continuite 
 
 
       ~H_Graphe();
@@ -94,42 +94,42 @@ class H_Graphe : public Camera_V
       H_Graphe& operator =(H_Graphe&);
 
 
-      INT  sommet_in(Pt3dr p);
-      void sommet_en(INT i);
+      int  sommet_in(Pt3dr p);
+      void sommet_en(int i);
       
-      INT  segment_in(INT i, INT j);
-      void segment_en(INT n_s);
-      void segment_valide(INT n_s);
+      int  segment_in(int i, int j);
+      void segment_en(int n_s);
+      void segment_valide(int n_s);
       void enleve_seg_discontinuite();
 
 
-      INT  facette_in(ElFilo<INT>& f, INT n_plan = 0, REAL poids = 0.);
-      void facette_en(INT n_f);
-      void facette_en(ElFilo<INT>& f_facet);
-      void facette_valide(INT n_f);
-      Facette_3d facette(INT n_f);
+      int  facette_in(ElFilo<int>& f, int n_plan = 0, double_t poids = 0.);
+      void facette_en(int n_f);
+      void facette_en(ElFilo<int>& f_facet);
+      void facette_valide(int n_f);
+      Facette_3d facette(int n_f);
       Facette_3d contour(ElFilo<Pt3dr>& f_p);    //si le graphe est planair
       void to_facette_3d(ElFilo<Facette_3d>& f_f);
 
       void arrange_facette();
-      void arrange_facette(INT i);
-      bool if_facette_a_droite_de_segment(INT nf, INT ns, Pt3dr rayon);
-      void arrange_facette_de_segment(INT i);
+      void arrange_facette(int i);
+      bool if_facette_a_droite_de_segment(int nf, int ns, Pt3dr rayon);
+      void arrange_facette_de_segment(int i);
 
-      void recherche_facette_cont_sup(INT n_f, ElFilo<INT>& facet_cont_sup);
-      void recherche_facette_cont_inf(INT n_f, ElFilo<INT>& facet_cont_inf);
-      void recherche_facette_cont_sup_inf(INT n_f, ElFilo<INT>& facet_cont_sup_inf);
+      void recherche_facette_cont_sup(int n_f, ElFilo<int>& facet_cont_sup);
+      void recherche_facette_cont_inf(int n_f, ElFilo<int>& facet_cont_inf);
+      void recherche_facette_cont_sup_inf(int n_f, ElFilo<int>& facet_cont_sup_inf);
 
-      INT  complexite();
+      int  complexite();
 
-      void facettes_intersectant_plan(Hplan pl, ElFilo<INT>& f_int_pl, REAL dist = 0);
+      void facettes_intersectant_plan(Hplan pl, ElFilo<int>& f_int_pl, double_t dist = 0);
 
-      void enleve_facette_sup_inf(INT n_f);
-      void enleve_facette_sup(INT n_f);
-      void enleve_facette_inf(INT n_f);
+      void enleve_facette_sup_inf(int n_f);
+      void enleve_facette_sup(int n_f);
+      void enleve_facette_inf(int n_f);
 
-      void facette_droite_gauche(INT n_f);
-      bool if_facet_a_gauche_seg(INT n_f, INT n_seg);
+      void facette_droite_gauche(int n_f);
+      bool if_facet_a_gauche_seg(int n_f, int n_seg);
 
 
       void surface_continue();
@@ -139,13 +139,13 @@ class H_Graphe : public Camera_V
       void compsantes_connexes(ElFilo<H_Graphe*>& f_g);
 
 
-      void facette_poids_in(INT n_f, REAL poids );
-      void segment_poids_in(INT n_s, REAL poids );
-      REAL graphe_poids_surface();
-      REAL graphe_poids_contour_interne();
-      REAL graphe_poids_contour_externe();
-      REAL graphe_poids_contour();
-      REAL graphe_poids(REAL alpha = .5);
+      void facette_poids_in(int n_f, double_t poids );
+      void segment_poids_in(int n_s, double_t poids );
+      double_t graphe_poids_surface();
+      double_t graphe_poids_contour_interne();
+      double_t graphe_poids_contour_externe();
+      double_t graphe_poids_contour();
+      double_t graphe_poids(double_t alpha = .5);
 
 
       void initialiser_flags_segments();
@@ -164,10 +164,10 @@ class H_Graphe : public Camera_V
       virtual void interface();
 
 
-      void affiche_segment(INT n_seg, INT color);
-      void affiche_segment(ElFilo<INT>& f_seg, INT color);
-      void affiche_facette(INT n_facet, INT color);
-      void affiche_facette(ElFilo<INT>& f_facet, INT color);
+      void affiche_segment(int n_seg, int color);
+      void affiche_segment(ElFilo<int>& f_seg, int color);
+      void affiche_facette(int n_facet, int color);
+      void affiche_facette(ElFilo<int>& f_facet, int color);
 
       void parcour_seg_facet();
       void parcour_segment();

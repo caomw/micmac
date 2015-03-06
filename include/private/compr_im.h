@@ -47,7 +47,7 @@ class IntIdLut
 	public :
 
 		IntIdLut();
-		INT  ObjFromInd(INT  x) {return x;}
+		int  ObjFromInd(int  x) {return x;}
 };
 
 
@@ -59,13 +59,13 @@ class RGB_Int
 			_r(0), _g(0), _b(0) 
 		{}
 
-		RGB_Int(INT R,INT G,INT B) :
+		RGB_Int(int R,int G,int B) :
 			_r(R), _g(G), _b(B) 
 		{}
 
 
-		INT _r,_g,_b;
-		void operator = (INT v) {_r = _g = _b = v;}
+		int _r,_g,_b;
+		void operator = (int v) {_r = _g = _b = v;}
 
 		void operator += (const RGB_Int & c2)
 		{
@@ -79,11 +79,11 @@ class RGB_Int
 			_g -= c2._g;
 			_b -= c2._b;
 		}
-		RGB_Int operator * (INT s)
+		RGB_Int operator * (int s)
 		{
 			return RGB_Int(_r*s,_g*s,_b*s);
 		}
-		void operator /= (INT s)
+		void operator /= (int s)
 		{
 			_r /= s;
 			_g /= s;
@@ -104,12 +104,12 @@ class Lut_RGB_Int
 
 		Lut_RGB_Int();
 		~Lut_RGB_Int();
-		void init(Elise_colour *,INT nb);
+		void init(Elise_colour *,int nb);
 		
-		INT _nb;
-		INT * _r;
-		INT * _g;
-		INT * _b;
+		int _nb;
+		int * _r;
+		int * _g;
+		int * _b;
 
 };
 
@@ -131,17 +131,17 @@ class TrueCol16Bit_RGB
 	
 		static void  BufI2RGB
 				     (
-                           INT ** out_put,
-                           INT ** in_put,
-                           INT     nb,
+                           int ** out_put,
+                           int ** in_put,
+                           int     nb,
                            const class Arg_Comp_Simple_OP_UN& arg
                      );
 
 		static void  BufRGB2I
 				     (
-                           INT ** out_put,
-                           INT ** in_put,
-                           INT     nb,
+                           int ** out_put,
+                           int ** in_put,
+                           int     nb,
                            const class Arg_Comp_Simple_OP_UN& arg
                      );
 
@@ -174,28 +174,28 @@ class TrueCol16Bit_RGB
 class ElPixelCentre
 {
     public :
-         static  INT  PixelIncluant(REAL aVal)   
+         static  int  PixelIncluant(double_t aVal)   
 		             {return round_ni(aVal);}
 
 
-         static  INT  PixelInf(REAL aVal)   
+         static  int  PixelInf(double_t aVal)   
 		             {return round_down(aVal);}
-         static  INT  PixelSup(REAL aVal)   
+         static  int  PixelSup(double_t aVal)   
 		             {return round_up(aVal);}
 
-          static REAL PdsBarryPixelInf(REAL aVal)
+          static double_t PdsBarryPixelInf(double_t aVal)
 		       {return 1.0 - (aVal-round_down(aVal));}
 
-         static  REAL DebIntervalPixel(INT aPixel) 
+         static  double_t DebIntervalPixel(int aPixel) 
 		             {return aPixel-0.5;}
 
-         static  REAL FinIntervalPixel(INT aPixel) 
+         static  double_t FinIntervalPixel(int aPixel) 
 		             {return 1+DebIntervalPixel(aPixel);}
 
-	static  REAL LenghFromDebIntervPixelIncluant(REAL aVal)
+	static  double_t LenghFromDebIntervPixelIncluant(double_t aVal)
 		              {return aVal-DebIntervalPixel(PixelIncluant(aVal));}
 
-	static  REAL LenghFromFinIntervPixelIncluant(REAL aVal)
+	static  double_t LenghFromFinIntervPixelIncluant(double_t aVal)
 		              {return 1-LenghFromDebIntervPixelIncluant(aVal);}
 };
 
@@ -203,16 +203,16 @@ class ElPixelCentre
 class ElTranlatScaleTransfo
 {
       public :
-          REAL U2W(REAL Uval) const {return (Uval-mTr) * mSc;}
-          REAL W2U(REAL Wval) const {return (Wval/mSc) + mTr;}
+          double_t U2W(double_t Uval) const {return (Uval-mTr) * mSc;}
+          double_t W2U(double_t Wval) const {return (Wval/mSc) + mTr;}
 
 
 		  // Soit W un pixel W, retourne le pixel user qui contient
 
-		  void Set(REAL aTr,REAL aSc) {mTr=aTr;mSc=aSc;}
+		  void Set(double_t aTr,double_t aSc) {mTr=aTr;mSc=aSc;}
       // private :
-          REAL                    mTr;
-          REAL                    mSc;
+          double_t                    mTr;
+          double_t                    mSc;
 };
 
 
@@ -226,79 +226,79 @@ template <class TObj> class GenScaleIm
 	protected :
 
 
-		bool do_it_gen(Pt2dr tr,REAL sc,Pt2di  pW0,Pt2di  pW1);
+		bool do_it_gen(Pt2dr tr,double_t sc,Pt2di  pW0,Pt2di  pW1);
 
 		virtual ~GenScaleIm();
-		GenScaleIm(Pt2di SzU,Pt2di SzW,INT nb_chan);
+		GenScaleIm(Pt2di SzU,Pt2di SzW,int nb_chan);
 
 
-		REAL x_to_window(REAL x) const {return XTransfo.U2W(x);}
-		REAL x_to_user(REAL x)   const {return XTransfo.W2U(x);}
+		double_t x_to_window(double_t x) const {return XTransfo.U2W(x);}
+		double_t x_to_user(double_t x)   const {return XTransfo.W2U(x);}
 
-		REAL y_to_window(REAL y) const {return YTransfo.U2W(y);}
-		REAL y_to_user(REAL y)   const {return YTransfo.W2U(y);}
+		double_t y_to_window(double_t y) const {return YTransfo.U2W(y);}
+		double_t y_to_user(double_t y)   const {return YTransfo.W2U(y);}
 
 	 	inline Pt2dr to_window(Pt2dr p) const
 			{ return Pt2dr(x_to_window(p.x),y_to_window(p.y));}
 	 	inline Pt2dr to_user(Pt2dr p) const 	
 			{ return Pt2dr(x_to_user(p.x),y_to_user(p.y));}
 
-		INT PremPixelU2WX(INT ux) const
+		int PremPixelU2WX(int ux) const
 		{
               return ElPixelCentre::PixelIncluant(x_to_window(ElPixelCentre::DebIntervalPixel(ux)));
 		}
-		INT PremPixelU2WY(INT uy) const
+		int PremPixelU2WY(int uy) const
 		{
               return ElPixelCentre::PixelIncluant(y_to_window(ElPixelCentre::DebIntervalPixel(uy)));
 		}
 
-		INT FitInWX(INT Val)   const {return  ElMax(0,ElMin(_SzW.x-1,Val));}
-		INT FitInWY(INT Val)   const {return  ElMax(0,ElMin(_SzW.y-1,Val));}
-		REAL FitInWX(REAL Val) const {return  ElMax(0.0,ElMin(_SzW.x-1.0,Val));}
-		REAL FitInWY(REAL Val) const {return  ElMax(0.0,ElMin(_SzW.y-1.0,Val));}
+		int FitInWX(int Val)   const {return  ElMax(0,ElMin(_SzW.x-1,Val));}
+		int FitInWY(int Val)   const {return  ElMax(0,ElMin(_SzW.y-1,Val));}
+		double_t FitInWX(double_t Val) const {return  ElMax(0.0,ElMin(_SzW.x-1.0,Val));}
+		double_t FitInWY(double_t Val) const {return  ElMax(0.0,ElMin(_SzW.y-1.0,Val));}
 
 
-		INT FitInUX(INT Val)   const {return  ElMax(0,ElMin(_SzU.x-1,Val));}
-		INT FitInUY(INT Val)   const {return  ElMax(0,ElMin(_SzU.y-1,Val));}
-		REAL FitInUX(REAL Val) const {return  ElMax(0.0,ElMin(_SzU.x-1.0,Val));}
-		REAL FitInUY(REAL Val) const {return  ElMax(0.0,ElMin(_SzU.y-1.0,Val));}
+		int FitInUX(int Val)   const {return  ElMax(0,ElMin(_SzU.x-1,Val));}
+		int FitInUY(int Val)   const {return  ElMax(0,ElMin(_SzU.y-1,Val));}
+		double_t FitInUX(double_t Val) const {return  ElMax(0.0,ElMin(_SzU.x-1.0,Val));}
+		double_t FitInUY(double_t Val) const {return  ElMax(0.0,ElMin(_SzU.y-1.0,Val));}
 
 
-		INT PixCenterW2U_x (INT wx) const
+		int PixCenterW2U_x (int wx) const
 		{
 			return FitInUX(ElPixelCentre::PixelIncluant(x_to_user(wx)));
 		}
-		INT PixCenterW2U_y (INT wy) const
+		int PixCenterW2U_y (int wy) const
 		{
 			return FitInUY(ElPixelCentre::PixelIncluant(y_to_user(wy)));
 		}
 
 
 		Pt2dr 		_tr;
-		REAL 		_sc;
+		double_t 		_sc;
 		ElTranlatScaleTransfo   XTransfo;
 		ElTranlatScaleTransfo   YTransfo;
-		INT		_CoeffPds;
+		int		_CoeffPds;
 		
 		Pt2di		_pW0;
 		Pt2di		_pW1;
-		INT 		_xU0;
-		INT		_xU1;
-		INT 		_yU0;
-		INT		_yU1;
+		int 		_xU0;
+		int		_xU1;
+		int 		_yU0;
+		int		_yU1;
 
 		Pt2di		_SzU;
 			// debut d'intervalle
-		INT4 *	 	_u2wX; // -3 ... _SzU.x +3
-		INT4 *	 	_u2wY; // -3 ... _SzU.x +3
+		int4 *	 	_u2wX; // -3 ... _SzU.x +3
+		int4 *	 	_u2wY; // -3 ... _SzU.x +3
 			// centre de points
-		INT4 *	 	_Cw2uX; // -3 ... _SzU.x +3
-		INT4 *	 	_Cw2uY; // -3 ... _SzU.x +3
+		int4 *	 	_Cw2uX; // -3 ... _SzU.x +3
+		int4 *	 	_Cw2uY; // -3 ... _SzU.x +3
 		Pt2di		_SzW;
 
 		TObj **		_line;  //  -1  .. _SzW.x +1
 		TObj *		_l0;  //  -1  .. _SzW.x +1
-		INT         _nb_chan;
+		int         _nb_chan;
 		enum {RAB = 4};
 
 		     // Structure pour le coupage en morceau des pixels en zoom reduit
@@ -318,7 +318,7 @@ template <class TObj,class TLut,class TInd > class Scale_Im_Compr : public GenSc
 {
 	public :
 
-		Box2di do_it(Pt2dr tr,REAL sc,Pt2di  pW0,Pt2di  pW1,bool quick);
+		Box2di do_it(Pt2dr tr,double_t sc,Pt2di  pW0,Pt2di  pW1,bool quick);
 
 
 
@@ -331,7 +331,7 @@ template <class TObj,class TLut,class TInd > class Scale_Im_Compr : public GenSc
 
 
 
-		INT		_CurPds;
+		int		_CurPds;
 
 
 		void DoItReduce();
@@ -340,45 +340,45 @@ template <class TObj,class TLut,class TInd > class Scale_Im_Compr : public GenSc
 		PackB_IM<TInd> 			_pbim;
 		Data_PackB_IM<TInd> *	_dim;
 
-		INT4 *	 		_RLE_Pds_0; // -3 ... _SzU.x +3
-		INT4 *	 		_RLE_Pds_1; // -3 ... _SzU.x +3
-		INT4 *	 		_LIT_Pds_0; // -3 ... _SzU.x +3
-		INT4 *	 		_LIT_Pds_1; // -3 ... _SzU.x +3
-		INT4 *	 		_LIT_Pds_2; // -3 ... _SzU.x +3
+		int4 *	 		_RLE_Pds_0; // -3 ... _SzU.x +3
+		int4 *	 		_RLE_Pds_1; // -3 ... _SzU.x +3
+		int4 *	 		_LIT_Pds_0; // -3 ... _SzU.x +3
+		int4 *	 		_LIT_Pds_1; // -3 ... _SzU.x +3
+		int4 *	 		_LIT_Pds_2; // -3 ... _SzU.x +3
 
 
-		REAL mTimeUnCompr; // 0.0
+		double_t mTimeUnCompr; // 0.0
 
 
 	private :
 		Scale_Im_Compr(const Scale_Im_Compr<TObj,TLut,TInd> &);
 	public :
 
-		inline void RunRLE(INT ux0,INT ux1,TInd ind);
-		inline void RunLIT(INT ux0,INT ux1,const TInd * inds);
+		inline void RunRLE(int ux0,int ux1,TInd ind);
+		inline void RunLIT(int ux0,int ux1,const TInd * inds);
 };
 
 
-class StdGray_Scale_Im_Compr : public  Scale_Im_Compr<INT,IntIdLut,U_INT1> 
+class StdGray_Scale_Im_Compr : public  Scale_Im_Compr<int,IntIdLut,U_int1> 
 {
 	public :
 
-		StdGray_Scale_Im_Compr(PackB_IM<U_INT1>,Pt2di SzW);
+		StdGray_Scale_Im_Compr(PackB_IM<U_int1>,Pt2di SzW);
 	private :
 		StdGray_Scale_Im_Compr(const StdGray_Scale_Im_Compr &);
 };
 
 
-class RGBLut_Scale_Im_Compr : public  Scale_Im_Compr<RGB_Int,Lut_RGB_Int,U_INT1>
+class RGBLut_Scale_Im_Compr : public  Scale_Im_Compr<RGB_Int,Lut_RGB_Int,U_int1>
 {
 	public :
 
 		RGBLut_Scale_Im_Compr
 		(
-			PackB_IM<U_INT1>,
+			PackB_IM<U_int1>,
 			Pt2di SzW,
 			Elise_colour *,
-			INT nb
+			int nb
 		);
 
 	private :
@@ -386,13 +386,13 @@ class RGBLut_Scale_Im_Compr : public  Scale_Im_Compr<RGB_Int,Lut_RGB_Int,U_INT1>
 };
 
 
-class RGBTrue16Col_Scale_Im_Compr : public  Scale_Im_Compr<RGB_Int,TrueCol16Bit_RGB,U_INT2>
+class RGBTrue16Col_Scale_Im_Compr : public  Scale_Im_Compr<RGB_Int,TrueCol16Bit_RGB,U_int2>
 {
     public :
 
 		RGBTrue16Col_Scale_Im_Compr
 		(
-			PackB_IM<U_INT2>,
+			PackB_IM<U_int2>,
 			Pt2di SzW
 		);
 
@@ -412,13 +412,13 @@ class PckBitImScroller : public ElImScroller ,
         PckBitImScroller
         (
             Visu_ElImScr &Visu,
-            PackB_IM<U_INT1>,
-            REAL  sc_im 
+            PackB_IM<U_int1>,
+            double_t  sc_im 
         );
 
 
 
-        virtual ElImScroller * Reduc(INT zoom,bool quick = false);
+        virtual ElImScroller * Reduc(int zoom,bool quick = false);
         virtual void SetPoly (Fonc_Num aFonc,std::vector<Pt2dr> VPts);
         virtual void ApplyLutOnPoly(Fonc_Num ,std::vector<Pt2dr>);
 
@@ -426,9 +426,9 @@ class PckBitImScroller : public ElImScroller ,
 
      private :
 
-		virtual REAL TimeUnCompr() const; 
+		virtual double_t TimeUnCompr() const; 
         void LoadXImage(Pt2di p0,Pt2di p1,bool quick);
-        void RasterUseLine(Pt2di p0,Pt2di p1,INT **);
+        void RasterUseLine(Pt2di p0,Pt2di p1,int **);
 		PckBitImScroller(const PckBitImScroller &);
 };            
 
@@ -436,7 +436,7 @@ class PckBitImScroller : public ElImScroller ,
 class  RGB_PckbImScr : public ElImScroller
 {
 	 public :
-		RGB_PckbImScr(Visu_ElImScr & Visu,Pt2di Sz,REAL ScaleIm);
+		RGB_PckbImScr(Visu_ElImScr & Visu,Pt2di Sz,double_t ScaleIm);
 
 		virtual ~RGB_PckbImScr();
 	 protected :
@@ -445,10 +445,10 @@ class  RGB_PckbImScr : public ElImScroller
 
 		Pt2di   mP0Im;
 		Pt2di   mP1Im;
-		INT **  mIm;
-		INT *   mRIm;
-		INT *   mGIm;
-		INT *   mBIm;
+		int **  mIm;
+		int *   mRIm;
+		int *   mGIm;
+		int *   mBIm;
 };
 
 class RGBLut_PckbImScr : public RGB_PckbImScr ,
@@ -462,10 +462,10 @@ class RGBLut_PckbImScr : public RGB_PckbImScr ,
         RGBLut_PckbImScr
         (
             Visu_ElImScr &Visu,
-            PackB_IM<U_INT1>,
+            PackB_IM<U_int1>,
 			Elise_colour *,
-			INT nb,
-            REAL  sc_im
+			int nb,
+            double_t  sc_im
         );
 
 	private :
@@ -473,7 +473,7 @@ class RGBLut_PckbImScr : public RGB_PckbImScr ,
         void LoadXImage(Pt2di p0,Pt2di p1,bool quick);
         void RasterUseLine(Pt2di p0,Pt2di p1,RGB_Int **);
 		RGBLut_PckbImScr(const RGBLut_PckbImScr &);
-		virtual REAL TimeUnCompr() const; 
+		virtual double_t TimeUnCompr() const; 
 };            
 
 
@@ -488,8 +488,8 @@ class RGBTrue16Col_PckbImScr : public RGB_PckbImScr,
         RGBTrue16Col_PckbImScr
         (
             Visu_ElImScr &Visu,
-            PackB_IM<U_INT2>,
-            REAL  sc_im 
+            PackB_IM<U_int2>,
+            double_t  sc_im 
         );
 
 	private :
@@ -497,7 +497,7 @@ class RGBTrue16Col_PckbImScr : public RGB_PckbImScr,
         void LoadXImage(Pt2di p0,Pt2di p1,bool quick);
         void RasterUseLine(Pt2di p0,Pt2di p1,RGB_Int **);
 		RGBTrue16Col_PckbImScr(const RGBTrue16Col_PckbImScr &);
-		virtual REAL TimeUnCompr() const; 
+		virtual double_t TimeUnCompr() const; 
 };
 
 
@@ -511,8 +511,8 @@ class RGBTrue16Col_PckbImScr : public RGB_PckbImScr,
 class  ElPixelUPond
 {
 			public :
-				INT mPixU;
-				INT mPds;
+				int mPixU;
+				int mPds;
 };
 
 class ElIntervPixelUPond
@@ -520,8 +520,8 @@ class ElIntervPixelUPond
        public :
               ElPixelUPond * mBegin;
               ElPixelUPond * mEnd;
-              INT FirstPixel() const;
-              INT LastPixel() const;
+              int FirstPixel() const;
+              int LastPixel() const;
 };
 
 class ElTabIntervPUP
@@ -530,33 +530,33 @@ class ElTabIntervPUP
            typedef enum {Reduc,Lin,Cub} ModeAct;
 
            ~ElTabIntervPUP();
-           ElTabIntervPUP(INT SzW,INT SzU,INT rab,ElTranlatScaleTransfo & aTransfo);
-           void Actualise(INT PdsPerPixW,ModeAct);
+           ElTabIntervPUP(int SzW,int SzU,int rab,ElTranlatScaleTransfo & aTransfo);
+           void Actualise(int PdsPerPixW,ModeAct);
 
-           const ElIntervPixelUPond & IntervPixelPond(INT wPix);
+           const ElIntervPixelUPond & IntervPixelPond(int wPix);
 
 
-		   void IntervalW2U(INT & u0,INT & u1,INT w0,INT w1);
+		   void IntervalW2U(int & u0,int & u1,int w0,int w1);
 
        private :
-           void Actualise_Reduc(INT PixW);
-           void Actualise_Sinc(INT PixW,INT NbSinc);
-           void Actualise_Lin(INT PixW);
-           void Actualise_Cub(INT PixW);
+           void Actualise_Reduc(int PixW);
+           void Actualise_Sinc(int PixW,int NbSinc);
+           void Actualise_Lin(int PixW);
+           void Actualise_Cub(int PixW);
 
-		   INT FitInUser(INT);
-		   void PushInterval(INT PixelU,REAL Pds);
+		   int FitInUser(int);
+		   void PushInterval(int PixelU,double_t Pds);
 
-           INT                     mSzW;
-		   INT                     mIW0;
-		   INT                     mIW1;
-		   INT                     mNbW;
-           INT                     mSzU;
-           INT                     mIndTopRes;
-           INT                     mNbRes;
+           int                     mSzW;
+		   int                     mIW0;
+		   int                     mIW1;
+		   int                     mNbW;
+           int                     mSzU;
+           int                     mIndTopRes;
+           int                     mNbRes;
 
-		   REAL                   mPdsRealResiduel;
-		   INT                    mPdsIntResiduel;
+		   double_t                   mPdsRealResiduel;
+		   int                    mPdsIntResiduel;
 
 		   
            ElPixelUPond *          mRes;
@@ -570,16 +570,16 @@ class IFL_LineWindow
 {
 	public :
 
-		IFL_LineWindow(INT SzW,INT NbChan);
+		IFL_LineWindow(int SzW,int NbChan);
 		~IFL_LineWindow();
 
 		void reinit();
-		INT mNbChan;
-		INT mSzW;
-		INT mLastX0;
-		INT mLastX1;
-		INT mLastY;
-		INT ** mLine;
+		int mNbChan;
+		int mSzW;
+		int mLastX0;
+		int mLastX1;
+		int mLastY;
+		int ** mLine;
 	private :
 		IFL_LineWindow(const IFL_LineWindow &);
 		void operator = (const IFL_LineWindow &);
@@ -590,7 +590,7 @@ template <class Type> class TilesIMFL;
 template <class Type> class LoadedTilesIMFL;
 template <class Type> class LoadedTilesIMFLAllocator;
 
-template <class Type> class  ImFileLoader : public GenScaleIm<INT>
+template <class Type> class  ImFileLoader : public GenScaleIm<int>
 {
 	    public :
 
@@ -600,15 +600,15 @@ template <class Type> class  ImFileLoader : public GenScaleIm<INT>
 		ImFileLoader(Tiff_Im,Pt2di SzW,ImFileLoader<Type> * ForAlloc = 0);
 		virtual ~ImFileLoader();
 									 
-		void do_it(Pt2dr tr,REAL sc,Pt2di p0,Pt2di p1,bool quick);
+		void do_it(Pt2dr tr,double_t sc,Pt2di p0,Pt2di p1,bool quick);
 													 
-		ImFileLoader(ImFileLoader<Type> &,INT zoom);
+		ImFileLoader(ImFileLoader<Type> &,int zoom);
 
 		protected  :
                        Tiff_Im  Tiff();                        
-			bool load_all(Pt2dr tr,REAL sc,Pt2di p0,Pt2di p1);
-			Type * get_line_user(INT x0,INT x1,INT y);
-			virtual void RasterUseLine(Pt2di p0,Pt2di p1,INT **) =0;
+			bool load_all(Pt2dr tr,double_t sc,Pt2di p0,Pt2di p1);
+			Type * get_line_user(int x0,int x1,int y);
+			virtual void RasterUseLine(Pt2di p0,Pt2di p1,int **) =0;
 																			 
                        void MakeOneLine(bool quick);
                        void MakeOneLineZooPPV();
@@ -617,12 +617,12 @@ template <class Type> class  ImFileLoader : public GenScaleIm<INT>
 
                        void put_tiles_in_alloc(bool FullReinit = false);
 		
-					   void load_this_tile(INT x,INT y);
+					   void load_this_tile(int x,int y);
 		private :
 			
 			bool                             mByteOrdered;
 			Tiff_Im                          * _tiff;
-			INT                             _nb_chan;
+			int                             _nb_chan;
 			ELISE_fp *                      _fp;
 			Pt2di                           _nb_tile;
 			Pt2di                           _sz_tile;
@@ -638,7 +638,7 @@ template <class Type> class  ImFileLoader : public GenScaleIm<INT>
 		private :
 
 			std::vector<IFL_LineWindow *> mBufLW;
-			INT ** GetLineWindow(INT x0U,INT x1U,INT y0U);
+			int ** GetLineWindow(int x0U,int x1U,int y0U);
 			void init_LW();
 
 
@@ -646,21 +646,21 @@ template <class Type> class  ImFileLoader : public GenScaleIm<INT>
                         bool mPixReplic;
                         bool mReduc;
 
-			INT _ux0cur;
-			INT _ux1cur;
-			INT _uy0cur;
-			INT _uy1cur;
-			INT mWyCur0;
-			INT mWyCur1;
+			int _ux0cur;
+			int _ux1cur;
+			int _uy0cur;
+			int _uy1cur;
+			int mWyCur0;
+			int mWyCur1;
 			ElTabIntervPUP   mXTabIntervales;
 			ElTabIntervPUP   mYTabIntervales;
 
 			ImFileLoader(const ImFileLoader<Type> &);
 
 			bool mUpToDate_LastXY_GLU;
-			INT mLastX0_GLU; // GLU = get_line_user
-			INT mLastX1_GLU; // GLU = get_line_user
-			INT mLastY_GLU; // GLU = get_line_user
+			int mLastX0_GLU; // GLU = get_line_user
+			int mLastX1_GLU; // GLU = get_line_user
+			int mLastY_GLU; // GLU = get_line_user
 
 };                                      
 
@@ -677,21 +677,21 @@ template <class Type> class ImFileScroller : public ImFileLoader<Type>,
 				(
 					Visu_ElImScr &  V,
 					Tiff_Im         tif,
-					REAL            sc_im ,
+					double_t            sc_im ,
 					ImFileScroller*     alloc = 0
 				);
                                 virtual void no_use();
 							 
 				void LoadXImage(Pt2di p0,Pt2di p1,bool quick);
-				void RasterUseLine(Pt2di p0,Pt2di p1,INT **);
-                virtual ElImScroller * Reduc(INT zoom,bool quick = false);
+				void RasterUseLine(Pt2di p0,Pt2di p1,int **);
+                virtual ElImScroller * Reduc(int zoom,bool quick = false);
 
 		private :
                                 Fonc_Num in();
 				ImFileScroller
 				(
 					ImFileScroller &,
-					INT          zoom
+					int          zoom
 				);
 				ImFileScroller(const ImFileScroller &);
 };                      
@@ -722,7 +722,7 @@ template <class Type> class ImFileScroller : public ImFileLoader<Type>,
 	    mettre a jour la correspondances de coordonnees est :
 
 
-		    bool do_it_gen(Pt2dr tr,REAL sc,Pt2di  pW0,Pt2di  pW1);
+		    bool do_it_gen(Pt2dr tr,double_t sc,Pt2di  pW0,Pt2di  pW1);
 
 	        retourne vraie si la zone de validitee (point dans W avec homologue dans U)
 		    est non vide
@@ -741,7 +741,7 @@ template <class Type> class ImFileScroller : public ImFileLoader<Type>,
 
 		La methode public est "do_it"
 
-		      Box2di do_it(Pt2dr tr,REAL sc,Pt2di  pW0,Pt2di  pW1,bool quick);
+		      Box2di do_it(Pt2dr tr,double_t sc,Pt2di  pW0,Pt2di  pW1,bool quick);
 
 			  Pour chaque ligne de W le necessitant , 
 			  elle decompresse/met a l'echelle ce qui est necessaire
@@ -756,10 +756,10 @@ template <class Type> class ImFileScroller : public ImFileLoader<Type>,
 
 
 
-	StdGray_Scale_Im_Compr :  Scale_Im_Compr<INT,IntIdLut,U_INT1>  
+	StdGray_Scale_Im_Compr :  Scale_Im_Compr<int,IntIdLut,U_int1>  
 	-----------------------
 
-	    Aujourd'hui plus ou - un typedef sur Scale_Im_Compr<INT,IntIdLut,U_INT1> 
+	    Aujourd'hui plus ou - un typedef sur Scale_Im_Compr<int,IntIdLut,U_int1> 
 		(ie heritage sans aucun "apport personnel")
 	    
 
@@ -767,7 +767,7 @@ template <class Type> class ImFileScroller : public ImFileLoader<Type>,
 	Visu_ElImScr :
 	--------------
 
-		Une INTERFACE au sens JAVA . 
+		Une intERFACE au sens JAVA . 
 		Abstrait la notion de "fenetre raster avec gestion de buffer d'image" 
 		(typiquement une ce buffer est une XImage).
 	
@@ -776,7 +776,7 @@ template <class Type> class ImFileScroller : public ImFileLoader<Type>,
 		        La Visu_ElImScr doit pouboir indiquer sa taille.
 
 
-		virtual void write_image(INT x0src,Pt2di p0dest,INT nb,INT ** data)  =0 ;
+		virtual void write_image(int x0src,Pt2di p0dest,int nb,int ** data)  =0 ;
 		   
 		       Seul canal de communication permettant le transfert de donnee image.
 		       La Visu_ElImScr doit memoriser la ligne data (commencant en x0src, de taille nb)
@@ -822,7 +822,7 @@ template <class Type> class ImFileScroller : public ImFileLoader<Type>,
 
 		2 Fonction "fondamentale" : 
 
-        	void set(Pt2dr tr,REAL sc,bool quick = false) : 
+        	void set(Pt2dr tr,double_t sc,bool quick = false) : 
 
 				modifie la geometrie et remet a jour l'affichage en consequence.
 				si quick = true fait un affichage rapide
@@ -838,7 +838,7 @@ template <class Type> class ImFileScroller : public ImFileLoader<Type>,
 
         	void SetTrU(Pt2dr tr) : tr est donnee en unite User
 
-			void SetScArroundPW(Pt2dr PinvW,REAL sc,bool quick = false);
+			void SetScArroundPW(Pt2dr PinvW,double_t sc,bool quick = false);
 			   fait un changement d'echelle avec une translation telle
 			   que PinvW soit invariant
 
@@ -866,11 +866,11 @@ template <class Type> class ImFileScroller : public ImFileLoader<Type>,
 class Gen_PackB_IM
 {
       public :
-             static inline INT CodeOfLengthRLE(INT aLength)
+             static inline int CodeOfLengthRLE(int aLength)
              {
                  return 1 + 2 *(aLength-1);
              }
-             static inline INT CodeOfLengthLIT(INT aLength)
+             static inline int CodeOfLengthLIT(int aLength)
              {
                  return  2 *(aLength-1);
              }
@@ -885,44 +885,44 @@ template <class Type> class Line_PackB_IM  : public Gen_PackB_IM
 
                 void init
                 (       
-				    INT                         BlockInit,
-					std::vector<U_INT2> &    LInd,
-					std::vector<U_INT2> &    VInd,
-					std::vector<U_INT1> &    Length,
+				    int                         BlockInit,
+					std::vector<U_int2> &    LInd,
+					std::vector<U_int2> &    VInd,
+					std::vector<U_int1> &    Length,
 					std::vector<Type> &		Vals,
 					const Type *		line =0,
-					INT                 nb_tot =0,
-					INT                 per =0
+					int                 nb_tot =0,
+					int                 per =0
                 );
 
            class RunsOfPer
            {
                  public :
-                     std::vector <U_INT1> mLRun;
+                     std::vector <U_int1> mLRun;
                      std::vector <Type>   mVRun;
 
 
-                     inline int  run_length_pixel(INT ind) const
+                     inline int  run_length_pixel(int ind) const
                      {
                             return mLRun[ind]/2+1; 
                      }
-                     inline int  run_length_compr(INT ind) const
+                     inline int  run_length_compr(int ind) const
                      {
                             return run_rle(ind) ? 1 : run_length_pixel(ind);
                      }
-                     inline bool run_rle(INT ind) const
+                     inline bool run_rle(int ind) const
                      {
                             return (mLRun[ind]&1) != 0; 
                      }
                      void Clear(){mLRun.clear();mVRun.clear();}
 
-                     void PushRle(Type aVal,INT aLength)
+                     void PushRle(Type aVal,int aLength)
                      {
                           mVRun.push_back(aVal);
                           mLRun.push_back(Gen_PackB_IM::CodeOfLengthRLE(aLength));
                      }
 
-                     void PushRleSafe128(Type aVal,INT aLength)
+                     void PushRleSafe128(Type aVal,int aLength)
                      {
                           while  (aLength > 128)
                           {
@@ -945,12 +945,12 @@ template <class Type> class Line_PackB_IM  : public Gen_PackB_IM
 
 
 		RunsOfPer  * mRuns;
-		INT          mNbRuns;
+		int          mNbRuns;
 
 		/*
-		U_INT2 *   _indexes_Lrun;
-		U_INT2 *   _indexes_Vrun;
-		U_INT1 * 	_Lrun;
+		U_int2 *   _indexes_Lrun;
+		U_int2 *   _indexes_Vrun;
+		U_int1 * 	_Lrun;
 		Type *		_Vrun;
 		*/
 };
@@ -961,9 +961,9 @@ void        DeCompr
             (
                  Line_PackB_IM<Type> & aLPBIM,
                  TAct & act,
-                 INT x0,
-                 INT x1,
-                 INT per
+                 int x0,
+                 int x1,
+                 int per
             );
 
 */
@@ -974,15 +974,15 @@ inline void        DeCompr
             (
                  Line_PackB_IM<Type> & aLPBIM,
                  TAct & act,
-                 INT x0,
-                 INT x1,
-                 INT per
+                 int x0,
+                 int x1,
+                 int per
             )
 {
 	typename Line_PackB_IM<Type>::RunsOfPer *  aROP = aLPBIM.mRuns + x0/per;
-	INT Vind = 0;
-	INT Lind = 0;
-	INT x = (x0/per) * per;
+	int Vind = 0;
+	int Lind = 0;
+	int x = (x0/per) * per;
 
 	while (x<x0)
 	{
@@ -996,7 +996,7 @@ inline void        DeCompr
 			int x_end = ElMin(x,x1);
 			int LiPrec = Lind-1;
 			int ViPrec = Vind-aROP->run_length_compr(LiPrec);
-			INT xprec = x-aROP->run_length_pixel(LiPrec);
+			int xprec = x-aROP->run_length_pixel(LiPrec);
 			Type * adr = & (aROP->mVRun[ViPrec]);
 
 			if (aROP->run_rle(LiPrec))
@@ -1007,13 +1007,13 @@ inline void        DeCompr
 			
 	while(x<x1)
 	{
-			if (Lind == (INT) aROP->mLRun.size())
+			if (Lind == (int) aROP->mLRun.size())
 			{
 				aROP++;
 				Vind =0;
 				Lind =0;
 			}
-			INT xn = ElMin(x1,x+aROP->run_length_pixel(Lind));
+			int xn = ElMin(x1,x+aROP->run_length_pixel(Lind));
 			if (aROP->run_rle(Lind))
 				act.RunRLE(x,xn,aROP->mVRun[Vind]);
 			else
@@ -1043,24 +1043,24 @@ template <class Type> class Data_PackB_IM :	public	RC_Object
 
 		~Data_PackB_IM();
 		// per <0, convention pour ne pas initialiser avec Fonc_Num
-		Data_PackB_IM (INT tx,INT ty,Fonc_Num,INT per =128);
+		Data_PackB_IM (int tx,int ty,Fonc_Num,int per =128);
 
 
-//		Fonc_Num in(INT def,bool with_def);
+//		Fonc_Num in(int def,bool with_def);
 // Modif DB
 		Pt2di sz() const {return Pt2di(_tx,_ty);}
-		INT tx() const {return _tx;}
-		INT ty() const {return _ty;}
+		int tx() const {return _tx;}
+		int ty() const {return _ty;}
 
-		 Line_PackB_IM<Type> & lpckb(INT y) {return _LINES[y];}
-		 INT per() const {return _per;}
+		 Line_PackB_IM<Type> & lpckb(int y) {return _LINES[y];}
+		 int per() const {return _per;}
 		
 	private :
 		Line_PackB_IM<Type>	* _LINES;
-		INT _tx,_ty,_per;
+		int _tx,_ty,_per;
 
-		INT _p0[2];
-		INT _p1[2];
+		int _p0[2];
+		int _p1[2];
 };
 
 

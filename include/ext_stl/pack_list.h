@@ -60,9 +60,9 @@ template <class T,const int NB> class  ElPackList
 
       private :
 
-           INT  _sz;
-           INT  _i0;
-           INT  _i1;
+           int  _sz;
+           int  _i0;
+           int  _i1;
            std::list<el >       _l;
            std::list<el > *     _rl;
 
@@ -119,10 +119,10 @@ template <class T,const int NB> class  ElPackList
                friend  class ElPackList<T,NB>;
                private :
                   std::list<el>::iterator _iter;
-                 INT                _i;
-                 INT                _pabs;
+                 int                _i;
+                 int                _pabs;
 
-                 iterator( std::list<el>::iterator iter,INT i,INT pos_abs) :
+                 iterator( std::list<el>::iterator iter,int i,int pos_abs) :
                       _iter (iter),
                       _i    (i),
                       _pabs (pos_abs)
@@ -248,7 +248,7 @@ template <class T,const int NB> class  ElPackList
             }
 
 
-            INT size() const{return _sz;}
+            int size() const{return _sz;}
             bool empty() const{return _sz == 0;}
 
 };

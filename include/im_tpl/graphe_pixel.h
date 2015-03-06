@@ -50,7 +50,7 @@ class   GTIm2D
           void assert_inside(const Pt2di & );
      protected :
 
-          GTIm2D(INT tx,INT ty,INT x0=0,INT y0=0) ;
+          GTIm2D(int tx,int ty,int x0=0,int y0=0) ;
 };
 */
 
@@ -66,8 +66,8 @@ class   GTIm2D
        - definir les methode 
  
                  * som_in_graphe(const Pt2di & p);
-                 * arc_in_graphe_ifs1in(const Pt2di & p,INT k);
-                 * arc_in_graphe(const Pt2di & p,INT k); // doit etre equivalent a && des deux preced, 
+                 * arc_in_graphe_ifs1in(const Pt2di & p,int k);
+                 * arc_in_graphe(const Pt2di & p,int k); // doit etre equivalent a && des deux preced, 
                                                          // peut etre une optim de cela
 
        TGrapheSetIm2D correspond a un graphe pour lequel un sommet est dans le graphe
@@ -78,7 +78,7 @@ class  GenTGrapheIm2D : public  GTIm2D
 {
      protected :
 
-          GenTGrapheIm2D(INT tx,INT ty,INT x0=0,INT y0=0)  : GTIm2D(tx,ty,x0,y0) {}
+          GenTGrapheIm2D(int tx,int ty,int x0=0,int y0=0)  : GTIm2D(tx,ty,x0,y0) {}
       
 };
 
@@ -103,7 +103,7 @@ template  <class Type> class  TGrapheSetIm2D : public GenTGrapheIm2D
                 return (mIm.get(p)!=0);
           }
 
-          inline bool arc_in_graphe_ifs1in(const Pt2di & p,INT k)
+          inline bool arc_in_graphe_ifs1in(const Pt2di & p,int k)
           {
                 return som_in_graphe(p+TAB_8_NEIGH[k]);
           }
@@ -137,30 +137,30 @@ template  <class Type,class Type_Base> class  SafeTIm2D : public TIm2D<Type,Type
 };
 
 
-template  <const INT NBB> class  TIm2DBits : public GTIm2D
+template  <const int NBB> class  TIm2DBits : public GTIm2D
 {
 
           enum
           {
               nb_per_byte = Tabul_Bits<NBB,true>::nb_per_byte
           };
-          U_INT1 **                   _d;
+          U_int1 **                   _d;
           Im2D_Bits<NBB>              _the_im;
 
 
      public :
 
 
-          typedef  INT  OutputFonc;
-          typedef  INT  ValOut;
+          typedef  int  OutputFonc;
+          typedef  int  ValOut;
           
-	  INT  get(const Pt2di & p) 
+	  int  get(const Pt2di & p) 
           {
                 assert_inside(p);
                 return Tabul_Bits<NBB,true>::input_tab[_d[p.y][p.x/nb_per_byte]][p.x%nb_per_byte];
           }
 
-	  void  oset(const Pt2di & p ,INT  v) 
+	  void  oset(const Pt2di & p ,int  v) 
           {
                 assert_inside(p);
                 _d[p.y][p.x/nb_per_byte] = 
@@ -193,25 +193,25 @@ template <class TypeFlx,class TypeFonc,class TypeOut>
 template <class Im1,class Im2>  void Tdup(Im1 im1,Im2 im2)
 {
     Pt2di sz =  Inf(im1.sz(),im2.sz());
-    for(INT y =0; y<sz.y ; y++)
-        for(INT x =0; x<sz.x ; x++)
+    for(int y =0; y<sz.y ; y++)
+        for(int x =0; x<sz.x ; x++)
             im1.oset(Pt2di(x,y),im2.get(Pt2di(x,y)));
 }
 
 
 
-template <class Type,class Type_Base,const INT b> class TImGet
+template <class Type,class Type_Base,const int b> class TImGet
 {
 	public :
 
 	static Type_Base getb2(TIm2D<Type,Type_Base> & im,ElPFixed<b> pt)
 	{
-		INT xo   = pt._x >> b;
-		INT yo   = pt._y >> b;
-		INT  px1 = pt._x - (xo<<b);
-		INT  py1 = pt._y - (yo<<b);
-		INT  px0 =  pt.Q -px1;
-		INT  py0 =  pt.Q -py1;
+		int xo   = pt._x >> b;
+		int yo   = pt._y >> b;
+		int  px1 = pt._x - (xo<<b);
+		int  py1 = pt._y - (yo<<b);
+		int  px0 =  pt.Q -px1;
+		int  py0 =  pt.Q -py1;
 		Type * l0 = im._d[yo]+xo;
 		Type * l1 = im._d[yo+1]+xo;
 
@@ -224,26 +224,26 @@ template <class Type,class Type_Base,const INT b> class TImGet
              );
 	}
 
-	static REAL getr(TIm2D<Type,Type_Base> & im,ElPFixed<b> pt)
+	static double_t getr(TIm2D<Type,Type_Base> & im,ElPFixed<b> pt)
 	{
-       return getb2(im,pt) / (REAL) pt.Q2;
+       return getb2(im,pt) / (double_t) pt.Q2;
 	}
-	static INT geti(TIm2D<Type,Type_Base> & im,ElPFixed<b> pt)
+	static int geti(TIm2D<Type,Type_Base> & im,ElPFixed<b> pt)
 	{
        return getb2(im,pt) >>  ElPFixed<b>::b2;
 	}
 
 	static Type_Base getb2(TIm2D<Type,Type_Base> & im,ElPFixed<b> pt,Type_Base def)
 	{
-		INT xo   = pt._x >> b;
-		INT yo   = pt._y >> b;
+		int xo   = pt._x >> b;
+		int yo   = pt._y >> b;
 		if (! im.inside_bilin(Pt2di(xo,yo)))
 		   return def;
 
-		INT  px1 = pt._x - (xo<<b);
-		INT  py1 = pt._y - (yo<<b);
-		INT  px0 =  pt.Q -px1;
-		INT  py0 =  pt.Q -py1;
+		int  px1 = pt._x - (xo<<b);
+		int  py1 = pt._y - (yo<<b);
+		int  px0 =  pt.Q -px1;
+		int  py0 =  pt.Q -py1;
 		Type * l0 = im._d[yo]+xo;
 		Type * l1 = im._d[yo+1]+xo;
 
@@ -256,11 +256,11 @@ template <class Type,class Type_Base,const INT b> class TImGet
              );
 	}
 
-	static REAL getr(TIm2D<Type,Type_Base> & im,ElPFixed<b> pt,Type_Base def)
+	static double_t getr(TIm2D<Type,Type_Base> & im,ElPFixed<b> pt,Type_Base def)
 	{
-       return getb2(im,pt,def) / (REAL) pt.Q2;
+       return getb2(im,pt,def) / (double_t) pt.Q2;
 	}
-	static INT geti(TIm2D<Type,Type_Base> & im,ElPFixed<b> pt,Type_Base def)
+	static int geti(TIm2D<Type,Type_Base> & im,ElPFixed<b> pt,Type_Base def)
 	{
        return getb2(im,pt,def) >>  ElPFixed<b>::b2;
 	}
@@ -269,14 +269,14 @@ template <class Type,class Type_Base,const INT b> class TImGet
 
 
 /*
-template <class Type,class Type_Base,const INT b> 
-         INT getb2(TIm2D<Type,Type_Base> & im,ElPFixed<b> pt)
+template <class Type,class Type_Base,const int b> 
+         int getb2(TIm2D<Type,Type_Base> & im,ElPFixed<b> pt)
 {
 	return TImGet<Type,Type_Base,b>::getb2(im,pt);
 }
 */
 template <class Type,class Type_Base,class PFixed>
-         INT getb2(TIm2D<Type,Type_Base> & im,PFixed pt)
+         int getb2(TIm2D<Type,Type_Base> & im,PFixed pt)
 {
 	return TImGet<Type,Type_Base,PFixed::b1>::getb2(im,pt);
 }
@@ -285,15 +285,15 @@ template <class Type,class Type_Base,class PFixed>
 
 /*
 
-template <class Type,class Type_Base,const INT b> 
-         INT getb2(TIm2D<Type,Type_Base> & im,ElPFixed<b> pt)
+template <class Type,class Type_Base,const int b> 
+         int getb2(TIm2D<Type,Type_Base> & im,ElPFixed<b> pt)
 {
-      INT xo   = pt._x >> b;
-      INT yo   = pt._y >> b;
-      INT  px1 = pt._x - (xo<<b);
-      INT  py1 = pt._y - (yo<<b);
-      INT  px0 =  pt.Q -px1;
-      INT  py0 =  pt.Q -py1;
+      int xo   = pt._x >> b;
+      int yo   = pt._y >> b;
+      int  px1 = pt._x - (xo<<b);
+      int  py1 = pt._y - (yo<<b);
+      int  px0 =  pt.Q -px1;
+      int  py0 =  pt.Q -py1;
       Type * l0 = im._d[yo]+xo;
       Type * l1 = im._d[yo+1]+xo;
 
@@ -306,39 +306,39 @@ template <class Type,class Type_Base,const INT b>
              );
 }
 
-template <class Type,class Type_Base,const INT b> 
-         INT geti(TIm2D<Type,Type_Base> & im,ElPFixed<b> pt)
+template <class Type,class Type_Base,const int b> 
+         int geti(TIm2D<Type,Type_Base> & im,ElPFixed<b> pt)
 {
      return getb2(im,pt) >> pt.b2;
 }
 
-template <class Type,class Type_Base,const INT b> 
-         REAL getr(TIm2D<Type,Type_Base> & im,ElPFixed<b> pt)
+template <class Type,class Type_Base,const int b> 
+         double_t getr(TIm2D<Type,Type_Base> & im,ElPFixed<b> pt)
 {
-     return getb2(im,pt) / (REAL) pt.Q2;
+     return getb2(im,pt) / (double_t) pt.Q2;
 }
 */
 
 template <class Type,class Type_Base,class PFixed>
-         INT geti(TIm2D<Type,Type_Base> & im,PFixed pt)
+         int geti(TIm2D<Type,Type_Base> & im,PFixed pt)
 {
      return getb2(im,pt) >> PFixed::b2;
 }
 
 template <class Type,class Type_Base,class PFixed>
-         REAL getr(TIm2D<Type,Type_Base> & im,PFixed pt)
+         double_t getr(TIm2D<Type,Type_Base> & im,PFixed pt)
 {
-     return getb2(im,pt) / (REAL) PFixed::Q2;
+     return getb2(im,pt) / (double_t) PFixed::Q2;
 }
 
 // Calcul rapide mais approches (nombre fixed sur 8 bits)
-template <class Type,class TypeBase> REAL FixedSomSegDr(TIm2D<Type,TypeBase>& Tim,Pt2dr p1,Pt2dr p2,INT NBPts,REAL DefOut); 
+template <class Type,class TypeBase> double_t FixedSomSegDr(TIm2D<Type,TypeBase>& Tim,Pt2dr p1,Pt2dr p2,int NBPts,double_t DefOut); 
 
 
 /*
     Requirement :
-      INT Obj.tx()
-      INT Obj.ty()
+      int Obj.tx()
+      int Obj.ty()
       typedef CharIntDouble  tValueElem;
       tValueElem  Obj.adr_data(Pt2di)
 */
@@ -356,20 +356,20 @@ template <class Type>  void AutoTranslateData(Pt2di tr,Type & Obj)
  
     tyMemCopy MCP = (tr.y==0) ? memmove : memcpy;
  
-    INT sx =ElMax(-tr.x,0);
-    INT sy =ElMax(-tr.y,0);
-    INT dx =ElMax(tr.x,0);
-    INT dy =ElMax(tr.y,0);
+    int sx =ElMax(-tr.x,0);
+    int sy =ElMax(-tr.y,0);
+    int dx =ElMax(tr.x,0);
+    int dy =ElMax(tr.y,0);
  
-    INT szx = Obj.tx()-ElAbs(tr.x);
-    INT szy = Obj.ty()-ElAbs(tr.y);
+    int szx = Obj.tx()-ElAbs(tr.x);
+    int szy = Obj.ty()-ElAbs(tr.y);
  
     if ((szx<=0) || (szy <=0))
        return;
  
     if ((tr.y>0) || ((tr.y==0) && (tr.x >0)))
     {
-        for (INT y=szy-1; y>=0; y--)
+        for (int y=szy-1; y>=0; y--)
         {
             typename Type::tValueElem * is0 = Obj.adr_data(Pt2di(sx,sy+y));
             typename Type::tValueElem * is1 = Obj.adr_data(Pt2di(sx+szx,sy+y));
@@ -379,7 +379,7 @@ template <class Type>  void AutoTranslateData(Pt2di tr,Type & Obj)
     }
     else
     {
-        for (INT y=0; y<szy; y++)
+        for (int y=0; y<szy; y++)
         {
             typename Type::tValueElem * is0 = Obj.adr_data(Pt2di(sx,sy+y));
             typename Type::tValueElem * is1 = Obj.adr_data(Pt2di(sx+szx,sy+y));

@@ -10,17 +10,17 @@ class  cPolynome1VarFormel
         (
                 cSetEqFormelles    &,
                 cVarSpec           aVarTime,
-                REAL *             aV0,
-                INT                aDegre
+                double_t *             aV0,
+                int                aDegre
         );
         Fonc_Num  Fonc();
-        REAL  Val(REAL aTime);
+        double_t  Val(double_t aTime);
 
      private :
-        REAL *                  mV0;
-        INT                     mDegre;
+        double_t *                  mV0;
+        int                     mDegre;
         Fonc_Num                mFonc;
-        std::vector<REAL>       mValsCur;
+        std::vector<double_t>       mValsCur;
 
         cPolynome1VarFormel(const cPolynome1VarFormel &);  // Non Implemante
         void    operator = (const cPolynome1VarFormel &);  // Non Implemante

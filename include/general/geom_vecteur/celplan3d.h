@@ -18,7 +18,7 @@ class cElPlan3D
               ElSeg3D Inter(const cElPlan3D&,bool &OK) const;
 
           // Plante si Plan Vertical
-          REAL   ZOfXY(Pt2dr aP) const;
+          double_t   ZOfXY(Pt2dr aP) const;
           Pt3dr  AddZ(Pt2dr aP) const;
 
              // void L1Ameliore(const std::vector<Pt3dr> & aVP,int aNbMax=-1);
@@ -37,7 +37,7 @@ class cElPlan3D
           // Le plan est donne par son equation normale
           // mScal + mNorm.P = 0
           Pt3dr mNorm;
-          REAL mScal;
+          double_t mScal;
           Pt3dr mP0;
           Pt3dr mU;
           Pt3dr mV;

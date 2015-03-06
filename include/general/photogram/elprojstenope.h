@@ -4,16 +4,16 @@
 #include "general/sys_dep.h"
 
 class ElProjStenope : public ElProj32 ,
-        public ElProjStenopeGen<REAL>
+        public ElProjStenopeGen<double_t>
 {
 public :
 
-    ElProjStenope(REAL Focale,Pt2dr centre, const tParamAFocal  & AFocalParam);
+    ElProjStenope(double_t Focale,Pt2dr centre, const tParamAFocal  & AFocalParam);
 
     Pt2dr Proj(Pt3dr) const;
     Pt3dr DirRayon(Pt2dr) const;
     virtual void Rayon(Pt2dr,Pt3dr &p0,Pt3dr & p1) const;
-    void  Diff(ElMatrix<REAL> &,Pt3dr)const ;
+    void  Diff(ElMatrix<double_t> &,Pt3dr)const ;
 
 
     Pt2dr   centre() const;

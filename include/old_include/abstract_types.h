@@ -70,7 +70,7 @@ template <class Type>   Type operator , (Type,Type)
 #include <ostream>
 
 #ifndef PI
-// const REAL PI =  3.14159265358979323846;
+// const double_t PI =  3.14159265358979323846;
 // Je mets un define car j'ai un doute sur le fonctionnement quand
 // on initialise d'autres constantes a partir de PI
 #define PI  3.14159265358979323846
@@ -107,7 +107,7 @@ class Flux_Pts : public  PRC0
      Flux_Pts(class Flux_Pts_Not_Comp *);
      class Flux_Pts_Computed * compute (const class  Arg_Flux_Pts_Comp &);
 
-     Flux_Pts(Std_Pack_Of_Pts<INT> *);
+     Flux_Pts(Std_Pack_Of_Pts<int> *);
      Flux_Pts(ElList<Pt2di>);
      Flux_Pts(Pt2di);
 
@@ -123,10 +123,10 @@ class Flux_Pts : public  PRC0
             // 1-D
             // - - - 
 
-extern Flux_Pts rectangle(INT,INT);
+extern Flux_Pts rectangle(int,int);
 
-extern Flux_Pts border_rect(INT p1,INT p2,INT b1,INT b2);
-extern Flux_Pts border_rect(INT p1,INT p2,INT b);
+extern Flux_Pts border_rect(int p1,int p2,int b1,int b2);
+extern Flux_Pts border_rect(int p1,int p2,int b);
 
             // 2-D
             // - - - 
@@ -171,40 +171,40 @@ template <class tContPts> ElList<Pt2di> ToListPt2di(const tContPts & aCont)
                        //  border of rectangles
 
 extern Flux_Pts border_rect(Pt2di p1,Pt2di p2,Pt2di b1,Pt2di b2);
-extern Flux_Pts border_rect(Pt2di p1,Pt2di p2,INT sz=1);
+extern Flux_Pts border_rect(Pt2di p1,Pt2di p2,int sz=1);
 
                          // cirle,ellipse, arc  
 
-extern Flux_Pts circle(Pt2dr,REAL,bool v8 = true);
-extern Flux_Pts disc(Pt2dr,REAL,bool front = true);
-extern Flux_Pts arc_cir(Pt2dr,REAL r,REAL a0,REAL a1,bool v8 = true);
+extern Flux_Pts circle(Pt2dr,double_t,bool v8 = true);
+extern Flux_Pts disc(Pt2dr,double_t,bool front = true);
+extern Flux_Pts arc_cir(Pt2dr,double_t r,double_t a0,double_t a1,bool v8 = true);
 
-extern Flux_Pts fr_sector_ang(Pt2dr,REAL r,REAL a0,REAL a1,bool v8 = true);
-extern Flux_Pts fr_chord_ang (Pt2dr,REAL r,REAL a0,REAL a1,bool v8 = true);
-extern Flux_Pts sector_ang(Pt2dr,REAL r,REAL a0,REAL a1,bool front  = true);
-extern Flux_Pts chord_ang  (Pt2dr,REAL r,REAL a0,REAL a1,bool front = true);
+extern Flux_Pts fr_sector_ang(Pt2dr,double_t r,double_t a0,double_t a1,bool v8 = true);
+extern Flux_Pts fr_chord_ang (Pt2dr,double_t r,double_t a0,double_t a1,bool v8 = true);
+extern Flux_Pts sector_ang(Pt2dr,double_t r,double_t a0,double_t a1,bool front  = true);
+extern Flux_Pts chord_ang  (Pt2dr,double_t r,double_t a0,double_t a1,bool front = true);
 
-extern Flux_Pts ellipse(Pt2dr c,REAL A,REAL B,REAL teta,bool v8 = true);
-extern Flux_Pts ell_fill(Pt2dr c,REAL A,REAL B,REAL teta,bool front = true);
+extern Flux_Pts ellipse(Pt2dr c,double_t A,double_t B,double_t teta,bool v8 = true);
+extern Flux_Pts ell_fill(Pt2dr c,double_t A,double_t B,double_t teta,bool front = true);
 extern Flux_Pts arc_ellipse
-       (Pt2dr c,REAL A,REAL B,REAL teta,REAL a0,REAL a1,bool v8 = true);
+       (Pt2dr c,double_t A,double_t B,double_t teta,double_t a0,double_t a1,bool v8 = true);
 
 extern Flux_Pts sector_ell
-                (Pt2dr c,REAL A,REAL B,
-                 REAL teta,REAL a0,
-                 REAL a1,bool front = true);
+                (Pt2dr c,double_t A,double_t B,
+                 double_t teta,double_t a0,
+                 double_t a1,bool front = true);
 extern Flux_Pts chord_ell
-                (Pt2dr c,REAL A,REAL B,
-                 REAL teta,REAL a0,
-                 REAL a1,bool front = true);
+                (Pt2dr c,double_t A,double_t B,
+                 double_t teta,double_t a0,
+                 double_t a1,bool front = true);
 extern Flux_Pts fr_sector_ell
-                (Pt2dr c,REAL A,REAL B,
-                 REAL teta,REAL a0,
-                 REAL a1,bool v8 = true);
+                (Pt2dr c,double_t A,double_t B,
+                 double_t teta,double_t a0,
+                 double_t a1,bool v8 = true);
 extern Flux_Pts fr_chord_ell
-                (Pt2dr c,REAL A,REAL B,
-                 REAL teta,REAL a0,
-                 REAL a1,bool v8 = true);
+                (Pt2dr c,double_t A,double_t B,
+                 double_t teta,double_t a0,
+                 double_t a1,bool v8 = true);
 
 
                    // special 
@@ -212,7 +212,7 @@ extern Flux_Pts fr_chord_ell
                          // map the rectangle p1,p2 with digital line of direction u
 Flux_Pts line_map_rect(Pt2di u,Pt2di p0,Pt2di p1);
                         // idem for 1-D rectangles 
-Flux_Pts line_map_rect(INT  dx,INT  x0,INT  x1);
+Flux_Pts line_map_rect(int  dx,int  x0,int  x1);
 
                 // see "include/general/bitm.h" for lpts
 
@@ -222,18 +222,18 @@ extern Flux_Pts rectangle(Pt3di p0,Pt3di p1);
             // K-D
             // - - - 
 
-extern Flux_Pts rectangle(const INT*,const INT*,INT);
-extern Flux_Pts border_rect(  const  INT * p1,
-                              const  INT * p2,
-                              const  INT * b1,
-                              const  INT * b2,
-                              INT     dim
+extern Flux_Pts rectangle(const int*,const int*,int);
+extern Flux_Pts border_rect(  const  int * p1,
+                              const  int * p2,
+                              const  int * b1,
+                              const  int * b2,
+                              int     dim
                      );
 
-extern Flux_Pts border_rect(  const  INT * p1,
-                              const  INT * p2,
-                                     INT   b ,
-                                     INT   dim
+extern Flux_Pts border_rect(  const  int * p1,
+                              const  int * p2,
+                                     int   b ,
+                                     int   dim
                      );
 
 
@@ -244,7 +244,7 @@ extern Flux_Pts border_rect(  const  INT * p1,
 
 Flux_Pts select(Flux_Pts flx,Fonc_Num fonc); 
 extern Flux_Pts dilate(Flux_Pts flx,Neigh_Rel fonc); 
-extern Flux_Pts conc(Flux_Pts flx,Neigh_Rel Rel,INT nb_step_max = 1000000000); 
+extern Flux_Pts conc(Flux_Pts flx,Neigh_Rel Rel,int nb_step_max = 1000000000); 
 
 
     /*----------------------------------------*/
@@ -260,45 +260,45 @@ class Fonc_Num : public  PRC0
    friend class Arg_FNOPB;
 
    public :
-     REAL ValFoncGen(Pt2di) const;  
-     REAL ValFoncGenR(Pt2dr) const;  
+     double_t ValFoncGen(Pt2di) const;  
+     double_t ValFoncGenR(Pt2dr) const;  
           // valable qqsoit la fonction, assez long
-         // REAL ValFonc(const class PtsKD &) const; pour les fonction analytique
+         // double_t ValFonc(const class PtsKD &) const; pour les fonction analytique
 
      std::string NameCpp();
      bool        HasNameCpp();
      void        SetNameCpp(const std::string &);
 
      ~Fonc_Num();
-     Fonc_Num(INT);
-     Fonc_Num(INT,INT);
+     Fonc_Num(int);
+     Fonc_Num(int,int);
      Fonc_Num(Pt2di);
-     Fonc_Num(INT,INT,INT);
-     Fonc_Num(INT,INT,INT,INT);
-     Fonc_Num(REAL);
-     Fonc_Num(REAL,REAL);
+     Fonc_Num(int,int,int);
+     Fonc_Num(int,int,int,int);
+     Fonc_Num(double_t);
+     Fonc_Num(double_t,double_t);
      Fonc_Num(Pt2dr);
-     Fonc_Num(REAL,REAL,REAL);
-     Fonc_Num(REAL,REAL,REAL,REAL);
+     Fonc_Num(double_t,double_t,double_t);
+     Fonc_Num(double_t,double_t,double_t,double_t);
      Fonc_Num(class Fonc_Num_Not_Comp *);
 
      void compile(cElCompileFN &);
      bool integral_fonc (bool integral_flux) const ;
-     INT dimf_out() const;
-     REAL ValFonc(const class PtsKD &) const;
-     Fonc_Num deriv(INT kth) const;
+     int dimf_out() const;
+     double_t ValFonc(const class PtsKD &) const;
+     Fonc_Num deriv(int kth) const;
      Fonc_Num deriv(class cVarSpec ) const;
-     INT DegrePoly() const; // retourne  conventionnellement -1 si pas polynome
+     int DegrePoly() const; // retourne  conventionnellement -1 si pas polynome
 
      void VarDerNN(ElGrowingSetInd &) const; // Remplit l'indexe des variable a derivee non nulle
-	 REAL ValDeriv(const  PtsKD &  pts,INT k) const;
-	 INT  NumCoord() const; // En qq sorte la fonc inverse de kth_coord, 
+	 double_t ValDeriv(const  PtsKD &  pts,int k) const;
+	 int  NumCoord() const; // En qq sorte la fonc inverse de kth_coord, 
 	                        // => Erreur si pas une fonc coord
      void show(std::ostream & os) const;
      bool is0() const;
      bool is1() const;
-     bool IsCsteRealDim1(REAL & aVal) const;
-     bool IsCsteRealDim1(INT  & aVal) const;
+     bool IsCsteRealDim1(double_t & aVal) const;
+     bool IsCsteRealDim1(int  & aVal) const;
 
      Fonc_Num operator [] (Fonc_Num);
      
@@ -307,7 +307,7 @@ class Fonc_Num : public  PRC0
      Fonc_Num v2();     // = kth_proj(*this,2);
 
      Fonc_Num permut(const std::vector<int>&  kth) const;
-     Fonc_Num kth_proj(INT kth) const;
+     Fonc_Num kth_proj(int kth) const;
      Fonc_Num shift_coord(int shift) const;
 
 
@@ -337,7 +337,7 @@ class Fonc_Num : public  PRC0
                    eIsUnknown
                 }  tKindOfExpr;
 
-       INT CmpFormel(const Fonc_Num &) const;
+       int CmpFormel(const Fonc_Num &) const;
        tKindOfExpr KindOfExpr() const;
        bool IsVarSpec() const;
        bool IsAtom() const;
@@ -347,15 +347,15 @@ class Fonc_Num : public  PRC0
 
    protected :
      class cTagCsteDer {};
-     Fonc_Num (cTagCsteDer,REAL aVal,INT anInd,const std::string & );
+     Fonc_Num (cTagCsteDer,double_t aVal,int anInd,const std::string & );
 };
 
 
 class cVarSpec : public  Fonc_Num
 {
      public :
-         cVarSpec(REAL aVal,const std::string & = "");
-         void Set(REAL aVal);
+         cVarSpec(double_t aVal,const std::string & = "");
+         void Set(double_t aVal);
          double * AdrVal() const;
 
          const std::string & Name() const;
@@ -365,8 +365,8 @@ class cVarSpec : public  Fonc_Num
 
 
          friend class Fonc_Num;
-         INT IndexeDeriv();
-         static INT TheCptIndexeNumerotation;
+         int IndexeDeriv();
+         static int TheCptIndexeNumerotation;
 };
 
 template <> inline Fonc_Num ElMax (Fonc_Num ,Fonc_Num ) {ELISE_ASSERT(false,"ElMax(Fonc_Num)");return 0;}
@@ -383,47 +383,47 @@ template <> inline Fonc_Num ElAbs   (Fonc_Num ) {ELISE_ASSERT(false,"ElMax(Fonc_
 
      // coordinates functions 
 
-extern Fonc_Num kth_coord(INT);
+extern Fonc_Num kth_coord(int);
 extern const Fonc_Num FX;  // FX = kth_coord(0)
 extern const Fonc_Num FY;  // FY = kth_coord(1)
 extern const Fonc_Num FZ;  // FY = kth_coord(2)
 
-extern Fonc_Num Identite(INT dim);  // Identite = (FX,FY, .... ,kth_coord(dim-1)
+extern Fonc_Num Identite(int dim);  // Identite = (FX,FY, .... ,kth_coord(dim-1)
 
-extern Fonc_Num  inside(const INT * p0,const INT * p1,INT dim);
+extern Fonc_Num  inside(const int * p0,const int * p1,int dim);
 extern Fonc_Num  inside(Pt2di,Pt2di);
 
-extern Fonc_Num CsteNDim(double aVal,INT dim);  // 
-extern Fonc_Num CsteNDim(int    aVal,INT dim);  // 
+extern Fonc_Num CsteNDim(double aVal,int dim);  // 
+extern Fonc_Num CsteNDim(int    aVal,int dim);  // 
      // random values
 
 Fonc_Num frandr(); 
 
 
-Fonc_Num gauss_noise_1(INT sz);
-Fonc_Num gauss_noise_2(INT sz);
-Fonc_Num gauss_noise_3(INT sz);
-Fonc_Num gauss_noise_4(INT sz);
-Fonc_Num gauss_noise(INT sz,int aK);
+Fonc_Num gauss_noise_1(int sz);
+Fonc_Num gauss_noise_2(int sz);
+Fonc_Num gauss_noise_3(int sz);
+Fonc_Num gauss_noise_4(int sz);
+Fonc_Num gauss_noise(int sz,int aK);
 
-Fonc_Num unif_noise_1(INT sz);
-Fonc_Num unif_noise_2(INT sz);
-Fonc_Num unif_noise_3(INT sz);
-Fonc_Num unif_noise_4(INT sz);
-Fonc_Num unif_noise(INT sz,int aK);
+Fonc_Num unif_noise_1(int sz);
+Fonc_Num unif_noise_2(int sz);
+Fonc_Num unif_noise_3(int sz);
+Fonc_Num unif_noise_4(int sz);
+Fonc_Num unif_noise(int sz,int aK);
 
-Fonc_Num fonc_noise(INT sz,int aK,bool unif);
+Fonc_Num fonc_noise(int sz,int aK,bool unif);
 
-Fonc_Num gauss_noise_4(REAL * pds,INT * sz , INT nb);
-Fonc_Num unif_noise_4(REAL * pds,INT * sz , INT nb);
+Fonc_Num gauss_noise_4(double_t * pds,int * sz , int nb);
+Fonc_Num unif_noise_4(double_t * pds,int * sz , int nb);
 
 Fonc_Num CorrelSquare
          (
              Fonc_Num aF1,
              Fonc_Num aF2,
              Fonc_Num aPond,
-             INT aSquare,
-             REAL anEpsilon
+             int aSquare,
+             double_t anEpsilon
          );
 
      // concatenation 
@@ -442,11 +442,11 @@ extern   Fonc_Num Virgule(Fonc_Num,Fonc_Num,Fonc_Num,Fonc_Num,Fonc_Num,Fonc_Num)
     /*  -  -  -  -  -  -  -  -  -  -  */
 
 
-Fonc_Num linear_red(const OperAssocMixte &,Fonc_Num f,INT x0,INT x1);
+Fonc_Num linear_red(const OperAssocMixte &,Fonc_Num f,int x0,int x1);
 
-Fonc_Num linear_som(Fonc_Num f,INT x0,INT x1);
-Fonc_Num linear_max(Fonc_Num f,INT x0,INT x1);
-Fonc_Num linear_min(Fonc_Num f,INT x0,INT x1);
+Fonc_Num linear_som(Fonc_Num f,int x0,int x1);
+Fonc_Num linear_max(Fonc_Num f,int x0,int x1);
+Fonc_Num linear_min(Fonc_Num f,int x0,int x1);
 
 Fonc_Num lin_cumul_ass(const OperAssocMixte & op,Fonc_Num f,const OperAssocMixte * = 0);
 Fonc_Num lin_cumul_sum(Fonc_Num f);
@@ -458,20 +458,20 @@ Fonc_Num linear_integral(Fonc_Num f);
 Fonc_Num min_linear_cum2sens_max(Fonc_Num f);
 Fonc_Num max_linear_cum2sens_min(Fonc_Num f);
 
-Fonc_Num linear_Kth(Fonc_Num f,INT x0,INT x1,INT kth,INT max_vals=256);
-Fonc_Num linear_median(Fonc_Num f,INT sz,INT max_vals = 256);
+Fonc_Num linear_Kth(Fonc_Num f,int x0,int x1,int kth,int max_vals=256);
+Fonc_Num linear_median(Fonc_Num f,int sz,int max_vals = 256);
 
 
        // related to shading
 
-Fonc_Num binary_shading(Fonc_Num f,REAL steep);
+Fonc_Num binary_shading(Fonc_Num f,double_t steep);
 Fonc_Num gray_level_shading(Fonc_Num f);
 
 
        // related to stereo-vision
 
-Fonc_Num proj_cav(Fonc_Num f,REAL zobs,REAL steep);
-Fonc_Num phasis_auto_stereogramme(Fonc_Num f,REAL zobs,REAL steep);
+Fonc_Num proj_cav(Fonc_Num f,double_t zobs,double_t steep);
+Fonc_Num phasis_auto_stereogramme(Fonc_Num f,double_t zobs,double_t steep);
 
 
     /*  -  -  -  -  -  -  -  -  -  -  -  - */
@@ -486,15 +486,15 @@ Fonc_Num phasis_auto_stereogramme(Fonc_Num f,REAL zobs,REAL steep);
 
          //   exponential filter
 
-Fonc_Num canny_exp_filt(Fonc_Num f,REAL fx,REAL fy,INT nb = -1); // nb<0= let ELISE compuetd it
-Fonc_Num semi_cef(Fonc_Num f,REAL fx,REAL fy);
-Fonc_Num  deriche(Fonc_Num f,REAL alpha,INT d0 = 5);
+Fonc_Num canny_exp_filt(Fonc_Num f,double_t fx,double_t fy,int nb = -1); // nb<0= let ELISE compuetd it
+Fonc_Num semi_cef(Fonc_Num f,double_t fx,double_t fy);
+Fonc_Num  deriche(Fonc_Num f,double_t alpha,int d0 = 5);
 
 // Le filtre de exponentiel admet un inverse a support borne 
-Fonc_Num inv_canny_exp_filt(Fonc_Num f,REAL fx,REAL fy);
-Fonc_Num inv_canny_exp_filt(Fonc_Num f,REAL fxy);
-Fonc_Num inv_semi_cef(Fonc_Num f,REAL fx,REAL fy);
-Fonc_Num inv_semi_cef(Fonc_Num f,REAL fxy);
+Fonc_Num inv_canny_exp_filt(Fonc_Num f,double_t fx,double_t fy);
+Fonc_Num inv_canny_exp_filt(Fonc_Num f,double_t fxy);
+Fonc_Num inv_semi_cef(Fonc_Num f,double_t fx,double_t fy);
+Fonc_Num inv_semi_cef(Fonc_Num f,double_t fxy);
 
 
 
@@ -517,52 +517,52 @@ Fonc_Num nflag_open_sym(Fonc_Num);
 
                   // extinction-function 
 
-Fonc_Num extinc(Fonc_Num f,const class Chamfer &,INT max_d);
-Fonc_Num extinc_32(Fonc_Num f,INT max_d = 256);
-Fonc_Num extinc_d8(Fonc_Num f,INT max_d = 256);
-Fonc_Num extinc_d4(Fonc_Num f,INT max_d = 256);
-Fonc_Num extinc_5711(Fonc_Num f,INT max_d = 256);
+Fonc_Num extinc(Fonc_Num f,const class Chamfer &,int max_d);
+Fonc_Num extinc_32(Fonc_Num f,int max_d = 256);
+Fonc_Num extinc_d8(Fonc_Num f,int max_d = 256);
+Fonc_Num extinc_d4(Fonc_Num f,int max_d = 256);
+Fonc_Num extinc_5711(Fonc_Num f,int max_d = 256);
 
                   // erosion
 
-Fonc_Num erod(Fonc_Num f,const class Chamfer &,INT max_d);
-Fonc_Num erod_32(Fonc_Num f,INT max_d);
-Fonc_Num erod_d8(Fonc_Num f,INT max_d);
-Fonc_Num erod_d4(Fonc_Num f,INT max_d);
-Fonc_Num erod_5711(Fonc_Num f,INT max_d);
+Fonc_Num erod(Fonc_Num f,const class Chamfer &,int max_d);
+Fonc_Num erod_32(Fonc_Num f,int max_d);
+Fonc_Num erod_d8(Fonc_Num f,int max_d);
+Fonc_Num erod_d4(Fonc_Num f,int max_d);
+Fonc_Num erod_5711(Fonc_Num f,int max_d);
 
                   // dilataion
 
-Fonc_Num dilat(Fonc_Num f,const class Chamfer &,INT max_d);
-Fonc_Num dilat_32(Fonc_Num f,INT max_d);
-Fonc_Num dilat_d8(Fonc_Num f,INT max_d);
-Fonc_Num dilat_d4(Fonc_Num f,INT max_d);
-Fonc_Num dilat_5711(Fonc_Num f,INT max_d);
+Fonc_Num dilat(Fonc_Num f,const class Chamfer &,int max_d);
+Fonc_Num dilat_32(Fonc_Num f,int max_d);
+Fonc_Num dilat_d8(Fonc_Num f,int max_d);
+Fonc_Num dilat_d4(Fonc_Num f,int max_d);
+Fonc_Num dilat_5711(Fonc_Num f,int max_d);
 
 
                   // closing-opening
 
-Fonc_Num close(Fonc_Num f,const Chamfer & chamf,INT max_d,INT delta = 0);
-Fonc_Num close_32(Fonc_Num f,INT max_d,INT delta = 0);
-Fonc_Num close_d8(Fonc_Num f,INT max_d,INT delta = 0);
-Fonc_Num close_d4(Fonc_Num f,INT max_d,INT delta = 0);
-Fonc_Num close_5711(Fonc_Num f,INT max_d,INT delta = 0);
+Fonc_Num close(Fonc_Num f,const Chamfer & chamf,int max_d,int delta = 0);
+Fonc_Num close_32(Fonc_Num f,int max_d,int delta = 0);
+Fonc_Num close_d8(Fonc_Num f,int max_d,int delta = 0);
+Fonc_Num close_d4(Fonc_Num f,int max_d,int delta = 0);
+Fonc_Num close_5711(Fonc_Num f,int max_d,int delta = 0);
 
 
-Fonc_Num open(Fonc_Num f,const Chamfer & chamf,INT max_d,INT delta = 0);
-Fonc_Num open_32(Fonc_Num f,INT max_d,INT delta = 0);
-Fonc_Num open_d8(Fonc_Num f,INT max_d,INT delta = 0);
-Fonc_Num open_d4(Fonc_Num f,INT max_d,INT delta = 0);
-Fonc_Num open_5711(Fonc_Num f,INT max_d,INT delta = 0);
+Fonc_Num open(Fonc_Num f,const Chamfer & chamf,int max_d,int delta = 0);
+Fonc_Num open_32(Fonc_Num f,int max_d,int delta = 0);
+Fonc_Num open_d8(Fonc_Num f,int max_d,int delta = 0);
+Fonc_Num open_d4(Fonc_Num f,int max_d,int delta = 0);
+Fonc_Num open_5711(Fonc_Num f,int max_d,int delta = 0);
 
               // K-Lipschitz envelop (= distance algorithm
               // with no intial binarization)
 
-Fonc_Num EnvKLipshcitz(Fonc_Num f,const Chamfer & chamf,INT max_dif);
-Fonc_Num EnvKLipshcitz_5711(Fonc_Num f,INT max_dif);
-Fonc_Num EnvKLipshcitz_32(Fonc_Num f,INT max_dif);
-Fonc_Num EnvKLipshcitz_d8(Fonc_Num f,INT max_dif);
-Fonc_Num EnvKLipshcitz_d4(Fonc_Num f,INT max_dif);
+Fonc_Num EnvKLipshcitz(Fonc_Num f,const Chamfer & chamf,int max_dif);
+Fonc_Num EnvKLipshcitz_5711(Fonc_Num f,int max_dif);
+Fonc_Num EnvKLipshcitz_32(Fonc_Num f,int max_dif);
+Fonc_Num EnvKLipshcitz_d8(Fonc_Num f,int max_dif);
+Fonc_Num EnvKLipshcitz_d4(Fonc_Num f,int max_dif);
 
 
           //  filters relative to radiometries ordering
@@ -584,33 +584,33 @@ class Histo_Kieme : public Mcheck
                                 RANK
                         } mode_res;
 
-                static Histo_Kieme * New_HK(mode_h,INT max_vals);
+                static Histo_Kieme * New_HK(mode_h,int max_vals);
                 // renvoit un pointeur sur une class derivee (BinTree_HK ou
                 // LastRank_HK)
-                static mode_h  Opt_HK(INT ty,INT max_vals);
-                static mode_h  Opt_HK(mode_h aModePref,INT ty,INT max_vals);
+                static mode_h  Opt_HK(int ty,int max_vals);
+                static mode_h  Opt_HK(mode_h aModePref,int ty,int max_vals);
 
 
-                virtual void add(INT radiom) ;
-                virtual void sub(INT radiom) ;
-                virtual void AddPop(INT radiom,INT aPop) = 0;
+                virtual void add(int radiom) ;
+                virtual void sub(int radiom) ;
+                virtual void AddPop(int radiom,int aPop) = 0;
 
-                INT  RKthVal(REAL aProp,INT adef);
+                int  RKthVal(double_t aProp,int adef);
 
 
                 virtual void raz() = 0;
-               virtual INT kth_val(INT kth) = 0;
-                virtual INT rank(INT radiom) = 0;
+               virtual int kth_val(int kth) = 0;
+                virtual int rank(int radiom) = 0;
 
                 virtual  ~Histo_Kieme();
-                virtual void verif_vals(const INT *,INT nb);
+                virtual void verif_vals(const int *,int nb);
 
 
 
         protected :
-                INT   _max_vals;
-                INT   mPopTot;
-                Histo_Kieme(INT max_vals);
+                int   _max_vals;
+                int   mPopTot;
+                Histo_Kieme(int max_vals);
 
         private :
 };
@@ -621,7 +621,7 @@ Fonc_Num rect_kth
                     Fonc_Num  f,
                     double kth,
                     Box2di  side,
-                    INT   max_vals,
+                    int   max_vals,
                     bool CatInit = false,
                     bool aModePond = false,
                     Histo_Kieme::mode_h=Histo_Kieme::undef
@@ -631,7 +631,7 @@ Fonc_Num rect_kth
                     Fonc_Num  f,
                     double kth,
                     Pt2di  side,
-                    INT   max_vals,
+                    int   max_vals,
                     bool CatInit = false,
                     bool aModePond = false,
                     Histo_Kieme::mode_h=Histo_Kieme::undef
@@ -640,8 +640,8 @@ Fonc_Num rect_kth
          (
                     Fonc_Num  f,
                     double kth,
-                    INT  side,
-                    INT   max_vals,
+                    int  side,
+                    int   max_vals,
                     bool CatInit = false,
                     bool aModePond = false,
                     Histo_Kieme::mode_h=Histo_Kieme::undef
@@ -651,7 +651,7 @@ Fonc_Num rect_median
          (
                     Fonc_Num  f,
                     Box2di  side,
-                    INT   max_vals,
+                    int   max_vals,
                     bool CatInit = false,
                     bool aModePond = false,
                     Histo_Kieme::mode_h=Histo_Kieme::undef
@@ -660,7 +660,7 @@ Fonc_Num rect_median
          (
                     Fonc_Num  f,
                     Pt2di  side,
-                    INT   max_vals,
+                    int   max_vals,
                     bool CatInit = false,
                     bool aModePond = false,
                     Histo_Kieme::mode_h=Histo_Kieme::undef
@@ -668,13 +668,13 @@ Fonc_Num rect_median
 Fonc_Num rect_median 
          (
                     Fonc_Num  f,
-                    INT    side,
-                    INT   max_vals,
+                    int    side,
+                    int   max_vals,
                     bool CatInit = false,
                     bool aModePond = false,
                     Histo_Kieme::mode_h=Histo_Kieme::undef
          );
-Fonc_Num MedianBySort(Fonc_Num f,INT NbMed);
+Fonc_Num MedianBySort(Fonc_Num f,int NbMed);
 Fonc_Num OmbrageKL(Fonc_Num Prof,Fonc_Num Masq,double aPente,int aSzV);
 Fonc_Num NFoncDilatCond(Fonc_Num f2Dil,Fonc_Num fCond,bool aV4,int aNb);
 
@@ -684,17 +684,17 @@ Fonc_Num RectKth_Pondere
           (
                Fonc_Num    f1,
                Fonc_Num    f2,
-               REAL         kth,
-               INT          side,
-               INT         max_vals
+               double_t         kth,
+               int          side,
+               int         max_vals
           );  // Non benche
 
 
-// Fonc_Num  rect_kth (Fonc_Num f,INT kth,Box2di side,INT max_vals);
+// Fonc_Num  rect_kth (Fonc_Num f,int kth,Box2di side,int max_vals);
 
 
-Fonc_Num  rect_rank(Fonc_Num f,Box2di side,INT max_vals,bool CatInit = false);
-Fonc_Num  rect_egal_histo(Fonc_Num f,Box2di side,INT max_vals);
+Fonc_Num  rect_rank(Fonc_Num f,Box2di side,int max_vals,bool CatInit = false);
+Fonc_Num  rect_egal_histo(Fonc_Num f,Box2di side,int max_vals);
 
 
          // assoc
@@ -704,7 +704,7 @@ Fonc_Num rect_red(const OperAssocMixte &,Fonc_Num f,Box2di,bool aCatFinit = fals
 Fonc_Num rect_var_som(Fonc_Num f,Fonc_Num fside,Box2di);
 Fonc_Num rect_som(Fonc_Num f,Box2di,bool aCatFinit = false);
 Fonc_Num rect_som(Fonc_Num f,Pt2di,bool aCatFinit = false);
-Fonc_Num rect_som(Fonc_Num f,INT,bool aCatFinit = false);
+Fonc_Num rect_som(Fonc_Num f,int,bool aCatFinit = false);
 
 Fonc_Num Moy(Fonc_Num,int);
 Fonc_Num Moy1(Fonc_Num aF);
@@ -713,12 +713,12 @@ Fonc_Num MoyIter(Fonc_Num aF,int aSz,int aNbIter);
 
 Fonc_Num rect_max(Fonc_Num f,Box2di,bool aCatFinit = false);
 Fonc_Num rect_max(Fonc_Num f,Pt2di,bool aCatFinit = false);
-Fonc_Num rect_max(Fonc_Num f,INT,bool aCatFinit = false);
+Fonc_Num rect_max(Fonc_Num f,int,bool aCatFinit = false);
 
 
 Fonc_Num rect_min(Fonc_Num f,Box2di,bool aCatFinit = false);
 Fonc_Num rect_min(Fonc_Num f,Pt2di,bool aCatFinit = false);
-Fonc_Num rect_min(Fonc_Num f,INT,bool aCatFinit = false);
+Fonc_Num rect_min(Fonc_Num f,int,bool aCatFinit = false);
 
      // Iteration de sommes
 Fonc_Num FoncMoy(Fonc_Num aF,int aK);
@@ -732,8 +732,8 @@ Fonc_Num MoyByIterSquare(Fonc_Num aF,double aSigmaCible,int aNbIter);
     /*       "Jump" operator          */
     /*  -  -  -  -  -  -  -  -  -  -  */
 
-Fonc_Num  clip_def(Fonc_Num,REAL,Pt2di,Pt2di);
-Fonc_Num  clip_def(Fonc_Num,REAL,INT* p0,INT* p1,INT dim);
+Fonc_Num  clip_def(Fonc_Num,double_t,Pt2di,Pt2di);
+Fonc_Num  clip_def(Fonc_Num,double_t,int* p0,int* p1,int dim);
 
 
     /*  -  -  -  -  -  -  -  -  -  -  */
@@ -791,7 +791,7 @@ extern   Fonc_Num SuperiorStrict(Fonc_Num,Fonc_Num);
 extern   Fonc_Num NotEqual(Fonc_Num,Fonc_Num);
 
 
-// HYPER LENT POU MISE AU POINT
+// HYPER LENT POU MISE AU POint
 double GETVALPT(Fonc_Num,Pt2di);
 
 
@@ -806,7 +806,7 @@ extern   Fonc_Num operator -(Fonc_Num);
 extern   Fonc_Num Abs(Fonc_Num);
 extern   Fonc_Num Square(Fonc_Num);
 extern   Fonc_Num Cube(Fonc_Num);
-Fonc_Num PowI(Fonc_Num f,INT aDegre);
+Fonc_Num PowI(Fonc_Num f,int aDegre);
 
 
 extern   double Square(double);
@@ -975,7 +975,7 @@ extern    Fonc_Num  Hypot(Fonc_Num Fxyz);  // Autant de dim qu'on veut
 extern    Fonc_Num TronkUC(Fonc_Num);  // Tronque 0 - 256
 extern    Fonc_Num Scal(Fonc_Num F1,Fonc_Num F2);
          //  specifies the value of teta when x,y = 0
-extern   Fonc_Num polar(Fonc_Num,REAL rh0); 
+extern   Fonc_Num polar(Fonc_Num,double_t rh0); 
 extern   Fonc_Num divc(Fonc_Num);   // 1/f
 
 
@@ -998,10 +998,10 @@ Fonc_Num diag_m2_sym(Fonc_Num f);
 
         // translation 
 
-extern Fonc_Num trans(Fonc_Num,const INT*,INT);
+extern Fonc_Num trans(Fonc_Num,const int*,int);
 extern Fonc_Num trans(Fonc_Num,Pt2di);
 extern Fonc_Num trans(Fonc_Num,Pt3di);
-extern Fonc_Num trans(Fonc_Num,INT);
+extern Fonc_Num trans(Fonc_Num,int);
 
 
     /*  -  -  -  -  -  -  -  -  -  -  -  -  -  - */
@@ -1025,7 +1025,7 @@ class Output : public  PRC0
         Output(class Output_Not_Comp *);
         Output(class Liste_Pts_Gen);
         class Output_Computed * compute (const class Arg_Output_Comp &);
-        static Output onul(INT dim = 1);
+        static Output onul(int dim = 1);
         Output chc(Fonc_Num);
      private :
 };
@@ -1057,27 +1057,27 @@ extern Output Filtre_Out_RedBin_Gen(Output anOut,bool aRedX,bool aRedY);
 
 
 template <class Type>    Output  reduc(const OperAssocMixte &,Type &);
-template <class Type>    Output  reduc(const OperAssocMixte &,Type *,INT nb);
+template <class Type>    Output  reduc(const OperAssocMixte &,Type *,int nb);
 
 //  The sigma function is just a syntactic shugar that is rewriten as follow :
 //     sigma(v) ==> reduc(OpSum,v)
 // 
 
 template <class Type>    Output  sigma(Type &);
-template <class Type>    Output  sigma(Type *,INT nb);
+template <class Type>    Output  sigma(Type *,int nb);
 
 template <class Type>    Output  VMax(Type &);
-template <class Type>    Output  VMax(Type *,INT nb);
+template <class Type>    Output  VMax(Type *,int nb);
 
 template <class Type>    Output  VMin(Type &);
-template <class Type>    Output  VMin(Type *,INT nb);
+template <class Type>    Output  VMin(Type *,int nb);
 
 
 template <class Type>    Output  WhichMax(Type &);
-template <class Type>    Output  WhichMax(Type *,INT nb);
+template <class Type>    Output  WhichMax(Type *,int nb);
 
 template <class Type>    Output  WhichMin(Type &);
-template <class Type>    Output  WhichMin(Type *,INT nb);
+template <class Type>    Output  WhichMin(Type *,int nb);
 
 
     /*----------------------------------------*/
@@ -1094,8 +1094,8 @@ class Neighbourhood : public PRC0
      friend class B2d_Spec_Neigh_Not_Comp;
 
      public :
-         Neighbourhood (Im2D<INT4,INT>);
-         Neighbourhood (Pt2di *,INT nb);
+         Neighbourhood (Im2D<int4,int>);
+         Neighbourhood (Pt2di *,int nb);
 
          static Neighbourhood   v4();
          static Neighbourhood   v8();
@@ -1165,7 +1165,7 @@ class Symb_FNum : public  Fonc_Num
 extern bool DebugCopy;
 extern bool DebugInProj;
 
-void ElCopy(Flux_Pts,Fonc_Num,Output,INT,const char *);
+void ElCopy(Flux_Pts,Fonc_Num,Output,int,const char *);
 #define  ELISE_COPY(a,b,c) ElCopy((a),(b),(c),__LINE__,__FILE__)
 
     /*----------------------------------------*/
@@ -1178,11 +1178,11 @@ void ElCopy(Flux_Pts,Fonc_Num,Output,INT,const char *);
 class Elise_Rect
 {
    public :
-     INT _p0[Elise_Std_Max_Dim];
-     INT _p1[Elise_Std_Max_Dim];
-     INT _dim;
+     int _p0[Elise_Std_Max_Dim];
+     int _p1[Elise_Std_Max_Dim];
+     int _dim;
      Elise_Rect (Pt2di,Pt2di);
-     Elise_Rect (const INT *,const INT*,INT);
+     Elise_Rect (const int *,const int*,int);
      Box2dr ToBoxR() const;
 };
 
@@ -1194,13 +1194,13 @@ class Rectang_Object
 
      Fonc_Num  inside() const ;
      Flux_Pts all_pts() const ;
-     Flux_Pts interior(INT) const ;
-     Flux_Pts border(INT) const ;
+     Flux_Pts interior(int) const ;
+     Flux_Pts border(int) const ;
 
      // only for objects known to be of dimention 1
-     Flux_Pts lmr_all_pts(INT) const ;   // lmr = linear map rect
-     INT  x0() const ;
-     INT  x1() const ;
+     Flux_Pts lmr_all_pts(int) const ;   // lmr = linear map rect
+     int  x0() const ;
+     int  x1() const ;
 
      // only for objects known to be of dimention 2
      Pt2di  p0() const ;
@@ -1214,32 +1214,32 @@ class Rectang_Object
 class PtsKD
 {
   public :
-    PtsKD(INT dim);
-    PtsKD(REAL * v,INT dim);
+    PtsKD(int dim);
+    PtsKD(double_t * v,int dim);
     PtsKD(const PtsKD &);
     void operator = (const PtsKD &);
     
     
     ~PtsKD();
-    const REAL  & operator ()(INT k) const
+    const double_t  & operator ()(int k) const
     {
       ELISE_ASSERT((k>=0)&&(k<_dim),"Out of Range in PtsKD(int)");
       return _x[k];
     }
     
-    REAL  & operator ()(INT k)
+    double_t  & operator ()(int k)
     {
       ELISE_ASSERT((k>=0)&&(k<_dim),"Out of Range in PtsKD(int)");
       return _x[k];
     }
-    REAL * AdrX0() {return _x;}
+    double_t * AdrX0() {return _x;}
     
     
-    INT Dim() const {return _dim;}
+    int Dim() const {return _dim;}
   private :
-      void init(INT Dim);
-      REAL * _x;
-      INT    _dim;
+      void init(int Dim);
+      double_t * _x;
+      int    _dim;
 };
 
 class cSimpleFoncNum
@@ -1247,18 +1247,18 @@ class cSimpleFoncNum
      public :
        Fonc_Num ToF();
                                                                                                       
-       virtual REAL SFN_Calc(const REAL *) const;
-       virtual REAL SFN_Calc(const INT *) const;
-       virtual void AcceptDim(INT )const ; // Defaut : non
+       virtual double_t SFN_Calc(const double_t *) const;
+       virtual double_t SFN_Calc(const int *) const;
+       virtual void AcceptDim(int )const ; // Defaut : non
        virtual ~cSimpleFoncNum();
                                                                                                       
                                                                                                       
      protected :
-         cSimpleFoncNum(INT aDim);
+         cSimpleFoncNum(int aDim);
      private :
        cSimpleFoncNum(const cSimpleFoncNum &) ; // Non Impl
                                                                                                       
-       INT   mDim;
+       int   mDim;
 };
 
 class cSFN2D : public cSimpleFoncNum
@@ -1266,11 +1266,11 @@ class cSFN2D : public cSimpleFoncNum
      public :
         cSFN2D();
      private :
-       virtual REAL SFN2_Calc(const Pt2dr &) const;
-       virtual REAL SFN2_Calc(const Pt2di &) const;
+       virtual double_t SFN2_Calc(const Pt2dr &) const;
+       virtual double_t SFN2_Calc(const Pt2di &) const;
                                                                                                       
-       virtual REAL SFN_Calc(const REAL *) const;
-       virtual REAL SFN_Calc(const INT *) const;
+       virtual double_t SFN_Calc(const double_t *) const;
+       virtual double_t SFN_Calc(const int *) const;
 };
 
 /*

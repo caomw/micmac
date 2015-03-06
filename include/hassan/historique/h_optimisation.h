@@ -48,11 +48,11 @@ class H_Optimisation : public virtual  H_Graphe
     public:
 
 
-      ElFilo<INT>             _seg_facet_vot_gauche;
-      ElFilo<INT>             _seg_facet_vot_droite;
+      ElFilo<int>             _seg_facet_vot_gauche;
+      ElFilo<int>             _seg_facet_vot_droite;
 
-      ElFilo< ElFilo<INT>* >  _solution;
-      ElFilo< REAL >          _solution_poids;
+      ElFilo< ElFilo<int>* >  _solution;
+      ElFilo< double_t >          _solution_poids;
 
       H_Optimisation(H_Graphe& graphe );
       H_Optimisation( H_Optimisation& opt );
@@ -71,53 +71,53 @@ class H_Optimisation : public virtual  H_Graphe
 
       void recherche_meil_combinaison_pour_chaque_segment();
       void recherche_solutions();
-      void rejete_solutions(INT n_sol);
+      void rejete_solutions(int n_sol);
       void rejete_solutions();
-      void garder_n_premieres_solutions(INT n);
+      void garder_n_premieres_solutions(int n);
       void rejete_solutions_non_compatibles();
       void difusion_continuite();
 
-      void facette_poids(INT n_f, Boite& coef_cor);
+      void facette_poids(int n_f, Boite& coef_cor);
       void facette_poids(Boite& coef_cor);
       void facette_poids(ElFilo<Boite>& coef_cor_plan);
-      void facette_poids(Boite& b_mne, Im2D_U_INT1 masq, INT decal = 1, INT test_stab = 0);
-      void facette_poids(Mne& mne, INT decal = 1, INT test_stab = 0);
-      void facette_poids(ElFilo<Pt3dr>& f_pt, REAL surf_pt, REAL sigma, REAL delta, REAL distance);
+      void facette_poids(Boite& b_mne, Im2D_U_int1 masq, int decal = 1, int test_stab = 0);
+      void facette_poids(Mne& mne, int decal = 1, int test_stab = 0);
+      void facette_poids(ElFilo<Pt3dr>& f_pt, double_t surf_pt, double_t sigma, double_t delta, double_t distance);
 
-      void segment_poids(INT n_s, WcorVis W1, Im2D_U_INT1 grad1, WcorVis W2, Im2D_U_INT1 grad2);
-      void segment_poids(WcorVis W1, Im2D_U_INT1 grad1, WcorVis W2, Im2D_U_INT1 grad2);
+      void segment_poids(int n_s, WcorVis W1, Im2D_U_int1 grad1, WcorVis W2, Im2D_U_int1 grad2);
+      void segment_poids(WcorVis W1, Im2D_U_int1 grad1, WcorVis W2, Im2D_U_int1 grad2);
       void segment_poids(ElFilo<Boite>& coef_cor_plan);
-      void segment_poids(Boite& b_mne, INT decal = 1);
-      void segment_poids_mne(INT n_s, Boite& b_mne, INT decal = 1);
-      void segment_poids_coef(INT n_s, Boite& b_coef);
+      void segment_poids(Boite& b_mne, int decal = 1);
+      void segment_poids_mne(int n_s, Boite& b_mne, int decal = 1);
+      void segment_poids_coef(int n_s, Boite& b_coef);
       void segment_interne_poids_coef(Boite& b_coef);
 
       void select_meil_composante();
-      REAL explorer();   //retour le temps de calcul
+      double_t explorer();   //retour le temps de calcul
 
-      REAL merite(INT n_sol);
-      REAL merite_cont(INT n_sol);
-      REAL merite_cont(INT n_sol, Boite& b_a, Boite& b_b, INT s_t_f, Output);
-      REAL merite_coef(INT n_sol, Boite& b_a, Boite& b_b, INT s_t_f, INT type_correl, Output);
-      void solution_poids_coef(Boite& b_a, Boite& b_b, INT s_t_f, INT type_correl, Output w);
-      void solution_poids_cont(Boite& b_a, Boite& b_b, INT s_t_f, Output w);
+      double_t merite(int n_sol);
+      double_t merite_cont(int n_sol);
+      double_t merite_cont(int n_sol, Boite& b_a, Boite& b_b, int s_t_f, Output);
+      double_t merite_coef(int n_sol, Boite& b_a, Boite& b_b, int s_t_f, int type_correl, Output);
+      void solution_poids_coef(Boite& b_a, Boite& b_b, int s_t_f, int type_correl, Output w);
+      void solution_poids_cont(Boite& b_a, Boite& b_b, int s_t_f, Output w);
       void solution_poids_cont();
       void solution_poids();
-      void arrange_solutions(REAL alpha = .005);
+      void arrange_solutions(double_t alpha = .005);
 
-      REAL heuristic(REAL alpha = .1, REAL seuil_sup = .5, REAL seuil_inf = .1, INT nb_min = 60, REAL surafce_min = 1.6);
+      double_t heuristic(double_t alpha = .1, double_t seuil_sup = .5, double_t seuil_inf = .1, int nb_min = 60, double_t surafce_min = 1.6);
       
 
                                             //methode d'affichage
 
-      void affiche_solution(INT n_sol, INT color);
+      void affiche_solution(int n_sol, int color);
       void parcour_solution(bool debut = false);
 
       void interface();
 
    private:
 
-     REAL calcul_poids(REAL f_int, REAL f_ext, REAL seuil, REAL p_min)
+     double_t calcul_poids(double_t f_int, double_t f_ext, double_t seuil, double_t p_min)
                       {
                          if(f_int < seuil && f_ext < seuil) return p_min;
                          if(!f_int) f_int = 1e-10;

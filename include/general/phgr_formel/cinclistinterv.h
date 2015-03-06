@@ -1,5 +1,5 @@
-#ifndef _ELISE_GENERAL_PHGR_FORMEL_CINCLISTINTERV_H
-#define _ELISE_GENERAL_PHGR_FORMEL_CINCLISTINTERV_H
+#ifndef _ELISE_GENERAL_PHGR_FORMEL_CINCLISTintERV_H
+#define _ELISE_GENERAL_PHGR_FORMEL_CINCLISTintERV_H
 
 #include "general/sys_dep.h"
 
@@ -9,16 +9,16 @@ class  cIncListInterv
 
        cIncListInterv();
        bool Equal(const cIncListInterv&) const;
-       cIncListInterv(bool isTmp,const cIncIntervale::tId & anId,INT anI0,INT anI1);
+       cIncListInterv(bool isTmp,const cIncIntervale::tId & anId,int anI0,int anI1);
 
        ~cIncListInterv();
        void AddInterv(const cIncIntervale &,bool CanOverlap=false);
        void ResetInterv(const cIncIntervale &);
        bool IsConnexe0N() const;
 
-       INT I0Min() const;
-       INT I1Max() const;
-       INT Surf()  const;
+       int I0Min() const;
+       int I1Max() const;
+       int Surf()  const;
        const cIncIntervale & FindEquiv(const cIncIntervale &) const;
 
        const cMapIncInterv &Map() const;
@@ -30,9 +30,9 @@ class  cIncListInterv
        // cIncListInterv  (const cIncListInterv &) ; // Un imlemanted
        void operator = (const cIncListInterv &) ; // Un imlemanted
 
-       INT          mI0Min;
-       INT          mI1Max;
-       INT          mSurf;
+       int          mI0Min;
+       int          mI1Max;
+       int          mSurf;
        cMapIncInterv mMap;
        bool          mMayOverlap;  // Est-ce que l'overlap est possible
 };

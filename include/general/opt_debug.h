@@ -45,9 +45,9 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 
 
-#define DEBUG_SMART_POINTEUR 0
+#define DEBUG_SMART_POintEUR 0
 #define DEBUG_DYN_CAST  0
-#define DEBUG_INTERNAL  0
+#define DEBUG_intERNAL  0
 
 #if (DEBUG_DYN_CAST)
 #include <std/typeinfo.h>
@@ -100,15 +100,15 @@ extern void elise_test_error(const char * mes,const char * file,int line);
 extern void elise_fatal_error(const char * mes,const char * file,int line);
 
 
-#if (DEBUG_INTERNAL)
-#define ASSERT_INTERNAL(expr,mes)\
+#if (DEBUG_intERNAL)
+#define ASSERT_intERNAL(expr,mes)\
 ((expr)?((void) 0) : elise_internal_error(mes,__FILE__,__LINE__))
 #else
-#define ASSERT_INTERNAL(expr,mes) ((void) 0)
+#define ASSERT_intERNAL(expr,mes) ((void) 0)
 #endif
 
 #define OLD_BUG_CARD_VAL_FONC(pck1,pck2)\
-ASSERT_INTERNAL(((pck1)->nb()==(pck2)->nb()),"Inchorence in values cardinals")
+ASSERT_intERNAL(((pck1)->nb()==(pck2)->nb()),"Inchorence in values cardinals")
 
 
 
@@ -120,7 +120,7 @@ ASSERT_INTERNAL(((pck1)->nb()==(pck2)->nb()),"Inchorence in values cardinals")
 
 
 extern bool ELISE_DEBUG_USER;
-extern bool ELISE_DEBUG_INTERNAL;
+extern bool ELISE_DEBUG_intERNAL;
 
 #define ASSERT_USER(expr,mes)\
 (((!ELISE_DEBUG_USER) || (expr))?((void) 0) : elise_fatal_error(mes,__FILE__,__LINE__))

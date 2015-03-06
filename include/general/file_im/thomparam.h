@@ -11,15 +11,15 @@ public :
 
     //private :
     std::string ORIGINE,OBJECTIF,DATE,FORMAT;
-    INT MAXIMG,MINIMG,mCOULEUR,mCAMERA;
-    INT FOCALE,TDI,TAILLEPIX,NBCOL,NBLIG;
+    int MAXIMG,MINIMG,mCOULEUR,mCAMERA;
+    int FOCALE,TDI,TAILLEPIX,NBCOL,NBLIG;
     std::string NOM;
-    REAL EXPOTIME,DIAPHRAGME;
-    INT OFFSET;
+    double_t EXPOTIME,DIAPHRAGME;
+    int OFFSET;
     std::string MERE;
-    INT BLANC;
-    INT BIDON;
-    INT BYTEORD;
+    int BLANC;
+    int BIDON;
+    int BYTEORD;
 };
 
 #endif

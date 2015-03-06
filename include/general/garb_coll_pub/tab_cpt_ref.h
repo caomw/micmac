@@ -50,11 +50,11 @@ template  <class Type> class Tab_CPT_REF : public PRC0
 
            Tab_CPT_REF(Type p0,Type p1,Type p2);
            Tab_CPT_REF(Type p0,Type p1,Type p2,Type p3);
-           Tab_CPT_REF(const Type *objects,INT nb);
-           Tab_CPT_REF(INT nb);
+           Tab_CPT_REF(const Type *objects,int nb);
+           Tab_CPT_REF(int nb);
 
-           INT   nb();
-           Type & operator [](INT i);
+           int   nb();
+           Type & operator [](int i);
            void  push(Type);
 
      private :

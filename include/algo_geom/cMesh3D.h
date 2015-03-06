@@ -84,7 +84,7 @@ class cMesh
         void		setTrianglesAttribute(int img_idx, Pt3dr Dir, vector <unsigned int> const &aTriIdx);
 
         void		setGraph(int img_idx, RGraph &aGraph, vector <int> &aTriInGraph, vector <unsigned int> const &aTriIdx); //TriInGraph: index of triangles in Graph
-        void		setLambda(REAL aL) {mLambda = aL;}
+        void		setLambda(double_t aL) {mLambda = aL;}
 
         void        clean();
 
@@ -96,7 +96,7 @@ class cMesh
         vector <cTriangle>	mTriangles;
         vector <cEdge>	    mEdges;			//aretes du graphe de voisinage
 
-        REAL				mLambda;
+        double_t				mLambda;
 };
 
 //--------------------------------------------------------------------------------------------------------------
@@ -140,13 +140,13 @@ class cTriangle
         void	getVertexesIndexes(vector <int> &vList) const {vList = mTriVertex;}
         void	getVertexesIndexes(int &v1, int &v2, int &v3);
 
-        bool	getAttributes(int image_idx, vector <REAL> &ta) const;
-        map <int, vector <REAL> >	getAttributesMap() const {return mAttributes;}
+        bool	getAttributes(int image_idx, vector <double_t> &ta) const;
+        map <int, vector <double_t> >	getAttributesMap() const {return mAttributes;}
 
         void    setIdx(int id) { mTriIdx = id; }
         int		getIdx() const {return mTriIdx;}
 
-        void	setAttributes(int image_idx, const vector <REAL> &ta);
+        void	setAttributes(int image_idx, const vector <double_t> &ta);
 
         bool	hasAttributes() { return (!mAttributes.empty()); }
 
@@ -154,7 +154,7 @@ class cTriangle
 
         bool	isInside(){return mInside;}
 
-        REAL	computeEnergy(int img_idx);
+        double_t	computeEnergy(int img_idx);
 
         int     getEdgesNumber() { return mTriEdges.size(); }
 
@@ -179,7 +179,7 @@ class cTriangle
         int							mTriIdx;		// triangle index
         vector <int>				mTriVertex;		// index of vertexes in pMesh->mVertexes
         vector <int>                mTriEdges;      // index of edges in pMesh->Edges
-        map <int, vector <REAL> >	mAttributes;	// map between image index and triangle attributes
+        map <int, vector <double_t> >	mAttributes;	// map between image index and triangle attributes
         static const int            mDefTextImIdx = -1;
         int                         mTextImIdx;
 
@@ -225,8 +225,8 @@ class cZBuf
 
                 ~cZBuf();
 
-        Im2D_REAL4	BasculerUnMaillage(cMesh const &aMesh);			//Projection du maillage dans la geometrie de aNuage, aDef: valeur par defaut de l'image resultante
-        Im2D_REAL4  BasculerUnMaillage(cMesh const &aMesh, CamStenope const & aCam);
+        Im2D_double_t4	BasculerUnMaillage(cMesh const &aMesh);			//Projection du maillage dans la geometrie de aNuage, aDef: valeur par defaut de l'image resultante
+        Im2D_double_t4  BasculerUnMaillage(cMesh const &aMesh, CamStenope const & aCam);
 
         void		BasculerUnTriangle(cTriangle &aTri, bool doMask = false); //soit on calcule le ZBuffer, soit le Masque (true)
 
@@ -234,7 +234,7 @@ class cZBuf
         Im2D_BIN	ComputeMask(int img_idx, cMesh &aMesh);
         Im2D_BIN	ComputeMask(vector <int> const &TriInGraph, RGraph &aGraph, cMesh &aMesh);
 
-        Im2D_INT4				getIndexImage() const {return mImTriIdx;}
+        Im2D_int4				getIndexImage() const {return mImTriIdx;}
         vector <unsigned int>	getVisibleTrianglesIndexes() const {return vTri;}
 
         cElNuage3DMaille * &	Nuage() {return mNuage;}
@@ -252,10 +252,10 @@ class cZBuf
 
         Pt2di					mSzRes;			//size result
 
-        Im2D_INT4				mImTriIdx;		//triangle index image (label image)
+        Im2D_int4				mImTriIdx;		//triangle index image (label image)
         Im2D_BIN				mImMask;		//mask image
 
-        Im2D_REAL4				mRes;			//Zbuffer
+        Im2D_double_t4				mRes;			//Zbuffer
         float **				mDataRes;
 
         float					mDpDef;			//default value for depth img (mRes)

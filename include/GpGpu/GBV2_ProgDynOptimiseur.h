@@ -133,13 +133,13 @@ public :
             cLoadTer            &mLT,
             const cEquiv1D      &anEqX,
             const cEquiv1D      &anEqY,
-            Im2D_INT2           aPxMin,
-            Im2D_INT2           aPxMax
+            Im2D_int2           aPxMin,
+            Im2D_int2           aPxMax
             );
 
     ~cGBV2_ProgDynOptimiseur();
 
-    void Local_SetCout(Pt2di aPTer,int *aPX,REAL aCost,int aLabel);
+    void Local_SetCout(Pt2di aPTer,int *aPX,double_t aCost,int aLabel);
 
 #if CUDA_ENABLED
 	void gLocal_SetCout(Pt2di aPTer, int aPX, ushort aCost,pixel pix);
@@ -152,9 +152,9 @@ public :
 
 	TIm2DBits<1>		*mTMask;
 #endif
-    void Local_SolveOpt(Im2D_U_INT1 aImCor);
+    void Local_SolveOpt(Im2D_U_int1 aImCor);
 
-    // Im2D_INT2     ImRes() {return mImRes;}
+    // Im2D_int2     ImRes() {return mImRes;}
 
     Pt2di direction(int aNbDir, int aKDir);
 
@@ -201,13 +201,13 @@ private :
 	void maskAuto(const Pt2di &ptTer,tCost   &aCostMin,Pt2di	&aPRXMin);
 #endif
 
-	Im2D_U_INT1						   *mImCor;
-    Im2D_INT2                          mXMin;
-    Im2D_INT2                          mXMax;
+	Im2D_U_int1						   *mImCor;
+    Im2D_int2                          mXMin;
+    Im2D_int2                          mXMax;
     Pt2di                              mSz;
     int                                mNbPx;
-    Im2D_INT2                          mYMin;
-    Im2D_INT2                          mYMax;
+    Im2D_int2                          mYMin;
+    Im2D_int2                          mYMax;
     cMatrOfSMV<cGBV2_CelOptimProgDyn>  mMatrCel;
     cLineMapRect                       mLMR;
     cGBV2_TabulCost                    mTabCost[theDimPxMax];

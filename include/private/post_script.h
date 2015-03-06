@@ -44,14 +44,14 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 #define ElPsPREFIX "El"
 
-extern void  Ps_Hex_Code_Col(std::ofstream & fp,REAL v);
-extern void  Ps_Hex_Code_Int(std::ofstream & fp,INT v);
+extern void  Ps_Hex_Code_Col(std::ofstream & fp,double_t v);
+extern void  Ps_Hex_Code_Int(std::ofstream & fp,int v);
 
-extern void Ps_Real_Prec(std::ofstream & fp,REAL v,INT nb_apr_virg);
-extern void Ps_Real_Prec(std::ofstream & fp,Elise_colour c,INT nb_apr_virg);
-extern void Ps_Real_Col_Prec(std::ofstream & fp,INT,INT,INT,INT nb_apr_virg);
+extern void Ps_Real_Prec(std::ofstream & fp,double_t v,int nb_apr_virg);
+extern void Ps_Real_Prec(std::ofstream & fp,Elise_colour c,int nb_apr_virg);
+extern void Ps_Real_Col_Prec(std::ofstream & fp,int,int,int,int nb_apr_virg);
 
-extern void Ps_Pts(std::ofstream & fp,Pt2dr,INT nb_apr_virg);
+extern void Ps_Pts(std::ofstream & fp,Pt2dr,int nb_apr_virg);
 
 class Elise_PS_Palette
 {
@@ -68,7 +68,7 @@ class Elise_PS_Palette
         virtual  void        set_cur_color(std::ofstream &,const int *) = 0;
         virtual ColDevice cdev() const = 0;
 
-        virtual void use_colors(U_INT1 **,INT **,INT dim,INT nb);
+        virtual void use_colors(U_int1 **,int **,int dim,int nb);
 
 
         char   *             _name;
@@ -99,12 +99,12 @@ class Data_Elise_PS_Disp : public Data_Elise_Gra_Disp
              class LGeom : public Mcheck
              {
                 public :
-                 LGeom(Pt2dr,Pt2dr,Pt2dr,Pt2dr,INT,LGeom * );
+                 LGeom(Pt2dr,Pt2dr,Pt2dr,Pt2dr,int,LGeom * );
                  Pt2dr _p1;
                  Pt2dr _p2;
                  Pt2dr _tr;
                  Pt2dr _sc;
-                 INT   _num;
+                 int   _num;
                  LGeom * _next;
                  virtual ~LGeom();
              };
@@ -115,10 +115,10 @@ class Data_Elise_PS_Disp : public Data_Elise_Gra_Disp
                    virtual ~NumGeAlloc();
                    NumGeAlloc(bool box_only);
                    bool  new_get_num( Pt2dr p1,Pt2dr p2,
-                                      Pt2dr tr,Pt2dr sc,INT &);
+                                      Pt2dr tr,Pt2dr sc,int &);
                 private :
                   LGeom * _lg; 
-                  INT     _num;
+                  int     _num;
                   bool    _box_only;
              };
 
@@ -186,7 +186,7 @@ class Data_Elise_PS_Disp : public Data_Elise_Gra_Disp
                   public :
 
                      defI (const char * name, const char * prim);
-                     void put_prim(Data_Elise_PS_Disp *,INT i);
+                     void put_prim(Data_Elise_PS_Disp *,int i);
                      void over_prim(Data_Elise_PS_Disp *);
 
                   private :
@@ -198,7 +198,7 @@ class Data_Elise_PS_Disp : public Data_Elise_Gra_Disp
             // class defV;
 
 
-            REAL   compute_sz_pixel(Pt2dr sz,Pt2dr margin,Pt2di nb,Pt2dr inside_margin);
+            double_t   compute_sz_pixel(Pt2dr sz,Pt2dr margin,Pt2di nb,Pt2dr inside_margin);
             Box2dr   box_1_w        (Pt2dr sz,Pt2dr margin,Pt2di k,Pt2dr inside_margin);
             Box2dr   box_all_w      (Pt2dr sz,Pt2dr margin,Pt2di nb,Pt2dr inside_margin);
 
@@ -228,7 +228,7 @@ class Data_Elise_PS_Disp : public Data_Elise_Gra_Disp
            void ins_window(Data_Elise_PS_Win *);
 
            void disp_flush() {}
-           void _inst_set_line_witdh(REAL);
+           void _inst_set_line_witdh(double_t);
 
            char *                  _name;
            std::ofstream                _fp;
@@ -241,10 +241,10 @@ class Data_Elise_PS_Disp : public Data_Elise_Gra_Disp
 
 
            Elise_Set_Of_Palette   _sop;
-           INT                    _offs_bbox;
+           int                    _offs_bbox;
            Pt2dr                  _p0_box;
            Pt2dr                  _p1_box;
-           INT                    _nb_win;
+           int                    _nb_win;
 
 
            void add_file(std::ofstream &f,const char * name);
@@ -253,8 +253,8 @@ class Data_Elise_PS_Disp : public Data_Elise_Gra_Disp
            void line(Pt2dr p1,Pt2dr p2);
            void fill_rect(Pt2dr p1,Pt2dr p2);
            void dr_rect(Pt2dr p1,Pt2dr p2);
-           void dr_circle(Pt2dr centre,REAL radius);
-           void draw_poly(const REAL * x,const REAL *y,INT nb);
+           void dr_circle(Pt2dr centre,double_t radius);
+           void draw_poly(const double_t * x,const double_t *y,int nb);
 
            void set_active_window(class Data_Elise_PS_Win *);
            void set_active_palette(Elise_Palette,bool image);
@@ -265,15 +265,15 @@ class Data_Elise_PS_Disp : public Data_Elise_Gra_Disp
            void use_conv_colors
                 (
                     Data_Elise_Palette *,
-                    U_INT1 **,INT **,INT dim,INT nb
+                    U_int1 **,int **,int dim,int nb
                 );
 
            void Lpts_put_prim(bool cste);
 
-           INT                     _nbpal;
+           int                     _nbpal;
            Elise_PS_Palette  **    _teps;
            Pt2dr                   _sz_page;
-           INT                      _num_last_act_win;
+           int                      _num_last_act_win;
            Data_Elise_Palette   *  _active_pal;
            Elise_PS_Palette     *  _act_ps_pal;
            bool                    _use_lzw;
@@ -360,7 +360,7 @@ class Data_Elise_PS_Win  : public Data_Elise_Gra_Win
                        const Data_El_Geom_GWin *,
                        const Arg_Output_Comp & ,
                        Data_Elise_Palette *,
-                       INT        * 
+                       int        * 
          );
 
 
@@ -378,7 +378,7 @@ class Data_Elise_PS_Win  : public Data_Elise_Gra_Win
         void _inst_fill_rectangle(Pt2dr,Pt2dr);
         void _inst_draw_rectangle(Pt2dr,Pt2dr);
         void _inst_draw_circle(Pt2dr centre,Pt2dr ray /* ray.x != ray.y */);
-        void _inst_draw_polyl(const REAL * x,const REAL *y,INT nb);
+        void _inst_draw_polyl(const double_t * x,const double_t *y,int nb);
 
 
         virtual  bool adapt_vect() ;
@@ -397,7 +397,7 @@ class Data_Elise_PS_Win  : public Data_Elise_Gra_Win
 
         Pt2dr   _geo_tr;
         Pt2dr   _geo_sc;
-        INT     _ps_num;
+        int     _ps_num;
 
 
         PS_Display           _Ptr_psd;
@@ -416,12 +416,12 @@ class Ps_Multi_Filter : public Mcheck
               (
                    Data_Elise_PS_Win * w,
                    Elise_Palette       p,
-                   U_INT1 ***          d,
-                   INT                 dim_out,
+                   U_int1 ***          d,
+                   int                 dim_out,
                    Pt2di               sz,
                    Pt2di               p0,
                    Pt2di               p1,
-                   INT                nb_byte_max  // <0 if no limit
+                   int                nb_byte_max  // <0 if no limit
               );
 
 
@@ -429,11 +429,11 @@ class Ps_Multi_Filter : public Mcheck
               (
                    Data_Elise_PS_Win * w,
                    Data_Col_Pal  *     dcp,
-                   U_INT1 **           d,
+                   U_int1 **           d,
                    Pt2di               sz,
                    Pt2di               p0,
                    Pt2di               p1,
-                   INT                nb_byte_max
+                   int                nb_byte_max
               );
 
 
@@ -441,20 +441,20 @@ class Ps_Multi_Filter : public Mcheck
 
       private :
          Data_Elise_PS_Disp *    _psd;
-         INT                     _nb_filter;
+         int                     _nb_filter;
          class Ps_Filter *       (_filter[3]);
 
          bool put
               (
                    Data_Elise_PS_Win * w,
                    Elise_Palette       p,
-                   U_INT1 ***          d,
-                   INT                 dim_out,
+                   U_int1 ***          d,
+                   int                 dim_out,
                    Pt2di               sz,
                    Pt2di               p0,
                    Pt2di               p1,
                    bool                mask,
-                   INT                 nb_byte_max
+                   int                 nb_byte_max
               );
 };
 
@@ -481,7 +481,7 @@ class PS_A85
 
 
 
-        virtual void put(INT);
+        virtual void put(int);
         virtual void close_block() ;
 	virtual ~PS_A85() {}
 
@@ -493,14 +493,14 @@ class PS_A85
         void putchar_maxline(char c);
 
         std::ostream &        _fd;
-        INT               _nb;
+        int               _nb;
 
         double            sB256;
-        INT               nB256;
+        int               nB256;
 
-        static   const  INT  coeffB256[4];
-        static   const  INT  coeffB85[5];
-        void put85(INT);
+        static   const  int  coeffB256[4];
+        static   const  int  coeffB85[5];
+        void put85(int);
 
         enum {max_line = 80};
 };

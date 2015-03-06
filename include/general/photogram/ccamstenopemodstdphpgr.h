@@ -9,7 +9,7 @@ public :
     cCamStenopeModStdPhpgr
     (
             bool DistIsC2M, // [1]
-            REAL Focale,
+            double_t Focale,
             Pt2dr Centre,
             cDistModStdPhpgr,
             const std::vector<double> & ParamAF

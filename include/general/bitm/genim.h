@@ -46,7 +46,7 @@ class GenIm : public PRC0 ,
 
        virtual Elise_Rect box() const;
        Fonc_Num  in(void);
-       Fonc_Num  in(REAL def_out);
+       Fonc_Num  in(double_t def_out);
        Fonc_Num  in_proj();  // prolongation by projection
 
     // oclip : output cliped, = ELISE select the points
@@ -60,7 +60,7 @@ class GenIm : public PRC0 ,
 
        Output    out(void);
        void * data_lin();
-       const INT * P1();
+       const int * P1();
 
 
      //    sum_eg, .. ,mul_eg : just interface function to oper_ass_eg;
@@ -83,7 +83,7 @@ class GenIm : public PRC0 ,
        GenIm(DataGenIm *);
     private :
 
-       void tiff_predictor(INT nb_el,INT nb_ch,INT max_val,bool codage);
+       void tiff_predictor(int nb_el,int nb_ch,int max_val,bool codage);
        DataGenIm * data_im();
        const DataGenIm * data_im() const;
 

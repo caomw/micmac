@@ -3,35 +3,37 @@
 
 #include "general/sys_dep.h"
 
+#include <Pt3d>
+
 template <class Type>  class ElMatrix
 {
       public :
 
-          void ResizeInside(INT TX,INT TY);
+          void ResizeInside(int TX,int TY);
 
-          void GetCol(INT aCol,Pt3d<Type> &) const;
-          void GetLig(INT aCol,Pt3d<Type> &) const;
+          void GetCol(int aCol,Pt3d<Type> &) const;
+          void GetLig(int aCol,Pt3d<Type> &) const;
 
-          void GetCol(INT aCol,Pt2d<Type> &) const;
-          void GetLig(INT aCol,Pt2d<Type> &) const;
+          void GetCol(int aCol,Pt2d<Type> &) const;
+          void GetLig(int aCol,Pt2d<Type> &) const;
         // Creation etc..
-          ElMatrix(INT,bool init_id = true);
-          ElMatrix(INT,INT,Type v =0);
+          ElMatrix(int,bool init_id = true);
+          ElMatrix(int,int,Type v =0);
           ElMatrix(const ElMatrix<Type> & m2);
           ElMatrix<Type> & operator = (const ElMatrix<Type> &);
           ~ElMatrix();
 
-          ElMatrix<Type> sub_mat(INT aCol, INT aLig, INT aNbCol, INT aNbLig) const;
-          ElMatrix<Type> ExtensionId(INT ExtAvant,INT ExtApres) const;
+          ElMatrix<Type> sub_mat(int aCol, int aLig, int aNbCol, int aNbLig) const;
+          ElMatrix<Type> ExtensionId(int ExtAvant,int ExtApres) const;
 
-          void set_to_size(INT TX,INT TY);
+          void set_to_size(int TX,int TY);
           void set_to_size(const ElMatrix<Type> & m2);
 
 
           // fait de la matrice une matrice de permutation de type
           // shift
-          void set_shift_mat_permut(INT ShiftPremierCol);
-          static  ElMatrix<Type>  transposition(INT aN,INT aK1,INT aK2);
+          void set_shift_mat_permut(int ShiftPremierCol);
+          static  ElMatrix<Type>  transposition(int aN,int aK1,int aK2);
 
 
 
@@ -61,17 +63,17 @@ template <class Type>  class ElMatrix
 
 
 
-          INT tx() const {return _tx;}
-          INT ty() const {return _ty;}
+          int tx() const {return _tx;}
+          int ty() const {return _ty;}
           Pt2di Sz() const {return Pt2di(_tx,_ty);}
 
                // Produits "scalaires"; par ex  LC = LigneColone,
-          Type ProdCC(const ElMatrix<Type> &,INT x1,INT x2) const;
-          Type ProdLL(const ElMatrix<Type> &,INT y1,INT y2) const;
-          Type ProdLC(const ElMatrix<Type> &,INT y1,INT x2) const;
+          Type ProdCC(const ElMatrix<Type> &,int x1,int x2) const;
+          Type ProdLL(const ElMatrix<Type> &,int y1,int y2) const;
+          Type ProdLC(const ElMatrix<Type> &,int y1,int x2) const;
 
-          void SetLine(INT NL,const Type *);
-          void GetLine(INT NL,Type *) const;
+          void SetLine(int NL,const Type *);
+          void GetLine(int NL,Type *) const;
 
 
         // Operation matricielles (algebriques)
@@ -109,14 +111,14 @@ template <class Type>  class ElMatrix
           void  SymetriseParleBas();
           ElMatrix<Type> transpose() const;
 
-          // Instantiated only for Type=REAL
+          // Instantiated only for Type=double_t
 
 
 
         // Operation matricielles (Euclidiennes)
 
-          static ElMatrix<Type> Rotation3D(Type teta,INT aNumAxeInv);
-          static ElMatrix<Type> Rotation(INT sz,Type teta,INT k1,INT k2);
+          static ElMatrix<Type> Rotation3D(Type teta,int aNumAxeInv);
+          static ElMatrix<Type> Rotation(int sz,Type teta,int k1,int k2);
           static ElMatrix<Type> Rotation(Type teta12,Type teta13,Type teta23);
           static ElMatrix<Type> Rotation(Pt3d<Type> aImI,Pt3d<Type> aImJ,Pt3d<Type> aImK);
 
@@ -126,19 +128,19 @@ template <class Type>  class ElMatrix
           static ElMatrix<Type> PermRot(const std::string &);  // par ex  ji-k  -i-k-j  ...
           // derivee   de rotation
           // derivee d'une rotation simple / a teta
-          static ElMatrix<Type> DerRotation(INT sz,Type teta,INT k1,INT k2);
+          static ElMatrix<Type> DerRotation(int sz,Type teta,int k1,int k2);
           static ElMatrix<Type> DDteta01(Type teta12,Type teta13,Type teta23);
           static ElMatrix<Type> DDteta02(Type teta12,Type teta13,Type teta23);
           static ElMatrix<Type> DDteta12(Type teta12,Type teta13,Type teta23);
 
           // friend  ElMatrix<Type>
 
-          ElMatrix<Type> ColSchmidtOrthog(INT iter =1) const;
-          void SetColSchmidtOrthog(INT iter =1);
+          ElMatrix<Type> ColSchmidtOrthog(int iter =1) const;
+          void SetColSchmidtOrthog(int iter =1);
           Type  L2(const ElMatrix<Type> & m2) const;
           Type  scal(const ElMatrix<Type> & m2) const;
           Type  L2() const;
-          Type NormC(INT x) const;
+          Type NormC(int x) const;
 
       private :
 
@@ -147,7 +149,7 @@ template <class Type>  class ElMatrix
                                const ElMatrix<Type> & m2);
 
 
-          void init(INT TX,INT TY);
+          void init(int TX,int TY);
           void dup_data(const ElMatrix<Type> & m2);
           void un_init();
           int     _tx;

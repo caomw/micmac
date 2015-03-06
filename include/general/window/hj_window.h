@@ -70,7 +70,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 
         std::string GetString(const Pt2dr & aP,Col_Pal aColDr,Col_Pal aColErase);
         Clik   clik_in();
-        ElList<Pt2di> GetPolyg(Line_St,INT aButonEnd);
+        ElList<Pt2di> GetPolyg(Line_St,int aButonEnd);
 		void grab(Grab_Untill_Realeased &);
 		Video_Display    disp();
 
@@ -82,7 +82,7 @@ Header-MicMac-eLiSe-25/06/2007*/
               Pt2di p0src,
               Pt2di p0dest,
               Pt2di sz,
-              INT *** Im,
+              int *** Im,
               Elise_Palette 
            );
       	void load_image(Pt2di p0src,Pt2di p0dest,Pt2di sz); 

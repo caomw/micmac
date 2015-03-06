@@ -13,13 +13,13 @@ class cLI_MakeEqIm
 	           const std::string &      aPref,
 		   cLIParam_Image &              anIm,
                    bool Normalize, // Si faux pas de normalisation Moy/Ect
-		   INT        aNbPts,
+		   int        aNbPts,
                    cRotationFormelle * aRotPts
 	      );
 	      Fonc_Num     FRad();
-	      Fonc_Num              KthRad(INT aK);
+	      Fonc_Num              KthRad(int aK);
               void InitAdr(cElCompiledFonc *);
-	      bool  InitEquations(std::vector<Pt3dr>,INT Offset,const ElRotation3D &);
+	      bool  InitEquations(std::vector<Pt3dr>,int Offset,const ElRotation3D &);
 
 
               struct  cPts
@@ -27,7 +27,7 @@ class cLI_MakeEqIm
                     cPts
                     ( 
                           const std::string &   aPref,
-                          INT,
+                          int,
                           cRotationFormelle &,
                           cRotationFormelle * aRotPts
                     );
@@ -63,7 +63,7 @@ class cLI_MakeEqIm
 	      Fonc_Num              mMoy;
 	      Fonc_Num              mEct;
 	      Fonc_Num              mRadC;
-              ElMatrix<REAL>        mMat;
+              ElMatrix<double_t>        mMat;
               bool                  mNormalize;
 };
 

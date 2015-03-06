@@ -1,5 +1,5 @@
-#ifndef GPGPU_INTERFACE_CORMULTISCALE_H
-#define GPGPU_INTERFACE_CORMULTISCALE_H
+#ifndef GPGPU_intERFACE_CORMULTISCALE_H
+#define GPGPU_intERFACE_CORMULTISCALE_H
 
 #include "GpGpu/GpGpu.h"
 #include "GpGpu/GpGpu_Data.h"
@@ -256,4 +256,4 @@ private:
 
 };
 
-#endif // GPGPU_INTERFACE_CORMULTISCALE_H
+#endif // GPGPU_intERFACE_CORMULTISCALE_H

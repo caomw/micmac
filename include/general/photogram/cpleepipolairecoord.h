@@ -14,16 +14,16 @@ public :
     static CpleEpipolaireCoord * PolynomialFromHomologue
     (
             const ElPackHomologue &,
-            INT   aDegre,
+            int   aDegre,
             Pt2dr aDir1,
             Pt2dr aDir2
             );
     static CpleEpipolaireCoord * PolynomialFromHomologue
     (
             const ElPackHomologue & lHL1,
-            INT   aDegreL1,
+            int   aDegreL1,
             const ElPackHomologue & lHL2,
-            INT   aDegreL2,
+            int   aDegreL2,
             Pt2dr aDir1,
             Pt2dr aDir2
             );
@@ -31,9 +31,9 @@ public :
     static CpleEpipolaireCoord * PolynomialFromHomologue
     (
             CpleEpipolaireCoord  *  aSolApprox, // Solution pour calcul de residu
-            REAL  aResiduMin,
+            double_t  aResiduMin,
             const ElPackHomologue &,
-            INT   aDegre,
+            int   aDegre,
             Pt2dr aDir1,
             Pt2dr aDir2
             );
@@ -48,22 +48,22 @@ public :
     (
             const cElHomographie &,
             const ElDistRadiale_PolynImpair &,
-            REAL aRayInv,
-            INT aDeltaDegreInv
+            double_t aRayInv,
+            int aDeltaDegreInv
             );
 
     static CpleEpipolaireCoord * OriEpipolaire
     (
             const std::string & aName1, Pt2dr aP1,
             const std::string & aName2, Pt2dr aP2,
-            REAL aZoom
+            double_t aZoom
             );
 
     static CpleEpipolaireCoord * CamEpipolaire
     (
             CamStenope  & aCam1, Pt2dr aP1,
             CamStenope  & aCam2, Pt2dr aP2,
-            REAL aZoom
+            double_t aZoom
             );
 
     ~CpleEpipolaireCoord();
@@ -71,8 +71,8 @@ public :
     EpipolaireCoordinate & EPI2();
 
     Pt2dr Hom12(Pt2dr,Pt2dr aParalaxe); // x=> paralaxe, y variation de colonne
-    Pt2dr Hom12(Pt2dr,REAL aParalaxe);
-    Pt2dr Hom21(Pt2dr,REAL aParalaxe);
+    Pt2dr Hom12(Pt2dr,double_t aParalaxe);
+    Pt2dr Hom21(Pt2dr,double_t aParalaxe);
     Pt2dr Hom21(Pt2dr,Pt2dr aParalaxe); // x=> paralaxe, y variation de colonne
 
     Pt2dr Homol(Pt2dr,Pt2dr aParalaxe,bool Sens12);
@@ -83,7 +83,7 @@ public :
     void write(class  ELISE_fp & aFile) const;
     static CpleEpipolaireCoord * read(ELISE_fp & aFile);
     //     P ->  aChSacle * Pol(P/aChSacle)
-    CpleEpipolaireCoord * MapingChScale(REAL aChSacle) const;
+    CpleEpipolaireCoord * MapingChScale(double_t aChSacle) const;
 
     void SelfSwap(); // Intervertit les  2
     CpleEpipolaireCoord * Swap();  // renvoie une nouvelle avec Intervertion
@@ -95,7 +95,7 @@ private:
 
     EpipolaireCoordinate * mEPI1;
     EpipolaireCoordinate * mEPI2;
-    REAL                   mFact;
+    double_t                   mFact;
 
     CpleEpipolaireCoord
     (

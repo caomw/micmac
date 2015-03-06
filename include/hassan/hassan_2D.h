@@ -76,8 +76,8 @@ template <class Type> class Hdroite_2D : public PRC0
       inline  Data_Hdroite_2D<Type> * dtd();
 };
 
-typedef Hdroite_2D<INT>  Hdroite_2Di;
-typedef Hdroite_2D<REAL>  Hdroite_2Dr;
+typedef Hdroite_2D<int>  Hdroite_2Di;
+typedef Hdroite_2D<double_t>  Hdroite_2Dr;
 
 
 

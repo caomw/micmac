@@ -43,37 +43,37 @@ Header-MicMac-eLiSe-25/06/2007*/
 #define _ELISE_EXT_STL_FIXED
 
 
-template <const INT b> class ElFixed
+template <const int b> class ElFixed
 {
      public :
          enum
          {
               b1 = b,  // Pour y acceder a partir du type par T::b1
-              b2 = 2*(INT) b,
-              Q  = 1 << (INT) b,
-              QS2  = 1 << ((INT) b-1),
-              Q2 = (1<<(INT) b2)
+              b2 = 2*(int) b,
+              Q  = 1 << (int) b,
+              QS2  = 1 << ((int) b-1),
+              Q2 = (1<<(int) b2)
          };
 };
 
 
 
-template <const INT b>  class ElPFixed : public ElFixed<b>
+template <const int b>  class ElPFixed : public ElFixed<b>
 {
      private :
 
-        ElPFixed(INT x,INT y)   : _x(x), _y(y) {}
+        ElPFixed(int x,int y)   : _x(x), _y(y) {}
      public :
 
 	// LLC : Low Level Create
-	static ElPFixed<b> LLC(INT anX,INT anY){return ElPFixed<b>(anX,anY);}
+	static ElPFixed<b> LLC(int anX,int anY){return ElPFixed<b>(anX,anY);}
         ElPFixed()   : _x(0), _y(0) {}
-        INT  _x;
-        INT  _y;
+        int  _x;
+        int  _y;
 
        ElPFixed (const Pt2dr & pt ) :
-		_x ((INT)(pt.x*ElFixed<b>::Q)) ,
-             _y ((INT)(pt.y*ElFixed<b>::Q))
+		_x ((int)(pt.x*ElFixed<b>::Q)) ,
+             _y ((int)(pt.y*ElFixed<b>::Q))
        {}
 
        bool inside(const Pt2di & p0,const Pt2di & p1)
@@ -94,8 +94,8 @@ template <const INT b>  class ElPFixed : public ElFixed<b>
                     );
        }
 
-        REAL x() const {return _x/(REAL) this->Q;}
-        REAL y() const {return _y/(REAL) this->Q;}
+        double_t x() const {return _x/(double_t) this->Q;}
+        double_t y() const {return _y/(double_t) this->Q;}
 
        Pt2dr  Pt2drConv() const {return Pt2dr(x(),y());}
 
@@ -121,8 +121,8 @@ template <const INT b>  class ElPFixed : public ElFixed<b>
         {
                  return (_x==p2._x) && (_y==p2._y);
         }
-        ElPFixed<b> operator * (INT aScal) const {return  ElPFixed<b>(_x*aScal,_y*aScal);}
-        ElPFixed<b> MulRat (INT  aF,INT aNBB) const 
+        ElPFixed<b> operator * (int aScal) const {return  ElPFixed<b>(_x*aScal,_y*aScal);}
+        ElPFixed<b> MulRat (int  aF,int aNBB) const 
         {
               return  ElPFixed<b>((_x*aF)>>aNBB,(_y*aF)>>aNBB);
         }
@@ -154,7 +154,7 @@ template <const INT b>  class ElPFixed : public ElFixed<b>
              _y+= (p2.y<<b);
         }
 
-        void AddScalFixed(const ElPFixed<b> & p2, const INT & aScalFixed)
+        void AddScalFixed(const ElPFixed<b> & p2, const int & aScalFixed)
         {
              _x+= ((p2.x*this->aSF)<<this->b2);
              _y+= ((p2.y*this->aSF)<<this->b2);
@@ -163,7 +163,7 @@ template <const INT b>  class ElPFixed : public ElFixed<b>
 };
                          
 /*
-template <const INT b1,const INT b2>
+template <const int b1,const int b2>
          ElPFixed<b1> operator * (const ElPFixed<b1> & p1,const ElPFixed<b2> & p2)
 {
       return ElPFixed<b1>
@@ -191,10 +191,10 @@ template <class T1>
 */
 
 
-template <const INT b> class ElSegIter : public  ElFixed<b>
+template <const int b> class ElSegIter : public  ElFixed<b>
 {
      public :
-          ElSegIter(ElPFixed<b> p0,ElPFixed<b> p1,INT NB) :
+          ElSegIter(ElPFixed<b> p0,ElPFixed<b> p1,int NB) :
                _x0        (p0._x),
                _y0        (p0._y),
                _dx        (p1._x-p0._x),
@@ -219,15 +219,15 @@ template <const INT b> class ElSegIter : public  ElFixed<b>
          
      private :
 
-         INT   _x0;
-         INT   _y0;
-         INT   _dx;
-         INT   _dy;
-         INT   _dx_cur;
-         INT   _dy_cur;
-         INT   _bs;
-         INT   _Qs;
-         INT   _k;
+         int   _x0;
+         int   _y0;
+         int   _dx;
+         int   _dy;
+         int   _dx_cur;
+         int   _dy_cur;
+         int   _bs;
+         int   _Qs;
+         int   _k;
 };
 
 #endif // _ELISE_EXT_STL_FIXED

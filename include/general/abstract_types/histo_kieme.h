@@ -61,33 +61,33 @@ class Histo_Kieme : public Mcheck
                                 RANK
                         } mode_res;
 
-                static Histo_Kieme * New_HK(mode_h,INT max_vals);
+                static Histo_Kieme * New_HK(mode_h,int max_vals);
                 // renvoit un pointeur sur une class derivee (BinTree_HK ou
                 // LastRank_HK)
-                static mode_h  Opt_HK(INT ty,INT max_vals);
-                static mode_h  Opt_HK(mode_h aModePref,INT ty,INT max_vals);
+                static mode_h  Opt_HK(int ty,int max_vals);
+                static mode_h  Opt_HK(mode_h aModePref,int ty,int max_vals);
 
 
-                virtual void add(INT radiom) ;
-                virtual void sub(INT radiom) ;
-                virtual void AddPop(INT radiom,INT aPop) = 0;
+                virtual void add(int radiom) ;
+                virtual void sub(int radiom) ;
+                virtual void AddPop(int radiom,int aPop) = 0;
 
-                INT  RKthVal(REAL aProp,INT adef);
+                int  RKthVal(double_t aProp,int adef);
 
 
                 virtual void raz() = 0;
-               virtual INT kth_val(INT kth) = 0;
-                virtual INT rank(INT radiom) = 0;
+               virtual int kth_val(int kth) = 0;
+                virtual int rank(int radiom) = 0;
 
                 virtual  ~Histo_Kieme();
-                virtual void verif_vals(const INT *,INT nb);
+                virtual void verif_vals(const int *,int nb);
 
 
 
         protected :
-                INT   _max_vals;
-                INT   mPopTot;
-                Histo_Kieme(INT max_vals);
+                int   _max_vals;
+                int   mPopTot;
+                Histo_Kieme(int max_vals);
 
         private :
 };

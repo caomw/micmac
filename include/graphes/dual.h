@@ -62,7 +62,7 @@ template <class  Graphe, class GrDual> class ElMakeDual
         typedef ElSom<DASom,DAArc>                    DTSom;
         typedef ElArc<DASom,DAArc>                    DTArc;
 
-        typedef map<TArc *,INT>                       MapArc;
+        typedef map<TArc *,int>                       MapArc;
 
 
         //====================================================
@@ -103,7 +103,7 @@ template <class  Graphe, class GrDual> class ElMakeDual
 
 
               all_face_trigo(gr,sub,FArcs);
-             for (INT Kf =0 ; Kf<FArcs.nb(); Kf++)
+             for (int Kf =0 ; Kf<FArcs.nb(); Kf++)
              {
                  ElSubFilo<TArc *>  fa = FArcs[Kf];
 
@@ -111,7 +111,7 @@ template <class  Graphe, class GrDual> class ElMakeDual
                  {
                     DTSom & f = dual.new_som(DM_CreateAttrFace(fa));
                     FDual.pushlast(&f);
-                    for (INT ka = 0 ; ka<fa.nb() ; ka++)
+                    for (int ka = 0 ; ka<fa.nb() ; ka++)
                     {
                          //  FaceG[fa[ka]] = Kf; => acces implicite
                          FaceD[&(fa[ka]->arc_rec())] = Kf;
@@ -123,13 +123,13 @@ template <class  Graphe, class GrDual> class ElMakeDual
                  }
              }
 
-             for (INT Kf =0 ; Kf<FArcs.nb(); Kf++)
+             for (int Kf =0 ; Kf<FArcs.nb(); Kf++)
              {
                   DTSom * f1 = FDual[Kf];
                   if (f1 != 0)
                   {
                       ElSubFilo<TArc *>  fa = FArcs[Kf];
-                      for (INT ka = 0 ; ka<fa.nb() ; ka++)
+                      for (int ka = 0 ; ka<fa.nb() ; ka++)
                       {
                           TArc * arcInit = fa[ka];
                           MapArc::iterator ItD = FaceD.find(arcInit);

@@ -56,7 +56,7 @@ class  Video_Display : public PRC0
          Clik   clik();
          Clik   clik_press();
          Clik   clik_release();
-		 INT  Depth() const; // Nombre de bits par pixel
+		 int  Depth() const; // Nombre de bits par pixel
 		 Pt2di  Sz() const; // Nombre de pixels
 		 bool TrueCol() const; // false si col-indexe
 

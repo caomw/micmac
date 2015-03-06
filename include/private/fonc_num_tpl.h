@@ -50,7 +50,7 @@ template <class Type> class Fonc_Num_Comp_TPL : public Fonc_Num_Computed
 
     protected :
        Std_Pack_Of_Pts<Type> * _pack_out;
-       Fonc_Num_Comp_TPL(const Arg_Fonc_Num_Comp &,INT dim_out,Flux_Pts_Computed * flx,bool sz_buf_0 = false);
+       Fonc_Num_Comp_TPL(const Arg_Fonc_Num_Comp &,int dim_out,Flux_Pts_Computed * flx,bool sz_buf_0 = false);
 
     private :
 
@@ -59,8 +59,8 @@ template <class Type> class Fonc_Num_Comp_TPL : public Fonc_Num_Computed
 
 };
 
-#define Int_Fonc_Num_Comp   Fonc_Num_Comp_TPL<INT>
-#define Real_Fonc_Num_Comp  Fonc_Num_Comp_TPL<REAL>
+#define Int_Fonc_Num_Comp   Fonc_Num_Comp_TPL<int>
+#define Real_Fonc_Num_Comp  Fonc_Num_Comp_TPL<double_t>
 
 
 

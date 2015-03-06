@@ -7,21 +7,21 @@ class cEqCorrelGrid  : public cObjFormel2Destroy
 {
 	public :
             friend class cSetEqFormelles;
-	    static std::string NameType(INT aNbPix,bool Im2MoyVar);
-	    cElemEqCorrelGrid & KthElem(INT aK);
+	    static std::string NameType(int aNbPix,bool Im2MoyVar);
+	    cElemEqCorrelGrid & KthElem(int aK);
             cElCompiledFonc * Fctr();
 	private :
 	    cEqCorrelGrid(const cEqCorrelGrid &); // Not Impl
 	    cEqCorrelGrid
             (
 	        cSetEqFormelles & aSet,
-	        INT aNbPix,
+	        int aNbPix,
 		bool Im2MoyVar,
 		bool GenCode
             );
 	    cSetEqFormelles &              mSet;
             cIncListInterv                 mLInterv;
-	    INT                            mNbPix;
+	    int                            mNbPix;
 	    std::vector<cElemEqCorrelGrid> mVPix;
 	    bool                           mIm2MoyVar;
 	    bool                           mGenCode;

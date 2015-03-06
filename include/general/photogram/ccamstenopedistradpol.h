@@ -11,7 +11,7 @@ public :
     cCamStenopeDistRadPol
     (
             bool isDistC2M,
-            REAL Focale,
+            double_t Focale,
             Pt2dr Centre,
             ElDistRadiale_PolynImpair,
             const std::vector<double> & ParamAF,

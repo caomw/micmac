@@ -43,26 +43,26 @@ template <class Type> class Harrange
 {
    public:
    
-      Harrange<Type>(Type* tab, INT nb);
-      Harrange<Type>(Type* tab,INT* t_ind, INT nb);
+      Harrange<Type>(Type* tab, int nb);
+      Harrange<Type>(Type* tab,int* t_ind, int nb);
       
-      static void executer(Type* tab,INT* t_ind, INT nb);
-      static Type kiemme(Type* tab, INT nb, INT k);
+      static void executer(Type* tab,int* t_ind, int nb);
+      static Type kiemme(Type* tab, int nb, int k);
       
       
    private:
       
-      INT _nb;
+      int _nb;
       Type* _tab0;
-      INT* _tab1;
+      int* _tab1;
    
-      void echanger(INT i, INT j);
-      INT partitionner(INT first, INT last);
-      void repeter(INT first, INT last);
+      void echanger(int i, int j);
+      int partitionner(int first, int last);
+      void repeter(int first, int last);
 };
 
-typedef Harrange<INT> HarrangeI;
-typedef Harrange<REAL> HarrangeR;
+typedef Harrange<int> HarrangeI;
+typedef Harrange<double_t> HarrangeR;
 
 
 //////////////////////////////////////////////////////////////////
@@ -75,29 +75,29 @@ template <class Type> class Hsort
 
    
       Hsort<Type>(     Type* tab, 
-                       INT   debut,
-                       INT   fin, 
-                       INT   (*comparaison) (const Type, const Type)
+                       int   debut,
+                       int   fin, 
+                       int   (*comparaison) (const Type, const Type)
                   );
       
       Hsort<Type>(     Type* tab, 
-                       INT   debut,
-                       INT   fin, 
-                       INT   k_iemme,
-                       INT   (*comparaison) (const Type, const Type)
+                       int   debut,
+                       int   fin, 
+                       int   k_iemme,
+                       int   (*comparaison) (const Type, const Type)
                   );
       
       
    private:
       
       Type* _tab;
-      INT   _k_iem;
-      INT   (* _compar) (const Type, const Type);
+      int   _k_iem;
+      int   (* _compar) (const Type, const Type);
    
-      void echanger(INT i, INT j);
-      INT partitionner(INT first, INT last);
-      void sort(INT first, INT last);
-      void k_iem(INT first, INT last);
+      void echanger(int i, int j);
+      int partitionner(int first, int last);
+      void sort(int first, int last);
+      void k_iem(int first, int last);
 };
 
 

@@ -6,21 +6,21 @@
 class PolyDegre2XY
 {
 public :
-    PolyDegre2XY (REAL a,REAL aX,REAL aY,REAL aXX,REAL aXY,REAL aYY);
+    PolyDegre2XY (double_t a,double_t aX,double_t aY,double_t aXX,double_t aXY,double_t aYY);
 
-    REAL Val(Pt2dr aPt) const;
+    double_t Val(Pt2dr aPt) const;
     Pt2dr Grad(Pt2dr aPt) const;
 
-    REAL & Coeff() {return m;}
-    REAL & CoeffX() {return mX;}
-    REAL & CoeffY() {return mY;}
+    double_t & Coeff() {return m;}
+    double_t & CoeffX() {return mX;}
+    double_t & CoeffY() {return mY;}
 private :
-    REAL m;
-    REAL mX;
-    REAL mY;
-    REAL mXX;
-    REAL mXY;
-    REAL mYY;
+    double_t m;
+    double_t mX;
+    double_t mY;
+    double_t mXX;
+    double_t mXY;
+    double_t mYY;
 
 };
 

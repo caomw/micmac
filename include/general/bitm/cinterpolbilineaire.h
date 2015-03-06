@@ -4,8 +4,8 @@
 #include "general/sys_dep.h"
 
 template <class TypeEl>
-#ifndef _ELISE_GENERAL_BITM_CINTERPOLBILINEAIRE_H
-#define _ELISE_GENERAL_BITM_CINTERPOLBILINEAIRE_H
+#ifndef _ELISE_GENERAL_BITM_CintERPOLBILINEAIRE_H
+#define _ELISE_GENERAL_BITM_CintERPOLBILINEAIRE_H
 
 #include "general/sys_dep.h"
 

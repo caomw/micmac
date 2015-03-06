@@ -28,7 +28,7 @@ public :
 
     Tga_Im(const char * name);
     Fonc_Num              in();
-    Fonc_Num              in(INT);
+    Fonc_Num              in(int);
 
     bool                im_present() const;
     type_of_image       toi()        const;

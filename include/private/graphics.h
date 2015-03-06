@@ -49,8 +49,8 @@ class Data_Col_Pal : public RC_Object
       friend class Data_Elise_Gra_Disp;  // => Data_Col_Pal()
       friend class PS_Out_RLE_computed;
 
-      INT    num(){return _num;}
-      INT    get_index_col(Data_Disp_Set_Of_Pal *);
+      int    num(){return _num;}
+      int    get_index_col(Data_Disp_Set_Of_Pal *);
 
       inline bool eg_dcp(const Data_Col_Pal & p2)
       {
@@ -68,14 +68,14 @@ class Data_Col_Pal : public RC_Object
     private :
   
 
-      Data_Col_Pal(Elise_Palette,INT,INT = -1,INT = -1);
+      Data_Col_Pal(Elise_Palette,int,int = -1,int = -1);
       Data_Col_Pal();  // initialize an impossible colour
 
       Elise_Palette         _pal;
-      INT                   _c[3];
-      INT                   _num;
+      int                   _c[3];
+      int                   _num;
 
-      static  INT           _number_tot;
+      static  int           _number_tot;
 
 
 };
@@ -87,18 +87,18 @@ class Data_Line_St : public RC_Object
       friend class Data_Elise_Gra_Win;
 
       public  :
-        inline REAL witdh() const {return _width;}
+        inline double_t witdh() const {return _width;}
         inline Data_Col_Pal * dcp() const {return _col.dcp();}
         inline Col_Pal  col() const {return _col;}
 
       private :
 
-         Data_Line_St(Col_Pal,REAL witdh);
+         Data_Line_St(Col_Pal,double_t witdh);
 
 
 
         Col_Pal _col;
-        REAL     _width;
+        double_t     _width;
 };
 
 class Data_Fill_St : public RC_Object

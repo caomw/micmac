@@ -70,14 +70,14 @@ class OperBin
 {
    public :
 
-     virtual void t0_eg_t1_op_t2(INT  * t0,const INT  * t1,const INT  *t2,INT nb) const;
-     virtual void t0_eg_t1_op_t2(REAL * t0,const REAL * t1,const REAL *t2,INT nb) const;
-     virtual void t0_eg_t1_op_t2(REAL * t0,const REAL * t1,const INT  *t2,INT nb) const;
-     virtual void t0_eg_t1_op_t2(REAL * t0,const INT  * t1,const REAL *t2,INT nb) const;
+     virtual void t0_eg_t1_op_t2(int  * t0,const int  * t1,const int  *t2,int nb) const;
+     virtual void t0_eg_t1_op_t2(double_t * t0,const double_t * t1,const double_t *t2,int nb) const;
+     virtual void t0_eg_t1_op_t2(double_t * t0,const double_t * t1,const int  *t2,int nb) const;
+     virtual void t0_eg_t1_op_t2(double_t * t0,const int  * t1,const double_t *t2,int nb) const;
 
-     virtual void t0_eg_t1_op_t2(INT  * t0,const REAL  * t1,const INT  *t2,INT nb) const;
-     virtual void t0_eg_t1_op_t2(INT  * t0,const INT   * t1,const REAL  *t2,INT nb) const;
-     virtual void t0_eg_t1_op_t2(INT  * t0,const REAL  * t1,const REAL *t2,INT nb) const;
+     virtual void t0_eg_t1_op_t2(int  * t0,const double_t  * t1,const int  *t2,int nb) const;
+     virtual void t0_eg_t1_op_t2(int  * t0,const int   * t1,const double_t  *t2,int nb) const;
+     virtual void t0_eg_t1_op_t2(int  * t0,const double_t  * t1,const double_t *t2,int nb) const;
 };
 */
 
@@ -96,7 +96,7 @@ class OperBin
 class OperBinInt : public OperBin
 {
    public :
-      virtual void t0_eg_t1_op_t2(INT  * t0,const INT  * t1,const INT  *t2,INT nb) const = 0;
+      virtual void t0_eg_t1_op_t2(int  * t0,const int  * t1,const int  *t2,int nb) const = 0;
    virtual ~OperBinInt() {}
 };
 
@@ -122,10 +122,10 @@ extern const OperBinInt & OperLeftShift;    //   <<
 class OperComp : public OperBin
 {
    public :
-     virtual void t0_eg_t1_op_t2(INT  * t0,const INT  * t1,const INT  *t2,INT nb) const = 0;
-     virtual void t0_eg_t1_op_t2(INT  * t0,const REAL  * t1,const INT  *t2,INT nb) const = 0;
-     virtual void t0_eg_t1_op_t2(INT  * t0,const INT   * t1,const REAL  *t2,INT nb) const = 0;
-     virtual void t0_eg_t1_op_t2(INT  * t0,const REAL  * t1,const REAL *t2,INT nb) const = 0;
+     virtual void t0_eg_t1_op_t2(int  * t0,const int  * t1,const int  *t2,int nb) const = 0;
+     virtual void t0_eg_t1_op_t2(int  * t0,const double_t  * t1,const int  *t2,int nb) const = 0;
+     virtual void t0_eg_t1_op_t2(int  * t0,const int   * t1,const double_t  *t2,int nb) const = 0;
+     virtual void t0_eg_t1_op_t2(int  * t0,const double_t  * t1,const double_t *t2,int nb) const = 0;
      virtual ~OperComp() {}
 };
 
@@ -151,12 +151,12 @@ class OperBinMixte : public OperBin
 {
    public :
 
-       void t0_eg_t1_op_t2(REAL16 * t0,const REAL16 * t1,const REAL16 *t2,INT nb) const ;
+       void t0_eg_t1_op_t2(double_t16 * t0,const double_t16 * t1,const double_t16 *t2,int nb) const ;
 
-       virtual void t0_eg_t1_op_t2(REAL * t0,const REAL * t1,const REAL *t2,INT nb) const = 0;
-       virtual void t0_eg_t1_op_t2(REAL * t0,const REAL * t1,const INT  *t2,INT nb) const = 0;
-       virtual void t0_eg_t1_op_t2(REAL * t0,const INT  * t1,const REAL *t2,INT nb) const = 0;
-       virtual void t0_eg_t1_op_t2(INT  * t0,const INT  * t1,const INT  *t2,INT nb) const = 0;
+       virtual void t0_eg_t1_op_t2(double_t * t0,const double_t * t1,const double_t *t2,int nb) const = 0;
+       virtual void t0_eg_t1_op_t2(double_t * t0,const double_t * t1,const int  *t2,int nb) const = 0;
+       virtual void t0_eg_t1_op_t2(double_t * t0,const int  * t1,const double_t *t2,int nb) const = 0;
+       virtual void t0_eg_t1_op_t2(int  * t0,const int  * t1,const int  *t2,int nb) const = 0;
        virtual ~OperBinMixte() {}
 };
 
@@ -185,59 +185,59 @@ class OperAssocMixte : public OperBinMixte
      OperAssocMixte(Id);
    public :
 
-     REAL16 opel(REAL16,REAL16) const;
-     virtual REAL opel(REAL,REAL) const =0;
-     virtual INT  opel(INT ,INT ) const =0;
+     double_t16 opel(double_t16,double_t16) const;
+     virtual double_t opel(double_t,double_t) const =0;
+     virtual int  opel(int ,int ) const =0;
 
      virtual Fonc_Num opf(Fonc_Num,Fonc_Num) const = 0;
 
-     virtual INT  red_tab(const INT  *,INT nb,INT     v_init) const =0;
-     virtual INT   ineutre(void) const =0;
-     inline INT red_tab (const INT  * vals,INT nb) const
+     virtual int  red_tab(const int  *,int nb,int     v_init) const =0;
+     virtual int   ineutre(void) const =0;
+     inline int red_tab (const int  * vals,int nb) const
      {
              return red_tab(vals,nb,ineutre());
      }
-     inline void  set_neutre(INT & v) const {v = ineutre();}
+     inline void  set_neutre(int & v) const {v = ineutre();}
     
-     virtual REAL red_tab(const REAL *,INT nb,REAL    v_init) const =0;
-     virtual REAL  rneutre(void) const =0;
-     inline REAL red_tab (const REAL  * vals,INT nb) const
+     virtual double_t red_tab(const double_t *,int nb,double_t    v_init) const =0;
+     virtual double_t  rneutre(void) const =0;
+     inline double_t red_tab (const double_t  * vals,int nb) const
      {
              return red_tab(vals,nb,rneutre());
      }
 
 
-     long double red_tab (const long double  * /*vals*/,INT /*nb*/) const
+     long double red_tab (const long double  * /*vals*/,int /*nb*/) const
      {
          ELISE_ASSERT(false,"No Red Tab Long Double");
          return 0;
      }
 
 
-     inline void  set_neutre(REAL& v) const {v = rneutre();}
+     inline void  set_neutre(double_t& v) const {v = rneutre();}
 
-      virtual void integral(INT *out,const INT * in,INT nb) const = 0;
-      virtual void integral(REAL *out,const REAL * in,INT nb) const = 0;
-
-      virtual void reduce_seg
-           ( INT * out, const INT * in, INT * buf_av, INT * buf_ar,
-             INT   x_min, INT   x_max, INT  dx0, INT   dx1) const = 0;
+      virtual void integral(int *out,const int * in,int nb) const = 0;
+      virtual void integral(double_t *out,const double_t * in,int nb) const = 0;
 
       virtual void reduce_seg
-           ( REAL * out, const REAL * in, REAL * buf_av, REAL * buf_ar,
-             INT   x_min, INT   x_max, INT  dx0, INT   dx1) const = 0;
+           ( int * out, const int * in, int * buf_av, int * buf_ar,
+             int   x_min, int   x_max, int  dx0, int   dx1) const = 0;
+
+      virtual void reduce_seg
+           ( double_t * out, const double_t * in, double_t * buf_av, double_t * buf_ar,
+             int   x_min, int   x_max, int  dx0, int   dx1) const = 0;
 
      virtual bool grp_oper() const;
 
-     virtual void t0_eg_t1_opinv_t2(INT  * t0,const INT  * t1,const INT  *t2,INT nb) const;
-     virtual void t0_eg_t1_opinv_t2(REAL  * t0,const REAL  * t1,const REAL  *t2,INT nb) const;
+     virtual void t0_eg_t1_opinv_t2(int  * t0,const int  * t1,const int  *t2,int nb) const;
+     virtual void t0_eg_t1_opinv_t2(double_t  * t0,const double_t  * t1,const double_t  *t2,int nb) const;
 
 
-     virtual void t0_opinveg_t1(INT  * t0,const INT  * t1,INT nb) const;  // -=
-     virtual void t0_opinveg_t1(REAL  * t0,const REAL  * t1,INT nb) const;
+     virtual void t0_opinveg_t1(int  * t0,const int  * t1,int nb) const;  // -=
+     virtual void t0_opinveg_t1(double_t  * t0,const double_t  * t1,int nb) const;
 
-     virtual void t0_opeg_t1(INT  * t0,const INT  * t1,INT nb)  const;     // +=
-     virtual void t0_opeg_t1(REAL  * t0,const REAL  * t1,INT nb)  const;
+     virtual void t0_opeg_t1(int  * t0,const int  * t1,int nb)  const;     // +=
+     virtual void t0_opeg_t1(double_t  * t0,const double_t  * t1,int nb)  const;
 
      virtual const char * name () const = 0;
      virtual ~OperAssocMixte() {}
@@ -262,11 +262,11 @@ class OperAssocMixte : public OperBinMixte
 /*  
      Defined in general/util.h , should be something like :
 
-     template <class Type> void tab_Abs (Type * out,const Type * in,INT nb);
+     template <class Type> void tab_Abs (Type * out,const Type * in,int nb);
 
-     template <class Type> void tab_minus1 (Type * out,const Type * in,INT nb);
+     template <class Type> void tab_minus1 (Type * out,const Type * in,int nb);
 
-     template <class Type> void tab_square (Type * out,const Type * in,INT nb);
+     template <class Type> void tab_square (Type * out,const Type * in,int nb);
 
 */ 
 
@@ -276,18 +276,18 @@ class OperAssocMixte : public OperBinMixte
     /*                                        */
     /*----------------------------------------*/
 
-extern void tab_sqrt(REAL * out, const REAL * in,INT nb);
-extern void tab_cos(REAL * out, const REAL * in,INT nb);
-extern void tab_sin(REAL * out, const REAL * in,INT nb);
-extern void tab_tan(REAL * out, const REAL * in,INT nb);
-extern void tab_atan(REAL * out, const REAL * in,INT nb);
+extern void tab_sqrt(double_t * out, const double_t * in,int nb);
+extern void tab_cos(double_t * out, const double_t * in,int nb);
+extern void tab_sin(double_t * out, const double_t * in,int nb);
+extern void tab_tan(double_t * out, const double_t * in,int nb);
+extern void tab_atan(double_t * out, const double_t * in,int nb);
 
-extern void tab_exp(REAL * out, const REAL * in,INT nb);
-extern void tab_log(REAL * out, const REAL * in,INT nb);
-extern void tab_log2(REAL * out, const REAL * in,INT nb);
+extern void tab_exp(double_t * out, const double_t * in,int nb);
+extern void tab_log(double_t * out, const double_t * in,int nb);
+extern void tab_log2(double_t * out, const double_t * in,int nb);
 
-extern REAL erfcc (REAL x);
-extern void tab_erfcc(REAL * out, const REAL * in,INT nb);
+extern double_t erfcc (double_t x);
+extern void tab_erfcc(double_t * out, const double_t * in,int nb);
 
 
 

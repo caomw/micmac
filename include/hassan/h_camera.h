@@ -93,45 +93,45 @@ class Camera_V
 
 //   protected :
       
-      REAL _m00, _m01, _m02, _m03;
-      REAL _m10, _m11, _m12, _m13;
-      REAL _m20, _m21, _m22, _m23;
-      REAL _m30, _m31, _m32, _m33;
-      REAL _zoom;
-      REAL _teta;
-      REAL _phi;
-      REAL _rho;
-      REAL _d_zoom;
-      REAL _d_teta;
-      REAL _d_phi;
-      REAL _d_rho;
-      REAL _x_c;
-      REAL _y_c;
-      REAL _z_c;
-      INT  _tx_1_2;
-      INT  _ty_1_2;
+      double_t _m00, _m01, _m02, _m03;
+      double_t _m10, _m11, _m12, _m13;
+      double_t _m20, _m21, _m22, _m23;
+      double_t _m30, _m31, _m32, _m33;
+      double_t _zoom;
+      double_t _teta;
+      double_t _phi;
+      double_t _rho;
+      double_t _d_zoom;
+      double_t _d_teta;
+      double_t _d_phi;
+      double_t _d_rho;
+      double_t _x_c;
+      double_t _y_c;
+      double_t _z_c;
+      int  _tx_1_2;
+      int  _ty_1_2;
       bool _avant_arrier;
 
       Video_Win* _W;
-      INT       _nb_color;
+      int       _nb_color;
 
 
                                       // mouvement de camera
 
 
 
-      inline void vitesse(INT i = 1)                { (i>0)? plus_vite(i) : moins_vite(i); } 
-      inline void plus_vite(INT i = 1)              { while(i--){_d_zoom *= 1.00001; _d_teta *= 1.00001; _d_phi *= 1.00001;_d_rho *= 1.00001;}   } 
-      inline void moins_vite(INT i = 1)             { while(i--){_d_zoom *= .99999;  _d_teta *= .99999;  _d_phi *= .99999; _d_rho *= .99999;}    } 
-      inline void zoom(REAL i = 1)                  {   _zoom *= (1 + i*_d_zoom);_zoom = (_zoom>300)? 300 : (_zoom<.2)? .2:_zoom; }
+      inline void vitesse(int i = 1)                { (i>0)? plus_vite(i) : moins_vite(i); } 
+      inline void plus_vite(int i = 1)              { while(i--){_d_zoom *= 1.00001; _d_teta *= 1.00001; _d_phi *= 1.00001;_d_rho *= 1.00001;}   } 
+      inline void moins_vite(int i = 1)             { while(i--){_d_zoom *= .99999;  _d_teta *= .99999;  _d_phi *= .99999; _d_rho *= .99999;}    } 
+      inline void zoom(double_t i = 1)                  {   _zoom *= (1 + i*_d_zoom);_zoom = (_zoom>300)? 300 : (_zoom<.2)? .2:_zoom; }
       inline void zoom_up()                         {   _zoom *= (1 + _d_zoom);  _zoom = (_zoom>195)? 195:_zoom; }
       inline void zoom_down()                       {   _zoom *= (1 - _d_zoom);  _zoom = (_zoom<.2)? .2:_zoom; }
       inline void approche_up()                     {   _rho *= (1 + _d_rho);    _rho  = (_rho>900)? 900:_rho; }
       inline void approche_down()                   {   _rho *= (1 - _d_rho);    _rho  = (_rho<1)? 1:_rho; }
-      inline void tourne_objet (REAL i=1, REAL j=0) {   _teta += (i *_d_teta); _phi += (j * _d_phi); }
-      inline void tourne_camera(REAL i=1, REAL j=0) {
-                                                       REAL teta = _teta + i * _d_teta * .1;
-                                                       REAL phi  = _phi  + j * _d_phi  * .1;
+      inline void tourne_objet (double_t i=1, double_t j=0) {   _teta += (i *_d_teta); _phi += (j * _d_phi); }
+      inline void tourne_camera(double_t i=1, double_t j=0) {
+                                                       double_t teta = _teta + i * _d_teta * .1;
+                                                       double_t phi  = _phi  + j * _d_phi  * .1;
                                                        _x_c -= _rho * ( 2 * sin(_phi) * cos(_teta) - sin(phi) * cos(_teta) - sin(_phi) * cos(teta));
                                                        _y_c -= _rho * ( 2 * sin(_phi) * sin(_teta) - sin(phi) * sin(_teta) - sin(_phi) * sin(teta));
                                                       _z_c -= _rho * (cos(_phi) - cos(phi));
@@ -161,8 +161,8 @@ class Camera_V
 
       Pt2di   projeter(Pt3dr p){
                                   return Pt2di(
-                                                 (INT)(_m00 * p.x + _m01 * p.y + _m02 * p.z + _m03),
-                                                 (INT)(_m10 * p.x + _m11 * p.y + _m12 * p.z + _m13)
+                                                 (int)(_m00 * p.x + _m01 * p.y + _m02 * p.z + _m03),
+                                                 (int)(_m10 * p.x + _m11 * p.y + _m12 * p.z + _m13)
                                                );
                                }
 
@@ -178,7 +178,7 @@ class Camera_V
 
 
       Video_Win* window()            {   return _W; }
-      INT       nb_color()           {   return _nb_color; }
+      int       nb_color()           {   return _nb_color; }
 
       virtual void interface()       {
                                          Gray_Pal       Pgray  (100);
@@ -193,16 +193,16 @@ class Camera_V
                                          reafficher();
 
 
-                                         INT x  = 0;
-                                         INT y  = 0;
-                                         INT x1 = 0;
-                                         INT y1 = 0;
-                                         INT x2 = 0;
-                                         INT y2 = 0;
-                                         INT dzoom = 0;
-                                         REAL tempsecoule=0;
-                                         REAL time1 = 0;
-                                         REAL time2 = 0;
+                                         int x  = 0;
+                                         int y  = 0;
+                                         int x1 = 0;
+                                         int y1 = 0;
+                                         int x2 = 0;
+                                         int y2 = 0;
+                                         int dzoom = 0;
+                                         double_t tempsecoule=0;
+                                         double_t time1 = 0;
+                                         double_t time2 = 0;
                                          bool objet = true;
                                          bool affichage = false;
                                          Display * display = _W->display().mDisp;
@@ -210,10 +210,10 @@ class Camera_V
                                          XEvent event;
                                          XEvent event_last;
                                          char buffer[20];
-                                         INT  bufsize = 20;
+                                         int  bufsize = 20;
                                          KeySym keysym = XK_a;
                                          XComposeStatus compose;
-                                         INT charcount;
+                                         int charcount;
                                          XSelectInput(   display,
                                                          window,
                                                          KeyPressMask
@@ -280,8 +280,8 @@ class Camera_V
                                                {
                                                   clock_t debut = clock();
                                                    
-                                                  REAL dx = .05 * (x1 - x2) + x;
-                                                  REAL dy = .05 * (y1 - y2) + y;
+                                                  double_t dx = .05 * (x1 - x2) + x;
+                                                  double_t dy = .05 * (y1 - y2) + y;
                                       
                                                   if(objet) tourne_objet (dx, dy);
                                                   else      tourne_camera(dx, dy);
@@ -296,7 +296,7 @@ class Camera_V
                                                   time1 = time2;
 
                                                   clock_t fin = clock();
-                                                  tempsecoule = (REAL)(fin - debut)/CLOCKS_PER_SEC * 1000;
+                                                  tempsecoule = (double_t)(fin - debut)/CLOCKS_PER_SEC * 1000;
                                                }
 
                                                event = event_last;
@@ -378,23 +378,23 @@ class Camera_MNE_F:public Camera_V
 
    protected:
 
-      INT2**              _mne;
+      int2**              _mne;
 
-      INT2                _label_interdit;
-      INT                 _tx_mne;
-      INT                 _ty_mne;
+      int2                _label_interdit;
+      int                 _tx_mne;
+      int                 _ty_mne;
 
-      Im1D_REAL4          _im_x00;
-      Im1D_REAL4          _im_x10;
-      Im1D_REAL4          _im_y01;
-      Im1D_REAL4          _im_y11;
-      REAL4*              _im_x00_d;
-      REAL4*              _im_x10_d;
-      REAL4*              _im_y01_d; 
-      REAL4*              _im_y11_d; 
+      Im1D_double_t4          _im_x00;
+      Im1D_double_t4          _im_x10;
+      Im1D_double_t4          _im_y01;
+      Im1D_double_t4          _im_y11;
+      double_t4*              _im_x00_d;
+      double_t4*              _im_x10_d;
+      double_t4*              _im_y01_d; 
+      double_t4*              _im_y11_d; 
 
-      INT                 _tx_W;
-      INT                 _ty_W;
+      int                 _tx_W;
+      int                 _ty_W;
 
       ElFilo<Facette_3d>  _f_face;
 
@@ -420,14 +420,14 @@ class Camera_G:public Camera_V
 
       H_Graphe&     _graphe;
 
-      INT    _nb_som;
+      int    _nb_som;
       Pt3dr* _som;
-      INT*   _som_flag;
+      int*   _som_flag;
 
-      INT    _nb_seg;
-      INT*   _seg0;
-      INT*   _seg1;
-      INT*   _seg_flag;
+      int    _nb_seg;
+      int*   _seg0;
+      int*   _seg1;
+      int*   _seg_flag;
 
       Pt2di*        _p_proj;
 

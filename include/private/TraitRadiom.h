@@ -138,7 +138,7 @@ class cER_MesureNIm
          Pt3dr  PAbs() const;
     private :
         void AddMesure(const cER_MesureOneIm &);
-        U_INT1                       mMode;
+        U_int1                       mMode;
         Pt3df                        mPAbs;
         Pt3df                        mPNorm;
         std::vector<cER_MesureOneIm> mMes;
@@ -164,7 +164,7 @@ class cER_SolOneCh
 {
    public :
         const cER_OneIm    &  Im() const;
-        cER_SolOneCh(int aKCh,const cER_OneIm & anIm,Im1D_REAL8 aSolGlob);
+        cER_SolOneCh(int aKCh,const cER_OneIm & anIm,Im1D_double_t8 aSolGlob);
          ~cER_SolOneCh();
        
         inline double Value(const Pt2dr & aP,const std::vector<double> &) const;
@@ -209,7 +209,7 @@ class cER_OneIm
          void AddEqValsEgal(double aPds,int aKCh,cER_OneIm & ,cGenSysSurResol *);
          cER_Global * ERG() const;
   
-         void SetSol(int aKCh,Im1D_REAL8 aSolGlob);
+         void SetSol(int aKCh,Im1D_double_t8 aSolGlob);
 
          double  Value(const Pt2dr& aP,double anInput,int aKParam);
 
@@ -284,7 +284,7 @@ class cER_SysResol
        static void AddCoeff(double aV0,Pt2dr,Pt2di aDeg,std::vector<double> &);
        
        cGenSysSurResol * Sys();
-       Im1D_REAL8        GetSol();
+       Im1D_double_t8        GetSol();
     private :
        cER_SysResol(const cER_SysResol &); // N.I. 
 

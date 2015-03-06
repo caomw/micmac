@@ -9,7 +9,7 @@ class cManipOrdInc
         
         cManipOrdInc();
         void Init(const std::vector<cIncIntervale *> &aBlocsIncAlloc);
-        Im1D_REAL8 ReordonneSol(Im1D_REAL8 aIm);
+        Im1D_double_t8 ReordonneSol(Im1D_double_t8 aIm);
         std::vector<cIncIntervale *> &  BlocsIncSolve();
         std::vector<int>             &  I02NblSolve();
         std::vector<int>             &  Alloc2Solve();

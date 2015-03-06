@@ -37,8 +37,8 @@ English :
 
 Header-MicMac-eLiSe-25/06/2007*/
 
-#ifndef _ELISE_ALGO_GEOM_INTEGER_DELAUNAY_MEDIATRICE
-#define _ELISE_ALGO_GEOM_INTEGER_DELAUNAY_MEDIATRICE
+#ifndef _ELISE_ALGO_GEOM_intEGER_DELAUNAY_MEDIATRICE
+#define _ELISE_ALGO_GEOM_intEGER_DELAUNAY_MEDIATRICE
 
 class RATIONNEL
 {
@@ -75,7 +75,7 @@ template <class Iterator,class Fpt,class Act,class Type>  void
                  Iterator end,
                  Fpt   fpt,
                  Act & act,
-                 REAL  dist,
+                 double_t  dist,
                  Type  *
           )
 {
@@ -94,7 +94,7 @@ template <class Iterator,class Fpt,class Act,class Type>  void
            F.pushlast(&(*it));
     }
     Type ** vals = F.tab();
-    INT nb = F.nb();
+    int nb = F.nb();
 
 
     {
@@ -109,7 +109,7 @@ template <class Iterator,class Fpt,class Act,class Type>  void
     }
 
 
-    ElFifo<INT> MARQUEUR_K;
+    ElFifo<int> MARQUEUR_K;
 
 
     for (I = 0 ; I < nb ; I++)
@@ -121,7 +121,7 @@ template <class Iterator,class Fpt,class Act,class Type>  void
         MARQUEUR_K.clear();
         for ( J = 0; J < nb ; J++)
             MARQUEUR_K.pushlast(0);
-        REAL x_lim = A_x + dist;
+        double_t x_lim = A_x + dist;
         for(J = I+1 ; (J < nb) && ( fpt(*vals[J]).x <x_lim) ; J++)
         {
             Pt2di pj = (Pt2di)fpt(*vals[J]);
@@ -220,7 +220,7 @@ template <class Iterator,class Fpt,class Act,class Type>  void
                   etat = (etat + 1) % 2;
                }
                /* si alpha > beta IJ est un arc de la triangulation */
-	       INT cmp = CmpRat (&alpha,&beta);
+	       int cmp = CmpRat (&alpha,&beta);
                if ( cmp <=0)
                   act(*vals[I],*vals[J],cmp==0);
            }
@@ -236,10 +236,10 @@ template <class Type,class Fpt,class Act>  void
           Integer_Delaunay_Mediatrice
           (
                  Type * vals,
-                 INT   nb,
+                 int   nb,
                  Fpt   fpt,
                  Act & act,
-                 REAL  dist
+                 double_t  dist
           )
 {
    Integer_Delaunay_Mediatrice(vals,vals+nb,fpt,act,dist,(Type *)0);
@@ -253,10 +253,10 @@ template <class Type,class Fpt,class Act>  void
           Delaunay_Mediatrice
           (
                  Type * vals,
-                 INT   nb,
+                 int   nb,
                  Fpt   fpt,
                  Act & act,
-                 REAL  dist
+                 double_t  dist
           )
 {
     int I,J,K;
@@ -276,7 +276,7 @@ template <class Type,class Fpt,class Act>  void
         Type * newlast = std::unique(vals,vals+nb,CmpEq);
         nb = newlast - vals;
     }
-    ElFifo<INT> MARQUEUR_K;
+    ElFifo<int> MARQUEUR_K;
 
 
     for (I = 0 ; I < nb ; I++)
@@ -288,7 +288,7 @@ template <class Type,class Fpt,class Act>  void
         MARQUEUR_K.clear();
         for ( J = 0; J < nb ; J++)
             MARQUEUR_K.pushlast(0);
-        REAL x_lim = A_x + dist;
+        double_t x_lim = A_x + dist;
         for(J = I+1 ; (J < nb) && ( fpt(vals[J]).x <x_lim) ; J++)
         {
             Pt2di pj = fpt(vals[J]);
@@ -403,7 +403,7 @@ template <class Iterator,class Fpt,class Act>  void
                  Iterator  end,
                  Fpt   fpt,
                  Act & act,
-                 REAL  dist
+                 double_t  dist
           )
 {
     int I,J,K;
@@ -425,12 +425,12 @@ template <class Iterator,class Fpt,class Act>  void
         ElComparPts<Type,Fpt> CmpEq(fpt);
         end = std::unique(begin,end,CmpEq);
     }
-    INT nb =0;
+    int nb =0;
     {
        for (Iterator it = begin; it!=end; it++) 
            nb++;
     }
-    ElFifo<INT> MARQUEUR_K;
+    ElFifo<int> MARQUEUR_K;
 
     I=0;
     for (Iterator itI = begin; itI != end ; itI++, I++)
@@ -442,10 +442,10 @@ template <class Iterator,class Fpt,class Act>  void
         MARQUEUR_K.clear();
         for ( J = 0; J < nb ; J++)
             MARQUEUR_K.pushlast(0);
-        REAL x_lim = A_x + dist;
+        double_t x_lim = A_x + dist;
 
         Iterator  itIJ = itI;
-        INT        K0  = I;
+        int        K0  = I;
         J= I+1;
         Iterator itJ = itI; itJ++;
         for( ; (J < nb) && ( fpt(*itJ).x <x_lim) ; itJ++,J++)
@@ -566,7 +566,7 @@ template <class Iterator,class Fpt,class Act>  void
         }
     }
 }
-#endif // _ELISE_ALGO_GEOM_INTEGER_DELAUNAY_MEDIATRICE
+#endif // _ELISE_ALGO_GEOM_intEGER_DELAUNAY_MEDIATRICE
                 
 
 /*Footer-MicMac-eLiSe-25/06/2007

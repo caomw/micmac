@@ -4,8 +4,8 @@
 #include "general/sys_dep.h"
 
 template <class TypeEl>
-#ifndef _ELISE_GENERAL_BITM_CINTERPOLSINUSCARDINAL_H
-#define _ELISE_GENERAL_BITM_CINTERPOLSINUSCARDINAL_H
+#ifndef _ELISE_GENERAL_BITM_CintERPOLSINUSCARDINAL_H
+#define _ELISE_GENERAL_BITM_CintERPOLSINUSCARDINAL_H
 
 #include "general/sys_dep.h"
 
@@ -19,7 +19,7 @@ class cInterpolSinusCardinal : public cInterpolateurIm2D<TypeEl>
     private :
         bool m_apodise;
         int m_sizeOfWindow;
-        REAL *m_tabX, *m_tabY, *m_tabTemp;
+        double_t *m_tabX, *m_tabY, *m_tabTemp;
 };
 
 #endif

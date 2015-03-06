@@ -89,10 +89,10 @@ if (Bug)
 */
 
 
-     Im1D_REAL8 aIBuf(aNb);
+     Im1D_double_t8 aIBuf(aNb);
      double * aBuf = aIBuf.data();
 
-     Im1D_REAL4 aIPond(aNb,1.0);
+     Im1D_double_t4 aIPond(aNb,1.0);
      float *   aDPond =  aIPond.data();
 
      FilterLinExpVar(aDPond,Fact,aBuf,aNb); 
@@ -129,7 +129,7 @@ template <class T1> void  FilterExp
 {
     Pt2di aSz = anIm.sz();
     int aNbBuf = 2 + aSz.x + aSz.y;
-    Im1D_REAL8 mBufL(aNbBuf,0.0);
+    Im1D_double_t8 mBufL(aNbBuf,0.0);
 
     typename T1::tElem **  aD = anIm.data();
     double  * mBL = mBufL.data();
@@ -187,7 +187,7 @@ template <class T1> void  FilterGauss(T1 & anIm, double aSzF,int aNbIter = 4)
   double aF = FromSzW2FactExp(aSzF,aNbIter);
 
   Pt2di aSz = anIm.sz();
-  Im2D_REAL4 aIP1(aSz.x,aSz.y,1.0);
+  Im2D_double_t4 aIP1(aSz.x,aSz.y,1.0);
   FilterExp(aIP1,aF);
 
   for (int aKIt=0 ; aKIt<aNbIter ; aKIt++)
@@ -202,7 +202,7 @@ template <class T1,class T2> void  MasqkedFilterGauss(T1 & anIm, T2& aMasq,doubl
   double aF = FromSzW2FactExp(aSzF,aNbIter);
 
   Pt2di aSz = anIm.sz();
-  Im2D_REAL4 aIP1(aSz.x,aSz.y);
+  Im2D_double_t4 aIP1(aSz.x,aSz.y);
   ELISE_COPY(aIP1.all_pts(),aMasq.in(),aIP1.out());
   FilterExp(aIP1,aF);
   ELISE_COPY(aIP1.all_pts(),Max(1e-5,aIP1.in()),aIP1.out());

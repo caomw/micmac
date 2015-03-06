@@ -44,6 +44,9 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 #include "general/sys_dep.h"
 
+#include <ElStdTypeScal>
+#include <TCompl>
+
 template <class Type> class Pt3d : public  ElStdTypeScal<Type>
 {
    public :
@@ -127,5 +130,9 @@ template <class Type> class Pt3d : public  ElStdTypeScal<Type>
      private :
           void Verif_adr_xy();
 };
+
+typedef Pt3d<int> Pt3di;
+typedef Pt3d<double_t> Pt3dr;
+typedef Pt3d<float_t> Pt3df;
 
 #endif

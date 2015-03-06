@@ -67,7 +67,7 @@ class cPtOfCorrel
 
         void MakeScoreAndMasq
              (
-                   Im2D_REAL4 & aISc,
+                   Im2D_double_t4 & aISc,
                    double  aEstBr,
                    Im2D_Bits<1> & aMasq,
                    double aSeuilVp,
@@ -83,14 +83,14 @@ class cPtOfCorrel
 
        Pt2di                   mSz;
        int                     mVCor;
-       Im2D_REAL4              mImIn;
-       TIm2D<REAL4,REAL8>      mTIn;
-       Im2D_REAL4              mGrX;
-       TIm2D<REAL4,REAL8>      mTGrX;
-       Im2D_REAL4              mGrY;
-       TIm2D<REAL4,REAL8>      mTGrY;
+       Im2D_double_t4              mImIn;
+       TIm2D<double_t4,double_t8>      mTIn;
+       Im2D_double_t4              mGrX;
+       TIm2D<double_t4,double_t8>      mTGrX;
+       Im2D_double_t4              mGrY;
+       TIm2D<double_t4,double_t8>      mTGrY;
 
-       TIm2D<REAL4,REAL8> *   mISc;
+       TIm2D<double_t4,double_t8> *   mISc;
        TIm2DBits<1> *         mMasq;
        double                 mEstBr;
        double                 mSeuilVP;
@@ -108,7 +108,7 @@ class cRepartPtInteret
     public :
         cRepartPtInteret
         (
-            Im2D_REAL4        aImSc,
+            Im2D_double_t4        aImSc,
             Im2D_Bits<1>      aMasq,
             const cEquiv1D &  anEqX,
             const cEquiv1D &  anEqY,
@@ -122,29 +122,29 @@ class cRepartPtInteret
     private :
         void OnePasse(double aProp);
 
-       void UpdatePond (Pt2di aP, Im2D_REAL4 aPond, bool Ajout);
+       void UpdatePond (Pt2di aP, Im2D_double_t4 aPond, bool Ajout);
 
        Pt2di    mNbC;
-       Im2D_REAL4          mImSc;
-       TIm2D<REAL4,REAL8>  mTSc;
+       Im2D_double_t4          mImSc;
+       TIm2D<double_t4,double_t8>  mTSc;
        Im2D_Bits<1>        mMasq;
        TIm2DBits<1>        mTMasq;
        Pt2di               mSzGlob;
-       Im2D_REAL4          mPondGlob;
-       TIm2D<REAL4,REAL8>  mTPondGlob;
+       Im2D_double_t4          mPondGlob;
+       TIm2D<double_t4,double_t8>  mTPondGlob;
 
        cEquiv1D mEqX;
        cEquiv1D mEqY;
-       Im2D_INT4 mPX;
-       TIm2D<INT4,INT4> mTPx;
-       Im2D_INT4 mPY;
-       TIm2D<INT4,INT4> mTPy;
+       Im2D_int4 mPX;
+       TIm2D<int4,int4> mTPx;
+       Im2D_int4 mPY;
+       TIm2D<int4,int4> mTPy;
        double    mValRejet;
        double    mDRejMax;
        //double    mDRejCur;
        //double    mDEvCur;
        double    mDEvMax;
-       Im2D_REAL4  mLastImPond;
+       Im2D_double_t4  mLastImPond;
 };
 
 

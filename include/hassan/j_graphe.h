@@ -46,63 +46,63 @@ class J_Graphe
 
     private:
 
-      ElFilo<INT>             _sommet_enleve;
-      ElFilo<INT>             _segment_enleve;
-      ElFilo<INT>             _facette_enleve;
-      ElFilo<INT>             _seg_discontinuite;
+      ElFilo<int>             _sommet_enleve;
+      ElFilo<int>             _segment_enleve;
+      ElFilo<int>             _facette_enleve;
+      ElFilo<int>             _seg_discontinuite;
 
 
     public:
 
 
       ElFilo<Pt3dr>           _sommet;
-      ElFilo<INT>             _sommet_flag;
+      ElFilo<int>             _sommet_flag;
 
-      ElFilo<INT>             _segment_0;
-      ElFilo<INT>             _segment_1;
-      ElFilo<INT>             _segment_flag;
-      ElFilo< ElFilo<INT>* >  _segment_facette;
-      ElFilo< ElFilo<INT>* >  _seg_facet_droite;
-      ElFilo< ElFilo<INT>* >  _seg_facet_gauche;
+      ElFilo<int>             _segment_0;
+      ElFilo<int>             _segment_1;
+      ElFilo<int>             _segment_flag;
+      ElFilo< ElFilo<int>* >  _segment_facette;
+      ElFilo< ElFilo<int>* >  _seg_facet_droite;
+      ElFilo< ElFilo<int>* >  _seg_facet_gauche;
 
-      ElFilo< ElFilo<INT>* >  _facette;
-      ElFilo<INT>             _facette_flag;
-      ElFilo<INT>             _facette_plan;
+      ElFilo< ElFilo<int>* >  _facette;
+      ElFilo<int>             _facette_flag;
+      ElFilo<int>             _facette_plan;
 
-      ElFilo< ElFilo<INT>* >  _solution;
+      ElFilo< ElFilo<int>* >  _solution;
 
 
-      J_Graphe( ElFilo<Facette_3d> & f_f, REAL element_petit = .1 );     //.1 metre
-      J_Graphe( J_Graphe& graphe, ElFilo<INT> & sous_ensemble );
+      J_Graphe( ElFilo<Facette_3d> & f_f, double_t element_petit = .1 );     //.1 metre
+      J_Graphe( J_Graphe& graphe, ElFilo<int> & sous_ensemble );
 
       ~J_Graphe();
 
-      INT  sommet_in(Pt3dr p);
-      void sommet_en(INT i);
+      int  sommet_in(Pt3dr p);
+      void sommet_en(int i);
       
-      INT  segment_in(INT i, INT j);
-      void segment_en(INT n_s, bool continuite = false);
-      void segment_valide(INT n_s);
+      int  segment_in(int i, int j);
+      void segment_en(int n_s, bool continuite = false);
+      void segment_valide(int n_s);
       void enleve_seg_discontinuite();
 
 
-      INT  facette_in(ElFilo<INT>& f, INT n_plan = 0, REAL poids = 0.);
-      void facette_en(INT n_f, bool continuite = false);
-      void facette_en(ElFilo<INT>& f_facet, bool continuite = false);
-      Facette_3d facette(INT n_f);
+      int  facette_in(ElFilo<int>& f, int n_plan = 0, double_t poids = 0.);
+      void facette_en(int n_f, bool continuite = false);
+      void facette_en(ElFilo<int>& f_facet, bool continuite = false);
+      Facette_3d facette(int n_f);
 
       void arrange_facette();
 
-      void recherche_facette_cont_sup(INT n_f, ElFilo<INT>& facet_cont_sup);
-      void recherche_facette_cont_inf(INT n_f, ElFilo<INT>& facet_cont_inf);
-      void recherche_facette_cont_sup_inf(INT n_f, ElFilo<INT>& facet_cont_sup_inf);
+      void recherche_facette_cont_sup(int n_f, ElFilo<int>& facet_cont_sup);
+      void recherche_facette_cont_inf(int n_f, ElFilo<int>& facet_cont_inf);
+      void recherche_facette_cont_sup_inf(int n_f, ElFilo<int>& facet_cont_sup_inf);
 
-      void enleve_facette_sup_inf(INT n_f);
-      void enleve_facette_sup(INT n_f);
-      void enleve_facette_inf(INT n_f);
+      void enleve_facette_sup_inf(int n_f);
+      void enleve_facette_sup(int n_f);
+      void enleve_facette_inf(int n_f);
 
-      void facette_droite_gauche(INT n_f);
-      bool if_facet_a_gauche_seg(INT n_f, INT n_seg);
+      void facette_droite_gauche(int n_f);
+      bool if_facet_a_gauche_seg(int n_f, int n_seg);
 
 
       void surface_continue();
@@ -115,7 +115,7 @@ class J_Graphe
 
       void up_date();
       void explorer();
-      void rejete_solutions(INT n_sol);
+      void rejete_solutions(int n_sol);
       void rejete_solutions();
 };
 

@@ -208,8 +208,8 @@ public :
 
 
 
-    const REAL & Pds() const ;
-    REAL & Pds() ;
+    const double_t & Pds() const ;
+    double_t & Pds() ;
 
     cNupletPtsHomologues(int aNb,double aPds=1.0);
     int NbPts() const;
@@ -228,7 +228,7 @@ public :
 private :
     void AssertD2() const;
     std::vector<Pt2dr> mPts;
-    REAL  mPds;
+    double_t  mPds;
     // Gestion super bas-niveau avec des flag de bits pour etre compatible avec la structure physique faite
     // quand on ne contenait que des points ....
     int   mFlagDr;
@@ -242,7 +242,7 @@ class ElCplePtsHomologues : public cNupletPtsHomologues
 {
 public :
 
-    ElCplePtsHomologues (Pt2dr aP1,Pt2dr aP2,REAL aPds=1.0);
+    ElCplePtsHomologues (Pt2dr aP1,Pt2dr aP2,double_t aPds=1.0);
 
     const Pt2dr & P1() const ;
     Pt2dr & P1() ;
@@ -317,11 +317,11 @@ private :
     void VerifInd(Pt2di aP,int aK);
 
     Pt2di      mSz;
-    Im2D_REAL4 mImX1;
-    Im2D_REAL4 mImY1;
-    std::vector<Im2D_REAL4> mImXn;
-    std::vector<Im2D_REAL4> mImYn;
-    std::vector<Im2D_REAL4> mImPdsN;
+    Im2D_double_t4 mImX1;
+    Im2D_double_t4 mImY1;
+    std::vector<Im2D_double_t4> mImXn;
+    std::vector<Im2D_double_t4> mImYn;
+    std::vector<Im2D_double_t4> mImPdsN;
 
 };
 
@@ -348,7 +348,7 @@ public :
     const_iterator begin() const;
     iterator       end();
     const_iterator end() const;
-    INT size() const ;
+    int size() const ;
     void clear();
 
     void AddNuplet(const cNupletPtsHomologues &);
@@ -379,10 +379,10 @@ private :
     // Par defaut resoud aux moindre L1, l'aspect virtuel permet
     // de definir une classe ayant exactement le meme
     // comportement
-    ElMatrix<REAL> SolveSys(const  ElMatrix<REAL> &);
+    ElMatrix<double_t> SolveSys(const  ElMatrix<double_t> &);
 
 
-    void  PrivDirEpipolaire(Pt2dr & aDir1,Pt2dr & aDir2,INT aNbDir) const;
+    void  PrivDirEpipolaire(Pt2dr & aDir1,Pt2dr & aDir2,int aNbDir) const;
     bool  mSolveInL1;
 
 public :
@@ -404,29 +404,29 @@ public :
     Polynome2dReal  FitPolynome
     (
             bool aModeL2,
-            INT aDegre,
-            REAL anAmpl,
+            int aDegre,
+            double_t anAmpl,
             bool aFitX
             );
 
     ElDistortionPolynomiale FitDistPolynomiale
     (
             bool aL2,
-            INT aDegre,
-            REAL anAmpl,
-            REAL anEpsInv = 1e-7
+            int aDegre,
+            double_t anAmpl,
+            double_t anEpsInv = 1e-7
             );
-    void  DirEpipolaire(Pt2dr & aDir1,Pt2dr & aDir2,INT WantedPts,INT aNbDir,INT aDegre) const;
+    void  DirEpipolaire(Pt2dr & aDir1,Pt2dr & aDir2,int WantedPts,int aNbDir,int aDegre) const;
     CpleEpipolaireCoord *  DirAndCpleEpipolaire
-    (Pt2dr & aDir1,Pt2dr & aDir2,INT WantedPts,INT aNbDir,INT aDegreFinal) const;
+    (Pt2dr & aDir1,Pt2dr & aDir2,int WantedPts,int aNbDir,int aDegreFinal) const;
 
-    ElMatrix<REAL> MatriceEssentielle(bool SysL2);
+    ElMatrix<double_t> MatriceEssentielle(bool SysL2);
 
-    REAL MatriceEssentielle
+    double_t MatriceEssentielle
     (
             class cGenSysSurResol &,
             double *  Vect,
-            REAL  EcartForPond
+            double_t  EcartForPond
             );
 
 
@@ -436,14 +436,14 @@ public :
 
     // Teste la matrice essentielle et le plan et retient la meilleure
     // Par defaut fait une optimisation , pas forcement opportune
-    ElRotation3D MepRelGen(REAL LongBase,bool L2,double & aD);
-    ElRotation3D MepRelGenSsOpt(REAL LongBase,bool L2,double & aD);
-    ElRotation3D MepRelGen(REAL LongBase,bool L2,double & aD,bool Optimize);
+    ElRotation3D MepRelGen(double_t LongBase,bool L2,double & aD);
+    ElRotation3D MepRelGenSsOpt(double_t LongBase,bool L2,double & aD);
+    ElRotation3D MepRelGen(double_t LongBase,bool L2,double & aD,bool Optimize);
 
 
     // Comme dab, en entree des couple "photogrammetrique" en sortie
     // la rotation qui envoie de 1 vers 2
-    ElMatrix<REAL> MepRelCocentrique(int aNbRansac,int aNbMaxPts) const;
+    ElMatrix<double_t> MepRelCocentrique(int aNbRansac,int aNbMaxPts) const;
 
 
     //   Toutes les mises en place relatives font les hypotheses suivantes
@@ -454,18 +454,18 @@ public :
     // renvoie les rotation qui permet, etant donne
     // un point en coordonnee camera1, d'avoir
     // ses coordonnees en camera 2
-    std::list<ElRotation3D> MepRelStd(REAL LongBase,bool L2);
+    std::list<ElRotation3D> MepRelStd(double_t LongBase,bool L2);
 
     // Phys : cherche a avoir le max de couples de rayons
     // qui s'intersectent avec des Z positifs
-    ElRotation3D MepRelPhysStd(REAL LongBase,bool L2);
+    ElRotation3D MepRelPhysStd(double_t LongBase,bool L2);
 
     // Nombre de points ayant une intersection positive en Im1 et Im2
-    REAL SignInters
+    double_t SignInters
     (
             const ElRotation3D & aRot1to2,
-            INT &                NbP1,
-            INT &                NbP2
+            int &                NbP1,
+            int &                NbP2
             );
 
     tPairPt  PMed() const;
@@ -473,8 +473,8 @@ public :
     // Si tous les points sont coplanaires, ou presque,
     //  la mise en place par l'algo standard est degenere,
     // on choisit donc un algo ad hoc
-    cResMepRelCoplan   MepRelCoplan (REAL LongBase,bool HomEstL2);
-    static cResMepRelCoplan   MepRelCoplan (REAL LongBase,cElHomographie,const tPairPt & Centre);
+    cResMepRelCoplan   MepRelCoplan (double_t LongBase,bool HomEstL2);
+    static cResMepRelCoplan   MepRelCoplan (double_t LongBase,cElHomographie,const tPairPt & Centre);
 
     // s'adapte a xml, tif , dat
     static ElPackHomologue   FromFile(const std::string &);
@@ -515,20 +515,20 @@ public :
     StatElPackH(const ElPackHomologue &);
     Pt2dr Cdg1 () const;
     Pt2dr Cdg2 () const;
-    REAL  RMax1 () const;
-    REAL  RMax2 () const;
-    INT   NbPts() const;
-    REAL  SomD1 () const;
-    REAL  SomD2 () const;
+    double_t  RMax1 () const;
+    double_t  RMax2 () const;
+    int   NbPts() const;
+    double_t  SomD1 () const;
+    double_t  SomD2 () const;
 private :
-    REAL  mSPds;
-    INT   mNbPts;
+    double_t  mSPds;
+    int   mNbPts;
     Pt2dr mCdg1;
     Pt2dr mCdg2;
-    REAL  mRMax1;
-    REAL  mRMax2;
-    REAL  mSomD1;
-    REAL  mSomD2;
+    double_t  mRMax1;
+    double_t  mRMax2;
+    double_t  mSomD1;
+    double_t  mSomD2;
 };
 
 
@@ -546,7 +546,7 @@ public :
     (
             std::list<Pt3dr>&  res,  // liste de triplets de prof de champs
             Pt3dr p1,Pt3dr p2,Pt3dr p3, // points de projection
-            REAL d12, REAL d13, REAL d23
+            double_t d12, double_t d13, double_t d23
             );
 };
 
@@ -564,13 +564,13 @@ public :
 
     virtual Pt2dr Proj(Pt3dr) const = 0;
     virtual Pt3dr DirRayon(Pt2dr) const = 0;
-    virtual void  Diff(ElMatrix<REAL> &,Pt3dr) const = 0;  // differentielle
+    virtual void  Diff(ElMatrix<double_t> &,Pt3dr) const = 0;  // differentielle
 
 
     virtual void Rayon(Pt2dr,Pt3dr &p0,Pt3dr & p1) const = 0;
 
     // Interfaces simplifiee
-    ElMatrix<REAL> Diff(Pt3dr)const ;
+    ElMatrix<double_t> Diff(Pt3dr)const ;
 
     virtual ~ElProj32() {}
 };
@@ -580,7 +580,7 @@ class ElProjIdentite : public ElProj32
 public :
     Pt2dr Proj(Pt3dr) const ;
     Pt3dr DirRayon(Pt2dr) const ;
-    void  Diff(ElMatrix<REAL> &,Pt3dr) const ;  // differentielle
+    void  Diff(ElMatrix<double_t> &,Pt3dr) const ;  // differentielle
     void Rayon(Pt2dr,Pt3dr &p0,Pt3dr & p1) const ;
 
     static ElProjIdentite  TheOne;
@@ -631,16 +631,16 @@ protected :
 typedef  std::vector<double> tParamAFocal;
 
 class ElProjStenope : public ElProj32 ,
-        public ElProjStenopeGen<REAL>
+        public ElProjStenopeGen<double_t>
 {
 public :
 
-    ElProjStenope(REAL Focale,Pt2dr centre, const tParamAFocal  & AFocalParam);
+    ElProjStenope(double_t Focale,Pt2dr centre, const tParamAFocal  & AFocalParam);
 
     Pt2dr Proj(Pt3dr) const;
     Pt3dr DirRayon(Pt2dr) const;
     virtual void Rayon(Pt2dr,Pt3dr &p0,Pt3dr & p1) const;
-    void  Diff(ElMatrix<REAL> &,Pt3dr)const ;
+    void  Diff(ElMatrix<double_t> &,Pt3dr)const ;
 
 
     Pt2dr   centre() const;
@@ -665,9 +665,9 @@ public :
     (const cPreCondGrid&);
 
 
-    REAL D1(const ElDistortion22_Gen &,Pt2dr P0, Pt2dr P1,INT NbEch) const;
-    REAL D2(const ElDistortion22_Gen &,Pt2dr P0, Pt2dr P1,INT NbEch) const;
-    REAL DInfini(const ElDistortion22_Gen &,Pt2dr P0, Pt2dr P1,INT NbEch) const;
+    double_t D1(const ElDistortion22_Gen &,Pt2dr P0, Pt2dr P1,int NbEch) const;
+    double_t D2(const ElDistortion22_Gen &,Pt2dr P0, Pt2dr P1,int NbEch) const;
+    double_t DInfini(const ElDistortion22_Gen &,Pt2dr P0, Pt2dr P1,int NbEch) const;
 
     virtual Pt2dr Direct(Pt2dr) const = 0 ;    //
     Pt2dr Inverse(Pt2dr) const ; //  Pour inverser :
@@ -676,40 +676,40 @@ public :
     //    (3) Sinon on applique le ComputeInvFromDirByDiff
 
 
-    ElMatrix<REAL> Diff(Pt2dr) const;  // Juste interf a "Diff(ElMatrix<REAL> &,..)"
+    ElMatrix<double_t> Diff(Pt2dr) const;  // Juste interf a "Diff(ElMatrix<double_t> &,..)"
     virtual ~ElDistortion22_Gen();
 
-    // PolynLeastSquareInverse (REAL aDom,INT aDegre);
+    // PolynLeastSquareInverse (double_t aDom,int aDegre);
 
     ElDistortionPolynomiale NewPolynLeastSquareInverse
     (
             Box2dr aBox,
-            INT  aDegre,
-            INT  aNbPts = -1
+            int  aDegre,
+            int  aNbPts = -1
             );
     Polynome2dReal  NewPolynLeastSquareInverse_OneCoord
     (
             bool XCoord,
             Box2dr aBox,
-            INT  aDegre,
-            INT  aNbPts = -1
+            int  aDegre,
+            int  aNbPts = -1
             );
     //  aSc * Direct (aP/aSc*)
     // Def renvoit un objet contenant un pointeur sur this
-    virtual ElDistortion22_Gen  * D22G_ChScale(REAL aS) const;
+    virtual ElDistortion22_Gen  * D22G_ChScale(double_t aS) const;
     virtual bool IsId() const; // Def false
 
     // Fonction "ad hoc" de dynamic cast, par defaut return 0, strict change pour PhgStd qui
     // ne se voit pas alors comme un cas particulier de DRad
     virtual ElDistRadiale_PolynImpair * DRADPol(bool strict = false);
 
-    Box2dr ImageOfBox(Box2dr,INT aNbPtsDisc=8 );
-    Box2dr ImageRecOfBox(Box2dr,INT aNbPtsDisc=8  );
+    Box2dr ImageOfBox(Box2dr,int aNbPtsDisc=8 );
+    Box2dr ImageRecOfBox(Box2dr,int aNbPtsDisc=8  );
 
     // Par defaut renvoie un objet contenant un pointeur sur this
     // et redirigeant Direct sur inverse et Lycee de Versailles
     virtual ElDistortion22_Gen * CalcInverse() const;
-    void SetParamConvInvDiff(INT aNbIter,REAL aEps);
+    void SetParamConvInvDiff(int aNbIter,double_t aEps);
 
     void SaveAsGrid(const std::string&,const Pt2dr& aP0,const Pt2dr& aP1,const Pt2dr& aStep);
 
@@ -742,19 +742,19 @@ protected :
 
     void ErrorInvert() const;
     ElDistortion22_Gen();
-    void DiffByDiffFinies(ElMatrix<REAL> &,Pt2dr,Pt2dr Eps) const;
-    void DiffByDiffFinies(ElMatrix<REAL> &,Pt2dr,REAL Eps) const;
+    void DiffByDiffFinies(ElMatrix<double_t> &,Pt2dr,Pt2dr Eps) const;
+    void DiffByDiffFinies(ElMatrix<double_t> &,Pt2dr,double_t Eps) const;
 
 private :
 
     virtual  void V_SetScalingTranslate(const double &,const Pt2dr &);
 
-    REAL DistanceObjet(INT tagDist,const ElDistortion22_Gen &,Pt2dr P0, Pt2dr P1,INT NbEch) const;
+    double_t DistanceObjet(int tagDist,const ElDistortion22_Gen &,Pt2dr P0, Pt2dr P1,int NbEch) const;
 
 
     ElDistortionPolynomiale * mPolynInv;
 
-    virtual void  Diff(ElMatrix<REAL> &,Pt2dr) const ;  //  differentielle
+    virtual void  Diff(ElMatrix<double_t> &,Pt2dr) const ;  //  differentielle
     // Def err fatale
 
 
@@ -769,8 +769,8 @@ private :
 
 
 protected :
-    REAL mEpsInvDiff;
-    INT  mNbIterMaxInvDiff;
+    double_t mEpsInvDiff;
+    int  mNbIterMaxInvDiff;
 private :
     double mScN;
     bool   mDist22Gen_UsePreConditionner;
@@ -785,42 +785,42 @@ class cXmlAffinR2ToR;
 class cElComposHomographie
 {
 public :
-    REAL operator() (const Pt2dr & aP) const
+    double_t operator() (const Pt2dr & aP) const
     {
         return mX*aP.x + mY*aP.y + m1;
     }
     Fonc_Num operator() (Pt2d<Fonc_Num> ) const;
 
 
-    cElComposHomographie(REAL aX,REAL aY,REAL a1);
+    cElComposHomographie(double_t aX,double_t aY,double_t a1);
     cElComposHomographie(const cXmlAffinR2ToR &);
     cXmlAffinR2ToR ToXml() const;
 
-    cElComposHomographie MulXY(REAL ) const;
-    cElComposHomographie MulCste(REAL ) const;
+    cElComposHomographie MulXY(double_t ) const;
+    cElComposHomographie MulCste(double_t ) const;
 
     void write(class  ELISE_fp & aFile) const;
     static cElComposHomographie read(ELISE_fp & aFile);
     friend class cElHomographie;
 
 
-    REAL & CoeffX();
-    REAL & CoeffY();
-    REAL & Coeff1();
+    double_t & CoeffX();
+    double_t & CoeffY();
+    double_t & Coeff1();
 
-    REAL  CoeffX() const;
-    REAL  CoeffY() const;
-    REAL  Coeff1() const;
+    double_t  CoeffX() const;
+    double_t  CoeffY() const;
+    double_t  Coeff1() const;
 
     void Show(const std::string & aMes);
     bool HasNan() const;
 
 private  :
-    void SetCoHom(REAL *) const;
-    void Divide (REAL);
-    REAL mX;
-    REAL mY;
-    REAL m1;
+    void SetCoHom(double_t *) const;
+    void Divide (double_t);
+    double_t mX;
+    double_t mY;
+    double_t m1;
 };
 
 class cXmlHomogr;
@@ -847,10 +847,10 @@ public :
     static cElHomographie RansacInitH(const ElPackHomologue & aPack,int aNbRansac,int aNbMaxPts);
 
     static cElHomographie Id();
-    static cElHomographie Homotie(Pt2dr aP,REAL aSc);  // -> tr + aSc * P
-    static cElHomographie FromMatrix(const ElMatrix<REAL> &);
+    static cElHomographie Homotie(Pt2dr aP,double_t aSc);  // -> tr + aSc * P
+    static cElHomographie FromMatrix(const ElMatrix<double_t> &);
 
-    void ToMatrix(ElMatrix<REAL> &) const;
+    void ToMatrix(ElMatrix<double_t> &) const;
 
     cElHomographie
     (
@@ -863,7 +863,7 @@ public :
     cElHomographie Inverse() const;
     cElHomographie operator * (const cElHomographie &) const;
     //     P ->  aChSacle * Pol(P/aChSacle)
-    cElHomographie MapingChScale(REAL aChSacle) const;
+    cElHomographie MapingChScale(double_t aChSacle) const;
     void write(class  ELISE_fp & aFile) const;
     static cElHomographie read(ELISE_fp & aFile);
 
@@ -876,7 +876,7 @@ public :
     const cElComposHomographie & HZ() const;
 
     // Renvoie sa representation matricielle en coordonnees homogenes
-    ElMatrix<REAL>  MatCoordHom() const;
+    ElMatrix<double_t>  MatCoordHom() const;
     static cElHomographie  RobustInit(double * aQuality,const ElPackHomologue & aPack,bool & Ok ,int aNbTestEstim, double aPerc,int aNbMaxPts);
 
     static cElHomographie SomPondHom(const std::vector<cElHomographie> & aVH,const std::vector<double> & aVP);
@@ -899,12 +899,12 @@ public :
 
     virtual bool OwnInverse(Pt2dr &) const ;    //
     virtual Pt2dr Direct(Pt2dr) const  ;    //
-    cDistHomographie MapingChScale(REAL aChSacle) const;
+    cDistHomographie MapingChScale(double_t aChSacle) const;
     const cElHomographie & Hom() const;
 private :
 
-    virtual ElDistortion22_Gen  * D22G_ChScale(REAL aS) const; // Def erreur fatale
-    void  Diff(ElMatrix<REAL> &,Pt2dr) const ;  //  Erreur Fatale
+    virtual ElDistortion22_Gen  * D22G_ChScale(double_t aS) const; // Def erreur fatale
+    void  Diff(ElMatrix<double_t> &,Pt2dr) const ;  //  Erreur Fatale
     cElHomographie mHDir;
     cElHomographie mHInv;
 };
@@ -916,10 +916,10 @@ private :
 class ElDistortion22_Triviale : public ElDistortion22_Gen
 {
 public :
-    void  Diff(ElMatrix<REAL> &,Pt2dr) const ;  // ** differentielle
+    void  Diff(ElMatrix<double_t> &,Pt2dr) const ;  // ** differentielle
     Pt2dr Direct(Pt2dr) const  ;     //  **
     static ElDistortion22_Triviale  TheOne;
-    virtual ElDistortion22_Gen  * D22G_ChScale(REAL aS) const; // Def erreur fatale
+    virtual ElDistortion22_Gen  * D22G_ChScale(double_t aS) const; // Def erreur fatale
     virtual bool IsId() const;
     virtual cCalibDistortion ToXmlStruct(const ElCamera *) const;
 
@@ -946,17 +946,17 @@ public :
     virtual bool OwnInverse(Pt2dr &) const ;    //  return false
     virtual Pt2dr Direct(Pt2dr) const ;
 
-    virtual void  Diff(ElMatrix<REAL> &,Pt2dr) const;  // differentielle
+    virtual void  Diff(ElMatrix<double_t> &,Pt2dr) const;  // differentielle
 
     // rho -> K0 *rho * (1 + DistDirecte(rho))
-    virtual REAL K0() const; // def : return 1
-    virtual REAL DistDirecte(REAL R) const = 0;
-    virtual REAL DistDirecteR2(REAL R) const = 0;
+    virtual double_t K0() const; // def : return 1
+    virtual double_t DistDirecte(double_t R) const = 0;
+    virtual double_t DistDirecteR2(double_t R) const = 0;
 
     // doit renvoyer la derivee de DistDirecte, divisee par rho
-    virtual REAL  DerSurRho(REAL R) const = 0; // en delta / a 1
+    virtual double_t  DerSurRho(double_t R) const = 0; // en delta / a 1
 
-    virtual REAL DistInverse(REAL R)  const;
+    virtual double_t DistInverse(double_t R)  const;
     // Par defaut les distortion sont
     // supposees faibles et la fontion inverse est
     // - la fonction directe
@@ -976,47 +976,47 @@ public :
     // si R > RMax on remplace par la differentielle en RMax
 
 
-    ElDistRadiale_PolynImpair(REAL RMax,Pt2dr centre);
+    ElDistRadiale_PolynImpair(double_t RMax,Pt2dr centre);
     void ActuRMaxFromDist(Pt2di aSz);
     void ActuRMax();
-    void SetRMax(REAL aV);
-    virtual REAL DistDirecte(REAL) const;
-    REAL DistDirecteR2NoSeuil(REAL R) const ;
-    virtual REAL DistDirecteR2(REAL) const;
-    virtual REAL DerSurRho(REAL) const;
+    void SetRMax(double_t aV);
+    virtual double_t DistDirecte(double_t) const;
+    double_t DistDirecteR2NoSeuil(double_t R) const ;
+    virtual double_t DistDirecteR2(double_t) const;
+    virtual double_t DerSurRho(double_t) const;
 
-    void PushCoeff(REAL); // Premiere fois fixe r3 , etc ....
-    void PushCoeff(const std::vector<REAL> &); // Premiere fois fixe r3 , etc ....
-    REAL & Coeff(INT k);
-    REAL  Coeff(INT k) const;
-    INT NbCoeff() const;
-    INT NbCoeffNN() const;  // Elimine les eventuelles coefficient nul rajoutes
-    void VerifCoeff(INT aK) const;
-    REAL   CoeffGen(INT aK) const;
+    void PushCoeff(double_t); // Premiere fois fixe r3 , etc ....
+    void PushCoeff(const std::vector<double_t> &); // Premiere fois fixe r3 , etc ....
+    double_t & Coeff(int k);
+    double_t  Coeff(int k) const;
+    int NbCoeff() const;
+    int NbCoeffNN() const;  // Elimine les eventuelles coefficient nul rajoutes
+    void VerifCoeff(int aK) const;
+    double_t   CoeffGen(int aK) const;
 
 
-    ElDistRadiale_PolynImpair DistRadialeInverse(REAL RhoApp,INT DeltaDeg = 1);
+    ElDistRadiale_PolynImpair DistRadialeInverse(double_t RhoApp,int DeltaDeg = 1);
 
 
     // aPt -> aChSacle * Direct (aPt / aChSacle)
-    ElDistRadiale_PolynImpair MapingChScale(REAL aChSacle) const;
+    ElDistRadiale_PolynImpair MapingChScale(double_t aChSacle) const;
 
-    static ElDistRadiale_PolynImpair DistId(REAL aRMax,Pt2dr aCentre,INT aDeg);
+    static ElDistRadiale_PolynImpair DistId(double_t aRMax,Pt2dr aCentre,int aDeg);
 
     static ElDistRadiale_PolynImpair read(ELISE_fp & aFile);
     static ElDistRadiale_PolynImpair read(const std::string &);
     void write(ELISE_fp & aFile);
 
     // DEBUG PURPOSE,
-    REAL RMax() const;
-    REAL ValRMax() const;
-    REAL DiffRMax() const;
+    double_t RMax() const;
+    double_t ValRMax() const;
+    double_t DiffRMax() const;
     virtual ElDistRadiale_PolynImpair * DRADPol(bool strict = false);
 
-    ElPolynome<REAL> PolynOfR();
+    ElPolynome<double_t> PolynOfR();
     // Rayon max a l'interieur duquel la fonction de
     // distortion est bijective croissante
-    REAL RMaxCroissant(REAL BorneInit);
+    double_t RMaxCroissant(double_t BorneInit);
 
     virtual cCalibDistortion ToXmlStruct(const ElCamera *) const;
     cCalibrationInterneRadiale ToXmlDradStruct() const;
@@ -1028,18 +1028,18 @@ protected :
 
 
 private :
-    std::vector<REAL> mCoeffs;  // mCoeffs[0] en r3,  mCoeffs[1] en r5 , etc ....
+    std::vector<double_t> mCoeffs;  // mCoeffs[0] en r3,  mCoeffs[1] en r5 , etc ....
 
-    REAL              mRMax;
-    REAL              mRMaxP2N;
-    REAL              mValRMax;
-    REAL              mDiffRMax;
+    double_t              mRMax;
+    double_t              mRMaxP2N;
+    double_t              mValRMax;
+    double_t              mDiffRMax;
 };
 
 class ElDistRadiale_Pol357  : public ElDistRadiale_PolynImpair // polynome en r de degre 3,5,7
 {
 public :
-    ElDistRadiale_Pol357(REAL aRMax,Pt2dr centre,REAL  c3,REAL c5,REAL c7);
+    ElDistRadiale_Pol357(double_t aRMax,Pt2dr centre,double_t  c3,double_t c5,double_t c7);
 
 private  :
 };
@@ -1055,22 +1055,22 @@ public :
     (
             const cElHomographie & anHom,
             const ElDistRadiale_PolynImpair & aDRad,
-            REAL aRayInv,
-            INT  aDeltaDegraInv
+            double_t aRayInv,
+            int  aDeltaDegraInv
             );
     virtual bool OwnInverse(Pt2dr &) const ;    //
     virtual Pt2dr Direct(Pt2dr) const  ;    //
     // aPt -> aChSacle * Direct (aPt / aChSacle)
-    cDistHomographieRadiale MapingChScale(REAL aChSacle) const;
+    cDistHomographieRadiale MapingChScale(double_t aChSacle) const;
 private:
-    virtual ElDistortion22_Gen  * D22G_ChScale(REAL aS) const; // Def erreur fatale
-    void  Diff(ElMatrix<REAL> &,Pt2dr) const ;  //  Erreur Fatale
+    virtual ElDistortion22_Gen  * D22G_ChScale(double_t aS) const; // Def erreur fatale
+    void  Diff(ElMatrix<double_t> &,Pt2dr) const ;  //  Erreur Fatale
     cElHomographie            mHom;
     cElHomographie            mHomInv;
     ElDistRadiale_PolynImpair mDist;
     ElDistRadiale_PolynImpair mDistInv;
-    REAL                      mRay;
-    INT                       mDeg;
+    double_t                      mRay;
+    int                       mDeg;
 };
 
 
@@ -1084,21 +1084,21 @@ private:
 class PolyDegre2XY
 {
 public :
-    PolyDegre2XY (REAL a,REAL aX,REAL aY,REAL aXX,REAL aXY,REAL aYY);
+    PolyDegre2XY (double_t a,double_t aX,double_t aY,double_t aXX,double_t aXY,double_t aYY);
 
-    REAL Val(Pt2dr aPt) const;
+    double_t Val(Pt2dr aPt) const;
     Pt2dr Grad(Pt2dr aPt) const;
 
-    REAL & Coeff() {return m;}
-    REAL & CoeffX() {return mX;}
-    REAL & CoeffY() {return mY;}
+    double_t & Coeff() {return m;}
+    double_t & CoeffX() {return mX;}
+    double_t & CoeffY() {return mY;}
 private :
-    REAL m;
-    REAL mX;
-    REAL mY;
-    REAL mXX;
-    REAL mXY;
-    REAL mYY;
+    double_t m;
+    double_t mX;
+    double_t mY;
+    double_t mXX;
+    double_t mXY;
+    double_t mYY;
 
 };
 
@@ -1112,18 +1112,18 @@ public :
     (
             const PolyDegre2XY & aPolX,
             const PolyDegre2XY & aPolY,
-            REAL EpsilonInv
+            double_t EpsilonInv
             );
 
     // par defaut appel au fonctions "Quick" (ou Quasi)
 
-    virtual void  Diff(ElMatrix<REAL> &,Pt2dr) const;  // ** differentielle
+    virtual void  Diff(ElMatrix<double_t> &,Pt2dr) const;  // ** differentielle
 
 private :
 
     PolyDegre2XY mPolX;
     PolyDegre2XY mPolY;
-    //REAL         mEpsilon;
+    //double_t         mEpsilon;
 };
 
 
@@ -1139,7 +1139,7 @@ public :
     (
             const Polynome2dReal & aDistX,
             const Polynome2dReal & aDistY,
-            REAL                   anEpsilonInv = 1e-7
+            double_t                   anEpsilonInv = 1e-7
             );
     virtual Pt2dr Direct(Pt2dr) const ;  // **
 
@@ -1147,20 +1147,20 @@ public :
     const Polynome2dReal & DistY() const ;
     Fonc_Num FNum() const ;
 
-    ElDistortionPolynomiale (REAL anAmpl,REAL anEpsilonInv = 1e-7) ;
+    ElDistortionPolynomiale (double_t anAmpl,double_t anEpsilonInv = 1e-7) ;
 
     // par defaut appel au fonctions "Quick" (ou Quasi)
 
-    virtual void  Diff(ElMatrix<REAL> &,Pt2dr) const;  // ** differentielle
+    virtual void  Diff(ElMatrix<double_t> &,Pt2dr) const;  // ** differentielle
 
     // aPt -> aChSacle * Direct (aPt / aChSacle)
-    ElDistortionPolynomiale MapingChScale(REAL aChSacle) const;
-    virtual ElDistortion22_Gen  * D22G_ChScale(REAL aS) const; // Def erreur fatale
+    ElDistortionPolynomiale MapingChScale(double_t aChSacle) const;
+    virtual ElDistortion22_Gen  * D22G_ChScale(double_t aS) const; // Def erreur fatale
 
 private :
     Polynome2dReal mDistX;
     Polynome2dReal mDistY;
-    REAL           mEpsilon;
+    double_t           mEpsilon;
 };
 
 class EpipolaireCoordinate : public ElDistortion22_Gen
@@ -1172,7 +1172,7 @@ public :
     Pt2dr  TransOnLineEpip
     (
             Pt2dr aP,
-            REAL aParal
+            double_t aParal
             );
 
 
@@ -1182,7 +1182,7 @@ public :
     // Inverse est heritee  et fait appel a OwnInverse
 
 
-    Pt2dr DirEpip(Pt2dr,REAL anEpsilon); // Calcul par difference finie !
+    Pt2dr DirEpip(Pt2dr,double_t anEpsilon); // Calcul par difference finie !
 
 
     Pt2dr P0() const;
@@ -1193,10 +1193,10 @@ public :
 
     //     P ->  aChSacle * Pol(P/aChSacle)
     virtual EpipolaireCoordinate *
-    MapingChScale(REAL aChSacle) const = 0;
+    MapingChScale(double_t aChSacle) const = 0;
 
     // Fait heriter les parametre globaux aP0, aDirX, aTrFin
-    void HeriteChScale(EpipolaireCoordinate &,REAL aChSacle);
+    void HeriteChScale(EpipolaireCoordinate &,double_t aChSacle);
 
     Box2dr ImageOfBox(Box2dr );
     void   AddTrFinale(Pt2dr);
@@ -1207,9 +1207,9 @@ public :
     (
             Fonc_Num DeltaY, // rab de Y epip, exprime en coord image
             Fonc_Num Pond,   // Binarisee en 0/1 , exprime en coord image
-            REAL  aStepGr ,
+            double_t  aStepGr ,
             Box2dr aBoxIm,
-            REAL   aRatioMin = 0.2 // Ratio pour remplir la grille
+            double_t   aRatioMin = 0.2 // Ratio pour remplir la grille
             );
     virtual ~EpipolaireCoordinate();
 protected :
@@ -1233,7 +1233,7 @@ private :
 
 
     virtual bool OwnInverse(Pt2dr &) const ;
-    virtual void  Diff(ElMatrix<REAL> &,Pt2dr) const ;  //  => Error Fatale, for now
+    virtual void  Diff(ElMatrix<double_t> &,Pt2dr) const ;  //  => Error Fatale, for now
 
 
     Pt2dr      mP0;
@@ -1253,7 +1253,7 @@ private :
     virtual Pt2dr ToCoordEpipol(Pt2dr aPInit) const ;
     virtual Pt2dr ToCoordInit(Pt2dr aPEpi) const ;
     virtual EpipolaireCoordinate *
-    MapingChScale(REAL aChSacle) const;
+    MapingChScale(double_t aChSacle) const;
 };
 
 class cMappingEpipCoord : public EpipolaireCoordinate
@@ -1263,7 +1263,7 @@ public :
     ~cMappingEpipCoord();
 private :
     virtual bool IsEpipId() const;
-    EpipolaireCoordinate * MapingChScale(REAL aChSacle) const;
+    EpipolaireCoordinate * MapingChScale(double_t aChSacle) const;
     Pt2dr ToCoordEpipol(Pt2dr aPInit) const ;
     Pt2dr ToCoordInit(Pt2dr aPEpi) const ;
 
@@ -1282,8 +1282,8 @@ public :
             Pt2dr aP0,
             Pt2dr aDirX,
             const Polynome2dReal & aPolY,
-            REAL                   anAmpl,
-            INT                    DeltaDegreInv = 2,
+            double_t                   anAmpl,
+            int                    DeltaDegreInv = 2,
             Pt2dr                  aTrFin = Pt2dr(0,0)
             );
 
@@ -1295,13 +1295,13 @@ public :
     void write(class  ELISE_fp & aFile) const;
     static PolynomialEpipolaireCoordinate read(ELISE_fp & aFile);
     //     P ->  aChSacle * Pol(P/aChSacle)
-    EpipolaireCoordinate * MapingChScale(REAL aChSacle) const;
-    PolynomialEpipolaireCoordinate * PolMapingChScale(REAL aChSacle) const;
+    EpipolaireCoordinate * MapingChScale(double_t aChSacle) const;
+    PolynomialEpipolaireCoordinate * PolMapingChScale(double_t aChSacle) const;
 
 private :
 
-    INT DeltaDegre() const;
-    REAL AmplInv() const;
+    int DeltaDegre() const;
+    double_t AmplInv() const;
 
     Polynome2dReal  mPolToYEpip;
     Polynome2dReal  mPolToYInit;
@@ -1322,16 +1322,16 @@ public :
     static CpleEpipolaireCoord * PolynomialFromHomologue
     (
             const ElPackHomologue &,
-            INT   aDegre,
+            int   aDegre,
             Pt2dr aDir1,
             Pt2dr aDir2
             );
     static CpleEpipolaireCoord * PolynomialFromHomologue
     (
             const ElPackHomologue & lHL1,
-            INT   aDegreL1,
+            int   aDegreL1,
             const ElPackHomologue & lHL2,
-            INT   aDegreL2,
+            int   aDegreL2,
             Pt2dr aDir1,
             Pt2dr aDir2
             );
@@ -1339,9 +1339,9 @@ public :
     static CpleEpipolaireCoord * PolynomialFromHomologue
     (
             CpleEpipolaireCoord  *  aSolApprox, // Solution pour calcul de residu
-            REAL  aResiduMin,
+            double_t  aResiduMin,
             const ElPackHomologue &,
-            INT   aDegre,
+            int   aDegre,
             Pt2dr aDir1,
             Pt2dr aDir2
             );
@@ -1356,22 +1356,22 @@ public :
     (
             const cElHomographie &,
             const ElDistRadiale_PolynImpair &,
-            REAL aRayInv,
-            INT aDeltaDegreInv
+            double_t aRayInv,
+            int aDeltaDegreInv
             );
 
     static CpleEpipolaireCoord * OriEpipolaire
     (
             const std::string & aName1, Pt2dr aP1,
             const std::string & aName2, Pt2dr aP2,
-            REAL aZoom
+            double_t aZoom
             );
 
     static CpleEpipolaireCoord * CamEpipolaire
     (
             CamStenope  & aCam1, Pt2dr aP1,
             CamStenope  & aCam2, Pt2dr aP2,
-            REAL aZoom
+            double_t aZoom
             );
 
     ~CpleEpipolaireCoord();
@@ -1379,8 +1379,8 @@ public :
     EpipolaireCoordinate & EPI2();
 
     Pt2dr Hom12(Pt2dr,Pt2dr aParalaxe); // x=> paralaxe, y variation de colonne
-    Pt2dr Hom12(Pt2dr,REAL aParalaxe);
-    Pt2dr Hom21(Pt2dr,REAL aParalaxe);
+    Pt2dr Hom12(Pt2dr,double_t aParalaxe);
+    Pt2dr Hom21(Pt2dr,double_t aParalaxe);
     Pt2dr Hom21(Pt2dr,Pt2dr aParalaxe); // x=> paralaxe, y variation de colonne
 
     Pt2dr Homol(Pt2dr,Pt2dr aParalaxe,bool Sens12);
@@ -1391,7 +1391,7 @@ public :
     void write(class  ELISE_fp & aFile) const;
     static CpleEpipolaireCoord * read(ELISE_fp & aFile);
     //     P ->  aChSacle * Pol(P/aChSacle)
-    CpleEpipolaireCoord * MapingChScale(REAL aChSacle) const;
+    CpleEpipolaireCoord * MapingChScale(double_t aChSacle) const;
 
     void SelfSwap(); // Intervertit les  2
     CpleEpipolaireCoord * Swap();  // renvoie une nouvelle avec Intervertion
@@ -1403,7 +1403,7 @@ private:
 
     EpipolaireCoordinate * mEPI1;
     EpipolaireCoordinate * mEPI2;
-    REAL                   mFact;
+    double_t                   mFact;
 
     CpleEpipolaireCoord
     (
@@ -1570,9 +1570,9 @@ public :
     Pt3dr  PseudoInter(Pt2dr aPF2A,const ElCamera & CamB,Pt2dr aPF2B,double * aD=0) const;
     Pt3dr  CdgPseudoInter(const ElPackHomologue &,const ElCamera & CamB,double & aD) const;
 
-    REAL EcartProj(Pt2dr aPF2A,const ElCamera & CamB,Pt2dr aPF2B) const;
+    double_t EcartProj(Pt2dr aPF2A,const ElCamera & CamB,Pt2dr aPF2B) const;
 
-    REAL EcartProj(Pt2dr aPF2A,Pt3dr aPR3,Pt3dr aDirR3) const;
+    double_t EcartProj(Pt2dr aPF2A,Pt3dr aPR3,Pt3dr aDirR3) const;
 
 
     double  ScaleCamNorm() const;
@@ -1628,18 +1628,18 @@ public :
 
     bool Devant(const Pt3dr &) const;
     bool TousDevant(const std::list<Pt3dr> &) const;
-    REAL EcProj(const std::list<Pt3dr> & PR3 ,
+    double_t EcProj(const std::list<Pt3dr> & PR3 ,
                 const std::list<Pt2dr> & PF2) const;
 
-    REAL EcProj ( const std::list<Appar23> & P23);
+    double_t EcProj ( const std::list<Appar23> & P23);
 
     // Differentielle de l'application globale
     // par rapport a un point
-    void  DiffR3F2(ElMatrix<REAL> &,Pt3dr) const;
-    ElMatrix<REAL>  DiffR3F2(Pt3dr) const;
+    void  DiffR3F2(ElMatrix<double_t> &,Pt3dr) const;
+    ElMatrix<double_t>  DiffR3F2(Pt3dr) const;
     // par rapport aux params
-    void  DiffR3F2Param(ElMatrix<REAL> &,Pt3dr) const;
-    ElMatrix<REAL>  DiffR3F2Param(Pt3dr) const;
+    void  DiffR3F2Param(ElMatrix<double_t> &,Pt3dr) const;
+    ElMatrix<double_t>  DiffR3F2Param(Pt3dr) const;
 
     // void SetDistInverse();
     // void SetDistDirecte();
@@ -1925,7 +1925,7 @@ public :
     Pt2dr Direct(Pt2dr) const;    // -> DistDirect() = M2C
     bool OwnInverse(Pt2dr &) const ;
     const ElCamera & mCam;
-    void  Diff(ElMatrix<REAL> & aMat,Pt2dr aP) const;
+    void  Diff(ElMatrix<double_t> & aMat,Pt2dr aP) const;
 
 private :
     bool mUseRay;
@@ -1936,7 +1936,7 @@ private :
 
 
 // Donne une mesure en pixel (non distordu) de l'ecart d'appariement
-REAL EcartTotalProjection
+double_t EcartTotalProjection
 (
         const ElCamera & CamA,Pt2dr aPF2A,
         const ElCamera & CamB,Pt2dr aPF2B
@@ -1975,7 +1975,7 @@ public :
     // La methode a ete definie dans la mere, il n'y a aucun interet
     // apparement a la specialiser
 
-    // REAL EcartProj(Pt2dr aPF2A,const ElCamera & CamB,Pt2dr aPF2B);
+    // double_t EcartProj(Pt2dr aPF2A,const ElCamera & CamB,Pt2dr aPF2B);
 
     // Helas, le SzIm n'est pas integre dans mes CamStenope ...
 
@@ -1983,7 +1983,7 @@ public :
 
 
 
-    CamStenope(bool isDistC2M,REAL Focale,Pt2dr centre,const std::vector<double>  & AFocalParam);
+    CamStenope(bool isDistC2M,double_t Focale,Pt2dr centre,const std::vector<double>  & AFocalParam);
     CamStenope(const CamStenope &,const ElRotation3D &);
 
     // Par defaut true, mais peut redefini, par exemple pour
@@ -2016,24 +2016,24 @@ public :
             bool TousDevant,
             const std::list<Pt3dr> & PR3 ,
             const std::list<Pt2dr> & PF2 ,
-            REAL * Ecart = 0,
-            INT  * NbSol    = 0
+            double_t * Ecart = 0,
+            int  * NbSol    = 0
             );
 
     ElRotation3D  OrientFromPtsAppui
     (
             bool TousDevant,
             const std::list<Appar23> & P32 ,
-            REAL * Ecart = 0,
-            INT  * NbSol    = 0
+            double_t * Ecart = 0,
+            int  * NbSol    = 0
             );
     ElRotation3D  CombinatoireOFPAGen
     (
             bool TousDevant,
-            INT  NbTest,
+            int  NbTest,
             const std::list<Pt3dr> & PR3 ,
             const std::list<Pt2dr> & PF2,
-            REAL * Res_Dmin,
+            double_t * Res_Dmin,
             bool   ModeRansac,
             Pt3dr * aDirApprox = 0
             );
@@ -2041,19 +2041,19 @@ public :
     ElRotation3D  CombinatoireOFPA
     (
             bool TousDevant,
-            INT  NbTest,
+            int  NbTest,
             const std::list<Pt3dr> & PR3 ,
             const std::list<Pt2dr> & PF2,
-            REAL * Res_Dmin,
+            double_t * Res_Dmin,
             Pt3dr * aDirApprox = 0
             );
 
     ElRotation3D  RansacOFPA
     (
             bool TousDevant,
-            INT  NbTest,
+            int  NbTest,
             const std::list<Appar23> & P23 ,
-            REAL * Res_Dmin,
+            double_t * Res_Dmin,
             Pt3dr * aDirApprox = 0
             );
 
@@ -2062,9 +2062,9 @@ public :
     ElRotation3D  CombinatoireOFPA
     (
             bool TousDevant,
-            INT  NbTest,
+            int  NbTest,
             const std::list<Appar23> & P32 ,
-            REAL * Res_Dmin,
+            double_t * Res_Dmin,
             Pt3dr * aDirApprox = 0
             );
 
@@ -2090,7 +2090,7 @@ public :
     virtual CamStenope * Dupl() const;   // OO
 
 
-    REAL Focale() const ;
+    double_t Focale() const ;
     Pt2dr PP() const ;
     Pt3dr VraiOpticalCenter() const;
     Pt3dr PseudoOpticalCenter() const;
@@ -2101,8 +2101,8 @@ public :
     Pt3dr ImEtZ2Terrain(const Pt2dr & aP,double aZ) const;
     void  Coins(Pt3dr &aP1, Pt3dr &aP2, Pt3dr &aP3, Pt3dr &aP4, double aZ) const;
 
-    Pt3dr  ImEtProfSpherik2Terrain(const Pt2dr & aPIm,const REAL & aProf) const; //OO
-    Pt3dr  ImDirEtProf2Terrain(const Pt2dr & aPIm,const REAL & aProf,const Pt3dr & aNormPl) const; //OO
+    Pt3dr  ImEtProfSpherik2Terrain(const Pt2dr & aPIm,const double_t & aProf) const; //OO
+    Pt3dr  ImDirEtProf2Terrain(const Pt2dr & aPIm,const double_t & aProf,const Pt3dr & aNormPl) const; //OO
     Pt3dr Im1DirEtProf2_To_Terrain  //OO
     (Pt2dr p1,const CamStenope &  ph2,double prof2,const Pt3dr & aDir) const;
     Pt3dr Im1EtProfSpherik2_To_Terrain (Pt2dr p1,const CamStenope &  ph2,double prof2) const;
@@ -2167,7 +2167,7 @@ class cDistStdFromCam : public ElDistortion22_Gen
 public :
     cDistStdFromCam(ElCamera & Cam);
     Pt2dr Direct(Pt2dr) const ;
-    void  Diff(ElMatrix<REAL> &,Pt2dr) const;
+    void  Diff(ElMatrix<double_t> &,Pt2dr) const;
 
 private :
     ElCamera & mCam;
@@ -2198,7 +2198,7 @@ private :
 class CamStenopeIdeale : public CamStenope
 {
 public :
-    CamStenopeIdeale (bool isDistC2M,REAL Focale,Pt2dr Centre,const std::vector<double> & ParamAF);
+    CamStenopeIdeale (bool isDistC2M,double_t Focale,Pt2dr Centre,const std::vector<double> & ParamAF);
     CamStenopeIdeale(const CamStenopeIdeale &,const ElRotation3D &);
     static CamStenopeIdeale  CameraId(bool isDistC2M,const ElRotation3D &);
     CamStenopeIdeale(const CamStenopeIdeale &);
@@ -2229,7 +2229,7 @@ public :
     cCamStenopeDistRadPol
     (
             bool isDistC2M,
-            REAL Focale,
+            double_t Focale,
             Pt2dr Centre,
             ElDistRadiale_PolynImpair,
             const std::vector<double> & ParamAF,
@@ -2274,14 +2274,14 @@ public :
     cDistModStdPhpgr(const ElDistRadiale_PolynImpair &);
 
     Pt2dr Direct(Pt2dr) const ;
-    void  Diff(ElMatrix<REAL> &,Pt2dr) const;
+    void  Diff(ElMatrix<double_t> &,Pt2dr) const;
     virtual bool OwnInverse(Pt2dr &) const ;    //  Pour "casser" la valeur radiale
     virtual Pt2dr GuessInv(const Pt2dr & aP) const ;
 
-    REAL & P1();
-    REAL & P2();
-    REAL & b1();
-    REAL & b2();
+    double_t & P1();
+    double_t & P2();
+    double_t & b1();
+    double_t & b2();
     ElDistRadiale_PolynImpair & DRad();
     const ElDistRadiale_PolynImpair & DRad() const;
     virtual ElDistRadiale_PolynImpair * DRADPol(bool strict = false);
@@ -2307,7 +2307,7 @@ public :
     cCamStenopeModStdPhpgr
     (
             bool DistIsC2M, // [1]
-            REAL Focale,
+            double_t Focale,
             Pt2dr Centre,
             cDistModStdPhpgr,
             const std::vector<double> & ParamAF
@@ -2336,7 +2336,7 @@ class cCamStenopeDistPolyn : public CamStenope
 {
 public :
     cCamStenopeDistPolyn
-    (bool isDistC2M,REAL Focale,Pt2dr Centre, const ElDistortionPolynomiale &,const std::vector<double> &);
+    (bool isDistC2M,double_t Focale,Pt2dr Centre, const ElDistortionPolynomiale &,const std::vector<double> &);
     const ElDistortionPolynomiale & DistPol() const;
 private :
     ElDistortionPolynomiale mDist;
@@ -2349,7 +2349,7 @@ class cCamStenopeDistHomogr : public CamStenope
 {
 public :
     cCamStenopeDistHomogr
-    (bool isDistC2M,REAL Focale,Pt2dr Centre, const cDistHomographie &,const std::vector<double> &);
+    (bool isDistC2M,double_t Focale,Pt2dr Centre, const cDistHomographie &,const std::vector<double> &);
     const cElHomographie & Hom() const;
 private :
     cDistHomographie   mDist;
@@ -2433,8 +2433,8 @@ public :
             Pt2di aP0,
             Pt2di aP1,
             Fonc_Num aFonc,
-            REAL aSize,
-            REAL aRatio = 0.8
+            double_t aSize,
+            double_t aRatio = 0.8
             );
 
     static tContainerPtsInt GetEnsPtsInteret_Nb
@@ -2442,21 +2442,21 @@ public :
             Pt2di aP0,
             Pt2di aP1,
             Fonc_Num aFonc,
-            INT  aNb,  // NbTot = NbX * NbY
-            REAL aRatio = 0.8
+            int  aNb,  // NbTot = NbX * NbY
+            double_t aRatio = 0.8
             );
 
     static tContainerPtsInt GetEnsPtsInteret_Size
     (
-            Im2D_U_INT1,
-            REAL aSize,
-            REAL aRatio = 0.8
+            Im2D_U_int1,
+            double_t aSize,
+            double_t aRatio = 0.8
             );
     static tContainerPtsInt GetEnsPtsInteret_Nb
     (
-            Im2D_U_INT1,
-            INT  aNb,
-            REAL aRatio = 0.8
+            Im2D_U_int1,
+            int  aNb,
+            double_t aRatio = 0.8
             );
 
 private :
@@ -2471,37 +2471,37 @@ public :
     // convergence commun du faisceau de droite,
     // suppose une valeur initiale approche en teta,phi
 
-    void PtsConvergence(REAL  & teta0,REAL & phi0, bool OptimPhi);
+    void PtsConvergence(double_t  & teta0,double_t & phi0, bool OptimPhi);
 
     // Itere, s'arrete apres NbStep Etape ou si le
     // de residu < Epsilon, ou si le delta residu < DeltaRes
     void PtsConvergenceItere
     (
-            REAL  & teta0,REAL & phi0,INT NbStep,
-            REAL Epsilon, bool OptimPhi,REAL DeltaResidu =-1
+            double_t  & teta0,double_t & phi0,int NbStep,
+            double_t Epsilon, bool OptimPhi,double_t DeltaResidu =-1
             );
     //  Residu de convergence MOYEN du faisceau vers le point
     //  projectif
 
-    REAL ResiduConvergence(REAL  teta,REAL phi);
+    double_t ResiduConvergence(double_t  teta,double_t phi);
 
-    void AddFaisceau(Pt2dr aP0,Pt2dr aDir,REAL aPds);
+    void AddFaisceau(Pt2dr aP0,Pt2dr aDir,double_t aPds);
 
 
 
     // Si tout les faisceau ont approximativement la meme
     // direction renvoie une estimation de cette direction,
     // ne necessite pas de valeur initiale
-    REAL TetaDirectionInf();
+    double_t TetaDirectionInf();
 
 
     void CalibrDistRadiale
     (
             Pt2dr   &            aC0,
             bool                 CentreMobile,
-            REAL    &            TetaEpip,
-            REAL    &            PhiEpip,
-            std::vector<REAL> &  Coeffs
+            double_t    &            TetaEpip,
+            double_t    &            PhiEpip,
+            std::vector<double_t> &  Coeffs
             );
 
 
@@ -2510,10 +2510,10 @@ private :
     class cFaisceau : public SegComp
     {
     public :
-        cFaisceau(Pt2dr aP0,Pt2dr aDir,REAL aPds);
-        REAL Pds() const;
+        cFaisceau(Pt2dr aP0,Pt2dr aDir,double_t aPds);
+        double_t Pds() const;
     private :
-        REAL mPds;
+        double_t mPds;
     };
 
     typedef cFaisceau        tDr;
@@ -2522,7 +2522,7 @@ private :
 
     tIter Begin() {return mPckDr.begin();}
     tIter End() {return mPckDr.end();}
-    INT NbDr() {return (INT) mPckDr.size();}
+    int NbDr() {return (int) mPckDr.size();}
 
     tPckDr  mPckDr;
 };
@@ -2544,9 +2544,9 @@ public :
 
     bool PhysOk() const;
     void Show() const;
-    REAL AngTot() const;
-    REAL Ang1() const;
-    REAL Ang2() const;
+    double_t AngTot() const;
+    double_t Ang1() const;
+    double_t Ang2() const;
     const ElRotation3D & Rot() const;
 
     double TestSol() const;
@@ -2558,14 +2558,14 @@ public :
     //  Distance entre le centre optique et l'image "reciproque"
     //  du centre camera 1 sur le plan, permet de normalisee
     //  les bases
-    REAL DPlan() const;
+    double_t DPlan() const;
 
 
     // "Vraie" distance min entre le plan et
     double DistanceEuclid() const;
 
     // Idem camera2
-    REAL DPlan2() ;
+    double_t DPlan2() ;
     // Point du plan, ayant P1 comme image  par cam1
     // (en coord camera 1)
     Pt3dr ImCam1(Pt2dr aP1);
@@ -2587,7 +2587,7 @@ private :
     // (en coord camera 1)
     Pt3dr ImCam2(Pt2dr aP2);
 
-    REAL AngleNormale(Pt3dr);
+    double_t AngleNormale(Pt3dr);
 
 
     cElHomographie mHom;
@@ -2607,11 +2607,11 @@ private :
     Pt3dr          mCZCMur;
     Pt3dr          mCOptC1;
     Pt3dr          mCOptC2;
-    REAL           mProfC1;
-    REAL           mProfC2;
-    REAL           mAng1;
-    REAL           mAng2;
-    REAL           mAngTot;
+    double_t           mProfC1;
+    double_t           mProfC2;
+    double_t           mAng1;
+    double_t           mAng2;
+    double_t           mAngTot;
     double         mDEuclidP;
 };
 
@@ -2651,8 +2651,8 @@ public :
     static const cMirePolygonEtal & MT0();
     static const cMirePolygonEtal & MTClous1();
     static const cMirePolygonEtal & GetFromName(const std::string &);
-    INT NbDiam() const;
-    REAL KthDiam(INT aK) const;
+    int NbDiam() const;
+    double_t KthDiam(int aK) const;
     const std::string & Name() const;
 
 
@@ -2678,11 +2678,11 @@ private :
     static cMirePolygonEtal TheMT0;
     static cMirePolygonEtal TheMTClous1;
 
-    cMirePolygonEtal(const std::string & mName,const double *,INT NB);
+    cMirePolygonEtal(const std::string & mName,const double *,int NB);
 
     std::string  mName;
     const double *     mDiams;
-    INT          mNBDiam;
+    int          mNBDiam;
 };
 
 
@@ -2717,7 +2717,7 @@ public :
 
     cCiblePolygoneEtal
     (
-            tInd,Pt3dr,const cMirePolygonEtal &,INT Qual,
+            tInd,Pt3dr,const cMirePolygonEtal &,int Qual,
             cCibleCalib *,
             int anOrder
             );
@@ -2772,13 +2772,13 @@ public :
     void SetPosIm(Pt2dr);
     const cCiblePolygoneEtal  & Cible() const;
     bool  UseIt () const;
-    REAL  Pds()    const;
+    double_t  Pds()    const;
 private :
 
     Pt2dr                       mPos;
     const cCiblePolygoneEtal *  mCible;
     bool                        mUseIt;
-    REAL                        mPds;
+    double_t                        mPds;
 
 };
 
@@ -2798,7 +2798,7 @@ public :
     tCont  & Pointes() ;
     cPointeEtalonage & PointeOfId(cCiblePolygoneEtal::tInd);
     cPointeEtalonage * PointeOfIdSvp(cCiblePolygoneEtal::tInd);
-    void RemoveCibles(const std::vector<INT> & IndToRemove);
+    void RemoveCibles(const std::vector<int> & IndToRemove);
     bool  InitFromFile(const cPolygoneEtal &,ELISE_fp & aFp,bool InPK1);
 private :
     tCont mPointes;
@@ -2816,7 +2816,7 @@ public :
             );
     typedef std::list<cSetPointes1Im> tCont;
     tCont  & Pointes() ;
-    INT NbPointes();
+    int NbPointes();
 private :
     tCont mLPointes;
 
@@ -2830,7 +2830,7 @@ public :
     // le PP est l'image reciproque de (0,0),
     // la Focale est calculee par differnce finie,
     // en X, avec un pas de 1 Pixel
-    REAL Focale();
+    double_t Focale();
     Pt2dr PP() ;
     const Pt2dr & P0_Dir() const;
     const Pt2dr & P1_Dir() const;
@@ -2868,8 +2868,8 @@ public :
     // Applique un chgt d'echelle sur les image direct
     // typiquement si ChScale=Focale() Tr= PP() ; alors
     // on une correction de distorsion assez classique
-    void SetTrChScaleDir(REAL aChScale,Pt2dr aTr);
-    void SetTrChScaleInv(REAL aChScale,Pt2dr aTr);
+    void SetTrChScaleDir(double_t aChScale,Pt2dr aTr);
+    void SetTrChScaleInv(double_t aChScale,Pt2dr aTr);
 
     class cXMLMode {
     public :
@@ -2897,12 +2897,12 @@ private :
     void SauvDataGrid
     (
             const std::string &  aNameDir,
-            Im2D_REAL8 anIm,
+            Im2D_double_t8 anIm,
             const std::string & aName
             );
 
     virtual bool OwnInverse(Pt2dr &) const ;    //  return true
-    virtual void  Diff(ElMatrix<REAL> &,Pt2dr) const ;  //  differentielle
+    virtual void  Diff(ElMatrix<double_t> &,Pt2dr) const ;  //  differentielle
     cDbleGrid(PtImGrid*,PtImGrid*);
 
 
@@ -2915,33 +2915,33 @@ private :
 
 class cEqTrianguApparImage
 {
-    typedef REAL tV6[6];
+    typedef double_t tV6[6];
 public :
     // Ordre des variables A.x A.y B.x etc ....
-    cEqTrianguApparImage(INT aCapa);
+    cEqTrianguApparImage(int aCapa);
     ~cEqTrianguApparImage();
     void Reset();
     void Close();
     void Add
     (
-            REAL aI,
-            REAL aJ, REAL aDxJ, REAL aDyJ,
-            REAL aPdsA, REAL aPdsB, REAL aPdsC
+            double_t aI,
+            double_t aJ, double_t aDxJ, double_t aDyJ,
+            double_t aPdsA, double_t aPdsB, double_t aPdsC
             );
 
-    void SetDer(REAL & aCste,REAL  * aDer,INT aK);
+    void SetDer(double_t & aCste,double_t  * aDer,int aK);
 
 private :
-    INT  mCapa;
-    INT  mN;     // Nombre de point
-    REAL mSI1;   // Moyenne/Somme de l'image I
-    REAL mSI2;   // Moyenne/Somme du carre l'image I
-    REAL   mSigmaI;
-    REAL mSJ1;   // Moyenne/Somme de l'image J
-    REAL mSJ2;   // Moyenne/Somme du carre de l'image J
-    REAL   mSigmaJ2;
-    REAL   mSigmaJ;
-    REAL   mSigmaJ3;
+    int  mCapa;
+    int  mN;     // Nombre de point
+    double_t mSI1;   // Moyenne/Somme de l'image I
+    double_t mSI2;   // Moyenne/Somme du carre l'image I
+    double_t   mSigmaI;
+    double_t mSJ1;   // Moyenne/Somme de l'image J
+    double_t mSJ2;   // Moyenne/Somme du carre de l'image J
+    double_t   mSigmaJ2;
+    double_t   mSigmaJ;
+    double_t   mSigmaJ3;
 
 
     tV6   mDerSJ1;     // Derivee de SJ1 / a A.x A.y B.x etc ..
@@ -2949,8 +2949,8 @@ private :
     tV6   mDerSigmaJ2; // Derivee SigmaJ2 = mSJ2 - Square(mSJ1)
     tV6 * mDerJk;      // mDerJk[k][0] derivee de kieme J / a A.x
 
-    REAL * mVI;
-    REAL * mVJ;
+    double_t * mVI;
+    double_t * mVJ;
 };
 
 
@@ -2989,7 +2989,7 @@ public :
     Pt2dr Direct(Pt2dr aP) const;
 private :
     bool OwnInverse(Pt2dr & aP) const;
-    void  Diff(ElMatrix<REAL> &,Pt2dr) const;
+    void  Diff(ElMatrix<double_t> &,Pt2dr) const;
 
     CamStenope & mCam;
 };
@@ -3068,8 +3068,8 @@ private :
     std::string        mPrefRight;
     Pt2di              mSzIn;
     double             mFoc;
-    ElMatrix<REAL>     mMatM2C;
-    ElMatrix<REAL>     mMatC2M;
+    ElMatrix<double_t>     mMatM2C;
+    ElMatrix<double_t>     mMatC2M;
 
     CamStenopeIdeale   mCamOut1;
     CamStenopeIdeale   mCamOut2;
@@ -3166,7 +3166,7 @@ private  :
     void InitAffine(double aF,Pt2dr aPP);
 
     //  =============
-    void  Diff(ElMatrix<REAL> &,Pt2dr) const;
+    void  Diff(ElMatrix<double_t> &,Pt2dr) const;
     Pt2dr ToCoordGrid(const Pt2dr &) const;
     Pt2dr FromCoordGrid(const Pt2dr &) const;
     // Renvoie le meilleur interval [X0, X0+1[ contenat aCoordGr, valide qqsoit aCoordGr
@@ -3192,7 +3192,7 @@ class cCamStenopeBilin : public CamStenope
 public :
     cCamStenopeBilin
     (
-            REAL Focale,
+            double_t Focale,
             Pt2dr Centre,
             const  cDistorBilin & aDBL
             );

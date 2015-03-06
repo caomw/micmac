@@ -65,9 +65,9 @@ public :
 
     // caracteristique logique :
 
-    INT              Dim()       const;
+    int              Dim()       const;
     const int *      Sz()        const;
-    INT              NbChannel() const;
+    int              NbChannel() const;
     Pt2di 			Sz2() const;  // Error if Dim != 1
 
 
@@ -85,7 +85,7 @@ public :
     bool       Compressed() const;
 
     Fonc_Num in();
-    Fonc_Num in(REAL val);
+    Fonc_Num in(double_t val);
     Output   out();
 
 
@@ -120,12 +120,12 @@ public :
     Elise_File_Im
     (
             const char *     name,
-            INT        dim,        // 2 for usual images
-            INT *      sz,         // tx,ty for usual images
-            GenIm::type_el,        // U_INT1,INT ....
-            INT        dim_out,    // 1 for gray level, 3 for RVB ...
+            int        dim,        // 2 for usual images
+            int *      sz,         // tx,ty for usual images
+            GenIm::type_el,        // U_int1,int ....
+            int        dim_out,    // 1 for gray level, 3 for RVB ...
             tFileOffset        offset_0,   // size of header to pass
-            INT        _szd0 = -1,  // see just down
+            int        _szd0 = -1,  // see just down
             bool       create = false      // if does not exist
             );
 
@@ -152,8 +152,8 @@ public :
     Elise_File_Im
     (
             const char *     name,
-            INT        sz,      // tx,ty for usual images
-            GenIm::type_el,      // U_INT1,INT ....
+            int        sz,      // tx,ty for usual images
+            GenIm::type_el,      // U_int1,int ....
             tFileOffset    offset_0 = 0,  // size of header to pass
             bool       create = false      // if does not exist
             );
@@ -162,7 +162,7 @@ public :
     (
             const char *     name,
             Pt2di       sz,      // tx,ty for usual images
-            GenIm::type_el,      // U_INT1,INT ....
+            GenIm::type_el,      // U_int1,int ....
             tFileOffset    offset_0 = 0,  // size of header to pass
             bool       create = false      // if does not exist
             );
@@ -172,7 +172,7 @@ public :
     (
             const char *     name,
             Pt3di       sz,      // tx,ty for usual images
-            GenIm::type_el,      // U_INT1,INT ....
+            GenIm::type_el,      // U_int1,int ....
             tFileOffset    offset_0 = 0,  // size of header to pass
             bool       create = false      // if does not exist
             );
@@ -182,7 +182,7 @@ public :
      */
 
     Fonc_Num in();
-    Fonc_Num in(REAL);
+    Fonc_Num in(double_t);
 
     // Image file are, by default, always cliped when used as
     // output.
@@ -207,8 +207,8 @@ private  :
             char **   comment,
             Pt2di  sz,
             GenIm::type_el,
-            INT    dim,
-            INT    mode_pnm
+            int    dim,
+            int    mode_pnm
             );
     Data_Elise_File_Im * defi() const
     {
@@ -236,7 +236,7 @@ public :
             const char *     name                   ,
             Pt2di            sz                     ,
             GenIm::type_el   type                   ,
-            INT              dim_out                ,
+            int              dim_out                ,
             Pt2di            sz_tiles               ,
             bool             clip_last_tile = DefCLT,         // false ,
             bool             chunk          = DefChunk,       // true  ,
@@ -246,7 +246,7 @@ public :
             );
 
     Fonc_Num in();
-    Fonc_Num in(REAL def_out);
+    Fonc_Num in(double_t def_out);
     Output out();
 
     static Elise_Tiled_File_Im_2D HDR(const std::string & aNameHdr);
@@ -286,17 +286,17 @@ class Gif_Im : public ElGenFileIm
 
 public :
     Gif_Im(const char * name);
-    Im2D_U_INT1     im();
+    Im2D_U_int1     im();
     Disc_Pal              pal();
     Fonc_Num              in();
-    Fonc_Num              in(INT);
+    Fonc_Num              in(int);
     Pt2di                 sz();
 
     static  Output create  (
             const char *             name,
             Pt2di              sz,
             Elise_colour *     tec,
-            INT                nbb
+            int                nbb
             );
 
 
@@ -317,8 +317,8 @@ class Gif_File : public PRC0
 public :
     Gif_File(const char * name);
 
-    INT      nb_im   ()        const;
-    Gif_Im   kth_im  (INT)     const;
+    int      nb_im   ()        const;
+    Gif_Im   kth_im  (int)     const;
 
 
 private :
@@ -359,7 +359,7 @@ public :
 
     Tga_Im(const char * name);
     Fonc_Num              in();
-    Fonc_Num              in(INT);
+    Fonc_Num              in(int);
 
     bool                im_present() const;
     type_of_image       toi()        const;
@@ -400,8 +400,8 @@ public :
     Bmp_Im(const char * name);
     Output              out();
     Fonc_Num              in();
-    Fonc_Num              in(INT);
-    INT      bpp() const;   // bits per pixel
+    Fonc_Num              in(int);
+    int      bpp() const;   // bits per pixel
     Disc_Pal   pal() const ;  // error when bpp() == 24
     mode_compr  compr();
     Pt2di       sz();
@@ -425,15 +425,15 @@ public :
 
     //private :
     std::string ORIGINE,OBJECTIF,DATE,FORMAT;
-    INT MAXIMG,MINIMG,mCOULEUR,mCAMERA;
-    INT FOCALE,TDI,TAILLEPIX,NBCOL,NBLIG;
+    int MAXIMG,MINIMG,mCOULEUR,mCAMERA;
+    int FOCALE,TDI,TAILLEPIX,NBCOL,NBLIG;
     std::string NOM;
-    REAL EXPOTIME,DIAPHRAGME;
-    INT OFFSET;
+    double_t EXPOTIME,DIAPHRAGME;
+    int OFFSET;
     std::string MERE;
-    INT BLANC;
-    INT BIDON;
-    INT BYTEORD;
+    int BLANC;
+    int BIDON;
+    int BYTEORD;
 };
 
 void MakeFileThomVide
@@ -449,6 +449,6 @@ Im2D_Bits<1> MasqImThom
         Box2di &
         );
 
-void ThomCorrigeCourrantObscur(Im2D_U_INT2,const Box2di&);
+void ThomCorrigeCourrantObscur(Im2D_U_int2,const Box2di&);
 
 #endif  //  _ELISE_FILEIM_H

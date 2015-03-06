@@ -18,8 +18,8 @@ public :
     static const cMirePolygonEtal & MT0();
     static const cMirePolygonEtal & MTClous1();
     static const cMirePolygonEtal & GetFromName(const std::string &);
-    INT NbDiam() const;
-    REAL KthDiam(INT aK) const;
+    int NbDiam() const;
+    double_t KthDiam(int aK) const;
     const std::string & Name() const;
 
 
@@ -45,11 +45,11 @@ private :
     static cMirePolygonEtal TheMT0;
     static cMirePolygonEtal TheMTClous1;
 
-    cMirePolygonEtal(const std::string & mName,const double *,INT NB);
+    cMirePolygonEtal(const std::string & mName,const double *,int NB);
 
     std::string  mName;
     const double *     mDiams;
-    INT          mNBDiam;
+    int          mNBDiam;
 };
 
 #endif

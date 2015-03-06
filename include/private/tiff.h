@@ -61,7 +61,7 @@ class Pseudo_Tiff_Arg
               tFileOffset      offs0,
               Pt2di            sz,
               GenIm::type_el   type_im,
-              INT              nb_chan,
+              int              nb_chan,
               bool             chunk_conf,
               Pt2di            sz_tile,
               bool             clip_tile,
@@ -72,18 +72,18 @@ class Pseudo_Tiff_Arg
         tFileOffset      _offs0;
         Pt2di            _sz;
         GenIm::type_el   _type_im;
-        INT              _nb_chan;
+        int              _nb_chan;
         bool             _chunk_conf;
         Pt2di            _sz_tile;
         bool             _clip_tile;
         bool             _create;
 
-        INT  byte_sz_tile(Pt2di Ktile) const;
-        INT  nb_tile() const;
-        INT  nb_tile_x() const;
-        INT  nb_tile_y() const;
-        INT  nb_plan() const;
-        INT  chan_by_plan() const;
+        int  byte_sz_tile(Pt2di Ktile) const;
+        int  nb_tile() const;
+        int  nb_tile_x() const;
+        int  nb_tile_y() const;
+        int  nb_plan() const;
+        int  chan_by_plan() const;
         tFileOffset  sz_tot() const;
 
 };
@@ -100,7 +100,7 @@ class DATA_tiff_header : public  RC_Object
 
       private :
 
-         Tiff_Im kth_im(INT kth);
+         Tiff_Im kth_im(int kth);
 
 
          DATA_tiff_header (const char * name);
@@ -110,8 +110,8 @@ class DATA_tiff_header : public  RC_Object
          Tprov_char *   _tprov_name;
          char *         _name;
 
-         ELISE_fp   kth_file(INT & nb,bool read); 
-         INT        nb_im(); 
+         ELISE_fp   kth_file(int & nb,bool read); 
+         int        nb_im(); 
          
 };
 
@@ -132,19 +132,19 @@ class D_Tiff_ifd_Arg_opt
       friend class DATA_Tiff_Ifd;
 
       public :
-          INT     _predictor;
+          int     _predictor;
           Pt2di   _sz_tile;
-          INT     _row_per_strip;
-          INT     _no_strip;
-          INT     _plan_conf;
+          int     _row_per_strip;
+          int     _no_strip;
+          int     _plan_conf;
 
           bool    _init_min_maxs;
-          INT     _maxs;
-          INT     _mins;
+          int     _maxs;
+          int     _mins;
 
-          INT     _res_unit;
+          int     _res_unit;
           Pt2dr   _resol;
-          INT     _orientation;
+          int     _orientation;
 	  Pt2di   mSzFileTile;
 
           double       mExifTiff_FocalEqui35Length;
@@ -193,7 +193,7 @@ class DATA_Tiff_Ifd : public ElDataGenFileIm
       friend class   TAG_TIF_SZY;
       friend class   TAG_TIF_BIT_P_CHAN;
       friend class   TAG_TIF_COMPR;
-      friend class   TAG_TIF_PHIT_INT;
+      friend class   TAG_TIF_PHIT_int;
       friend class   TAG_TIF_FILL_ORDER;
       friend class   TAG_TIF_STRIP_OFFS;
       friend class   TAG_TIF_ORIENTATION;
@@ -234,9 +234,9 @@ class DATA_Tiff_Ifd : public ElDataGenFileIm
 #else
 #endif
 */
-	   friend class UnLoadPackBit<U_INT1>;
-	   friend class UnLoadPackBit<U_INT2>;
-	  bool  OkFor_un_load_pack_bit(INT Nbb,Tiff_Im::COMPR_TYPE);
+	   friend class UnLoadPackBit<U_int1>;
+	   friend class UnLoadPackBit<U_int2>;
+	  bool  OkFor_un_load_pack_bit(int Nbb,Tiff_Im::COMPR_TYPE);
 
 
      public :
@@ -249,12 +249,12 @@ class DATA_Tiff_Ifd : public ElDataGenFileIm
               public :
                   vmodif ();
                   void flush();
-                  void init(INT v0,INT nb);
-                  void init_if_0(INT v0,INT nb);
-                  void init(INT *v,INT nb);
+                  void init(int v0,int nb);
+                  void init_if_0(int v0,int nb);
+                  void init(int *v,int nb);
 
-                  INT   * _vals;
-                  INT     _nb;
+                  int   * _vals;
+                  int     _nb;
                   tFileOffset     _offs;
            };
 
@@ -265,17 +265,17 @@ class DATA_Tiff_Ifd : public ElDataGenFileIm
 	   std::string     NameTileFile(Pt2di aITF);
            Disc_Pal              pal();
 
-           tFileOffset   offset_tile(INT x,INT y,INT kth_ch);
-           tFileOffset   byte_count_tile(INT x,INT y,INT kth_ch);
-           inline INT   num_tile(INT x,INT y,INT kth_ch);
+           tFileOffset   offset_tile(int x,int y,int kth_ch);
+           tFileOffset   byte_count_tile(int x,int y,int kth_ch);
+           inline int   num_tile(int x,int y,int kth_ch);
 
            GenIm::type_el  type_el();
            void set_value_tile
                 (
                     ELISE_fp & fp,
-                    INT x,
-                    INT y,
-                    INT kth_ch,
+                    int x,
+                    int y,
+                    int kth_ch,
                     tFileOffset value,
                     tFileOffset offset_file,
                     tFileOffset * tab_val 
@@ -283,18 +283,18 @@ class DATA_Tiff_Ifd : public ElDataGenFileIm
            void set_offs_tile
                 (
                     ELISE_fp & fp,
-                    INT x,
-                    INT y,
-                    INT kth_ch,
+                    int x,
+                    int y,
+                    int kth_ch,
                     tFileOffset offs
                 );
 
            void set_count_tile
                 (
                     ELISE_fp & fp,
-                    INT x,
-                    INT y,
-                    INT kth_ch,
+                    int x,
+                    int y,
+                    int kth_ch,
                     tFileOffset nb_byte
                 );
 
@@ -314,10 +314,10 @@ class DATA_Tiff_Ifd : public ElDataGenFileIm
                  Pt2di                       sz,
                  GenIm::type_el              type,
                  Tiff_Im::COMPR_TYPE         compr,
-                 Tiff_Im::PH_INTER_TYPE      phot_interp,
+                 Tiff_Im::PH_intER_TYPE      phot_interp,
 		 Disc_Pal *                      aPal,
                  Elise_colour                    *,
-                 INT                             nb,
+                 int                             nb,
                  L_Arg_Opt_Tiff            l = Tiff_Im::Empty_ARG
            );
 
@@ -348,31 +348,31 @@ class DATA_Tiff_Ifd : public ElDataGenFileIm
            int                                 _nb_chan_per_tile;
            
 
-           INT    *                    _palette;
-           INT                         _nb_pal_entry;
+           int    *                    _palette;
+           int                         _nb_pal_entry;
 
 
            bool                        _tiled;
            Pt2dr                       _resol;
-           INT                         _res_unit;
+           int                         _res_unit;
            Pt2di                       _nb_tile;
            tFileOffset                 _nb_tile_tot;
 
-           INT *                       _bits_p_chanel;
-           INT                         _nbb_ch0;
-           INT                         _nbb_tot;// sum of _bits_p_chanel
+           int *                       _bits_p_chanel;
+           int                         _nbb_ch0;
+           int                         _nbb_tot;// sum of _bits_p_chanel
            tFileOffset *               _tiles_offset;
            tFileOffset                 _offs_toffs;
            tFileOffset *               _tiles_byte_count;
            tFileOffset                 _offs_bcount;
-           INT                         _nb_chanel;
-           INT                         _mode_compr;
-           INT                         _phot_interp;
-           INT                         _plan_conf;
-           INT *                       _data_format;
-           INT                         _predict;
+           int                         _nb_chanel;
+           int                         _mode_compr;
+           int                         _phot_interp;
+           int                         _plan_conf;
+           int *                       _data_format;
+           int                         _predict;
            bool                        _ccitt_ucomp;
-           INT                         _orientation;
+           int                         _orientation;
            double                       mExifTiff_FocalLength;
            double                       mExifTiff_FocalEqui35Length;
            double                       mExifTiff_ShutterSpeed;
@@ -384,18 +384,18 @@ class DATA_Tiff_Ifd : public ElDataGenFileIm
            vmodif                      _maxs;
            vmodif                      _mins;
            
-           INT                          _padding_constr;
+           int                          _padding_constr;
                       // the number of "physical" el by line must ne
                       // multiple of padding
 
-           INT                         _sz_byte_pel_unpacked;
+           int                         _sz_byte_pel_unpacked;
            GenIm::type_el              _type_el;
            GenIm::type_el              _unpacked_type_el; 
                                        // _type_el if  bits per pixel >= 8
                                        // u_int1 elsewhere
 
           virtual   Fonc_Num in()     ;
-          virtual   Fonc_Num in(REAL) ;
+          virtual   Fonc_Num in(double_t) ;
           virtual   Output out()    ;
 
 };
@@ -421,8 +421,8 @@ class Tiff_file_2d : public Std_Bitm_Fich_Im_2d
               Flux_Pts_Computed *,
               DATA_Tiff_Ifd *,
               bool read_mode,
-              INT  nb_chan,
-              INT  kth_channel,
+              int  nb_chan,
+              int  kth_channel,
               Tiff_file_2d * princ = 0
           );
 
@@ -433,8 +433,8 @@ class Tiff_file_2d : public Std_Bitm_Fich_Im_2d
           Tiff_Tiles * alloc_tile();
 
            DATA_Tiff_Ifd *              _dti;
-           INT                          _nb_chan;
-           INT                          _kth_ch;
+           int                          _nb_chan;
+           int                          _kth_ch;
            Tiff_file_2d               * _princ;
 
            //  will there have only one tiles open  at each moment
@@ -454,10 +454,10 @@ class Tiff_file_2d : public Std_Bitm_Fich_Im_2d
 
     static bool is_tile_front 
                 (
-                    INT x,
-                    INT tx,
-                    INT sz_tile,
-                    INT & num
+                    int x,
+                    int tx,
+                    int sz_tile,
+                    int & num
                 );
 
     static bool is_tile_corner 
@@ -483,7 +483,7 @@ class Tiff_Tiles : public Tile_F2d
           Std_Packed_Flux_Of_Byte * 
              init_pfob(DATA_Tiff_Ifd *,class Tiff_file_2d *,bool read);
 
-	  INT             mCurNumYTileFile;
+	  int             mCurNumYTileFile;
 	  Tiff_Im *       mTifTile;
 	  DATA_Tiff_Ifd * mDTITile;
 };
@@ -504,7 +504,7 @@ class Tiff_Tiles_NC : public Tiff_Tiles
 
 
           virtual void seek_pack_line
-                                 (Fich_Im2d *,INT y0,INT y1,bool read_mode);
+                                 (Fich_Im2d *,int y0,int y1,bool read_mode);
 
 };
 

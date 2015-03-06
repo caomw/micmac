@@ -60,7 +60,7 @@ template <class Iterator,class Fpt,class Act,class Type>  void
                  Iterator end,
                  Fpt   fpt,
                  Act & act,
-                 REAL  dist,
+                 double_t  dist,
                  Type  *
           )
 {
@@ -76,7 +76,7 @@ template <class Iterator,class Fpt,class Act,class Type>  void
             F.push_back(&(*it));
     }
     Type ** vals =&(F[0]);
-    INT nb = F.size();
+    int nb = F.size();
 
 
     {
@@ -90,7 +90,7 @@ template <class Iterator,class Fpt,class Act,class Type>  void
         nb = (int)(newlast - vals);
     }
 
-    std::vector<INT> MARQUEUR_K;
+    std::vector<int> MARQUEUR_K;
 
     for (I = 0 ; I < nb ; I++)
     {
@@ -101,7 +101,7 @@ template <class Iterator,class Fpt,class Act,class Type>  void
         MARQUEUR_K.clear();
         for ( J = 0; J < nb ; J++)
             MARQUEUR_K.push_back(0);
-        REAL x_lim = A_x + dist;
+        double_t x_lim = A_x + dist;
         for(J = I+1 ; (J < nb) && ( fpt(*vals[J]).x <x_lim) ; J++)
         {
             Pt2dr pj = fpt(*vals[J]);
@@ -193,7 +193,7 @@ template <class Iterator,class Fpt,class Act,class Type>  void
                   etat = (etat + 1) % 2;
                }
                /* si alpha > beta IJ est un arc de la triangulation */
-               INT cmp = CmpRat (alpha,beta);
+               int cmp = CmpRat (alpha,beta);
                if ( cmp <=0)
                   act(*vals[I],*vals[J],cmp==0);
            }
@@ -209,10 +209,10 @@ template <class Type,class Fpt,class Act>  void
           Delaunay_Mediatrice
           (
                  Type * vals,
-                 INT   nb,
+                 int   nb,
                  Fpt   fpt,
                  Act & act,
-                 REAL  dist
+                 double_t  dist
           )
 {
     Delaunay_Mediatrice(vals,vals+nb,fpt,act,dist,(Type *)0);

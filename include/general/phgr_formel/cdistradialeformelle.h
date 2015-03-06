@@ -18,9 +18,9 @@ class cDistRadialeFormelle : public cElemEqFormelle,
            void ReinitDist(const ElDistRadiale_PolynImpair & );
            cMultiContEQF      StdContraintes() ;
 	   void SetCentreFige(bool);
-           void SetDegreFige(INT aDF,double aTol=cContrainteEQF::theContrStricte);
+           void SetDegreFige(int aDF,double aTol=cContrainteEQF::theContrStricte);
 
-	   INT   IndCentre() const;
+	   int   IndCentre() const;
 
            cDistModStdPhpgr & DistCurStd();
            const cDistModStdPhpgr & DistCurStd() const;
@@ -41,7 +41,7 @@ class cDistRadialeFormelle : public cElemEqFormelle,
 	   void  AddContrCoeff(cMultiContEQF & aContr);
 
            cMultiContEQF   CentreFRapInit() ;
-           cMultiContEQF   CoeffsRapInit(INT aCoef0);
+           cMultiContEQF   CoeffsRapInit(int aCoef0);
            cDistRadialeFormelle
            (
                 bool closeEEF,
@@ -54,12 +54,12 @@ class cDistRadialeFormelle : public cElemEqFormelle,
 
 
 	   bool                       mCentreFige;
-	   INT                        mDegreFige;
+	   int                        mDegreFige;
            cDistModStdPhpgr           &mDistInitStd;
            cDistModStdPhpgr           &mCurDistStd;
 	   ElDistRadiale_PolynImpair& mDistInit;
 	   ElDistRadiale_PolynImpair& mCurDist;
-	   INT                        mIndCentre;
+	   int                        mIndCentre;
            Pt2d<Fonc_Num>             mFCentre;
            std::vector<Fonc_Num>      mFCoeffs;
 

@@ -37,7 +37,7 @@ private  :
     void InitAffine(double aF,Pt2dr aPP);
 
     //  =============
-    void  Diff(ElMatrix<REAL> &,Pt2dr) const;
+    void  Diff(ElMatrix<double_t> &,Pt2dr) const;
     Pt2dr ToCoordGrid(const Pt2dr &) const;
     Pt2dr FromCoordGrid(const Pt2dr &) const;
     // Renvoie le meilleur interval [X0, X0+1[ contenat aCoordGr, valide qqsoit aCoordGr

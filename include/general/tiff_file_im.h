@@ -63,8 +63,8 @@ class Tiff_File : public PRC0
 {
 public :
     Tiff_File(const char *);
-    INT nb_im();
-    class Tiff_Im kth_im(INT kth);
+    int nb_im();
+    class Tiff_Im kth_im(int kth);
 
 private :
     class DATA_tiff_header * dth();
@@ -151,8 +151,8 @@ public :
          *      en general bcp + efficace (car les bytes constiutant la meme
          *      valeur de pixel on puet de raison d'etre egaux)
          */
-    static const char * name_compr(INT);
-    static bool mode_compr_bin(INT);
+    static const char * name_compr(int);
+    static bool mode_compr_bin(int);
 
     typedef enum
     {
@@ -167,11 +167,11 @@ public :
         PtDeLiaison   = 10531, // Une valeur peu susceptible de telescopage
         // PtDAppuisDense : il y 4 canaux,Pds, xy et z superposables aux images
         PtDAppuisDense  = 10532
-    }  PH_INTER_TYPE;
+    }  PH_intER_TYPE;
 
-    static const char * name_phot_interp(INT);
-    static INT  nb_chan_of_phot_interp(PH_INTER_TYPE);
-    static Pt2di  std_sz_tile_of_nbb (INT nbb);
+    static const char * name_phot_interp(int);
+    static int  nb_chan_of_phot_interp(PH_intER_TYPE);
+    static Pt2di  std_sz_tile_of_nbb (int nbb);
 
     typedef enum
     {
@@ -179,14 +179,14 @@ public :
         Inch_Unit       = 2,
         Cm_Unit         = 3
     }  RESOLUTION_UNIT;
-    static const char * name_resol_unit(INT);
+    static const char * name_resol_unit(int);
 
     typedef enum
     {
         Chunky_conf  = 1,
         Planar_conf  = 2
     }  PLANAR_CONFIG;
-    static const char * name_plan_conf(INT);
+    static const char * name_plan_conf(int);
 
     typedef enum
     {
@@ -195,7 +195,7 @@ public :
         IEEE_float    = 3,
         Undef_data    = 4
     }  SAMPLE_FORMAT;
-    static const char * name_data_format(INT);
+    static const char * name_data_format(int);
 
     typedef enum
     {
@@ -211,7 +211,7 @@ public :
     };
 
 
-    static const char * name_predictor(INT);
+    static const char * name_predictor(int);
 
 
 public :
@@ -220,26 +220,26 @@ public :
 
     class AExifTiff_FocalEqui35Length : public Arg_Tiff
     {
-    public : AExifTiff_FocalEqui35Length(REAL);
+    public : AExifTiff_FocalEqui35Length(double_t);
     };
     class AExifTiff_FocalLength : public Arg_Tiff
     {
-    public : AExifTiff_FocalLength(REAL);
+    public : AExifTiff_FocalLength(double_t);
     };
     class AExifTiff_ShutterSpeed : public Arg_Tiff
     {
-    public : AExifTiff_ShutterSpeed(REAL);
+    public : AExifTiff_ShutterSpeed(double_t);
     };
 
 
 
     class AExifTiff_Aperture : public Arg_Tiff
     {
-    public : AExifTiff_Aperture(REAL);
+    public : AExifTiff_Aperture(double_t);
     };
     class AExifTiff_IsoSpeed : public Arg_Tiff
     {
-    public : AExifTiff_IsoSpeed(REAL);
+    public : AExifTiff_IsoSpeed(double_t);
     };
     class AExifTiff_Date : public Arg_Tiff
     {
@@ -258,7 +258,7 @@ public :
 
     class AResol : public Arg_Tiff
     {
-    public : AResol(REAL,RESOLUTION_UNIT);
+    public : AResol(double_t,RESOLUTION_UNIT);
         AResol(Pt2dr,RESOLUTION_UNIT);
     };
 
@@ -276,7 +276,7 @@ public :
     };
     class AStrip : public Arg_Tiff
     {
-    public : AStrip(INT row_per_strip);
+    public : AStrip(int row_per_strip);
     };
 
     class ANoStrip : public Arg_Tiff
@@ -295,7 +295,7 @@ public :
 
     class AOrientation : public Arg_Tiff
     {
-    public : AOrientation(INT);
+    public : AOrientation(int);
     };
 
     // Planar Configuration
@@ -309,7 +309,7 @@ public :
 
     class AMinMax  : public Arg_Tiff
     {
-    public : AMinMax(U_INT2,U_INT2);
+    public : AMinMax(U_int2,U_int2);
         // Tiff does not handle signed of 4-byte values for
         // these tags. That's a pity
     };
@@ -322,7 +322,7 @@ public :
               Pt2di                       sz,
               GenIm::type_el              type,
               COMPR_TYPE                  compr,
-              PH_INTER_TYPE               phot_interp,
+              PH_intER_TYPE               phot_interp,
               L_Arg_Opt_Tiff              l = Empty_ARG
             );
 
@@ -335,7 +335,7 @@ public :
             Pt2di                       sz,
             GenIm::type_el              type,
             COMPR_TYPE                  compr,
-            PH_INTER_TYPE               phot_interp,
+            PH_intER_TYPE               phot_interp,
             L_Arg_Opt_Tiff              l = Empty_ARG
             );
 
@@ -357,7 +357,7 @@ public :
     bool    can_elise_use();
     void show();
 
-    PH_INTER_TYPE  phot_interp();
+    PH_intER_TYPE  phot_interp();
     Pt2dr resol();
     RESOLUTION_UNIT resunit();
     GenIm::type_el  type_el();
@@ -367,9 +367,9 @@ public :
     Pt2di sz();
     Pt2di sz_tile();
     Pt2di nb_tile();
-    INT   nb_chan();
+    int   nb_chan();
     cMetaDataPhoto MDP() ;
-    INT   bitpp();
+    int   bitpp();
     bool byte_ordered();
     COMPR_TYPE mode_compr();
     PLANAR_CONFIG  plan_conf();
@@ -377,7 +377,7 @@ public :
 
     Fonc_Num in();
     Fonc_Num in_proj();
-    Fonc_Num in(REAL def_out);
+    Fonc_Num in(double_t def_out);
 
     // Renvoie 0 ou 1 + Gray adapt
     Fonc_Num in_bool();
@@ -386,16 +386,16 @@ public :
 
     typedef enum {eModeCoulStd,eModeCoulGray,eModeCoulRGB} eModeCoul;
     typedef enum {eModeNoProl,eModeProlProj,eModeProlDef}  eModeProl;
-    Fonc_Num  in_gen(eModeCoul,eModeProl,REAL aDef=0.0);
+    Fonc_Num  in_gen(eModeCoul,eModeProl,double_t aDef=0.0);
 
     Output out();
-    PackB_IM<U_INT1> un_load_pack_bit_U_INT1();
-    PackB_IM<U_INT2> un_load_pack_bit_U_INT2();
-    bool OkFor_un_load_pack_bit_U_INT1();
-    bool OkFor_un_load_pack_bit_U_INT2();
+    PackB_IM<U_int1> un_load_pack_bit_U_int1();
+    PackB_IM<U_int2> un_load_pack_bit_U_int2();
+    bool OkFor_un_load_pack_bit_U_int1();
+    bool OkFor_un_load_pack_bit_U_int2();
 
-    tFileOffset   offset_tile(INT x,INT y,INT kth_ch);
-    tFileOffset   byte_count_tile(INT x,INT y,INT kth_ch);
+    tFileOffset   offset_tile(int x,int y,int kth_ch);
+    tFileOffset   byte_count_tile(int x,int y,int kth_ch);
 
     // N'initialise pas
     std::vector<Im2DGen *>  VecOfIm(Pt2di aSz);
@@ -447,7 +447,7 @@ private :
 
     void verif_usable(bool mode_read);
     class DATA_Tiff_Ifd * dtifd();
-    Fonc_Num in(bool with_def,REAL def_out);
+    Fonc_Num in(bool with_def,double_t def_out);
 
     static int mDefTileFile ;
 };
@@ -488,7 +488,7 @@ void MakeTiffRed2
         GenIm::type_el        aType,
         int                   aDiv,
         bool                  HasVS,
-        REAL                  aVSpec
+        double_t                  aVSpec
         );
 
 // Pour reduire un fichier binaire (resultat en FAX4)
@@ -496,7 +496,7 @@ void MakeTiffRed2Binaire
 (
         const std::string &   aNameFul,
         const std::string &   aNameRed,
-        REAL                  aRatio,
+        double_t                  aRatio,
         Tiff_Im::COMPR_TYPE,
         GenIm::type_el,
         Pt2di                 aSzTile,
@@ -508,7 +508,7 @@ void MakeTiffRed2BinaireWithCaracIdent
 (
         const std::string &   aNameFul,
         const std::string &   aNameRed,
-        REAL                  aRatio,
+        double_t                  aRatio,
         Pt2di                 aSzRed=Pt2di(-1,-1)
         );
 

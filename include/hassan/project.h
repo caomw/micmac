@@ -43,23 +43,23 @@ Header-MicMac-eLiSe-25/06/2007*/
 class Project
 {
      public : 
-          REAL4        _niv0;
-          REAL4        _niv1;
+          double_t4        _niv0;
+          double_t4        _niv1;
           Ori3D_Std    _o3;
           Pt2di        _p0ph;
           Pt2di        _sz; 
-          Im2D_U_INT1  _iphoto;
+          Im2D_U_int1  _iphoto;
           Pt3dr        _p0ph3d;
           Pt3dr        _ori_lum;
  
           Project(Pt3dr, Pt3dr, Ori3D_Std);
-          Project(Pt3dr, Pt3dr, REAL4, REAL4, Ori3D_Std);
-          Im2D_U_INT1 image();
+          Project(Pt3dr, Pt3dr, double_t4, double_t4, Ori3D_Std);
+          Im2D_U_int1 image();
           
           void set_lum(Pt3dr ori_lum){_ori_lum = ori_lum/sqrt(scal(ori_lum,ori_lum));} 
-          void lancer_de_rayon(ElList<Batiment>,REAL4, REAL4, Video_Win);
-          void l_d_r_s_o(ElList<Batiment>, REAL4, REAL4, Video_Win);
-          bool l_d_r_s_o(ElList<Batiment>, REAL4, REAL4, int, int, Batiment&, Facette_3d&);
+          void lancer_de_rayon(ElList<Batiment>,double_t4, double_t4, Video_Win);
+          void l_d_r_s_o(ElList<Batiment>, double_t4, double_t4, Video_Win);
+          bool l_d_r_s_o(ElList<Batiment>, double_t4, double_t4, int, int, Batiment&, Facette_3d&);
           void l_d_r_z(Video_Win);
           void l_d_r_z(Facette_3d, Video_Win);
           void l_d_r_z(ElList<Facette_3d>, Video_Win);
@@ -68,7 +68,7 @@ class Project
           
       private:
           void set_param(Pt3dr,Pt3dr);
-          REAL4 const INFINI;
+          double_t4 const INFINI;
 
 
 };

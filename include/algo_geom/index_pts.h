@@ -48,7 +48,7 @@ template <class Type,class Fpt> class IndexPts
         IndexPts
         (
              Fpt   FPT,
-             INT   NBHASH
+             int   NBHASH
         );
         ~IndexPts();
 
@@ -57,13 +57,13 @@ template <class Type,class Fpt> class IndexPts
 
      private :
   
-        INT           hash(Pt2di pt);
+        int           hash(Pt2di pt);
         Fpt                     _fpt;
-        INT                 _nb_hash;
+        int                 _nb_hash;
         ElFilo<Type>   **       _mat;
 };
 
-template <class Type,class Fpt>  INT IndexPts<Type,Fpt>::hash(Pt2di pt)
+template <class Type,class Fpt>  int IndexPts<Type,Fpt>::hash(Pt2di pt)
 {
      return  mod(pt.x + 17 * pt.y +pt.x*pt.y, _nb_hash);
 }
@@ -73,13 +73,13 @@ template <class Type,class Fpt>
          IndexPts<Type,Fpt>::IndexPts
          (
              Fpt   FPT,
-             INT   NBHASH  
+             int   NBHASH  
          )  :
             _fpt      (FPT),
             _nb_hash  (ElMax(NBHASH,1)),
             _mat      (NEW_TAB(_nb_hash,ElFilo<Type> *))
 {
-    for (INT k=0 ; k<_nb_hash ; k++)
+    for (int k=0 ; k<_nb_hash ; k++)
         _mat[k] =0;
 }
 
@@ -88,7 +88,7 @@ template <class Type,class Fpt> Type * IndexPts<Type,Fpt>::get(Pt2di pt)
    ElFilo<Type> * el = _mat[hash(pt)];
    if (! el)
       return 0;
-   for (INT k =0; k<el->nb() ; k++)
+   for (int k =0; k<el->nb() ; k++)
        if (_fpt((*el)[k]) == pt)
          return & ((*el)[k]);
    return 0;
@@ -96,7 +96,7 @@ template <class Type,class Fpt> Type * IndexPts<Type,Fpt>::get(Pt2di pt)
 
 template <class Type,class Fpt>  void IndexPts<Type,Fpt>::add(const Type & val)
 {
-     INT ind = hash(_fpt(val));
+     int ind = hash(_fpt(val));
      if (!  _mat[ind])
         _mat[ind] = CLASS_NEW_ONE(ElFilo<Type>,(2));
 
@@ -105,7 +105,7 @@ template <class Type,class Fpt>  void IndexPts<Type,Fpt>::add(const Type & val)
 
 template <class Type,class Fpt> IndexPts<Type,Fpt>::~IndexPts()
 {
-    for (INT k=0 ; k<_nb_hash ; k++)
+    for (int k=0 ; k<_nb_hash ; k++)
         if (_mat[k])
            DELETE_ONE(_mat[k]);
    DELETE_TAB(_mat);

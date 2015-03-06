@@ -48,12 +48,12 @@ class Clik
 {
      public :
 
-        Clik   (Video_Win,Pt2dr,INT,U_INT state);
+        Clik   (Video_Win,Pt2dr,int,U_int state);
 
         Video_Win    _w;
         Pt2dr        _pt;
-        INT          _b;
-		U_INT 		 _state;
+        int          _b;
+		U_int 		 _state;
 
 		bool		 b1Pressed() const;
 		bool		 b2Pressed() const;

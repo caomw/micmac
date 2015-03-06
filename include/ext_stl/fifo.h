@@ -52,14 +52,14 @@ template <class Type> class ElFilo
 
         void del_tab()
         {
-             for (INT kk=0; kk<_capa; kk++) _tab[kk] = Type();
+             for (int kk=0; kk<_capa; kk++) _tab[kk] = Type();
              delete [] _tab;
         }
 
         void incr_capa()
         {
            Type * NewTab = new Type [2*_capa];
-           for (INT kk=0; kk<_nb ; kk++)
+           for (int kk=0; kk<_nb ; kk++)
                 NewTab[kk] = _tab[kk];
 
             del_tab();
@@ -82,16 +82,16 @@ template <class Type> class ElFilo
         int   nb   ()  const {return _nb;}
         int   size   ()  const {return _nb;}
         bool  empty()  const {return _nb == 0;}
-        INT     capa() const {return _capa;}
+        int     capa() const {return _capa;}
         void  clear() { _nb    = 0;}
 
-        void set_nb(INT Nb)
+        void set_nb(int Nb)
         {
              ELISE_ASSERT(Nb<=_capa,"ElFilo::set_nb"); // HJMPD,  < devient <=
              _nb = Nb;
         }
 
-        void set_capa(INT new_capa)
+        void set_capa(int new_capa)
         {
              while (_capa<new_capa)
              {
@@ -135,13 +135,13 @@ template <class Type> class ElFilo
              return  _tab[_nb-1];
         }
 
-        Type  & top(INT k)
+        Type  & top(int k)
         {
               ELISE_ASSERT((k>=0)&&(k<_nb),"out index in ElFifo<Type>::[]");
               return  _tab[_nb-1-k];
         }
 
-        const Type  & top(INT k) const
+        const Type  & top(int k) const
         {
               ELISE_ASSERT((k>=0)&&(k<_nb),"out index in ElFifo<Type>::[]");
               return  _tab[_nb-1-k];
@@ -190,7 +190,7 @@ template <class Type> class ElFifo
 
         void del_tab()
         {
-             for (INT kk=0; kk<_capa; kk++) _tab[kk] = Type();
+             for (int kk=0; kk<_capa; kk++) _tab[kk] = Type();
              delete [] _tab;
         }
 
@@ -198,7 +198,7 @@ template <class Type> class ElFifo
         void incr_capa()
         {
            Type * NewTab = new Type [2*_capa];
-           for (INT kk=0; kk<_nb ; kk++)
+           for (int kk=0; kk<_nb ; kk++)
                 NewTab[kk] = _tab[(kk+_begin)%_capa];
 
             del_tab();
@@ -227,7 +227,7 @@ template <class Type> class ElFifo
         bool  empty()  const {return _nb == 0;}
         bool circ()    const {return _is_circ;}
         void set_circ(bool Circ)  {_is_circ = Circ;}
-        INT     capa() const {return _capa;}
+        int     capa() const {return _capa;}
         void  clear() { _nb    = 0; _begin = 0;}
 
         Type * tab()
@@ -251,14 +251,14 @@ template <class Type> class ElFifo
             _begin     (0),
             _is_circ   (Circ)
         {
-            for (INT aK=0; aK<INT(V.size()) ; aK++)
+            for (int aK=0; aK<int(V.size()) ; aK++)
                 push_back(V[aK]);
         }
 
         std::vector<Type> ToVect()
 	{
              std::vector<Type> aV;
-	     for (INT aK=0; aK<nb() ; aK++)
+	     for (int aK=0; aK<nb() ; aK++)
 		     aV.push_back((*this)[aK]);
 	     return aV;
 	}
@@ -309,7 +309,7 @@ template <class Type> class ElFifo
 		const Type & front() const {return _tab[_begin];}
         const Type  & top() const {return back();}
 
-        Type  & top(INT k)
+        Type  & top(int k)
         {
               if (_is_circ)
               {
@@ -323,7 +323,7 @@ template <class Type> class ElFifo
              }
         }
 
-        const Type  & top(INT k) const
+        const Type  & top(int k) const
         {
               if (_is_circ)
               {
@@ -400,46 +400,46 @@ template <class Type> class ElSubFilo
          typedef Type value_type;
          friend class ElPartition<Type>;
 
-         INT size() const { return _i2-_i1;}
-         INT nb() const { return size();}
+         int size() const { return _i2-_i1;}
+         int nb() const { return size();}
          Type & operator [] (int k) {return (*_f)[k+_i1];}
          const Type & operator [] (int k) const {return (*_f)[k+_i1];}
-         const Type & top (INT k=0) const {return (*_f)[_i2-1-k];}
+         const Type & top (int k=0) const {return (*_f)[_i2-1-k];}
          Type * tab() {return (*_f).tab()+_i1;}
 
          ElSubFilo() : _f(0), _i1(0), _i2(0) {}
 
 
          void * AdrFilo() {return _f;}
-         INT    I1 () {return _i1;}
-         INT    I2 () {return _i2;}
+         int    I1 () {return _i1;}
+         int    I2 () {return _i2;}
 
           std::vector<Type> ToVect()
 	  {
              std::vector<Type> aV;
-	     for (INT aK=0; aK<nb() ; aK++)
+	     for (int aK=0; aK<nb() ; aK++)
 		     aV.push_back((*this)[aK]);
 	     return aV;
 	  }
 
       private :
-         ElSubFilo(ElFilo<Type> & f,INT i1,INT i2) : _f(&f), _i1(i1), _i2(i2) {}
+         ElSubFilo(ElFilo<Type> & f,int i1,int i2) : _f(&f), _i1(i1), _i2(i2) {}
 
          ElFilo<Type> *    _f;
-         INT               _i1;
-         INT               _i2;
+         int               _i1;
+         int               _i2;
 };
 template <class Type> class ElPartition
 {
      public :
            typedef Type value_type;
-           INT nb() const  {return  _adr.nb()-1;}
-           ElSubFilo<Type> operator[](INT k) 
+           int nb() const  {return  _adr.nb()-1;}
+           ElSubFilo<Type> operator[](int k) 
            {
                ELISE_ASSERT((k>=0) && (k<nb()),"ElPartition::[](int)");
                return ElSubFilo<Type>(_f,_adr[k],_adr[k+1]);
            }
-           ElSubFilo<Type> top(INT k=0) {return (*this)[nb()-1 -k];}
+           ElSubFilo<Type> top(int k=0) {return (*this)[nb()-1 -k];}
 
            void add(const Type & v) {_f.pushlast(v);}
            void close_cur()
@@ -459,13 +459,13 @@ template <class Type> class ElPartition
 
       private  :
            ElFilo<Type>    _f;
-           ElFilo<INT>     _adr;
+           ElFilo<int>     _adr;
 };
 
 template <class T1,class T2,class T3>
 void append(T1 & out,const T2 & in,T3 f)
 {
-     for(INT k=0; k<in.nb(); k++)
+     for(int k=0; k<in.nb(); k++)
         out.pushlast(f(in[k]));
 }
 template <class T1,class T2,class T3>
@@ -479,7 +479,7 @@ void copy_on(T1 & out,const T2 & in,T3 f)
 template <class T1,class T2>
 void append(T1 & out,const T2 & in)
 {
-     for(INT k=0; k<in.nb(); k++)
+     for(int k=0; k<in.nb(); k++)
         out.pushlast(in[k]);
 }
 template <class T1,class T2>
@@ -494,16 +494,16 @@ void copy_on(T1 & out,const T2 & in)
 
 template <class T1> void ElReverse(T1 & F)
 {
-    for (INT k1=0, k2=F.nb()-1; k1<k2 ; k1++,k2--)
+    for (int k1=0, k2=F.nb()-1; k1<k2 ; k1++,k2--)
         ElSwap(F[k1],F[k2]);
 }              
 
 #define IndexNoFind -0xfffffff
 
 template <class T1,class T2> 
-         INT  ElFind(T1 & F,T2 & v)
+         int  ElFind(T1 & F,T2 & v)
 {
-      for (INT k=0; k<F.nb(); k++)
+      for (int k=0; k<F.nb(); k++)
           if (F[k] == v)
              return k;
               

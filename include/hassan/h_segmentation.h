@@ -45,27 +45,27 @@ class H_Cours_Water
     public:
 
        H_Cours_Water(Output wdisc);
-       Im2D_INT4 etiquette(Im2D_U_INT1 Im_init);
+       Im2D_int4 etiquette(Im2D_U_int1 Im_init);
        ElList<Pt2di> sommet();
-       INT nbr_sommet();
-       Im2D_INT4 max_loc(Im2D_U_INT1 Im_init);
+       int nbr_sommet();
+       Im2D_int4 max_loc(Im2D_U_int1 Im_init);
    private:
 
-       INT tx;
-       INT ty;
-       INT indice;
-       INT v_min;
-       INT lev_max;
-       Im2D_U_INT1 Im;
-       Im2D_INT4 etiquet;
-       Im1D_INT4 histog;
+       int tx;
+       int ty;
+       int indice;
+       int v_min;
+       int lev_max;
+       Im2D_U_int1 Im;
+       Im2D_int4 etiquet;
+       Im1D_int4 histog;
        ElList<Pt2di> lqueu;
        ElList<Pt2di> l_som;
        Output Wdisc;
 
-       void pixel_suivant(INT x, INT y, INT v);
-       void pixel_suivant_m_l(INT x, INT y, INT v);
-       void histograme(INT color);
+       void pixel_suivant(int x, int y, int v);
+       void pixel_suivant_m_l(int x, int y, int v);
+       void histograme(int color);
 };
 
 
@@ -74,30 +74,30 @@ class H_Cours_Water_3D
     public:
 
        H_Cours_Water_3D();
-       Im3D_INT4 etiquette(Im3D_U_INT1 Im_init);
-       Im3D_U_INT1 surface();
+       Im3D_int4 etiquette(Im3D_U_int1 Im_init);
+       Im3D_U_int1 surface();
        ElList<Pt3di> sommet();
-       INT nbr_sommet();
+       int nbr_sommet();
 
    private:
 
-       INT _tx;
-       INT _ty;
-       INT _tz;
-       INT _indice;
-       INT _v_min;
-       INT _lev_max;
-       Im3D_U_INT1 _Im;
-       Im3D_INT4 _etiquet;
-       Im1D_INT4 _histog;
-       U_INT1*** _Im_data;
-       INT4*** _etiquet_data;
-       INT4* _histog_data;
+       int _tx;
+       int _ty;
+       int _tz;
+       int _indice;
+       int _v_min;
+       int _lev_max;
+       Im3D_U_int1 _Im;
+       Im3D_int4 _etiquet;
+       Im1D_int4 _histog;
+       U_int1*** _Im_data;
+       int4*** _etiquet_data;
+       int4* _histog_data;
        ElList<Pt3di> _lqueu;
        ElList<Pt3di> _l_som;
 
-       void pixel_suivant(INT x, INT y, INT z, INT v);
-       void histograme(Output w, INT color);
+       void pixel_suivant(int x, int y, int z, int v);
+       void histograme(Output w, int color);
 };
 
 
@@ -105,28 +105,28 @@ template<class type1, class type2> class H_Partage_eaux
 {
     public:
       H_Partage_eaux(Output wodisc);
-      Im2D_INT4 sommets();
+      Im2D_int4 sommets();
       ElList<Pt2di> top();
-      Im2D_INT4 regions(Im2D<type1, type2> Im);
-      INT nbr_regions();
+      Im2D_int4 regions(Im2D<type1, type2> Im);
+      int nbr_regions();
  
     private:
       Im2D<type1, type2> im;
-      Im2D_INT4 reg;
-      Im2D_INT4 sommet;
+      Im2D_int4 reg;
+      Im2D_int4 sommet;
       ElList<Pt2di> _top;
       ElList<Pt2di> graphe;
-      INT indice;
-      INT bord;
-      INT interdit;
-      INT val_retour;
-      INT tx;
-      INT ty;
+      int indice;
+      int bord;
+      int interdit;
+      int val_retour;
+      int tx;
+      int ty;
       Output Wodisc;
 
       void monter();
       void descendre();
-      void remplacer(INT x, INT y, type1& val_max, Pt2di& p);
+      void remplacer(int x, int y, type1& val_max, Pt2di& p);
 };
 
 
@@ -136,27 +136,27 @@ template<class type1, class type2> class H_Partage_eaux_3D
     public:
       H_Partage_eaux_3D();
       ElList<Pt3di> top();
-      Im3D_INT4 regions(Im3D<type1, type2> Im);
-      Im3D_U_INT1 surface();
-      INT nbr_regions();
+      Im3D_int4 regions(Im3D<type1, type2> Im);
+      Im3D_U_int1 surface();
+      int nbr_regions();
  
     private:
-      Im3D_INT4 reg;
+      Im3D_int4 reg;
       type1*** _im_d;
-      INT4*** _reg_d;
+      int4*** _reg_d;
       ElList<Pt3di> _top;
       ElList<Pt3di> graphe;
-      INT indice;
-      INT bord;
-      INT interdit;
-      INT val_retour;
-      INT tx;
-      INT ty;
-      INT tz;
+      int indice;
+      int bord;
+      int interdit;
+      int val_retour;
+      int tx;
+      int ty;
+      int tz;
 
       void monter();
       void descendre();
-      void remplacer(INT x, INT y, INT z, type1& val_max, Pt3di& p);
+      void remplacer(int x, int y, int z, type1& val_max, Pt3di& p);
 };
 
 

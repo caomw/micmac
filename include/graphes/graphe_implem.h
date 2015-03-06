@@ -54,11 +54,11 @@ template<class T> ElTabDyn<T>::~ElTabDyn()
 {
     if (_tvals)
     {
-         for (INT k0 =0 ; k0<NB ; k0++) 
+         for (int k0 =0 ; k0<NB ; k0++) 
          {
              if (_tvals[k0])
              {
-                 for (INT k1 =0 ; k1<NB ; k1++) 
+                 for (int k1 =0 ; k1<NB ; k1++) 
                  {
                       if (_tvals[k0][k1])
                       {
@@ -77,23 +77,23 @@ template<class T> void ElTabDyn<T>::augment_index()
 {
     if (! _tvals) 
     {
-       _tvals     =  STD_NEW_TAB((INT)NB,T**); 
+       _tvals     =  STD_NEW_TAB((int)NB,T**); 
         MEM_RAZ(_tvals,NB);
      }
     if (! t1(_nb) ) 
     {
-         t1(_nb)  =  STD_NEW_TAB((INT)NB,T*) ;
+         t1(_nb)  =  STD_NEW_TAB((int)NB,T*) ;
         MEM_RAZ(t1(_nb),NB);
     }
     if (! t2(_nb) ) 
     {
-        t2(_nb)  =  STD_NEW_TAB((INT)NB,T);
+        t2(_nb)  =  STD_NEW_TAB((int)NB,T);
     }
     
     _nb++;
 }
 
-template<class T> void ElTabDyn<T>::set_intexable_until(INT aNb)
+template<class T> void ElTabDyn<T>::set_intexable_until(int aNb)
 {
      while (nb()<aNb) augment_index();
 }
@@ -109,7 +109,7 @@ template <class AttrSom,class AttrArc>
          (
                ElGraphe<AttrSom,AttrArc> * gr,
                const AttrSom & attr,
-               INT             Num
+               int             Num
          ) :
                  _alive   (true),
                  _gr      (gr),
@@ -166,11 +166,11 @@ template <class AttrSom,class AttrArc> void ElSom<AttrSom,AttrArc>::remove()
 }
 
 template <class AttrSom,class AttrArc> 
-         INT ElSom<AttrSom,AttrArc>::nb_succ(ElSubGraphe<AttrSom,AttrArc> & sub)
+         int ElSom<AttrSom,AttrArc>::nb_succ(ElSubGraphe<AttrSom,AttrArc> & sub)
 {
      if (! sub.inS(*this)) return 0;
 
-     INT res=0;
+     int res=0;
      ElArc<AttrSom,AttrArc> * a = _succ;
      for (; a ; a = a->_next)
          res += sub.inA(*a) && sub.inS(a->s2());
@@ -306,7 +306,7 @@ template <class  AttrSom,class AttrArc>
          _free_number.pushlast(_tsom.nb());
          _tsom.augment_index();
     }
-    INT num = _free_number.poplast();
+    int num = _free_number.poplast();
     _tsom[num] = TSom(this,attr,num);
     TSom & aRes =  _tsom[num];
     OnNewSom(aRes);

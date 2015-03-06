@@ -56,7 +56,7 @@ template <class Type,class TypeBase> class cMaxLocBicub : public Optim2DParam
            cCubicInterpKernel   mKer;
            double               mDef;
 
-           REAL Op2DParam_ComputeScore(REAL anX,REAL anY) 
+           double_t Op2DParam_ComputeScore(double_t anX,double_t anY) 
            {
                 return mTIm.getr(mKer,Pt2dr(anX,anY),(TypeBase)mDef,true);
            }
@@ -154,12 +154,12 @@ class GenMaxLoc
       GenMaxLoc();
     private :
        void                  MajOvois();
-       U_INT1 &              Marq(Pt2di);
+       U_int1 &              Marq(Pt2di);
 
        Pt2di                 mLastVois;
        std::vector<Pt3di>    mOVois;
-       Im2D_U_INT1           mMarq;
-       U_INT1 **             mDataMarq;
+       Im2D_U_int1           mMarq;
+       U_int1 **             mDataMarq;
 };
 
 template <class Type,class TypeBase,class Compare = std::less<Type> >  
@@ -185,18 +185,18 @@ template <class Type,class TypeBase,class Compare = std::less<Type> >
 					 Pt2di p2,
 					 Im2D<Type,TypeBase> Im,
 					 Type  VInf,
-					 REAL Tol,
-					 Im2D_U_INT1 Marq
+					 double_t Tol,
+					 Im2D_U_int1 Marq
 			   );
 
 		  void FiltrMaxLoc_BCVS
 			   (
 				        std::vector<Pt2di> & Pts,
 					Im2D<Type,TypeBase> Im,
-					REAL  FactInf,
-					REAL  TolGeom,
+					double_t  FactInf,
+					double_t  TolGeom,
                     Pt2di SzVois,
-					Im2D_U_INT1 Marq
+					Im2D_U_int1 Marq
 			   );
 
     private :

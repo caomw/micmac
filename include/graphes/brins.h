@@ -87,7 +87,7 @@ template <class  AttrSom,class AttrArc>
                ElSom<AttrSom,AttrArc> *            s2,
                ElSubGraphe<AttrSom,AttrArc> &      sub_small,
                ElSubGraphe<AttrSom,AttrArc> &      sub_big,
-               INT                                 flag_marq,
+               int                                 flag_marq,
                bool                                push_last
          )            
 {
@@ -119,7 +119,7 @@ template <class  AttrSom,class AttrArc>
                ElSom<AttrSom,AttrArc> *            s1,
                ElSom<AttrSom,AttrArc> *            s2,
                ElSubGraphe<AttrSom,AttrArc> &      sub,
-               INT                                 flag_marq,
+               int                                 flag_marq,
                bool                                push_last
          )            
 {
@@ -136,7 +136,7 @@ template <class  AttrSom,class AttrArc>
                ElArc<AttrSom,AttrArc> &            arc,
                ElSubGraphe<AttrSom,AttrArc> &      sub1,
                ElSubGraphe<AttrSom,AttrArc> &      sub2,
-               INT                                 flag_marq
+               int                                 flag_marq
          )
 {                                        
     res.clear();
@@ -172,7 +172,7 @@ template <class  AttrSom,class AttrArc>
                ElFifo<ElSom<AttrSom,AttrArc> *> &  res,
                ElArc<AttrSom,AttrArc> &            arc,
                ElSubGraphe<AttrSom,AttrArc> &      sub,
-               INT                                 flag_marq
+               int                                 flag_marq
          )
 {
     brin_2_sens_and_marq(res,arc,sub,sub,flag_marq);
@@ -187,11 +187,11 @@ template <class  AttrSom,class AttrArc>
                ElSubGraphe<AttrSom,AttrArc> &      sub2
          )
 {                                        
-   INT  flag_marq = arc.gr().alloc_flag_som();
+   int  flag_marq = arc.gr().alloc_flag_som();
 
    brin_2_sens_and_marq(res,arc,sub1,sub2,flag_marq);
 
-   for (INT k=0; k< res.nb(); k++)
+   for (int k=0; k< res.nb(); k++)
        res[k]->flag_set_kth_false(flag_marq);
    arc.gr().free_flag_som(flag_marq);
 }
@@ -229,8 +229,8 @@ template <class  AttrSom,class AttrArc>
       )
       {
            ElSom<AttrSom,AttrArc> & s =   * sit;
-           INT nbS = s.nb_succ(sub_small);
-           INT nbB = s.nb_succ(sub_big);
+           int nbS = s.nb_succ(sub_small);
+           int nbB = s.nb_succ(sub_big);
 
            if (nbS == 0)
            {
@@ -329,7 +329,7 @@ template <class  AttrSom,class AttrArc>
                ElArc<AttrSom,AttrArc> *                  arc,
                ElSubGraphe<AttrSom,AttrArc> &            sub_small,
                ElSubGraphe<AttrSom,AttrArc> &            sub_big,
-               INT                                       fl_marq,
+               int                                       fl_marq,
                bool                                      plast,
                ElFifo<ElSom<AttrSom,AttrArc> *>  &       res
          )
@@ -383,7 +383,7 @@ template <class  AttrSom,class AttrArc>
      ElFifo<ElSom<AttrSom,AttrArc> *>  buf;
       
       part.clear();
-      INT fl_marq = gr.alloc_flag_arc();
+      int fl_marq = gr.alloc_flag_arc();
       set_flag_all_arcs(gr,fl_marq,false);
 
       for
@@ -433,7 +433,7 @@ template <class  AttrSom,class AttrArc>
          )
 {
      aRes.clear();
-     INT fl_marq = gr.alloc_flag_som();
+     int fl_marq = gr.alloc_flag_som();
      set_flag_all_soms(gr,subgr,fl_marq,true);
      cSubGrFlagSom<ElSubGraphe<AttrSom,AttrArc> > aGrMarq(subgr,fl_marq);
 

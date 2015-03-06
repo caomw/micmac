@@ -100,10 +100,10 @@ class cElHJaSomEmpr
 	public :
            cElHJaSomEmpr(Pt2dr  aPos,const cElHJaSomEmpr * mPrec);
 	   Pt2dr Pos() const;
-	   REAL  ACurv() const;
+	   double_t  ACurv() const;
 	private :
            Pt2dr mPos;
-	   REAL  mACurv;
+	   double_t  mACurv;
 };
 
 class cElHJaPlan3D
@@ -113,20 +113,20 @@ class cElHJaPlan3D
          cElHJaPlan3D
          (
 	      cElHJaArrangt &             anArrgt,
-              INT                         aNum,
+              int                         aNum,
               const cElPlan3D &           aPlan,
               const tEmprPlani &          anEmprGlob,
               const std::vector<Pt2dr>&   anEmpriseSpec,
               Video_Win *                 aW  // Eventuelement 0
          );
 	 void SetSegOblig(Seg2d aSeg);
-         INT    Num() const;
+         int    Num() const;
 	 const cElPlan3D & Plan() const;
-	 void  SetNbPlansInter(INT);
+	 void  SetNbPlansInter(int);
 
 	 void AddInter(cElHJaDroite &,cElHJaPlan3D & AutrPl);
          cElHJaDroite * DroiteOfInter(const cElHJaPlan3D & anOtherPl) const;
-	 void Show(Video_Win,INT CoulRaz,bool ShowDroite,bool ShowInterEmpr);
+	 void Show(Video_Win,int CoulRaz,bool ShowDroite,bool ShowInterEmpr);
 
 	 void AddArcEmpriseInGraphe();
 
@@ -143,13 +143,13 @@ class cElHJaPlan3D
 	 std::vector<std::vector<Pt3dr> > FacesSols(bool WithIndet);
 
      private :
-         tSomGrPl *  AddSom(bool & IsNew,Pt2dr aP,REAL Absc,bool IsEmpr);
+         tSomGrPl *  AddSom(bool & IsNew,Pt2dr aP,double_t Absc,bool IsEmpr);
 	 cElHJaPlan3D(const cElHJaPlan3D &); // Non implemente
-	 tSomGrPl * SomNearest(Pt2dr aP,REAL & aDist);
+	 tSomGrPl * SomNearest(Pt2dr aP,double_t & aDist);
 
 
 	 cElHJaArrangt &              mArrgt;
-         INT                          mNum;
+         int                          mNum;
 	 cElPlan3D                    mPlan;
 	 std::vector<Pt2dr>           mEmpriseSpec;
 	 bool                         mHasEmprSpec;
@@ -166,7 +166,7 @@ class cElHJaPlan3D
 class cElHJaDroite
 {
      public :
-         cElHJaDroite(const ElSeg3D & aSeg,cElHJaPlan3D & aP1,cElHJaPlan3D & aP2,INT aNbPl);
+         cElHJaDroite(const ElSeg3D & aSeg,cElHJaPlan3D & aP1,cElHJaPlan3D & aP2,int aNbPl);
 	 // P1 et P2 pour verfier "temporairement" que l'on ne
 	 // s'est pas emmele sur l'ordre des plan, a part ca inutile
          void AddPoint(cElHJaPoint &,cElHJaPlan3D & aP3,
@@ -188,7 +188,7 @@ class cElHJaDroite
                   tSomGrPl * mS1;
                   tSomGrPl * mS2;
 		  Pt2dr      mPt;
-                  REAL       mAbsc;
+                  double_t       mAbsc;
 	 };
      private :
 	 void AddPaire(tSomGrPl * aS1,tSomGrPl * aS2);
@@ -248,10 +248,10 @@ class cElHJaFacette
          );
 	 cElHJaPlan3D * Plan();
 	 bool PointInFacette(Pt2dr aP) const;
-	 void Show(REAL aDirH,INT aCoul,bool WithBox);
+	 void Show(double_t aDirH,int aCoul,bool WithBox);
 	 void ShowGlob();
-	 void ShowCont(INT aCoul,Video_Win);
-	 REAL Surf() const;
+	 void ShowCont(int aCoul,Video_Win);
+	 double_t Surf() const;
 	 bool IsExterne() ; // La "Fausse" face externe
 
 	 void MakeAdjacences();
@@ -291,10 +291,10 @@ class cElHJaFacette
 	 //  A priori surtout pour mise au point
 	 void SetSureIfPossible();
 	 const  std::vector<tArcGrPl *>  & Arcs();
-         INT    NbThisEnDessous() const;
+         int    NbThisEnDessous() const;
          void AddDessouSansDessus(std::vector<cElHJaFacette *> &);
 
-         void MakeInertie(Im2D_INT2 aMnt,INT aValForb,cGenSysSurResol *);
+         void MakeInertie(Im2D_int2 aMnt,int aValForb,cGenSysSurResol *);
          const RMat_Inertie & MatInert() const;
 
       private :
@@ -326,9 +326,9 @@ class cElHJaFacette
 	 // mVFInterVert : Ensemble des facettes ayant une intersection
 	 // verticale non nulle avec elle
 	 std::vector<cElHJaFacette *> mVFRecouvrt;
-	 std::vector<INT>             mThisIsEnDessus;
-         INT                          mNbThisIsEnDessous;
-	 REAL                         mSurf;
+	 std::vector<int>             mThisIsEnDessus;
+         int                          mNbThisIsEnDessous;
+	 double_t                         mSurf;
 
          std::vector<FBool>           mStates;
          RMat_Inertie                 mMatInert;
@@ -339,7 +339,7 @@ class cElHJaArrangt_Visu
 {
 	public :
            cElHJaArrangt_Visu(Pt2di aSzG,Pt2di aNbVisu,Pt2di aSzPl);
-	   Video_Win * WinOfPl(INT aK);
+	   Video_Win * WinOfPl(int aK);
 	   Video_Win   WG();
 	   Video_Win   WG2();
 	   Video_Win   WG3();
@@ -377,19 +377,19 @@ template <class tCont> void DeleteAndClear(tCont & aCont)
     aCont.clear();
 }
 
-template <class Type> Type & VAt(std::vector<Type> & aV,INT aK)
+template <class Type> Type & VAt(std::vector<Type> & aV,int aK)
 {
     ELISE_ASSERT((aK>=0)&&(aK<int(aV.size())),"Out of Vect VAt");
     return aV[aK];
 }
-template <class Type> const Type & VAt(const std::vector<Type> & aV,INT aK)
+template <class Type> const Type & VAt(const std::vector<Type> & aV,int aK)
 {
     ELISE_ASSERT((aK>=0)&&(aK<int(aV.size())),"Out of Vect VAt");
     return aV[aK];
 }
 
 template <class Type>
-const Type & VAtDef(const std::vector<Type> & aV,INT aK,const Type & aDef)
+const Type & VAtDef(const std::vector<Type> & aV,int aK,const Type & aDef)
 {
    if ((aK>=0)&&(aK<int(aV.size())))
       return aV[aK];
@@ -481,11 +481,11 @@ class cTrapuFace
     public :
        friend class cTrapuBat;
     private :
-        cTrapuFace(INT aNum);
-        void AddSom(INT aNum);
+        cTrapuFace(int aNum);
+        void AddSom(int aNum);
 
-        std::vector<INT>  mSoms;
-        INT               mNum;
+        std::vector<int>  mSoms;
+        int               mNum;
 };
 
 
@@ -497,13 +497,13 @@ class cTrapuBat
         void AddFace
              (
                      const std::vector<Pt3dr> &,
-                     REAL aEps,
-		     INT aNum
+                     double_t aEps,
+		     int aNum
              );
         Pt3dr  P0() const;
         Pt3dr  P1() const;
-        INT    NbFaces() const;
-        std::vector<Pt3dr> PtKiemeFace(INT aK) const;
+        int    NbFaces() const;
+        std::vector<Pt3dr> PtKiemeFace(int aK) const;
         std::vector<Pt3dr> & Soms();
         Pt3dr & P0();
         Pt3dr & P1();
@@ -511,7 +511,7 @@ class cTrapuBat
         void PutXML(class cElXMLFileIn &);
 
     private :
-        INT  GetNumSom(Pt3dr aP,REAL aEpsilon);
+        int  GetNumSom(Pt3dr aP,double_t aEpsilon);
 
         std::vector<Pt3dr>  mSoms;
         std::vector<cTrapuFace> mFaces;
@@ -527,17 +527,17 @@ class cElImagesOfTrapu
        public :
 	       // Si Dec = 0, calcule
            cElImagesOfTrapu
-           (const cTrapuBat & aBat,INT aRab,bool Sup,Pt2di *Dec);
+           (const cTrapuBat & aBat,int aRab,bool Sup,Pt2di *Dec);
 
-	   Im2D_INT1 ImLabel();
-	   Im2D_REAL4 ImZ();
-	   Im2D_U_INT1 ImShade();
+	   Im2D_int1 ImLabel();
+	   Im2D_double_t4 ImZ();
+	   Im2D_U_int1 ImShade();
            Pt2di Dec() const;
        private :
            Pt2di                     mDec;
-	   Im2D_INT1                 mImLabel;
-	   Im2D_REAL4                mImZ;
-	   Im2D_U_INT1               mImShade;
+	   Im2D_int1                 mImLabel;
+	   Im2D_double_t4                mImZ;
+	   Im2D_U_int1               mImShade;
 };
 
 
@@ -561,19 +561,19 @@ class cElHJaArrangt
 
 	      struct  cStatistique
 	      {
-                      cStatistique(REAL Sure,REAL Impos,REAL Indet);
+                      cStatistique(double_t Sure,double_t Impos,double_t Indet);
 
-                      REAL mSurfSure;
-                      REAL mSurfImpossible;
-                      REAL mSurfIndet;
+                      double_t mSurfSure;
+                      double_t mSurfImpossible;
+                      double_t mSurfIndet;
 	      };
 
-	      void AddStatistique(REAL aSurf,const FBool &);
+	      void AddStatistique(double_t aSurf,const FBool &);
 
 	      void ShowStatistique();
-	      REAL SurfResiduelle();
-	      bool StdSolFlag(INT aFlag);
-              void MakeInertieFacettes(Im2D_INT2 aMnt,INT aValForb);
+	      double_t SurfResiduelle();
+	      bool StdSolFlag(int aFlag);
+              void MakeInertieFacettes(Im2D_int2 aMnt,int aValForb);
 	      RMat_Inertie MInertCurSol();
               void  PopStateFac();
 	      enum eModeEvalZ
@@ -588,19 +588,19 @@ class cElHJaArrangt
                          (
                               Pt2dr aDec,
 			      eModeEvalZ,
-			      INT  aValZ,
-			      Im2D_INT2 aMnt,
+			      int  aValZ,
+			      Im2D_int2 aMnt,
                               bool WithIndet  = false
                          );
 
       protected :
               bool GetTheSolution(bool WithForcageSup,tBufFacette & aBuf);
               void ForcageSup();
-              void InitFlag(INT aFlag,tBufFacette & aBuf);
+              void InitFlag(int aFlag,tBufFacette & aBuf);
 
 	      void SetAllFacSureIfPossible();
               void  DupStateFac();
-	      static const REAL Epsilon;
+	      static const double_t Epsilon;
 	      cElHJaArrangt(const cElHJaArrangt &); // Non Implementes
 
               void TriTopologiqueFacette();
@@ -615,7 +615,7 @@ class cElHJaArrangt
 	      typedef std::vector<cElHJaFacette *>  tContFac;
 	      typedef tContFac::iterator            tItFac;
 
-	      Video_Win * WinOfPl(INT aK);
+	      Video_Win * WinOfPl(int aK);
 
 	      cElHJaArrangt_Visu *     mVisu;
               tContPl                  mPlans;
@@ -625,9 +625,9 @@ class cElHJaArrangt
               tEmprPlani               mEmprPl;  // Emprise planimetrique
               std::vector<Pt2dr>       mEmprVPt2d; // Id prec, pour format PointInPoly
               std::vector<Pt2dr>        mEmptyEmprise; // Utilitaire
-	      INT                       mNbPl;
+	      int                       mNbPl;
 	      std::vector<cStatistique> mStats;
-	      REAL                      mSurfEmpr;
+	      double_t                      mSurfEmpr;
 
 	      cGenSysSurResol *         mSysResolv;
 	      L2SysSurResol             mL2SysResolv;

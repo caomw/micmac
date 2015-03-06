@@ -50,14 +50,14 @@ class Seg2d
 {
    public :
 
-     Seg2d(REAL x1,REAL y1,REAL x2,REAL y2);
+     Seg2d(double_t x1,double_t y1,double_t x2,double_t y2);
      Seg2d(Pt2dr,Pt2dr);
      Seg2d();  // create an empty seg
 
     Seg2d reverse() const {assert_non_empty(); return Seg2d(p1(),p0());}
 
      Seg2d clip(Box2dr) const;
-     Seg2d clip(Box2dr,REAL,REAL,bool IsSeg) const;
+     Seg2d clip(Box2dr,double_t,double_t,bool IsSeg) const;
      Seg2d clipDroite(Box2dr) const;
      Seg2d clip(Box2di) const;
 
@@ -65,10 +65,10 @@ class Seg2d
      inline Pt2dr p0() const {assert_non_empty();  return _pts[0];}
      inline Pt2dr p1() const {assert_non_empty();  return _pts[1];}
 
-     inline REAL x0() const {assert_non_empty();  return _pts[0].x;}
-     inline REAL x1() const {assert_non_empty();  return _pts[1].x;}
-     inline REAL y0() const {assert_non_empty();  return _pts[0].y;}
-     inline REAL y1() const {assert_non_empty();  return _pts[1].y;}
+     inline double_t x0() const {assert_non_empty();  return _pts[0].x;}
+     inline double_t x1() const {assert_non_empty();  return _pts[1].x;}
+     inline double_t y0() const {assert_non_empty();  return _pts[0].y;}
+     inline double_t y1() const {assert_non_empty();  return _pts[1].y;}
 
      inline Pt2dr milieu() const {assert_non_empty();  return (_pts[1]+_pts[0])/2.0;}
 
@@ -76,11 +76,11 @@ class Seg2d
 
      inline Seg2d trans(Pt2dr tr) const {assert_non_empty();  return Seg2d(_pts[0]+tr,_pts[1]+tr);}
 
-      REAL AbsiceInterDroiteHoriz(REAL anOrdonnee) const;
+      double_t AbsiceInterDroiteHoriz(double_t anOrdonnee) const;
 
    protected :
 
-    inline Pt2dr kpts(INT k) const {return _pts[k];}
+    inline Pt2dr kpts(int k) const {return _pts[k];}
 
      void assert_non_empty() const
      {

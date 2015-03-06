@@ -53,7 +53,7 @@ template <class Type> class Pt2d : public  ElStdTypeScal<Type>
 public :
 
     typedef typename TCompl<Type>::TypeCompl  tCompl;
-    typedef Pt2d<REAL>  TypeReel;
+    typedef Pt2d<double>  TypeReel;
     typedef Type        TypeScal;
     typedef Pt2d<Type>  TypeEff;
     static Pt2d  El0 () {return Pt2d(0,0);}
@@ -71,7 +71,7 @@ public :
     Pt2d<Type>(Type X,Type Y) : x (X), y (Y) {}
 
     Pt2d<Type>(const Pt2d<Type>& p) : x (p.x), y (p.y) {}
-    explicit Pt2d<Type>(const Pt2d<tCompl>& p) :
+    explicit Pt2d<Type>(const Pt2d<TCompl>& p) :
         x( TCompl<Type>::FromC( p.x)),
         y( TCompl<Type>::FromC( p.y))
     {
@@ -83,17 +83,17 @@ public :
 
     /*
 
-     Pt2d<Type>(const Pt2d<INT>& p) : x (p.x), y (p.y) {};
-     Pt2d<Type>(const Pt2d<REAL>& p): x (Pt2d<Type>::RtoT(p.x)), y (Pt2d<Type>::RtoT(p.y)) {};
+     Pt2d<Type>(const Pt2d<int>& p) : x (p.x), y (p.y) {};
+     Pt2d<Type>(const Pt2d<double>& p): x (Pt2d<Type>::RtoT(p.x)), y (Pt2d<Type>::RtoT(p.y)) {};
 */
 
 
-    static  Pt2d<Type>  FromPolar(REAL rho,REAL teta)
+    static  Pt2d<Type>  FromPolar(double rho,double teta)
     {
         return   Pt2d<Type>(ElStdTypeScal<Type>::RtoT(cos(teta)*rho),ElStdTypeScal<Type>::RtoT(sin(teta)*rho));
     }
 
-    static Pt2d<double> polar(const Pt2d<double> & p,REAL AngDef);
+    static Pt2d<double> polar(const Pt2d<double> & p,double AngDef);
 
     // Operateurs
 
@@ -169,13 +169,13 @@ public :
 
     // binaires,  PtxScalaire => Pt
 
-    Pt2d<Type> operator * (INT  lambda) const { return Pt2d<Type>(x*lambda,y*lambda);}
+    Pt2d<Type> operator * (int  lambda) const { return Pt2d<Type>(x*lambda,y*lambda);}
 
 
-    Pt2d<typename ElStdTypeScal<Type>::TypeScalReel> operator * (REAL lambda) const { return Pt2d<typename ElStdTypeScal<Type>::TypeScalReel>(x*lambda,y*lambda);}
+    Pt2d<typename ElStdTypeScal<Type>::TypeScalReel> operator * (double lambda) const { return Pt2d<typename ElStdTypeScal<Type>::TypeScalReel>(x*lambda,y*lambda);}
 
-    Pt2d<Type> operator / (INT  lambda) const { return Pt2d<Type>(x/lambda,y/lambda);}
-    Pt2d<typename ElStdTypeScal<Type>::TypeScalReel> operator / (REAL lambda) const { return Pt2d<typename ElStdTypeScal<Type>::TypeScalReel>(x/lambda,y/lambda);}
+    Pt2d<Type> operator / (int  lambda) const { return Pt2d<Type>(x/lambda,y/lambda);}
+    Pt2d<typename ElStdTypeScal<Type>::TypeScalReel> operator / (double lambda) const { return Pt2d<typename ElStdTypeScal<Type>::TypeScalReel>(x/lambda,y/lambda);}
 
 
     // operator * est deja surcharge
@@ -223,9 +223,8 @@ private :
 };
 
 typedef Pt2d<int> Pt2di;
-typedef Pt2d<REAL> Pt2dr;
+typedef Pt2d<double> Pt2dr;
 typedef Pt2d<long double> Pt2dlr;
-typedef Pt2d<float> Pt2df;
 
 typedef TypeSubst<Pt2di>   Pt2diSubst;
 typedef TypeSubst<Pt2dr>   Pt2drSubst;

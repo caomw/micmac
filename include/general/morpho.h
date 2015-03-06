@@ -47,34 +47,34 @@ class Chamfer
       public :
 
 
-        inline const INT *   pds ()      const { return _pds;}
+        inline const int *   pds ()      const { return _pds;}
         inline const Pt2di * neigh ()    const { return _neigh;}
-        inline INT           nbv ()      const { return _nbv;}
+        inline int           nbv ()      const { return _nbv;}
 
         //  sub-neigh y >= 0
-        inline const INT *   pds_yp ()   const { return _pds_yp;}
+        inline const int *   pds_yp ()   const { return _pds_yp;}
         inline const Pt2di * neigh_yp () const { return _neigh_yp;}
-        inline INT           nbv_yp ()   const { return _nbv_yp;}
+        inline int           nbv_yp ()   const { return _nbv_yp;}
 
         //  sub-neigh y <= 0
-        inline const INT *   pds_yn ()   const { return _pds_yn;}
+        inline const int *   pds_yn ()   const { return _pds_yn;}
         inline const Pt2di * neigh_yn () const { return _neigh_yn;}
-        inline INT           nbv_yn ()   const { return _nbv_yn;}
+        inline int           nbv_yn ()   const { return _nbv_yn;}
 
         //  p_0_1 must return pds for x =0, y =1;  default
         // is return  _p[0];
         // ex :  p_0_1 for d4,d8; p_0_1 =2 for d32, p_0_1 = 5 for d5711
 
-        virtual INT  p_0_1 () const;
+        virtual int  p_0_1 () const;
 
         //  radius  maxim of (|xi|,|yi|)
         //  2 for d5711, 1 for d4,d8,d32
-        virtual INT  radius () const =0;
+        virtual int  radius () const =0;
 
 
 
-        void im_dist(Im2D<U_INT1,INT>) const;
-        void dilate_label(Im2D<U_INT1,INT> im_dist,Im2D<INT,INT> label,INT dmax) const;
+        void im_dist(Im2D<U_int1,int>) const;
+        void dilate_label(Im2D<U_int1,int> im_dist,Im2D<int,int> label,int dmax) const;
 	virtual ~Chamfer() {}
 
         static const Chamfer & d4;
@@ -84,22 +84,22 @@ class Chamfer
      protected :
 
         // only valuable for d4,d8 d32
-        Chamfer(const Pt2di *,INT,const INT *,INT * v_lin);
+        Chamfer(const Pt2di *,int,const int *,int * v_lin);
 
       private :
 
           const Pt2di *   _neigh;
-          INT             _nbv;
-          const INT *     _pds;
+          int             _nbv;
+          const int *     _pds;
 
           const Pt2di *   _neigh_yp;
-          INT             _nbv_yp;
-          const INT *     _pds_yp;
+          int             _nbv_yp;
+          const int *     _pds_yp;
 
           const Pt2di *   _neigh_yn;
-          INT             _nbv_yn;
-          const INT *     _pds_yn;
-          INT *           _v_lin;
+          int             _nbv_yn;
+          const int *     _pds_yn;
+          int *           _v_lin;
 
 };
 
@@ -122,13 +122,13 @@ L_ArgSkeleton NewLArgSkel(ArgSkeleton);
 class AngSkel : public ArgSkeleton
 {
      public :
-        AngSkel(REAL);
+        AngSkel(double_t);
 };
 
 class SurfSkel : public ArgSkeleton
 {
      public :
-        SurfSkel(INT);
+        SurfSkel(int);
 };
 
 class SkelOfDisk : public ArgSkeleton
@@ -159,32 +159,32 @@ class Cx8Skel : public ArgSkeleton
 class TmpSkel : public ArgSkeleton
 {
      public :
-        TmpSkel(Im2D_U_INT2);
+        TmpSkel(Im2D_U_int2);
 };
 
 extern const Pt2di ElSzDefSkel;
 
-Liste_Pts_U_INT2  Skeleton
+Liste_Pts_U_int2  Skeleton
 (
-     Im2D_U_INT1  skel,
-     Im2D_U_INT1  image,
+     Im2D_U_int1  skel,
+     Im2D_U_int1  image,
      L_ArgSkeleton  = ArgSkeleton::L_empty,
      Pt2di          SZ = ElSzDefSkel
 );
 
-Im1D_U_INT1 NbBits(INT nbb);
+Im1D_U_int1 NbBits(int nbb);
 
 Fonc_Num skeleton
          (
              Fonc_Num f,
-             INT max_d = 256,
+             int max_d = 256,
              L_ArgSkeleton = ArgSkeleton::L_empty
          );
 
 Fonc_Num skeleton_and_dist
          (
              Fonc_Num f,
-             INT max_d = 256,
+             int max_d = 256,
              L_ArgSkeleton = ArgSkeleton::L_empty
          );
 
@@ -199,16 +199,16 @@ class EliseRle
 {
     public :
        typedef  ElFifo<EliseRle> tContainer;
-       typedef INT            tIm;
+       typedef int            tIm;
 
-       EliseRle(INT x0,INT x1,INT y) : mX0(x0),mX1(x1),mY(y) {}
+       EliseRle(int x0,int x1,int y) : mX0(x0),mX1(x1),mY(y) {}
        EliseRle() : mX0(0),mX1(0),mY(0){}
 
-       inline INT X0() const {return mX0;}
-       inline INT X1() const {return mX1;}
-       inline INT Y0() const {return mY ;}
-       inline INT Y1() const {return mY+1 ;}
-       inline INT NB() const {return mX1-mX0;}
+       inline int X0() const {return mX0;}
+       inline int X1() const {return mX1;}
+       inline int Y0() const {return mY ;}
+       inline int Y1() const {return mY+1 ;}
+       inline int NB() const {return mX1-mX0;}
 
        Pt2di P0() {return Pt2di(X0(),Y0());}
        Pt2di P1() {return Pt2di(X1(),Y1());}
@@ -231,27 +231,27 @@ class EliseRle
 		friend class EliseSurfRle;
 		inline void UpdateBox(Pt2di & p0,Pt2di & p1) const;
 
-	    inline EliseRle(INT x0,INT y,tIm ** im,tIm vTest,tIm vSet);
+	    inline EliseRle(int x0,int y,tIm ** im,tIm vTest,tIm vSet);
 	    inline void AddRleVois(tContainer & V,tIm ** im,
 	    tIm vTest,tIm vSet,bool v8) const;
 	    inline void SetIm(tIm ** anIm,tIm vSet);
-	    INT mX0,mX1,mY;
+	    int mX0,mX1,mY;
 };
 
 
-template <class Type> void RleDescOfBinaryImage(Im2D<Type,INT>,EliseRle::tContainer &);
+template <class Type> void RleDescOfBinaryImage(Im2D<Type,int>,EliseRle::tContainer &);
 
 class ParamConcOpb : public Mcheck
 {
     public :
 
        virtual bool ToDelete(); // Vrai par defaut
-       virtual INT ColBig();    // 2 par defaut
-       virtual INT ColSmall(const EliseRle::tContainer &,const Box2di &,INT ColInit); // 3 par def
+       virtual int ColBig();    // 2 par defaut
+       virtual int ColSmall(const EliseRle::tContainer &,const Box2di &,int ColInit); // 3 par def
        virtual ~ParamConcOpb    () {}
 
-	   static INT  DefColBig();
-	   static INT  DefColSmall();
+	   static int  DefColBig();
+	   static int  DefColSmall();
 
     private  :
 };
@@ -260,7 +260,7 @@ Fonc_Num  BoxedConc(Fonc_Num f,Pt2di SzBox,bool V8,ParamConcOpb * param,bool aCa
 Fonc_Num  BoxedConc(Fonc_Num f,Pt2di SzBox,bool V8,bool aCatInit = false);
 
 //  Not to use, only for bench purpose
-Fonc_Num  BoxedConc(Fonc_Num f,Pt2di SzBox,bool V8,ParamConcOpb * param,INT per_reaf,bool aCatInit = false);
+Fonc_Num  BoxedConc(Fonc_Num f,Pt2di SzBox,bool V8,ParamConcOpb * param,int per_reaf,bool aCatInit = false);
 
 
 
@@ -274,7 +274,7 @@ class ElImplemDequantifier
 {
      public :
          // Anncienne interface, anEquid est un parametre idiot !
-         // void Dequant(Pt2di aSzIm,Fonc_Num f2Deq,INT anEquid);
+         // void Dequant(Pt2di aSzIm,Fonc_Num f2Deq,int anEquid);
 
 
          // aVerifI verifie que l'image est entiere
@@ -283,9 +283,9 @@ class ElImplemDequantifier
          ElImplemDequantifier (Pt2di aSz);
 
          Fonc_Num ImDeqReelle();
-         Fonc_Num PartieFrac(INT ampl);
-         Im2D_U_INT2   DistPlus();
-         Im2D_U_INT2   DistMoins();
+         Fonc_Num PartieFrac(int ampl);
+         Im2D_U_int2   DistPlus();
+         Im2D_U_int2   DistMoins();
 
          void SetTraitSpecialCuv(bool);
 
@@ -295,35 +295,35 @@ class ElImplemDequantifier
          void Test();
          void OnePasse
               (
-                  INT aP0,INT aStepP, INT aPend,
-                  INT aNbV,INT * mV,INT * mP
+                  int aP0,int aStepP, int aPend,
+                  int aNbV,int * mV,int * mP
               );
          void OnePasseVideo();
          void OnePasseInverseVideo();
-	 void TraitCuv(U_INT2* aDA,U_INT2* aDB);
+	 void TraitCuv(U_int2* aDA,U_int2* aDB);
 
          void SetSize(Pt2di aSz);
          void SetChamfer(const Chamfer & aChamf);
-         void QuickSetDist(INT aNbStep);
+         void QuickSetDist(int aNbStep);
 
          Pt2di mSzReel;
-         INT   mNbPts;
+         int   mNbPts;
 
 
-         INT     mNbVYp;
-         INT     mVYp[20];
-         INT     mPdsYp[20];
+         int     mNbVYp;
+         int     mVYp[20];
+         int     mPdsYp[20];
 
-         INT     mNbVYm;
-         INT     mVYm[20];
-         INT     mPdsYm[20];
+         int     mNbVYm;
+         int     mVYm[20];
+         int     mPdsYm[20];
 
-         INT     mNbVYT;
-         INT     mVYT[20];
-         INT     mPdsYT[20];
+         int     mNbVYT;
+         int     mVYT[20];
+         int     mPdsYT[20];
 
-         typedef INT2  tQuant;
-         typedef U_INT2  tDist;
+         typedef int2  tQuant;
+         typedef U_int2  tDist;
 
 
          enum
@@ -333,13 +333,13 @@ class ElImplemDequantifier
          };
 
 	 bool          mTraitCuv;
-         Im2D_INT2     mImQuant;
-         INT2 *        lDQ;
-         Im2D_U_INT2   mDistPlus;
-         U_INT2 *      mDPL;
-         Im2D_U_INT2   mDistMoins;
-         U_INT2 *      mDM;
-         Im2D_REAL4    mImDeq;
+         Im2D_int2     mImQuant;
+         int2 *        lDQ;
+         Im2D_U_int2   mDistPlus;
+         U_int2 *      mDPL;
+         Im2D_U_int2   mDistMoins;
+         U_int2 *      mDM;
+         Im2D_double_t4    mImDeq;
 
 };
 
@@ -350,21 +350,21 @@ class cResProj32
         // La distance est "cadeau" au sens ou de toute facon
         // il est necessaire de la calculer
 
-        cResProj32(Im2D_U_INT2 aD,Im2D_U_INT2 aPX,Im2D_U_INT2 aPY,bool aIsInit,bool aIsFull);
+        cResProj32(Im2D_U_int2 aD,Im2D_U_int2 aPX,Im2D_U_int2 aPY,bool aIsInit,bool aIsFull);
 
         bool        IsInit() const;
         bool        IsFull() const;
-        Im2D_U_INT2 Dist() const;
-        Im2D_U_INT2 PX() const;
-        Im2D_U_INT2 PY() const;
+        Im2D_U_int2 Dist() const;
+        Im2D_U_int2 PX() const;
+        Im2D_U_int2 PY() const;
    private :
         void AssertIsInit() const;
 
         bool        mIsInit;
         bool        mIsFull;
-        Im2D_U_INT2 mDist;
-        Im2D_U_INT2 mPX;
-        Im2D_U_INT2 mPY;
+        Im2D_U_int2 mDist;
+        Im2D_U_int2 mPX;
+        Im2D_U_int2 mPY;
 };
 
 cResProj32 Projection32(Fonc_Num aF,Pt2di aSz);
@@ -372,13 +372,13 @@ cResProj32 Projection32(Fonc_Num aF,Pt2di aSz);
 //  Filtrage divers adapte aux carte de profondeur :
 
 class cParamFiltreDepthByPrgDyn;
-Im2D_Bits<1>    FiltrageDepthByProgDyn(Im2D_REAL4 aImDepth,Im2D_U_INT1 aImLab,const cParamFiltreDepthByPrgDyn & aParam);
+Im2D_Bits<1>    FiltrageDepthByProgDyn(Im2D_double_t4 aImDepth,Im2D_U_int1 aImLab,const cParamFiltreDepthByPrgDyn & aParam);
 
 class cParamFiltreDetecRegulProf;
-extern Im2D_Bits<1>  FiltreDetecRegulProf(Im2D_REAL4 aImProf,Im2D_Bits<1> aIMasq,const cParamFiltreDetecRegulProf & aParam);
+extern Im2D_Bits<1>  FiltreDetecRegulProf(Im2D_double_t4 aImProf,Im2D_Bits<1> aIMasq,const cParamFiltreDetecRegulProf & aParam);
 
-Im2D_REAL4 ReduceImageProf(double aDifStd,Im2D_Bits<1> aIMasq,Im2D_REAL4 aImProf, const Box2dr &aBox,double aScale,Im2D_REAL4 aImPds,std::vector<Im2DGen*>  aVNew,std::vector<Im2DGen*> aVOld);
-Im2D_REAL4 ReduceImageProf(double aDifStd,Im2D_Bits<1> aIMasq,Im2D_INT2 aImProf, const Box2dr &aBox,double aScale,Im2D_REAL4 aImPds,std::vector<Im2DGen*>  aVNew,std::vector<Im2DGen*> aVOld);
+Im2D_double_t4 ReduceImageProf(double aDifStd,Im2D_Bits<1> aIMasq,Im2D_double_t4 aImProf, const Box2dr &aBox,double aScale,Im2D_double_t4 aImPds,std::vector<Im2DGen*>  aVNew,std::vector<Im2DGen*> aVOld);
+Im2D_double_t4 ReduceImageProf(double aDifStd,Im2D_Bits<1> aIMasq,Im2D_int2 aImProf, const Box2dr &aBox,double aScale,Im2D_double_t4 aImPds,std::vector<Im2DGen*>  aVNew,std::vector<Im2DGen*> aVOld);
 
 
 
