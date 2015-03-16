@@ -40,62 +40,8 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GARB_COLL_H
 #define _ELISE_GARB_COLL_H
 
-#include <Pt2d>
-
-template <class Type>  class ElList; 
-template <class Type>  class liste_phys;
-template <class Type>  ElList <Type> operator  + (ElList<Type>,Type);
-
-template <class Type>  ElList <Type> SumElListe (ElList<Type>,Type);
-template <class Type>  ElList <Type> SumElListe (ElList<Type>,Type,Type);
-
-
-template <class Type>  class ElList :  public  PRC0
-{
-   public :
-
-       ElList<Type>();
-
-       Type        car() const;  // Fatal error when empty
-       ElList<Type>  cdr() const;  // Fatal error when empty
-       Type        last() const;  // Fatal error when empty
-       Type        pop();  // Fatal error when empty
-
-       ElList<Type> reverse();  // only for ElList<Pt2di> for today
-
-       // friend ElList <Type> ::operator  + (ElList<Type>,Type);
-
-       bool                 empty() const;
-       int                  card() const;
-       void                 clear() {while(!empty()) pop();}
-
-      ElList<Type>(RC_Object*);
-};
-
-template <class Type>  class liste_phys : public RC_Object
-{
-
-         // friend  ElList<Type> ::operator +(ElList<Type> l,Type e);
-         // friend  ElList<Type>;
-
-         public :
-
-
-               virtual ~liste_phys();
-               liste_phys(Type, ElList<Type>);
-               Type  _el;
-               ElList<Type> _next;
-};
-     
-
-
-typedef  ElList<Pt2di> LPt2di;
-typedef  ElList<Pt3di> LPt3di;
-template  <class Type> class Data_Tab_CPT_REF;
-
-
-
-
+class Garb_Coll_Pub {
+	public:
 
 /*
 const int Elise_Std_Max_Dim = 20;
@@ -106,30 +52,8 @@ enum {
     Elise_Std_Max_Buf = 500
 };
 
-
-template  <class Type> class Tab_CPT_REF : public PRC0
-{
-     public :
-
-           Tab_CPT_REF(Type p0,Type p1,Type p2);
-           Tab_CPT_REF(Type p0,Type p1,Type p2,Type p3);
-           Tab_CPT_REF(const Type *objects,int nb);
-           Tab_CPT_REF(int nb);
-
-           int   nb();
-           Type & operator [](int i);
-           void  push(Type);
-
-     private :
-
-          inline  Data_Tab_CPT_REF<Type> * dtd();
 };
 
-
-typedef Tab_CPT_REF<Pt2dr>   Facette_2D;
-
-extern ElList<Facette_2D> read_cadastre(const char * name);
-
-ElList<Pt2di> NewLPt2di(Pt2di);
+//extern ElList<Facette_2D> read_cadastre(const char * name);
 
 #endif /*! _ELISE_GARB_COLL_H*/
