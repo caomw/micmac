@@ -81,7 +81,7 @@ int MakePlancheImage_main(int argc,char ** argv)
         aVT.push_back(Tiff_Im::StdConvGen(aDir+*itS,aForceGray?1:-1,false,true));
 
         aSzMax.SetSup(aVT.back().sz());
-        aNbCh = ElMax(aNbCh,aVT.back().nb_chan());
+        aNbCh = std::max(aNbCh,aVT.back().nb_chan());
    }
 
    if (aColF.size()==0)

@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "general/sys_dep.h"
+
 
 class CamStenope;
 class cOrientationConique;

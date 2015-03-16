@@ -506,13 +506,13 @@ void cMA_AffineOrient::TestOri1Ori2(bool ShowAll,CamStenope & anOri1,CamStenope 
           Pt2dr aQ1  = mCam1.F2toPtDirRayonL3(iT->P1());
           Pt2dr aQ2  = mCam2.F2toPtDirRayonL3(iT->P2());
           double aL =  mCpl12->ResiduSigneP1P2(aQ1,aQ2);
-          aL = ElAbs(aL*mFocale);
+          aL = std::abs(aL*mFocale);
 
 
           double aD;
           anOri1.PseudoInter(iT->P1(),anOri2,iT->P2(),&aD);
           aSEc2 += ElSquare(aD)*iT->Pds();
-          aSEc  += ElAbs(aD)*iT->Pds();
+          aSEc  += std::abs(aD)*iT->Pds();
           aSP   += iT->Pds();
 
        // double aRatio = aL/aD;
@@ -589,7 +589,7 @@ void cMA_AffineOrient::OneItere(bool isLast)
        //double aL =  mCpl12->ResiduSigneP1P2(aQ1,aQ2);
        double aL2 =  mCpl12->AddLiaisonP1P2(aQ1,aQ2,iT->Pds(),false);
        aSEc2 += ElSquare(aL2)*iT->Pds();
-       aSEc += ElAbs(aL2)*iT->Pds();
+       aSEc += std::abs(aL2)*iT->Pds();
        aSP  += iT->Pds();
 
        Pt2dr  aP1 = mGeoTer.R2ToRDisc(iT->P1());
@@ -860,7 +860,7 @@ cMA_AffineOrient::cMA_AffineOrient
       {
           Pt2dr aQ1  = mCam1.F2toPtDirRayonL3(iT->P1());
           Pt2dr aQ2  = mCam2.F2toPtDirRayonL3(iT->P2());
-          double aL =  ElAbs(mCpl12->ResiduSigneP1P2(aQ1,aQ2))*mFocale;
+          double aL =  std::abs(mCpl12->ResiduSigneP1P2(aQ1,aQ2))*mFocale;
           double aP = ElSquare(aPds)/(ElSquare(aPds)+ElSquare(aL));
           iT->Pds() *= aP;
       }
@@ -1036,7 +1036,7 @@ void cModeleAnalytiqueComp::SolveHomographie(const ElPackHomologue &  aPackHom)
            aPMin.SetInf(iT->P1());
            aPMax.SetSup(iT->P1());
       }
-      double anAmpl = ElMax(dist8(aPMin),dist8(aPMax));
+      double anAmpl = std::max(dist8(aPMin),dist8(aPMax));
       mBoxPoly = Box2dr(aPMin,aPMax);
       bool aPL2 = mModele.PolynomeL2().Val();
       mPolX = aPck2.FitPolynome(aPL2,mDegrPolAdd,anAmpl,true);
@@ -1069,11 +1069,11 @@ void cModeleAnalytiqueComp::SolveHomographie(const ElPackHomologue &  aPackHom)
       double aEps = 0.05;
       for (int aKx=0 ; aKx<= aNb ; aKx++)
       {
-          double aPdsX = ElMax(aEps,ElMin(1-aEps,aKx/double(aNb)));
+          double aPdsX = std::max(aEps,std::min(1-aEps,aKx/double(aNb)));
           for (int aKy=0 ; aKy<= aNb ; aKy++)
           {
               
-              double aPdsY = ElMax(aEps,ElMin(1-aEps,aKy/double(aNb)));
+              double aPdsY = std::max(aEps,std::min(1-aEps,aKy/double(aNb)));
               Pt2dr aPRas = Pt2dr (mSzGl.x*aPdsX, mSzGl.x*aPdsY);
               Pt2dr aPTer = mGeoTer.RDiscToR2(aPRas);
               Pt2dr aP1 = Direct(Pt2dr(aPTer));

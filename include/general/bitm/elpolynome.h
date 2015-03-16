@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_BITM_ELPOLYNOME_H
 #define _ELISE_GENERAL_BITM_ELPOLYNOME_H
 
-#include "general/sys_dep.h"
+
 
 template <class Type>  class ElPolynome
 {

@@ -152,7 +152,7 @@ if ( (*AlphaSoleil > -1.0)&&(*AlphaSoleil<1.0) )
 else
 	{ *AlphaSoleil = Pi_/2.0 -atan(1.0 / *AlphaSoleil) ; }
 if ( *AlphaSoleil < 0.0 ) *AlphaSoleil = *AlphaSoleil + 2.0*Pi_ ;
-if ( ElAbs(*AlphaSoleil-LgEclSoleil) > Pi_/2.0 ) 
+if ( std::abs(*AlphaSoleil-LgEclSoleil) > Pi_/2.0 ) 
 	{
 	*AlphaSoleil = *AlphaSoleil + Pi_ ;
 	if ( *AlphaSoleil > 2.0*Pi_ ) { *AlphaSoleil = *AlphaSoleil - 2.0*Pi_ ; }
@@ -409,7 +409,7 @@ const double Pi_ = 4.0 * atan (1.0) ;
 
 HCorrige = Hauteur ;
 Result = HCorrige + 1 ;
-while ( ElAbs(1000000.0*(HCorrige-Result))> 5.0 )
+while ( std::abs(1000000.0*(HCorrige-Result))> 5.0 )
 	{
 	Result = HCorrige ;
 	DH = ASDHEntreeAtmosphere ( HCorrige, RAtmosphere ) ;

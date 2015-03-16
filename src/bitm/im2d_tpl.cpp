@@ -104,7 +104,7 @@ template <class TyBase>
          TyBase v[nb_buf];
          for (INT i=0; i<nb0 ; i+=nb_buf )
          {
-             INT nb_loc = ElMin(nb_buf,nb0-i);
+             INT nb_loc = std::min(nb_buf,nb0-i);
              op.t0_eg_t1_op_t2(v,pre_out+i,values+i,nb_loc);
              INT index =    index_values_out_of_range(v,nb_loc,v_min,v_max);
              El_User_Dyn.ElAssert
@@ -793,12 +793,12 @@ template <class Type,class TyBase>
     if (p0.x > p1.x)
     {
          sign= -1;
-         ElSwap(p0.x,p1.x);
+         std::swap(p0.x,p1.x);
     }
     if (p0.y > p1.y)
     {
          sign = -sign;
-         ElSwap(p0.y,p1.y);
+         std::swap(p0.y,p1.y);
     }
 
 
@@ -822,10 +822,10 @@ template <class Type,class TyBase>
                     _data[y][x]                                 :
                     def                                         ;
 
-             REAL X0 = ElMax(p0.x,(REAL)x);
-             REAL X1 = ElMin(p1.x,(REAL)x+1);
-             REAL Y0 = ElMax(p0.y,(REAL)y);
-             REAL Y1 = ElMin(p1.y,(REAL)y+1);
+             REAL X0 = std::max(p0.x,(REAL)x);
+             REAL X1 = std::min(p1.x,(REAL)x+1);
+             REAL Y0 = std::max(p0.y,(REAL)y);
+             REAL Y1 = std::min(p1.y,(REAL)y+1);
 
              res += v * (X1-X0) * (Y1-Y0);
         }
@@ -844,8 +844,8 @@ template <class Type,class TyBase>
 template <class Type,class TyBase>
          void DataIm2D<Type,TyBase>::set_brd(Pt2di sz,Type Val)
 {
-    sz.x = ElMin(sz.x,(mTx+1)/2);
-    sz.y = ElMin(sz.y,(mTy+1)/2);
+    sz.x = std::min(sz.x,(mTx+1)/2);
+    sz.y = std::min(sz.y,(mTy+1)/2);
 
    for (INT wx=0; wx <sz.x ; wx++)
    {
@@ -1101,7 +1101,7 @@ template <class Type,class TyBase>
     if ((aSz.x<=tx()) && (aSz.y<= ty()))
        return * this;
 
-    Im2D<Type,TyBase>  aRes (ElMax(tx(),aSz.x),ElMax(ty(),aSz.y),aValCompl);
+    Im2D<Type,TyBase>  aRes (std::max(tx(),aSz.x),std::max(ty(),aSz.y),aValCompl);
     ELISE_COPY(all_pts(),in(),aRes.out());
 
     return aRes;
@@ -1684,9 +1684,9 @@ template <class Type,class TyBase>
 template <class Type,class TyBase>
         void Im2D<Type,TyBase>::SetLine(INT x0,INT y,INT nb,INT val)
 {
-   x0 = ElMax(0,ElMin(x0,tx()));
-   nb = ElMax(0,ElMin(nb,tx()-x0));
-   y  = ElMax(0,ElMin(y,ty()));
+   x0 = std::max(0,std::min(x0,tx()));
+   nb = std::max(0,std::min(nb,tx()-x0));
+   y  = std::max(0,std::min(y,ty()));
 
    Type * aLine = data()[y]+x0;
 
@@ -1999,7 +1999,7 @@ template <class Type,class TyBase>
     if (aSz<=tx())
        return * this;
 
-    Im1D<Type,TyBase>  aRes (ElMax(tx(),aSz),aValCompl);
+    Im1D<Type,TyBase>  aRes (std::max(tx(),aSz),aValCompl);
     ELISE_COPY(all_pts(),in(),aRes.out());
 
     return aRes;
@@ -2067,11 +2067,11 @@ template <class Type,class Type_Base> Im2D<Type,Type_Base>
                  std::sort(aD,aD+aNb);
                  double  aSomV= 0;
                  double  aSomP= 0;
-                 double aTol = ElMax(aTolTh,1/double(aNb-1));
+                 double aTol = std::max(aTolTh,1/double(aNb-1));
                  for (int aK=0 ; aK<aNb; aK++)
                  {
-                     double aRank = ElAbs(aK/double(aNb-1) - 0.5);
-                     double aPds = ElMax(0.0,aTol-aRank);
+                     double aRank = std::abs(aK/double(aNb-1) - 0.5);
+                     double aPds = std::max(0.0,aTol-aRank);
                      aSomV += aPds*aD[aK];
                      aSomP += aPds;
                  }

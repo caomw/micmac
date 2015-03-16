@@ -1226,7 +1226,7 @@ void  cAppliApero::DoRapportAppuis
        double anEr = euclid(aR1.mErIm);
        double aRay = euclid(aR1.mPIm-aMil);
        int aKr = round_down((aRay*aNBR)/aRMax);
-       aKr = ElMax(0,ElMin(aKr,aNBR-1));
+       aKr = std::max(0,std::min(aKr,aNBR-1));
        aNbEr[aKr] ++;
        aSomEr[aKr] += anEr;
    }
@@ -1262,7 +1262,7 @@ void  cAppliApero::DoRapportAppuis
    if (aRAO.ROA_FichierImg().IsInit())
    {
         const cROA_FichierImg &  aRFI = aRAO.ROA_FichierImg().Val();
-        double aDZ = aRFI.Sz() / ElMax(aSzIm.x,aSzIm.y);
+        double aDZ = aRFI.Sz() / std::max(aSzIm.x,aSzIm.y);
         
         Bitm_Win aBW("Toto.tif",RGB_Gray_GlobPal(),Pt2di(Pt2dr(aSzIm)*aDZ));
         ELISE_COPY(aBW.all_pts(),P8COL::black,aBW.odisc());

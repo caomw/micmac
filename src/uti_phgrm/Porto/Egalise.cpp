@@ -208,7 +208,7 @@ if (mCO.TestDiff().Val())
 }
 
    Pt2di aBr0(0,0);
-   int aNbDef = ElMax(1,round_ni(sqrt(mNbPtMoyPerIm/mSE->NbPEqualMoyPerImage().Val())));
+   int aNbDef = std::max(1,round_ni(sqrt(mNbPtMoyPerIm/mSE->NbPEqualMoyPerImage().Val())));
    int aPer = mSE->PeriodEchant().ValWithDef(aNbDef);
 
 // std::cout << "PPeeerr " << aNbDef << " " << aPer << "\n";

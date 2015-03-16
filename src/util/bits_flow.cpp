@@ -112,7 +112,7 @@ INT MSBitFirst_Flux_Of_VarLI::nexti(INT nb)
             _last_char_read = _flx_byte->Getc();
         }
 
-        nb_bit_to_read = ElMin(_last_bit_read,(nb-sum_nb_bit_read));
+        nb_bit_to_read = std::min(_last_bit_read,(nb-sum_nb_bit_read));
         res <<= nb_bit_to_read;
         res |= sub_bit
                (
@@ -198,7 +198,7 @@ INT LSBitFirst_Flux_Of_VarLI::nexti(INT nb)
             _last_char_read = _flx_byte->Getc();
         }
 
-        nb_bit_to_read = ElMin(8-_last_bit_read,(nb-sum_nb_bit_read));
+        nb_bit_to_read = std::min(8-_last_bit_read,(nb-sum_nb_bit_read));
         res |= sub_bit
                (
                     _last_char_read,
@@ -355,7 +355,7 @@ INT BitsPacked_PFOB::_Rseek(INT nb_el)
       U_INT1 buf[8];
       INT nb_el_0 = nb_el;
 
-      INT nb_read = ElMin(nb_el,_nb_pb-_i_buf);
+      INT nb_read = std::min(nb_el,_nb_pb-_i_buf);
       nb_el -= nb_read;
       INT nb_seek = nb_el/_nb_pb; 
 
@@ -414,7 +414,7 @@ tRelFileOffset BitsPacked_PFOB::Rseek(tRelFileOffset nb)
 
 void byte_inv_2(void * t)
 {
-     ElSwap
+     std::swap
      (
           ((char *) t)[0],
           ((char *) t)[1]
@@ -423,12 +423,12 @@ void byte_inv_2(void * t)
 
 void byte_inv_4(void * t)
 {
-     ElSwap
+     std::swap
      (
           ((char *) t)[0],
           ((char *) t)[3]
      );
-     ElSwap
+     std::swap
      (
           ((char *) t)[1],
           ((char *) t)[2]
@@ -437,22 +437,22 @@ void byte_inv_4(void * t)
 
 void byte_inv_8(void * t)
 {
-     ElSwap
+     std::swap
      (
           ((char *) t)[0],
           ((char *) t)[7]
      );
-     ElSwap
+     std::swap
      (
           ((char *) t)[1],
           ((char *) t)[6]
      );
-     ElSwap
+     std::swap
      (
           ((char *) t)[2],
           ((char *) t)[5]
      );
-     ElSwap
+     std::swap
      (
           ((char *) t)[3],
           ((char *) t)[4]
@@ -473,7 +473,7 @@ void byte_inv_tab(void * t,INT byte_by_el,INT nb_el)
              byt_0 < byt_1;
              byt_0++,byt_1--
        )
-             ElSwap(tab[byt_0],tab[byt_1]);
+             std::swap(tab[byt_0],tab[byt_1]);
 
        tab += byte_by_el;
    }
@@ -537,7 +537,7 @@ INT MSBF_Flux_OutVarLI::puti(INT val,INT nb)
          sum_nb_bit_written+=nb_bit_to_write
     )
     {
-        nb_bit_to_write = ElMin(_bit_to_write,(nb-sum_nb_bit_written));
+        nb_bit_to_write = std::min(_bit_to_write,(nb-sum_nb_bit_written));
         _char_to_write = set_sub_bit
                          (
                              _char_to_write,
@@ -590,7 +590,7 @@ INT LSBF_Flux_OutVarLI::puti(INT val,INT nb)
          sum_nb_bit_written+=nb_bit_to_write
     )
     {
-        nb_bit_to_write = ElMin(8-_bit_to_write,(nb-sum_nb_bit_written));
+        nb_bit_to_write = std::min(8-_bit_to_write,(nb-sum_nb_bit_written));
         _char_to_write = set_sub_bit
                          (
                              _char_to_write,

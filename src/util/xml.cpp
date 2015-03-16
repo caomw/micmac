@@ -1741,7 +1741,7 @@ INT cElXMLTree::Profondeur() const
 	itF != mFils.end();
 	itF++
 		)
-		aRes = ElMax(aRes,1+(*itF)->Profondeur());
+		aRes = std::max(aRes,1+(*itF)->Profondeur());
 
 	return aRes;
 }

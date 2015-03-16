@@ -556,7 +556,7 @@ int CalcNbProcSys()
 
 int NbProcSys()
 {
-    static int aRes = ElMin(CalcNbProcSys(),MMUserEnv().NbMaxProc().Val());
+    static int aRes = std::min(CalcNbProcSys(),MMUserEnv().NbMaxProc().Val());
 
     return aRes;
 }
@@ -673,7 +673,7 @@ std::string XML_MM_File(const std::string & aFile)
         {
             cBasicAssocNameToName aInv = aN2N.Direct();
             ELISE_ASSERT(aInv.CalcName().size()==1,"AutoInverseBySym cInterfNameCalculator::StdCalcFromXML");
-            ElSwap(aInv.PatternTransform(),aInv.CalcName()[0]);
+            std::swap(aInv.PatternTransform(),aInv.CalcName()[0]);
             return new cInv_AutomNC(aICNM,aN2N.Direct(),aInv);
         }
         return new cNI_AutomNC(aICNM,aN2N.Direct());
@@ -2943,7 +2943,7 @@ aKeyOrFile         :
         Pt2di aMaxEc = mPF->EcartFiltreMatr().Val();
         Pt2di anEc = aRA.mId-aRB.mId;
 
-        return (ElAbs(anEc.x)<=aMaxEc.x) &&  (ElAbs(anEc.x)<=aMaxEc.x) ;
+        return (std::abs(anEc.x)<=aMaxEc.x) &&  (std::abs(anEc.x)<=aMaxEc.x) ;
     }
 
     bool cComputeFiltreRelOr::OKEmprise(const std::string & aNA,const std::string & aNB) const
@@ -3084,8 +3084,8 @@ void cStdChantierRel::AddAllCpleKeySet
             }
             else
             {
-                int aKB0 = ElMax(0,aKA+aDeltaMin);
-                int aKB1 = ElMin(aKA+aDeltaMax,int(aSetB->size())-1);
+                int aKB0 = std::max(0,aKA+aDeltaMin);
+                int aKB1 = std::min(aKA+aDeltaMax,int(aSetB->size())-1);
                 for (int  aKB= aKB0 ;aKB<=aKB1 ; aKB++)
                     aVKB.push_back(aKB);
             }
@@ -3364,8 +3364,8 @@ void cStdChantierRel::AddAllCpleKeySet
 
                 for (int aKA=0 ; aKA<int(aVN.size()) ; aKA++)
                 {
-                    int aK0B = ElMax(0,aKA+aDMin);
-                    int aK1B = ElMin(int(aVN.size()-1),aKA+aDMax);
+                    int aK0B = std::max(0,aKA+aDMin);
+                    int aK1B = std::min(int(aVN.size()-1),aKA+aDMax);
                     for (int aKB = aK0B ; aKB<=aK1B ; aKB++)
                     {
                         AddAllCpleKeySet(aVN[aKA],aVN[aKB],aCFO,itG->Sym().Val());
@@ -3457,7 +3457,7 @@ void cStdChantierRel::AddAllCpleKeySet
         if (aResol <=0) return;
 
         Pt2di aSz = aTF.sz();
-        double aScale = double(aResol) / double(ElMax(aSz.x,aSz.y));
+        double aScale = double(aResol) / double(std::max(aSz.x,aSz.y));
         double  Arrondi = 10;
         int iScale = round_ni((1/aScale) * Arrondi);
 
@@ -3740,8 +3740,8 @@ void cStdChantierRel::AddAllCpleKeySet
 
         double aPds = (aC1.PdsMaxAdaptScale().Val() + aC2.PdsMaxAdaptScale().Val()) / 2.0;
 
-        double aSMax = ElMax(aC1.Scale().Val(),aC2.Scale().Val());
-        double aSMin = ElMin(aC1.Scale().Val(),aC2.Scale().Val());
+        double aSMax = std::max(aC1.Scale().Val(),aC2.Scale().Val());
+        double aSMin = std::min(aC1.Scale().Val(),aC2.Scale().Val());
 
         double aPLog = aPds *log(aSMax) + (1-aPds)*log(aSMin);
         double aScN = exp(aPLog);
@@ -3799,7 +3799,7 @@ void cStdChantierRel::AddAllCpleKeySet
         {
             double aD1 = BiggestDim(aC1,aN1);
             double aD2 = BiggestDim(aC2,aN2);
-            double aMult = aSzMax/ElMin(aD1,aD2);
+            double aMult = aSzMax/std::min(aD1,aD2);
             //std::cout << "DDMM " << aD1 << " " << aD2  << " " << aMult << "\n";
             aC1.Scale().Val() /= aMult;
             aC2.Scale().Val() /= aMult;

@@ -42,32 +42,34 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_UTIL_TFILEOFFSET_H
 #define _ELISE_GENERAL_UTIL_TFILEOFFSET_H
 
-#include "general/sys_dep.h"
+#include <cstdint>
+
+#include <cTplValGesInit>
 
 class tFileOffset
 {
     public :
 
 
-         const tLowLevelFileOffset & AbsLLO() const
+         const int64_t & AbsLLO() const
          {
-               tLowLevelFileOffset aLLO = mLLO.Val();
+               int64_t aLLO = mLLO.Val();
                ELISE_ASSERT(aLLO>=0,"AbsLLO neg");
                return mLLO.Val();
          }
-         tByte4AbsFileOffset   Byte4AbsLLO() const
+         unsigned int   Byte4AbsLLO() const
          {
-               tLowLevelFileOffset aLLO = mLLO.Val();
+               int64_t aLLO = mLLO.Val();
                ELISE_ASSERT((aLLO>=0) && (aLLO<=0xFFFFFFFFll),"Byt4LLO too big");
-               return (tByte4AbsFileOffset)aLLO;
+               return (unsigned int)aLLO;
          }
-         const tLowLevelFileOffset & BasicLLO() const
+         const int64_t & BasicLLO() const
          {
                return mLLO.Val();
          }
          int  IntBasicLLO() const
          {
-               tLowLevelFileOffset aLLO = mLLO.Val();
+               int64_t aLLO = mLLO.Val();
                ELISE_ASSERT((aLLO>-0x7FFFFFFFll) && (aLLO<0x7FFFFFFFll),"Byt4LLO too big");
                return (int)aLLO;
          }
@@ -76,7 +78,7 @@ class tFileOffset
          {
              mLLO.SetNoInit();
          }
-         tFileOffset (const tLowLevelFileOffset & aLLO) :
+         tFileOffset (const int64_t & aLLO) :
            mLLO(aLLO)
          {
          }
@@ -134,7 +136,7 @@ class tFileOffset
 
 
 /*
-         void SetLLO(const tLowLevelFileOffset & aLLO)
+         void SetLLO(const int64_t & aLLO)
          {
               mLLO.SetVal(aLLO);
          }
@@ -148,19 +150,19 @@ class tFileOffset
 // en int des offset dans les tiffs qui est necessaire pour utiliser le service de tag generiques
          static  tFileOffset FromReinterpretInt(int anI)
          {
-               tByte4AbsFileOffset anUI;
-			   std::memcpy(&anUI,&anI,sizeof(tByte4AbsFileOffset));
+               unsigned int anUI;
+                           std::memcpy(&anUI,&anI,sizeof(unsigned int));
                return tFileOffset(anUI);
          }
          int ToReinterpretInt() const
          {
               int aRes;
-              tByte4AbsFileOffset anOfs4 = Byte4AbsLLO();
-			  std::memcpy(&aRes,&anOfs4,sizeof(tByte4AbsFileOffset));
+              unsigned int anOfs4 = Byte4AbsLLO();
+                          std::memcpy(&aRes,&anOfs4,sizeof(unsigned int));
               return aRes;
          }
     private :
-        cTplValGesInit<tLowLevelFileOffset> mLLO;
+        cTplValGesInit<int64_t> mLLO;
 };
 
 #endif

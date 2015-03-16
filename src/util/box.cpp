@@ -192,12 +192,12 @@ Pt2di  RandomlyGenereInside(const Box2di & aBox)
 
 template <class Type> double Box2d<Type>::Interiorite(const Pt2dr & aP) const
 {
-   return ElMin4
+   return std::min4
           (
-                ElMax(0.0,double(aP.x-_p0.x)),
-                ElMax(0.0,double(aP.y-_p0.y)),
-                ElMax(0.0,double(_p1.x-aP.x)),
-                ElMax(0.0,double(_p1.y-aP.y))
+                std::max(0.0,double(aP.x-_p0.x)),
+                std::max(0.0,double(aP.y-_p0.y)),
+                std::max(0.0,double(_p1.x-aP.x)),
+                std::max(0.0,double(_p1.y-aP.y))
           );
 }
 
@@ -634,7 +634,7 @@ template <class Type> REAL  BoxFreemanCompil<Type>::D2BoxSeg(const Box2d<Type> &
    {
       case INTER_TOUJ  : return 0.0;
       case CFF_00      :
-           return ElMin(b.SquareDist(s.p0(),c1),b.SquareDist(s.p1(),c2));
+           return std::min(b.SquareDist(s.p0(),c1),b.SquareDist(s.p1(),c2));
 
       case CFF_11      :
       {
@@ -643,7 +643,7 @@ template <class Type> REAL  BoxFreemanCompil<Type>::D2BoxSeg(const Box2d<Type> &
 
       case CFF_13      :
       {
-           return  ElMin
+           return  std::min
                    (
                        s.square_dist_seg(PQ1(b,c1,c2)),
                        s.square_dist_seg(PQ2(b,c1,c2))
@@ -651,7 +651,7 @@ template <class Type> REAL  BoxFreemanCompil<Type>::D2BoxSeg(const Box2d<Type> &
       }
       case CFF_01      :
       {
-           return ElMin3
+           return std::min3
                   (
                      b.SquareDist(s.p0(),c1),
                      b.SquareDist(s.p1(),c2),
@@ -684,7 +684,7 @@ template <class Type> REAL  BoxFreemanCompil<Type>::D2BoxSeg(const Box2d<Type> &
            REAL ord2 = s.ordonnee(PQ2(b,c1,c2));
 
            return ((ord1 < 0) == (ord2 < 0))             ?
-                    ElMin(ElSquare(ord1),ElSquare(ord2)) :
+                    std::min(ElSquare(ord1),ElSquare(ord2)) :
                     0.0                                  ;
       }
 
@@ -863,7 +863,7 @@ bool ModelBoxSubstr::MakeIt(Box2di A,Box2di S)
  
    if (A._p0.y < S._p0.y)
    {
-       Pt2di p0(ElMax(A._p0.x ,S._p0.x) , A._p0.y);
+       Pt2di p0(std::max(A._p0.x ,S._p0.x) , A._p0.y);
        Pt2di p1(A._p1.x               , S._p0.y);
        AddBox(p0,p1);
    }
@@ -871,7 +871,7 @@ bool ModelBoxSubstr::MakeIt(Box2di A,Box2di S)
  
    if (A._p1.x > S._p1.x)
    {
-       Pt2di p0(S._p1.x,ElMax(A._p0.y,S._p0.y));
+       Pt2di p0(S._p1.x,std::max(A._p0.y,S._p0.y));
        Pt2di p1 = A._p1;
        AddBox(p0,p1);
    }
@@ -879,14 +879,14 @@ bool ModelBoxSubstr::MakeIt(Box2di A,Box2di S)
    if (A._p1.y > S._p1.y)
    {
       Pt2di p0(A._p0.x,S._p1.y);
-      Pt2di p1(ElMin(A._p1.x,S._p1.x),A._p1.y);
+      Pt2di p1(std::min(A._p1.x,S._p1.x),A._p1.y);
       AddBox(p0,p1);
    }
  
    if (A._p0.x < S._p0.x)
    {
       Pt2di p0 =  A._p0;
-      Pt2di p1(S._p0.x,ElMin(A._p1.y,S._p1.y));
+      Pt2di p1(S._p0.x,std::min(A._p1.y,S._p1.y));
       AddBox(p0,p1);
    }
 
@@ -960,8 +960,8 @@ Pt2di BoxPClipedIntervC(const Box2di & aB,const Pt2di & aP)
 {
    return  Pt2di
            (
-               ElMax(aB._p0.x,ElMin(aP.x,aB._p1.x-1)),
-               ElMax(aB._p0.y,ElMin(aP.y,aB._p1.y-1))
+               std::max(aB._p0.x,std::min(aP.x,aB._p1.x-1)),
+               std::max(aB._p0.y,std::min(aP.y,aB._p1.y-1))
            );
 
 }

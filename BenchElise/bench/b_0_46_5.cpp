@@ -151,7 +151,7 @@ void cBench_GCF1::VerifDerSec
        for (REAL eps2 = 1e-2 ; eps2 > 1e-8; eps2 /= 2)
        {
           double aV = DerivSecDiffFinie(aI1,aI2,eps1,eps2);
-          aDMin = ElMin(aDMin,ElAbs(aV-aV2));
+          aDMin = std::min(aDMin,std::abs(aV-aV2));
        }
     // cout << "Dif = " <<  aDMin << "\n";
     BENCH_ASSERT(aDMin<epsilon);
@@ -174,13 +174,13 @@ void cBench_GCF1::VerifDer
     if (aDyn)
     {
         REAL aDD = aDyn->Deriv(0,aD2);
-        BENCH_ASSERT(ElAbs(aDD-aDer)<epsilon);
+        BENCH_ASSERT(std::abs(aDD-aDer)<epsilon);
     }
 
     for (REAL eps = 1e-1 ; eps > 1e-10 ; eps /= 2.0)
     {
-        REAL aDif = ElAbs(aDer-DerivDiffFinie(aD1,eps));
-        aDifMin = ElMin(aDifMin,aDif);
+        REAL aDif = std::abs(aDer-DerivDiffFinie(aD1,eps));
+        aDifMin = std::min(aDifMin,aDif);
     }
 
     BENCH_ASSERT(aDifMin<epsilon);
@@ -373,8 +373,8 @@ template <class tComp> void TplBench_cB_GCF(INT aNumF,tComp & aComp)
       aCompVal.SetVal();
 
       double aVV  = aCompVal.Val();
-      BENCH_ASSERT(ElAbs(aVOri-aVComp)< epsilon);
-      BENCH_ASSERT(ElAbs(aVOri-aVV)< epsilon);
+      BENCH_ASSERT(std::abs(aVOri-aVComp)< epsilon);
+      BENCH_ASSERT(std::abs(aVOri-aVV)< epsilon);
    }
 
    cElCompiledFonc * aDyn =  cElCompiledFonc::DynamicAlloc(anOri2.LInt(),anOri2.Fonc());
@@ -468,11 +468,11 @@ template <class tComp> void TplBench_cB_GCF(INT aNumF,tComp & aComp)
         double aVH =  aCompHess.Val();
 
 
-        BENCH_ASSERT(ElAbs(aVOri-aVComp)< epsilon);
-        BENCH_ASSERT(ElAbs(aVOri-aVDyn)< epsilon);
-        BENCH_ASSERT(ElAbs(aVFName-aVDyn)< epsilon);
-        BENCH_ASSERT(ElAbs(aVD2-aVDyn)< epsilon);
-        BENCH_ASSERT(ElAbs(aVH-aVDyn)< epsilon);
+        BENCH_ASSERT(std::abs(aVOri-aVComp)< epsilon);
+        BENCH_ASSERT(std::abs(aVOri-aVDyn)< epsilon);
+        BENCH_ASSERT(std::abs(aVFName-aVDyn)< epsilon);
+        BENCH_ASSERT(std::abs(aVD2-aVDyn)< epsilon);
+        BENCH_ASSERT(std::abs(aVH-aVDyn)< epsilon);
 
 
        INT TabInd[5];

@@ -138,7 +138,7 @@ void  cGradMaxLoc::calc_buf(double ** output,double *** input)
                {
                    if (
                             (g2<  ElSquare( tgx[aDy][x+aDx])+ElSquare(tgy[aDy][x+aDx]))
-                        &&  ( ElAbs(scal(aGrad,mDir[aDy][aDx])) > 0.7)
+                        &&  ( std::abs(scal(aGrad,mDir[aDy][aDx])) > 0.7)
                       )
                    {
                        Ok=0;
@@ -216,7 +216,7 @@ cCalcSzWCorrel<Type,TypeBase>::cCalcSzWCorrel(const std::string & aNameOut,Fonc_
    mFIP       (mImOri.in_proj()),
    mImEcT     (aSz.x,aSz.y),
    mTImEcT    (mImEcT),
-   mRatioW    (ElMin3(1.0,aSzWMax.x/mSz.x,aSzWMax.y/aSz.y)),
+   mRatioW    (std::min3(1.0,aSzWMax.x/mSz.x,aSzWMax.y/aSz.y)),
    mSzW       (round_ni(Pt2dr(mSz)*mRatioW)),
    mW         ((mRatioW>0) ?  Video_Win::PtrWStd(mSzW,true,Pt2dr(mRatioW,mRatioW)) : 0),
    mOWgr      (mW ? mW->ogray() : Output::onul(1)),

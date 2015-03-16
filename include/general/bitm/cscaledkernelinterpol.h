@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_BITM_CSCALEDKERNELintERPOL_H
 #define _ELISE_GENERAL_BITM_CSCALEDKERNELintERPOL_H
 
-#include "general/sys_dep.h"
+
 
 class cScaledKernelInterpol :  public cKernelInterpol1D
 

@@ -307,7 +307,7 @@ int to8Bits_main(int argc,char ** argv)
 
             cout << "MIN MAX = " << GMin << " " << GMax << "\n";
             if (AdaptMinMax)
-                fRes = (tiff.in()-GMin) * ((Dyn*255.0)  / ElMax(GMax-GMin,1e-2));
+                fRes = (tiff.in()-GMin) * ((Dyn*255.0)  / std::max(GMax-GMin,1e-2));
             else if (AdaptMin)
                 fRes = Min((tiff.in()-GMin),255);
             else if (EqHisto)

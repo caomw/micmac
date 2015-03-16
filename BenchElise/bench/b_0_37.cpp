@@ -101,7 +101,7 @@ void cBenchEl_BT2D::Verif()
             {
                 REAL vTab = mT2D.Get(aP).Val();
                 REAL vMap = mMap[aP].Val();
-                BENCH_ASSERT(ElAbs(vTab-vMap)<epsilon);
+                BENCH_ASSERT(std::abs(vTab-vMap)<epsilon);
                 Som1 += vMap;
             }
         }
@@ -118,7 +118,7 @@ void cBenchEl_BT2D::Verif()
          Som2 += mT2D.Get(*it).Val();
     }
 
-    BENCH_ASSERT(ElAbs(Som1-Som2)<epsilon);
+    BENCH_ASSERT(std::abs(Som1-Som2)<epsilon);
 }
 
 
@@ -143,13 +143,13 @@ void     bench_tab2D_dyn()
 
                 Pt2di aSz = aP1-aP0;
 
-                for ( INT aNb = ElMin(100,aSz.x*aSz.y); aNb>=0 ; aNb--)
+                for ( INT aNb = std::min(100,aSz.x*aSz.y); aNb>=0 ; aNb--)
                 {
                       Pt2di aP =   aP0  
                                  + Pt2di
                                    (
-                                       ElMin(aSz.x-1,INT(NRrandom3()*aSz.x)),
-                                       ElMin(aSz.y-1,INT(NRrandom3()*aSz.y))
+                                       std::min(aSz.x-1,INT(NRrandom3()*aSz.x)),
+                                       std::min(aSz.y-1,INT(NRrandom3()*aSz.y))
                                    );
                       
                       cEl_BT2D anEl(NRrandom3());
@@ -367,7 +367,7 @@ void bench_borned_integer_heap()
           BENCH_ASSERT(p1==p2);
           BENCH_ASSERT(Ind2 == (p2.x + p2.y));
 
-          INT nb_vois = ElMin(9*max_dif-H1.nb(),1+(INT)(3*NRrandom3()));
+          INT nb_vois = std::min(9*max_dif-H1.nb(),1+(INT)(3*NRrandom3()));
 
           for (INT v=0 ; v<nb_vois ; v++)
           {

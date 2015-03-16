@@ -357,7 +357,7 @@ double cElNuage3DMaille::ResolSolGlob() const
       double aSomRes = 0.0;
       double aSomPds = 0.0;
 
-      for (int aNb=50 ; (aNb>0) &&  (aSomPds<500) ; aNb = ElMin(aNb-1,round_ni(aNb/1.2)))
+      for (int aNb=50 ; (aNb>0) &&  (aSomPds<500) ; aNb = std::min(aNb-1,round_ni(aNb/1.2)))
       {
           Pt2di aDec (aNb,aNb);
           Pt2di aP;
@@ -1311,7 +1311,7 @@ void cElNuage3DMaille::AddAttrFromFile
             anAdd  = anI->out();
             std::string aProp = "Unknown";
             if (aNbProp)
-               aProp = aNameProps[ElMin(aNbAdded,aNbProp-1)];
+               aProp = aNameProps[std::min(aNbAdded,aNbProp-1)];
             mAttrs.push_back(new cLayerNuage3DM(anI,aProp));
 
             aNbAdded++;
@@ -1845,7 +1845,7 @@ cElNuage3DMaille *  BasculeNuageAutoReSize
        double aSeuil = anArgBasc.mSeuilEtir;
 // aSeuil = 0.9;
 // std::cout << "SEUIILLL " << aSeuil << "\n";
-       double aDynSeuil = 0.5 / ElMax(aSeuil,1-aSeuil);
+       double aDynSeuil = 0.5 / std::max(aSeuil,1-aSeuil);
 
 
        for (aP.x=0 ; aP.x<aSz.x ; aP.x++)

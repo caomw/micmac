@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_BITM_CIM2DintER_H
 #define _ELISE_GENERAL_BITM_CIM2DintER_H
 
-#include "general/sys_dep.h"
+
 
 class cIm2DInter
 {

@@ -1,12 +1,8 @@
 #ifndef _ELISE_GENERAL_FILE_IM_ELISE_TILED_FILE_IM_2D_H
 #define _ELISE_GENERAL_FILE_IM_ELISE_TILED_FILE_IM_2D_H
 
-#include "general/sys_dep.h"
-#include "general/tiff_file_im.h"
-
 #include <ElGenFileIm>
 #include <GenIm>
-
 
 class Elise_Tiled_File_Im_2D : public ElGenFileIm 
 {

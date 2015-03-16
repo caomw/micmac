@@ -38,7 +38,7 @@ void test_card_rect_kd(int * p0,int *p1,int dim)
 
    s2 = 1;
    for(INT i=0 ; i < dim ; i++)
-      s2 *= ElAbs(p0[i]-p1[i]);
+      s2 *= std::abs(p0[i]-p1[i]);
 
    BENCH_ASSERT(s1 == s2);
 }
@@ -53,7 +53,7 @@ void test_card_rect_kd_coord(int * p0,int *p1,int dim,int kth)
    for(INT d=0 ; d < dim ; d++)
       s2 *=  (d == kth)         ?
              som_x(p0[d],p1[d]) :
-             ElAbs(p0[d]-p1[d])   ;
+             std::abs(p0[d]-p1[d])   ;
 
    BENCH_ASSERT(s1 == s2);
 }

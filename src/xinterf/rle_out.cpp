@@ -141,8 +141,8 @@ RLE_Out_Ras_W_Comp::RLE_Out_Ras_W_Comp
         INT wx0,wx1;
         interval_user_to_window(wx0,wx1,x,x+1,tx,sx);
 
-        wx0 = ElMax(0,wx0);
-        wx1 = ElMin(geom->sz().x,wx1);
+        wx0 = std::max(0,wx0);
+        wx1 = std::min(geom->sz().x,wx1);
 
         _zx[x] = wx1 -wx0;
         _wx0[x] = wx0;
@@ -161,8 +161,8 @@ void RLE_Out_Ras_W_Comp::flush_image(void)
    {
        INT wy0,wy1;
        interval_user_to_window(wy0,wy1,_u_last_y,_u_last_y+1,_tr.y,_sc.y);
-       wy0 = ElMax(0,wy0);
-       wy1 = ElMin(_sz.y,wy1);
+       wy0 = std::max(0,wy0);
+       wy1 = std::min(_sz.y,wy1);
        if (wy0 != wy1)
        {
             memcpy
@@ -205,8 +205,8 @@ void RLE_Out_Ras_W_Comp::update(const Pack_Of_Pts * p,const Pack_Of_Pts * v)
     INT out_wx0,out_wx1;
      // these values may get out ``slightly'' (no more than 1  user pixel) of window
     interval_user_to_window(out_wx0,out_wx1,ux0,ux1,tx,sx);
-    INT wx0 =  ElMax(0,out_wx0);
-    INT wx1 = ElMin(_sz.x,out_wx1);
+    INT wx0 =  std::max(0,out_wx0);
+    INT wx1 = std::min(_sz.x,out_wx1);
 
 
     // An easy way to treat the firt call is to consider that a previous empty segment

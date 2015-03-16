@@ -812,7 +812,7 @@ void cEtalonnage::CalculModeleRadiale
 	              if (aK >= 5)
 	              {
                           // INT aD = mParam.DegDist();
-                           PIFDR()->SetDRFDegreFige(ElMin(aD,(aK-5)/2));
+                           PIFDR()->SetDRFDegreFige(std::min(aD,(aK-5)/2));
                       }
 
 	              if (aK >= 15)
@@ -830,13 +830,13 @@ void cEtalonnage::CalculModeleRadiale
 	          if (aK >= 3)
 	          {
                      if (FreeRad)
-                         PIFDR()->SetDRFDegreFige(ElMin(aD,2));
+                         PIFDR()->SetDRFDegreFige(std::min(aD,2));
                      PIFDR()->SetFocFree(true);
 	          }
 	          if (aK >= 6)
 	          {
                      if (FreeRad)
-                        PIFDR()->SetDRFDegreFige(ElMin(aD,3));
+                        PIFDR()->SetDRFDegreFige(std::min(aD,3));
 	          }
 	          if (aK >= 9)
 	          {
@@ -846,7 +846,7 @@ void cEtalonnage::CalculModeleRadiale
 	          {
 
                      if (FreeRad)
-                        PIFDR()->SetDRFDegreFige(ElMin(aD,5));
+                        PIFDR()->SetDRFDegreFige(std::min(aD,5));
 	          }
                   if (aK >=15)
                   {
@@ -868,7 +868,7 @@ void cEtalonnage::CalculModeleRadiale
 	       if (aK >= 5)
 	       {
                    INT aD = mParam.DegDist();
-                   mParamPhgrStd->SetDRFDegreFige(ElMin(aD,3));
+                   mParamPhgrStd->SetDRFDegreFige(std::min(aD,3));
                }
 
 	       if (aK >= 7)
@@ -895,7 +895,7 @@ void cEtalonnage::CalculModeleRadiale
 	  if (mParamIFPol)
 	  {
              if (aK > 6) 
-                mParamIFPol->SetFige(ElMin(mDegPolXY,aK-5));
+                mParamIFPol->SetFige(std::min(mDegPolXY,aK-5));
 	  }
       }
       if (mParamIFDR)
@@ -969,7 +969,7 @@ void cEtalonnage::CalculModeleRadiale
          SauvXML(mModeDist);
 
       std::sort(mVCPS.begin(), mVCPS.end());
-      INT aNb = ElMin(200,INT(mVCPS.size()));
+      INT aNb = std::min(200,INT(mVCPS.size()));
       for (INT aK =aNb-1; aK >= 0 ; aK--)
 	      cout << (mVCPS[aK].mScore * mFactNorm) 
 		   << " " << (mVCPS[aK].mScore * mFactNorm) * (mVCPS.size()/REAL(mVCPS.size()-aK))
@@ -1038,7 +1038,7 @@ void cEtalonnage::Do8Bits(const std::vector<string> & mVNames)
 
       aGPAO.GenerateMakeFile(aNameMk);
 
-      std::string aComMake = "make all -f " + aNameMk + " -j" + ToString(ElMax(2,mParam.ByProcess()));
+      std::string aComMake = "make all -f " + aNameMk + " -j" + ToString(std::max(2,mParam.ByProcess()));
       System(aComMake);
 }
 

@@ -147,7 +147,7 @@ void cFiltrageDepthByProgDyn::DoConnexion
                     aCost = mParamCostTrans;
                  else if (aCelIn.mInside  && aCelOut.mInside)
                  {
-                    double aDZ = ElAbs(mTDetph.get(aPIn)-mTDetph.get(aPOut)) * mPasDZ ;
+                    double aDZ = std::abs(mTDetph.get(aPIn)-mTDetph.get(aPOut)) * mPasDZ ;
                     // Fonction concave, derivee nulle en zero,  assympote en mMaxDZ
                     // aDZ =  (sqrt(1+aDZ/mMaxDZ)-1) * 2*mMaxDZ ;
                     aDZ =  (mMaxDZ * aDZ) / (mMaxDZ + aDZ);
@@ -156,7 +156,7 @@ void cFiltrageDepthByProgDyn::DoConnexion
             }
             anOut.UpdateCostOneArc(anInp,aSens,ToICost(aCost));
 /*
-            double aDZ = ElAbs(aPIn.Z()-aPOut.Z())/mResolPlaniEquiAlt;
+            double aDZ = std::abs(aPIn.Z()-aPOut.Z())/mResolPlaniEquiAlt;
             if ((mFNoVal==0) || (aDZ < mFNoVal->PenteMax()))
             {
             // Fonction concave, nulle et de derivee 1 en 0
@@ -323,14 +323,14 @@ template <class tNum,class tNBase>  Im2D_Bits<1> TplFiltreDetecRegulProf
                      if (aKP>0)
                      {
                          double aDist = euclid(aP,aQ);
-                         double aDZ = ElAbs(aZ0-aTProf.get(aQ));
+                         double aDZ = std::abs(aZ0-aTProf.get(aQ));
                          double aAttZ = aPondZ + aPente * aDist;
                          double aPds  = 1 / (1 + ElSquare(aDZ/aAttZ));
                          aNbP++;
                          aSomP += aPds;
                      }
                  }
-                 aNbP = ElMax(aNbP,aSzCC*(1+aSzCC));
+                 aNbP = std::max(aNbP,aSzCC*(1+aSzCC));
                  aTDif.oset(aP,aSomP/aNbP);
              }
         }
@@ -421,7 +421,7 @@ template <class tNum,class tNBase>  Im2D_REAL4   TplFReduceImageProf
     aVNew.push_back(&aRes);
     aVOld.push_back(&aIProf);
 
-    int aSzCC = ElMax(3,round_up(aScale*2+1));
+    int aSzCC = std::max(3,round_up(aScale*2+1));
 
     Pt2di aPOut;
     for (aPOut.x = 0 ; aPOut.x<aSzOut.x ; aPOut.x++)
@@ -430,14 +430,14 @@ template <class tNum,class tNBase>  Im2D_REAL4   TplFReduceImageProf
         {
               aTPds.oset(aPOut,0.0);
               Pt2dr aPRIn (aPOut.x*aScale +aBox._p0.x,aPOut.y*aScale+aBox._p0.y);
-              int aXInCentreI = ElMax(1,ElMin(aSzIn.x-2,round_ni(aPRIn.x)));
-              int aYInCentreI = ElMax(1,ElMin(aSzIn.y-2,round_ni(aPRIn.y)));
+              int aXInCentreI = std::max(1,std::min(aSzIn.x-2,round_ni(aPRIn.x)));
+              int aYInCentreI = std::max(1,std::min(aSzIn.y-2,round_ni(aPRIn.y)));
               Pt2di aPII(aXInCentreI,aYInCentreI);
 
-              int aXI0 = ElMax(0,aXInCentreI-aSzCC);
-              int aYI0 = ElMax(0,aYInCentreI-aSzCC);
-              int aXI1 = ElMin(aSzIn.x-2,aXInCentreI+aSzCC);
-              int aYI1 = ElMin(aSzIn.y-2,aYInCentreI+aSzCC);
+              int aXI0 = std::max(0,aXInCentreI-aSzCC);
+              int aYI0 = std::max(0,aYInCentreI-aSzCC);
+              int aXI1 = std::min(aSzIn.x-2,aXInCentreI+aSzCC);
+              int aYI1 = std::min(aSzIn.y-2,aYInCentreI+aSzCC);
 
               // 1 calcul du barrycentre
               Pt2dr aBar(0,0);
@@ -478,7 +478,7 @@ template <class tNum,class tNBase>  Im2D_REAL4   TplFReduceImageProf
                       const Pt2di & aP = aVP[aKP];
                       double aDist= euclid(aP-aNearest);
                       double aProf =  aTProf.get(aP);
-                      double aDifNorm = ElAbs(aProf-aProfRef) /(aDifStd * (1+aDist/2.0));
+                      double aDifNorm = std::abs(aProf-aProfRef) /(aDifStd * (1+aDist/2.0));
                       double aPdsProf = 1.0;
 
                       if (aDifNorm<1)
@@ -493,7 +493,7 @@ template <class tNum,class tNBase>  Im2D_REAL4   TplFReduceImageProf
                          aPdsProf = 0;
                       }
                   
-                      double aDistNorm= ElMin(aDist/aScale,2.0);
+                      double aDistNorm= std::min(aDist/aScale,2.0);
                       double aPdsDist = (1+cos(aDistNorm * (PI/2.0)));
 
                       double aPds = aPdsDist * aPdsProf;
@@ -637,7 +637,7 @@ template <class tNum,class tNBase>  Im2D_REAL4   TplProlongByCont
              aTMC.oset(aVNewGen[aKP],0);
          aNbProl--;
          aVCur = aVNewGen;
-         aDCum += ElAbs(aDistAdd);
+         aDCum += std::abs(aDistAdd);
          if (aDCum> aDistMaxAdd) aDistAdd = 0;
     }
 

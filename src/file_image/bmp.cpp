@@ -361,7 +361,7 @@ tFileOffset BMP_Rle_8_PFOB::Read(U_INT1 * res,tFileOffset nbo)
 
               case Data_BMP_File::rle:
               {
-                   INT nb_to_read = ElMin(nb-i,_nb_buffered.IntBasicLLO());
+                   INT nb_to_read = std::min(nb-i,_nb_buffered.IntBasicLLO());
                     memset(res+i,_rle_val,nb_to_read);
                     i+= nb_to_read;
                    _nb_buffered -= nb_to_read;
@@ -371,7 +371,7 @@ tFileOffset BMP_Rle_8_PFOB::Read(U_INT1 * res,tFileOffset nbo)
 
               case Data_BMP_File::absolute:
               {
-                   INT nb_to_read = ElMin(nb-i,_nb_buffered.IntBasicLLO());
+                   INT nb_to_read = std::min(nb-i,_nb_buffered.IntBasicLLO());
                    _fp.read(res+i,sizeof(U_INT1),nb_to_read);
                    i += nb_to_read;
                    _nb_buffered -= nb_to_read;

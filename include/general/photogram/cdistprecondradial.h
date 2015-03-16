@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CDISTPRECONDRADIAL_H
 #define _ELISE_GENERAL_PHOTOGRAM_CDISTPRECONDRADIAL_H
 
-#include "general/sys_dep.h"
+
 
 class cDistPrecondRadial : public ElDistortion22_Gen
 {

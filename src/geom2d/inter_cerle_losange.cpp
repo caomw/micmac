@@ -131,7 +131,7 @@ REAL IntersecSegCercle(const SegComp &aSeg,Pt2dr & Q0,Pt2dr & Q1)
     REAL b = 2 * scal(T,p0);
     REAL c = square_euclid(p0) - 1;
     REAL delta = ElSquare(b) - 4 * a * c;
-    REAL SqDelta = sqrt(ElMax(0.0,delta));
+    REAL SqDelta = sqrt(std::max(0.0,delta));
 
     Q0  = p0 + T*((-b-SqDelta)/(2*a));
     Q1  = p0 + T*((-b+SqDelta)/(2*a));
@@ -482,7 +482,7 @@ REAL SurfIER
 
 REAL DerASurfIER(Pt2dr CEl,REAL A,REAL B,REAL C,Pt2dr P0,Pt2dr P1)
 {
-   REAL Eps = EpsABC * (ElAbs(A)+ElAbs(B)+ElAbs(C));
+   REAL Eps = EpsABC * (std::abs(A)+std::abs(B)+std::abs(C));
    return (
              SurfIER(CEl,A+Eps,B,C,P0,P1)
             -SurfIER(CEl,A-Eps,B,C,P0,P1)
@@ -491,7 +491,7 @@ REAL DerASurfIER(Pt2dr CEl,REAL A,REAL B,REAL C,Pt2dr P0,Pt2dr P1)
 
 REAL DerBSurfIER(Pt2dr CEl,REAL A,REAL B,REAL C,Pt2dr P0,Pt2dr P1)
 {
-   REAL Eps = EpsABC * (ElAbs(A)+ElAbs(B)+ElAbs(C));
+   REAL Eps = EpsABC * (std::abs(A)+std::abs(B)+std::abs(C));
    return (
              SurfIER(CEl,A,B+Eps,C,P0,P1)
             -SurfIER(CEl,A,B-Eps,C,P0,P1)
@@ -500,7 +500,7 @@ REAL DerBSurfIER(Pt2dr CEl,REAL A,REAL B,REAL C,Pt2dr P0,Pt2dr P1)
 
 REAL DerCSurfIER(Pt2dr CEl,REAL A,REAL B,REAL C,Pt2dr P0,Pt2dr P1)
 {
-   REAL Eps = EpsABC * (ElAbs(A)+ElAbs(B)+ElAbs(C));
+   REAL Eps = EpsABC * (std::abs(A)+std::abs(B)+std::abs(C));
    return (
              SurfIER(CEl,A,B,C+Eps,P0,P1)
             -SurfIER(CEl,A,B,C-Eps,P0,P1)
@@ -806,7 +806,7 @@ bool EllipseEq2ParamPhys
 
    if (V1 < V2)
    {
-      ElSwap(V1,V2);
+      std::swap(V1,V2);
       teta += PI/2;
       if (teta> PI)
          teta -= PI;

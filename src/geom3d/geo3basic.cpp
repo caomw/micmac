@@ -130,7 +130,7 @@ void   ElSeg3D::AbscissesPseudoInter
      REAL det = m11 * m22 - m12*m12;
      m11 /= det;
      m22 /= det;
-     ElSwap(m11,m22);
+     std::swap(m11,m22);
      m12 /= -det;
 
      // on calcule les termes lineaires
@@ -275,14 +275,14 @@ cElPlan3D RobustePlan3D
 
 
     int aNbTirage = sqrt(anEffort);
-    int aNbPTest = ElMin(int(aVPts.size()),round_up(anEffort/aNbTirage));
+    int aNbPTest = std::min(int(aVPts.size()),round_up(anEffort/aNbTirage));
     std::vector<int> aIndPts; GetNRandParmiQ(aIndPts,aNbPTest,aVPts.size());
 
 
     cElPlan3D  aRes(Pt3dr(0,0,0),Pt3dr(1,0,0),Pt3dr(0,1,0));
     double aBestDist = 1e60;
 
-    double aProp = ElMin(0.9,(aNbPTest-3.1)/aNbPTest); // On enleve au - 3 pts
+    double aProp = std::min(0.9,(aNbPTest-3.1)/aNbPTest); // On enleve au - 3 pts
 
     for (int aK=0 ; aK<aNbTirage ; aK++)
     {
@@ -299,7 +299,7 @@ cElPlan3D RobustePlan3D
             std::vector<double> aVDist;
             for (int aKInd=0 ; aKInd<int(aIndPts.size()) ; aKInd++)
             {
-                aVDist.push_back(ElAbs(scal(aNorm,aVPts[aIndPts[aKInd]]-aP0)));
+                aVDist.push_back(std::abs(scal(aNorm,aVPts[aIndPts[aKInd]]-aP0)));
             }
             double aScore = KthValProp(aVDist,aProp);
             if (aScore < aBestDist)
@@ -312,7 +312,7 @@ cElPlan3D RobustePlan3D
     }
     
     double aDistMin=1e-10; // Juste anti plantage au cas ou seulement 3 pt
-    double aDistMoy = ElMax(aDistMin,aBestDist);
+    double aDistMoy = std::max(aDistMin,aBestDist);
     for (int aTime=0  ; aTime <7 ; aTime++)
     {
         // std::cout << "RRRpplDMoy " << aDistMoy << "\n";
@@ -332,7 +332,7 @@ cElPlan3D RobustePlan3D
             aNbDist = 0;
             for (int aKP=0 ; aKP<int(aVPts.size()) ; aKP++)
             {
-                 double aDist = ElAbs(scal(aNorm,aVPts[aKP]-aP0));
+                 double aDist = std::abs(scal(aNorm,aVPts[aKP]-aP0));
                  double aPds = 0;
                  if (aDist < aSeuilDist)
                  {
@@ -351,7 +351,7 @@ cElPlan3D RobustePlan3D
         aRes = cElPlan3D(aVPts,&aVPds);
 
         
-        aDistMoy = ElMax(aDistMin,aSomDist/aNbDist);
+        aDistMoy = std::max(aDistMin,aSomDist/aNbDist);
 
     }
 

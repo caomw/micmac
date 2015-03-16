@@ -492,7 +492,7 @@ void  cMMTP::ConputeEnveloppe(const cComputeAndExportEnveloppe & aCAEE,const cXM
    int     aSzFiltrer = aCAEE.SzFilter().Val();
    double  aProp = aCAEE.ParamPropFilter().Val();
 
-   int     aDistProl = round_up(  ElMax(aCAEE.ProlResolCur().Val(),aCAEE.ProlResolCible().Val()/aZoomRel) /aStepSsEch);
+   int     aDistProl = round_up(  std::max(aCAEE.ProlResolCur().Val(),aCAEE.ProlResolCible().Val()/aZoomRel) /aStepSsEch);
    double  aDistCum =  (aCAEE.ProlDistAddMax().Val()  / (aPasPx*  aZoomRel));
    double aDistAdd =   (aCAEE.ProlDistAdd().Val()*aStepSsEch )  / (aPasPx);
 
@@ -522,10 +522,10 @@ void  cMMTP::ConputeEnveloppe(const cComputeAndExportEnveloppe & aCAEE,const cXM
         for (aPRed.x = 0 ; aPRed.x<aSzRed.x ; aPRed.x++)
         {
              Pt2di aPR1 = round_ni(Pt2dr(aPRed)*aStepSsEch);
-             int anX0 = ElMax(0,aPR1.x-aSzFiltrer);
-             int anX1 = ElMin(mSzTiep.x-1,aPR1.x+aSzFiltrer);
-             int anY0 = ElMax(0,aPR1.y-aSzFiltrer);
-             int anY1 = ElMin(mSzTiep.y-1,aPR1.y+aSzFiltrer);
+             int anX0 = std::max(0,aPR1.x-aSzFiltrer);
+             int anX1 = std::min(mSzTiep.x-1,aPR1.x+aSzFiltrer);
+             int anY0 = std::max(0,aPR1.y-aSzFiltrer);
+             int anY1 = std::min(mSzTiep.y-1,aPR1.y+aSzFiltrer);
              std::vector<REAL> aVVals;
              Pt2di aVoisR1;
              for (aVoisR1.x=anX0 ; aVoisR1.x<=anX1 ; aVoisR1.x++)
@@ -565,8 +565,8 @@ void  cMMTP::ConputeEnveloppe(const cComputeAndExportEnveloppe & aCAEE,const cXM
     // fMasqBin = fMasq>0.5;
 
 
-    mDilatPlani = ElMax(aCAEE.DilatPlaniCible().Val(),round_up(aCAEE.DilatPlaniCur().Val()*aZoomRel));
-    mDilatAlti  = ElMax(aCAEE.DilatAltiCible ().Val(),round_up(aCAEE.DilatPlaniCur().Val()*aZoomRel));
+    mDilatPlani = std::max(aCAEE.DilatPlaniCible().Val(),round_up(aCAEE.DilatPlaniCur().Val()*aZoomRel));
+    mDilatAlti  = std::max(aCAEE.DilatAltiCible ().Val(),round_up(aCAEE.DilatPlaniCur().Val()*aZoomRel));
     
     DoOneEnv(aNewMax,aNewM,true ,aTargetNuage,aCurNuage,aStepSsEch * aZoomRel);
     DoOneEnv(aNewMin,aNewM,false,aTargetNuage,aCurNuage,aStepSsEch * aZoomRel);
@@ -926,7 +926,7 @@ static int aCptCMT =0 ; aCptCMT++;
              aSomIm /= aPdsCum;
              aSomI2 /= aPdsCum;
              double anEct = aSomI2-ElSquare(aSomIm);
-             aSomI2 = sqrt(ElMax(1e0,anEct));
+             aSomI2 = sqrt(std::max(1e0,anEct));
              for (int aKS=0 ; aKS<aNbScale ; aKS++)
              {
                  cGPU_LoadedImGeom * aLI = mVScaIm[aKS][aKI];
@@ -961,8 +961,8 @@ static int aCptCMT =0 ; aCptCMT++;
              aDistLoc += aStat0->SquareDist(*aStat1) * aLI0->PdsMS() ;
          }
          aSomDistTot += aDistLoc;
-         aMaxDistTot = ElMax(aMaxDistTot,aDistLoc);
-         aMinDistTot = ElMin(aMinDistTot,aDistLoc);
+         aMaxDistTot = std::max(aMaxDistTot,aDistLoc);
+         aMinDistTot = std::min(aMinDistTot,aDistLoc);
     }
 
     double aDistMed = aSomDistTot - (aMaxDistTot+aMinDistTot);
@@ -1156,7 +1156,7 @@ void  cAppliMICMAC::DoMasqueAutoByTieP(const Box2di& aBoxLoc,const cMasqueAutoBy
    if (aMATP.Visu().Val())
    {
        Pt2dr aSzW = Pt2dr(aBoxLoc.sz());
-       TheScaleW = ElMin(1000.0,ElMin(TheMaxSzW.x/aSzW.x,TheMaxSzW.y/aSzW.y));  // Pour l'instant on accepts Zoom>1 , donc => 1000
+       TheScaleW = std::min(1000.0,std::min(TheMaxSzW.x/aSzW.x,TheMaxSzW.y/aSzW.y));  // Pour l'instant on accepts Zoom>1 , donc => 1000
 
        // TheScaleW = 0.635;
        aSzW = aSzW * TheScaleW;

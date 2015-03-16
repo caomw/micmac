@@ -666,7 +666,7 @@ cSC_Chantier::cSC_Chantier
     aP0 = aP0 - aSz * dR;
     aP1 = aP1 + aSz * dR;
 
-    REAL aZoom = ElMin(aSzMaxVisu.y/aSz.x,aSzMaxVisu.y/aSz.y);
+    REAL aZoom = std::min(aSzMaxVisu.y/aSz.x,aSzMaxVisu.y/aSz.y);
 
     //pWMur  = Video_Win::PtrWStd(aSz*aZoom,true);
     pWMur  = Video_Win::PtrWStd(Pt2di(aSz*aZoom),true); // __NEW

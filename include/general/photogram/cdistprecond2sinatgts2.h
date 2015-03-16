@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CDISTPRECOND2SINATGTS2_H
 #define _ELISE_GENERAL_PHOTOGRAM_CDISTPRECOND2SINATGTS2_H
 
-#include "general/sys_dep.h"
+
 
 class cDistPrecond2SinAtgtS2 : public cDistPrecondRadial
 {

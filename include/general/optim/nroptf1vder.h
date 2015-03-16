@@ -42,7 +42,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_OPTIM_NROPTF1VDER_H
 #define _ELISE_GENERAL_OPTIM_NROPTF1VDER_H
 
-#include "general/sys_dep.h"
+#include <NROptF1vND>
 
 class NROptF1vDer : public NROptF1vND
 {

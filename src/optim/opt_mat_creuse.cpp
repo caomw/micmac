@@ -43,22 +43,24 @@ Header-MicMac-eLiSe-25/06/2007*/
 /*                                                  */
 /****************************************************/
 
-#include "general/opt_debug.h"
-#include "abstract_types.h"
+#include <string>
+#include <vector>
+#include <iostream>
+#include <map>
+#include <cstring>
 
 #include <cElMatCreuseGen>
 #include <cIncIntervale>
 #include <ElGrowingSetInd>
 #include <ElMatrix>
 #include <Im1D>
+#include <Box2d>
 #include <cFormQuadCreuse>
 #include <PtsKD>
+#include <cControleGC>
+#include <Flux_Pts>
 
-#include <string>
-#include <vector>
-#include <iostream>
-#include <map>
-#include <cstring>
+#include <micmac_global.h>
 
 cElMatCreuseGen::cElMatCreuseGen(bool OptSym,int aNbCol,int aNbLig) :
     mOptSym (OptSym),
@@ -1341,7 +1343,7 @@ void cElMatCreuseBlocSym::VMAT_GSSR_AddNewEquation_Indexe
     for (int aKBly=0 ; aKBly <aNbBl ; aKBly++)
     {
         const cSsBloc & aBlY = (*aVSB)[aKBly];
-        const cIncintervale * aintY  = aBlY.intervale();
+        const cIncIntervale * aintY  = aBlY.Intervale();
         int aNumBlocintervY    = aintY->NumBlocSolve();
 
         int aI0y = aBlY.I0AbsSolve();
@@ -1352,7 +1354,7 @@ void cElMatCreuseBlocSym::VMAT_GSSR_AddNewEquation_Indexe
         for (int aKBlx=0 ; aKBlx <aNbBl ; aKBlx++)
         {
             const cSsBloc & aBlX = (*aVSB)[aKBlx];
-            const cIncintervale * aintX  = aBlX.intervale();
+            const cIncIntervale * aintX  = aBlX.Intervale();
             int aNumBlocintervX    = aintX->NumBlocSolve();
             if ((!mOptSym) || (aNumBlocintervX>=aNumBlocintervY))
             {
@@ -1411,7 +1413,7 @@ void cElMatCreuseBlocSym::SoutraitProduc3x3
     for (int aKBly=0 ; aKBly <aNbBl ; aKBly++)
     {
         const cSsBloc & aBlY = (*aYVSB)[aKBly];
-        const cIncintervale * aintY  = aBlY.intervale();
+        const cIncIntervale * aintY  = aBlY.Intervale();
         int aNumBlocintervY    = aintY->NumBlocSolve();
 
         int aI0y = aBlY.I0AbsSolve();
@@ -1422,7 +1424,7 @@ void cElMatCreuseBlocSym::SoutraitProduc3x3
         for (int aKBlx=0 ; aKBlx <aNbBl ; aKBlx++)
         {
             const cSsBloc & aBlX = (*aYVSB)[aKBlx];
-            const cIncintervale * aintX  = aBlX.intervale();
+            const cIncIntervale * aintX  = aBlX.Intervale();
             int aNumBlocintervX    = aintX->NumBlocSolve();
             if ((!mOptSym) || (aNumBlocintervX>=aNumBlocintervY))
             {
@@ -1474,7 +1476,7 @@ typedef cBlocMCBS ** tBlPP;
 
 cElMatCreuseBlocSym::cElMatCreuseBlocSym
 (
-        const  std::vector<cIncintervale *> &  strBlocs,
+        const  std::vector<cIncIntervale *> &  strBlocs,
         const  std::vector<int> &              ISolve2Bloc,
         eModePreCond                           aMode
         ) :
@@ -1513,7 +1515,7 @@ cElMatCreuseBlocSym::cElMatCreuseBlocSym
     {
         int aN = mISolve2Bloc[aKN];
         ELISE_ASSERT((aN>=0)&&(aN<int(strBlocs.size())),"Er6 in cElMatCreuseBlocSym::cElMatCreuseBlocSym");
-        cIncintervale * anI =  mStrBlocs[aN];
+        cIncIntervale * anI =  mStrBlocs[aN];
         ELISE_ASSERT
                 (
                     (aKN>=anI->I0Solve())&& (aKN<anI->I1Solve()),
@@ -1563,8 +1565,8 @@ void  cElMatCreuseBlocSym::VerifScal()
             double aScB = ScaleCol(aC1,aC2);
             double aEps = 1e-6;
 
-            double aDif = ElAbs((aScA-aScB)/(aEps+ElAbs(aScA)+ElAbs(aScB)));
-            if (ElAbs(aScA) > aEps)
+            double aDif = std::abs((aScA-aScB)/(aEps+std::abs(aScA)+std::abs(aScB)));
+            if (std::abs(aScA) > aEps)
                 std::cout << aScA << " " << aScB <<  " " << aDif << "\n";
             ELISE_ASSERT(aDif<aEps,"cElMatCreuseBlocSym::ShowStruct");
         }
@@ -1586,8 +1588,8 @@ void  cElMatCreuseBlocSym::ShowStruct(bool basic)
     {
         for (int aKx = 0 ; aKx< mNbBlocs  ; aKx++)
         {
-            int aKMx = ElMax(aKx,aKy);
-            int aKMy = ElMin(aKx,aKy);
+            int aKMx = std::max(aKx,aKy);
+            int aKMy = std::min(aKx,aKy);
 
             std::string aS = ".";
             cBlocMCBS * aBl = mDataBlocs[aKMy][aKMx];
@@ -1638,7 +1640,7 @@ void  cElMatCreuseBlocSym::Reset()
 
 double  cElMatCreuseBlocSym::LowGetElem(int aX,int aY)  const
 {
-    if (aX <aY) ElSwap(aX,aY);
+    if (aX <aY) std::swap(aX,aY);
 
     int aKBx = mISolve2Bloc[aX];
     int aKBy = mISolve2Bloc[aY];
@@ -1652,7 +1654,7 @@ double  cElMatCreuseBlocSym::LowGetElem(int aX,int aY)  const
 
 void  cElMatCreuseBlocSym::LowSetElem(int aX,int aY,const double & aVal)
 {
-    if (aX <aY) ElSwap(aX,aY);
+    if (aX <aY) std::swap(aX,aY);
 
     int aKbX = mISolve2Bloc[aX];
     int aKbY = mISolve2Bloc[aY];
@@ -1665,8 +1667,8 @@ void  cElMatCreuseBlocSym::LowSetElem(int aX,int aY,const double & aVal)
 
 double  cElMatCreuseBlocSym::SimpleScaleCol(int aCol1,int aCol2)
 {
-    if (aCol1> aCol2) ElSwap(aCol1,aCol2);
-    int aNb = ElMin(aCol1,aCol2-1);
+    if (aCol1> aCol2) std::swap(aCol1,aCol2);
+    int aNb = std::min(aCol1,aCol2-1);
     double aRes = 0;
     for (int aK=0 ; aK<= aNb; aK++)
         aRes += SimpleGet(aCol1,aK) * SimpleGet(aCol2,aK);
@@ -1803,7 +1805,7 @@ void cElMatCreuseBlocSym::CalculCholesky()
 double  cElMatCreuseBlocSym::ScaleCol(int aCol1,int aCol2)
 {
     if (aCol1> aCol2) std::swap(aCol1,aCol2);
-    // int aNb = ElMin(aCol1,aCol2-1);
+    // int aNb = std::min(aCol1,aCol2-1);
 
     int aKBl1 = mISolve2Bloc[aCol1];
     int aKBl2 = mISolve2Bloc[aCol2];
@@ -1839,7 +1841,7 @@ double  cElMatCreuseBlocSym::ScaleCol(int aCol1,int aCol2)
 
 double  cElMatCreuseBlocSym::SimpleGet(int aX,int aY)  const
 {
-    if (aX <aY) ElSwap(aX,aY);
+    if (aX <aY) std::swap(aX,aY);
 
     int aKbX = mISolve2Bloc[aX];
     int aKbY = mISolve2Bloc[aY];
@@ -1874,7 +1876,7 @@ void VerifMats(const std::string & aMes,Im1D_REAL8  aM1,Im1D_REAL8 aM2)
             (
                 aM1.all_pts(),
                 Abs(aM1.in()-aM2.in()),
-                sigma(aSom) | VMax(aMax)
+                Output::sigma(aSom) | Output::VMax(aMax)
                 );
 
     std::cout << "Verif " << aMes << " DMax " << aMax << " DMoy " << aSom/aM1.tx() << "\n";

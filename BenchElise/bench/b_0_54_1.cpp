@@ -78,7 +78,7 @@ public :
      void Verif(Fonc_Num aF1,Fonc_Num aF2)
      {
 
-         BENCH_ASSERT(ElAbs(aF1.ValFonc(P1)-aF2.ValFonc(P2))<epsilon);
+         BENCH_ASSERT(std::abs(aF1.ValFonc(P1)-aF2.ValFonc(P2))<epsilon);
      }
 };
 

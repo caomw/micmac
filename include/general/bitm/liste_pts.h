@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_BITM_LISTE_PTS_H
 #define _ELISE_GENERAL_BITM_LISTE_PTS_H
 
-#include "general/sys_dep.h"
+
 
 template <class Type,class Type_Base> class Liste_Pts : public Liste_Pts_Gen
 {

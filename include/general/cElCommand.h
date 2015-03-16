@@ -8,7 +8,6 @@
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
-#include "../include/general/sys_dep.h"
 #include "../include/private/util.h"
 #include "sys/stat.h"
 

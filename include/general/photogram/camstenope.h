@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CAMSTENOPE_H
 #define _ELISE_GENERAL_PHOTOGRAM_CAMSTENOPE_H
 
-#include "general/sys_dep.h"
+
 
 #include <ElCamera>
 

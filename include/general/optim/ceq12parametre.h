@@ -42,8 +42,6 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_OPTIM_CEQ12PARAMETRE_H
 #define _ELISE_GENERAL_OPTIM_CEQ12PARAMETRE_H
 
-#include "general/sys_dep.h"
-
 class cEq12Parametre
 {
     public :

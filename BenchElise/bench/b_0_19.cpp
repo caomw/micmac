@@ -106,7 +106,7 @@ void  bench_can_exp_op_buf(Pt2di sz,Pt2di p0,REAL fx,REAL fy,INT nb)
           {
               d0[y][x] = 
                           (y >= p0.y -nb)                              ?
-                          (Pow(fx,ElAbs(x-p0.x)) * Pow(fy,ElAbs(y-p0.y)))  :
+                          (Pow(fx,std::abs(x-p0.x)) * Pow(fy,std::abs(y-p0.y)))  :
                           0.0                                          ;
           }
       
@@ -190,7 +190,7 @@ void bench_rect_kth(Pt2di sz,Box2di s,INT kth)
              NEW_VECTEUR
              (
                 0,
-                ElAbs(s._p1.x-s._p0.x+1) * ElAbs(s._p1.y-s._p0.y+1),
+                std::abs(s._p1.x-s._p0.x+1) * std::abs(s._p1.y-s._p0.y+1),
                 INT
              );
 
@@ -299,10 +299,10 @@ void bench_rect_var_som(Pt2di sz,Box2di side)
     {
         for (INT x =0; x<sz.x;x++)
         {
-             INT u0 = ElMax(0,x+ElMax(side._p0.x,(int)x0[y][x]));
-             INT v0 = ElMax(0,y+ElMax(side._p0.y,(int)y0[y][x]));
-             INT u1 = ElMin(sz.x-1,x+ElMin(side._p1.x,(int)x1[y][x]));
-             INT v1 = ElMin(sz.y-1,y+ElMin(side._p1.y,(int)y1[y][x]));
+             INT u0 = std::max(0,x+std::max(side._p0.x,(int)x0[y][x]));
+             INT v0 = std::max(0,y+std::max(side._p0.y,(int)y0[y][x]));
+             INT u1 = std::min(sz.x-1,x+std::min(side._p1.x,(int)x1[y][x]));
+             INT v1 = std::min(sz.y-1,y+std::min(side._p1.y,(int)y1[y][x]));
     
              INT som = 0;
              for (INT v = v0; v<=v1 ; v++)

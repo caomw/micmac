@@ -364,7 +364,7 @@ Fonc_Num canny_exp_filt(Fonc_Num f,REAL fx,REAL fy,INT nb)
 {
     if (nb < 0)
     {
-       nb = ElMax(2,ElMin(100,round_up(log(1e-9)/log(fy))));
+       nb = std::max(2,std::min(100,round_up(log(1e-9)/log(fy))));
     }
     return new Can_Exp_OPB_Not_Comp(f,fx,fy,nb,nb>4,true);
 }

@@ -60,7 +60,7 @@ void cRepartPtInteret::UpdatePond(Pt2di aP0,Im2D_REAL4 aIPond,bool Ajout)
            Pt2di aP = aP0 + Pt2di(anX,anY);
            if (mTPondGlob.inside(aP))
            {
-               double aMod = aTIPond.get(Pt2di(ElAbs(anX),ElAbs(anY)));
+               double aMod = aTIPond.get(Pt2di(std::abs(anX),std::abs(anY)));
                double aPds = mTPondGlob.get(aP);
                if (Ajout)
                   aPds *= aMod;
@@ -107,7 +107,7 @@ Im2D_Bits<1> cRepartPtInteret::ItereAndResult()
 
     for (int aK=0 ; aK < 5 ; aK++)
     {
-       OnePasse(ElMin(1.0,aK/3.0));
+       OnePasse(std::min(1.0,aK/3.0));
     }
     Im2D_Bits<1> aRes(mSzGlob.x,mSzGlob.y,0);
     TIm2DBits<1> aTRes(aRes);
@@ -206,7 +206,7 @@ void cRepartPtInteret::OnePasse(double aProp)
 double  cPtOfCorrel::PdsCorrel(double anX,double anY)
 {
    return 1.0;
-   // return 0.5+ ElMin(mVCor-ElAbs(anX),mVCor-ElAbs(anY));
+   // return 0.5+ std::min(mVCor-std::abs(anX),mVCor-std::abs(anY));
 }
 
 
@@ -329,14 +329,14 @@ void cQAC_Stat_XYV::AutoCor_Gen(double & aLambda)
 
 
     ELISE_ASSERT(mSvv>-1e-5,"cPtOfCorrel::QuickAutoCor");
-    mSvv = ElMax(1e-9,mSvv);
+    mSvv = std::max(1e-9,mSvv);
     double aA = mSxx - ElSquare(mSxv)/mSvv;
     double aB = mSxy - (mSxv*mSyv) / mSvv;
     double aC = mSyy -  ElSquare(mSyv)/mSvv;
 
     double aDelta = ElSquare(aA+aC)-4*(aA*aC-ElSquare(aB));
     ELISE_ASSERT(aDelta>-1e-5,"cPtOfCorrel::QuickAutoCor");
-    aLambda = (aA+aC-sqrt(ElMax(0.0,aDelta))) / 2.0;
+    aLambda = (aA+aC-sqrt(std::max(0.0,aDelta))) / 2.0;
 }
 
 
@@ -402,14 +402,14 @@ void cPtOfCorrel::QuickAutoCor_Gen(Pt2di aP0,double & aLambda,double & aSvv)
 
 
     ELISE_ASSERT(aSvv>-1e-5,"cPtOfCorrel::QuickAutoCor");
-    aSvv = ElMax(1e-9,aSvv);
+    aSvv = std::max(1e-9,aSvv);
     double aA = aSxx - ElSquare(aSxv)/aSvv;
     double aB = aSxy - (aSxv*aSyv) / aSvv;
     double aC = aSyy -  ElSquare(aSyv)/aSvv;
 
     double aDelta = ElSquare(aA+aC)-4*(aA*aC-ElSquare(aB));
     ELISE_ASSERT(aDelta>-1e-5,"cPtOfCorrel::QuickAutoCor");
-    aLambda = (aA+aC-sqrt(ElMax(0.0,aDelta))) / 2.0;
+    aLambda = (aA+aC-sqrt(std::max(0.0,aDelta))) / 2.0;
 
 // std::cout << "Deter " << (aSxx-aLambda)*(aSyy-aLambda)-ElSquare(aSxy) << "\n";
 }
@@ -458,7 +458,7 @@ double cPtOfCorrel::BrutaleAutoCor(Pt2di aP,int aNbTeta,double anEpsilon)
     for (int aK=0 ; aK<aNbTeta ; aK++)
     {
         double aCor = AutoCorTeta(aP,(aK*2*PI)/aNbTeta,anEpsilon);
-        aRes = ElMin(aRes,aCor);
+        aRes = std::min(aRes,aCor);
     }
     return aRes;
 }

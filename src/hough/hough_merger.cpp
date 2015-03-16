@@ -111,7 +111,7 @@ void ElSegMerge
      for(tItSC itV = VC.begin(); itV != VC.end(); itV++)
      {
         sVois.clear();
-        aQdt.RVoisins(sVois,*itV,ElMax(dLong,dLarg));
+        aQdt.RVoisins(sVois,*itV,std::max(dLong,dLarg));
 
         bool Ok = true;
         for

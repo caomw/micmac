@@ -209,7 +209,7 @@ void CorrecFromInertie
    ELISE_COPY
    (
       anIm.all_pts(),
-      aMat.s1() +(anIm.in()-aMat.s2())*sqrt(aMat.s11()/ElMax(1.0,aMat.s22())),
+      aMat.s1() +(anIm.in()-aMat.s2())*sqrt(aMat.s11()/std::max(1.0,aMat.s22())),
          anIm.out()
       | (aW.ogray()<<Max(0,Min(255,anIm.in())))
    );

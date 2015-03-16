@@ -52,7 +52,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 double AdaptPas(double aStep,double aSz)
 {
-  return aSz / ElMax(1,round_ni(aSz/aStep));
+  return aSz / std::max(1,round_ni(aSz/aStep));
 }
 
 Pt2dr AdaptPas(Pt2dr aStep,Pt2dr aSz)
@@ -191,8 +191,8 @@ REAL RImGrid::Value(Pt2dr  aP) const
 	  (
 	       Pt2dr
 	       (
-                   ElMax(0.0,ElMin(aP.x,mSzGrid.x-1.001)),
-                   ElMax(0.0,ElMin(aP.y,mSzGrid.y-1.001))
+                   std::max(0.0,std::min(aP.x,mSzGrid.x-1.001)),
+                   std::max(0.0,std::min(aP.y,mSzGrid.y-1.001))
                )
 	  );
 }
@@ -204,8 +204,8 @@ REAL RImGrid::ValueAndDer(Pt2dr aP,Pt2dr & aDer)
 	        (
 	             Pt2dr
 	             (
-                         ElMax(0.0,ElMin(aP.x,mSzGrid.x-1.001)),
-                         ElMax(0.0,ElMin(aP.y,mSzGrid.y-1.001))
+                         std::max(0.0,std::min(aP.x,mSzGrid.x-1.001)),
+                         std::max(0.0,std::min(aP.y,mSzGrid.y-1.001))
                      )
 	        );
    aDer.x = aP3.x / mStepGr.x;
@@ -834,7 +834,7 @@ cDbleGrid::cDbleGrid
        pGrDir = new PtImGrid (aTree.GetUnique("grid_directe")->GetPtImGrid(aDir));
        if (aXM.toSwapDirInv)
        {
-          ElSwap(pGrInv,pGrDir);
+          std::swap(pGrInv,pGrDir);
        }
    }
 }

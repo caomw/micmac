@@ -42,7 +42,8 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_OPTIM_ELGROWINGSETIND_H
 #define _ELISE_GENERAL_OPTIM_ELGROWINGSETIND_H
 
-#include "general/sys_dep.h"
+#include <Im2D>
+#include <Im2D_Bits>
 
 class ElGrowingSetInd 
 {

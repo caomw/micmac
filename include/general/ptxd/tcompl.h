@@ -43,6 +43,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 #define _ELISE_GENERAL_PTXD_TCOMPL_H
 
 #include <Fonc_Num>
+#include <micmac_global.h>
 
 template <class Type> class TCompl
 {
@@ -70,19 +71,6 @@ template <> class TCompl<double>
     public :
         typedef int  TypeCompl;
         static double FromC(int aV) {return aV;}
-};
-template <> class TCompl<float>
-{
-    public :
-        typedef double  TypeCompl;
-        static float FromC(double aV) {return (float)aV;}
-};
-
-template <> class TCompl<long double>
-{
-    public :
-        typedef double  TypeCompl;
-        static long double FromC(double aV) {return (long double)aV;}
 };
 
 #endif

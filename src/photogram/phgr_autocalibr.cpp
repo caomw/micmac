@@ -114,7 +114,7 @@ REAL  cElFaisceauDr2D::ResiduConvergence(REAL  teta,REAL phi)
     for (tIter anIt=Begin() ; anIt!=End() ; anIt++)
     {
        REAL aP = anIt->Pds();
-       aRes += ElAbs(anIt->ordonnee(PP)*aP);
+       aRes += std::abs(anIt->ordonnee(PP)*aP);
        aSomP += aP;
     }
     return aRes/ aSomP;
@@ -132,7 +132,7 @@ void  cElFaisceauDr2D::PtsConvergenceItere
      {
 	 REAL aResidu = ResiduConvergence(teta0,phi0);
 
-	 if ((aResidu< Epsilon) || ElAbs(aResidu-LastResidu)<DeltaRes)
+	 if ((aResidu< Epsilon) || std::abs(aResidu-LastResidu)<DeltaRes)
             return;
 	 PtsConvergence(teta0,phi0,OptimPhi);
      }

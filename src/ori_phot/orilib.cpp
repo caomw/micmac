@@ -1093,7 +1093,7 @@ void InitGrilleFromCam(or_orientation * ori,or_grille * aGr,const ElCamera & aCa
 {
    INT aNb = _NS_GRILLE-1;
    aGr->ns = aGr->nl = aNb+1;
-   aGr->pas = ElMax(ori->ins,ori->inl) / aNb;
+   aGr->pas = std::max(ori->ins,ori->inl) / aNb;
 
    for (INT anX=0 ; anX<=aNb ; anX++)
    {
@@ -1116,7 +1116,7 @@ void InitGrilleFromPol(or_orientation * ori,or_grille * aGr,ElDistRadiale_PolynI
 {
    INT aNb = _NS_GRILLE-1;
    aGr->ns = aGr->nl = aNb+1;
-   aGr->pas = ElMax(ori->ins,ori->inl) / aNb;
+   aGr->pas = std::max(ori->ins,ori->inl) / aNb;
 
    for (INT anX=0 ; anX<=aNb ; anX++)
    {
@@ -3446,12 +3446,12 @@ ElDistRadiale_PolynImpair  cDistFromCIC::DRP
     {
        double aDI =  aDist.DistInverse(aRay);
        double aRI = aRay * (1+aDI);
-       if (ElAbs(aDI)>0.5)
+       if (std::abs(aDI)>0.5)
        {
            std::cout << "DI " << aDI << "Ray " << aRay << "\n";
            ELISE_ASSERT
            (
-                 (ElAbs(aDI)<0.5),
+                 (std::abs(aDI)<0.5),
                  "Radiale distorsion abnormaly high"
            );
        }
@@ -3687,7 +3687,7 @@ cDistFromCIC::cDistFromCIC
             {
                // Chez Ebner le param B est la base en repere image, on lui donne
                // pour valeur par defaut ce qu'elle vaut en rec 60%
-               aVE.push_back(0.4 *ElMin(aCIC.SzIm().x,aCIC.SzIm().y));
+               aVE.push_back(0.4 *std::min(aCIC.SzIm().x,aCIC.SzIm().y));
             }
                     mCamEb = new cCam_Ebner
                                  (
@@ -4230,7 +4230,7 @@ int XML_orlit_fictexte_orientation (const char *fic, or_orientation *ori,bool Qu
            Box2dr aBoxI(Pt2dr(0,0),Pt2dr(anOI.SzIm()));
            Box2dr aBoxMonde = aDFC.ImageRecOfBox(aBoxI);
            Pt2dr aRab(2,2);
-           double aDDiscr = ElMin(aDMinGrid,euclid(anOI.SzIm())/aNbGrid);
+           double aDDiscr = std::min(aDMinGrid,euclid(anOI.SzIm())/aNbGrid);
           ori->mCorrDistM2C = new cDbleGrid
                          (
                       true,

@@ -139,7 +139,7 @@ cOneVisuPMul::cOneVisuPMul
    mNameF   (mAppli.DC()+mNameCam),
    mFileIm  (Tiff_Im::UnivConvStd(mNameF)),
    mSzF     (mFileIm.sz()),
-   mRatio   (mVMP.SzWPrinc().Val()/double(ElMax(mSzF.x,mSzF.y))),
+   mRatio   (mVMP.SzWPrinc().Val()/double(std::max(mSzF.x,mSzF.y))),
    mSzW     (round_ni(Pt2dr(mSzF)*mRatio)),
    mWPrinc  (mModeVisu ? (Video_Win::PtrWStd(mSzW)) : 0),
    mVVE     (mModeVisu ? (new VideoWin_Visu_ElImScr(*mWPrinc,mFileIm)) : 0),
@@ -366,7 +366,7 @@ ElTimer aChr;
                 aS1 /= aS0;
                 aS2 /= aS0;
                 aS2 -= ElSquare(aS1);
-                aS2 = sqrt(ElMax(1.0,aS2));
+                aS2 = sqrt(std::max(1.0,aS2));
 
 
                 ELISE_COPY

@@ -127,7 +127,7 @@ void Data_Liste_Pts_Gen::cat_pts(char ** c,INT nb_tot)
              _last = _last->next;
              _nb_last = 0;
          }
-         INT nb = ElMin(nb_tot,_nb_by_el-_nb_last);
+         INT nb = std::min(nb_tot,_nb_by_el-_nb_last);
 
 
          _gi->striped_output_rle
@@ -408,8 +408,8 @@ template <class Type,class TyBase>
 
      for (INT ipt=0; ipt<nb; ipt+= _nb_by_el)
      {
-         INT nb_loc = ElMin(nb-ipt,_nb_by_el);
-         dup.next_pts((char **) tmp.data(),ElMax(nb_loc,_nb_by_el));
+         INT nb_loc = std::min(nb-ipt,_nb_by_el);
+         dup.next_pts((char **) tmp.data(),std::max(nb_loc,_nb_by_el));
          for (INT d=0; d<_dim; d++)
              convert(_rdata[d]+ipt,_tdata[d],nb_loc);
      }
@@ -474,7 +474,7 @@ template <class Type,class TyBase> Liste_Pts<Type,TyBase>::Liste_Pts(INT dim,Typ
 
     for (INT k =0; k<nb ; k+=nb_by_el)
     {
-        INT nb_loc = ElMin(nb_by_el,nb-k);
+        INT nb_loc = std::min(nb_by_el,nb-k);
         for (INT d =0; d<dim ; d++)
             convert(I.data()[d],data[d]+k,nb_loc);
         p->cat_pts (C_CAST(char **,I.data()),nb_loc);

@@ -44,8 +44,8 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 INT nb_pts_in_box(Box2di side)
 {
-    return  (ElAbs(side._p1.x-side._p0.x)+1)
-          * (ElAbs(side._p1.y-side._p0.y)+1);
+    return  (std::abs(side._p1.x-side._p0.x)+1)
+          * (std::abs(side._p1.y-side._p0.y)+1);
 }
 static bool Debug=false;
 /*************************************************/
@@ -650,7 +650,7 @@ Fonc_Num  rect_kth
                Histo_Kieme::mode_h aModeH
           )
 {
-    kth = ElMax(0.0,ElMin(nb_pts_in_box(side)-1.0,kth));
+    kth = std::max(0.0,std::min(nb_pts_in_box(side)-1.0,kth));
     
     return new Kieme_Opb_Not_Comp
               (f,kth,side,max_vals,Histo_Kieme::KTH,aModeH,aCatInit,aModePond);

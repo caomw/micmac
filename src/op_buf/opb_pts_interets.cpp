@@ -59,7 +59,7 @@ class cHarrisOPB  : public Simple_OPBuf1<double,double>
              double aSeuilGrad
       )   :
           mExpGrad    (aExpGrad),
-	  mSeuilG2    (ElMax(0.0,ElSquare(aSeuilGrad)))
+	  mSeuilG2    (std::max(0.0,ElSquare(aSeuilGrad)))
       {
       }
 

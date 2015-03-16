@@ -106,7 +106,7 @@ Pt3dr cProjTore::E2UVL(const Pt3dr & aP) const { return Cyl2Tore(mCyl.E2UVL(aP))
 
 double cProjTore::SeuilDistPbTopo() const
 {
-   return PI * ElMin(mCyl.Ray(),mDiamCyl.z-mCyl.Ray());
+   return PI * std::min(mCyl.Ray(),mDiamCyl.z-mCyl.Ray());
 }
 
 
@@ -291,7 +291,7 @@ cAppliDonuts::cAppliDonuts(int argc,char **argv) :
 
              double EcartInv = euclid(aPE-aPE2);  // Test que les systeme sont inverse
              double EcartON = aP.L2();            // Test que le system est orthorme en R=0
-             double EcartDir =  ElAbs(aMixte-1);  // Test que le systeme est direct
+             double EcartDir =  std::abs(aMixte-1);  // Test que le systeme est direct
 
 
 /*
@@ -322,7 +322,7 @@ cAppliDonuts::cAppliDonuts(int argc,char **argv) :
              std::cout 
                        << "\n";
 
-             IndQual = ElMax(IndQual,EcartInv + EcartON + EcartDir);
+             IndQual = std::max(IndQual,EcartInv + EcartON + EcartDir);
         }
         std::cout << "=============================================\n";
         std::cout << "   Qual = " << IndQual  << "\n";

@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_BITM_TYPE>_H
 #define _ELISE_GENERAL_BITM_TYPE>_H
 
-#include "general/sys_dep.h"
+
 
 template <class Type> void  RealRootsOfRealPolynome
      (
@@ -33,7 +33,7 @@ void RacinesPolyneDegre4Reel
 #ifndef _ELISE_GENERAL_BITM_MONOME2Ddouble_t_H
 #define _ELISE_GENERAL_BITM_MONOME2Ddouble_t_H
 
-#include "general/sys_dep.h"
+
 
 class Monome2dReal
 {

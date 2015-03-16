@@ -216,7 +216,7 @@ void ElHoughImplem::finish()
    }
 
    {
-       INT AmplRho = ElMax(ElAbs(mIRhoMax+mNbRabRho),ElAbs(mIRhoMin-mNbRabRho));
+       INT AmplRho = std::max(std::abs(mIRhoMax+mNbRabRho),std::abs(mIRhoMin-mNbRabRho));
        mIRhoMax = + AmplRho;
        mIRhoMin = - AmplRho;
    }
@@ -334,7 +334,7 @@ ElHough::~ElHough() {}
 
 REAL ElHough::LongEstimTeta() const
 {
-   return ElMax(mNbX,mNbY)/2.0;
+   return std::max(mNbX,mNbY)/2.0;
 }
 
 ElHough::ElHough(Pt2di SzXY,REAL StepTeta) :
@@ -367,8 +367,8 @@ ElHough * ElHough::NewOne
                       StepRho,
                       StepTeta,
                       mode,
-                      ElMax(0.0,RabRho),
-                      ElMax(0.0,RabTeta)
+                      std::max(0.0,RabRho),
+                      std::max(0.0,RabTeta)
                    );
 
    res->mMode = mode;

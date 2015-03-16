@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CCAMSTENOPEBILIN_H
 #define _ELISE_GENERAL_PHOTOGRAM_CCAMSTENOPEBILIN_H
 
-#include "general/sys_dep.h"
+
 
 #include <cDistorBilin>
 #include <CamStenope>

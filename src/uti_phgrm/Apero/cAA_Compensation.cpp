@@ -932,7 +932,7 @@ void  cAppliApero::DoOneEtapeCompensation(const cEtapeCompensation & anEC)
                        if (aStepC==0)
                        {
                            int aNb = mVProfs.size();
-                           aStepC = ElMax(1,mVProfs[aNb-1] - mVProfs[aNb-2]);
+                           aStepC = std::max(1,mVProfs[aNb-1] - mVProfs[aNb-2]);
                        }
                        while (mVProfs.back() <= mProfMax)
                              mVProfs.push_back(mVProfs.back()+aStepC);

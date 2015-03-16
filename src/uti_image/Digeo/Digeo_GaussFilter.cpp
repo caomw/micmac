@@ -189,7 +189,7 @@ Im1D_INT4 ToIntegerKernel(Im1D_REAL8 aRK,int aMul,bool aForceSym)
         int aKBest=-1;
         double aDeltaMin = 1e20;
 
-        if (aForceSym && (ElAbs(toAdd)==1) )
+        if (aForceSym && (std::abs(toAdd)==1) )
         {
             ELISE_ASSERT((aSz%2),"ToIntegerKernel Sym");
             aKBest=  aSz/2;
@@ -606,7 +606,7 @@ void TestConvol()
    Im1D_REAL8 aI4 = Convol(aI1,aI2B);
 
 
-   for (int aK=0 ; aK<ElMax(aI3.tx(),aI4.tx()) ; aK++)
+   for (int aK=0 ; aK<std::max(aI3.tx(),aI4.tx()) ; aK++)
    {
        std::cout 
                   << aK << ":" 

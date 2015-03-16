@@ -169,7 +169,7 @@ void getPastisGrayscaleFilename(const std::string & aParamDir, const string &i_b
     Tiff_Im aFileInit = Tiff_Im::StdConvGen( aParamDir+i_baseName, 1, false );
     Pt2di 	imageSize = aFileInit.sz();
 
-    double scaleFactor = double( i_resolution ) / double( ElMax( imageSize.x, imageSize.y ) );
+    double scaleFactor = double( i_resolution ) / double( std::max( imageSize.x, imageSize.y ) );
     double round_ = 10;
     int    round_scaleFactor = round_ni( ( 1/scaleFactor )*round_ );
 

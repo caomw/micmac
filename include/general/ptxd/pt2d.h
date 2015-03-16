@@ -42,17 +42,18 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_PTXD_PT2D_H
 #define _ELISE_GENERAL_PTXD_PT2D_H
 
-#include "general/sys_dep.h"
+#include <cmath>
 
 #include <ElStdTypeScal>
 #include <TCompl>
 #include <Output>
+#include <TypeSubst>
 
 template <class Type> class Pt2d : public  ElStdTypeScal<Type>
 {
 public :
 
-    typedef typename TCompl<Type>::TypeCompl  tCompl;
+    //typedef typename TCompl<Type>::TypeCompl  tCompl;
     typedef Pt2d<double>  TypeReel;
     typedef Type        TypeScal;
     typedef Pt2d<Type>  TypeEff;
@@ -71,11 +72,11 @@ public :
     Pt2d<Type>(Type X,Type Y) : x (X), y (Y) {}
 
     Pt2d<Type>(const Pt2d<Type>& p) : x (p.x), y (p.y) {}
-    explicit Pt2d<Type>(const Pt2d<TCompl>& p) :
-        x( TCompl<Type>::FromC( p.x)),
-        y( TCompl<Type>::FromC( p.y))
-    {
-    }
+//    explicit Pt2d<Type>(const Pt2d<TCompl>& p) :
+//        x( TCompl<Type>::FromC( p.x)),
+//        y( TCompl<Type>::FromC( p.y))
+//    {
+//    }
 
     static  Pt2d<Type> IP2ToThisT(const Pt2d<int> & aP){return Pt2d<Type>(Type(aP.x),Type(aP.y));}
     static  Pt2d<Type> RP2ToThisT(const Pt2d<double> & aP){return Pt2d<Type>(Type(aP.x),Type(aP.y));}
@@ -90,7 +91,7 @@ public :
 
     static  Pt2d<Type>  FromPolar(double rho,double teta)
     {
-        return   Pt2d<Type>(ElStdTypeScal<Type>::RtoT(cos(teta)*rho),ElStdTypeScal<Type>::RtoT(sin(teta)*rho));
+        return   Pt2d<Type>(ElStdTypeScal<Type>::RtoT(std::cos(teta)*rho),ElStdTypeScal<Type>::RtoT(std::sin(teta)*rho));
     }
 
     static Pt2d<double> polar(const Pt2d<double> & p,double AngDef);

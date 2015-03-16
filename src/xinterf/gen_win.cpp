@@ -622,7 +622,7 @@ void Data_El_Geom_GWin::draw_circle
      if (r_loc)
         radius =     prto_window_geom(radius) 
                   -  prto_window_geom(Pt2dr(0.0,0.0));
-     radius = Pt2dr(ElAbs(radius.x),ElAbs(radius.y));
+     radius = Pt2dr(std::abs(radius.x),std::abs(radius.y));
 
      _degw->_inst_draw_circle(prto_window_geom(centre),radius);
      if (auto_flush)

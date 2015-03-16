@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHGR_FORMEL_CDISTRADIALEFORMELLE_H
 #define _ELISE_GENERAL_PHGR_FORMEL_CDISTRADIALEFORMELLE_H
 
-#include "general/sys_dep.h"
+
 
 class cDistRadialeFormelle : public cElemEqFormelle,
                              public cObjFormel2Destroy

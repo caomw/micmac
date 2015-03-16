@@ -808,7 +808,7 @@ cEl_GPAO * DoCmdExePar(const cCmdExePar & aCEP,int aNbProcess)
    std::string aNameMkF = aCEP.NameMkF().Val();
    if (aNameMkF!="") 
    {
-      aNbProcess = ElMax(1,aNbProcess);
+      aNbProcess = std::max(1,aNbProcess);
       aGPAO->GenerateMakeFile(aNameMkF);
 
       //std::string aCom = string("\"")+g_externalToolHandler.get( "make" ).callName()+"\" all -f \""+  aNameMkF + std::string("\" -j") +ToString(aNbProcess) + " -k"; 

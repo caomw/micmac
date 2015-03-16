@@ -110,14 +110,14 @@ void verif_bitm_2()
     for (int y=0 ; y<ty ; y++)
         for (int x=0 ; x<tx ; x++)
             if (b.data()[y][x] != 
-                      ElMax((REAL)x,2.25*y)
-                  +   ElMax(ElMin(x,y),(int)(0.5*y))
+                      std::max((REAL)x,2.25*y)
+                  +   std::max(std::min(x,y),(int)(0.5*y))
                   +   (x-3)/(y+2)
                   +   (x-y)/2.0
                   -  12.5
                   +  (-x+ -(y+0.5))
-                  +  ElAbs(x-y)
-                  +  ElAbs(x-y+10.25)
+                  +  std::abs(x-y)
+                  +  std::abs(x-y+10.25)
                   +  (x*x)
                   +  ((x+0.5)*(x+0.5))
               )
@@ -528,7 +528,7 @@ template <class T1,class T2> void verif_Resize(T1*,T2*)
          Virgule(sigma(aNb),I1.out()|I2.out())
     );
 
-    REAL aDif = ElAbs(aNb - aSz3.x*aSz3.y);
+    REAL aDif = std::abs(aNb - aSz3.x*aSz3.y);
     BENCH_ASSERT(aDif < epsilon);
     
     ELISE_COPY(I1.all_pts(),Abs(I1.in()-I2.in()),sigma(aDif));

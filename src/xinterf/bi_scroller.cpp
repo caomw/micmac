@@ -252,7 +252,7 @@ BiScroller::BiScroller
         Elise_colour  aGray = Elise_colour::gray(CCol.GrayVal());
 
 
-        REAL dist = ElMax(1e-10,aGray.eucl_dist(CCol));
+        REAL dist = std::max(1e-10,aGray.eucl_dist(CCol));
 
         Elise_colour vAtDit = aGray +  (DistCible/dist) * (CCol-aGray);
 
@@ -522,9 +522,9 @@ void BiScroller::SetRGBEntry(INT Gray,INT IndCol,const Elise_colour & aCol)
 {
     U_INT1 * aRGB = RGBEntry(Gray,IndCol);
 
-    aRGB[eIndR] = ElMax(0,ElMin(255,round_ni(aCol.r() *255)));
-    aRGB[eIndG] = ElMax(0,ElMin(255,round_ni(aCol.g() *255)));
-    aRGB[eIndB] = ElMax(0,ElMin(255,round_ni(aCol.b() *255)));
+    aRGB[eIndR] = std::max(0,std::min(255,round_ni(aCol.r() *255)));
+    aRGB[eIndG] = std::max(0,std::min(255,round_ni(aCol.g() *255)));
+    aRGB[eIndB] = std::max(0,std::min(255,round_ni(aCol.b() *255)));
 
 }
 

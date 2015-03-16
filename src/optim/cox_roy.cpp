@@ -634,8 +634,8 @@ template <class cCRNode> void cTplCoxRoyAlgo<cCRNode>::SetFlagEdges
 */
                          if (isInside)
                          {
-                             zMinUnval = ElMin(aZ1,ZMin(vX,vY));
-                             zMaxUnval = ElMax(aZ0,ZMax(vX,vY));
+                             zMinUnval = std::min(aZ1,ZMin(vX,vY));
+                             zMaxUnval = std::max(aZ0,ZMax(vX,vY));
                          }
                          for (int aZ = aZ0; aZ<zMinUnval ; aZ++)
                               aCol[aZ].SetEdgeNotValide(ed);
@@ -1298,11 +1298,11 @@ cInterfaceCoxRoyAlgo * cInterfaceCoxRoyAlgo::NewOne
                      {
                         int aZMin1 = aDataZmin[aY1][aX1];
                         int aZMin2 = aDataZmin[aY2][aX2];
-                        int aZMinInter = ElMax(aZMin1,aZMin2);
+                        int aZMinInter = std::max(aZMin1,aZMin2);
 
                         int aZMax1 = aDataZmax[aY1][aX1];
                         int aZMax2 = aDataZmax[aY2][aX2];
-                        int aZMaxInter = ElMin(aZMax1,aZMax2);
+                        int aZMaxInter = std::min(aZMax1,aZMax2);
 
                         int aSzInterv = aZMaxInter-aZMinInter;
 

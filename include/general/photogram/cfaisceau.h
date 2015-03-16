@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CELFAISCEAUDR2D_H
 #define _ELISE_GENERAL_PHOTOGRAM_CELFAISCEAUDR2D_H
 
-#include "general/sys_dep.h"
+
 
 class cElFaisceauDr2D
 {
@@ -49,7 +49,7 @@ private :
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CFAISCEAU_H
 #define _ELISE_GENERAL_PHOTOGRAM_CFAISCEAU_H
 
-#include "general/sys_dep.h"
+
 
     class cFaisceau : public SegComp
     {

@@ -75,7 +75,7 @@ void cAppliApero::ExportRedressement(const cExportRedressement & anER,cPoseCam &
     double aZSol = anER.ZSol().ValWithDef(aPC.AltiSol());
     double aResol = anER.Resol();
     Pt3dr aCenter = aCS->PseudoOpticalCenter();
-    double aDZ = ElAbs(aCenter.z-aZSol);
+    double aDZ = std::abs(aCenter.z-aZSol);
     double aResolSol = aDZ / (aCS->Focale()*aCS->ScaleCamNorm());
 
 // std::cout << "RES " << aResol << " SOL " << aResolSol << "\n";

@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHGR_FORMEL_CTRIANGULFORMELLE_H
 #define _ELISE_GENERAL_PHGR_FORMEL_CTRIANGULFORMELLE_H
 
-#include "general/sys_dep.h"
+
 
 class cTriangulFormelle : public ElDistortion22_Gen,
 	                  public cElemEqFormelle,

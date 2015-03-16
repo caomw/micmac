@@ -542,7 +542,7 @@ void cImDigeo::LoadImageAndPyram(const Box2di & aBoxIn,const Box2di & aBoxOut)
 		 if (aTP.PyramideGaussienne().IsInit())
 		 {
 			  double aSigma = Sigma0();
-			  aSigma = sqrt(ElMax(0.0,ElSquare(aSigma)-ElSquare(1/mResol)));
+			  aSigma = sqrt(std::max(0.0,ElSquare(aSigma)-ElSquare(1/mResol)));
 			  aF = GaussSepFilter(aF,aSigma,1e-3);
 		 }
     #endif

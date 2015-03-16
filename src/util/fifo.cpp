@@ -83,7 +83,7 @@ template <class Type,class Compare>  void ElHeap<Type,Compare>::heap_up(INT k)
            return;
         else
         {
-            ElSwap(_tab[ind_plus_petit],_tab[k]);
+            std::swap(_tab[ind_plus_petit],_tab[k]);
             k = ind_plus_petit;
         }
     }
@@ -94,7 +94,7 @@ template <class Type,class Compare>  void ElHeap<Type,Compare>::heap_down(INT k)
 {
     while ((k>1)&& _inferior(_tab[k],_tab[Fils(k)]))
     {
-          ElSwap(_tab[k],_tab[Fils(k)]);
+          std::swap(_tab[k],_tab[Fils(k)]);
           k = Fils(k);
     }
 }

@@ -109,7 +109,7 @@ void  cOneSurf_Casa::Compense(const cCasaEtapeCompensation & anEtape,bool First)
 
         aSP +=  aPds;
         aSEc2 += aPds*ElSquare(anEc);
-        aVEcart.push_back(ElAbs(anEc));
+        aVEcart.push_back(std::abs(anEc));
      }
 
      aSEc2 /= aSP;

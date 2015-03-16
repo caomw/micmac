@@ -633,7 +633,7 @@ void MakeTiffRed2Binaire
     Fonc_Num aFonc = aIm.in_proj();
 
     int aSeuil = round_ni(aRatio*16);
-    aSeuil = ElMax(0,ElMin(15,aSeuil));
+    aSeuil = std::max(0,std::min(15,aSeuil));
     aFonc = reduc_binaire_gen(aFonc,true,true,1,false,0) > aSeuil;
 
     int aMul = 1;
@@ -1039,10 +1039,10 @@ template <class Type> void calc_pente_crete_gen
                          +  FreemanVals(in[d],x,k+6)
                          +  FreemanVals(in[d],x,k+7);
 
-                CritCrete   += ElAbs(2*vB-(vA+vC));
-                CritPente   += ElAbs(vA-vC);
-                CritPente_A += ElAbs(vA-vB);
-                CritPente_C += ElAbs(vC-vB);
+                CritCrete   += std::abs(2*vB-(vA+vC));
+                CritPente   += std::abs(vA-vC);
+                CritPente_A += std::abs(vA-vB);
+                CritPente_C += std::abs(vC-vB);
            }
            if (CritCrete > CritPente)
            {

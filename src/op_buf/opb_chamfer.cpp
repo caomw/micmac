@@ -295,7 +295,7 @@ void Chamfer_OPB_Comp::prop
                if (l0[x])
                {
                   for (INT k=0 ; k<nbv ; k++)
-                      l0[x] = ElMin((INT)l0[x],l[v[k].y][x+v[k].x]+pds[k]);
+                      l0[x] = std::min((INT)l0[x],l[v[k].y][x+v[k].x]+pds[k]);
                }
       }
 }
@@ -432,7 +432,7 @@ Chamfer_OPB_Not_Comp::Chamfer_OPB_Not_Comp
 )    :
      _f                (f0),
      _chamf            (chamf), 
-     _max_d            (ElMin(255,max_d)),
+     _max_d            (std::min(255,max_d)),
      _post             (post),
      _neg              (neg),
      _binarise_input   (binarise_input)

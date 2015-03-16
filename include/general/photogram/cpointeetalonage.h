@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CPOintEETALONAGE_H
 #define _ELISE_GENERAL_PHOTOGRAM_CPOintEETALONAGE_H
 
-#include "general/sys_dep.h"
+
 
 class cPointeEtalonage
 {

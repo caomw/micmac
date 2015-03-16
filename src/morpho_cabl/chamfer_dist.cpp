@@ -88,7 +88,7 @@ template <class Type>  void one_pass_chamfer
            if (d[i])
            {
               for (INT k=0 ; k<nb_v ; k++)
-                  d[i] = ElMin((INT)d[i],d[i+vois[k]]+pds[k]);
+                  d[i] = std::min((INT)d[i],d[i+vois[k]]+pds[k]);
            }
 }
 
@@ -169,7 +169,7 @@ void Chamfer::dilate_label(Im2D<U_INT1,INT> i2d,Im2D<INT,INT> label,INT vmax) co
      U_INT1 * d = i2d.data_lin();
      INT *    l = label.data_lin();
 
-     vmax = ElMin(vmax,i2d.vmax()-2);
+     vmax = std::min(vmax,i2d.vmax()-2);
      for (int xy =0; xy<nb_pts ; xy++)
          d[xy] = l[xy] ? 0 : vmax;
 

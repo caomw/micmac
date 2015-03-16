@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHGR_FORMEL_CCMPI0PTRII_H
 #define _ELISE_GENERAL_PHGR_FORMEL_CCMPI0PTRII_H
 
-#include "general/sys_dep.h"
+
 
 class cCmpI0PtrII
 {

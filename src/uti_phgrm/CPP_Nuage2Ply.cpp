@@ -47,7 +47,7 @@ int Ratio(double aV1,double aV2)
    double aRes = aV1 / aV2;
    int aIRes = round_ni(aRes);
    double anEcart =  (aV1 - aV2*aIRes)/aIRes;
-   if ((ElAbs(anEcart) > 1.001) || (aIRes > 32))
+   if ((std::abs(anEcart) > 1.001) || (aIRes > 32))
       return -1;
 
    return aIRes;

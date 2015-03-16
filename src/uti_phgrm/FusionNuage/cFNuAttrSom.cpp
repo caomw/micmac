@@ -160,7 +160,7 @@ cFNuAttrSom::cFNuAttrSom
                   {
                      if (aTDef.get(aP))
                      {
-                        double aDist = euclid(Pt2dr(aP),aPMoy) - ElMin(6,aTDist.get(aP))/1.8;
+                        double aDist = euclid(Pt2dr(aP),aPMoy) - std::min(6,aTDist.get(aP))/1.8;
                        
                         if (aDist<aDBest)
                         {

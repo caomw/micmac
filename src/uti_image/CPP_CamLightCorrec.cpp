@@ -207,7 +207,7 @@ void cCorCamL::DoOne(const std::string & aName)
     {
        {
            Pt2dr aSzMax(1200,800);
-           double aRatio  = ElMin(aSz.x/aSzMax.x, aSz.y/aSzMax.y);
+           double aRatio  = std::min(aSz.x/aSzMax.x, aSz.y/aSzMax.y);
            Pt2di aSzW = Pt2di(Pt2dr(aSz)/aRatio);
            Video_Win aWIm = Video_Win::WStd(aSzW,1.0);
            Im2D_U_INT1 aImD0(aSz.x,aSz.y);

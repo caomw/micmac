@@ -345,8 +345,8 @@ void MPD_Coeff(double   anX,double &A,double & B,double &C,double &D)
 
    if (toSwap)
    {
-      ElSwap(A,D);
-      ElSwap(B,C);
+      std::swap(A,D);
+      std::swap(B,C);
    }
 }
 
@@ -547,11 +547,11 @@ double cKernelInterpol1D::Interpole(const cFoncI2D & aFonc,const double & x,cons
 {
     Box2di aBox = aFonc.BoxDef();
 
-    int aX0 = ElMax(aBox._p0.x,round_up(x-mSzKernel));
-    int aX1 = ElMin(aBox._p1.x,round_up(x+mSzKernel));
+    int aX0 = std::max(aBox._p0.x,round_up(x-mSzKernel));
+    int aX1 = std::min(aBox._p1.x,round_up(x+mSzKernel));
     
-    int aY0 = ElMax(aBox._p0.y,round_up(y-mSzKernel));
-    int aY1 = ElMin(aBox._p1.y,round_up(y+mSzKernel));
+    int aY0 = std::max(aBox._p0.y,round_up(y-mSzKernel));
+    int aY1 = std::min(aBox._p1.y,round_up(y+mSzKernel));
 
     double * aDx0 = mDataPX-aX0;
     double * aDy0 = mDataPY-aY0;
@@ -581,7 +581,7 @@ double cKernelInterpol1D::Interpole(const cFoncI2D & aFonc,const double & x,cons
        }
     }
 
-    return aSomV/ ElMax(1e-9,(aSomPx*aSomPy));
+    return aSomV/ std::max(1e-9,(aSomPx*aSomPy));
 }
 
 
@@ -598,7 +598,7 @@ cKernelInterpol1D  * cKernelInterpol1D::StdInterpCHC(double aScale,int  aNbTab)
 
    if (aScale==1) return aKern;
 
-   aKern = new cScaledKernelInterpol(aKern,ElMax(1.0,aScale));
+   aKern = new cScaledKernelInterpol(aKern,std::max(1.0,aScale));
    if (aNbTab>=0)
    {
       aKern = new cTabulKernelInterpol(aKern,aNbTab,false);
@@ -619,7 +619,7 @@ cSinCardApodInterpol1D::cSinCardApodInterpol1D
      cKernelInterpol1D(aSzK),
      mModeApod         (aModeApod),
      mOnlyApod         (OnlyApod),
-     mSzApod          (ElMin(mSzKernel,aSzApod)),
+     mSzApod          (std::min(mSzKernel,aSzApod)),
      mEpsilon         (aEpsilon)
 {
 }
@@ -628,7 +628,7 @@ cSinCardApodInterpol1D::cSinCardApodInterpol1D
 double  cSinCardApodInterpol1D::Value(double x) const
 {
    double aPiX = PI * x;
-   double aNorm = ElAbs(x);
+   double aNorm = std::abs(x);
 
    double aSinC =  ( aNorm < mEpsilon) ?  (1 - ElSquare(aPiX)/6.0) : (sin(aPiX)/aPiX);
 
@@ -643,7 +643,7 @@ double  cSinCardApodInterpol1D::Value(double x) const
 
          if (aNorm > (mSzKernel-mSzApod))
          {
-             double aDist = ElAbs(mSzKernel-aNorm);
+             double aDist = std::abs(mSzKernel-aNorm);
              aDist = (aDist /mSzApod) * (PI/2);
 
              aPdsApod  = ElSquare(sin(aDist));
@@ -684,7 +684,7 @@ cCubicInterpKernel::cCubicInterpKernel(REAL aA) :
 
 REAL cCubicInterpKernel::Value(REAL x) const
 {
-     x = ElAbs(x);
+     x = std::abs(x);
      REAL x2 = x * x;
      REAL x3 = x2 * x;
 
@@ -796,8 +796,8 @@ cTabulKernelInterpol::cTabulKernelInterpol
 
     for (int anX=0 ; anX<mSzTab ; anX++)
     {
-        int aXm1 = ElMax(0,anX-1);
-        int aXp1 = ElMin(mSzTab-1,anX+1);
+        int aXm1 = std::max(0,anX-1);
+        int aXp1 = std::min(mSzTab-1,anX+1);
 
         double aDif = mTab[aXp1]-mTab[aXm1];
         mDer[anX] = (aDif/2.0) * mNbDisc1;
@@ -1187,8 +1187,8 @@ void cTestCubic::DrawKernel(REAL aA)
           REAL aD1 = aCI.Derivee(x1);
           REAL aV2,aD2;
           aCI.ValAndDerivee(x1,aV2,aD2);
-          ELISE_ASSERT(ElAbs(aV1-aV2)<1e-6,"cTestCubic::DrawKernel");
-          ELISE_ASSERT(ElAbs(aD1-aD2)<1e-6,"cTestCubic::DrawKernel");
+          ELISE_ASSERT(std::abs(aV1-aV2)<1e-6,"cTestCubic::DrawKernel");
+          ELISE_ASSERT(std::abs(aD1-aD2)<1e-6,"cTestCubic::DrawKernel");
           mW.draw_seg
           (
                ToPVal(Pt2dr(x1,aCI.Value(x1))),

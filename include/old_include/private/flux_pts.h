@@ -40,10 +40,12 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_FLUX_PTS
 #define _ELISE_FLUX_PTS
 
-#include <general/sys_dep.h>
 #include <private/garb_coll_tpl.h>
+#include <general/opt_debug.h>
 
+#include <RC_Object>
 #include <Pt2d>
+#include <Box2d>
 
 /*
       One of the major feature of the ELISE'lib is the generality of the
@@ -96,25 +98,25 @@ public :
 
     const RLE_Pack_Of_Pts * rle_cast () const
     {
-        ASSERT_intERNAL(_type == rle,"RLE Convertion");
+        ASSERT_INTERNAL(_type == rle,"RLE Convertion");
         return (const RLE_Pack_Of_Pts *) this;
     }
 
     const Std_Pack_Of_Pts_Gen * std_cast () const
     {
-        ASSERT_intERNAL(_type != rle,"Std  Convertion");
+        ASSERT_INTERNAL(_type != rle,"Std  Convertion");
         return (const Std_Pack_Of_Pts_Gen *) this;
     }
 
     const Std_Pack_Of_Pts<int> * std_cast (int *) const
     {
-        ASSERT_intERNAL(_type == integer,"Std int Convertion");
+        ASSERT_INTERNAL(_type == integer,"Std int Convertion");
         return (const Std_Pack_Of_Pts<int> *) this;
     }
 
     const Std_Pack_Of_Pts<double_t> * std_cast (double_t *) const
     {
-        ASSERT_intERNAL(_type == double_t,"Std double_t Convertion");
+        ASSERT_INTERNAL(_type == double_t,"Std double_t Convertion");
         return (const Std_Pack_Of_Pts<double_t> *) this;
     }
     const Std_Pack_Of_Pts<double_t> * double_t_cast () const
@@ -295,9 +297,9 @@ public :
 
     virtual const Pack_Of_Pts * next(void) = 0;
     virtual  ~Flux_Pts_Computed();
-    inline int                          dim(void) const {return _dim;};
-    inline  Pack_Of_Pts::type_pack     type(void) const {return _type;};
-    inline int                       sz_buf(void) const {return _sz_buf;};
+    inline int                          dim(void) const {return _dim;}
+    inline  Pack_Of_Pts::type_pack     type(void) const {return _type;}
+    inline int                       sz_buf(void) const {return _sz_buf;}
     inline bool integral_flux() const {return _type != Pack_Of_Pts::real;}
 
     Flux_Pts_Computed * convert(Pack_Of_Pts::type_pack) ;

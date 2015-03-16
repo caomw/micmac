@@ -1,13 +1,17 @@
 #ifndef _ELISE_GENERAL_BITM_IM2DGEN_H
 #define _ELISE_GENERAL_BITM_IM2DGEN_H
 
-#include "general/sys_dep.h"
+#include <Im1D>
+#include <GenIm>
+#include <cFoncI2D>
+#include <Neigh_Rel>
+#include <Neighbourhood>
 
 class Im2DGen : public GenIm,
                 public cFoncI2D
 {
     public :
-      Neigh_Rel neigh_test_and_set(Neighbourhood,Im1D<int4,int> sel,Im1D<int4,int> update);
+      Neigh_Rel neigh_test_and_set(Neighbourhood,Im1D<int,int> sel,Im1D<int,int> update);
       Neigh_Rel neigh_test_and_set(Neighbourhood,int sel,int udpate,int v_max);
 
       // the list of point is considered as a list of couple of value :

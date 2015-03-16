@@ -196,7 +196,7 @@ void cEquiv1D::InitByDeZoom
             {
                 mLut->push_back
                 (
-                   ElMax(aV0_Out,ElMin(Elise_div(aV,aDz),aV1_Out-1))
+                   std::max(aV0_Out,std::min(Elise_div(aV,aDz),aV1_Out-1))
                 );
             }
         }
@@ -249,7 +249,7 @@ int cEquiv1D::SzMaxClasses() const
 {
    int aRes = 0;
    for (int aNCL = 0; aNCL<mNbClasses ; aNCL++)
-      aRes = ElMax(aRes,mDebOfClasse[aNCL+1]-mDebOfClasse[aNCL]);
+      aRes = std::max(aRes,mDebOfClasse[aNCL+1]-mDebOfClasse[aNCL]);
 
   return aRes;
 }

@@ -168,7 +168,7 @@ INT PackBitsGen<Traits>::Compr
      for (INT i =0; i<nb_tot;)
      {
          INT i0 = i;
-         INT lim = ElMin(nb_tot,i+128);
+         INT lim = std::min(nb_tot,i+128);
 
          /*
              Si au moins 2 element et 2 premier egaux : RLE

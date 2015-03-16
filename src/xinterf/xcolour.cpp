@@ -381,7 +381,7 @@ void  Data_Elise_Palette::ilutage
 
     for (INT i0=0; i0<nb ; i0+=sz_buf )
     {
-       INT i1 = ElMin(nb,i0+sz_buf);
+       INT i1 = std::min(nb,i0+sz_buf);
        lutage
        (
            derd,
@@ -1026,7 +1026,7 @@ Disc_Pal  Disc_Pal::reduce_col(Im1D_INT4 lut,INT nb_cible)
          "Size of lut != number of colours init in Disc_Pal::reduce_col"
      );
 
-     nb_cible = ElMin(nb_cible,depd()->nb());
+     nb_cible = std::min(nb_cible,depd()->nb());
 
 
      INT * nearest = lut.data();
@@ -1165,7 +1165,7 @@ Col_Pal Disc_Pal::operator ()(INT c1)
 
 Disc_Pal  Disc_Pal::clisp_pal(INT nb)
 {
-    nb = ElMax(nb,30);
+    nb = std::max(nb,30);
 
     Elise_colour * tabc = new Elise_colour [nb];
 

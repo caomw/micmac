@@ -184,7 +184,7 @@ void cAppliMICMAC::DoCorrel2ImGeomImGen
                      }
                      double aV0 = Vals[0];
                      double aV1 = Vals[1] * aRatioI1I2;
-                     double aCost = aPdsPonct  * (ElAbs(aV1-aV0)/(aV1+aV0));
+                     double aCost = aPdsPonct  * (std::abs(aV1-aV0)/(aV1+aV0));
                      // On envoie le resultat a l'optimiseur pour valoir  ce que de droit
                      mSurfOpt->SetCout(Pt2di(anX,anY),&aZInt,aCost);
                    }
@@ -366,7 +366,7 @@ void cAppliMICMAC::DoCorrelRobusteNonCentree
                                           {
                                              double aRatio = (aI1 < aI2) ? (aI1/aI2) : (aI2/aI1);
                                              aRatio = 10*(1-aRatio);
-                                             aCostMin+=  ElMin(1.0,aRatio);
+                                             aCostMin+=  std::min(1.0,aRatio);
                                           }
                                           else
                                           {

@@ -190,8 +190,8 @@ double cAppli_HomCorOri::ScorePts(const Pt2di & aP)
     {
         for (aQ.y=aP0.y ; aQ.y<aP1.y; aQ.y++)
         {
-             double aEPr = ElAbs(aProf-mTProf.get(aQ));
-             double aEPax = ElAbs(aPax-mTPx.get(aQ)) * 10;
+             double aEPr = std::abs(aProf-mTProf.get(aQ));
+             double aEPax = std::abs(aPax-mTPx.get(aQ)) * 10;
 
              aRes += PdsErr(aEPr) * PdsErr(aEPax);
         }

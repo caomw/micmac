@@ -82,7 +82,7 @@ template <class Type>   const Pack_Of_Pts * Im2_Pts_in_Comp<Type>::next()
 {
    if (_ind == _nb_pts)
       return 0;
-   INT nb = ElMin(this->sz_buf(),_nb_pts-_ind);
+   INT nb = std::min(this->sz_buf(),_nb_pts-_ind);
 
    for (INT d=0; d<this->dim() ; d++)
        ::convert(this->_pack->_pts[d],_data[d]+_ind,nb);

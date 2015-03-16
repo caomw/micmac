@@ -247,7 +247,7 @@ cIntervLiquor * cAppliLiquor::SplitRecInterv(int aDeb,int aEnd,int aProf)
    }
    else
    {
-         int anOverlap = ElMax(mOverlapMin,ElMin(mOverlapMax,round_ni(aLarg*mOverlapProp)));
+         int anOverlap = std::max(mOverlapMin,std::min(mOverlapMax,round_ni(aLarg*mOverlapProp)));
          int aNewLarg = round_up((aLarg + anOverlap)/2.0);
 
          aRes->SetF1(SplitRecInterv(aDeb,aDeb+aNewLarg,aProf+1));

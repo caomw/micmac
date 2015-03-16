@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHGR_FORMEL_CEQHOMOGFORMELLE_H
 #define _ELISE_GENERAL_PHGR_FORMEL_CEQHOMOGFORMELLE_H
 
-#include "general/sys_dep.h"
+
 
 class cEqHomogFormelle : public  cNameSpaceEqF ,
                          public cEqFPtLiaison,

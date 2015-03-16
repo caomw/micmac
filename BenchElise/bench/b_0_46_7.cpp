@@ -49,7 +49,7 @@ class cTestDistFraser
 		    if (pW)
 		    {
                        mCW = pW->sz()/2;
-                       mFact = ElMin(mCW.x,mCW.y) / mAmpl;
+                       mFact = std::min(mCW.x,mCW.y) / mAmpl;
 		    }
 		    mDist.DRad().PushCoeff(aR3/pow(anAmpl,2));
 		    mDist.DRad().PushCoeff(aR5/pow(anAmpl,4));

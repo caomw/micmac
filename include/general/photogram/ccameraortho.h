@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CCAMERAORTHO_H
 #define _ELISE_GENERAL_PHOTOGRAM_CCAMERAORTHO_H
 
-#include "general/sys_dep.h"
+
 
 class cCameraOrtho : public ElCamera
 {

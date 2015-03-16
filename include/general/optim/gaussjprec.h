@@ -42,8 +42,6 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_OPTIM_GAUSSJPREC_H
 #define _ELISE_GENERAL_OPTIM_GAUSSJPREC_H
 
-#include "general/sys_dep.h"
-
 class GaussjPrec
 {
       public :
@@ -78,6 +76,6 @@ class GaussjPrec
           ElMatrix<double_t> _x;
           ElMatrix<double_t> _eps;
           ElMatrix<double_t> _ec;
-};                
+};
 
 #endif

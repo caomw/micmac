@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_ELDISTRADIALE_H
 #define _ELISE_GENERAL_PHOTOGRAM_ELDISTRADIALE_H
 
-#include "general/sys_dep.h"
+
 
 class ElDistRadiale : public ElDistortion22_Gen
 {

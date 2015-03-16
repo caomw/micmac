@@ -57,7 +57,7 @@ class ElHoughBasic : public ElHoughImplem
        {
           if (!mAdapt) return 1.0;
           REAL aTeta = G2S_Teta(iTeta);
-          return ElMax(ElAbs(cos(aTeta)),ElAbs(sin(aTeta)));
+          return std::max(std::abs(cos(aTeta)),std::abs(sin(aTeta)));
        }
        bool mAdapt;
        bool mSubPix;

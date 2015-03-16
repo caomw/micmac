@@ -166,7 +166,7 @@ double cRecorrel::OneCorrelOfDec(Pt2dr aDec,cRecorrel & aRC)
    aS12 /=  mNbPts;
    aS12 -= mS1 * aRC.mS1;
 
-   double aRes = aS12/sqrt(ElMax(0.1,mS2*aRC.mS2));
+   double aRes = aS12/sqrt(std::max(0.1,mS2*aRC.mS2));
 
    return aRes;
 }

@@ -109,7 +109,7 @@ CamStenope * cParamIFDistPolynXY::DupCurPIF()
 { 
     cCamStenopeDistPolyn * aS = mCurPIF;
     NV_UpdateCurPIF();
-    ElSwap(aS,mCurPIF);
+    std::swap(aS,mCurPIF);
     return aS;
 }
 
@@ -650,8 +650,8 @@ void cParamIntrinsequeFormel::UpdateCamGrid( double aTol)
 
                        double aDist = euclid(aP1,aPG);
                        if ( aDist >aTol)
-                          mRayonGrid = ElMin(mRayonGrid,euclid(aP,aSz/2.0));
-                       aEcMax = ElMax(aDist,aEcMax);
+                          mRayonGrid = std::min(mRayonGrid,euclid(aP,aSz/2.0));
+                       aEcMax = std::max(aDist,aEcMax);
                     }
                }
            }
@@ -907,7 +907,7 @@ CamStenope * cParamIntrinsequeFormel::DupCurPIF()
 { 
     CamStenopeIdeale * aS = mCurPIF;
     NV_UpdateCurPIF();
-    ElSwap(aS,mCurPIF);
+    std::swap(aS,mCurPIF);
     return aS;
 }
 
@@ -1088,7 +1088,7 @@ CamStenope * cParamIFDistRadiale::DupCurPIF()
 { 
     cCamStenopeDistRadPol * aS = mCurPIF;
     NV_UpdateCurPIF();
-    ElSwap(aS,mCurPIF);
+    std::swap(aS,mCurPIF);
     return aS;
 }
 
@@ -1229,7 +1229,7 @@ CamStenope * cParamIFDistStdPhgr::DupCurPIF()
  // std::cout << "cParamIFDistStdPhgr::DupCurPIF  " << mDStd.P1() << " " << mDStd.P2() << " " << mDStd.b1() << " " << mDStd.b2() << "\n";
     cCamStenopeModStdPhpgr * aS = mCurPIF;
     NV_UpdateCurPIF();
-    ElSwap(aS,mCurPIF);
+    std::swap(aS,mCurPIF);
 
 /*
  mSet.ShowVar(); 
@@ -1324,7 +1324,7 @@ CamStenope * cParamIFHomogr::DupCurPIF()
 { 
     cCamStenopeDistHomogr * aS = mCurPIF;
     NV_UpdateCurPIF();
-    ElSwap(aS,mCurPIF);
+    std::swap(aS,mCurPIF);
     return aS;
 }
 

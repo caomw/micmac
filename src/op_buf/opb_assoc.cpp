@@ -428,7 +428,7 @@ std::vector<int>  DecompSigmaEnInt(double aSigma,int aNb)
     {
          double  aRes = ElSquare(aSigma)-aSom2;
          aRes /= aNb - aK;
-         aRes = sqrt(ElMax(0.0,aRes));
+         aRes = sqrt(std::max(0.0,aRes));
          int aIRes = round_ni(aRes);
          aSom2 += ElSquare(aIRes);
          aVI.push_back(aIRes);

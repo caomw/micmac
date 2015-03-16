@@ -169,13 +169,13 @@ Fonc_Num skeleton_gen(Fonc_Num f,INT max_d,L_ArgSkeleton larg,bool AvecDist)
       if  (askel._ang >0)
       {
           REAL da = (d * 1.2) / cos(atan(askel._ang+1)) +2;
-          d = ElMax (d,round_up(da));
+          d = std::max (d,round_up(da));
       }
-      d =  ElMax(d,askel._surf+2);
+      d =  std::max(d,askel._surf+2);
 
       INT per_reaf = (INT) (3 * d) + 5;
 
-      per_reaf = ElMax(per_reaf,500);
+      per_reaf = std::max(per_reaf,500);
                 
 
       return create_op_buf_simple_tpl

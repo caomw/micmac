@@ -37,7 +37,7 @@ void bench_dist_pt_box(Box2di box,INT nb)
           );
           BENCH_ASSERT
           (
-              ElAbs(d2- box.SquareDist(Pt2dr(pt))) < epsilon
+              std::abs(d2- box.SquareDist(Pt2dr(pt))) < epsilon
           );
 
           //BENCH_ASSERT(bp1.Intersecte(pt) ==  (d2==0));
@@ -62,7 +62,7 @@ REAL BovDistSegBox(const Box2di & b,const SegComp & s)
         return 0.0;
      Pt2di pt[4];
      b.Corners(pt);
-     return ElMin4
+     return std::min4
             (
                //s.square_dist(SegComp::seg,SegComp(pt[0],pt[1]),SegComp::seg),
                //s.square_dist(SegComp::seg,SegComp(pt[1],pt[2]),SegComp::seg),
@@ -94,7 +94,7 @@ void bench_dist_seg_box(Box2di b,INT nb)
 
               REAL d1 = BovDistSegBox(b,S);
               REAL d2 = b.SquareDist(S);
-              BENCH_ASSERT(ElAbs(d1-d2)<epsilon);
+              BENCH_ASSERT(std::abs(d1-d2)<epsilon);
          }
      }
 }

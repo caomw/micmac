@@ -130,8 +130,8 @@ Quick_Flux_Poly_Comp::Quick_Flux_Poly_Comp(const std::vector<Pt2di> & Pts,Box2di
              Pt2dr aPR0 = Pt2dr(p0);
              Pt2dr aPR1 = Pt2dr(p1);
              Seg2d aSeg(aPR0,aPR1);
-             INT y0 = ElMin(p0.y ,p1.y);
-             INT y1 = ElMax(p0.y ,p1.y);
+             INT y0 = std::min(p0.y ,p1.y);
+             INT y1 = std::max(p0.y ,p1.y);
              
              for (INT y =y0 ; y<y1 ; y++)
              {

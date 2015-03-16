@@ -298,14 +298,14 @@ class cGetPdsOnVPtr
 
 void cOneImageVideo::CalcScoreAutoCorrel(const  std::vector<cOneImageVideo*> & aVOIV,int aSzW)
 {
-      int aK0 = ElMax(0,mTimeNum-aSzW);
-      int aK1 = ElMin(mTimeNum+1+aSzW,int(aVOIV.size()));
+      int aK0 = std::max(0,mTimeNum-aSzW);
+      int aK1 = std::min(mTimeNum+1+aSzW,int(aVOIV.size()));
 
       std::vector<cOneImageVideo*> aSV;
       double aSomPds = 0;
       for (int aK=aK0 ; aK<aK1 ; aK++)
       {
-          double aPds = ElAbs(aSzW+1 -ElAbs(mTimeNum-aK)) / double(aSzW+1);
+          double aPds = std::abs(aSzW+1 -std::abs(mTimeNum-aK)) / double(aSzW+1);
           aVOIV[aK]->mPdsAutoCor = aPds;
           aSomPds += aPds;
           aSV.push_back(aVOIV[aK]);
@@ -320,7 +320,7 @@ void cOneImageVideo::CalcScoreAutoCorrel(const  std::vector<cOneImageVideo*> & a
       double aEcartMoy = 0.0;
       for (int aK=aK0 ; aK<aK1 ; aK++)
       {
-           aEcartMoy += ElAbs(aVOIV[aK]->mAutoCor-aVMed) * aVOIV[aK]->mPdsAutoCor;
+           aEcartMoy += std::abs(aVOIV[aK]->mAutoCor-aVMed) * aVOIV[aK]->mPdsAutoCor;
       }
       aEcartMoy /= aSomPds;
       
@@ -363,7 +363,7 @@ void cOneImageVideo::InitOk()
 
 int cOneImageVideo::DifTime(const cOneImageVideo & anOIV) const
 {
-    return ElAbs(mTimeNum-anOIV.mTimeNum);
+    return std::abs(mTimeNum-anOIV.mTimeNum);
 }
 
 
@@ -386,7 +386,7 @@ void cOneImageVideo::UpdateCheminOpt(int aS0,int aS1,const std::vector<cOneImage
     for (int aS=aS0 ; aS< aS1 ; aS++)
     {
         const cOneImageVideo & aPred = *(aVIV[aS]);
-        double aDeltaL = ElAbs(ElAbs(aS-mTimeNum)-aStdJ) / aStdJ;
+        double aDeltaL = std::abs(std::abs(aS-mTimeNum)-aStdJ) / aStdJ;
 
         double aGainArc = mNormAC +  aPred.mNormAC - (aDeltaL + 2*ElSquare(aDeltaL)) * 1.0;
         for (int aKSolP=0 ; aKSolP<int(aPred.mSols.size())  ; aKSolP++)
@@ -416,7 +416,7 @@ const cSolChemOptImV &  cOneImageVideo::SolOfLength(int aNbL)
         {
              if ( mSols[aK].mIndPred>=0)
              {
-                 double  aDist = ElAbs(aK-aNbL);
+                 double  aDist = std::abs(aK-aNbL);
                  if (aDist<aDMin)
                  {
                      aDMin = aDist;
@@ -501,8 +501,8 @@ cAppliDevideo::cAppliDevideo(int argc,char ** argv) :
     // Calcul des noms dans l'intervalle
     {
         const std::vector<std::string> * aVN = mEASF.mICNM->Get(mMMPatImOk);
-        int aK0 = ElMax(0,mMinMax.x);
-        int aK1 = ElMin(int(aVN->size()),mMinMax.y);
+        int aK0 = std::max(0,mMinMax.x);
+        int aK1 = std::min(int(aVN->size()),mMinMax.y);
         for (int aK=aK0; aK<aK1 ;aK++)
         {
             mVName.push_back((*aVN)[aK]);
@@ -562,7 +562,7 @@ cAppliDevideo::cAppliDevideo(int argc,char ** argv) :
         int aPivNext = PivotAPriori(aKI+1);
         
         int aPiv0 =  round_ni(barry(ThePropRechPiv,aPivPrec,aPiv));
-        int aPiv1 =  ElMax(aPiv+1,round_ni(barry(ThePropRechPiv,aPivNext,aPiv)));
+        int aPiv1 =  std::max(aPiv+1,round_ni(barry(ThePropRechPiv,aPivNext,aPiv)));
         int aPivMax = -1;
         double aScoreMax=-1;
         for (int aPiv=aPiv0  ; aPiv<=aPiv1 ; aPiv++)
@@ -626,8 +626,8 @@ void cAppliDevideo::ComputeChemOpt(int aS0,int aS1)
     int aJumpMin = round_down(0.5*mStdJump);
     for (int aS=aS0+1 ; aS<=aS1 ; aS++)
     {
-        int aSDeb = ElMax(aS0,aS-aJumpMax);
-        int aSEnd = ElMax(aSDeb+1,aS-aJumpMin);
+        int aSDeb = std::max(aS0,aS-aJumpMax);
+        int aSEnd = std::max(aSDeb+1,aS-aJumpMin);
         mVIms[aS]->UpdateCheminOpt(aSDeb,aSEnd,mVIms,mStdJump);
     }
 

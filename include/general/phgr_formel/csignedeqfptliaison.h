@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHGR_FORMEL_CSIGNEDEQFPTLIAISON_H
 #define _ELISE_GENERAL_PHGR_FORMEL_CSIGNEDEQFPTLIAISON_H
 
-#include "general/sys_dep.h"
+
 
 class cSignedEqFPtLiaison  : public cEqFPtLiaison
 {

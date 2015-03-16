@@ -275,8 +275,8 @@ cTplLoadedImage<TypeEl>::cTplLoadedImage
      mImSomMasq    (mSzImSpec.x,mSzImSpec.y),
      mTImSomMasq   (mImSomMasq),
      mNbPtsW       (anAppli.NbPtsWFixe()),
-     mBufL         (ElMax(mSzCImT.x,mSzCImT.y)),
-     mBufL2        (ElMax(mSzCImT.x,mSzCImT.y)),
+     mBufL         (std::max(mSzCImT.x,mSzCImT.y)),
+     mBufL2        (std::max(mSzCImT.x,mSzCImT.y)),
      mEpsC         (anAppli.EpsilonCorrelation().Val()),
      mWPC          (0)
 {
@@ -495,10 +495,10 @@ void cTplLoadedImage<TypeEl>::LoadImInGeomTerr
 
    for (int anY0 = mP0TerCorMarge.y; anY0<mP1TerCorMarge.y ; anY0+=aSzBloc)
    {
-       int anY1 = ElMin(mP1TerCorMarge.y,anY0+aSzBloc);
+       int anY1 = std::min(mP1TerCorMarge.y,anY0+aSzBloc);
        for (int anX0 = mP0TerCorMarge.x; anX0<mP1TerCorMarge.x ; anX0+=aSzBloc)
        {
-           int anX1 = ElMin(mP1TerCorMarge.x,anX0+aSzBloc);
+           int anX1 = std::min(mP1TerCorMarge.x,anX0+aSzBloc);
            aLP.InitLP
            (
                Box2di(Pt2di(anX0,anY0),Pt2di(anX1-1,anY1-1)),
@@ -837,7 +837,7 @@ template <class TypeEl>
               double aSBB = aIm2.mTImSomI2Ter.get(aP) /aNbB -ElSquare(aSB);
 
 	      double aSAB = aTSomI1I2.get(aP) / sqrt(aNbA*aNbB) - aSA*aSB;
-	      double anEct = ElMax(mEpsC,aSAA*aSBB);
+	      double anEct = std::max(mEpsC,aSAA*aSBB);
 	      double aCor = aSAB / sqrt(anEct);
 
 
@@ -1050,7 +1050,7 @@ void cTplLoadedImage<TypeEl>::AddToStat
     double * aVD = aDist->Vals();
     double aS1 = mTImSomITer.get(aPTer);
     double aS2 = mTImSomI2Ter.get(aPTer)-ElSquare(aS1)/double(mNbPtsW);
-    aS2 = sqrt(ElMax(aS2,aStatGlob.EpsCorr()));
+    aS2 = sqrt(std::max(aS2,aStatGlob.EpsCorr()));
     aS1 /= mNbPtsW;
 
 
@@ -1205,7 +1205,7 @@ template <class TypeEl,const int aNb> class  cNVCovRapide
                {
                   mSN[aK] = aCum.mSI[aK]/mRNbPtsW;
                   mS2N[aK] = aCum.mSII[aK]/mRNbPtsW-ElSquare(mSN[aK]);
-                  mS2N[aK] = sqrt(ElMax(sqrt(mEpsC),mS2N[aK]));
+                  mS2N[aK] = sqrt(std::max(sqrt(mEpsC),mS2N[aK]));
                }
           }
           double aSCor=0;
@@ -1438,7 +1438,7 @@ template <class TypeEl> class  cVCovABRapide
              double aSbb = aCum.mSIbb / mRNbPtsW -ElSquare(aSb);
              double aSab = aCum.mSIab / mRNbPtsW -aSa*aSb;
 
-             aCor = aSab / sqrt(ElMax(mEpsC,aSaa*aSbb));
+             aCor = aSab / sqrt(std::max(mEpsC,aSaa*aSbb));
           }
           if (mModeAdd)
 	  {
@@ -1967,7 +1967,7 @@ Pt2di cLoadedImage::DiscTerAppli2DiscTerCorr(const Pt2di  &aPt)
 {
    Pt2dr aResR =   mGeomCorrelImTer.R2ToRDisc(mGeomTerAp.DiscToR2(aPt));
    Pt2di aResI = round_ni(aResR);
-   double anEr = ElAbs(aResR.x-aResI.x) +  ElAbs(aResR.y-aResI.y);
+   double anEr = std::abs(aResR.x-aResI.x) +  std::abs(aResR.y-aResI.y);
    // Apparement, ca marche parce que le resultat est implicitement
    // entier.
    ELISE_ASSERT(anEr<1e-5,"CcLoadedImage::DiscTerAppli2DiscTerCorr");

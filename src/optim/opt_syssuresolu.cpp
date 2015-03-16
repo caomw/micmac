@@ -150,10 +150,10 @@ void SystLinSurResolu::AdjustSizeCapa()
       return;
 
    if (mNbVarCur > mNbVarCapa)
-      ElSetMax(mNbVarCapa,ElMax(2*mNbVarCapa,mNbVarCur));
+      ElSetMax(mNbVarCapa,std::max(2*mNbVarCapa,mNbVarCur));
 
    if (mNbEqCur>mNbEqCapa)
-      ElSetMax( mNbEqCapa,ElMax(2*mNbEqCapa, mNbEqCur));
+      ElSetMax( mNbEqCapa,std::max(2*mNbEqCapa, mNbEqCur));
 
    mA = mA.AugmentSizeTo(Pt2di(mNbVarCapa,mNbEqCapa),0.0);
    mDataA   = mA.data();
@@ -797,7 +797,7 @@ void cStateAllocI::ShowDiff(const cStateAllocI & aS)  const
 
    for (int aK=0 ; aK<int(mVals.size()) ; aK++)
    {
-      double aDif =  ElAbs(mVals[aK]-aS.mVals[aK]);
+      double aDif =  std::abs(mVals[aK]-aS.mVals[aK]);
       aSom += aDif;
    }
    std::cout << "SomDIF =" << aSom << "\n";

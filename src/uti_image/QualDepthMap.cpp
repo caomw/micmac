@@ -55,7 +55,7 @@ double SquareQualGrad(double aGx,double aGy)
    return ElSquare(aGx) + ElSquare(aGy) ;
 /*
    
-   aGx  = ElMax(-0.66,ElMin(2.0,aGx));
+   aGx  = std::max(-0.66,std::min(2.0,aGx));
 
    // if (aGx <=-0.66) return MaxQualDM;
 
@@ -269,7 +269,7 @@ cMasqBordHomomogene::cMasqBordHomomogene(Im2D_REAL4 anIm0,Im2D_Bits<1>  aMasq0,V
    double aPropMin = 0.3;
    ELISE_ASSERT(aMasq0.sz()==mSz,"Sz Incoh in cMasqBordHomomogene");
    ELISE_COPY(mMasq0.all_pts(),mMasq0.in(),mMasqFin.out());
-   ELISE_COPY(mMasqFin.border(ElMax(aNbVMax,2)),0,mMasqFin.out());
+   ELISE_COPY(mMasqFin.border(std::max(aNbVMax,2)),0,mMasqFin.out());
    ELISE_COPY(mIm0.all_pts(),mIm0.in(),mImLisse.out());
  
 
@@ -300,7 +300,7 @@ cMasqBordHomomogene::cMasqBordHomomogene(Im2D_REAL4 anIm0,Im2D_Bits<1>  aMasq0,V
    int aCpt = 0;
    while (! aV0.empty())
    {
-       int aNbV = ElMax(1,ElMin(1+aCpt,aNbVMax));
+       int aNbV = std::max(1,std::min(1+aCpt,aNbVMax));
        int aNbMinInVois =  round_down(ElSquare(1+2*aNbV)*aPropMin);
 
        std::vector<Pt2di> aV1;

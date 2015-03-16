@@ -290,7 +290,7 @@ void BenchQdt::sverif(Pt2dr p0,Pt2dr p1,REAL ray)
      SegComp s01 (p0,p1);
 
      Sqdt.RVoisins(SSup,s01,ray+1);
-     Sqdt.RVoisins(SInf,s01,ElMax(ray-1,0.0));
+     Sqdt.RVoisins(SInf,s01,std::max(ray-1,0.0));
 
      for (std::set<STQdt>::iterator it =SGSet.begin(); it!=SGSet.end() ; it++)
          if (sqrt(s01.square_dist(SegComp::seg,(*it).seg(),SegComp::seg)) <ray)
@@ -312,7 +312,7 @@ void BenchQdt::sverif_box(Pt2dr p0,Pt2dr p1,REAL ray)
      Box2dr  box (p0,p1);
 
      Sqdt.RVoisins(SSup,box,ray+1);
-     Sqdt.RVoisins(SInf,box,ElMax(ray-1,0.0));
+     Sqdt.RVoisins(SInf,box,std::max(ray-1,0.0));
 
      for (std::set<STQdt>::iterator it =SGSet.begin(); it!=SGSet.end() ; it++)
          if (sqrt(box.SquareDist((*it).seg())) <ray)

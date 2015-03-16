@@ -55,7 +55,7 @@ bool cAppliMICMAC::DoNotTA() const
 }
 
 /*
-    int aDeZoom = ElMax(0,round_ni(log2(aSzGlob.x * aSzGlob.y / 3.0e7)));
+    int aDeZoom = std::max(0,round_ni(log2(aSzGlob.x * aSzGlob.y / 3.0e7)));
 
    if (ZoomMakeTA().Val() <= 0) 
       return true;
@@ -304,7 +304,7 @@ void cAppliMICMAC::MakeFileTA()
 
 /*
 std::cout << aPdsT1*aTeta1+aPdsT2*aTeta2 << "\n";
-                             int aPri = ElMin(60000,round_ni((aPdsT1*aTeta1+aPdsT2*aTeta2)*50));
+                             int aPri = std::min(60000,round_ni((aPdsT1*aTeta1+aPdsT2*aTeta2)*50));
 */
                              double aPri = aPdsT1*aTeta1+aPdsT2*aTeta2;
 
@@ -518,7 +518,7 @@ void cAppliMICMAC::MakeDefImMasq(int aDeZoomCible)
     cGeomDiscFPx aGeomDFPx =  *mGeomDFPx;
     // aGeomDFPx.SetDeZoom(1);
     // Pt2di aSzGlob = aGeomDFPx.SzDz();
-    // int aDeZoom = ElMax(0,round_ni(log2(aSzGlob.x * aSzGlob.y / 3.0e7)));
+    // int aDeZoom = std::max(0,round_ni(log2(aSzGlob.x * aSzGlob.y / 3.0e7)));
     // aDeZoom = 1<< aDeZoom;
     int aDeZoom = ZoomMakeMasq().ValWithDef(mDeZoomFilesAux);
 
@@ -609,7 +609,7 @@ void cAppliMICMAC::MakeDefImMasq(int aDeZoomCible)
 
                       if (aBoxIm.inside(aPIm))
                       {
-                         aTImCpt.oset(aPTer,ElMin(15,1+aTImCpt.get(aPTer)));
+                         aTImCpt.oset(aPTer,std::min(15,1+aTImCpt.get(aPTer)));
                          if (FirstIm)
                          {
                              aTImOKIm1.oset(aPTer,1);
@@ -1137,7 +1137,7 @@ void cAppliMICMAC::TestPointsLiaisons
        aW.draw_circle_abs
        (
           anIter->P1()/aZ,
-          20*ElMin(6.0,(aD1+aD2)/2),
+          20*std::min(6.0,(aD1+aD2)/2),
           aW.pdisc()(P8COL::red)
        );
    }

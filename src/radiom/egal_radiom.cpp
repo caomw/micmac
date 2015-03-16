@@ -186,8 +186,8 @@ int cER_ParamOneSys::NbVarOfDegI(int aDeg)
 
 int  cER_ParamOneSys::NbVarOfDeg(Pt2di  aDeg)
 {
-  int aD1 = ElMax(aDeg.x,aDeg.y);
-  int aD0 = ElMin(aDeg.x,aDeg.y);
+  int aD1 = std::max(aDeg.x,aDeg.y);
+  int aD0 = std::min(aDeg.x,aDeg.y);
 
   return NbVarOfDegI(aD1) - NbVarOfDegI(aD1-aD0-1);
 }
@@ -454,7 +454,7 @@ cER_SolOnePower::cER_SolOnePower
 ) :
   mSolCh (aSolCh),
   mIm    (mSolCh.Im()),
-  mNbDisc(2 + ElSquare(1+2*ElMax(aDeg.x,aDeg.y))),
+  mNbDisc(2 + ElSquare(1+2*std::max(aDeg.x,aDeg.y))),
   mGrid  (
              true,
              Pt2dr(-2,-2),
@@ -944,8 +944,8 @@ aP = Pt2dr (2,10);
 
    if (aDegreMax.y>aDegreMax.x)
    {
-       ElSwap(aDegreMax.y,aDegreMax.x);
-       ElSwap(aP.y,aP.x);
+       std::swap(aDegreMax.y,aDegreMax.x);
+       std::swap(aP.y,aP.x);
    }
    double aVPowY = aV0;
    for (int aDY=0 ; aDY<= aDegreMax.y ; aDY++)
@@ -985,8 +985,8 @@ std::cout << aVC.back() << "\n";
    // ....
    if (aDegreMax.y>aDegreMax.x)
    {
-       ElSwap(aDegreMax.y,aDegreMax.x);
-       ElSwap(aP.y,aP.x);
+       std::swap(aDegreMax.y,aDegreMax.x);
+       std::swap(aP.y,aP.x);
    }
 
    int aKXn = 0;
@@ -997,7 +997,7 @@ std::cout << aVC.back() << "\n";
 
 
        int aNb = aVC.size();
-       int aDegY = ElMin(aDegX,aDegreMax.y);
+       int aDegY = std::min(aDegX,aDegreMax.y);
 
 
        int aK = aNb-aDegY;  // K est l'indexe du monome  X ^ aDeg-1
@@ -1124,7 +1124,7 @@ void cER_Global::DoComputeL1Cple()
                  const cER_MesureOneIm * aM2 = & (aMN.KthMes(aKM2));
                  if (aM1->KIm() > aM2->KIm())
                  {
-                    ElSwap(aM1,aM2);
+                    std::swap(aM1,aM2);
                  }
                  Pt2di anInd(aM1->KIm(),aM2->KIm());
                  mGrIm[anInd].AddPt(aM1->Pt(),aM2->Pt());
@@ -1330,7 +1330,7 @@ void  cER_Global::MakeStatL1ByIm(cER_OneIm * anIm)
               if (aM->KIm() != aKIm)
               {
                    double aDif = DifL1Normal(theM,aM);
-                   aVDif.push_back(ElAbs(aDif));
+                   aVDif.push_back(std::abs(aDif));
               }
            }
         }
@@ -1382,7 +1382,7 @@ void cER_Global::TestModelL1ByCple(cER_OneIm * aI1,cER_OneIm * aI2,cElemGrapheIm
             double aF1 =  aI1->FactCorrectL1(aP1);
             double aF2 =  aI2->FactCorrectL1(aP2);
             double aR12 =  aCpl.FactCorrec1to2(aP1);
-            double aDif = ElAbs(aR12-aF1/aF2);
+            double aDif = std::abs(aR12-aF1/aF2);
 
             aVDif.push_back(aDif);
             
@@ -1432,7 +1432,7 @@ void cER_Global::DoComputeL1Cple(cER_OneIm * aI1,cER_OneIm * aI2,cElemGrapheIm &
 
  
 //   Pt2dr aCdg2 (MatCdg(aCpl.Inert2()));
-// if (Swap)  ElSwap(aCdg1,aCdg2);
+// if (Swap)  std::swap(aCdg1,aCdg2);
 
    ElPackHomologue aPack;
    for (std::list<cER_MesureNIm>::const_iterator itM= mMes.begin(); itM!=mMes.end(); itM++)
@@ -1452,7 +1452,7 @@ void cER_Global::DoComputeL1Cple(cER_OneIm * aI1,cER_OneIm * aI2,cElemGrapheIm &
         }
         if (aM1 && aM2)
         {
-// if (Swap) ElSwap(aM1,aM2);
+// if (Swap) std::swap(aM1,aM2);
             //  R1 (K0 + K1 P1.x + K2 P2.y) = R2
             aVM1.push_back(aM1);
             aVM2.push_back(aM2);
@@ -1486,7 +1486,7 @@ void cER_Global::DoComputeL1Cple(cER_OneIm * aI1,cER_OneIm * aI2,cElemGrapheIm &
        double aR2 = aM2->SomVal();
 
        double aDif = aR2 - aR1 * aCpl.FactCorrec1to2(aP1);
-       aVDif.push_back(ElAbs(aDif));
+       aVDif.push_back(std::abs(aDif));
        // std::cout << "DIF " << aDif << " " << aR1 << " " << aR2 << "\n";
    }
 
@@ -1559,7 +1559,7 @@ bool cER_Global::ValideMesure(const cER_MesureOneIm & aMes1,const cER_MesureOneI
     if (!mComputL1Cple) 
        return true;
 
-    double aDif =  ElAbs(DifL1Normal(&aMes1,&aMes2));
+    double aDif =  std::abs(DifL1Normal(&aMes1,&aMes2));
     double aSeuil1  = mVecIm[aMes1.KIm()]->SeuilPL1();
     double aSeuil2  = mVecIm[aMes2.KIm()]->SeuilPL1();
 

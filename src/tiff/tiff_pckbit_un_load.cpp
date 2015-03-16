@@ -229,7 +229,7 @@ template <class Type> PackB_IM<Type> UnLoadPackBit<Type>::Do(DATA_Tiff_Ifd &aDTI
 			TUP[Tilx].read(fp,aDTI.byte_count_tile(Tilx,Tily,0));
 		}
 		INT y0 = Tily * aDTI._sz_tile.y;
-		INT y1 = ElMin(y0+aDTI._sz_tile.y,aDTI._sz.y);
+		INT y1 = std::min(y0+aDTI._sz_tile.y,aDTI._sz.y);
 
 		for (INT y= y0; y<y1; y++)
 		{

@@ -146,9 +146,9 @@ template <const int nbb>  void Test_im2d_bits<nbb>::test(INT v_init)
 
     for (INT k = 0; k < 1000 ; k++)
     {
-        INT x = ElMin(tx-1,(INT)(NRrandom3() * tx));
-        INT y = ElMin(ty-1,(INT)(NRrandom3() * ty));
-        INT v = ElMin((INT)((1<<nbb)-1),(INT)(NRrandom3() * (1<<nbb) ));
+        INT x = std::min(tx-1,(INT)(NRrandom3() * tx));
+        INT y = std::min(ty-1,(INT)(NRrandom3() * ty));
+        INT v = std::min((INT)((1<<nbb)-1),(INT)(NRrandom3() * (1<<nbb) ));
         i2[y][x] = v;
         Iv.set(x,y,v);
     }

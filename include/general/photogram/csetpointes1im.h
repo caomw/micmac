@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CSETPOintES1IM_H
 #define _ELISE_GENERAL_PHOTOGRAM_CSETPOintES1IM_H
 
-#include "general/sys_dep.h"
+
 
 class cSetPointes1Im
 {

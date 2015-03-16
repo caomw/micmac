@@ -181,10 +181,10 @@ Buf_Fonc_Op_buf::Buf_Fonc_Op_buf
      mInitX1        (side._p1.x +rect._p1.x),
      mInitY0    (side._p0.y),
      mInitY1    (side._p1.y+1),
-     mY0        (ElMin(0,side._p0.y)),
-     mY1        (ElMax(0,side._p1.y)+1),
-     mX0       (ElMin(0,side._p0.x) +rect._p0.x),
-     mX1       (ElMax(0,side._p1.x) +rect._p1.x)
+     mY0        (std::min(0,side._p0.y)),
+     mY1        (std::max(0,side._p1.y)+1),
+     mX0       (std::min(0,side._p0.x) +rect._p0.x),
+     mX1       (std::max(0,side._p1.x) +rect._p1.x)
 {
 }
 
@@ -310,7 +310,7 @@ template <class TyData,class TyBase>
       // 2 : compute
       for (INT x=mX0; x<mX1; x+=_sz_buf)
       {
-           INT nb = ElMin(mX1-x,_sz_buf);
+           INT nb = std::min(mX1-x,_sz_buf);
            _pack_f->pt0()[0] = x;
            _pack_f->pt0()[1] = anY + mY1-1;
            _pack_f->set_nb(nb);

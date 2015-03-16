@@ -42,9 +42,6 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_FILE_IM_ELGENFILEIM_H
 #define _ELISE_GENERAL_FILE_IM_ELGENFILEIM_H
 
-#include "general/sys_dep.h"
-#include "general/allocation.h"
-
 #include <GenIm>
 #include <Rectang_Object>
 

@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CELEMMEPRELCOPLAN_H
 #define _ELISE_GENERAL_PHOTOGRAM_CELEMMEPRELCOPLAN_H
 
-#include "general/sys_dep.h"
+
 
 class cElemMepRelCoplan
 {

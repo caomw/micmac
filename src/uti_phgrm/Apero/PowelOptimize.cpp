@@ -208,7 +208,7 @@ double cLiaisORPO::Residu()
 
          Pt2dr aVAB  (aProjB.y-aProjA.y,aProjA.x-aProjB.x);
 
-         double aD2 =  ElAbs(scal(aVAB,aProjA-itP->P2()) / euclid(aVAB));
+         double aD2 =  std::abs(scal(aVAB,aProjA-itP->P2()) / euclid(aVAB));
          sDist += aPds*aD2;
 
          aK++;

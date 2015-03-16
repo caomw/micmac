@@ -222,7 +222,7 @@ void cProgDOLB::DoConnexion
     {
         for (int aZOut=aOutZMin ; aZOut<aOutZMax ; aZOut++)
         {
-             Ouput[aZOut].UpdateCostOneArc(Input[aZIn],aSens,mICostRegul*ElAbs(aZIn-aZOut));
+             Ouput[aZOut].UpdateCostOneArc(Input[aZIn],aSens,mICostRegul*std::abs(aZIn-aZOut));
         }
     }
 }
@@ -249,9 +249,9 @@ Im2D_REAL4 cProgDOLB::ImCost(Im2D_REAL4 aCostIn,int aNbDir,double aTeta0)
        for (aP.y=0; aP.y<mSz.y; aP.y++)
        {
            double aCost = aTCostIn.get(aP);
-           aSigmaIn += ElAbs(aCost);
+           aSigmaIn += std::abs(aCost);
            int IndCost = (aCost<0) ; // Si cout negatif, c'est la couche 1 qui est penalisee
-           aNaps[aP.y][aP.x][IndCost].SetOwnCost(round_ni(ElAbs(aCost)*mMul));
+           aNaps[aP.y][aP.x][IndCost].SetOwnCost(round_ni(std::abs(aCost)*mMul));
            aNaps[aP.y][aP.x][1-IndCost].SetOwnCost(0);
        }
    }
@@ -274,7 +274,7 @@ Im2D_REAL4 cProgDOLB::ImCost(Im2D_REAL4 aCostIn,int aNbDir,double aTeta0)
            double aCost1 = aNaps[aP.y][aP.x][1].CostAgrege();
            double aDelta = (aCost0 - aCost1) / mMul;
            aTRes.oset(aP,aDelta);
-           aSigmaOut += ElAbs(aDelta);
+           aSigmaOut += std::abs(aDelta);
        }
    }
    double aRatio = aSigmaIn/aSigmaOut;
@@ -319,7 +319,7 @@ cOptimLabelBinaire::cOptimLabelBinaire(Pt2di aSz,double aDefCost,double aRegul) 
 
 U_INT1 cOptimLabelBinaire::ToCost(double aCost)
 {
-    return ElMax(0,ElMin(255,round_ni(255*aCost)));
+    return std::max(0,std::min(255,round_ni(255*aCost)));
 }
 
 void cOptimLabelBinaire::SetCost(Pt2di aP,double aCost)

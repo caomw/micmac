@@ -184,7 +184,7 @@ int GrShade_main(int argc,char ** argv)
      Im2DGen aShade =  AllocImGen(aDecoup.SzMaxIn(),aTShade);
 
      cout << "SZ Max In " << aDecoup.SzMaxIn() << endl;
-     REAL aRatio = ElMin(800.0/aSzGlob.x,700.0/aSzGlob.y);
+     REAL aRatio = std::min(800.0/aSzGlob.x,700.0/aSzGlob.y);
      Video_Win * pW  = aVisu                          ?
                        Video_Win::PtrWStd(Pt2di(Pt2dr(aSzGlob)*aRatio)) :
                        0                              ;

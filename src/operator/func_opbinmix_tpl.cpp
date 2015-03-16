@@ -162,7 +162,7 @@ template <class Type> OP_Bin_Comp_TPL<Type>::OP_Bin_Comp_TPL
                             Fonc_Num_Computed * f1,
                             Flux_Pts_Computed * flx
                       ) :
-         Fonc_Num_Comp_TPL<Type>(arg,ElMax(f0->idim_out(),f1->idim_out()),flx),
+         Fonc_Num_Comp_TPL<Type>(arg,std::max(f0->idim_out(),f1->idim_out()),flx),
          _f0 (f0),
          _f1 (f1),
          _dim_0 (f0->idim_out()),
@@ -243,8 +243,8 @@ template <class Oper,class TOut,class T0In,class T1In>
          _op.t0_eg_t1_op_t2
          (
              to[d],
-             t0[ElMin(d,this->_dim_0-1)],
-             t1[ElMin(d,this->_dim_1-1)],
+             t0[std::min(d,this->_dim_0-1)],
+             t1[std::min(d,this->_dim_1-1)],
              nb
          );
 
@@ -411,7 +411,7 @@ static REAL  VDPlus(Fonc_Num f1,Fonc_Num f2,const PtsKD & aPts,INT k)
 
 INT PlusMoinsMixDegre(INT D0,INT D1)
 {
-    return ElMax(D0,D1);
+    return std::max(D0,D1);
 }
 
 Fonc_Num operator + (Fonc_Num f1,Fonc_Num f2)
@@ -456,18 +456,18 @@ Fonc_Num operator * (Fonc_Num f1,Fonc_Num f2)
 };
 
 
-static REAL VMax(REAL v1,REAL v2) {return ElMax(v1,v2);}
+static REAL VMax(REAL v1,REAL v2) {return std::max(v1,v2);}
 Fonc_Num Max (Fonc_Num f1,Fonc_Num f2)
 {
-     return Op_Bin_Mix_Not_Comp::New(f1,f2,OpMax,false,"ElMax",VMax,NoDeriv,NoValDeriv,StdMixDegre);
+     return Op_Bin_Mix_Not_Comp::New(f1,f2,OpMax,false,"std::max",VMax,NoDeriv,NoValDeriv,StdMixDegre);
 };
 
 
 
-static REAL VMin(REAL v1,REAL v2) {return ElMin(v1,v2);}
+static REAL VMin(REAL v1,REAL v2) {return std::min(v1,v2);}
 Fonc_Num Min (Fonc_Num f1,Fonc_Num f2)
 {
-     return Op_Bin_Mix_Not_Comp::New(f1,f2,OpMin,false,"ElMin",VMin,NoDeriv,NoValDeriv,PlusMoinsMixDegre);
+     return Op_Bin_Mix_Not_Comp::New(f1,f2,OpMin,false,"std::min",VMin,NoDeriv,NoValDeriv,PlusMoinsMixDegre);
 };
 
 

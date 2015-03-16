@@ -304,8 +304,8 @@ void ElHoughSubPixellaire::compute_contrib(INT IG_Teta,REAL G_Teta)
             Pt2dr pt3 =  InTetaCoord(S_Pt+Pt2dr(+0.5,+0.5));
             Pt2dr pt4 =  InTetaCoord(S_Pt+Pt2dr(-0.5,+0.5));
 
-            REAL S_RhoMax = ElMax4(pt1.x,pt2.x,pt3.x,pt4.x);
-            REAL S_RhoMin = ElMin4(pt1.x,pt2.x,pt3.x,pt4.x);
+            REAL S_RhoMax = std::max4(pt1.x,pt2.x,pt3.x,pt4.x);
+            REAL S_RhoMin = std::min4(pt1.x,pt2.x,pt3.x,pt4.x);
 
             REAL  G_RhoMax = CentS2G_Rho(S_RhoMax,IG_Teta);
             REAL  G_RhoMin = CentS2G_Rho(S_RhoMin,IG_Teta);

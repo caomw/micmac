@@ -133,10 +133,10 @@ template <class Type> void Som_Rvar_Comp<Type>::post_new_line(bool first)
 
             for (INT x = this->_x0; x < this->_x1; x++)
             {
-                INT x0 = ElMax(this->_x0_side,X0[x]-1);
-                INT y0 = ElMax(this->_y0_side,Y0[x]-1);
-                INT x1 = ElMin(this->_x1_side,X1[x]);
-                INT y1 = ElMin(this->_y1_side,Y1[x]);
+                INT x0 = std::max(this->_x0_side,X0[x]-1);
+                INT y0 = std::max(this->_y0_side,Y0[x]-1);
+                INT x1 = std::min(this->_x1_side,X1[x]);
+                INT y1 = std::min(this->_y1_side,Y1[x]);
                 res[x] =  lines[y0][x+x0] + lines[y1][x+x1]
                         - lines[y0][x+x1] - lines[y1][x+x0];
             }

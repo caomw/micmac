@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_BITM_IM3D_H
 #define _ELISE_GENERAL_BITM_IM3D_H
 
-#include "general/sys_dep.h"
+
 
 template <class Type,class TyBase> class Im3D : public GenIm
 {

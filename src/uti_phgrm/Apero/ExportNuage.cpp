@@ -279,7 +279,7 @@ void cAppliApero::ExportNuage(const cExportNuage & anEN)
                 int aKC=0;
                 double aProp = 0.8;
 
-                double aStep = ElMin(aSzC.x/aSzFX,aSzC.y/aSzFY) * aProp;
+                double aStep = std::min(aSzC.x/aSzFX,aSzC.y/aSzFY) * aProp;
 
                 Pt2dr aRab = aSzC - Pt2dr(aSzFX,aSzFY) * aStep;
 

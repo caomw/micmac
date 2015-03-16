@@ -42,146 +42,141 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_PTXD_BOX2D_H
 #define _ELISE_GENERAL_PTXD_BOX2D_H
 
-#include "general/sys_dep.h"
+#include <vector>
 
-#include <cElMap2D>
 #include <Interval>
 #include <Pt2d>
-#include <Flux_Pts>
 #include <SegComp>
 #include <cElTriangleComp>
-#include <BoxFreemanCompil>
+
+class cElMap2D;
 
 template <class Type> class Box2d
 {
-   public :
+public :
 
-      Box2d<double> BoxImage(const cElMap2D &) const;
+    Box2d<double> BoxImage(const cElMap2D &) const;
 
-      Interval  XInterv() const {return Interval(_p0.x,_p1.x);}
-      Interval  YInterv() const {return Interval(_p0.y,_p1.y);}
+    Interval  XInterv() const {return Interval(_p0.x,_p1.x);}
+    Interval  YInterv() const {return Interval(_p0.y,_p1.y);}
 
-     typedef  Box2d<Type> QBox[4];
-     typedef  Pt2d<Type>  P4[4];
+    typedef  Box2d<Type> QBox[4];
+    typedef  Pt2d<Type>  P4[4];
 
-     Pt2dr  RandomlyGenereInside() const;
+    Pt2dr  RandomlyGenereInside() const;
 
-     std::vector<Pt2dr> ClipConpMax(const std::vector<Pt2dr> &);
-
-
-     Pt2d<Type>  _p0;
-     Pt2d<Type>  _p1;
-     Pt2d<Type> milieu() const { return (_p0+_p1) / 2;}
-     Pt2d<Type> sz() const { return _p1 - _p0;}
-     Pt2d<Type> FromCoordLoc(Pt2dr aP) const { return Pt2d<Type>(ToPt2dr(_p0)+aP.mcbyc(ToPt2dr(sz())));}
+    std::vector<Pt2dr> ClipConpMax(const std::vector<Pt2dr> &);
 
 
-     Pt2dr ToCoordLoc(Pt2dr aP) const { return (aP-ToPt2dr(_p0)).dcbyc(ToPt2dr(sz()));}
-
-     Type   hauteur() const { return _p1.y-_p0.y;}
-     Type   largeur() const { return _p1.x-_p0.x;}
-     double_t  diam() const{return euclid(_p0,_p1);}
-     Type surf() {return hauteur() * largeur();}
-     Type x(int i) const {return i ? _p1.x : _p0.x;}
-     Type y(int i) const {return i ? _p1.y : _p0.y;}
-
-     Box2d<Type> trans(Pt2d<Type>) const;
-     Pt2d<Type> P0() const {return _p0;}
-     Pt2d<Type> P1() const {return _p1;}
-     Flux_Pts Flux() const;
+    Pt2d<Type>  _p0;
+    Pt2d<Type>  _p1;
+    Pt2d<Type> milieu() const { return (_p0+_p1) / 2;}
+    Pt2d<Type> sz() const { return _p1 - _p0;}
+    Pt2d<Type> FromCoordLoc(Pt2dr aP) const { return Pt2d<Type>(ToPt2dr(_p0)+aP.mcbyc(ToPt2dr(sz())));}
 
 
-     // 0 a l'exterieur, distance (d8) au bord a l'interieur
-     double Interiorite(const Pt2dr & aP) const;
+    Pt2dr ToCoordLoc(Pt2dr aP) const { return (aP-ToPt2dr(_p0)).dcbyc(ToPt2dr(sz()));}
+
+    Type   hauteur() const { return _p1.y-_p0.y;}
+    Type   largeur() const { return _p1.x-_p0.x;}
+    double_t  diam() const{return euclid(_p0,_p1);}
+    Type surf() {return hauteur() * largeur();}
+    Type x(int i) const {return i ? _p1.x : _p0.x;}
+    Type y(int i) const {return i ? _p1.y : _p0.y;}
+
+    Box2d<Type> trans(Pt2d<Type>) const;
+    Pt2d<Type> P0() const {return _p0;}
+    Pt2d<Type> P1() const {return _p1;}
+    //Flux_Pts Flux() const;
 
 
-     Box2d(){}
-     Box2d(Type);
-     Box2d(Pt2d<Type>);
-     Box2d(const Pt2d<Type> *,int aNb);
-     Box2d(Pt2di,Pt2di);
-     Box2d(Pt2dr,Pt2dr);  // cast up and down
-     Box2d(Pt2dlr,Pt2dlr);  // cast up and down
-     Box2d(const Type *,const Type *,int);
-     bool include_in(const Box2d<Type> & b2) const;
-     Box2d<Type>  erode(Pt2d<Type>) const;
-     Box2d<Type>  dilate(Pt2d<Type>) const;
-     Box2d<Type>  dilate(Type) const;
+    // 0 a l'exterieur, distance (d8) au bord a l'interieur
+    double Interiorite(const Pt2dr & aP) const;
 
-     std::vector<Pt2d<Type> >   Contour() const;
+    Box2d(){}
+    Box2d(Type);
+    Box2d(Pt2d<Type>);
+    Box2d(const Pt2d<Type> *,int aNb);
+    Box2d(Pt2di,Pt2di);
+    Box2d(Pt2dr,Pt2dr);  // cast up and down
+    Box2d(Pt2dlr,Pt2dlr);  // cast up and down
+    Box2d(const Type *,const Type *,int);
+    bool include_in(const Box2d<Type> & b2) const;
+    Box2d<Type>  erode(Pt2d<Type>) const;
+    Box2d<Type>  dilate(Pt2d<Type>) const;
+    Box2d<Type>  dilate(Type) const;
 
+    std::vector<Pt2d<Type> >   Contour() const;
 
-     // + ou - dilatation signee, en fait equivalent avec la
-     // definition actuelle de dilate (mais le cote algebrique de
-     // de dilate n'est pas acquis a 100%)
-     Box2d<Type>  AddTol(const Box2d<Type> &) const;
-     Box2d<Type>  AddTol(const Pt2d<Type> &) const;
-     Box2d<Type>  AddTol(const Type &) const;
+    // + ou - dilatation signee, en fait equivalent avec la
+    // definition actuelle de dilate (mais le cote algebrique de
+    // de dilate n'est pas acquis a 100%)
+    Box2d<Type>  AddTol(const Box2d<Type> &) const;
+    Box2d<Type>  AddTol(const Pt2d<Type> &) const;
+    Box2d<Type>  AddTol(const Type &) const;
 
-     bool  inside(const Pt2d<Type> & p) const;  // p0 <= Box._p1
-     bool  inside_std(const Pt2d<Type> & p) const;  // p0 < Box._p1
+    bool  inside(const Pt2d<Type> & p) const;  // p0 <= Box._p1
+    bool  inside_std(const Pt2d<Type> & p) const;  // p0 < Box._p1
 
-     bool contains(const Pt2d<int> & pt) const
-     {
+    bool contains(const Pt2d<int> & pt) const
+    {
         return (pt.x>=_p0.x) && (pt.y>=_p0.y) && (pt.x<_p1.x) && (pt.y<_p1.y);
-     }
-     bool contains(const Pt2d<double> & pt) const
-     {
+    }
+
+    bool contains(const Pt2d<double> & pt) const
+    {
         return (pt.x>=_p0.x) && (pt.y>=_p0.y) && (pt.x<_p1.x) && (pt.y<_p1.y);
-     }
-     bool contains(const Pt2d<long double> & pt) const
-     {
+    }
+
+    bool contains(const Pt2d<long double> & pt) const
+    {
         return (pt.x>=_p0.x) && (pt.y>=_p0.y) && (pt.x<_p1.x) && (pt.y<_p1.y);
-     }
+    }
 
+    Pt2dr FromCoordBar(Pt2dr aCBar) const;
 
+    //   QT
 
-     Pt2dr FromCoordBar(Pt2dr aCBar) const;
+    // generaux
 
+    int  freeman_pos(const Pt2dr & pt) const;
 
-   //   QT
+    // box point
 
-          // generaux
+    bool   Intersecte(const Pt2dr &) const;
+    bool   Intersecte(const SegComp &) const;
+    bool   Intersecte(const Seg2d &) const;
+    bool   Intersecte(const cElTriangleComp &) const;
+    bool   Include(const Pt2dr &) const;
+    bool   Include(const SegComp &) const;
+    bool   Include(const Seg2d &) const;
+    bool   Include(const cElTriangleComp &) const;
+    double_t  SquareDist(const Pt2dr &) const;
+    double_t  SquareDist(const SegComp &) const;
+    double_t  SquareDist(const Seg2d &) const;
+    double_t  SquareDist(const Box2d<Type> &) const;
 
-          int  freeman_pos(const Pt2dr & pt) const;
+    void   QSplit(QBox &) const; // Split in 4 box (for Q-Tree)
+    void   QSplitWithRab(QBox &,Type aRab) const; // Split in 4 box (for Q-Tree)
+    void   Corners(P4 &) const; // Split in 4 box (for Q-Tree)
 
-          // box point
+    void PtsDisc(std::vector<Pt2dr> &,int aNbPts);
+private :
+    typedef double_t (Box2d<Type>:: * R_fonc_Pt2dr)(const Pt2dr &) const;
 
-     bool   Intersecte(const Pt2dr &) const;
-     bool   Intersecte(const SegComp &) const;
-     bool   Intersecte(const Seg2d &) const;
-     bool   Intersecte(const cElTriangleComp &) const;
-     bool   Include(const Pt2dr &) const;
-     bool   Include(const SegComp &) const;
-     bool   Include(const Seg2d &) const;
-     bool   Include(const cElTriangleComp &) const;
-     double_t  SquareDist(const Pt2dr &) const;
-     double_t  SquareDist(const SegComp &) const;
-     double_t  SquareDist(const Seg2d &) const;
-     double_t  SquareDist(const Box2d<Type> &) const;
+    double_t  Freem0SquareDist(const Pt2dr &) const;
+    double_t  Freem1SquareDist(const Pt2dr &) const;
+    double_t  Freem2SquareDist(const Pt2dr &) const;
+    double_t  Freem3SquareDist(const Pt2dr &) const;
+    double_t  Freem4SquareDist(const Pt2dr &) const;
+    double_t  Freem5SquareDist(const Pt2dr &) const;
+    double_t  Freem6SquareDist(const Pt2dr &) const;
+    double_t  Freem7SquareDist(const Pt2dr &) const;
+    double_t  Freem8SquareDist(const Pt2dr &) const;
 
-     void   QSplit(QBox &) const; // Split in 4 box (for Q-Tree)
-     void   QSplitWithRab(QBox &,Type aRab) const; // Split in 4 box (for Q-Tree)
-     void   Corners(P4 &) const; // Split in 4 box (for Q-Tree)
+    double_t  SquareDist(const Pt2dr &,int c) const;
 
-      void PtsDisc(std::vector<Pt2dr> &,int aNbPts);
-   private :
-        typedef double_t (Box2d<Type>:: * R_fonc_Pt2dr)(const Pt2dr &) const;
-
-        double_t  Freem0SquareDist(const Pt2dr &) const;
-        double_t  Freem1SquareDist(const Pt2dr &) const;
-        double_t  Freem2SquareDist(const Pt2dr &) const;
-        double_t  Freem3SquareDist(const Pt2dr &) const;
-        double_t  Freem4SquareDist(const Pt2dr &) const;
-        double_t  Freem5SquareDist(const Pt2dr &) const;
-        double_t  Freem6SquareDist(const Pt2dr &) const;
-        double_t  Freem7SquareDist(const Pt2dr &) const;
-        double_t  Freem8SquareDist(const Pt2dr &) const;
-
-        friend  class BoxFreemanCompil<Type>;
-        double_t  SquareDist(const Pt2dr &,int c) const;
-
-        static R_fonc_Pt2dr _Tab_FreemSquareDist[9];
+    static R_fonc_Pt2dr _Tab_FreemSquareDist[9];
 };
 
 typedef Box2d<int> Box2di;

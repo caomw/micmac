@@ -316,9 +316,9 @@ template <class Type>  void  cNewResProfChamp<Type>::CheckDeriv(Type  b,Type  c)
 
 
 
-    std::cout << "Chekc Vals "<< ElAbs(aDA.z-A0) << " " << ElAbs(aDC.z-C0) << "\n";
-    std::cout << "  DerA :: "<< ElAbs(aDA.x-DaDb) << " " << ElAbs(aDA.y-DaDc) << "\n";
-    std::cout << "  DerC :: "<< ElAbs(aDC.x-DcDb) << " " << ElAbs(aDC.y-DcDc) << "\n";
+    std::cout << "Chekc Vals "<< std::abs(aDA.z-A0) << " " << std::abs(aDC.z-C0) << "\n";
+    std::cout << "  DerA :: "<< std::abs(aDA.x-DaDb) << " " << std::abs(aDA.y-DaDc) << "\n";
+    std::cout << "  DerC :: "<< std::abs(aDC.x-DcDb) << " " << std::abs(aDC.y-DcDc) << "\n";
 }
     
 
@@ -326,7 +326,7 @@ template <class Type>  void  cNewResProfChamp<Type>::CheckDeriv(Type  b,Type  c)
 
 template <class Type> Type cNewResProfChamp<Type>::QualSol(Type aB,Type aC)
 {
-   return ElAbs(RatioA(aB,aC)-mRhoA) + ElAbs(RatioC(aB,aC)-mRhoC);
+   return std::abs(RatioA(aB,aC)-mRhoA) + std::abs(RatioC(aB,aC)-mRhoC);
 }
 
 
@@ -352,7 +352,7 @@ template <class Type>  void  cNewResProfChamp<Type>::AffineBC(Type & b,Type & c)
         Pt3d<Type> aDA = FandDerRatA(b,c);
         Pt3d<Type> aDC = FandDerRatC(b,c);
         Pt2d<Type> aDif (mRhoA-aDA.z,mRhoC-aDC.z);
-        Type aEr = ElAbs(aDif.x) + ElAbs(aDif.y);
+        Type aEr = std::abs(aDif.x) + std::abs(aDif.y);
 
         if (aEr< aTarget)
         {
@@ -365,7 +365,7 @@ template <class Type>  void  cNewResProfChamp<Type>::AffineBC(Type & b,Type & c)
     B D   -B A   ;  DC.z +   [DC.x    DC.y]   Y = rhoC
 */
             Type aDelta = aDA.x * aDC.y -aDC.x*aDA.y;
-            if (ElAbs(aDelta) > 1e-20) 
+            if (std::abs(aDelta) > 1e-20) 
             {
                  Pt2d<Type> aInvGx (  aDC.y/aDelta, -aDA.y/aDelta) ;
                  Pt2d<Type> aInvGy ( -aDC.x/aDelta,  aDA.x/aDelta) ;
@@ -573,15 +573,15 @@ template <class Type>  void  ResProfChamp<Type>::CheckDerivatives(Type & b,Type 
 
 
 
-    std::cout << "ptimizeBC "<< ElAbs(aDA.z-A0) << " " << ElAbs(aDC.z-C0) << "\n";
-    std::cout << "  DerA :: "<< ElAbs(aDA.x-DaDb) << " " << ElAbs(aDA.y-DaDc) << "\n";
-    std::cout << "  DerC :: "<< ElAbs(aDC.x-DcDb) << " " << ElAbs(aDC.y-DcDc) << "\n";
+    std::cout << "ptimizeBC "<< std::abs(aDA.z-A0) << " " << std::abs(aDC.z-C0) << "\n";
+    std::cout << "  DerA :: "<< std::abs(aDA.x-DaDb) << " " << std::abs(aDA.y-DaDc) << "\n";
+    std::cout << "  DerC :: "<< std::abs(aDC.x-DcDb) << " " << std::abs(aDC.y-DcDc) << "\n";
     
 }
 
 template <class Type>  Type  ResProfChamp<Type>::Error (Type b,Type c)
 {
-   return ElAbs(RatA(b,c)-_rhoA) +  ElAbs(RatC(b,c)-_rhoC);
+   return std::abs(RatA(b,c)-_rhoA) +  std::abs(RatC(b,c)-_rhoC);
 }
 
 
@@ -599,7 +599,7 @@ template <class Type>  void  ResProfChamp<Type>::Optimize(Type & b,Type & c)
         Pt3d<Type> aDA = FandDerRatA(b,c);
         Pt3d<Type> aDC = FandDerRatC(b,c);
         Pt2d<Type> aDif (_rhoA-aDA.z,_rhoC-aDC.z);
-        Type aEr = ElAbs(aDif.x) + ElAbs(aDif.y);
+        Type aEr = std::abs(aDif.x) + std::abs(aDif.y);
 
         if (aEr< aTarget)
         {
@@ -613,7 +613,7 @@ template <class Type>  void  ResProfChamp<Type>::Optimize(Type & b,Type & c)
     B D   -B A   ;  DC.z +   [DC.x    DC.y]   Y = rhoC
 */
             Type aDelta = aDA.x * aDC.y -aDC.x*aDA.y;
-            if (ElAbs(aDelta) > 1e-20) 
+            if (std::abs(aDelta) > 1e-20) 
             {
                  Pt2d<Type> aInvGx (  aDC.y/aDelta, -aDA.y/aDelta) ;
                  Pt2d<Type> aInvGy ( -aDC.x/aDelta,  aDA.x/aDelta) ;
@@ -728,7 +728,7 @@ template <class Type> bool ResProfChamp<Type>::OkSolC(Type c)
      if (Gamma <0)
         return false;
 
-     if (ElAbs(_Omega(c) - 2 * _signdisc * sqrt(Gamma) * (_B2*_g -_BC*c))> 1e-4)
+     if (std::abs(_Omega(c) - 2 * _signdisc * sqrt(Gamma) * (_B2*_g -_BC*c))> 1e-4)
         return false;
 
      return true;
@@ -747,14 +747,14 @@ template <class Type> void ResProfChamp<Type>::AddBC(std::list<Pt3dr> & res,Type
        {
             bool Ok;
             Type aNewB = 1+mNRP.BOfC(c-1,aSign,Ok);
-            if (Ok) std::cout << ElAbs(aNewB-b) << " ";
+            if (Ok) std::cout << std::abs(aNewB-b) << " ";
        }
        std::cout << "\n";
 
        std::cout << " CCC-CHECK ";
        std::vector<Type> aVC = mNRP.CRoots();
        for (int aK=0 ; aK<int(aVC.size()) ; aK++)
-           std::cout << ElAbs(aVC[aK]+1-c) << " ";
+           std::cout << std::abs(aVC[aK]+1-c) << " ";
        std::cout << "\n";
  
     }
@@ -763,8 +763,8 @@ template <class Type> void ResProfChamp<Type>::AddBC(std::list<Pt3dr> & res,Type
     Type aRatA = RatA(b,c);
     Type aRatC = RatC(b,c);
     if ( 
-             (ElAbs(aRatA-_rhoA) < 1e-4)
-         &&  (ElAbs(aRatC-_rhoC) < 1e-4)
+             (std::abs(aRatA-_rhoA) < 1e-4)
+         &&  (std::abs(aRatC-_rhoC) < 1e-4)
     )
     {
         Type ratio = _DistBC / euclid(_PB*b-_PC*c);
@@ -776,7 +776,7 @@ template <class Type> void ResProfChamp<Type>::AddBC(std::list<Pt3dr> & res,Type
         {
 /*
                          std::cout << "BEGINDbgOFPA \n";
-                         std::cout << ElAbs(RatA-_rhoA) << " " << ElAbs(RatC-_rhoC) << "\n";
+                         std::cout << std::abs(RatA-_rhoA) << " " << std::abs(RatC-_rhoC) << "\n";
                          std::cout << " POL " <<  c << " " << _Resolv(c) << "\n";
 
 */
@@ -813,8 +813,8 @@ template <class Type> void ResProfChamp<Type>::ListeC(std::list<Pt3dr>&  res)
                Type aRatA = RatA(b,c);
                Type aRatC = RatC(b,c);
                if ( 
-                        (ElAbs(aRatA-_rhoA) < 1e-4)
-                    &&  (ElAbs(aRatC-_rhoC) < 1e-4)
+                        (std::abs(aRatA-_rhoA) < 1e-4)
+                    &&  (std::abs(aRatC-_rhoC) < 1e-4)
                   )
                {
                    Type ratio = _DistBC / euclid(_PB*b-_PC*c);

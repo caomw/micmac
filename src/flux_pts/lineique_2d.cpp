@@ -75,7 +75,7 @@ Trace_Digital_line::Trace_Digital_line(Pt2di p1,Pt2di p2,bool conx_8,bool includ
 
 
      if ((_u1^_u2) < 0)  // whish that the couple _u1,_u2
-        ElSwap(_u1,_u2);   // be trigonometrically oriented (== anti clokerwise)
+        std::swap(_u1,_u2);   // be trigonometrically oriented (== anti clokerwise)
 
      _p_cur = p1;
      _nb_pts = (conx_8 ? dist8(_u) : dist4(_u)) + (INT) include_p2;
@@ -456,7 +456,7 @@ static INT BufNeeded
          Pt2di  p1
        )
 {
-   return  2+ ((ElAbs(u.x)>ElAbs(u.y)) ? ElAbs(p0.x-p1.x) : ElAbs(p0.y-p1.y));
+   return  2+ ((std::abs(u.x)>std::abs(u.y)) ? std::abs(p0.x-p1.x) : std::abs(p0.y-p1.y));
 }
 
 
@@ -468,7 +468,7 @@ Line_Map_Rect_Comp::Line_Map_Rect_Comp
          INT    RabU
 ) :
   // sz of buf : (if u is rather horizontal witdh else heigth) + 2 (for extremities)
-  Std_Flux_Of_Points<INT> (2,ElMax(BufNeeded(Pt2di(1,0),p0,p1),BufNeeded(Pt2di(0,1),p0,p1)))
+  Std_Flux_Of_Points<INT> (2,std::max(BufNeeded(Pt2di(1,0),p0,p1),BufNeeded(Pt2di(0,1),p0,p1)))
 {
    _res = Std_Pack_Of_Pts<INT>::new_pck(2,0);
    _pck_tr  = 0;
@@ -481,7 +481,7 @@ void Line_Map_Rect_Comp::Init ( Pt2di  u, Pt2di  p0, Pt2di  p1)
   INT aSzBLoc = BufNeeded(u,p0,p1);
   ELISE_ASSERT(Flux_Pts_Computed ::sz_buf()>=aSzBLoc,"Not Enough Buf in  Line_Map_Rect_Comp");
 
-  _horiz                  =ElAbs(u.x)>ElAbs(u.y);
+  _horiz                  =std::abs(u.x)>std::abs(u.y);
   _u                      =u;
   _p0                     =Inf(p0,p1);
   _p1                     =Sup(p0,p1);
@@ -686,9 +686,9 @@ class Line_1d_Map_Rect_Comp : public Std_Flux_Of_Points<INT>
 };
 
 Line_1d_Map_Rect_Comp::Line_1d_Map_Rect_Comp(INT  dx,INT  x0,INT  x1) :
-          Std_Flux_Of_Points<INT>(1,ElAbs(x0-x1)),
-          _x0    (ElMin(x0,x1)),
-          _x1    (ElMax(x0,x1)),
+          Std_Flux_Of_Points<INT>(1,std::abs(x0-x1)),
+          _x0    (std::min(x0,x1)),
+          _x1    (std::max(x0,x1)),
           //_dx    (dx),
           _first (true)
 {
@@ -1043,8 +1043,8 @@ Arc_Ellipse_By_Contour::Arc_Ellipse_By_Contour
           (
               round_ni(c),
               round_ni(c),
-              Pt2di(pol_ellipse(c,A/B,teta,3+ElMax(A,B),a0)),
-              Pt2di(pol_ellipse(c,A/B,teta,3+ElMax(A,B),a1)),
+              Pt2di(pol_ellipse(c,A/B,teta,3+std::max(A,B),a0)),
+              Pt2di(pol_ellipse(c,A/B,teta,3+std::max(A,B),a1)),
               v8,
               Flux_By_Contour::not_full_ang(a0,a1)
           ),
@@ -1168,7 +1168,7 @@ Arc_Cercle_Not_Comp::Arc_Cercle_Not_Comp
        _a1 (a1),
        _v8 (v8)
 {
-    ASSERT_TJS_USER(ElAbs(r)>=1.0,"Elise circles must have radius >= 1.0");
+    ASSERT_TJS_USER(std::abs(r)>=1.0,"Elise circles must have radius >= 1.0");
 }
 
 
@@ -1283,7 +1283,7 @@ Arc_Ellispe_Not_Comp::Arc_Ellispe_Not_Comp
     _a1      (a1),
     _v8      (v8)
 {
-    ASSERT_TJS_USER(ElMin(ElAbs(A),ElAbs(B))>=1.0,"Elise elipse must have axes >= 1.0");
+    ASSERT_TJS_USER(std::min(std::abs(A),std::abs(B))>=1.0,"Elise elipse must have axes >= 1.0");
 }
 
 

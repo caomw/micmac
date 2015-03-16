@@ -46,8 +46,8 @@ void q_bench_line_map_rect(INT dx,INT x0,INT x1)
                (sigma(sx)|VMax(x_max)|VMin(x_min))
           )
     );
-    INT X_min = ElMin(x0,x1);
-    INT X_max = ElMax(x0,x1);
+    INT X_min = std::min(x0,x1);
+    INT X_max = std::max(x0,x1);
 
 
 

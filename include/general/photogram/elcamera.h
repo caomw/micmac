@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_ELCAMERA_H
 #define _ELISE_GENERAL_PHOTOGRAM_ELCAMERA_H
 
-#include "general/sys_dep.h"
+
 
 #include <cCapture3D>
 #include <cCamStenopeBilin>

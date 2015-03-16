@@ -122,7 +122,7 @@ void cOmbrageNuage::MakePyram()
          double aEcMin = 1e20;
          for (int aKP=0 ; aKP<mNbPyr ; aKP++)
          {
-             double anEc = ElAbs(log(aScCible/mPyr[aKP].mScale));
+             double anEc = std::abs(log(aScCible/mPyr[aKP].mScale));
              if (anEc < aEcMin)
              {
                    aEcMin = anEc;

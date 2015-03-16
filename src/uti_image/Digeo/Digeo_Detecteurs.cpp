@@ -608,7 +608,7 @@ void cTplImInMem<Type>::ExtractExtremaDOG_old
               double aD1 = aC[-1][anY][anX] -aC[0][anY][anX];
               double aD2 = aC[0][anY][anX] -aC[1][anY][anX];
 
-              aV.push_back(ElAbs(aD1)/(1e-5+ElAbs(aD2)));
+              aV.push_back(std::abs(aD1)/(1e-5+std::abs(aD2)));
           }
        }
 

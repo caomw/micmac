@@ -80,7 +80,7 @@ INT NR_jacobi (REAL ** A ,INT n ,REAL *d ,REAL ** V)
 		sm=0.0;
 		for (ip=1;ip<=n-1;ip++) {
 			for (iq=ip+1;iq<=n;iq++)
-				sm += ElAbs(a[ip][iq]);
+				sm += std::abs(a[ip][iq]);
 		}
 		if (sm == 0.0) {
 			return(1);
@@ -91,17 +91,17 @@ INT NR_jacobi (REAL ** A ,INT n ,REAL *d ,REAL ** V)
 			tresh=0.0;
 		for (ip=1;ip<=n-1;ip++) {
 			for (iq=ip+1;iq<=n;iq++) {
-				g=100.0*ElAbs(a[ip][iq]);
-				if (i > 4 && ElAbs(d[ip])+g == ElAbs(d[ip])
-					&& ElAbs(d[iq])+g == ElAbs(d[iq]))
+				g=100.0*std::abs(a[ip][iq]);
+				if (i > 4 && std::abs(d[ip])+g == std::abs(d[ip])
+					&& std::abs(d[iq])+g == std::abs(d[iq]))
 					a[ip][iq]=0.0;
-				else if (ElAbs(a[ip][iq]) > tresh) {
+				else if (std::abs(a[ip][iq]) > tresh) {
 					h=d[iq]-d[ip];
-					if (ElAbs(h)+g == ElAbs(h))
+					if (std::abs(h)+g == std::abs(h))
 						t=(a[ip][iq])/h;
 					else {
 						theta=0.5*h/(a[ip][iq]);
-						t=1.0/(ElAbs(theta)+sqrt(1.0+theta*theta));
+						t=1.0/(std::abs(theta)+sqrt(1.0+theta*theta));
 						if (theta < 0.0) t = -t;
 					}
 					c=1.0/sqrt(1+t*t);
@@ -211,14 +211,14 @@ std::vector<int> jacobi_diag
         
 
 
-/*  #define PYTHAG(a,b) ((at=ElAbs(a)) > (bt=ElAbs(b)) ? \
+/*  #define PYTHAG(a,b) ((at=std::abs(a)) > (bt=std::abs(b)) ? \
   (ct=bt/at,at*sqrt(1.0+ct*ct)) : (bt ? (ct=at/bt,bt*sqrt(1.0+ct*ct)): 0.0))
 */
 
 static inline double  PYTHAG(const double & a,const double & b)
 {
-   double at=ElAbs(a);
-   double bt=ElAbs(b);
+   double at=std::abs(a);
+   double bt=std::abs(b);
    
    if (at>bt)
    {
@@ -232,10 +232,10 @@ static inline double  PYTHAG(const double & a,const double & b)
    }
    
 }
-// #define SIGN(a,b) ((b) >= 0.0 ? ElAbs(a) : -ElAbs(a))
+// #define SIGN(a,b) ((b) >= 0.0 ? std::abs(a) : -std::abs(a))
 static double  SIGN(const double & a,const double & b) 
 {
-	return ((b)>=0.0 ? ElAbs(a) : -ElAbs(a));
+	return ((b)>=0.0 ? std::abs(a) : -std::abs(a));
 }
 
 
@@ -258,7 +258,7 @@ void NR_svdcmp(double ** A,int m,int n,double * w,double ** V)
 		rv1[i]=scale*g;
 		g=s=scale=0.0;
 		if (i <= m) {
-			for (k=i;k<=m;k++) scale += ElAbs(a[k][i]);
+			for (k=i;k<=m;k++) scale += std::abs(a[k][i]);
 			if (scale) {
 				for (k=i;k<=m;k++) {
 					a[k][i] /= scale;
@@ -281,7 +281,7 @@ void NR_svdcmp(double ** A,int m,int n,double * w,double ** V)
 		w[i]=scale*g;
 		g=s=scale=0.0;
 		if (i <= m && i != n) {
-			for (k=l;k<=n;k++) scale += ElAbs(a[i][k]);
+			for (k=l;k<=n;k++) scale += std::abs(a[i][k]);
 			if (scale) {
 				for (k=l;k<=n;k++) {
 					a[i][k] /= scale;
@@ -301,7 +301,7 @@ void NR_svdcmp(double ** A,int m,int n,double * w,double ** V)
 				for (k=l;k<=n;k++) a[i][k] *= scale;
 			}
 		}
-		anorm=ElMax(anorm,(ElAbs(w[i])+ElAbs(rv1[i])));
+		anorm=std::max(anorm,(std::abs(w[i])+std::abs(rv1[i])));
 	}
 	for (i=n;i>=1;i--) {
 		if (i < n) {
@@ -344,18 +344,18 @@ void NR_svdcmp(double ** A,int m,int n,double * w,double ** V)
 			flag=1;
 			for (l=k;l>=1;l--) {
 				nm=l-1;
-				if (ElAbs(rv1[l])+anorm == anorm) {
+				if (std::abs(rv1[l])+anorm == anorm) {
 					flag=0;
 					break;
 				}
-				if (ElAbs(w[nm])+anorm == anorm) break;
+				if (std::abs(w[nm])+anorm == anorm) break;
 			}
 			if (flag) {
 				c=0.0;
 				s=1.0;
 				for (i=l;i<=k;i++) {
 					f=s*rv1[i];
-					if (ElAbs(f)+anorm != anorm) {
+					if (std::abs(f)+anorm != anorm) {
 						g=w[i];
 						h=PYTHAG(f,g);
 						w[i]=h;
@@ -479,7 +479,7 @@ void MakeRONConservByPrio(Pt3dr & aV1,Pt3dr & aV2,Pt3dr & aV3)
 void MakeRONWith1Vect(Pt3dr & aV1,Pt3dr & aV2,Pt3dr & aV3)
 {
     aV1 = vunit(aV1);
-    if (ElAbs(aV1.x) < ElAbs(aV1.y))
+    if (std::abs(aV1.x) < std::abs(aV1.y))
        aV2 = Pt3dr(0,aV1.z,-aV1.y);
     else
        aV2 = Pt3dr(aV1.z,0,-aV1.x);
@@ -577,7 +577,7 @@ void NR_QRDecomp(double **A, int n, double *c, double *d, int *sing)
       scale=0.0;
       for (i=k;i<=n;i++)
       {
-          scale=ElMax(scale,ElAbs(a[i][k]));
+          scale=std::max(scale,std::abs(a[i][k]));
       }
       if (scale == 0.0)
       {
@@ -785,7 +785,7 @@ void TestQR(int aN)
         for (int anX=0 ;  anX< aN ; anX++)
            for (int anY=0 ;  anY< aN ; anY++)
                if (anY>anX) 
-                  aSomInf += ElAbs(aR(anX,anY));
+                  aSomInf += std::abs(aR(anX,anY));
 
         std::cout << "RQ-Test OrthoNo " << anId.L2(anId2) << " " << aT2.L2() 
                   << " NEG=" << aNbNeg  << " SomInf=" << aSomInf << "\n";

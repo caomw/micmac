@@ -72,7 +72,7 @@ template <class TObj>
 		_Cw2uX      (NEW_VECTEUR(-RAB,aSzW.x+RAB,INT4)),
 		_Cw2uY      (NEW_VECTEUR(-RAB,aSzW.y+RAB,INT4)),
 		_SzW		(aSzW),
-		_line       (NEW_MATRICE(Pt2di(-RAB,0),Pt2di(ElMax(aSzW.x,aSzU.x)+RAB,NbChan),TObj)),
+		_line       (NEW_MATRICE(Pt2di(-RAB,0),Pt2di(std::max(aSzW.x,aSzU.x)+RAB,NbChan),TObj)),
 		_l0			(_line[0]),
 		_nb_chan	(NbChan)
 {
@@ -85,7 +85,7 @@ template <class TObj>
 	DELETE_VECTOR(_u2wY		,-RAB);
 	DELETE_VECTOR(_Cw2uX	,-RAB);
 	DELETE_VECTOR(_Cw2uY	,-RAB);
-	DELETE_MATRICE(_line,Pt2di(-RAB,0),Pt2di(ElMax(_SzW.x,_SzU.x)+RAB,_nb_chan));
+	DELETE_MATRICE(_line,Pt2di(-RAB,0),Pt2di(std::max(_SzW.x,_SzU.x)+RAB,_nb_chan));
 }
 
 template <class TObj> 
@@ -114,10 +114,10 @@ template <class TObj>
 	_pW1 = pW1;
 
 
-	_xU0 = ElMax(0		, round_down(0.5+x_to_user(_pW0.x-0.5)));
-	_xU1 = ElMin(_SzU.x	, round_up  (0.5+x_to_user(_pW1.x-0.5)));
-	_yU0 = ElMax(0		, round_down(0.5+y_to_user(_pW0.y-0.5)));
-	_yU1 = ElMin(_SzU.y	, round_up  (0.5+y_to_user(_pW1.y-0.5)));
+	_xU0 = std::max(0		, round_down(0.5+x_to_user(_pW0.x-0.5)));
+	_xU1 = std::min(_SzU.x	, round_up  (0.5+x_to_user(_pW1.x-0.5)));
+	_yU0 = std::max(0		, round_down(0.5+y_to_user(_pW0.y-0.5)));
+	_yU1 = std::min(_SzU.y	, round_up  (0.5+y_to_user(_pW1.y-0.5)));
 
 
     	if ((_xU0 >=_xU1) || (_yU0 >= _yU1))
@@ -220,8 +220,8 @@ template <class TObj,class TLut,class TInd >
 
 			for (INT uy= yU0; uy<=yU1 ; uy++)
 			{
-				REAL yW0 = ElMax(this->y_to_window(uy-0.5),wy-0.5);
-				REAL yW1 = ElMin(this->y_to_window(uy+0.5),wy+0.5);
+				REAL yW0 = std::max(this->y_to_window(uy-0.5),wy-0.5);
+				REAL yW1 = std::min(this->y_to_window(uy+0.5),wy+0.5);
 				
 				INT pds = round_ni((yW1-yW0) * this->_CoeffPds);
 				if (pds > 0)
@@ -322,7 +322,7 @@ template <class TObj,class TLut,class TInd >
 		while ( (wy1<this->_pW1.y) && (yU0==round_ni(this->y_to_user(wy1))))
 			wy1++;
 
-                yU0 = ElMax(0,ElMin(yU0,this->_SzU.y-1));
+                yU0 = std::max(0,std::min(yU0,this->_SzU.y-1));
 		DeCompr
                 (
 		     _dim->lpckb(yU0),
@@ -486,9 +486,9 @@ void Lut_RGB_Int::init(Elise_colour * col,INT nb)
 	_b =  NEW_VECTEUR(0,nb,INT4);
 	for (INT k=0; k<_nb ; k++)
 	{
-		_r[k] = ElMax(0,ElMin(255,(INT)(255*col[k].r())));
-		_g[k] = ElMax(0,ElMin(255,(INT)(255*col[k].g())));
-		_b[k] = ElMax(0,ElMin(255,(INT)(255*col[k].b())));
+		_r[k] = std::max(0,std::min(255,(INT)(255*col[k].r())));
+		_g[k] = std::max(0,std::min(255,(INT)(255*col[k].g())));
+		_b[k] = std::max(0,std::min(255,(INT)(255*col[k].b())));
 
 	}
 }

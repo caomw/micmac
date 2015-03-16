@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_FILE_IM_BMP_IM_H
 #define _ELISE_GENERAL_FILE_IM_BMP_IM_H
 
-#include "general/sys_dep.h"
+
 
 class  Bmp_Im : public PRC0
 {
@@ -40,7 +40,7 @@ private :
 #ifndef _ELISE_GENERAL_FILE_IM_DATA_BMP_FILE_H
 #define _ELISE_GENERAL_FILE_IM_DATA_BMP_FILE_H
 
-#include "general/sys_dep.h"
+
 
     class Data_BMP_File * dbmp() const
     {return SAFE_DYNC(class Data_BMP_File *,_ptr);}

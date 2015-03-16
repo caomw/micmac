@@ -117,7 +117,7 @@ Linear_Proj_Cav_Comp::Linear_Proj_Cav_Comp
       _f (f)
 {
       _neg_st = (steep < 0);
-      _steep  =    ElAbs(steep) * arg.flux()->average_dist();
+      _steep  =    std::abs(steep) * arg.flux()->average_dist();
       _zobs   =    zobs;
 }
 
@@ -158,8 +158,8 @@ const Pack_Of_Pts * Linear_Proj_Cav_Comp::values(const Pack_Of_Pts * pts)
       REAL ylast = (pts->dim() == 2) ? p1[1] : 0;
       if (_neg_st)
       {
-          ElSwap(x0,xlast);
-          ElSwap(y0,ylast);
+          std::swap(x0,xlast);
+          std::swap(y0,ylast);
           vals->auto_reverse();
       }
 
@@ -404,7 +404,7 @@ Phas_auto_stero_Comp::Phas_auto_stero_Comp
 )     :
       Fonc_Num_Comp_TPL<REAL>(arg,1,arg.flux()),
       _f (f),
-      _steep (ElAbs(steep)),
+      _steep (std::abs(steep)),
       _zobs  (zobs)
 {
 }
@@ -446,7 +446,7 @@ const Pack_Of_Pts * Phas_auto_stero_Comp::values(const Pack_Of_Pts * pts)
                REAL z = alt_interpole(last_x);     
                last_x =  intersec_incr(Pt2dr(last_x,z));
           }
-          phas_max = ElMax(phas_max,phas[x]);
+          phas_max = std::max(phas_max,phas[x]);
       }
 
       REAL z = alt_interpole(phas_max);

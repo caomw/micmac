@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_GEOM_VECTEUR_ELSEG3D_H
 #define _ELISE_GENERAL_GEOM_VECTEUR_ELSEG3D_H
 
-#include "general/sys_dep.h"
+
 
 class ElSeg3D
 {

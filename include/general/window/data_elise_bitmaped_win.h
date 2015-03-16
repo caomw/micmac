@@ -42,7 +42,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_WINDOW_DATA_ELISE_BITMAPED_WIN_H
 #define _ELISE_GENERAL_WINDOW_DATA_ELISE_BITMAPED_WIN_H
 
-#include "general/sys_dep.h"
+
 
          class Data_Elise_Bitmaped_Win * debw()
          {

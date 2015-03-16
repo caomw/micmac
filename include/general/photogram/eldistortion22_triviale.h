@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_ELDISTORTION22_TRIVIALE_H
 #define _ELISE_GENERAL_PHOTOGRAM_ELDISTORTION22_TRIVIALE_H
 
-#include "general/sys_dep.h"
+
 
 class ElDistortion22_Triviale : public ElDistortion22_Gen
 {

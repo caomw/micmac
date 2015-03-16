@@ -371,7 +371,7 @@ for (double aD=-10 ; aD <=300 ; aD+=5.0)
                    double aVr = aZB.mInterpIm->GetVal(aDataImTer,aPt2);
                    //U_INT1 aVi = El_CTypeTraits<U_INT1>::TronqueR(aVr);
                    // aVi = aVr;
-                   int aVi = ElMax(1,ElMin(255,round_ni(aVr)));
+                   int aVi = std::max(1,std::min(255,round_ni(aVr)));
                    aTImProj.oset(aPIm,aVi);
                 }
            }
@@ -512,7 +512,7 @@ void cAppliMICMAC::GenerateSimulations()
 
 
     mSimFOM = OrientFromOneEtape(*mCurEtape);
-    mSimFactPA  = ElAbs(mSimFOM.ResolutionPlani().x/mSimFOM.ResolutionAlti());
+    mSimFactPA  = std::abs(mSimFOM.ResolutionPlani().x/mSimFOM.ResolutionAlti());
     mSimRPlani = dist8(mSimFOM.ResolutionPlani());
     mGTer = &(mCurEtape->GeomTer());
 

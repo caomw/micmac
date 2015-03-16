@@ -123,7 +123,7 @@ void  cAppliConvIP2L::Exec()
          Pt2dr aPHomApp = itH->P1();
 	 Pt2dr aPIm = itH->P2();
 	 if (! mAppHIsP1)
-	    ElSwap(aPHomApp,aPIm);
+	    std::swap(aPHomApp,aPIm);
 
          Pt2dr aPIndex = mN3D->Plani2Index(aPHomApp);
 

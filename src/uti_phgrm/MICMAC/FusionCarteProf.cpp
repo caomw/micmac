@@ -435,7 +435,7 @@ Pt3dr VerifExp(const std::vector<cElPile> & aVPile,cElPile aP0,float aPixFact)
     Pt3dr aRes (0,0,0);
     for (int aK=0 ; aK<int(aVPile.size()) ; aK++)
     {
-       double aPds  = exp(-ElAbs(aP0.Z()-aVPile[aK].Z())/aPixFact);
+       double aPds  = exp(-std::abs(aP0.Z()-aVPile[aK].Z())/aPixFact);
        aRes = aRes + Pt3dr(aVPile[aK].Z()*aVPile[aK].P(),aVPile[aK].P(),1.0) * aPds;
     }
     return aRes / aVPile.size();
@@ -465,7 +465,7 @@ bool IsMaxLoc(const std::vector<cTmpPile> & aVPile,int aK,float anEc,int aStep,i
    for (int aK1=aK+aStep ; (aK1!=aLim) ; aK1+=aStep)
    {
        cTmpPile aP1 = aVPile[aK1];
-       if (ElAbs(aP0.mZInit-aP1.mZInit) > anEc) return true;
+       if (std::abs(aP0.mZInit-aP1.mZInit) > anEc) return true;
        if (aP0.mPds0 < aP1.mPds0) return false;
    }
    return true;
@@ -485,7 +485,7 @@ double PdsCptr(double aDZ,double aSeuil)
     return  2* (1-aRes);
 
     // return aDZ < aSeuil;
-    // return ElMax(0.0,1-ElSquare(aDZ/aSeuil));
+    // return std::max(0.0,1-ElSquare(aDZ/aSeuil));
 }
 
 void IncreCptr(const std::vector<cTmpPile> & aVPile,cTmpPile & aPile,int aK0,float aSeuil,int aStep,int aLim)
@@ -493,7 +493,7 @@ void IncreCptr(const std::vector<cTmpPile> & aVPile,cTmpPile & aPile,int aK0,flo
     while (1)
     {
         if (aK0 == aLim) return;
-        double aP = PdsCptr(ElAbs(aVPile[aK0].mZInit-aPile.mZInit),aSeuil);
+        double aP = PdsCptr(std::abs(aVPile[aK0].mZInit-aPile.mZInit),aSeuil);
         if (aP<=0) return;
         aPile.mCpteur  += aP;
         aK0 += aStep;
@@ -781,7 +781,7 @@ template <class Type> double  cLoadedCP<Type>::PdsLinear(const Pt2dr & aPTer) co
            aPds = (aPds-mSeuilC)/(1.0-mSeuilC);
 */
        }
-       return ElMin(1.0,ElMax(0.0,aPds));
+       return std::min(1.0,std::max(0.0,aPds));
    }
    return 0;
 }
@@ -1224,7 +1224,7 @@ template <class Type> void cFusionCarteProf<Type>::DoOneBloc(int aKB,const Box2d
                          {
                              const cElPile& aPk = aPil[aKz];
                              aTabP[aKz].ArgAux() = cElPilePrgD(aPk.Z());
-                             aTabP[aKz].SetOwnCost(ToICost(ElMax(0.0,ElMin(1.0,1.0-aPk.P()))));
+                             aTabP[aKz].SetOwnCost(ToICost(std::max(0.0,std::min(1.0,1.0-aPk.P()))));
 
 
 if (0)
@@ -1241,7 +1241,7 @@ if (aPk.P()>MaxP)
                              {
                                  std::cout << "Fill Pill, Kz " << aKz << " , Z " 
                                            << aTabP[aKz].ArgAux().Z() 
-                                           <<  " CostInit " << ToICost(ElMax(0.0,ElMin(1.0,1.0-aPk.P())))
+                                           <<  " CostInit " << ToICost(std::max(0.0,std::min(1.0,1.0-aPk.P())))
                                            <<  " PrgdCost=" << ToRCost(aTabP[aKz].OwnCost()) << "\n";
                              }
                          }
@@ -1277,8 +1277,8 @@ if (aPk.P()>MaxP)
                    aTImFus.oset(aQ0,ToZSauv(aCol.ArgAux().Z()));
                    aTImMasq.oset(aQ0,1);
                    const cElPile & aPz = (*anIt)[aZ];
-                   aTImCorrel.oset(aQ0,ElMax(0,ElMin(255,(round_ni(aPz.P()*255)))));
-                   aTImCptr.oset(aQ0,ElMax(0,ElMin(255,(round_ni(aPz.CPtr()*DynCptrFusDepthMap )))));
+                   aTImCorrel.oset(aQ0,std::max(0,std::min(255,(round_ni(aPz.P()*255)))));
+                   aTImCptr.oset(aQ0,std::max(0,std::min(255,(round_ni(aPz.CPtr()*DynCptrFusDepthMap )))));
 
                 }
                 else
@@ -1374,7 +1374,7 @@ template <class Type>   void cFusionCarteProf<Type>::DoConnexion
         {
             tCelOpt & anOut = aTabOuput[aZOut];
             const  cElPilePrgD & aPOut = anOut.ArgAux();
-            double aDZ = ElAbs(aPIn.Z()-aPOut.Z())/mResolPlaniEquiAlt;
+            double aDZ = std::abs(aPIn.Z()-aPOut.Z())/mResolPlaniEquiAlt;
             if ((mFNoVal==0) || (aDZ < mFNoVal->PenteMax()))
             {
             // Fonction concave, nulle et de derivee 1 en 0

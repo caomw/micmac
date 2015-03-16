@@ -232,10 +232,10 @@ void  Data_Elise_Bitmaped_Win::rast_draw_pixels(struct El_RW_Point * pts,INT nb 
 
 void Data_Elise_Bitmaped_Win::draw_rect(INT x,INT y,INT w,INT h,INT c)
 {
-   INT x0 = ElMax(x,0);
-   INT y0 = ElMax(y,0);
-   INT x1 = ElMin(x+w,_tx);
-   INT y1 = ElMin(y+h,_ty);
+   INT x0 = std::max(x,0);
+   INT y0 = std::max(y,0);
+   INT x1 = std::min(x+w,_tx);
+   INT y1 = std::min(y+h,_ty);
 
    for (y=y0 ; y<y1; y++)
        for (x=x0 ; x<x1; x++)

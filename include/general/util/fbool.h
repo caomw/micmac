@@ -42,14 +42,12 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_UTIL_FBOOL_H
 #define _ELISE_GENERAL_UTIL_FBOOL_H
 
-#include "general/sys_dep.h"
+
 
 class FBool
 {
     public :
-       static const FBool True;
-       static const FBool MayBe;
-       static const FBool False;
+        enum { True, MayBe, False } FBoolEnum;
 
       FBool operator || (const FBool & F2)  const
       {
@@ -81,8 +79,8 @@ class FBool
 
 
     private :
-       FBool(U_int1);
-       U_int1    mVal;
+       FBool(unsigned char);
+       unsigned char    mVal;
 };
 
 #endif

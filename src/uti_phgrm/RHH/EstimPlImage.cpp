@@ -195,7 +195,7 @@ double TestCohHomogr(const cTestPlIm & aPL1,const cTestPlIm & aPL2,bool H1On2,bo
        getchar();
    }
 
-   aResidu = sqrt(ElMax(0.0,aResidu/aSomPds));
+   aResidu = sqrt(std::max(0.0,aResidu/aSomPds));
    // aResidu *=  aPL1.mLnk->Srce()->CamC()->Focale();
    aResidu /= aTrace;
    return aResidu;
@@ -646,7 +646,7 @@ std::string cImagH::EstimatePlan()
 
        Pt3dr aCentre0 = aRCam12P.ImAff(Pt3dr(0,0,0));
        double aMulXZ =  aAltiCible / aCentre0.z; // Si <0 remet les camera par dessus
-       double aMulY  =  ElAbs(aMulXZ);           // Pour que la transfo soit directe
+       double aMulY  =  std::abs(aMulXZ);           // Pour que la transfo soit directe
 
        std::string aDir = mAppli.Dir();
 
@@ -740,7 +740,7 @@ std::string cImagH::EstimatePlan()
        double aRab = 20;
 
        Pt2dr aPRab(aRab,aRab);
-       double aHaut = ElMin(aSzPh.x,aSzPh.y);
+       double aHaut = std::min(aSzPh.x,aSzPh.y);
        double aFocale =  round_ni( aCible/aHaut);
        Pt2dr aPP = Pt2dr(round_ni(aPRab - aPMin * aFocale));
        Pt2di aSzIm = round_ni(aSzPh*aFocale + aPRab*2);

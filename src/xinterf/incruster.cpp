@@ -77,9 +77,9 @@ INT Visu_ElImDest::VMax() const
 
 void Visu_ElImDest::SetEtalDyn(INT aVmin,INT aVmax,bool SetUse)
 {
-   mVMin = ElMin(aVmin,aVmax);
-   mVMax = ElMax(aVmin,aVmax);
-   mDiff = ElMax(1,mVMax-mVMin);
+   mVMin = std::min(aVmin,aVmax);
+   mVMax = std::max(aVmin,aVmax);
+   mDiff = std::max(1,mVMax-mVMin);
    if (SetUse)
       mUseEtalDyn = true;
 }
@@ -114,7 +114,7 @@ void Visu_ElImDest::write_image(INT  x0src,Pt2di p0dest,INT nb,INT ** data)
               INT * dOut = mDataBuf[d]+x0src;
 // cout << dIn << " " << dOut << " " << mVMin << " " << mDiff << "\n";
               for (INT k=0; k<nb ; k++)
-                  dOut[k] = ElMin(255,ElMax(0,((dIn[k]-mVMin)*255)/mDiff));
+                  dOut[k] = std::min(255,std::max(0,((dIn[k]-mVMin)*255)/mDiff));
          }
          ToW = mDataBuf;
      }
@@ -787,7 +787,7 @@ INT Filtr_Incr_EqDyn_Glob::Filters
          }
          rs1 /= rs0;
          rs2 = rs2/rs0 -ElSquare(rs1);
-         REAL sigma =  sqrt(ElMax(0.01,rs2));
+         REAL sigma =  sqrt(std::max(0.01,rs2));
 
 
          ELISE_COPY

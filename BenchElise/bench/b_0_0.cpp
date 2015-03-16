@@ -50,7 +50,7 @@ void som1_cste_int_rect_2d_by_hand(INT val, Pt2di p1,Pt2di p2)
           res = OpSum.red_tab(vals->_pts[0],vals->nb(),res);
     }
 
-    BENCH_ASSERT(res == ElAbs(val*(p1.x-p2.x)*(p1.y-p2.y)));
+    BENCH_ASSERT(res == std::abs(val*(p1.x-p2.x)*(p1.y-p2.y)));
     delete rc;
     delete fc;
 
@@ -84,7 +84,7 @@ void som2_cste_int_rect_2d_by_hand(INT val, Pt2di p1,Pt2di p2)
         delete oc;
     }
 
-    BENCH_ASSERT(res == ElAbs(val*(p1.x-p2.x)*(p1.y-p2.y)));
+    BENCH_ASSERT(res == std::abs(val*(p1.x-p2.x)*(p1.y-p2.y)));
 }
 
 
@@ -93,10 +93,10 @@ void som3_cste_int_rect_2d_by_hand(INT val, Pt2di p1,Pt2di p2)
     INT res;
 
     ELISE_COPY(rectangle(p1,p2),val,reduc(OpSum,res));
-    BENCH_ASSERT(res == ElAbs(val*(p1.x-p2.x)*(p1.y-p2.y)));
+    BENCH_ASSERT(res == std::abs(val*(p1.x-p2.x)*(p1.y-p2.y)));
 
     ELISE_COPY(rectangle(p1,p2),val,sigma(res));
-    BENCH_ASSERT(res == ElAbs(val*(p1.x-p2.x)*(p1.y-p2.y)));
+    BENCH_ASSERT(res == std::abs(val*(p1.x-p2.x)*(p1.y-p2.y)));
 }
 
 
@@ -110,7 +110,7 @@ void som4_cste_int_rect_2d_by_hand(REAL val, Pt2di p1,Pt2di p2)
     REAL res;
 
     ELISE_COPY(rectangle(p1,p2),val,sigma(res));
-    BENCH_ASSERT(res == ElAbs(val*(p1.x-p2.x)*(p1.y-p2.y)));
+    BENCH_ASSERT(res == std::abs(val*(p1.x-p2.x)*(p1.y-p2.y)));
 }
 
 

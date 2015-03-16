@@ -365,8 +365,8 @@ Border_Rect_Not_Comp::Border_Rect_Not_Comp
              (q1[j]&&q2[j]),
              "BORDER nul in border_rect"
          );
-         _q1[j] = _p1[j] + ElAbs(q1[j]);
-         _q2[j] = _p2[j] - ElAbs(q2[j]);
+         _q1[j] = _p1[j] + std::abs(q1[j]);
+         _q2[j] = _p2[j] - std::abs(q2[j]);
      }
      OpMin.t0_eg_t1_op_t2(_q1,_q1,_p2,dim);
      OpMax.t0_eg_t1_op_t2(_q2,_q2,_q1,dim);

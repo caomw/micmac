@@ -124,7 +124,7 @@ std::cout <<  aSz.x-anX << "\n";
                   {
                      aNb+= 0.5;
                      double anEc = aTIm.get(aP)-aTIm.get(aP+aDP);
-                     double aStep = ElAbs(anEc/aDist);
+                     double aStep = std::abs(anEc/aDist);
                      double aPds = 1/(1+ElSquare(aStep/aStepMax));
                      if (anEc> 0) 
                         aSPlus += aPds;
@@ -138,13 +138,13 @@ std::cout <<  aSz.x-anX << "\n";
                   }
               }
           }
-          double aVal = ElMax(aSPlus,aSMoins)/aNb;
+          double aVal = std::max(aSPlus,aSMoins)/aNb;
                   
 // std::cout << anX << " " << anY << " " << aSPlus << " " << aSMoins  << " " << aVal << "\n";
                   aTRes.oset
                   (
                       aP,
-                      ElMax(0,ElMin(128,round_ni(aVal*128)))
+                      std::max(0,std::min(128,round_ni(aVal*128)))
                   );
       }
    }
@@ -259,7 +259,7 @@ void TestEquiSolid()
        double aV1 = aV + aEps;
        double aDifF = (f2SAtRxS2SRx(aV1)-f2SAtRxS2SRx(aV0)) / (2*aEps);
 
-       std::cout << aV << " " << ElAbs(Dl_f2SAtRxS2SRx(aV)-Std_f2SAtRxS2SRx(aV)) << "\n";
+       std::cout << aV << " " << std::abs(Dl_f2SAtRxS2SRx(aV)-Std_f2SAtRxS2SRx(aV)) << "\n";
 
        std::cout  << aDifF << " " << Der2SAtRxS2SRx(aV) << " " << Dl_Der2SAtRxS2SRx(aV) << "\n";
 
@@ -429,7 +429,7 @@ void TestAMD()
      else
         anAI.AddArc(aK,0);
      anAI.AddArc(aK,aK);
-     anAI.AddArc(aK,ElMin(aN-1,aK+1));
+     anAI.AddArc(aK,std::min(aN-1,aK+1));
    }
 
    anAI.DoRank(true);

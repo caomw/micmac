@@ -57,11 +57,11 @@ void dist_chamfer_cabl(Im2D<U_INT1,INT> I,INT v_max)
               
               INT v;
               if (d[y][x])
-                 v  = ElMin3 
+                 v  = std::min3 
                       (
-                          ElMin3(d[y+1][x-1]+3,d[y+1][x]+2,d[y+1][x+1]+3),
-                          ElMin3(d[y][x-1]+2,vmax,d[y][x+1]+2),
-                          ElMin3(d[y-1][x-1]+3,d[y-1][x]+2,d[y-1][x+1]+3)
+                          std::min3(d[y+1][x-1]+3,d[y+1][x]+2,d[y+1][x+1]+3),
+                          std::min3(d[y][x-1]+2,vmax,d[y][x+1]+2),
+                          std::min3(d[y-1][x-1]+3,d[y-1][x]+2,d[y-1][x+1]+3)
                       );
               else
                  v = 0;
@@ -127,11 +127,11 @@ void bench_env_klip(Pt2di sz)
          for (INT y=0; y<sz.y ; y++)
             if (i1[y][x])
             {
-                 INT v  = ElMin3 
+                 INT v  = std::min3 
                       (
-                          ElMin3(i2[y+1][x-1]+3,i2[y+1][x]+2,i2[y+1][x+1]+3),
-                          ElMin3(i2[y][x-1]+2,(INT)i1[y][x],i2[y][x+1]+2),
-                          ElMin3(i2[y-1][x-1]+3,i2[y-1][x]+2,i2[y-1][x+1]+3)
+                          std::min3(i2[y+1][x-1]+3,i2[y+1][x]+2,i2[y+1][x+1]+3),
+                          std::min3(i2[y][x-1]+2,(INT)i1[y][x],i2[y][x+1]+2),
+                          std::min3(i2[y-1][x-1]+3,i2[y-1][x]+2,i2[y-1][x+1]+3)
                       );
                  BENCH_ASSERT(v==i2[y][x]);
            }

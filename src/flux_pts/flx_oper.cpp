@@ -90,7 +90,7 @@ Flux_Concat_Comp::Flux_Concat_Comp
    (
           flx1->dim(),
           flx1->type(),
-          ElMax(flx1->sz_buf(),flx2->sz_buf())
+          std::max(flx1->sz_buf(),flx2->sz_buf())
     )
 {
     ASSERT_INTERNAL

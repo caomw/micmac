@@ -82,8 +82,8 @@ void GenMaxLoc::MajOvois()
                  }
              }
          }
-         dx = ElMax(dx/2,1);
-         dy = ElMax(dy/2,1);
+         dx = std::max(dx/2,1);
+         dy = std::max(dy/2,1);
     }
 }
 
@@ -132,8 +132,8 @@ template <class Type,class TypeBase,class Compare>
              )
 {
    Pt2di Sz(Im.tx(),Im.ty());
-   Vois.x = ElAbs(Vois.x);
-   Vois.y = ElAbs(Vois.y);
+   Vois.x = std::abs(Vois.x);
+   Vois.y = std::abs(Vois.y);
    pt_set_min_max(p0,p1);
 
    p0 = Sup(p0,Vois);
@@ -152,10 +152,10 @@ template <class Type,class TypeBase,class Compare>
 
    for (INT Y0=p0.y ; Y0<p1.y ; Y0+=dly)
    {
-       INT Y1 = ElMin(p1.y,Y0+dly);
+       INT Y1 = std::min(p1.y,Y0+dly);
        for (INT X0=p0.x ; X0<p1.x ; X0+=dlx)
        {
-           INT X1 = ElMin(p1.x,X0+dlx);
+           INT X1 = std::min(p1.x,X0+dlx);
            Type vMax = vMin;
            INT xMax = DefXY;
            INT yMax = DefXY;

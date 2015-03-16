@@ -128,7 +128,7 @@ cOriMntCarto::cOriMntCarto
 REAL cOriMntCarto:: ResolZ() const {return mResolZ; }
 REAL cOriMntCarto:: ResolPlani() const
 {
-   return ElMin(mResol.x,mResol.y);
+   return std::min(mResol.x,mResol.y);
 }
 
 

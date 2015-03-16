@@ -41,7 +41,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_PHGR_FORMEL_CINCintERVALE_H
 #define _ELISE_GENERAL_PHGR_FORMEL_CINCintERVALE_H
 
-#include "general/sys_dep.h"
+
 
 #include <cSsBloc>
 

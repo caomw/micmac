@@ -479,7 +479,7 @@ void Op_Un_Not_Comp::VarDerNN(ElGrowingSetInd & aSet) const
 
 INT Op_Bin_Not_Comp::dimf_out() const
 {
-    return ElMax
+    return std::max
            (
                _f0.dimf_out(),
                _f1.dimf_out()

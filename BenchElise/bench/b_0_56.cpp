@@ -155,7 +155,7 @@ void BenchAmelLocMepRel
 //----
        aSet.SolveResetUpdate();
    }
-   BENCH_ASSERT(ElAbs(aPIF->CurFocale()-1.0)<epsilon);
+   BENCH_ASSERT(std::abs(aPIF->CurFocale()-1.0)<epsilon);
    BENCH_ASSERT(euclid( aPIF->CurPP())<epsilon);
    BENCH_ASSERT(EcartEq<epsilon);
    BENCH_ASSERT(EcRot<epsilon);
@@ -205,7 +205,7 @@ static bool OkCams
    if (! PCoPlan)
       return true;
 
-   return (ElAbs(aC1.z)>0.1) && (ElAbs(aC2.z)>0.1) ;
+   return (std::abs(aC1.z)>0.1) && (std::abs(aC2.z)>0.1) ;
 }
 
 
@@ -350,7 +350,7 @@ void OneBenchMatEss(bool CamPhys,bool PCoPlan,bool AmelLoc)
 
 	        REAL aS = scal(aR1,aMEss*aR2);
 
-	        BENCH_ASSERT(ElAbs(aS)<epsilon);
+	        BENCH_ASSERT(std::abs(aS)<epsilon);
 	    }
        }
        

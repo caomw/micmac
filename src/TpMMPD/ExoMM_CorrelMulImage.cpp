@@ -176,11 +176,11 @@ void cMCI_Ima::TestManipImage()
 
            // Test of miroring a part of image
         U_INT1 ** aData = aImAlias.data();
-        for (int anY=0 ; anY<ElMin(mSz.y,mSz.x) /2 ; anY++)
+        for (int anY=0 ; anY<std::min(mSz.y,mSz.x) /2 ; anY++)
         {
             for (int anX=0 ; anX<anY ; anX++)
             {
-                 ElSwap(aData[anY][anX],aData[anX][anY]);
+                 std::swap(aData[anY][anX],aData[anX][anY]);
             }
         }
         ELISE_COPY(mW->all_pts(),mIm.in(),mW->ogray());
@@ -827,10 +827,10 @@ int  ExoCorrelEpip_main(int argc,char ** argv)
         // Exact limit of domain, used for non functionnal mode to avoid
         // acces out of image domains
 
-    int aX0 = aSzW+ElMax(0,-aPax);
-        int aX1 = ElMin(aSz2.x+ElMin(0,-aPax),aSz1.x)-aSzW ;
+    int aX0 = aSzW+std::max(0,-aPax);
+        int aX1 = std::min(aSz2.x+std::min(0,-aPax),aSz1.x)-aSzW ;
         int aY0 = aSzW;
-        int aY1 = ElMin(aSz1.y,aSz2.y) - aSzW;
+        int aY1 = std::min(aSz1.y,aSz2.y) - aSzW;
 
         std::cout << "PAX tested " << aPax << "\n";
         // Function of image translated
@@ -873,7 +873,7 @@ int  ExoCorrelEpip_main(int argc,char ** argv)
 // the value of nearest pixel inside
                             int aV1 = aTI1.getproj(aP+aV);
                             int aV2 = aTI2.getproj(aP+aV+Pt2di(aPax,0));
-                aSomDif += ElAbs(aV1-aV2);
+                aSomDif += std::abs(aV1-aV2);
                          }
                       }
                       aTScore.oset(aP,aSomDif);
@@ -902,7 +902,7 @@ int  ExoCorrelEpip_main(int argc,char ** argv)
 
                             int aV1 = aDI1[aQ1.y][aQ1.x];
                             int aV2 = aDI2[aQ2.y][aQ2.x];
-                aSomDif += ElAbs(aV1-aV2);
+                aSomDif += std::abs(aV1-aV2);
                          }
                       }
                       aTScore.oset(aP,aSomDif);
@@ -929,7 +929,7 @@ int  ExoCorrelEpip_main(int argc,char ** argv)
                          U_INT1 * aL1Sup  =  aL1 + 2 * aSzW+1;
                          while (aL1 != aL1Sup)
                          {
-                aSomDif += ElAbs(*(aL1++) -  *(aL2++));
+                aSomDif += std::abs(*(aL1++) -  *(aL2++));
                          }
                       }
                       aTScore.oset(aP,aSomDif);

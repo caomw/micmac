@@ -476,7 +476,7 @@ template <const INT NbV,class TC,class TF>
 template <const INT NbV,class TC,class TF>
    TC  cCoxAlgo<NbV,TC,TF>::AdjustVal(INT aVal)
 {
-  return ElMax(0,ElMin(aVal,(INT)CostMax()));
+  return std::max(0,std::min(aVal,(INT)CostMax()));
 }
 
 
@@ -593,8 +593,8 @@ template <const INT NbV,class TC,class TF>
 		  }
 	     }
 
-	     ZMaxSource(aP) = ElMin(aZmaxSource,aZmax);
-	     ZMinPuis(aP)   = ElMax(aZminPuis,aZmin);
+	     ZMaxSource(aP) = std::min(aZmaxSource,aZmax);
+	     ZMinPuis(aP)   = std::max(aZminPuis,aZmin);
         }
     }
 }
@@ -632,7 +632,7 @@ template <const INT NbV,class TC,class TF>
 		   INT   aPrio
               )
 {
-    aPrio = ElMax(TheMinPrio,ElMin(TheMaxPrio,aPrio));
+    aPrio = std::max(TheMinPrio,std::min(TheMaxPrio,aPrio));
     aPSom->SetPere(aNumPere,aPere);
     aPSom->SetNoImpasse();
     Cpt(aSrc)++;
@@ -1124,16 +1124,16 @@ template <const INT NbV,class TC,class TF>
        INT dX=1;
        while (1)
        {
-	  INT aX0 = ElMax(aP0.x,aXMil-dX);
-	  INT aX1 = ElMin(aP1.x,aXMil+dX);
+	  INT aX0 = std::max(aP0.x,aXMil-dX);
+	  INT aX1 = std::min(aP1.x,aXMil+dX);
 
 /*
           for (INT dY = 4; dY< aSzY/4 ; dY++)
           {
              for (INT y= aP0.y+dY/2; y<aP1.y; y+=dY)
              {
-                   INT aY0 = ElMax(aP0.y,y-dY/2);
-                   INT aY1 = ElMin(aP1.y,y+(3*dY)/2);
+                   INT aY0 = std::max(aP0.y,y-dY/2);
+                   INT aY1 = std::min(aP1.y,y+(3*dY)/2);
                    aRes += UltimePCCNoRec(Pt2di(aX0,aY0),Pt2di(aX1,aY1));
              }
           }
@@ -1162,16 +1162,16 @@ template <const INT NbV,class TC,class TF>
        INT dY=1;
        while (1)
        {
-	  INT aY0 = ElMax(aP0.y,aYMil-dY);
-	  INT aY1 = ElMin(aP1.y,aYMil+dY);
+	  INT aY0 = std::max(aP0.y,aYMil-dY);
+	  INT aY1 = std::min(aP1.y,aYMil+dY);
 
 /*
           for (INT dX = 4; dX< aSzX/4 ; dX++)
           {
              for (INT x= aP0.x+dX/2; x<aP1.x; x+=dX)
              {
-                   INT aX0 = ElMax(aP0.x,x-dX/2);
-                   INT aX1 = ElMin(aP1.x,x+(3*dX)/2);
+                   INT aX0 = std::max(aP0.x,x-dX/2);
+                   INT aX1 = std::min(aP1.x,x+(3*dX)/2);
                    aRes += UltimePCCNoRec(Pt2di(aX0,aY0),Pt2di(aX1,aY1));
              }
           }

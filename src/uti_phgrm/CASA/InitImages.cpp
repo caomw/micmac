@@ -146,7 +146,7 @@ void cAppli_Casa::AddNuage2Surf
     if ( aSLN.SzW().IsInit ()  && (aSurf.mW==0))
     {
         Pt2di aSzW= aSLN.SzW().Val();
-        double aRatio = ElMin(aSzW.x/double(aSz.x),aSzW.y/double(aSz.y));
+        double aRatio = std::min(aSzW.x/double(aSz.x),aSzW.y/double(aSz.y));
         aSzW = round_ni(Pt2dr(aSz)*aRatio);
         aW = Video_Win::PtrWStd(aSzW,1);
         aW= aW->PtrChc(Pt2dr(0,0),Pt2dr(aRatio,aRatio));
@@ -207,7 +207,7 @@ void cAppli_Casa::AddNuage2Surf
                 Pt2di aP = aVExpl[aKP];
                 if (aTime==0)
                 {
-                    aTCpt.oset(aP,ElMin(255,1+aTCpt.get(aP)));
+                    aTCpt.oset(aP,std::min(255,1+aTCpt.get(aP)));
                 }
                 else
                 {

@@ -347,7 +347,7 @@ double  cObservLiaison_1Cple::AddObs
 	  double aPdsSurf = 0;
 	  if (mEqS)
 	  {
-             aPdsSurf = aPdrtSurf.PdsOfError(ElAbs(aRes.mEcSurf)) *aNb;
+             aPdsSurf = aPdrtSurf.PdsOfError(std::abs(aRes.mEcSurf)) *aNb;
 	  }
 	  aSomPdsSurf += aPdsSurf;
           mPLiaisTer->UsePointLiaison(-1,-1,aPdsSurf,*itL,aVPds,true);

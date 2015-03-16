@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_POLYNOMIALEPIPOLAIRECOORDINATE_H
 #define _ELISE_GENERAL_PHOTOGRAM_POLYNOMIALEPIPOLAIRECOORDINATE_H
 
-#include "general/sys_dep.h"
+
 
 class PolynomialEpipolaireCoordinate : public EpipolaireCoordinate
 {

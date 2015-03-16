@@ -128,7 +128,7 @@ void cASAMG::ComputeIncidGradProf()
 /*
 */
             }
-            mTIncid.oset(aP0,ElMin(255,ElMax(0,round_ni(Angle*DynAng()))));
+            mTIncid.oset(aP0,std::min(255,std::max(0,round_ni(Angle*DynAng()))));
        }
    }
 }
@@ -187,10 +187,10 @@ void cASAMG::ComputeIncidAngle3D()
                     ElSeg3D aSeg =  mStdN->FaisceauFromIndex(Pt2dr(aP0));
                     double aScal = scal(aPlan.Norm(),aSeg.TgNormee());
                     if (aScal<0) aScal = - aScal;
-                    Angle = acos(ElMin(1.0,ElMax(-1.0,aScal)));
+                    Angle = acos(std::min(1.0,std::max(-1.0,aScal)));
                 }
             }
-            mTIncid.oset(aP0,ElMin(255,ElMax(0,round_ni(Angle*DynAng()))));
+            mTIncid.oset(aP0,std::min(255,std::max(0,round_ni(Angle*DynAng()))));
        }
    }
 }
@@ -291,15 +291,15 @@ void cASAMG::ComputeIncidKLip(Im2D_Bits<1> aMasq,bool Inf,double aStep,int aSzVo
    Pt2di aP0;
    for (aP0.x=0 ; aP0.x<mSz.x ; aP0.x++)
    {
-       int aX0= ElMax(0,aP0.x-aSzVois);
-       int aX1= ElMin(mSz.x-1,aP0.x+aSzVois);
+       int aX0= std::max(0,aP0.x-aSzVois);
+       int aX1= std::min(mSz.x-1,aP0.x+aSzVois);
        for (aP0.y=0 ; aP0.y<mSz.y ; aP0.y++)
        {
            if (aTM.get(aP0))
            {
               double aProf0 = aImProf->GetR(aP0);
-              int aY0= ElMax(0,aP0.y-aSzVois);
-              int aY1= ElMin(mSz.y-1,aP0.y+aSzVois);
+              int aY0= std::max(0,aP0.y-aSzVois);
+              int aY1= std::min(mSz.y-1,aP0.y+aSzVois);
 
               Pt2di aPV;
               for (aPV.x=aX0 ; aPV.x<=aX1 ; aPV.x++)

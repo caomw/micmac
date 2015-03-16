@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHGR_FORMEL_CCPLECAMFORMELLE_H
 #define _ELISE_GENERAL_PHGR_FORMEL_CCPLECAMFORMELLE_H
 
-#include "general/sys_dep.h"
+
 
 class cCpleCamFormelle : public cNameSpaceEqF,
                          public cSignedEqFPtLiaison,

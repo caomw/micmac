@@ -204,7 +204,7 @@ void  cAppliApero::InitPosesTimeLink(const cTimeLinkage & aTLnk)
        double aTCur   = aPCCur->Time();
        bool OKLink =    (aTPred!= TIME_UNDEF())
                      && (aTCur!= TIME_UNDEF())
-                     && (ElAbs(aTPred-aTCur) < aDelta);
+                     && (std::abs(aTPred-aTCur) < aDelta);
        aPCCur->SetLink(aPCPred,OKLink);
    }
 }
@@ -338,7 +338,7 @@ void cAppliApero::DoAMD()
 void cAppliApero::AddLinkCam(cPoseCam * aC1,cPoseCam * aC2)
 {
    if (aC1>aC2) 
-      ElSwap(aC1,aC2);
+      std::swap(aC1,aC2);
   mSetLinkedCam.insert(std::pair<cPoseCam *,cPoseCam *>(aC1,aC2)); 
   AddLinkCamCal(aC1,aC1->Calib());
   AddLinkCamCal(aC2,aC2->Calib());
@@ -349,7 +349,7 @@ void cAppliApero::AddLinkCam(cPoseCam * aC1,cPoseCam * aC2)
 void cAppliApero::AddLinkCal(cCalibCam  * aC1,cCalibCam  * aC2)
 {
    if (aC1>aC2) 
-      ElSwap(aC1,aC2);
+      std::swap(aC1,aC2);
   mSetLinkedCal.insert(std::pair<cCalibCam *,cCalibCam *>(aC1,aC2)); 
 }
 
@@ -938,8 +938,8 @@ void ShowSpectrSys(cSetEqFormelles & aSetEq)
         int aIVp = aIndVP[aK];
         tSysCho aValP = aVP(aIVp,0);
         aDet *= aValP;
-        aVPMin = ElMin(aVPMin,aValP);
-        aVPMax = ElMax(aVPMax,aValP);
+        aVPMin = std::min(aVPMin,aValP);
+        aVPMax = std::max(aVPMax,aValP);
 
         std::cout << "Valp "  << aValP << "\n";
     }

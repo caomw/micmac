@@ -189,7 +189,7 @@ void PolygoneClipBandeVert::Bench
       }
 
 
-      REAL dif = ElAbs(surf_tot-square_euclid(q0));
+      REAL dif = std::abs(surf_tot-square_euclid(q0));
      BENCH_ASSERT(dif<1e-5);
 }
 

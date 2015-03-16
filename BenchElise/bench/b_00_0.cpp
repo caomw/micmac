@@ -358,7 +358,7 @@ void Bench_RANGE_SimpleArithmCoDec(INT aNbVal,INT aNbTest)
 
         for (INT aK=0 ; aK<aNbTest ; aK++)
         {
-            INT aV = ElMin(aNbVal-1,round_ni(NRrandom3()*aNbVal));
+            INT aV = std::min(aNbVal-1,round_ni(NRrandom3()*aNbVal));
 	    mVerifs.push_back(aV);
 	    aMSAE.PushCode(aV);
 	    aTS->AddCode(aVFreqs[aV],aVCums[aV],aTot);

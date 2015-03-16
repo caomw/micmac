@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CCAMSTENOPEDISTRADPOL_H
 #define _ELISE_GENERAL_PHOTOGRAM_CCAMSTENOPEDISTRADPOL_H
 
-#include "general/sys_dep.h"
+
 
 class cCamStenopeDistRadPol : public CamStenope
 {

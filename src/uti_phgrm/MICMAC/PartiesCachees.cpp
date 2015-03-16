@@ -491,10 +491,10 @@ void cAppliMICMAC::MakePartiesCachees
       // Calcul le masque en geometrie image
       for (int aY0=0; aY0<aSzIm.y ; aY0+=aSzBloc)
       {
-          int aY1 = ElMin(aSzIm.y,aY0+aSzBloc);
+          int aY1 = std::min(aSzIm.y,aY0+aSzBloc);
           for (int aX0=0; aX0<aSzIm.x ; aX0+=aSzBloc)
           {
-             int aX1 = ElMin(aSzIm.x,aX0+aSzBloc);
+             int aX1 = std::min(aSzIm.x,aX0+aSzBloc);
 
              int aSZ=0;
              int aNbZ=0;
@@ -689,10 +689,10 @@ void cAppliMICMAC::MakePartiesCachees
            double aRy = anOriOrtho.ResolutionPlani().y;
            double aRXSurY = aRx/aRy;
 
-           ELISE_ASSERT(ElAbs(ElAbs(aRXSurY)-1)<1e-5,"Incoherence in ResolAbsOrtho");
+           ELISE_ASSERT(std::abs(std::abs(aRXSurY)-1)<1e-5,"Incoherence in ResolAbsOrtho");
            if (aMOPI.ResolAbsOrtho().IsInit())
            {
-               aResRelOrtho = aMOPI.ResolAbsOrtho().Val()/ElAbs(aRx);
+               aResRelOrtho = aMOPI.ResolAbsOrtho().Val()/std::abs(aRx);
            }
 
            anOriOrtho.ResolutionPlani() = Pt2dr(aRx,aRy)*aResRelOrtho;
@@ -753,7 +753,7 @@ void cAppliMICMAC::MakePartiesCachees
                         Pt2dr aPM = aAfPOL2PML(Pt2dr(aPO));
                         aTMasqO.oset(aPO,aTMasqM.get(round_ni(aPM),0)==1);
                         double aVal = aTIPC.getr(aPM,0) / aMul;
-                        aTIPCOrt.oset(aPO,ElMax(0,ElMin(255,int(aVal))));
+                        aTIPCOrt.oset(aPO,std::max(0,std::min(255,int(aVal))));
                     }
                }
           }
@@ -1029,7 +1029,7 @@ void cAppliMICMAC::MakeOrtho
                           double aTeta = acos(-aSeg.TgNormee().z);
                           if (aRF > 0)
                           {
-                              aTeta += ElMax(0.0,(aRF-aBoxIm.Interiorite(aPImInc))*(10.0/aRF));
+                              aTeta += std::max(0.0,(aRF-aBoxIm.Interiorite(aPImInc))*(10.0/aRF));
                           }
                           aTImIncH.oset(aPO,aTeta);
                        }
@@ -1219,7 +1219,7 @@ void cAppliMICMAC::MakePartiesCachees()
    if (aVI_PC.Val().ByMkF().Val() && (! Paral_Pc_IdProcess().IsInit()))
    {
        // Si on demande une mise en // il faut etre logique !
-       int aNbP = ElMax(2,ByProcess().Val());
+       int aNbP = std::max(2,ByProcess().Val());
        std::list<std::string> aLP;
        for (int aKP=0 ; aKP < aNbP ; aKP++)
        {

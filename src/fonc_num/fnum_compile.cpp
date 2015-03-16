@@ -991,7 +991,7 @@ void cElCompiledFonc::SVD_And_AddEqSysSurResol
    {
        for (INT aD= 0 ; aD < mDimOut ; aD++)
        {
-            double aPdsCur = aVPds[ElMin(aD,aSzPds-1)]; 
+            double aPdsCur = aVPds[std::min(aD,aSzPds-1)]; 
             aVInd.clear();
             aDer.clear();
             REAL aB = -mVal[aD];

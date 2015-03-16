@@ -102,7 +102,7 @@ SegComp cElTriangleComp::ReorderDirect(Pt2dr & aP0, Pt2dr & aP1,Pt2dr & aP2)
 {
    if (ToSwap(aP0,aP1,aP2))
    {
-	   ElSwap(aP1,aP2);
+	   std::swap(aP1,aP2);
    }
 
    return SegComp(aP0,aP1);
@@ -126,7 +126,7 @@ REAL cElTriangleComp::square_dist(Pt2dr pt) const
     if (Inside(pt))
        return 0.0;
 
-    return ElMin3
+    return std::min3
 	   (
 	       mS01.square_dist_seg(pt),
 	       mS12.square_dist_seg(pt),
@@ -237,11 +237,11 @@ void cElTriangleComp::Test()
            Pt2dr aP = RanCorner();
 	   Pt3dr aCB = aTri.CoordBarry(aP);
 	   Pt2dr aQ = aTri.FromCoordBarry(aCB.x,aCB.y,aCB.z);
-	   BENCH_ASSERT(ElAbs(aCB.x+aCB.y + aCB.z-1.0)<1e-7);
+	   BENCH_ASSERT(std::abs(aCB.x+aCB.y + aCB.z-1.0)<1e-7);
 	   BENCH_ASSERT(euclid(aP,aQ)<1e-7);
 	   REAL aD  = aTri.square_dist(aP);
 	   INT aCoul = aTri.Inside(aP) ? P8COL::green : P8COL::blue;
-           aW.draw_circle_loc(aP,ElMax(1.0,sqrt(aD)),aW.pdisc()(aCoul));
+           aW.draw_circle_loc(aP,std::max(1.0,sqrt(aD)),aW.pdisc()(aCoul));
         }
         for (INT aK2  =0 ; aK2 < 10 ; aK2++)
 	{

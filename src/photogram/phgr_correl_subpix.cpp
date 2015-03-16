@@ -118,7 +118,7 @@ template <class Type> REAL OptimTranslationCorrelation<Type>::ScoreFonc(REAL aDx
      s12 -= s1*s2;
      s22 -= s2*s2;
 
-     mSc =  s12 / sqrt(ElMax(Epsilon,s11*s22));
+     mSc =  s12 / sqrt(std::max(Epsilon,s11*s22));
      return mSc;
 }
 

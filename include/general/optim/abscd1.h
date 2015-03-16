@@ -42,8 +42,6 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_OPTIM_ABSCD1_H
 #define _ELISE_GENERAL_OPTIM_ABSCD1_H
 
-#include "general/sys_dep.h"
-
        class  AbscD1
        {
            public :
@@ -81,10 +79,6 @@ Header-MicMac-eLiSe-25/06/2007*/
                 double_t        & sc_min,
                 int kv
              );
-
-
-
-
 
         bool Sol(const  ElFilo<int> & SubSet);
 

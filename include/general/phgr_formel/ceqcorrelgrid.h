@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHGR_FORMEL_CEQCORRELGRID_H
 #define _ELISE_GENERAL_PHGR_FORMEL_CEQCORRELGRID_H
 
-#include "general/sys_dep.h"
+
 
 class cEqCorrelGrid  : public cObjFormel2Destroy
 {

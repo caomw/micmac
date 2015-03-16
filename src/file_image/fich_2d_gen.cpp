@@ -284,7 +284,7 @@ void Fich_Im2d::init_tile(Tile_F2d * tile,INT k,INT padding,bool clip_last)
 {
     _tiles[k]       = tile;
     tile->_n_tile   = k;
-    tile->_sz_tile_log  = ElMin(_sz_til.x,_sz_file.x -k*_sz_til.x);
+    tile->_sz_tile_log  = std::min(_sz_til.x,_sz_file.x -k*_sz_til.x);
     tile->_sz_tile_phys = (clip_last ? tile->_sz_tile_log : _sz_til.x);
     tile->_sz_tile_phys = (tile->_sz_tile_phys +padding-1)/padding;
     tile->_sz_tile_phys *= padding;
@@ -332,7 +332,7 @@ std::cout << "Fich_Im2d::read_write_buf " << pack->y()
 
     bool last_line_of_tile;
     {
-       INT y_end_tile = ElMin(_sz_til.y,_sz_file.y-mCurItY*_sz_til.y)-1;
+       INT y_end_tile = std::min(_sz_til.y,_sz_file.y-mCurItY*_sz_til.y)-1;
        last_line_of_tile = (y_end_tile==yt);
     }
 
@@ -364,8 +364,8 @@ std::cout << "Fich_Im2d::read_write_buf " << pack->y()
             tile->_last_y = -1;
          }
 
-         INT x0t = ElMax(0,mX0CurPack-it*_sztx);
-         INT x1t = ElMin(mX1CurPack-it*_sztx,tile->_sz_tile_log);
+         INT x0t = std::max(0,mX0CurPack-it*_sztx);
+         INT x1t = std::min(mX1CurPack-it*_sztx,tile->_sz_tile_log);
          INT nbt = x1t-x0t;
          
 

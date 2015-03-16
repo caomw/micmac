@@ -332,7 +332,7 @@ double cOneTestLSQ::Correl(const Pt2dr & aDec) const
     aSom22 -= ElSquare(aSom2);
 
 
-    return aSom12 * sqrt(ElMax(1e-5,aSom22*mSom11));
+    return aSom12 * sqrt(std::max(1e-5,aSom22*mSom11));
 }
  
 bool  cOneTestLSQ::OneOptimOnLine()
@@ -351,7 +351,7 @@ bool  cOneTestLSQ::OneOptimOnLine()
    if (aC1<aC0) 
       return false;
 
-   double aL2 = ElMax(2.0,TheNormMinLSQ/euclid(mDepLSQ));
+   double aL2 = std::max(2.0,TheNormMinLSQ/euclid(mDepLSQ));
    double aC2 =  CorrelOnLine(aL2);
 
    if (aC2 == -1) 
@@ -477,7 +477,7 @@ bool  cOneTestLSQ::OneLSQItere()
 
    double aVPMin = 1e10;
    for(int aK1=0; aK1<NbInc; aK1++)
-      aVPMin = ElMin(aVPMin,mValP(aK1,aK1));
+      aVPMin = std::min(aVPMin,mValP(aK1,aK1));
 
    if (aVPMin<1e-8) return false;
 

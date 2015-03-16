@@ -314,7 +314,7 @@ void EliseStdImageInteractor::GQP(Clik cl,bool)
 		 REAL scy = mP0Grab.y- cl._pt.y;
 		 scy /= -mYDoubleScale;
 		 scy = mScale0Grab *pow(2.0,scy);
-		 scy = ElMin(ElMax(scy,mScaleMin),mScaleMax);
+		 scy = std::min(std::max(scy,mScaleMin),mScaleMax);
 
       	        mScr.SetScArroundPW
                 (

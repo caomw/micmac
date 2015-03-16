@@ -194,7 +194,7 @@ Pt2di   P2(INT x,INT y,INT z,bool im1)
 
 INT MakeCapa(REAL aStCapa)
 {
-    return round_ni(ElMin(1.0,aStCapa)*TheFact);
+    return round_ni(std::min(1.0,aStCapa)*TheFact);
 }
 
 

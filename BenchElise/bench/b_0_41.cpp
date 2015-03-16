@@ -152,18 +152,18 @@ void bench_graphe_grille(Pt2di sz,TGr41 & gr)
            if (nbf == 4)
            {
                nb4 ++;
-               BENCH_ASSERT (ElAbs(ElAbs(surf)-1.0) < epsilon);
+               BENCH_ASSERT (std::abs(std::abs(surf)-1.0) < epsilon);
                REAL x = cdg.x - round_down(cdg.x);
                REAL y = cdg.y - round_down(cdg.y);
                BENCH_ASSERT
                (
-                       (ElAbs(x-0.5) < epsilon)
-                   &&  (ElAbs(y-0.5) < epsilon)
+                       (std::abs(x-0.5) < epsilon)
+                   &&  (std::abs(y-0.5) < epsilon)
                );
            }
            else
            {
-                BENCH_ASSERT (ElAbs(surf-(sz.x-1)*(sz.y-1))< epsilon);
+                BENCH_ASSERT (std::abs(surf-(sz.x-1)*(sz.y-1))< epsilon);
                 BENCH_ASSERT(euclid(cdg,(Pt2dr(sz)-Pt2dr(1,1))/2.0) < epsilon);
            }
        }
@@ -251,7 +251,7 @@ void bench_pcc(TGr41 & gr, TSom41 *** TABS,Pt2di sz)
               {
                   INT y = s.attr()._pt.y;
                   INT x = s.attr()._pt.x;
-                  BENCH_ASSERT(PCC.pds(s) == ElAbs(y-y1));
+                  BENCH_ASSERT(PCC.pds(s) == std::abs(y-y1));
                   if (y == y1)
                      BENCH_ASSERT(PCC.pere(s) == 0);
                   else if (y> y1)

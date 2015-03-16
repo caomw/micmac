@@ -59,7 +59,7 @@ Optim_L1FormLin::AbscD1::AbscD1(ElMatrix<REAL> & sc,INT k)
        _x0 = - v0/_pds;
     else
        _x0 = 0;
-    _pds = ElAbs(_pds);
+    _pds = std::abs(_pds);
 }
 
 
@@ -91,7 +91,7 @@ REAL Optim_L1FormLin::Kth_score(const ElMatrix<REAL> & M,INT KLig)
     for (INT kc=0; kc<_NbVar ; kc++)
         res += M(0,kc)*_Flin(kc,KLig);
 
-    return ElAbs(res-_Flin(_NbVar,KLig));
+    return std::abs(res-_Flin(_NbVar,KLig));
 }
 
 REAL Optim_L1FormLin::score(const ElMatrix<REAL> & M)

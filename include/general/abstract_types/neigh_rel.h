@@ -42,7 +42,8 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_ABSTRACT_TYPES_NEIGH_REL_H
 #define _ELISE_GENERAL_ABSTRACT_TYPES_NEIGH_REL_H
 
-#include "general/sys_dep.h"
+#include <PRC0>
+#include <Neighbourhood>
 
 class Neigh_Rel : public PRC0
 {

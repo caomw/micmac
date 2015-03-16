@@ -789,7 +789,7 @@ void Huff_Ccitt_2D_T6::uncomp_line()
 void Huff_Ccitt_2D_T6::read(U_INT1 * res)
 {
 
-    ElSwap(_cur,_prec);
+    std::swap(_cur,_prec);
     _a0 = -1;
     _coul = 0;
     _prec[_a0] = 0;
@@ -883,7 +883,7 @@ void Huff_Ccitt_2D_T6::write(const U_INT1 * vals)
 {
 
 
-    ElSwap(_cur,_prec);
+    std::swap(_cur,_prec);
     _a0 = -1;
     _coul = 0;
     _prec[_a0] = 0;
@@ -914,7 +914,7 @@ void Huff_Ccitt_2D_T6::write(const U_INT1 * vals)
              {
                 calc_a2();
                 put(_ht_horz);
-                put_length(_a1-ElMax(_a0,0),_coul);
+                put_length(_a1-std::max(_a0,0),_coul);
                 put_length(_a2-_a1,!_coul);
                 _a0 = _a2;
              }
@@ -990,7 +990,7 @@ INT  MPD_CCIT_T6::get_plage_gray(INT a0,bool last)
      INT l =  get_length_gray();
      INT a1 = last ? (a0-l) : (a0+l);
      if (last)
-        ElSwap(a0,a1);
+        std::swap(a0,a1);
 
      if (_vals)
          for (INT a=a0 ; a<a1 ; a++)

@@ -234,7 +234,7 @@ void cCalibCam::ActiveContrainte(bool Stricte)
                 std::cout <<  "    " << aPG2 << aDGX << aDGY << "\n";
 
                 if (euclid(aP1,aPG) >aTol)
-                   aRMinTol = ElMin(aRMinTol,euclid(aP,aSz/2.0));
+                   aRMinTol = std::min(aRMinTol,euclid(aP,aSz/2.0));
            }
        }
 

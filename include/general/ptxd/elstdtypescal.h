@@ -42,8 +42,6 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_PTXD_ELSTDTYPESCAL_H
 #define _ELISE_GENERAL_PTXD_ELSTDTYPESCAL_H
 
-#include "general/sys_dep.h"
-
 template <class Type> class ElStdTypeScal
 {
     public :
@@ -64,9 +62,9 @@ template <class Type> class ElStdTypeScal
     private :
 };
 
-template <> int   ElStdTypeScal<int>::RtoT(double v); //  { return round_ni(v);}
-template <> double  ElStdTypeScal<double>::RtoT(double v); //  { return v;}
-template <> int   ElStdTypeScal<int>::RTtoT(double v) ; // { return round_ni(v);}
-template <> double  ElStdTypeScal<double>::RTtoT(double v) ; // { return v;}
+//template <> int   ElStdTypeScal<int>::RtoT(double v); //  { return round_ni(v);}
+//template <> double  ElStdTypeScal<double>::RtoT(double v); //  { return v;}
+//template <> int   ElStdTypeScal<int>::RTtoT(double v) ; // { return round_ni(v);}
+//template <> double  ElStdTypeScal<double>::RTtoT(double v) ; // { return v;}
 
 #endif

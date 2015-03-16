@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_FILE_IM_TGA_IM_H
 #define _ELISE_GENERAL_FILE_IM_TGA_IM_H
 
-#include "general/sys_dep.h"
+
 
 class  Tga_Im : public PRC0
 {
@@ -38,7 +38,7 @@ private :
 #ifndef _ELISE_GENERAL_FILE_IM_DATA_TGA_FILE_H
 #define _ELISE_GENERAL_FILE_IM_DATA_TGA_FILE_H
 
-#include "general/sys_dep.h"
+
 
     class Data_TGA_File * dtga() const
     {return SAFE_DYNC(Data_TGA_File *,_ptr);}

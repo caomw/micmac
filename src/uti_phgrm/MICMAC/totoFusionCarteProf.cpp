@@ -358,7 +358,7 @@ template <class Type> double  cLoadedCP<Type>::PdsLinear(const Pt2dr & aPTer) co
            aPds = (aPds -128.0) / 128.0;
            aPds = (aPds-mSeuilC)/(1.0-mSeuilC);
        }
-       return ElMin(1.0,ElMax(0.0,aPds));
+       return std::min(1.0,std::max(0.0,aPds));
    }
    return 0;
 }
@@ -407,7 +407,7 @@ template <class Type> cElPile  cFusionCarteProf<Type>::ComputeOneEvidence(const 
         if (aPk)
         {
             const float & aZk = aPilK.Z();
-            double aDz = ElAbs(aZ0-aZk);
+            double aDz = std::abs(aZ0-aZk);
             if (aDz<mFByEv->MaxDif().Val())
             {
                  double aPp = exp(-ElSquare(aDz/mSigmaP)) * aPk;
@@ -702,7 +702,7 @@ template <class Type> void cFusionCarteProf<Type>::DoOneBloc(int aKB,const Box2d
                     {
                          // aCol[aK].SetOwnCost(ToICost(0));
                          aCol[aK].SetOwnCost(ToICost(aBestP->P()-aNewV[aK].P()));
-                         // aCol[aK].SetOwnCost(ToICost(ElAbs(aQ0.x-aK)%3));
+                         // aCol[aK].SetOwnCost(ToICost(std::abs(aQ0.x-aK)%3));
                          aCol[aK].ArgAux() = aNewV[aK];
                     }
 //std::cout << "Bestt Ppp " << aBestP->P() << " " << aNewV.size() << "\n";
@@ -806,7 +806,7 @@ template <class Type>   void cFusionCarteProf<Type>::DoConnexion
         {
             tCelOpt & anOut = aTabOuput[aZOut];
             const  cElPile & aPOut = anOut.ArgAux();
-            double aDZ = ElAbs(aPIn.Z()-aPOut.Z());
+            double aDZ = std::abs(aPIn.Z()-aPOut.Z());
             if ((mFNoVal==0) || (aDZ < mFNoVal->PenteMax()))
             {
                  double aCost = (sqrt(1+aDZ/aSig0)-1) * 2*aSig0 * mFPrgD->Regul();

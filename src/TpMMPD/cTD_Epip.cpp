@@ -387,7 +387,7 @@ double cLoaedImTDEpip::CrossCorrelation
    double aVar11 = mTImS2.get(aPIm1) - ElSquare(aS1);
    double aVar22 = aIm2.mTImS2.get(aPIm2) - ElSquare(aS2);
    
-   return aCov / sqrt(ElMax(1e-5,aVar11*aVar22));
+   return aCov / sqrt(std::max(1e-5,aVar11*aVar22));
 }
 
 double cLoaedImTDEpip::Covariance
@@ -454,7 +454,7 @@ void cLoaedImTDEpip::DoConnexion
 		);
         for (int aDZ = aDZMin; aDZ<= aDZMax ; aDZ++)
         {
-			double aCost = mRegul * ElAbs(aDZ);
+			double aCost = mRegul * std::abs(aDZ);
 			Output[aZ].UpdateCostOneArc(Input[aZ+aDZ],aSens,ToICost(aCost));
 	    }
 
@@ -570,7 +570,7 @@ void cLoaedImTDEpip::ComputePx
 		      /// == End PGRD2
            }	
            mTPx.oset(aP,aBestPax);	
-           mTSc.oset(aP,ElMax(0,ElMin(255,round_ni((aBestCor+1)*128))));
+           mTSc.oset(aP,std::max(0,std::min(255,round_ni((aBestCor+1)*128))));
 	   }
 	}
 	

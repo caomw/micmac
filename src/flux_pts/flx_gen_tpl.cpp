@@ -207,7 +207,7 @@ template <class Type> void Std_Pack_Of_Pts<Type>::interv
 {
    const  Std_Pack_Of_Pts<Type> * pck = 
           SAFE_DYNC( Std_Pack_Of_Pts<Type> *,const_cast<Std_Pack_Of_Pts_Gen *>(pck_gen));
-    set_nb(ElMax(0,n2-n1));
+    set_nb(std::max(0,n2-n1));
     for (int d=0; d<dim() ; d++)
        _pts[d] = pck->_pts[d] + n1;
 }
@@ -268,7 +268,7 @@ template <class Type> void Std_Pack_Of_Pts<Type>::copy
 template <class Type> Pack_Of_Pts * Std_Pack_Of_Pts<Type>::dup(INT sz_buf) const
 {
     if (sz_buf == -1)
-       sz_buf = ElMax(_nb,1);
+       sz_buf = std::max(_nb,1);
 
     Std_Pack_Of_Pts<Type> * res = Std_Pack_Of_Pts<Type>::new_pck(_dim,sz_buf);
     res->copy(this);
@@ -310,7 +310,7 @@ template <class Type>  Std_Pack_Of_Pts<Type> * Std_Pack_Of_Pts<Type>::cat_and_gr
     if (_nb+res->_nb  >  res->_sz_buf)
     {
           Std_Pack_Of_Pts<Type> * new_res = 
-                  SAFE_DYNC(Std_Pack_Of_Pts<Type> *, res->dup(ElMax(_nb +res->_nb,new_sz_buf)));
+                  SAFE_DYNC(Std_Pack_Of_Pts<Type> *, res->dup(std::max(_nb +res->_nb,new_sz_buf)));
           delete res;
           res = new_res;
           chang = true;

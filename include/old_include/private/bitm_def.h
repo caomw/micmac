@@ -40,10 +40,10 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef __BITM_DEF__
 #define __BITM_DEF__
 
-#include <general/ptxd.h>
-
 #include <GenIm>
 #include <Elise_File_Im>
+#include <RC_Object>
+#include "private/flux_pts.h"
 
 extern int PTS_00000000000000 [];
 
@@ -54,7 +54,7 @@ public :
     int   _b1;
     int   _b2;
 
-    Image_Lut_1D_Compile(Im1D<int4,int>);
+    Image_Lut_1D_Compile(Im1D<int,int>);
 };
 
 
@@ -94,9 +94,9 @@ public :
     // This function is used for the not rle input or output, so it is described
     // in each specialization of dimention to allow a quicker implementation
 
-    virtual void out_pts_integer(Const_int_PP coord,int nb,const void *)  = 0;
-    virtual void input_pts_integer(void *,Const_int_PP coord,int nb) const  = 0;
-    virtual void input_pts_reel(double_t *,Const_double_t_PP coord,int nb) const  = 0;
+    virtual void out_pts_integer(Const_INT_PP coord,int nb,const void *)  = 0;
+    virtual void input_pts_integer(void *,Const_INT_PP coord,int nb) const  = 0;
+    virtual void input_pts_reel(double_t *,Const_REAL_PP coord,int nb) const  = 0;
 
     virtual int vmin() const = 0;
     virtual int vmax() const = 0;
@@ -105,7 +105,7 @@ public :
     (
             void * out, // never 0
             const OperAssocMixte &,
-            Const_int_PP coord,
+            Const_INT_PP coord,
             int nb,
             const void * values
             )  const = 0;

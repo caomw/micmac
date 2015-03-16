@@ -244,7 +244,7 @@ void cEtalonnage::SauvGrid(REAL aStep,const std::string & aName,bool XML)
             ElSetMax(aD,euclid(aC,aCorners[aK]));
 
 	ELISE_ASSERT(aD<aRCr,"Polynome non inversible sur le domaine");
-	aDRP->SetRMax(ElMin(aRCr,aD*1.1));
+	aDRP->SetRMax(std::min(aRCr,aD*1.1));
 
 
      }

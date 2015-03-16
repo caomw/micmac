@@ -42,7 +42,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_WINDOW_DATA_ELISE_PS_DISP_H
 #define _ELISE_GENERAL_WINDOW_DATA_ELISE_PS_DISP_H
 
-#include "general/sys_dep.h"
+
 
          class Data_Elise_PS_Disp * depsd()
          {

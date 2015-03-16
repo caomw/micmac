@@ -42,7 +42,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_UTIL_BOXFREEMANCOMPIL_H
 #define _ELISE_GENERAL_UTIL_BOXFREEMANCOMPIL_H
 
-#include "general/sys_dep.h"
+
 
 /*
       Ce qui suit n'est surement pas du tout dans le style Objet.
@@ -86,7 +86,7 @@ template <class Type> class BoxFreemanCompil
 
        double_t  D2BoxSeg(const Box2d<Type> & b,const SegComp & s);
 
-       inline Pt2dr  PQ1(const Box2d<Type> & b,int c1,int c2)
+       inline Pt2dr PQ1(const Box2d<Type> & b,int c1,int c2)
        {
              return Pt2dr
                     (  

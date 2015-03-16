@@ -170,9 +170,9 @@ void cGenSysSurResol::VerifGlob(const std::vector<cSsBloc> & aVSB,bool doCheck,b
             double aV = aValP(aK,0) / aCoef;
             if (aV< aVMIN) aVMIN = aV;
             if (aV<0)  aSomVNEG += aV;
-            if (ElAbs(aV) < 1e-2) aNbE2++;
-            if (ElAbs(aV) < 1e-3) aNbE3++;
-            if (ElAbs(aV) < 1e-4) aNbE4++;
+            if (std::abs(aV) < 1e-2) aNbE2++;
+            if (std::abs(aV) < 1e-3) aNbE3++;
+            if (std::abs(aV) < 1e-4) aNbE4++;
         }
         std::cout << " VMIN " << aVMIN  << " SOM NEG " << aSomVNEG  << " NBVar " << aNBV << "\n";
         std::cout << " == S2 " << aNbE2 << " S3 " << aNbE3 << " S4 " << aNbE4 <<  "\n";
@@ -306,8 +306,8 @@ void cGenSysSurResol::VerifMatPos
     if   ((aVMIN<aTPC.mMinVP) || (aSomVNEG<aTPC.mMinSomVNeg))
     {
         std::cout << "=========  " <<  aTPC.mName << " =======\n";
-        aTPC.mMinVP = ElMin(aTPC.mMinVP,aVMIN);
-        aTPC.mMinSomVNeg = ElMin(aTPC.mMinSomVNeg,aSomVNEG);
+        aTPC.mMinVP = std::min(aTPC.mMinVP,aVMIN);
+        aTPC.mMinSomVNeg = std::min(aTPC.mMinSomVNeg,aSomVNEG);
         for (int aX=0 ; aX<3 ; aX++)
         {
             for (int aY=aX+1 ; aY<3 ; aY++)
@@ -1250,7 +1250,7 @@ if (0)
            std::cout << "EC2 =" << aParam.mEc2 << "\n";
           ELISE_ASSERT(aParam.mEc2>-1e-7,"Singularity in cManipPt3TerInc::CalcPTerInterFaisceauCams ");
       }
-      aParam.mEc2 = sqrt(ElMax(0.0,aParam.mEc2) );
+      aParam.mEc2 = sqrt(std::max(0.0,aParam.mEc2) );
       // Adaptation purement heuristique
       aParam.mBsH  = 1.35 * aParam.mEc2;
 

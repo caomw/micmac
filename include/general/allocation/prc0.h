@@ -46,7 +46,7 @@ Header-MicMac-eLiSe-25/06/2007*/
          Pointer to References Counting Object
 */
 
-#include <RC_Object>
+class RC_Object;
 
 class PRC0
 {

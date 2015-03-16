@@ -231,8 +231,8 @@ void cOneImageOfLayer::SplitLayer
      )
 {
    ElPackHomologue aPck = ElPackHomologue::FromFile(mAppli.DC()+aNameH);
-   int aLMin = ElMax(mLabMin,aL2.mLabMin);
-   int aLMax = ElMin(mLabMax,aL2.mLabMax);
+   int aLMin = std::max(mLabMin,aL2.mLabMin);
+   int aLMax = std::min(mLabMax,aL2.mLabMax);
 
    for (int aLab = aLMin ; aLab<=aLMax ; aLab++)
    {

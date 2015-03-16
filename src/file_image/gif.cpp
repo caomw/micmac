@@ -622,7 +622,7 @@ Im2D<U_INT1,INT> Data_GifIm::im()
         {
            for (int x = 0 ; x <_im_w ; x+= 5)
            {
-               LZW_flow->Read(i[y]+x,ElMin(5,_im_w-x));
+               LZW_flow->Read(i[y]+x,std::min(5,_im_w-x));
            }
         }
     }
@@ -678,7 +678,7 @@ Data_GifIm::Data_GifIm(const char * name,ELISE_fp  fp,Data_Giff  * gh) :
      _offs_data = fp.tell();
 
 
-     INT sz_exp = ElMax(4,_sz_col_tab);
+     INT sz_exp = std::max(4,_sz_col_tab);
 
      if ( sz_exp != (1<<_nb_bits_lzw_init))
         cout << _nb_bits_lzw_init << " bits in LZW coder \n";
@@ -869,7 +869,7 @@ for (INT kth = 0; kth < gf.nb_im(); kth++)
    Im2D<U_INT1,INT> i2 = i.im();
 
    Pt2di sz = W.sz();
-   REAL sc = ElMin(sz.x / (REAL) i2.tx(),sz.y / (REAL) i2.ty());
+   REAL sc = std::min(sz.x / (REAL) i2.tx(),sz.y / (REAL) i2.ty());
 
 
 
@@ -977,7 +977,7 @@ GIF_Out_Comp::GIF_Out_Comp
     }
 
 
-    INT nbb_init = ElMax(4,nbb);
+    INT nbb_init = std::max(4,nbb);
     fp.write_U_INT1(nbb_init);     // nb bits lzw init
 
     GIF_char_flow  * GCF = new GIF_char_flow(fp,false);
@@ -1050,7 +1050,7 @@ GIF_Out_NotComp::GIF_Out_NotComp
     _tprov_name   = dup_name_std(name);
     _name         = _tprov_name->coord();
     _sz           = sz;
-    _nbb           = ElMax(4,nbb);
+    _nbb           = std::max(4,nbb);
     
 #if (ELISE_windows & !ELISE_MinGW)
     _cols        = NEW_TAB(1i64<<_nbb,Elise_colour);

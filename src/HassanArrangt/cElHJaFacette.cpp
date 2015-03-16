@@ -205,8 +205,8 @@ bool cElHJaFacette::IsRecouvrt(bool & ThisIsEnDessus,
          REAL aP = perimetre_poly(aC);
          if (ShowMes)
             cout << "P= " << aP << " ;  S= " << aS << "\n";
-         aSTot     += ElAbs(aS);
-         aPerimTot += ElAbs(aP);
+         aSTot     += std::abs(aS);
+         aPerimTot += std::abs(aP);
          for (INT aKP=0; aKP<INT(aC.size()) ; aKP++)
          {
              aZ1 += PL1.ZOfXY(aC[aKP]);
@@ -216,7 +216,7 @@ bool cElHJaFacette::IsRecouvrt(bool & ThisIsEnDessus,
 
      ThisIsEnDessus = (aZ1>aZ2);
 
-     REAL aDiam = aSTot / ElMax(aPerimTot,1e-5);
+     REAL aDiam = aSTot / std::max(aPerimTot,1e-5);
 
      if (ShowMes)
         cout << "Diam = " << aDiam << "\n";
@@ -253,10 +253,10 @@ void cElHJaFacette::MakeInertie
      if (! aSys)
         mMatInert = RMat_Inertie();
      Pt2di aSzIm = aImMnt.sz();
-     INT aX0 = ElMax(0,round_down(mBox._p0.x));
-     INT aY0 = ElMax(0,round_down(mBox._p0.y));
-     INT aX1 = ElMax(aSzIm.x,round_up(mBox._p1.x));
-     INT aY1 = ElMax(aSzIm.y,round_up(mBox._p1.y));
+     INT aX0 = std::max(0,round_down(mBox._p0.x));
+     INT aY0 = std::max(0,round_down(mBox._p0.y));
+     INT aX1 = std::max(aSzIm.x,round_up(mBox._p1.x));
+     INT aY1 = std::max(aSzIm.y,round_up(mBox._p1.y));
      INT2 ** aDMnt = aImMnt.data();
 
      for (INT anX=aX0 ; anX<aX1 ; anX++)
@@ -347,8 +347,8 @@ bool cElHJaFacette::SetFacetteGen(tBufFacette * aBuf,const FBool& aNewState,cons
     }
    if (TopState() != aNewState)
    {
-      Arrgt().AddStatistique(-ElAbs(mSurf),TopState());
-      Arrgt().AddStatistique( ElAbs(mSurf),aNewState);
+      Arrgt().AddStatistique(-std::abs(mSurf),TopState());
+      Arrgt().AddStatistique( std::abs(mSurf),aNewState);
       if (aBuf)
          aBuf->push_back(this);
       TopState() = aNewState;

@@ -77,7 +77,7 @@ void bench_som_seg(Pt2di sz)
             sigma(v1)
          );
 
-         REAL dif = (ElAbs(v0-v1) * 256) /NbPts;
+         REAL dif = (std::abs(v0-v1) * 256) /NbPts;
          BENCH_ASSERT(dif<6.0);
      }
 }
@@ -127,7 +127,7 @@ template <const INT b> void BenchFixed<b>::bench_get()
          REAL v0 = v[k];
          ElPFixed<b> p = Pt2dr(x[k],y[k]);
          REAL v1 = TImGet<INT1,INT,b>::getb2(Tim,p) / (REAL) (1 << (2*b));
-         REAL dif = ElAbs(v0-v1);
+         REAL dif = std::abs(v0-v1);
 
          BENCH_ASSERT(dif < difmax);
      }

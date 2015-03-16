@@ -241,7 +241,7 @@ const cSetHypDetectCible & cHypDetectCible::Set() const
 }
 REAL cHypDetectCible:: GdAxe() const
 {
-     return ElMax(mGdAxe,mPtAxe);
+     return std::max(mGdAxe,mPtAxe);
 }
 
 REAL cHypDetectCible::Largeur() const

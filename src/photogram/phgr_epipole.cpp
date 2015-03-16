@@ -461,7 +461,7 @@ CpleEpipolaireCoord * CpleEpipolaireCoord::MapingChScale(REAL aChSacle) const
 
 void CpleEpipolaireCoord:: SelfSwap()
 {
-   ElSwap(mEPI1,mEPI2);
+   std::swap(mEPI1,mEPI2);
 }
 
 CpleEpipolaireCoord * CpleEpipolaireCoord::Swap()
@@ -477,8 +477,8 @@ void CpleEpipolaireCoord::AdjustTr2Boxes(Box2dr aBoxIm1,Box2dr aBoxIm2)
     Pt2dr aP1  = aBoxEpi1._p0;
     Pt2dr aP2  = aBoxEpi2._p0;
 
-    // REAL aX12 = ElMin(aP1.x,aP2.x);
-    REAL aY12 = ElMin(aP1.y,aP2.y);
+    // REAL aX12 = std::min(aP1.x,aP2.x);
+    REAL aY12 = std::min(aP1.y,aP2.y);
 
     mEPI1->AddTrFinale(Pt2dr(-aP1.x,-aY12));
     mEPI2->AddTrFinale(Pt2dr(-aP2.x,-aY12));
@@ -609,7 +609,7 @@ CpleEpipolaireCoord  * CpleEpipolaireCoord::PolynomialFromHomologue
           Pt2dr aQ1 = aSolApprox->EPI1().Direct(itC->P1());
           Pt2dr aQ2 = aSolApprox->EPI2().Direct(itC->P2());
 
-          REAL aResidu = ElAbs(aQ1.y-aQ2.y);
+          REAL aResidu = std::abs(aQ1.y-aQ2.y);
           aPdsResidu =  1/sqrt(ElSquare(aResidu)+ElSquare(aResiduMin));
       }
       Pt2dr aP1 = ( itC->P1() -aStat.Cdg1()) / aDir1;

@@ -52,8 +52,8 @@ static inline REAL get_sat(REAL i,REAL vmi)
 static REAL get_sat (REAL i,Pt3dr vmi)
 {
     REAL s = get_sat(i,vmi.x);
-    s = ElMax(s,get_sat(i,vmi.y));
-    s = ElMax(s,get_sat(i,vmi.z));
+    s = std::max(s,get_sat(i,vmi.y));
+    s = std::max(s,get_sat(i,vmi.z));
 
     return s;
 }
@@ -63,7 +63,7 @@ static Pt3dr VecGreen = Pt3dr(0,1,-1) /euclid(Pt3dr(0,1,-1));
 
 REAL Elise_colour::adj_rvb(REAL v)
 {
-     return ElMax(0.0,ElMin(1.0,v));
+     return std::max(0.0,std::min(1.0,v));
 }
 
 void Elise_colour::to_its(REAL & i,REAL & t, REAL & s)
@@ -76,7 +76,7 @@ void Elise_colour::to_its(REAL & i,REAL & t, REAL & s)
      i = (x+y+z)/3;
      Pt3dr Pts(x-i,y-i,z-i);
      s = get_sat(i,Pts);
-     s = ElMin(s,1.0);
+     s = std::min(s,1.0);
 
 
      REAL cr = scal(Pts,VecRed);

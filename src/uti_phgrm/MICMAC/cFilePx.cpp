@@ -185,8 +185,8 @@ void cOneNappePx::ForceConnexions()
                     // Modif MPD GM
                      if (  (aP1.x>=0) && (aP1.y>=0)  && (aP1.x<mSz.x) && (aP1.y<mSz.y))
                      {
-                         mTImPxMin.oset(aP1,ElMin(mTImPxMin.get(aP1),aMax0-1));
-                         mTImPxMax.oset(aP1,ElMax(mTImPxMax.get(aP1),aMin0+1));
+                         mTImPxMin.oset(aP1,std::min(mTImPxMin.get(aP1),aMax0-1));
+                         mTImPxMax.oset(aP1,std::max(mTImPxMax.get(aP1),aMin0+1));
                      }
                }
            }

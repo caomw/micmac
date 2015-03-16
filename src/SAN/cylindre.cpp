@@ -395,7 +395,7 @@ std::vector<cInterSurfSegDroite>  cCylindreRevolution::InterDroite(const ElSeg3D
 // Si aDelta <0 on prend le point qui minise l'ecart, donc aDelta=0
 
 
-    double aSqrtDelta = sqrt(ElMax(0.0,aDelta));
+    double aSqrtDelta = sqrt(std::max(0.0,aDelta));
     double    aR1 = (-aB+aSqrtDelta)/(2*aA);
     double    aR2 = (-aB-aSqrtDelta)/(2*aA);
  
@@ -511,7 +511,7 @@ Pt3dr cCylindreRevolution::SegAndL(const ElSeg3D & aSeg,double aZ0,int & aNbVrai
     else
        aNbVraiSol = 1;
 
-    aDelta = sqrt(ElMax(0.0,aDelta));
+    aDelta = sqrt(std::max(0.0,aDelta));
     double    aR1 = (-aB+aDelta)/(2*aA);
     double    aR2 = (-aB-aDelta)/(2*aA);
  
@@ -521,7 +521,7 @@ Pt3dr cCylindreRevolution::SegAndL(const ElSeg3D & aSeg,double aZ0,int & aNbVrai
     Pt3dr aMil = (aSeg.P0()+aSeg.P1())/2.0;
 
     if (square_euclid(aP1-aMil)>square_euclid(aP2-aMil))
-       ElSwap(aP1,aP2);
+       std::swap(aP1,aP2);
 
 
     // std::cout << E2UVL(aP1) << " " << aZ0 << " " << aSeg.DistDoite(aP1) << "\n";

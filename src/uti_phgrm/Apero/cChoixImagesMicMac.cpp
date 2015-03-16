@@ -83,9 +83,9 @@ double GainAngle(double A,double Opt)
 {
    A /= Opt;
    if (A <= 1)
-      return pow(ElAbs(2*A - A*A),1.0);
+      return pow(std::abs(2*A - A*A),1.0);
 
-   return  1 / (1+ pow(ElAbs(A-1),2));
+   return  1 / (1+ pow(std::abs(A-1),2));
 }
 
 
@@ -163,12 +163,12 @@ cPoseCdtImSec::cPoseCdtImSec(int aKP,cPoseCam * aPC,cPCICentr aPCIC,const cChoix
    mRatioVisib (0)
 {
     double aRatioDist = euclid(mDir) / euclid(aPCIC.mDir);
-    mRatioD = ElMin(aRatioDist,1/aRatioDist);
+    mRatioD = std::min(aRatioDist,1/aRatioDist);
     double aScal = scal(vunit(mDir),vunit(aPCIC.mDir));
-    mBsH = acos(ElMax(-1.0,ElMin(1.0,aScal)));
+    mBsH = acos(std::max(-1.0,std::min(1.0,aScal)));
 
 
-    double aPenalD = 1 / (1 + pow(4*ElAbs(1-mRatioD),2));
+    double aPenalD = 1 / (1 + pow(4*std::abs(1-mRatioD),2));
 
     mGain = GainAngle(mBsH,aCIM.TetaOpt().Val()) * aPenalD;
 
@@ -180,7 +180,7 @@ cPoseCdtImSec::cPoseCdtImSec(int aKP,cPoseCam * aPC,cPCICentr aPCIC,const cChoix
 
 double cPoseCdtImSec::RatioStereoVert() const
 {
-    return (1-mRatioD) /ElMax(1e-30,mBsH);
+    return (1-mRatioD) /std::max(1e-30,mBsH);
 }
 
 bool cPoseCdtImSec::Ok(const cChoixImMM & aCIM)
@@ -222,7 +222,7 @@ void cPoseCdtImSec::MakeImageOccup()
            Pt2dr aPr = (Pt2dr(aPi)/double(NbOccup*0.5) -Pt2dr(1.0,1.0)) * TetaMaxOccup;
            aPr = aPr/ aDirU;
            // On privilegie les point qui sont de l'autre cote de l'image
-           double aDX = (aPr.x >0) ? (ElAbs(aPr.x-aRho)) : (aRho -3*aPr.x);
+           double aDX = (aPr.x >0) ? (std::abs(aPr.x-aRho)) : (aRho -3*aPr.x);
 
            double aRho2 = ElSquare(aDX/aSigmX) +ElSquare(aPr.y/aSigmY);
 
@@ -248,7 +248,7 @@ double  cPoseCdtImSec::Recouvrt(const cPoseCdtImSec & aPCIS2) const
    {
        for (aP.y=0 ; aP.y <NbOccup ; aP.y++)
        {
-           aSomDif += ElAbs(mTImOccup.get(aP)-aPCIS2.mTImOccup.get(aP));
+           aSomDif += std::abs(mTImOccup.get(aP)-aPCIS2.mTImOccup.get(aP));
        }
    }
     return (1-aSomDif/(mSomPds+aPCIS2.mSomPds));
@@ -776,7 +776,7 @@ bool  cAppliApero::ExportImSecMM(const cChoixImMM & aCIM,cPoseCam* aPC0,const cM
     
     cSetCombPosCam aSetComb(aVPPres);
     // ON TESTE LES SUBSET 
-    int aMaxCard = ElMin(aNbImAct,aCIM.CardMaxSub().Val()); 
+    int aMaxCard = std::min(aNbImAct,aCIM.CardMaxSub().Val()); 
     for (int aCard=1 ; aCard<=aMaxCard  ; aCard++)
     {
          // On selectionne les subset qui ont le bon cardinal
@@ -806,7 +806,7 @@ bool  cAppliApero::ExportImSecMM(const cChoixImMM & aCIM,cPoseCam* aPC0,const cM
 
          // On trie pour avoir les K meilleurs sur ce cout approx
          std::sort(aVSetPond.begin(),aVSetPond.end());
-         int aNbTest = ElMin(NbTestSetPrecis,int(aVSetPond.size()));
+         int aNbTest = std::min(NbTestSetPrecis,int(aVSetPond.size()));
 
          for (int aKTest=0; aKTest<aNbTest ; aKTest++)
          {

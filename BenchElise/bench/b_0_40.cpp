@@ -270,7 +270,7 @@ void  VerifIter::verif_arc_s1s2()
               TArc * a= _gr.arc_s1s2(*ts[k1],*ts[k2]);
               BENCH_ASSERT
               (
-                   (a==0) == ((k1==k2) || (ElAbs(k1-k2)>=NBV))
+                   (a==0) == ((k1==k2) || (std::abs(k1-k2)>=NBV))
               );
               if (a)
                  BENCH_ASSERT

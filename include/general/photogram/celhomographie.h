@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CELHOMOGRAPHIE_H
 #define _ELISE_GENERAL_PHOTOGRAM_CELHOMOGRAPHIE_H
 
-#include "general/sys_dep.h"
+
 
 class cElHomographie
 {

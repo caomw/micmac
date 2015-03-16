@@ -447,8 +447,8 @@ template <class Type> Linear_Red_Comp<Type>::Linear_Red_Comp
       _f   (f),
       _x0  (x0),
       _x1  (x1),
-      _xM0 (ElMin(x0,0)),
-      _xM1 (ElMax(x1,0))
+      _xM0 (std::min(x0,0)),
+      _xM1 (std::max(x1,0))
 {
       _op.set_neutre(_neutre);
 
@@ -643,7 +643,7 @@ Linear_Bin_Shading_Comp::Linear_Bin_Shading_Comp
 )     :
       Fonc_Num_Comp_TPL<INT>(arg,f->idim_out(),arg.flux()),
       _f (f),
-      _steep                (ElAbs(steep)*arg.flux()->average_dist()),
+      _steep                (std::abs(steep)*arg.flux()->average_dist()),
       _neg_st               (steep < 0)
 {
 }
@@ -887,8 +887,8 @@ const Pack_Of_Pts * Linear_Gray_Level_Shading_Comp::values(const Pack_Of_Pts * p
        {  // use this stupid {} because fucking visual
 	    for (int i =0; i<_nb ; i++)
             {
-                vmax = ElMax(vmax,_in[i]);
-                vmin = ElMin(vmin,_in[i]);
+                vmax = std::max(vmax,_in[i]);
+                vmin = std::min(vmin,_in[i]);
 	    } 
        }
 

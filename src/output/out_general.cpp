@@ -681,7 +681,7 @@ Video_Win Video_Win::WStd(Pt2di sz,REAL zoom,Video_Win Soeur,bool SetClikCoord)
                         
 Output Video_Win::WiewAv(Pt2di sz,Pt2di szmax)
 {
-    REAL zoom = ElMin(szmax.x/(REAL)sz.x,szmax.y/(REAL)sz.y);
+    REAL zoom = std::min(szmax.x/(REAL)sz.x,szmax.y/(REAL)sz.y);
  
     Video_Win res  = WStd(sz,zoom,false);
  
@@ -718,11 +718,11 @@ void AdaptParamCopyTrans
         INT   NbDest
      )
 {
-   INT x0 = ElMin3(0,X0dest,X0src);
+   INT x0 = std::min3(0,X0dest,X0src);
    X0src  -= x0;
    X0dest -= x0;
    NB += x0;
-   NB = ElMax(0,ElMin3(NB,NbSrc-X0src,NbDest-X0dest));
+   NB = std::max(0,std::min3(NB,NbSrc-X0src,NbDest-X0dest));
 }
 
 void AdaptParamCopyTrans

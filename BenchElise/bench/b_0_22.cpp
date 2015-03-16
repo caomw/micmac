@@ -49,7 +49,7 @@ void flux_cat_verif_sigma
 
      ELISE_COPY(fl1||fl2,f,sigma(v12));
 
-     BENCH_ASSERT(ElAbs(v12-(v1+v2))<epsilon);
+     BENCH_ASSERT(std::abs(v12-(v1+v2))<epsilon);
 }
 
 

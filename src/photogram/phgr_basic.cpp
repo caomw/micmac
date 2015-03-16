@@ -267,7 +267,7 @@ Pt2dr & ElCplePtsHomologues::P2() {return PK(1);}
 
 void  ElCplePtsHomologues::SelfSwap()
 {
-   ElSwap(P1(),P2());
+   std::swap(P1(),P2());
 }
 
 
@@ -1525,7 +1525,7 @@ bool    ElCamera::PIsVisibleInImage   (const Pt3dr & aPTer) const
 
    if (
          HasOrigineProf() 
-         && (aPCam.z <=   1e-5 * (ElAbs(aPCam.x)+ElAbs(aPCam.y)))
+         && (aPCam.z <=   1e-5 * (std::abs(aPCam.x)+std::abs(aPCam.y)))
       ) 
       return false;
 
@@ -3041,7 +3041,7 @@ cCalibrationInternConique  ElCamera::ExportCalibInterne2XmlStruct(Pt2di aSzIm) c
 double  CamStenope::GetRoughProfondeur() const
 {
     if (ProfIsDef())  return mProfondeur;
-    if (AltisSolIsDef()) return ElAbs(PseudoOpticalCenter().z-mAltiSol);
+    if (AltisSolIsDef()) return std::abs(PseudoOpticalCenter().z-mAltiSol);
 
     ELISE_ASSERT(false,"Nor Prof nor Alti in ElCamera::GetRoughProfondeur");
     return 0;
@@ -3068,7 +3068,7 @@ double   ElCamera::EcartAngulaire(const Appar23 & anAp) const
     Pt3dr aD1 =  vunit(R3toL3(anAp.pter));
     Pt3dr aD2 =  vunit(F2toDirRayonL3(anAp.pim));
 
-    return ElAbs(acos(scal(aD1,aD2)));
+    return std::abs(acos(scal(aD1,aD2)));
 }
 
 double   ElCamera::SomEcartAngulaire(const std::vector<Appar23> & aVApp) const
@@ -3095,8 +3095,8 @@ double   ElCamera::EcartAngulaire
    Pt3dr  aRes = aSegA.PseudoInter(aSegB);
    double aDist = aSegA.DistDoite(aRes);
 
-   return   ElAbs(atan2(euclid(aRes-OrigineProf()),aDist))
-          + ElAbs(atan2(euclid(aRes-CamB.OrigineProf()),aDist));
+   return   std::abs(atan2(euclid(aRes-OrigineProf()),aDist))
+          + std::abs(atan2(euclid(aRes-CamB.OrigineProf()),aDist));
 }
 
 double   ElCamera::SomEcartAngulaire
@@ -3345,7 +3345,7 @@ Pt3dr CamStenope::Im1EtProfSpherik2_To_Terrain
    double B = 2 * scal(aV12,aRay);
    double C = square_euclid(aV12) - ElSquare(prof2);
 
-   double aDelta = ElMax(B*B - 4*A*C,0.0);
+   double aDelta = std::max(B*B - 4*A*C,0.0);
 
    double aLamda =  (-B+sqrt(aDelta))/ (2*A);
    return aC1 + aRay * aLamda;
@@ -3881,7 +3881,7 @@ ElRotation3D  CamStenope::CombinatoireOFPAGen
      std::list<Pt2dr>   L2(PF2);
 
 
-     INT aNB = ElMin((INT) V3.size(),ElMax(3,NbTest));
+     INT aNB = std::min((INT) V3.size(),std::max(3,NbTest));
 
      int aNbTestMade= 0;
      for (INT k0= 0 ; k0<aNB ; k0++)
@@ -3900,7 +3900,7 @@ ElRotation3D  CamStenope::CombinatoireOFPAGen
                 L3.push_front(V3[k2]);
                 L2.push_front(V2[k2]);
 
-                    double aDist2 = ElMin3(dist8(V2[k0]-V2[k1]),dist8(V2[k1]-V2[k2]),dist8(V2[k2]-V2[k0]));
+                    double aDist2 = std::min3(dist8(V2[k0]-V2[k1]),dist8(V2[k1]-V2[k2]),dist8(V2[k2]-V2[k0]));
 
                     if (0)
                     {
@@ -4039,9 +4039,9 @@ REAL CamStenope::EcartProj(Pt2dr aPC2A,const ElCamera & CamB,Pt2dr aPC2B)
     RayB0 = RayB0 + DirR * 10;
     RayB1 = RayB1 + DirR * 30;
 
-    if (ElAbs(R3toL3(RayB0).z) < 1.0)
+    if (std::abs(R3toL3(RayB0).z) < 1.0)
        RayB0 = RayB0 + DirR * 10;
-    if (ElAbs(R3toL3(RayB1).z) < 1.0)
+    if (std::abs(R3toL3(RayB1).z) < 1.0)
        RayB1 = RayB1 + DirR * 10;
 
     SegComp aSegCam(R3toC2(RayB0),R3toC2(RayB1));
@@ -4506,7 +4506,7 @@ double   cAnalyseZoneLiaison::Score(double ExposantDist,double ExposantPds)
 
     for (int aK=0 ; aK<int(mVPts.size()) ; aK++)
     {
-        double aD = ElAbs(aSeg.ordonnee(mVPts[aK]));
+        double aD = std::abs(aSeg.ordonnee(mVPts[aK]));
         aRes += pow(aD,ExposantDist);
         aSPds++;
     }

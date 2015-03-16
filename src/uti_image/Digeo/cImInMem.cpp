@@ -215,7 +215,7 @@ template <class Type> void cTplImInMem<Type>::LoadFile(Fonc_Num aFonc,const Box2
 	     (!signed_type_num(mType) ) ){
 		int aMinT,aMaxT;
 		min_max_type_num(mType,aMinT,aMaxT);
-		aMaxT = ElMin(aMaxT-1,1<<19);  // !!! LIES A NbShift ds PyramideGaussienne
+		aMaxT = std::min(aMaxT-1,1<<19);  // !!! LIES A NbShift ds PyramideGaussienne
 		tBase aMul = 0;
 
 		if ( mAppli.ValMaxForDyn().IsInit() ){
@@ -225,7 +225,7 @@ template <class Type> void cTplImInMem<Type>::LoadFile(Fonc_Num aFonc,const Box2
 			for (int aY=0 ; aY<mSz.y ; aY++){
 				Type * aL = mData[aY];
 				for (int aX=0 ; aX<mSz.x ; aX++)
-				aL[aX] = ElMin(aMaxTm1,tBase(aL[aX]*aMul));
+				aL[aX] = std::min(aMaxTm1,tBase(aL[aX]*aMul));
 			}
 			std::cout << " Multiplieur in : " << aMul  << "\n";
 		}

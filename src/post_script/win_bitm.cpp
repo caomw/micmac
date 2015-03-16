@@ -139,7 +139,7 @@ void PS_Pts_Not_RLE::put_1L
     _psd->set_active_palette(_p,false);
     for (INT k=0; k <nb ; k+= _psd->max_str)
     {
-         INT nb_loc = ElMin((INT)_psd->max_str,nb-k);
+         INT nb_loc = std::min((INT)_psd->max_str,nb-k);
 
          put_1L(x+k,nb_loc,&_psd->_StrX);
          put_1L(y+k,nb_loc,&_psd->_StrY);
@@ -319,8 +319,8 @@ PS_Out_RLE_computed::PS_Out_RLE_computed
   _pmf             (w->_psd),
   _pal             (dep),
   _dep             (dep),
-  _p0buf           (ElMin(0,_up0.x-1),0),
-  _p1buf           (ElMax(_up1.x+1,arg.flux()->sz_buf()),_nb_buf_y),
+  _p0buf           (std::min(0,_up0.x-1),0),
+  _p1buf           (std::max(_up1.x+1,arg.flux()->sz_buf()),_nb_buf_y),
   _buf             (NEW_TAB_MATRICE(_dout,_p0buf,_p1buf,U_INT1)),
   _buf_tr          (NEW_VECTEUR(0,_dout,U_INT1 *)),
   _last_x0         (0xffffffff),
@@ -414,8 +414,8 @@ void PS_Out_RLE_computed::flush_image(bool /* end */)
                    );
         for (INT idx=bd._p0.x; idx<bd._p1.x ; idx++)
         {
-            INT x0 = ElMax(_last_x0,_up0.x+256*idx);
-            INT x1 = ElMin(_last_x1,_up0.x+256*(idx+1));
+            INT x0 = std::max(_last_x0,_up0.x+256*idx);
+            INT x1 = std::min(_last_x1,_up0.x+256*(idx+1));
             INT x0l = (x0-_up0.x)%256;
             INT nb = x1-x0;
 

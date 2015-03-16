@@ -39,11 +39,62 @@ English :
 Header-MicMac-eLiSe-25/06/2007*/
 
 
-#ifndef _ELISE_GENERAL_WINDOW_HJ_WINDOW_H
-#define _ELISE_GENERAL_WINDOW_HJ_WINDOW_H
+#ifndef _ELISE_GENERAL_WINDOW_VIDEO_WIN_H
+#define _ELISE_GENERAL_WINDOW_VIDEO_WIN_H
 
-#include "general/sys_dep.h"
+class Video_Win   :  public El_Window
+{
+    friend class ElXim;
+    public :
 
+        void DumpImage(const std::string & aName);
+
+
+         void raise();
+         void lower();
+         void move_to(const Pt2di&);
+         void move_translate(const Pt2di&);
+
+         EliseStdImageInteractor * Interactor();
+	 void  SetInteractor(EliseStdImageInteractor *);
+         
+         static Video_Win  WStd(Pt2di sz,double_t zoom,bool all_pal= true,bool SetClikCoord = true);
+         static Video_Win  WStd(Pt2di sz,double_t zoom,Video_Win,bool SetClikCoord = true);
+         static Video_Win  WSzMax(Pt2dr aSzTarget,Pt2dr aSzMax);
+
+         static Video_Win *  PtrWStd(Pt2di sz,bool all_pal= true,const Pt2dr & aScale=Pt2dr(1,1));
+
+         static Output  WiewAv(Pt2di sz,Pt2di szmax = Pt2di(500,500));
+
+         void set_sop(Elise_Set_Of_Palette);
+
+         // Video_Win (Pt2di);          
+
+         Video_Win
+         (
+                Video_Display          ,
+                Elise_Set_Of_Palette   ,
+                Pt2di                  ,
+                Pt2di                  ,
+                int          border_witdh = 5
+         );
+
+         typedef enum
+         {
+             eDroiteH,
+             eBasG,
+             eSamePos
+         }  ePosRel;
+
+         Video_Win
+         (
+                Video_Win   aSoeur,
+                ePosRel     aPos,
+                Pt2di       aSz,
+                int         border_witdh = 5
+         );
+
+        class HJ_PtrDisplay  display();   //  HJMPD
         class HJ_Window      window();    //  HJMPD
 
 

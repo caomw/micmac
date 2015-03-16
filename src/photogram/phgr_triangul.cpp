@@ -709,8 +709,8 @@ cTFI_Triangle & cTriangulFormelleImplem::GetTriFromP (const Pt2dr & aP) const
 void cTriangulFormelleImplem::SetTolMax(REAL aTol)
 {
       ELISE_ASSERT(NbTol==3,"NbTol!=3 in cTriangulFormelleImplem::Triangulate");
-      mDTol[0] = ElMin(aTol,1e-4)*mDType;
-      mDTol[1] = ElMin(aTol,1e-1)*mDType;
+      mDTol[0] = std::min(aTol,1e-4)*mDType;
+      mDTol[1] = std::min(aTol,1e-1)*mDType;
       mDTol[2] = aTol*mDType;
 }
 
@@ -789,7 +789,7 @@ class CplSom
 		REAL d1C = euclid(aP1,Center);
 		REAL d2C = euclid(aP2,Center);
 
-		mCost = d12 + ElAbs(d1C-d2C) / 10.0;
+		mCost = d12 + std::abs(d1C-d2C) / 10.0;
 	}
 
 
@@ -917,7 +917,7 @@ void cTriangulFormelleImplem::Finish()
      {
         tTFISom * aS = mNodes[aK];
 	Pt2dr aP = aS->attr()->PosPt();
-	REAL aDist = ElAbs(aPC.y-aP.y) - ElAbs(aPC.x-aP.x);
+	REAL aDist = std::abs(aPC.y-aP.y) - std::abs(aPC.x-aP.x);
 	if ((mSomVecHorz ==0) || (aDist<dMin))
 	{
             dMin = aDist;

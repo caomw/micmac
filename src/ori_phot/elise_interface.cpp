@@ -823,7 +823,7 @@ double Ori3D_Std::Prof(const Pt3dr & aP) const
 
 REAL Ori3D_Std::BSurH(Ori3D_Std Ori2)
 {
-     REAL H = ElAbs(orsommet_de_pdv_terrain().z-altisol());
+     REAL H = std::abs(orsommet_de_pdv_terrain().z-altisol());
      REAL B = euclid(orsommet_de_pdv_terrain()-Ori2.orsommet_de_pdv_terrain());
 
      return B/H;
@@ -1193,7 +1193,7 @@ std::vector<Pt2dr> Ori3D_Std::Inter(Ori3D_Std Ori2,double aZP,bool ByAlti)
 
    for (tLVP::const_iterator itV=aCont.begin(); itV!=aCont.end() ; itV++)
    {
-       double aS = ElAbs(surf_or_poly(*itV));
+       double aS = std::abs(surf_or_poly(*itV));
        if (aS > aSurfMax)
        {
            aSurfMax = aS;
@@ -1215,7 +1215,7 @@ double     Ori3D_Std::PropInter(Ori3D_Std Ori2,double aZP,bool ByAlti)
 {
      std::vector<Pt2dr>  anInter = Inter(Ori2,aZP,ByAlti);
 
-     return ElAbs(surf_or_poly(anInter)) / (SzIm().x*SzIm().y);
+     return std::abs(surf_or_poly(anInter)) / (SzIm().x*SzIm().y);
 }
 
 

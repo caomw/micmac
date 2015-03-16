@@ -529,9 +529,9 @@ template <class Type> void SkVeinIm<Type>::binarize
 template <class Type> void SkVeinIm<Type>::set_brd(Type val,int width)
 {
 
-     width =  SkVein::ElMax(width,0);
-     width =  SkVein::ElMin(width,(_tx+1)/2);
-     width =  SkVein::ElMin(width,(_ty+1)/2);
+     width =  SkVein::std::max(width,0);
+     width =  SkVein::std::min(width,(_tx+1)/2);
+     width =  SkVein::std::min(width,(_ty+1)/2);
 
     for (int w=0 ; w<width ; w++)
     {

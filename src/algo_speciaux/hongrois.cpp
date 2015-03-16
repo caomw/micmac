@@ -48,7 +48,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 Im1D_INT4  hongrois(Im2D_INT4 cost)
 {
     ELISE_ASSERT(false,"Obsolete hongrois use ALGOHONGR");
-    INT nb = ElMin(cost.tx(),cost.ty());
+    INT nb = std::min(cost.tx(),cost.ty());
 
     {
          ELISE_fp fp("commande/HONGR/fich_inp",ELISE_fp::WRITE);

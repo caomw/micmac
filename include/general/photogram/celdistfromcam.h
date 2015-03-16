@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CELDISTFROMCAM_H
 #define _ELISE_GENERAL_PHOTOGRAM_CELDISTFROMCAM_H
 
-#include "general/sys_dep.h"
+
 
 class cElDistFromCam : public ElDistortion22_Gen
 {

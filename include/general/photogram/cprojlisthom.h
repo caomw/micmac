@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CPROJLISTHOM_H
 #define _ELISE_GENERAL_PHOTOGRAM_CPROJLISTHOM_H
 
-#include "general/sys_dep.h"
+
 
 class cProjListHom
 {

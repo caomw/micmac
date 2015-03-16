@@ -236,7 +236,7 @@ HoughMapedParam::HoughMapedParam
 
 Box2di HoughMapedParam::BoxRab()
 {
-    INT dM = ElMax3(Hough().NbX(),Hough().NbY(),round_up(mLengthMaxSeg));
+    INT dM = std::max3(Hough().NbX(),Hough().NbY(),round_up(mLengthMaxSeg));
     Pt2di  RabDmax(dM,dM);
 
     return Box2di(-RabDmax-P0HoughUti(),RabDmax+SzHoughUti()-P0HoughUti());
@@ -558,7 +558,7 @@ template <class Type> Seg2d  Hough_Mappped_Comp<Type>::OptimSeg(Seg2d aSeg,REAL 
           (
                  aScore,
                  aSeg,
-                 ElMax(1,round_ni(euclid(aSeg.p0(),aSeg.p1()))),
+                 std::max(1,round_ni(euclid(aSeg.p0(),aSeg.p1()))),
                  1.0,
                  aPrec
           );

@@ -313,7 +313,7 @@ std::vector<double> PondVois(const Pt2di & aV,double Depond,double aGama)
         for (int anX=-aV.x ; anX<=aV.x ; anX++)
         {
              double aN = euclid(Pt2di(anX,anY));
-             double aPds = pow(ElMax(1.0 - aN/aN0,0.0),aGama);
+             double aPds = pow(std::max(1.0 - aN/aN0,0.0),aGama);
              aPds = (1-Depond) + Depond * aPds;
              aRes.push_back(aPds);
         }
@@ -346,7 +346,7 @@ std::vector<Pt3di>  VecKImGen
             {
                 Pt2di aSzV = aVSz[aKS];
 
-                if ( (ElAbs(anX)<=aSzV.x) &&  (ElAbs(anY)<=aSzV.y) )
+                if ( (std::abs(anX)<=aSzV.x) &&  (std::abs(anY)<=aSzV.y) )
                 {
                     double aScale = aVSigma[aKS];
                     if (aScale < aScaleMin)
@@ -446,7 +446,7 @@ template  <class Type> cFlagPonder<Type>::cFlagPonder(int aNbFlag,const Pt2di & 
   
      for (int aK=0 ; aK<aNbFlag ; aK+= cFlagTabule<Type>::TheNbBits)
      {
-          mVNbB.push_back(ElMin(cFlagTabule<Type>::TheNbBits,aNbFlag-aK));
+          mVNbB.push_back(std::min(cFlagTabule<Type>::TheNbBits,aNbFlag-aK));
           mVSz.push_back(1<<mVNbB.back());
           mVIm1D.push_back(Im1D_REAL4(mVSz.back()));
           mDIm.push_back(mVIm1D.back().data());
@@ -538,7 +538,7 @@ template   <class Type> cImFlags<Type> cImFlags<Type>::CensusMS
             {
                 Pt2di aSzV = aVSz[aKS];
 
-                if ( (ElAbs(anX)<=aSzV.x) &&  (ElAbs(anY)<=aSzV.y) )
+                if ( (std::abs(anX)<=aSzV.x) &&  (std::abs(anY)<=aSzV.y) )
                 {
                     double aScale = aVSigma[aKS];
                     if (aScale < aScaleMin)
@@ -1112,11 +1112,11 @@ double Quick_MS_CorrelBasic_Center
 
               if (ModeMax) 
               {
-                 double aCor = (aM12 * ElAbs(aM12)) /ElMax(anEpsilon,aM11*aM22);
+                 double aCor = (aM12 * std::abs(aM12)) /std::max(anEpsilon,aM11*aM22);
                  ElSetMax(aMaxCor,aCor);
               }
               else
-                 return aM12 / sqrt(ElMax(anEpsilon,aM11*aM22));
+                 return aM12 / sqrt(std::max(anEpsilon,aM11*aM22));
          }
 
           
@@ -1382,7 +1382,7 @@ void cAppliMICMAC::DoCensusCorrel(const Box2di & aBox,const cCensusCost & aCC)
     double aRealNbByPix = 1/ aStepPix;
     int mNbByPix = round_ni(aRealNbByPix);
 
-    if (ElAbs(aRealNbByPix-mNbByPix) > TolNbByPix)
+    if (std::abs(aRealNbByPix-mNbByPix) > TolNbByPix)
     {
          std::cout << "For Step = " << mStepZ  << " GotDif " << aRealNbByPix-mNbByPix << "\n";
          ELISE_ASSERT(false,"in DoCensusCorre step is not 1/INT");
@@ -1676,7 +1676,7 @@ void cAppliMICMAC::DoCensusCorrel(const Box2di & aBox,const cCensusCost & aCC)
                                          double aCostGrBas =CensusGraphePlein(aDataIm0,aPIm0,aDataIm1,aPRIm1.x,aPIm1.y,mCurSzVMax);
                                          // double aC3 = aCG->GainBasic(aBOI0.data(),aBOIC.data(),anOffset);
                                          // Peut pas forcer a 0, car interpol diff peut creer except une variation
-                                         if ((ElAbs(aCostGrBas-aCost)>1e-4) )
+                                         if ((std::abs(aCostGrBas-aCost)>1e-4) )
                                          {
                                              std::cout << "Verfi Gr " << aCost << " " << aCostGrBas    << "==============================\n";
                                          }
@@ -1693,13 +1693,13 @@ void cAppliMICMAC::DoCensusCorrel(const Box2di & aBox,const cCensusCost & aCC)
                                      {
                                          Pt2dr aPRIm1 = Pt2dr(aPIm1) + Pt2dr(aPhase/double(mNbByPix),0);
                                          double aC2 = CensusBasic(aDataIm0,aPIm0,aDataIm1,aPRIm1.x,aPIm1.y,mCurSzVMax);
-                                         if (ElAbs(aCost-aC2) > 1e-4)
+                                         if (std::abs(aCost-aC2) > 1e-4)
                                          {
                                              std::cout << "Verfi Basic " << aCost <<  " "<< aC2 << "===================================\n";
                                          }
 
                                          double aC3 = CensusBasicCenter(aVBOI0[0]->data(),aVBOIC[0]->data(),anOffset,mCurSzVMax);
-                                         if (ElAbs(aCost-aC3) > 1e-5)
+                                         if (std::abs(aCost-aC3) > 1e-5)
                                          {
                                              std::cout << "Verfi Flag/Cen " << aCost <<  " "<< aC3 << "===================================\n";
                                              std::cout << aPIm0  << aTabFlag0.SzIm() << " " << aPIm1 << aTabFlag1.SzIm()<< "\n";
@@ -1723,7 +1723,7 @@ void cAppliMICMAC::DoCensusCorrel(const Box2di & aBox,const cCensusCost & aCC)
                                     {
                                         double aC3 = MS_CorrelBasic_Center (aVBOI0,aVBOIC,anOffset,aVKImS,aVPds,mAhEpsilon,aModeMax);
 
-                                        if (ElAbs(aC3-aCost)> 1e-2)
+                                        if (std::abs(aC3-aCost)> 1e-2)
                                         {
                                              std::cout << "??????Correl check census ?????? " << aCost << " " << aC3 << "\n";
                                              // ELISE_ASSERT(false,"Correl check census");
@@ -1733,7 +1733,7 @@ void cAppliMICMAC::DoCensusCorrel(const Box2di & aBox,const cCensusCost & aCC)
                                          if (!CMS())
                                          {
                                              double aC2  = CorrelBasic_Center(aVBOI0[0]->data(),aVBOIC[0]->data(),anOffset,mCurSzVMax,mAhEpsilon);
-                                             if (ElAbs(aC2-aCost) > 1e-5)
+                                             if (std::abs(aC2-aCost) > 1e-5)
                                              {
                                                    std::cout << "COREELLL " << aCost << " " << aC2 << "\n";
                                                    ELISE_ASSERT(false,"Correl Check failed");

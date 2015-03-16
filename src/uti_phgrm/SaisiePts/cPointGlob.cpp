@@ -311,7 +311,7 @@ int cAppli_SaisiePts::GetCptMax() const
         const cPointGlob & aPG=*(mPG[aKP]->PG());
         if (aPG.NumAuto().IsInit())
         {
-            aCptMax = ElMax(aCptMax,aPG.NumAuto().Val());
+            aCptMax = std::max(aCptMax,aPG.NumAuto().Val());
         }
     }
     return aCptMax;

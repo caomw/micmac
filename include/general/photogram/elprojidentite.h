@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_ELPROJIDENTITE_H
 #define _ELISE_GENERAL_PHOTOGRAM_ELPROJIDENTITE_H
 
-#include "general/sys_dep.h"
+
 
 class ElProjIdentite : public ElProj32
 {

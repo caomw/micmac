@@ -162,8 +162,8 @@ double  cSimulAero::Gain // <0, veut dire on valide pas le noeud
        cSomSA aQ1 = *(itP->first);
        cSomSA aQ2 = *(itP->second);
        Pt2dr aDif(
-                     1.0-ElAbs(aQ1.mPt.x-aQ2.mPt.x)*mDist.x,
-                     1.0-ElAbs(aQ1.mPt.y-aQ2.mPt.y)*mDist.y
+                     1.0-std::abs(aQ1.mPt.x-aQ2.mPt.x)*mDist.x,
+                     1.0-std::abs(aQ1.mPt.y-aQ2.mPt.y)*mDist.y
                  );
        if ((aDif.x < 0) && (aDif.y < 0))
        {
@@ -173,7 +173,7 @@ double  cSimulAero::Gain // <0, veut dire on valide pas le noeud
    }
    if (aRes == 0.0) return -1;
 
-   return aRes / pow(1.3,ElMax(aN1->Depth(),aN2->Depth()));
+   return aRes / pow(1.3,std::max(aN1->Depth(),aN2->Depth()));
 }
 
 void cSimulAero::Vois(cSomSA * aP,std::vector<cSomSA *> & aRes)
@@ -268,7 +268,7 @@ double  cTestIntParamMerge::Gain // <0, veut dire on valide pas le noeud
     std::cout << "Cdt " << aNewNum << "={" << aN1->Num() << "," << aN2->Num() << "}\n";
 */
     mNbGain ++;
-    return   (1.0+ElMax(aN1->Depth(),aN2->Depth()));
+    return   (1.0+std::max(aN1->Depth(),aN2->Depth()));
 }
 
 void cTestIntParamMerge::OnNewLeaf(tNodTestInt * aSingle)

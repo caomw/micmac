@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CDISTCAMSTENOPEGRID_H
 #define _ELISE_GENERAL_PHOTOGRAM_CDISTCAMSTENOPEGRID_H
 
-#include "general/sys_dep.h"
+
 
 class cDistCamStenopeGrid : public ElDistortion22_Gen
 {

@@ -115,7 +115,7 @@ Data_Elise_File_Im::Data_Elise_File_Im
        _type_el_if_bits = (_nbb<8) ? GenIm::u_int1 : _type_el;
        _offset_0     = offset_0;
 
-       INT nb_pb = ElMax(1,8/_nbb);
+       INT nb_pb = std::max(1,8/_nbb);
        if (szd0 == -1)
        {
            _szd0 =  _sz[0]  * dim_out;

@@ -57,7 +57,7 @@ cCaracOfDeZoom::cCaracOfDeZoom
 {
    mDZI = aDZI;
    int aFreqI = anAppli.FreqPtsInt();
-   mRatioPtsInt = ElMin(1.0,double(aDeZoom)/double(aFreqI*mAppli.DeZoomMin()));
+   mRatioPtsInt = std::min(1.0,double(aDeZoom)/double(aFreqI*mAppli.DeZoomMin()));
    mHasMasqPtsInt = (mRatioPtsInt < 1.0);
    mNameMasqInt =    anAppli.FullDirPyr()
                   +  std::string("Pts_Interets_")

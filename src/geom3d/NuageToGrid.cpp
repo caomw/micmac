@@ -273,7 +273,7 @@ REAL  cLoadImDist::ScoreInTriangle
 
     aRes = aDir * ABC.x;
 
-    return ElMin(ABC.y,ABC.z);
+    return std::min(ABC.y,ABC.z);
 }
 
 
@@ -420,7 +420,7 @@ void cLoadImDist::Load(int argc,char ** argv)
 
 	     for (INT KTest = 0 ; KTest < NbTest ; KTest ++)
 	     {
-		  INT aKP = ElMin(mNbP-1,round_ni(mNbP*NRrandom3()));
+		  INT aKP = std::min(mNbP-1,round_ni(mNbP*NRrandom3()));
 	          REAL  YMin = mPts[aKP].mP.y - aStep/2.0;
 	          REAL  YMax = mPts[aKP].mP.y + aStep/2.0;
 
@@ -456,7 +456,7 @@ void cLoadImDist::Load(int argc,char ** argv)
 
 	     for (INT aKP = 0 ; aKP < mNbP ; aKP++)
 	     {
-		     ElSwap(mPts[aKP].mP.y,mPts[aKP].mP.z);
+		     std::swap(mPts[aKP].mP.y,mPts[aKP].mP.z);
 	     }
      }
      mMSph.SetStep(mStep);

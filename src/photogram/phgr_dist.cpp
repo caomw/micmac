@@ -414,7 +414,7 @@ Polynome2dReal  ElDistortion22_Gen::NewPolynLeastSquareInverse_OneCoord
       aNbPts = 2 * aDegre * aDegre * aDegre + 20 * aDegre * aDegre + 200;
    }
 
-   double anAmpl= ElMax(dist8(aDom._p0),dist8(aDom._p1));
+   double anAmpl= std::max(dist8(aDom._p0),dist8(aDom._p1));
    Polynome2dReal aRes(aDegre,anAmpl);
    INT aNbM = aRes.NbMonome();
    INT aNbD1 = round_up(sqrt(double(aNbPts)));
@@ -929,7 +929,7 @@ ElDistRadiale_PolynImpair   ElDistRadiale_PolynImpair::DistRadialeInverse
      REAL R2 = ElSquare(R);
 
      REAL ImR = R * (1+DistDirecteR2NoSeuil(R2));
-     REAL Pds = ElAbs(R);
+     REAL Pds = std::abs(R);
 
      REAL ImR2 = ImR*ImR;
      REAL ImR2N = 1;
@@ -1794,10 +1794,10 @@ cDistCamStenopeGrid * cDistCamStenopeGrid::Alloc
                 Pt2dr aR2 = aRes2->Direct(aQ2);
 
                 double aDist = euclid(aR0,aR2);
-                aDMax = ElMax(aDMax,aDist);
+                aDMax = std::max(aDMax,aDist);
                 if (aDist<1e-2)
                 {
-                    aRMax  = ElMax(aRMax,aRay);
+                    aRMax  = std::max(aRMax,aRay);
                 }
             }
           }

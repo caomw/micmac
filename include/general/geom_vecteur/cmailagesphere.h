@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_GEOM_VECTEUR_CMAILAGESPHERE_H
 #define _ELISE_GENERAL_GEOM_VECTEUR_CMAILAGESPHERE_H
 
-#include "general/sys_dep.h"
+
 
 class cMailageSphere
 {

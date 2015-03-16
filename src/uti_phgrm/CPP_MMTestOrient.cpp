@@ -61,7 +61,7 @@ int  FixSizeImage(int aZoom,std::string aFile,double aLargMin,int aZoomMax)
 {
    cMetaDataPhoto aMDP = cMetaDataPhoto::CreateExiv2(aFile);
    Pt2di aSz = aMDP.SzImTifOrXif();
-   double aLargFile =  ElMin(aSz.x,aSz.y);
+   double aLargFile =  std::min(aSz.x,aSz.y);
    while (  ((aLargFile/aZoom)<(aLargMin*2)) && (aZoom>aZoomMax))
          aZoom /= 2;
 

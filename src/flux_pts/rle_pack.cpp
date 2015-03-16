@@ -117,9 +117,9 @@ INT RLE_Pack_Of_Pts::clip(const RLE_Pack_Of_Pts * pck,
         }
     }
 
-    _pt0[0] = ElMax(p0[0],pck->_pt0[0]);  // begining of segment
-    INT x1  = ElMin(p1[0],pck->_pt0[0]+ pck->_nb);  // end of segment
-    _nb = ElMax(0,x1-_pt0[0]);
+    _pt0[0] = std::max(p0[0],pck->_pt0[0]);  // begining of segment
+    INT x1  = std::min(p1[0],pck->_pt0[0]+ pck->_nb);  // end of segment
+    _nb = std::max(0,x1-_pt0[0]);
 
     return _nb ? _pt0[0]-pck->_pt0[0] : 0;
 }
@@ -137,22 +137,22 @@ INT RLE_Pack_Of_Pts::proj_brd
 
     for(int i = 1; i <_dim ; i++)
     {
-       _pt0[i] = ElMax(pck->_pt0[i],p0[i]);
-       _pt0[i] = ElMin(_pt0[i],p1[i]-1);
+       _pt0[i] = std::max(pck->_pt0[i],p0[i]);
+       _pt0[i] = std::min(_pt0[i],p1[i]-1);
     }
 
     INT xp0 = pck->_pt0[0];
     INT X0 = p0[0];
     INT X1 = p1[0];
 
-    INT x0 =  ElMax(X0,xp0);
+    INT x0 =  std::max(X0,xp0);
     if (x0 >= X1)
     {
          _pt0[0] = X1-1;
          _nb = 1;
          return 0;
     }
-    INT x1 =  ElMin(X1,xp0+pck->_nb);
+    INT x1 =  std::min(X1,xp0+pck->_nb);
     if (x1 <= X0)
     {
          _pt0[0] = X0;

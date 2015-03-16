@@ -193,7 +193,7 @@ if (${WITH_ETALONPOLY})
         add_definitions(-DETA_POLYGON)
 endif()
 
-configure_file ( "include/general/micmac_version.h.in" "${CMAKE_SOURCE_DIR}/include/general/micmac_version.h" )
+configure_file ( "include/general/micmac_version.h.in" "${CMAKE_BUILD_DIR}/include/general/micmac_version.h" )
 
 # Utiliser le driver Kakadu pour gerer les images JP2OOO
 IF(${WITH_KAKADU})
@@ -396,20 +396,8 @@ ENDIF()
 
 # MicMac directories 
 include_directories(
-	include
-	include/general/photogram
-	include/general/geom_vecteur
-	include/general/file_im
-	include/general/bitm
-	include/general/optim
-	include/general/phgr_formel
-	include/general/abstract_types
-	include/general/allocation
-	include/general/ptxd
-	include/general/window
-	include/general/garb_coll_pub
-	include/general/operator
-	include/general/util
+	include/private
+	include/general
 	include/ext_stl
 	)
 

@@ -284,7 +284,7 @@ void PInt_No_Cste_Out_Ras_W_Comp::vider_buf()
                   _coul = i;
                else
                   _coul = _dep->ilutage(_derd,_ddp->lut_compr(),&i);
-               _map_psort->set_nb(ElMin(_sz_buf,a1-a));
+               _map_psort->set_nb(std::min(_sz_buf,a1-a));
                _map_psort->_pts[0] = x+a;
                _map_psort->_pts[1] = y+a;
                PInt_Cste_Out_Ras_W_Comp::update(_map_psort,0);

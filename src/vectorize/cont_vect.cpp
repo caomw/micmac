@@ -116,7 +116,7 @@ void Cont_Explore_Cycle::explore_cycle (Pt2di p,INT k)
    while ((_p != p0) || (_k != k0))
       next_kpt();
 
-   ELISE_ASSERT(ElAbs(_delta) == 8,"cycle dec");
+   ELISE_ASSERT(std::abs(_delta) == 8,"cycle dec");
    _act->action(_pts,_delta == 8);
 
    for (INT ip =0; ip<_pts.nb() ; ip++)
@@ -278,7 +278,7 @@ bool Br_Cont_Vect::make_pts(ElFifo<Pt2di> & pts)
           cprec = cod;
      }
 
-     ELISE_ASSERT(ElAbs(turn)==8,"Check Sum In cycle dec");
+     ELISE_ASSERT(std::abs(turn)==8,"Check Sum In cycle dec");
 
      return turn >0;
 }

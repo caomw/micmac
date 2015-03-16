@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CCAMERA_ORILIB_H
 #define _ELISE_GENERAL_PHOTOGRAM_CCAMERA_ORILIB_H
 
-#include "general/sys_dep.h"
+
 
 class cCamera_Orilib : public CamStenope
 {

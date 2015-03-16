@@ -254,7 +254,7 @@ Fonc_Num  BoxedConc
 
 Fonc_Num  BoxedConc(Fonc_Num f,Pt2di SzBox,bool V8,ParamConcOpb * param,bool aCatInit )
 {
-     SzBox = Pt2di(ElAbs(SzBox.x),ElAbs(SzBox.y));
+     SzBox = Pt2di(std::abs(SzBox.x),std::abs(SzBox.y));
 
      INT nb_pack_y = SzBox.y * 3 + 200;
      return BoxedConc(f,SzBox,V8,param,nb_pack_y,aCatInit);

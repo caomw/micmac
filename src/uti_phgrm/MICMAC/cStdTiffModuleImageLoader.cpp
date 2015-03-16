@@ -557,7 +557,7 @@ cInterfModuleImageLoader *  cAppliMICMAC::LoaderFiltre
    Pt2di aSz = Std2Elise(aLoaderBase->Sz(1));
    Tiff_Im * aTifZ1 = 0;
    int aSzBlocY = round_ni(1e8/aSz.x);
-   int aBrd = ElMin(200,round_ni(aSzBlocY*0.05));
+   int aBrd = std::min(200,round_ni(aSzBlocY*0.05));
 
    cDecoupageInterv1D aDec1
                       (

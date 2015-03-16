@@ -131,7 +131,7 @@ cDecimal StdRound(const double & aD,int aNbDigit,int * aTabR,int aSizeR)
    double aDifMin=1e20;
    for (int aK=0 ; aK<aSizeR ; aK++)
    {
-       double aDif = ElAbs(aVI-aTabR[aK]);
+       double aDif = std::abs(aVI-aTabR[aK]);
        if (aDif < aDifMin)
        {
            aDifMin=aDif;
@@ -305,16 +305,16 @@ void round_ni_inf (INT * out  ,const REAL * in, INT nb)
 
 
 
-Interval::Interval(REAL v0,REAL v1) : _v0 (ElMin(v0,v1)), _v1 (ElMax(v0,v1)){}
+Interval::Interval(REAL v0,REAL v1) : _v0 (std::min(v0,v1)), _v1 (std::max(v0,v1)){}
 Interval::Interval() : _v0 (0), _v1(0) {}
 
 REAL Interval::dist(const Interval & I2)
 {
-     return ElMax
+     return std::max
             (
                 0.0,
-                  ElMax(_v0,I2._v0)
-                - ElMin(_v1,I2._v1)
+                  std::max(_v0,I2._v0)
+                - std::min(_v1,I2._v1)
             );
 }
 
@@ -847,7 +847,7 @@ double Std_f2SAtRxS2SRx(double x)
 }
 double  f2SAtRxS2SRx(double x)
 {
-   x = ElAbs(x);
+   x = std::abs(x);
    if  (x<1e-5) return Dl_f2SAtRxS2SRx(x);
    return Std_f2SAtRxS2SRx(x);
 }
@@ -866,7 +866,7 @@ double Std_Dl_Der2SAtRxS2SRx(double x)
 }
 double Der2SAtRxS2SRx(double x)
 {
-   x = ElAbs(x);
+   x = std::abs(x);
    if (x<1e-5) return Dl_Der2SAtRxS2SRx(x);
 
     return Std_Dl_Der2SAtRxS2SRx(x);
@@ -874,7 +874,7 @@ double Der2SAtRxS2SRx(double x)
 
 double f4S2AtRxS2(double x)
 {
-   return  ElSquare(2* sin(atan(sqrt(ElAbs(x)))/2.0));
+   return  ElSquare(2* sin(atan(sqrt(std::abs(x)))/2.0));
 }
 
 double  Dl_Der4S2AtRxS2(double x)
@@ -888,7 +888,7 @@ double Std_Der4S2AtRxS2(double x)
 }
 double Der4S2AtRxS2(double x)
 {
-   x = ElAbs(x);
+   x = std::abs(x);
    if (x<1e-5) return Dl_Der4S2AtRxS2(x);
    return Std_Der4S2AtRxS2(x);
 }
@@ -917,12 +917,12 @@ Fonc_Num Tg2AsRxS2SRx(Fonc_Num aF)
 
 double CosRx(double anX)
 {
-   return cos(sqrt(ElAbs(anX)));
+   return cos(sqrt(std::abs(anX)));
 }
 
 double SinCardRx(double anX)
 {
-   anX =  ElAbs(anX);
+   anX =  std::abs(anX);
    if (anX <1e-5) return 1 - anX/6.0 + (anX*anX)/120.0;
 
    anX = sqrt(anX);
@@ -932,7 +932,7 @@ double SinCardRx(double anX)
      //  PRECOND EN ATAN
 double AtRxSRx(double x)
 {
-   x = ElAbs(x);
+   x = std::abs(x);
    if  (x<1e-5) return (1-x/3.0+(x*x)/5.0) ;    // dev limite
    x  = sqrt(x);
    return atan(x)/x;
@@ -940,7 +940,7 @@ double AtRxSRx(double x)
 
 double TgRxSRx(double x)
 {
-   x = ElAbs(x);
+   x = std::abs(x);
    if  (x<1e-6) return (1+x/3.0) ;    // dev limite
    x  = sqrt(x);
    return tan(x)/x;
@@ -957,7 +957,7 @@ double Square(double x){return x*x;}
 
 double DerAtRxSRx(double x)
 {
-    x = ElAbs(x);
+    x = std::abs(x);
 
     if (x<1e-5) 
        return (-1/3.0 + (2.0/5.0)*x -(3.0/7.0)*x);
@@ -967,19 +967,19 @@ double DerAtRxSRx(double x)
 
 double At2Rx(double x)
 {
-   return ElSquare(atan(sqrt(ElAbs(x))));
+   return ElSquare(atan(sqrt(std::abs(x))));
 }
 
 double DerAt2Rx(double x)
 {
-   return AtRxSRx(x) / (1+ElAbs(x));
+   return AtRxSRx(x) / (1+std::abs(x));
 }
 
  REAL angle_mod_real(REAL a,REAL b)
 {
      REAL res = mod_real(a,b);
-     if (res > ElAbs(b/2))
-        res -= ElAbs(b);
+     if (res > std::abs(b/2))
+        res -= std::abs(b);
      return res;
 }
 
@@ -1047,8 +1047,8 @@ void BasicComputeIntervaleDelta
                   INT aZ0Max
               )
 {
-   aDzMin = ElMax(-MaxDeltaZ,aZ0Min-aZ);
-   aDzMax = ElMin(MaxDeltaZ,aZ0Max-1-aZ);
+   aDzMin = std::max(-MaxDeltaZ,aZ0Min-aZ);
+   aDzMax = std::min(MaxDeltaZ,aZ0Max-1-aZ);
 }
 
 double FromSzW2FactExp(double aSzW,double mCurNbIterFenSpec)

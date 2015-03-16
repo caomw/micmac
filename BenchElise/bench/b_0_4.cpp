@@ -37,8 +37,8 @@ void test_sigm_0_0_cat_coord(Pt2di p1,Pt2di p2)
 
      BENCH_ASSERT
      (
-             (s[0] == ElAbs(som_x(p1.x,p2.x)*(p1.y-p2.y)))
-          && (s[1] == ElAbs(som_x(p1.y,p2.y)*(p1.x-p2.x)))
+             (s[0] == std::abs(som_x(p1.x,p2.x)*(p1.y-p2.y)))
+          && (s[1] == std::abs(som_x(p1.y,p2.y)*(p1.x-p2.x)))
      );
 
 }
@@ -51,8 +51,8 @@ void test_sigm_0_1_cat_coord(Pt2di p1,Pt2di p2)
 
      BENCH_ASSERT
      (
-             (s[0] == ElAbs(som_x(p1.x,p2.x)*(p1.y-p2.y)))
-          && (s[1] == ElAbs(som_x(p1.y,p2.y)*(p1.x-p2.x)))
+             (s[0] == std::abs(som_x(p1.x,p2.x)*(p1.y-p2.y)))
+          && (s[1] == std::abs(som_x(p1.y,p2.y)*(p1.x-p2.x)))
      );
 
 }
@@ -67,8 +67,8 @@ void test_sigm_0_2_cat_coord(Pt2di p1,Pt2di p2)
 
      BENCH_ASSERT
      (
-             (s[0] == ElAbs(som_x(p1.x,p2.x)*(p1.y-p2.y)))
-          && (s[1] == ElAbs(som_x(p1.y,p2.y)*(p1.x-p2.x)))
+             (s[0] == std::abs(som_x(p1.x,p2.x)*(p1.y-p2.y)))
+          && (s[1] == std::abs(som_x(p1.y,p2.y)*(p1.x-p2.x)))
      );
 
 }
@@ -144,9 +144,9 @@ void test_sigm_2_0_cat_coord(Pt2di p1,Pt2di p2)
 
      BENCH_ASSERT
      (
-             (s1 == ElAbs((p1.x-p2.x)*(p1.y-p2.y)))
-          && (sx == ElAbs(som_x(p1.x,p2.x)*(p1.y-p2.y)))
-          && (sy == ElAbs(som_x(p1.y,p2.y)*(p1.x-p2.x)))
+             (s1 == std::abs((p1.x-p2.x)*(p1.y-p2.y)))
+          && (sx == std::abs(som_x(p1.x,p2.x)*(p1.y-p2.y)))
+          && (sy == std::abs(som_x(p1.y,p2.y)*(p1.x-p2.x)))
      );
 
 }
@@ -198,8 +198,8 @@ void test_0_pipe_out(Pt2di p1,Pt2di p2)
     INT s0,s1,s2;
     INT theor;
 
-    theor =  ElAbs(som_x(p1.x,p2.x)*(p1.y-p2.y))
-          +  ElAbs(som_x(p1.y,p2.y)*(p1.x-p2.x));
+    theor =  std::abs(som_x(p1.x,p2.x)*(p1.y-p2.y))
+          +  std::abs(som_x(p1.y,p2.y)*(p1.x-p2.x));
 
     ELISE_COPY
     (    rectangle(p1,p2),
@@ -249,8 +249,8 @@ void test_1_pipe_out(Pt2di sz,bool pipe_before)
 
      BENCH_ASSERT
      (
-             (sx == ElAbs(som_x(0,sz.x)*sz.y))
-        &&   (sy == ElAbs(som_x(0,sz.y)*sz.x))
+             (sx == std::abs(som_x(0,sz.x)*sz.y))
+        &&   (sy == std::abs(som_x(0,sz.y)*sz.x))
      );
 
 }
@@ -408,8 +408,8 @@ template <class Type> void test_clip_def
          sigma(s3)
      );
 
-     BENCH_ASSERT(ElAbs(s1-s2)<epsilon);
-     BENCH_ASSERT(ElAbs(s3-s2)<epsilon);
+     BENCH_ASSERT(std::abs(s1-s2)<epsilon);
+     BENCH_ASSERT(std::abs(s3-s2)<epsilon);
 }
 
 void test_clip_def()

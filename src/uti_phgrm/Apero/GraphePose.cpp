@@ -195,7 +195,7 @@ void  cAppliApero::ConstructMST
        }
 
 
-       if (int(aVBestC.size()) < ElMin(2,aNbRotPreInit))
+       if (int(aVBestC.size()) < std::min(2,aNbRotPreInit))
        {
           if (aBestCam !=0)
           {
@@ -249,7 +249,7 @@ void  cAppliApero::ConstructMST
           aBestCam->DoInitIfNow();
           if (aBestCam)
           {
-              mProfMax = ElMax(mProfMax,aBestCam->Prof2Init());
+              mProfMax = std::max(mProfMax,aBestCam->Prof2Init());
           }
         }
    }

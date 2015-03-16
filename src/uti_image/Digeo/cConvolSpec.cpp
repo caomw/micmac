@@ -214,7 +214,7 @@ cConvolSpec<Type>::cConvolSpec(tBase* aFilter,int aDeb,int aFin,int aNbShit,bool
 		mSym = false;
 	else{
 		for (int aK=1 ; aK<=aDeb; aK++){  // aK<=aFin ou le test est desactivé ?
-			if (ElAbs(mDataCoeff[aK]-mDataCoeff[-aK])>1e-6)
+			if (std::abs(mDataCoeff[aK]-mDataCoeff[-aK])>1e-6)
 			mSym = false;
 		}
 	}
@@ -239,7 +239,7 @@ bool cConvolSpec<Type>::Match(tBase *  aDFilter,int aDeb,int aFin,int  aNbShit,b
        return false;
 
   for (int aK=aDeb; aK<=aFin ; aK++)
-     if (ElAbs(mCoeffs[aK-aDeb]-aDFilter[aK]) >1e-4)
+     if (std::abs(mCoeffs[aK-aDeb]-aDFilter[aK]) >1e-4)
         return false;
 
   return true;

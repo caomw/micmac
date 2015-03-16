@@ -140,7 +140,7 @@ void cArgGetPtsTerrain::AddAGP
       mPds.push_back(aPds);
       if (mDoByIm && aVPose)
       {
-          int aNb = mSymDoByIm ? aVPose->size() : ElMin(1,int(aVPose->size()));
+          int aNb = mSymDoByIm ? aVPose->size() : std::min(1,int(aVPose->size()));
           for (int aK=0 ; aK<aNb ; aK++)
               (*aVPose)[aK]->AddPtsVu(aPts);
       }
@@ -583,7 +583,7 @@ cCompBascNonLin::cCompBascNonLin
           Pt3dr aCibl = aPt.PApres();
 
           // Pt3dr aVerif = (aCibl-aPCor) - (aModEr-aPEr);
-          double aVerif = ElAbs(euclid(aCibl-aPCor) - euclid(aModEr-aPEr)) / (euclid(aCibl));
+          double aVerif = std::abs(euclid(aCibl-aPCor) - euclid(aModEr-aPEr)) / (euclid(aCibl));
           ELISE_ASSERT(aVerif<1e-10,"cCompBascNonLin::cCompBascNonLin");
 
           std::cout << (aPt.UseForEstim() ? "* " : "  ")
@@ -1495,7 +1495,7 @@ cAVA_PtHS::cAVA_PtHS
 
 bool operator < (const cAVA_PtHS & aPH1,const cAVA_PtHS & aPH2)
 {
-   return ElAbs(aPH1.mDZ) >  ElAbs(aPH2.mDZ);
+   return std::abs(aPH1.mDZ) >  std::abs(aPH2.mDZ);
 }
 
     //-----------------
@@ -1540,7 +1540,7 @@ void cArgVerifAero::AddPImDZ
        mImPds.SetR(aPI,1.0+mImPds.GetR(aPI));
    }
 
-   if (ElAbs(aDZ) > mVA.SeuilTxt())
+   if (std::abs(aDZ) > mVA.SeuilTxt())
    {
       mPHS.push_back(cAVA_PtHS(aPIM,aDZ,aVPds,aPM));
    }
@@ -1758,7 +1758,7 @@ double  BSurH(const std::vector<ElSeg3D> & aVS,const std::vector<double>  * aVPd
            std::cout << "EC2 =" << aEc2 << "\n";
           ELISE_ASSERT(aEc2>-1e-7,"Singularity in cManipPt3TerInc::CalcPTerInterFaisceauCams ");
    }
-   aEc2 = sqrt(ElMax(0.0,aEc2) );
+   aEc2 = sqrt(std::max(0.0,aEc2) );
       // Adaptation purement heuristique
    return 1.35 * aEc2;
 
@@ -1823,7 +1823,7 @@ void  cAppliApero::BlocBasculeOneWay
                            {
                                 aVPts1.push_back(ElSeg3D::L2InterFaisceaux(0,aV1));
                                 aVPts2.push_back(ElSeg3D::L2InterFaisceaux(0,aV2));
-                                aBlc.mBsH.push_back(ElMin(aBH1,aBH2));
+                                aBlc.mBsH.push_back(std::min(aBH1,aBH2));
                                 aBlc.mSomInvNb += 1.0 / (aNb1+aNb2);
                            }
                       }

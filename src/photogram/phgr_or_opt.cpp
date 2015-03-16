@@ -351,7 +351,7 @@ for (INT aTest =0 ; aTest < 100 ; aTest ++)
     for (INT aK = 0 ; aK < NbVal() ; aK++)
     {
         ELISE_ASSERT(mMatrValP(aK,aK) != 0,"Jcobi ");
-        REAL Val = (mtBVecP(aK,0) /  ElAbs(mMatrValP(aK,aK)))  ;
+        REAL Val = (mtBVecP(aK,0) /  std::abs(mMatrValP(aK,aK)))  ;
 
 	REAL aRan = aR.cNRrandom3()  ;
 

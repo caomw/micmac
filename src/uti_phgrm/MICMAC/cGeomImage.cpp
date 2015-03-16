@@ -423,7 +423,7 @@ double cGeomImage::GetResolNonEuclidBySurfPixel() const
 
 // std::cout << aPMil << aQ0 << aQ0x << aQ0y << aSurfOr << "\n";
 
-   return sqrt(ElAbs(aSurfOr));
+   return sqrt(std::abs(aSurfOr));
 }
 
 double cGeomImage::GetResolMoyenne_Euclid() const
@@ -901,7 +901,7 @@ bool  cGeomImage::IntersectEmprTer
    aPMoyEmpr =  aSomP / aSomS;
    if (aSurf)
    {
-      *aSurf = ElAbs(aSomS);
+      *aSurf = std::abs(aSomS);
    }
 
 
@@ -914,7 +914,7 @@ bool  cGeomImage::IntersectEmprTer
    aPMoyEmpr = barrycentre(*(aContInter.begin()));
    if (aSurf)
    {
-      *aSurf = ElAbs(surf_or_poly(*(aContInter.begin())));
+      *aSurf = std::abs(surf_or_poly(*(aContInter.begin())));
    }
 */
    
@@ -958,7 +958,7 @@ double cGeomImage::BSurH
      Pt2dr aPTer2B = aGeo2.ImageAndPx2Obj_Euclid(aPIm2,aPxB);
 
 
-     double aRes = euclid(aPTer1B,aPTer2B) / ElAbs(aZA-aZB);
+     double aRes = euclid(aPTer1B,aPTer2B) / std::abs(aZA-aZB);
 
      return aRes;
 }
@@ -1519,7 +1519,7 @@ class cGeomImage_Terrain_Ori : public cGeomImage
        double GetResolMoyenne_NonEuclid() const 
        {
 // std::cout << "ORI RES " <<  mOri.resolution() << "\n";
-          //OO  return ElAbs(mOri.resolution());
+          //OO  return std::abs(mOri.resolution());
           if (mAnamSA|| mRC)
           {
               double aRes =  GetResolNonEuclidBySurfPixel();
@@ -1528,14 +1528,14 @@ class cGeomImage_Terrain_Ori : public cGeomImage
               Pt3dr aC = mOri->CentreOptique();
               Pt3dr aCa =  mAnam->E2UVL(aC);
 
-              double aR1 =  ElAbs(aCa.z) / mOri->Focale();
+              double aR1 =  std::abs(aCa.z) / mOri->Focale();
               double aR2 =  GetResolNonEuclidBySurfPixel();
               return aR1;
 */
               // std::cout << "aaaaaaaaaNNaa " << aCa << "\n";
           }
  // std::cout << "XXXXXXXXXXXX " << mOri->ResolutionPDVVerticale() << "\n"; getchar();
-          return ElAbs(mOri->ResolutionPDVVerticale());
+          return std::abs(mOri->ResolutionPDVVerticale());
        }
        void  RemplitOri(cFileOriMnt & aFOM) const
        {
@@ -1710,7 +1710,7 @@ double cGeomImage_Terrain_Ori::CalcIncidTerrain(Pt3dr aP3A)
           std::cout << "GGGG " << aNB0 << " " << aNB1 << "\n";
       }
 
-      return ElMin(aScalE,aScaleULV);
+      return std::min(aScalE,aScaleULV);
 }
 /*
 
@@ -1756,7 +1756,7 @@ void cGeomImage_Terrain_Ori::Init0MasqAnamSA()
 
       // double aEps = 1e-4 * mAnamSA->SignDZSensRayCam();
 
-      double aScalLim = ElMax(0.0,cos(ElMax(0.0,ElMin(PI/2,mAppli.AnamLimAngleVisib().Val()))));
+      double aScalLim = std::max(0.0,cos(std::max(0.0,std::min(PI/2,mAppli.AnamLimAngleVisib().Val()))));
       Pt2dr  aP0Ter (1e20,1e20);
       Pt2dr  aP1Ter (-1e20,-1e20);
 
@@ -1944,8 +1944,8 @@ void cGeomImage_Terrain_Ori::Init0MasqAnamSA()
                    && (aPIm.x <aSzImR1.x) && (aPIm.y <aSzImR1.y)
                   )
                {
-                  aTMt.oset(aP,ElMax(-127,ElMin(127,round_ni((aScal-aScalLim)*100))));
-                  mTIncidTerr.oset(aP,round_ni(acos(ElMax(-1.0,ElMin(1.0,aScal)))*mDynIncidTerr));
+                  aTMt.oset(aP,std::max(-127,std::min(127,round_ni((aScal-aScalLim)*100))));
+                  mTIncidTerr.oset(aP,round_ni(acos(std::max(-1.0,std::min(1.0,aScal)))*mDynIncidTerr));
                }
                else
                {
@@ -2569,7 +2569,7 @@ class cGeomImage_Faisceau : public cGeomImage_Id_Ori
        // Precaution anti singularite ou +infini devient - infini
       double Px2Prof(double aPax) const
       {
-         return 1.0 / ElMax(aPax,1e-5);
+         return 1.0 / std::max(aPax,1e-5);
       }
 
       bool  InstPostInitGen(bool UseDist)

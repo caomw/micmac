@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHGR_FORMEL_CROTATIONFORMELLE_H
 #define _ELISE_GENERAL_PHGR_FORMEL_CROTATIONFORMELLE_H
 
-#include "general/sys_dep.h"
+
 
 class cRotationFormelle : public cElemEqFormelle,
                           public cObjFormel2Destroy

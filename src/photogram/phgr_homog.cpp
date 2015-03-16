@@ -534,9 +534,9 @@ ElMatrix<REAL>  cElHomographie::MatCoordHom() const
 
 double  QuickDist(const Pt2dr & aPt)
 {
-   double aDx = ElAbs(aPt.x);
-   double aDy = ElAbs(aPt.y);
-   return   (aDx+aDy + ElMax(aDx,aDy))/ 2.0;
+   double aDx = std::abs(aPt.x);
+   double aDy = std::abs(aPt.y);
+   return   (aDx+aDy + std::max(aDx,aDy))/ 2.0;
 }
 
 void AddPair(ElPackHomologue & aPack,const std::pair<Pt2dr,Pt2dr> &aPair)
@@ -641,7 +641,7 @@ cElHomographie  cElHomographie::RobustInit(double * aQuality,const ElPackHomolog
 
    double aDMIn = 1e30;
    int aNbPts = aVAll.size();
-   int aNbKth = ElMax(1,ElMin(aNbPts-1,round_ni((aPerc/100.0) * aNbPts)));
+   int aNbKth = std::max(1,std::min(aNbPts-1,round_ni((aPerc/100.0) * aNbPts)));
    std::vector<double> aVDist;
 
    if (aNbMaxPts<aNbPtsTot)
@@ -672,9 +672,9 @@ cElHomographie  cElHomographie::RobustInit(double * aQuality,const ElPackHomolog
 
 /*
           Pt2dr aDif = aP2 -aSol.Direct(aP1);
-          double aDx = ElAbs(aDif.x);
-          double aDy = ElAbs(aDif.y);
-          double aDist =  (aDx+aDy + ElMax(aDx,aDy))/ 2.0;
+          double aDx = std::abs(aDif.x);
+          double aDy = std::abs(aDif.y);
+          double aDist =  (aDx+aDy + std::max(aDx,aDy))/ 2.0;
 */
           double aDist = QuickDist(aP2 -aSol.Direct(aP1));
           aVDist.push_back(aDist);

@@ -1,8 +1,6 @@
 #ifndef _ELISE_GENERAL_BITM_ELMATRIX_H
 #define _ELISE_GENERAL_BITM_ELMATRIX_H
 
-#include "general/sys_dep.h"
-
 #include <Pt3d>
 
 template <class Type>  class ElMatrix
@@ -88,14 +86,6 @@ template <class Type>  class ElMatrix
       void operator += (const ElMatrix<Type> & );
           Type Det() const;
           Type Trace() const;
-
-
-#if (STRICT_ANSI_FRIEND_TPL)
-          // friend ElMatrix<Type> operator * <Type> (const Type &,const ElMatrix<Type>&);
-#else
-          // friend ElMatrix<Type> operator * <Type> (const Type &,const ElMatrix<Type>&);
-#endif
-
 
 
           // equiv a this = m1 + m2, + efficace

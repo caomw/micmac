@@ -106,7 +106,7 @@ void cElHJaArrangt::ReInit(const std::vector<Pt2dr> & anEmprise)
      DeleteAndClear(mFacettes);
      mNbPl = 0;
      mStats.clear();
-     mSurfEmpr = ElAbs(surf_or_poly(mEmprVPt2d));
+     mSurfEmpr = std::abs(surf_or_poly(mEmprVPt2d));
 }
 
 void cElHJaArrangt::AddFacette(cElHJaFacette * aFac)
@@ -418,8 +418,8 @@ bool cElHJaArrangt::GetTheSolution(bool WithForcageSup,tBufFacette & aBuf)
         return false;
 
      SetAllFacSureIfPossible();
-     REAL aSInd = ElAbs(mStats.back().mSurfIndet);
-     REAL aResidu = ElAbs(mStats.back().mSurfSure-mSurfEmpr);
+     REAL aSInd = std::abs(mStats.back().mSurfIndet);
+     REAL aResidu = std::abs(mStats.back().mSurfSure-mSurfEmpr);
      if ((aSInd<ElHJAEpsilon)&&(aResidu<ElHJAEpsilon))
         return true;
 
@@ -427,8 +427,8 @@ bool cElHJaArrangt::GetTheSolution(bool WithForcageSup,tBufFacette & aBuf)
         return false;
 
      ForcageSup();
-     aSInd = ElAbs(mStats.back().mSurfIndet);
-     aResidu = ElAbs(mStats.back().mSurfSure-mSurfEmpr);
+     aSInd = std::abs(mStats.back().mSurfIndet);
+     aResidu = std::abs(mStats.back().mSurfSure-mSurfEmpr);
 
      return ((aSInd<ElHJAEpsilon)&&(aResidu<ElHJAEpsilon));
 }
@@ -598,7 +598,7 @@ void cElHJaArrangt::AddStatistique(REAL aSurf,const FBool & anEtat)
 
 REAL cElHJaArrangt::SurfResiduelle()
 {
-    return ElAbs(     mStats.back().mSurfSure
+    return std::abs(     mStats.back().mSurfSure
 		    + mStats.back().mSurfIndet
 		    -mSurfEmpr
 		);

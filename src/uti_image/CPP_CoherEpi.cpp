@@ -132,7 +132,7 @@ void cCEM_OneIm_Epip::UsePack(const ElPackHomologue & aPack)
 
          //std::cout << aQ2 - aP2 <<  " " << mTPx.getr(aP1,0) << "\n";
 
-         double aD = ElAbs(aQ2.x-aP2.x);
+         double aD = std::abs(aQ2.x-aP2.x);
          if (0) mWin->draw_circle_abs(aP1,3.0,mWin->pdisc()( (aD<0.5) ? P8COL::green : P8COL::red));
      }
 }
@@ -415,7 +415,7 @@ Im2D_U_INT1  cCEM_OneIm::ImAR()
            {
                double aRatio = euclid(Pt2dr(aPIm)-aQ) / aSigma;
                double aPds = 255/(1+aRatio);
-               aTRes.oset(aPIm,ElMin(255,round_ni(aPds)));
+               aTRes.oset(aPIm,std::min(255,round_ni(aPds)));
            }
        }
    }
@@ -1021,7 +1021,7 @@ void cCoherEpi_main::action(const  ElFifo<Pt2di> & aFil,bool ext)
         }
     }
     cOneContour aC;
-    aC.mSurf = ElAbs(surf_or_poly(aVSurf));
+    aC.mSurf = std::abs(surf_or_poly(aVSurf));
     aC.mExt  = ext;
     aC.mL    = aLCont;
     mConts.push_back(aC);

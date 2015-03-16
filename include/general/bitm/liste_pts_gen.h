@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_BITM_LISTE_PTS_GEN_H
 #define _ELISE_GENERAL_BITM_LISTE_PTS_GEN_H
 
-#include "general/sys_dep.h"
+
 
 class Liste_Pts_Gen :  public PRC0
 {

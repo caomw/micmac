@@ -42,7 +42,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 static double Cor2Cost(eModeDynamiqueCorrel aDyn,double aCorrel,double aCorrelMin,double aGamaCorr) 
 { 
 
-   aCorrel = ElMax(aCorrelMin,ElMin(1.0,aCorrel));
+   aCorrel = std::max(aCorrelMin,std::min(1.0,aCorrel));
 
    switch (aDyn) 
    {
@@ -168,9 +168,9 @@ REAL cStat1Distrib::CoeffCorrel3Dist
   aS23 = aS23/mNbV-aS2*aS3;
 
 
-  aS12 /= sqrt(ElMax(anEps,aS11*aS22));
-  aS13 /= sqrt(ElMax(anEps,aS11*aS33));
-  aS23 /= sqrt(ElMax(anEps,aS22*aS33));
+  aS12 /= sqrt(std::max(anEps,aS11*aS22));
+  aS13 /= sqrt(std::max(anEps,aS11*aS33));
+  aS23 /= sqrt(std::max(anEps,aS22*aS33));
 
   return (aS12+aS13+aS23) / 3.0;
 }
@@ -188,7 +188,7 @@ void cStat1Distrib::NormalizeM1M2(REAL anEps)
     }
     aS2 -= ElSquare(aS1)/mNbV;
     aS1 /= mNbV;
-    aS2 = sqrt(ElMax(aS2,anEps));
+    aS2 = sqrt(std::max(aS2,anEps));
     for (int aK=0; aK<mNbV ; aK++)
         mVals[aK] = (mVals[aK]-aS1)/aS2;
 }

@@ -756,7 +756,7 @@ void cChangeCamFormat::DoAll()
 
            if (aKet >= 3)
 	   {
-	      int aDegre =  ElMin(mDegRadOut,1+ (aKet-3)/3);
+	      int aDegre =  std::min(mDegRadOut,1+ (aKet-3)/3);
 	      mPIF_DR->SetDRFDegreFige(aDegre);
            }
 

@@ -170,7 +170,7 @@ Pack_Of_Pts::type_pack Pack_Of_Pts::type_common(type_pack t1,type_pack t2)
           "Bad odrder for type in Pack_Of_Pts"
     );
 
-    return (type_pack) ElMax((INT)t1,(INT)t2);
+    return (type_pack) std::max((INT)t1,(INT)t2);
 }
 
 
@@ -384,7 +384,7 @@ Flux_Pts Rectang_Object::all_pts()  const
 Flux_Pts Rectang_Object::interior(INT sz)  const
 {
       Elise_Rect r = box();
-      sz = ElAbs(sz);
+      sz = std::abs(sz);
       for (INT d=0 ; d<r._dim;d++)
       {
           r._p0[d] += sz;

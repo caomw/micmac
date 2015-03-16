@@ -1790,7 +1790,7 @@ Pt3dr  cPoseCam::AddObsCentre
        Pt3dr aResidu = mEqOffsetGPS->Residu(mObsCentre.mCentre);
        std::cout << "Lever Arm, Cam: " << mName << " Residual " << aResidu  << " LA: " <<  mEqOffsetGPS->Base()->ValueBase() << "\n";
        double aPdsP  = aPondPlani.PdsOfError(euclid(Pt2dr(aResidu.x,aResidu.y))/sqrt(2.));
-       double aPdsZ  = aPondAlti.PdsOfError(ElAbs(aResidu.z));
+       double aPdsZ  = aPondAlti.PdsOfError(std::abs(aResidu.z));
        return mEqOffsetGPS->AddObs(mObsCentre.mCentre,Pt3dr(aPdsP,aPdsP,aPdsZ));
    }
 
@@ -1801,7 +1801,7 @@ Pt3dr  cPoseCam::AddObsCentre
    Pt2dr aDifPlani(aDif.x,aDif.y);
 
    double aPdsP  = aPondPlani.PdsOfError(euclid(aDifPlani)/sqrt(2.));
-   double aPdsZ  = aPondAlti.PdsOfError(ElAbs(aDif.z));
+   double aPdsZ  = aPondAlti.PdsOfError(std::abs(aDif.z));
 
    Pt3dr aPPds = aSO.AddEq() ? Pt3dr(aPdsP,aPdsP,aPdsZ) : Pt3dr(0,0,0) ; 
    Pt3dr aRAC = mRF->AddRappOnCentre(mObsCentre.mCentre,aPPds ,false);

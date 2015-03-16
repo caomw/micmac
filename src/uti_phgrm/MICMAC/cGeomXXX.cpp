@@ -256,12 +256,12 @@ void cAppliMICMAC::AddPrecisionOfArrondi(const cDecimal & aDec, double aVal)
 {
    long int anI = lround_ni( ((long double) aVal)  / ((long double) aDec.RVal())  );
 
-   int aP = round_up(log10((long double)(1.+anI))) +  round_up(ElAbs(log10((long double)(1.+aDec.Mant()))));
+   int aP = round_up(log10((long double)(1.+anI))) +  round_up(std::abs(log10((long double)(1.+aDec.Mant()))));
    UpdatePrecision(aP);
 }
 void cAppliMICMAC::AddPrecisionOfDec(const cDecimal & aDec,double aZ)
 {
-   int aP = round_up(ElAbs(log10((long double)(1.+aDec.Mant())))) + round_up(ElAbs(log10(aZ)));
+   int aP = round_up(std::abs(log10((long double)(1.+aDec.Mant())))) + round_up(std::abs(log10(aZ)));
    UpdatePrecision(aP);
 }
 
@@ -416,12 +416,12 @@ void cGeomDiscFPx::PostInit()
   SetResol(mResol,mAp->GeoRefAutoRoundResol().ValWithDef(mAp->GeomMNT()==eGeomMNTEuclid)) ;
   if (aFileExt)
   {
-       SetUnroundResol(ElAbs(aFileExt->ResolutionPlani().x));
-       // mResol = ElAbs(aFileExt->ResolutionPlani().x);
+       SetUnroundResol(std::abs(aFileExt->ResolutionPlani().x));
+       // mResol = std::abs(aFileExt->ResolutionPlani().x);
        //  Attention -(-x) != x  avec les flottant 
        ELISE_ASSERT
        (
-            ElAbs(mResol- ElAbs(aFileExt->ResolutionPlani().y)) < (1e-8 * mResol),
+            std::abs(mResol- std::abs(aFileExt->ResolutionPlani().y)) < (1e-8 * mResol),
            "Resol incoherente in FileOriMnt::ResolutionAlti"
        );
   }
@@ -488,7 +488,7 @@ void cGeomDiscFPx::PostInit()
              "Impossible de determiner la paralaxe moyenne"
          );
      }
-     mEcPxInit[0] = mAp->Px1IncCalc() + mAp->Px1PropProf().Val() * ElAbs(mV0Px[0]);
+     mEcPxInit[0] = mAp->Px1IncCalc() + mAp->Px1PropProf().Val() * std::abs(mV0Px[0]);
      mEcPxInit[1] = mAp->Px2IncCalc().ValWithDef(0);
 
 
@@ -562,7 +562,7 @@ void cGeomDiscFPx::PostInit()
           ELISE_ASSERT(aNbCentreGot,"Cannot get Centre with ZIncIsProp");
           Pt3dr aC = aCentre/double(aNbCentreGot);
 
-          double aDistSol = ElAbs(aC.z-mV0Px[0]);
+          double aDistSol = std::abs(aC.z-mV0Px[0]);
           mEcPxInit[0]  *= aDistSol ;
      }
 
@@ -578,7 +578,7 @@ void cGeomDiscFPx::PostInit()
   {
            ELISE_ASSERT(aNbCentreGot,"aNbCentreGot in GeomMNTFaisceauIm1ZTerrain");
            Pt3dr aC = aCentre/double(aNbCentreGot);
-           mEcPxInit[0] *= ElAbs(mV0Px[0]-aC.z);
+           mEcPxInit[0] *= std::abs(mV0Px[0]-aC.z);
   }
 
 
@@ -705,10 +705,10 @@ if ( 0 )
                          Pt2dr( -cVraiSecXMax.Sec(),-cVraiSecYMax.Sec())
                     );
 		    /*
-  double  aLarg = ElMin
+  double  aLarg = std::min
                   (
-		      ElAbs(aVraiBox._p0.x-aVraiBox._p1.x),
-		      ElAbs(aVraiBox._p0.y-aVraiBox._p1.y)
+		      std::abs(aVraiBox._p0.x-aVraiBox._p1.x),
+		      std::abs(aVraiBox._p0.y-aVraiBox._p1.y)
                   );
   */
   mBoxEngl = Box2dr
@@ -1113,8 +1113,8 @@ void cLineariseProj::InitLP
       Pt2dr aRasPCTer = (Pt2dr(aRBT._p0)+Pt2dr(aRBT._p1))/2.0;
 
       REAL aPas = 0.33;
-      REAL amplX = ElMax(0.5,double(aRBT._p1.x - aRBT._p0.x));
-      REAL amplY = ElMax(0.5,double(aRBT._p1.y - aRBT._p0.y));
+      REAL amplX = std::max(0.5,double(aRBT._p1.x - aRBT._p0.x));
+      REAL amplY = std::max(0.5,double(aRBT._p1.y - aRBT._p0.y));
       REAL aPasX  = amplX * aPas;
       REAL aPasY  = amplY * aPas;
 

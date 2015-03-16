@@ -196,8 +196,8 @@ cHomogFormelle&    cEqOneHomogFormelle::HF() {return mHF;}
 REAL cEqOneHomogFormelle::AddLiaisonP1P2(Pt2dr aP1,Pt2dr aP2,REAL aPds,bool WithD2)
 {
   return
-       ElAbs(pFEqX->AddLiaisonP1P2(aP1,aP2,aPds,WithD2)) +
-       ElAbs(pFEqY->AddLiaisonP1P2(aP1,aP2,aPds,WithD2)) ;
+       std::abs(pFEqX->AddLiaisonP1P2(aP1,aP2,aPds,WithD2)) +
+       std::abs(pFEqY->AddLiaisonP1P2(aP1,aP2,aPds,WithD2)) ;
 }
 
 Pt2dr cEqOneHomogFormelle::StdAddLiaisonP1P2(Pt2dr aP1,Pt2dr aP2,REAL aPds,bool WithD2)
@@ -211,8 +211,8 @@ Pt2dr cEqOneHomogFormelle::StdAddLiaisonP1P2(Pt2dr aP1,Pt2dr aP2,REAL aPds,bool 
 
 REAL cEqOneHomogFormelle::ResiduNonSigneP1P2(Pt2dr aP1,Pt2dr aP2)
 {
-   return   ElAbs(pFEqX->ResiduSigneP1P2(aP1,aP2))
-          + ElAbs(pFEqY->ResiduSigneP1P2(aP1,aP2));
+   return   std::abs(pFEqX->ResiduSigneP1P2(aP1,aP2))
+          + std::abs(pFEqY->ResiduSigneP1P2(aP1,aP2));
 }
 
 Pt2dr  cEqOneHomogFormelle::PtResidu(Pt2dr aP1,Pt2dr aP2)
@@ -531,8 +531,8 @@ Pt2d<Fonc_Num> cEqHomogFormelle::ComposeDRF (Pt2d<Fonc_Num> aP)
 REAL cEqHomogFormelle::AddLiaisonP1P2(Pt2dr aP1,Pt2dr aP2,REAL aPds,bool WithD2)
 {
   return
-       ElAbs(pFEqX->AddLiaisonP1P2(aP1,aP2,aPds,WithD2)) +
-       ElAbs(pFEqY->AddLiaisonP1P2(aP1,aP2,aPds,WithD2)) ;
+       std::abs(pFEqX->AddLiaisonP1P2(aP1,aP2,aPds,WithD2)) +
+       std::abs(pFEqY->AddLiaisonP1P2(aP1,aP2,aPds,WithD2)) ;
 }
 
 Pt2dr cEqHomogFormelle::StdAddLiaisonP1P2(Pt2dr aP1,Pt2dr aP2,REAL aPds,bool WithD2)
@@ -546,8 +546,8 @@ Pt2dr cEqHomogFormelle::StdAddLiaisonP1P2(Pt2dr aP1,Pt2dr aP2,REAL aPds,bool Wit
 
 REAL cEqHomogFormelle::ResiduNonSigneP1P2(Pt2dr aP1,Pt2dr aP2)
 {
-   return   ElAbs(pFEqX->ResiduSigneP1P2(aP1,aP2))
-          + ElAbs(pFEqY->ResiduSigneP1P2(aP1,aP2));
+   return   std::abs(pFEqX->ResiduSigneP1P2(aP1,aP2))
+          + std::abs(pFEqY->ResiduSigneP1P2(aP1,aP2));
 }
 
 Pt2dr  cEqHomogFormelle::PtResidu(Pt2dr aP1,Pt2dr aP2)
@@ -710,7 +710,7 @@ REAL cLEqHomOneDist::AddAllEquationsToSet()
         )
         {
            REAL Ecart = pEq->AddLiaisonP1P2(it->P1(),it->P2(),it->Pds(),mDerSec) ;
-           Res += ElAbs(Ecart);
+           Res += std::abs(Ecart);
            Cpt ++;
         }
    }

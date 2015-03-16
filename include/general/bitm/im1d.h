@@ -1,11 +1,10 @@
 #ifndef _ELISE_GENERAL_BITM_IM1D_H
 #define _ELISE_GENERAL_BITM_IM1D_H
 
-#include "general/sys_dep.h"
-
 #include <GenIm>
 
-template <class Type,class TyBase> class Im1D : public GenIm
+template <class Type,class TyBase>
+class Im1D : public GenIm
 {
    public :
       Type At(int aK) const;

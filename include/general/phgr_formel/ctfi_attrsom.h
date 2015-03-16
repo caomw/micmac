@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHGR_FORMEL_CTFI_ATTRSOM_H
 #define _ELISE_GENERAL_PHGR_FORMEL_CTFI_ATTRSOM_H
 
-#include "general/sys_dep.h"
+
 
 class  cTFI_AttrSom
 {

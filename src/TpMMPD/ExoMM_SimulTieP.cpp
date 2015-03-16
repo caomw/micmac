@@ -130,10 +130,10 @@ cAppliSimulTieP::cAppliSimulTieP(int argc, char** argv):    // cAppliWithSetImag
 
     for (int anX0 = 0 ; anX0 <mSzMNT.x ; anX0+=aStep)
     {
-       int anX1 = ElMin(anX0+aStep,mSzMNT.x);            // ElMin(a,b) to pick the lowest -> to avoid to pick point outside of the DSM
+       int anX1 = std::min(anX0+aStep,mSzMNT.x);            // std::min(a,b) to pick the lowest -> to avoid to pick point outside of the DSM
        for (int anY0 = 0 ; anY0 <mSzMNT.y ; anY0 +=aStep)       // [anX0,anY0] = lower left corner of the box
        {
-           int anY1 = ElMin(anY0+aStep,mSzMNT.y);               // [anX1,anY1] = upper right corner of the box
+           int anY1 = std::min(anY0+aStep,mSzMNT.y);               // [anX1,anY1] = upper right corner of the box
            Box2di aBox(Pt2di(anX0,anY0),Pt2di(anX1,anY1));
            Pt2di  aPRan = round_ni(aBox.RandomlyGenereInside());        // randomly pick a point in the box
            if (mMNT->IndexHasContenu(aPRan))             // if there is a point in the DSM at that place
@@ -157,7 +157,7 @@ cAppliSimulTieP::cAppliSimulTieP(int argc, char** argv):    // cAppliWithSetImag
                {
                   cCmpPtrI aCmp;
                   std::sort(aVSel.begin(),aVSel.end(),aCmp);    // order the list of images (in which the point is seen) by their rank (random order)
-                  int aNbMul = ElMax(2,round_ni(aMultMax * ElSquare(NRrandom3())));
+                  int aNbMul = std::max(2,round_ni(aMultMax * ElSquare(NRrandom3())));
                   while (int(aVSel.size()) > aNbMul) aVSel.pop_back();      // if the point is seen in too many images, reduce the list
                   std::cout << "MULTIPLICITE " << aNbOk << " =>" << aVSel.size()<< "\n";
                   for (int aK1=0 ; aK1<int(aVSel.size()) ; aK1++)

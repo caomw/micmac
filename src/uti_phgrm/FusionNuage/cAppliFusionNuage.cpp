@@ -149,7 +149,7 @@ cAppliFusionNuage::cAppliFusionNuage
 tFNuArc * cAppliFusionNuage::TestNewAndSet(tFNuSom *aS1,tFNuSom *aS2)
 {
    if (aS1==aS2) return 0;
-   if (aS2>aS1) ElSwap(aS1,aS2);
+   if (aS2>aS1) std::swap(aS1,aS2);
 
    std::pair<tFNuSom *,tFNuSom *>  aPair(aS1,aS2);
 

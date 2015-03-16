@@ -496,8 +496,8 @@ void cAppli_Ori_Txt2Xml_main::CalcVitesse()
    for (int aK= 0 ; aK<mNbCam ; aK++)
    {
         cTxtCam * aCam = mVCam[aK];
-        int aKPrec = ElMax(0,aK-1);
-        int aKNext = ElMin(mNbCam-1,aK+1);
+        int aKPrec = std::max(0,aK-1);
+        int aKNext = std::min(mNbCam-1,aK+1);
 
         aVSom.push_back(&mGr.new_som(cAttrHypSomV(aCam,VitesseIndice(aK,aKNext),(aKNext!=aK) ,eDebTraj)));
         aVSom.push_back(&mGr.new_som(cAttrHypSomV(aCam,VitesseIndice(aKPrec,aKNext),(aKPrec!=aK) && (aKNext!=aK),eMilTraj)));
@@ -1187,7 +1187,7 @@ void cAppli_Ori_Txt2Xml_main::CalcImCenter()
 {
     if (mCamC==0) return;
 
-    mNbImC = ElMin(mNbImC,mNbCam);
+    mNbImC = std::min(mNbImC,mNbCam);
 
     for (int aK1=0 ; aK1<mNbCam ; aK1++)
     {
@@ -1251,8 +1251,8 @@ void cAppli_Ori_Txt2Xml_main::SauvRel()
    {
        for (int aK1 = 0 ; aK1<int(mVCam.size()) ; aK1++)
        {
-           int aK2Min = ElMax(0,aK1-mLine);
-           int aK2Max = ElMin(int(mVCam.size())-1,aK1+mLine);
+           int aK2Min = std::max(0,aK1-mLine);
+           int aK2Max = std::min(int(mVCam.size())-1,aK1+mLine);
            for (int aK2=aK2Min ; aK2<aK2Max ; aK2++)
            {
                 if (aK1 != aK2)
@@ -1369,13 +1369,13 @@ void cAppli_Ori_Txt2Xml_main::GenerateOrientInit()
               int aMinNb=1000000000;
               for (int aKA=0 ; aKA<aF.nb() ; aKA++)
               {
-                  aMinNb = ElMin3(aMinNb,aF[aKA]->attr().mNbPts,aF[aKA]->arc_rec().attr().mNbPts);
+                  aMinNb = std::min3(aMinNb,aF[aKA]->attr().mNbPts,aF[aKA]->arc_rec().attr().mNbPts);
                   Pt3dr aP = aF[aKA]->s1().attr().mCam->mC;
 
                   aPolyg.push_back(Pt2dr(aP.x,aP.y));
               }
 
-              aVF.push_back(cFaceOrC(aF,aMinNb* ElAbs(surf_or_poly(aPolyg))));
+              aVF.push_back(cFaceOrC(aF,aMinNb* std::abs(surf_or_poly(aPolyg))));
          }
    }
    std::sort(aVF.begin(),aVF.end());
@@ -1528,7 +1528,7 @@ Pt3dr TestInvAngles(eConventionsOrientation aEnumConv,ElMatrix<double>  aMat)
      AngleFromRot(aMat,teta[0],teta[1],teta[2]);
      teta[1] *= -1;
      teta[2] *= -1;
-     ElSwap(teta[0],teta[2]);
+     std::swap(teta[0],teta[2]);
    }
 
    for (int aK=0 ; aK<3 ; aK++)

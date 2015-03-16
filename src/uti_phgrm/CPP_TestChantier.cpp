@@ -125,7 +125,7 @@ double CamFOV(CamStenope * aCam,const Pt2dr aP0)
 double CamFOV(CamStenope * aCam)
 {
     Pt2dr aSz = Pt2dr(aCam->Sz());
-    return ElMax(CamFOV(aCam,Pt2dr(0,0)),CamFOV(aCam,Pt2dr(aSz.x,0)));
+    return std::max(CamFOV(aCam,Pt2dr(0,0)),CamFOV(aCam,Pt2dr(aSz.x,0)));
 }
 
 

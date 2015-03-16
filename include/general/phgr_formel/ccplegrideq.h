@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHGR_FORMEL_CCPLEGRIDEQ_H
 #define _ELISE_GENERAL_PHGR_FORMEL_CCPLEGRIDEQ_H
 
-#include "general/sys_dep.h"
+
 
 class cCpleGridEq : public cNameSpaceEqF,
                     public cSignedEqFPtLiaison,

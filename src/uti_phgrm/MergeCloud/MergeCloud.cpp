@@ -191,7 +191,7 @@ std::cout << "CCcccccccccccc\n";
        for (tArcIter itA = aS1->begin(mSubGrAll) ; itA.go_on() ; itA++)
        {
             int aNiv2 =  (*itA).s2().attr()->MaxNivH();
-            int aNiv = ElMin(aNiv1,aNiv2);
+            int aNiv = std::min(aNiv1,aNiv2);
             double aRec = (*itA).attr()->Rec();
             mVStatNivs[aNiv].mRecTot += aRec;
        }
@@ -224,7 +224,7 @@ std::cout << "CCcccccccccccc\n";
    
 
 
-   int aNivMin = ElMin(eQC_Coh1,eQC_GradFaibleC2);
+   int aNivMin = std::min(eQC_Coh1,eQC_GradFaibleC2);
    if (mModeMerge ==eStatue)
    {
 /*
@@ -243,7 +243,7 @@ std::cout << "CCcccccccccccc\n";
    for (mCurNivSelSom=mGlobMaxNivH ; mCurNivSelSom>=aNivMin ; mCurNivSelSom--)
    {
        std::cout << "BEGIN NIV " <<  mCurNivSelSom << " " << eToString(eQualCloud(mCurNivSelSom)) << "\n"; 
-       mCurNivElim = ElMin(mCurNivSelSom,int(eQC_Coh2));
+       mCurNivElim = std::min(mCurNivSelSom,int(eQC_Coh2));
        OneStepSelection();
        std::cout << "END NIV " << mCurNivSelSom << "\n"; 
    }
@@ -357,7 +357,7 @@ Video_Win *  cAppliMergeCloud::TheWinIm(const cASAMG * anAS)
        Pt2di aSzW = mParam.SzVisu().Val();
        double aRx = aSzW.x / double(aSzIm.x);
        double aRy = aSzW.y / double(aSzIm.y);
-       mRatioW = ElMin(aRx,aRy);
+       mRatioW = std::min(aRx,aRy);
        aSzW = round_ni(Pt2dr(aSzIm)*mRatioW);
 
        mTheWinIm = Video_Win::PtrWStd(aSzW,true,Pt2dr(mRatioW,mRatioW));

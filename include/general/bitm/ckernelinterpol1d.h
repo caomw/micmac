@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_BITM_CKERNELintERPOL1D_H
 #define _ELISE_GENERAL_BITM_CKERNELintERPOL1D_H
 
-#include "general/sys_dep.h"
+
 
 class cKernelInterpol1D
 {

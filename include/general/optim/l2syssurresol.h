@@ -42,8 +42,6 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_OPTIM_L2SYSSURRESOL_H
 #define _ELISE_GENERAL_OPTIM_L2SYSSURRESOL_H
 
-#include "general/sys_dep.h"
-
 class L2SysSurResol : public cGenSysSurResol
 {
      public :

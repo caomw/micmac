@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CNUPLETPTSHOMOLOGUES_H
 #define _ELISE_GENERAL_PHOTOGRAM_CNUPLETPTSHOMOLOGUES_H
 
-#include "general/sys_dep.h"
+
 
 class cNupletPtsHomologues
 {

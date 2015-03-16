@@ -141,7 +141,7 @@ class cAppliCmpCal
              mP0    (Inf(mGr1.P0(), mGr2.P0())),
              mP1    (Inf(mGr1.P1(), mGr2.P1())),
              mSz     (mP1-mP0),
-             mRatioW (aSzW/ElMax(mSz.x,mSz.y)),
+             mRatioW (aSzW/std::max(mSz.x,mSz.y)),
 
              mBox    (mP0,mP1),
              mMil    (mBox.milieu()),
@@ -259,7 +259,7 @@ void cAppliCmpCal::OneItere(bool First,bool Last)
        fprintf(aFP," Rayon   Ecart\n");
        for( double aR = 0 ; aR<(mRay+aStep) ; aR+= aStep)
        {
-           double aRM = ElMin(aR,mRay-10.0);
+           double aRM = std::min(aR,mRay-10.0);
            double EC =  EcartFromRay(aRM);
            std::cout << "Ray=" << aRM
                      << " ; Ecart=" << EC << "\n";

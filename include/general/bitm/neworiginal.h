@@ -115,28 +115,6 @@ class Im2D_NoDataLin{};
 */
 
 
-typedef Im2D<U_int1,int>  Im2D_U_int1;
-typedef Im2D<int1,int>    Im2D_int1;
-typedef Im2D<U_int2,int>  Im2D_U_int2;
-typedef Im2D<int2,int>    Im2D_int2;
-typedef Im2D<int4,int>    Im2D_int4;
-
-typedef Im2D<double_t4,double_t>  Im2D_double_t4;
-typedef Im2D<double_t8,double_t>  Im2D_double_t8;
-typedef Im2D<double_t16,double_t16> Im2D_double_t16;
-
-
-
-
-typedef Im2D_Bits<1>	  Im2D_BIN;
-
-
-
-
-Im2D_Bits<1> ReducCentered(Im2D_Bits<1>);
-Im2D_Bits<1> MasqForInterpole(Im2D_Bits<1> aMasqInInit,eModeInterp aMode);
-
-
 
 GenIm alloc_im1d(GenIm::type_el type_el,int tx,void * data);
 

@@ -41,6 +41,8 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_FIFO_ELFIFO_H
 #define _ELISE_GENERAL_FIFO_ELFIFO_H
 
+#include <micmac_global.h>
+
 template <class Type> class ElFifo
 {
      protected :

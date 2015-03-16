@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_BITM_PTIMGRID_H
 #define _ELISE_GENERAL_BITM_PTIMGRID_H
 
-#include "general/sys_dep.h"
+
 
 class PtImGrid
 {

@@ -128,7 +128,7 @@ void cAppliApero::ExportCalib(const cExportCalib & anEC)
                   if (aR<0)
                       aR = aCC->RayonMax();
                   else
-                     aR = ElMin(aR,aCC->RayonMax());
+                     aR = std::min(aR,aCC->RayonMax());
                }
                aCS = cCamStenopeGrid::Alloc(aR,*aCS,anEANG.Step());
            }

@@ -257,7 +257,7 @@ void Data_Param_Plot_1d::plot(REAL * x, REAL *y,INT nb_pts)
           scy = (l_interv * (1-_ori_y)) / max_y;
        }
        if (min_y < 0)
-          scy = ElMin(scy,(l_interv * _ori_y) /(- min_y));
+          scy = std::min(scy,(l_interv * _ori_y) /(- min_y));
 
 
        if (scy != DBL_MAX)
@@ -311,7 +311,7 @@ void Data_Param_Plot_1d::plot(REAL * x, REAL *y,INT nb_pts)
                   for (INT k=0 ; k<nb_pts ; k++)
                   {
                       REAL yr = (clip_y)                                    ?
-                                ElMax(_y_interv._v0,ElMin(_y_interv._v1,y[k]))  :
+                                std::max(_y_interv._v0,std::min(_y_interv._v1,y[k]))  :
                                 y[k]                                        ;
                       Pt2dr p0 = Pt2dr(x[k]-0.5,yr);
                       Pt2dr p1 = Pt2dr(x[k]+0.5,0.0);
@@ -332,7 +332,7 @@ void Data_Param_Plot_1d::plot(REAL * x, REAL *y,INT nb_pts)
             for (INT k=0 ; k<nb_pts ; k++)
             {
                 REAL yr = (clip_y)                                    ?
-                          ElMax(_y_interv._v0,ElMin(_y_interv._v1,y[k]))  :
+                          std::max(_y_interv._v0,std::min(_y_interv._v1,y[k]))  :
                           y[k]                                        ;
                 Pt2dr p0 = Pt2dr(x[k],yr);
                 Pt2dr p1 = Pt2dr(x[k],0.0);

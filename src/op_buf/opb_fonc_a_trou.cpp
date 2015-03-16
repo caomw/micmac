@@ -192,7 +192,7 @@ template <class Type>
         convert
         (
              output[d]+x0(),
-             input[ElMin(d,dim_in()-1)][0]+x0(),
+             input[std::min(d,dim_in()-1)][0]+x0(),
              tx()
         );
     }

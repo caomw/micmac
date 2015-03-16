@@ -357,7 +357,7 @@ void BenchEpipole0
         Pt2dr anEpi1 = anEPI1.Direct(aQ1);
         Pt2dr anEpi2 = anEPI2.Direct(aQ2);
 
-        REAL  aDifEpi = ElAbs(anEpi1.y - anEpi2.y);
+        REAL  aDifEpi = std::abs(anEpi1.y - anEpi2.y);
         BENCH_ASSERT(aDifEpi<anEcartMax);
     }
 
@@ -472,8 +472,8 @@ void BenchCalcEpipoleAutom()
 
 	Pt2dr Ok1 =  (A1-B1) / anEpi1 ;
 	Pt2dr Ok2 =  (A2-B2) / anEpi2 ;
-	BENCH_ASSERT(ElAbs(Ok1.y)<epsilon);
-	BENCH_ASSERT(ElAbs(Ok2.y)<epsilon);
+	BENCH_ASSERT(std::abs(Ok1.y)<epsilon);
+	BENCH_ASSERT(std::abs(Ok2.y)<epsilon);
     }
 
 

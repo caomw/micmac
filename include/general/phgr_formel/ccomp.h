@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHGR_FORMEL_CHOMOGFORMELLE_H
 #define _ELISE_GENERAL_PHGR_FORMEL_CHOMOGFORMELLE_H
 
-#include "general/sys_dep.h"
+
 
 class cHomogFormelle : public cElemEqFormelle,
                        public cObjFormel2Destroy
@@ -24,7 +24,7 @@ class cHomogFormelle : public cElemEqFormelle,
 #ifndef _ELISE_GENERAL_PHGR_FORMEL_CCOMP_H
 #define _ELISE_GENERAL_PHGR_FORMEL_CCOMP_H
 
-#include "general/sys_dep.h"
+
 
             class cComp
             {

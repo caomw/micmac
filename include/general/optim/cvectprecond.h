@@ -42,15 +42,13 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_OPTIM_CVECTPRECOND_H
 #define _ELISE_GENERAL_OPTIM_CVECTPRECOND_H
 
-#include "general/sys_dep.h"
-
 #include <Im1D>
 
 // Meme classe a priori que cVectMatMul, mais comme les matrice doivent en heriter deux fois ....
 class cVectPreCond
 {
 public :
-    virtual void VPCDo(Im1D_double_t8 in,Im1D_double_t8 out) = 0;
+    virtual void VPCDo(Im1D_REAL8 in,Im1D_REAL8 out) = 0;
     virtual ~cVectPreCond();
 };
 

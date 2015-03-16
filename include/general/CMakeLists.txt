@@ -12,4 +12,5 @@ include_directories(
 	garb_coll_pub
 	operator
 	util
+	colour
 	)

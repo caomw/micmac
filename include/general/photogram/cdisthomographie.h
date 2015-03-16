@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CDISTHOMOGRAPHIE_H
 #define _ELISE_GENERAL_PHOTOGRAM_CDISTHOMOGRAPHIE_H
 
-#include "general/sys_dep.h"
+
 
 class cDistHomographie : public  ElDistortion22_Gen
 {

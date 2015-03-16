@@ -183,9 +183,9 @@ double GainAngle(double A,double Opt)
 {
    A /= Opt;
    if (A <= 1)
-      return pow(ElAbs(2*A - A*A),1.0);
+      return pow(std::abs(2*A - A*A),1.0);
 
-   return  1 / (1+ 2*pow(ElAbs(A-1),3));
+   return  1 / (1+ 2*pow(std::abs(A-1),3));
 }
 
 
@@ -205,10 +205,10 @@ double OrthogBase(cPoseCam* aPC1,cPoseCam* aPC2)
 
     aB12 = aB12 / aD;
 
-    double aS1 = ElAbs(scal(aB12,aCS1.DirK()));
-    double aS2 = ElAbs(scal(aB12,aCS2.DirK()));
+    double aS1 = std::abs(scal(aB12,aCS1.DirK()));
+    double aS2 = std::abs(scal(aB12,aCS2.DirK()));
 
-     return ElMax(aS1,aS2);
+     return std::max(aS1,aS2);
     
 }
 
@@ -319,7 +319,7 @@ void  cAppliApero::ExportImSecMM(const cChoixImMM & aCIM,cPoseCam* aPC0)
         {
              Pt2dr aDirT = Pt2dr::FromPolar(1.0,(2*PI*aKTeta) / aNbTeta);
              Pt2dr aDirLoc = aDirT / aPC->MMDir2D();
-             double aDifTeta = ElAbs(angle(aDirLoc));
+             double aDifTeta = std::abs(angle(aDirLoc));
              double aGain = 0.0;
              if (aDifTeta < aTeta0)
                 aGain = 1.0;
@@ -347,7 +347,7 @@ void  cAppliApero::ExportImSecMM(const cChoixImMM & aCIM,cPoseCam* aPC0)
 
     aISM.Master() = aPC0->Name();
     // ON TESTE LES SUBSET 
-    for (int aCard=1 ; aCard< ElMin(aNbIm+1, 1+aCIM.CardMaxSub().Val()) ; aCard++)
+    for (int aCard=1 ; aCard< std::min(aNbIm+1, 1+aCIM.CardMaxSub().Val()) ; aCard++)
     {
          // On selectionne a cardinal donne, les subset qui couvrent l'ensemble des directions
          std::vector<std::vector<int> > aSubSub;

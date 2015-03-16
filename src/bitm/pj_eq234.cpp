@@ -44,16 +44,16 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 
 // Pourquoi CAS n'est pas mise a jour dans RacinesPolyneDegre2Reel
-// Pourquoi  if (b<=0) ElSwap
+// Pourquoi  if (b<=0) std::swap
 // Pourquoi utiliser produit des racine  et pas somme
 //  CAS non initialise dans EQ2
 
 
 // Dans Degre 4 : R=AMINU4-B*A3+B2*AMINU2-3D0*B4  !!
 // Dans Degre 4 : R=AMINU4-B*AMINU3+B2*AMINU2-3D0*B4  serait plus OK ?
-// Dans Degre 3 : cas des racines triples, => if (ElAbs(r)< 1e-15)
+// Dans Degre 3 : cas des racines triples, => if (std::abs(r)< 1e-15)
 
-// Dans degre 4, cas des equation quasi bicarre => if (ElAbs(Q)< 1e-10)
+// Dans degre 4, cas des equation quasi bicarre => if (std::abs(Q)< 1e-10)
 // Solution , avec un coup de Newton sur la racine de Deg 3
 
 
@@ -116,8 +116,8 @@ void RacineCarreesComplexe (Pt2dr X,Pt2dr &A1,Pt2dr &A2)
 
     A1 = Pt2dr
 	  (
-	        sqrt(ElAbs(R+X.x)/2.0),
-		DSign( sqrt(ElAbs(R-X.x)/2.0),X.y)
+	        sqrt(std::abs(R+X.x)/2.0),
+		DSign( sqrt(std::abs(R-X.x)/2.0),X.y)
 	  );
     A2 = -A1;
 }
@@ -154,7 +154,7 @@ void RacinesPolyneDegre3Reel
 
      REAL r = q*q/4.0 + ppp/27.0;
 
-     if (ElAbs(r)< 1e-15)
+     if (std::abs(r)< 1e-15)
      {
          CAS = 0;
 //	 REAL S1 = cbrt(-q/2.0);
@@ -252,7 +252,7 @@ CPT++;
      REAL Q = aM3-2*B*aM2+8*B3;
      REAL R = aM4-B*aM3+B2*aM2-3*B4;
      // REAL R = aM4-B*A3+B2*aM2-3*B4;
-     if (ElAbs(Q)< 1e-10)
+     if (std::abs(Q)< 1e-10)
      {
          Pt2dr R1,R2;
          RacinesPolyneDegre2Reel(1.0,P,R,CAS,R1,R2);
@@ -279,10 +279,10 @@ CPT++;
 	 else
 	 {
             if (BUG) std::cout << "Yi " << Y1 << Y2 << Y3 << "\n";
-            Y =   ElMax(Y1.x,ElMax(Y2.x,Y3.x));
+            Y =   std::max(Y1.x,std::max(Y2.x,Y3.x));
 	 }
 
-	 if ((ElAbs(Q)<1e-3) && ((CAS==1) || ((Y2.x<0) && (Y3.x))))
+	 if ((std::abs(Q)<1e-3) && ((CAS==1) || ((Y2.x<0) && (Y3.x))))
 	 {
 		    REAL Y2 = Y * Y;
 		    REAL Y3 = Y2* Y;

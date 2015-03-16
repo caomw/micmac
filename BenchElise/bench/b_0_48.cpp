@@ -153,7 +153,7 @@ void Optim_L1FormLin::BenchRand(INT NbVar,INT NbForm,INT NbTest,bool Comb)
 
    for (;NbTest>=0; NbTest --)
    {
-      REAL eps = ElMax(1e-3,0.2*ElSquare(NRrandom3()));
+      REAL eps = std::max(1e-3,0.2*ElSquare(NRrandom3()));
       ElMatrix<REAL>  D = Sol;
       for (INT k=0 ; k<NbVar ; k++)
           D(0,k) += eps * (NRrandom3()-0.5);
@@ -167,7 +167,7 @@ void Optim_L1FormLin::BenchRand(INT NbVar,INT NbForm,INT NbTest,bool Comb)
           cout << ScS << " " << sd 
                << " " << ((ScS-sd)/eps) 
                << " " << eps << "\n";
-          BENCH_ASSERT(ElAbs((ScS-sd)/eps) < 1e-7);
+          BENCH_ASSERT(std::abs((ScS-sd)/eps) < 1e-7);
        }
    }
 }
@@ -254,7 +254,7 @@ REAL Optim_L1FormLin::TestNeighConjMinLoc
                    if (! (FlagSubset & (1<<k2)))
                    {
                         INT NewF = (FlagSubset & (~(1<<k1))) | (1<< k2);
-                        res = ElMin(res,dic[NewF]);
+                        res = std::min(res,dic[NewF]);
 /*
                         cout << "  [-]" << k1  << " [+]" << k2 << " : ";
                         show_flag(NewF);
@@ -329,7 +329,7 @@ void Optim_L1FormLin::CombinConjMinLoc
     BENCH_ASSERT(NbMin1 >= 1);
 
    cout << "MINS = " << M0 << " " << M1 << "\n";
-   BENCH_ASSERT(ElAbs(M0-M1)<epsilon);
+   BENCH_ASSERT(std::abs(M0-M1)<epsilon);
 
 
    {

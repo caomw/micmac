@@ -303,7 +303,7 @@ Box2dr  GlobBoxCam(Box2dr aBoxIn,const CamStenope & aCamIn,const CamStenope & aC
 double RatioExp(const CamStenope & aCamIn,const CamStenope & aCamOut)
 {
    Box2dr aBoxIn = Box2dr(Pt2dr(0,0),Pt2dr(aCamIn.Sz()));
-   return ElAbs(surf_or_poly(GlobEnvCam(aBoxIn,aCamIn,aCamOut)) ) / aBoxIn.surf();
+   return std::abs(surf_or_poly(GlobEnvCam(aBoxIn,aCamIn,aCamOut)) ) / aBoxIn.surf();
 }
 
 
@@ -441,8 +441,8 @@ cCpleEpip::cCpleEpip
    Box2dr aB1 = BoxCam(mCInit1,mCamOut1,false);
    Box2dr aB2 = BoxCam(mCInit2,mCamOut2,false);
 
-   double yMin = ElMax(aB1._p0.y,aB2._p0.y);
-   double yMax = ElMin(aB1._p1.y,aB2._p1.y);
+   double yMin = std::max(aB1._p0.y,aB2._p0.y);
+   double yMax = std::min(aB1._p1.y,aB2._p1.y);
    mSzY =  round_ni(yMax-yMin);
    if (mSzY <=0)
    {
@@ -472,9 +472,9 @@ cCpleEpip::cCpleEpip
       double aDX1 = (aDX > 0 ) ? 0 : (-aDX);
       double aDX2 = (aDX > 0 ) ? aDX : 0 ;
 
-      // int aSzX1 = aB1.sz().x - ElAbs(aDX);
-      // int aSzX2 = aB2.sz().x - ElAbs(aDX);
-      mSzX = ElMin(aB1.sz().x - aDX1,aB2.sz().x-aDX2);
+      // int aSzX1 = aB1.sz().x - std::abs(aDX);
+      // int aSzX2 = aB2.sz().x - std::abs(aDX);
+      mSzX = std::min(aB1.sz().x - aDX1,aB2.sz().x-aDX2);
 
       int aSzX1 = mSzX;
       int aSzX2 = mSzX;
@@ -946,7 +946,7 @@ void cChangEpip::OneIteration(int aDeg,double aSeuil,double aPond)
     {
         Pt2dr aPA = itH->P1();
         Pt2dr aPB = itH->P2();
-        double anEr = ElAbs(aPB.y - mCurPoly(aPA));
+        double anEr = std::abs(aPB.y - mCurPoly(aPA));
         double aPds = 0;
         if (anEr< aSeuil)
            aPds = 1/sqrt(1.0 + ElSquare(anEr/aPond));
@@ -965,7 +965,7 @@ void cChangEpip::OneIteration(int aDeg,double aSeuil,double aPond)
 
 
 cChangEpip::cChangEpip(const ElPackHomologue & aPck,double anAmpl,int aDegre) :
-     mDegre   (ElMin(aDegre,round_down(sqrt(double(aPck.size() /20) -1)))),
+     mDegre   (std::min(aDegre,round_down(sqrt(double(aPck.size() /20) -1)))),
      mPck     (aPck),
      mAmpl    (anAmpl),
      mCurPoly (0,anAmpl)

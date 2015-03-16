@@ -978,7 +978,7 @@ void DataElXim::write_image_per
     INT SZX_residuel = sz.x;
     while (SZX_residuel >0)
     {
-	INT szx = ElMin(SZX_residuel,Im2._sz.x-X0src);
+	INT szx = std::min(SZX_residuel,Im2._sz.x-X0src);
 
         for (INT y =0; y<sz.y ; y++)
         {
@@ -1010,13 +1010,13 @@ void Data_Elise_Video_Win::image_translate(Pt2di tr,DataElXim * xim)
 
 void Data_Elise_Video_Win::translate(Pt2di tr)
 {
-	INT sx =ElMax(-tr.x,0);
-	INT sy =ElMax(-tr.y,0);
-	INT dx =ElMax(tr.x,0);
-	INT dy =ElMax(tr.y,0);
+	INT sx =std::max(-tr.x,0);
+	INT sy =std::max(-tr.y,0);
+	INT dx =std::max(tr.x,0);
+	INT dy =std::max(tr.y,0);
 
-	INT szx = _sz.x-ElAbs(tr.x);
-	INT szy = _sz.y-ElAbs(tr.y);
+	INT szx = _sz.x-std::abs(tr.x);
+	INT szy = _sz.y-std::abs(tr.y);
         if ((szx <=0) || (szy<0))
            return;
 
@@ -1336,8 +1336,8 @@ void Data_Elise_Video_Win::_inst_draw_rectangle(Pt2dr p1,Pt2dr p2)
          _devd->_gc,
          round_ni(p1.x),
          round_ni(p1.y),
-         ElMax(1,round_ni(p2.x-p1.x)-1),
-         ElMax(1,round_ni(p2.y-p1.y)-1)
+         std::max(1,round_ni(p2.x-p1.x)-1),
+         std::max(1,round_ni(p2.y-p1.y)-1)
      ); 
 }
 
@@ -2041,7 +2041,7 @@ void Data_El_Video_Display::set_cur_coul(INT coul)
 
 INT intens_0_1_to_ushrt(REAL intens)
 {
-    return  ElMax(0,ElMin((INT)USHRT_MAX, (INT)(USHRT_MAX * intens)));
+    return  std::max(0,std::min((INT)USHRT_MAX, (INT)(USHRT_MAX * intens)));
 }
 
 void Data_El_Video_Display::load_palette(Elise_Set_Of_Palette esop)

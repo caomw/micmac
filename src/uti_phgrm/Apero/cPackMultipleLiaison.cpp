@@ -1279,7 +1279,7 @@ for (int aK=0 ; aK<int(aVpds.size()) ;  aK++)
 
                 if (anArgPT&&(aPdsIm >0) && (aRes.mBSurH > anArgPT->LimBsH()))
                 {
-                   double aPdsBsH  = ElMin(1.0,pow(aRes.mBSurH,2) / 0.1);
+                   double aPdsBsH  = std::min(1.0,pow(aRes.mBSurH,2) / 0.1);
                    Pt2dr aP = aNupl.PK(mKIm);
                    aP = aVP[mKIm]->OrIntM2C()(aP);
 // std::cout << "BBBbSh " << aRes.mBSurH << " " << anArgPT->LimBsH() << "\n";
@@ -1307,7 +1307,7 @@ for (int aK=0 ; aK<int(aVpds.size()) ;  aK++)
                     double aPdsSurf = 0;
                     if (mEqS)
                     {
-                       aPdsSurf = aPdrtSurf.PdsOfError(ElAbs(aRes.mEcSurf)) * aPds;
+                       aPdsSurf = aPdrtSurf.PdsOfError(std::abs(aRes.mEcSurf)) * aPds;
                     }
 
                      aCOM->LiaisTer()->SetTerrainInit(true);
@@ -1709,8 +1709,8 @@ class  cIndAppui
 
        cIndAppui(int aI1,int aI2,int aI3) 
        {
-             mI1 = ElMin3(aI1,aI2,aI3);
-             mI3 = ElMax3(aI1,aI2,aI3);
+             mI1 = std::min3(aI1,aI2,aI3);
+             mI3 = std::max3(aI1,aI2,aI3);
              mI2 = aI1+aI2+aI3 - mI1-mI3;
        }
        bool AllDif() const {return (mI1<mI2) && (mI2<mI3);}
@@ -1825,7 +1825,7 @@ double cObsLiaisonMultiple::CostOrientationPMult(const ElRotation3D & aR,const c
     SegComp  aSeg(ToLoc(aR,anAp.mSeg.P0()),ToLoc(aR,anAp.mSeg.P1()));
 
 
-    return DistConversion(ElAbs(aSeg.ordonnee(anAp.mIm)));
+    return DistConversion(std::abs(aSeg.ordonnee(anAp.mIm)));
 }
 
 
@@ -1895,16 +1895,16 @@ void cObsLiaisonMultiple::TestMEPAppuis
    // if (aNbTot<aLI.NbMinPtsRanAp().Val())
    if ((aNb2 <3)||(aNbTot<aLI.NbMinPtsRanAp().Val()))
        return;
-   int aNbMax =  ElMin(aLI.NbMaxPtsRanAp().Val(),aNbTot);
+   int aNbMax =  std::min(aLI.NbMaxPtsRanAp().Val(),aNbTot);
 
    // La proportion de point multiple est le max de la proportion reell
    // et de celle souhaitee
-   double aProp2 = ElMax(aLI.PropMinPtsMult().Val(),aNb2/double(aNbTot));
+   double aProp2 = std::max(aLI.PropMinPtsMult().Val(),aNb2/double(aNbTot));
    // Cepepdant on ne peut selectionner les points qu'une fois
-   aProp2 = ElMin3(1.0,aProp2,aNb2/double(aNbMax));
+   aProp2 = std::min3(1.0,aProp2,aNb2/double(aNbMax));
    
    int aNSel2 = round_ni(aNbMax*aProp2);
-   int aNSel1 = ElMin(aNb1,aNbMax-aNSel2);
+   int aNSel1 = std::min(aNb1,aNbMax-aNSel2);
 
    cRandNParmiQ  aSel1(aNSel1,aNb1);
    cRandNParmiQ  aSel2(aNSel2,aNb2);

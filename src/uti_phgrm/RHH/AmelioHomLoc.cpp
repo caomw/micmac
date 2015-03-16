@@ -143,7 +143,7 @@ void cAppliReduc::AmelioHomLocal(cImagH & anIm)
    cCmpPtrImOnGain aCmpPtrIm;
    std::sort(aVIms.begin(),aVIms.end(),aCmpPtrIm);
 
-   int aNbIterProgr = ElMin(aMaxIterProgr,round_up(aVIms.size()/3.0));
+   int aNbIterProgr = std::min(aMaxIterProgr,round_up(aVIms.size()/3.0));
    int aNbIterTot = aNbIterProgr + aNbIterSupl;
 
    double aErrorIn = ErrorSolLoc();

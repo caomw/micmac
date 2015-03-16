@@ -258,8 +258,8 @@ ElTabIntervPUP::~ElTabIntervPUP()
 
 void ElTabIntervPUP::IntervalW2U(INT & u0,INT & u1,INT w0,INT w1)
 {
-   u0 = ElMax(0,mIntervs[w0].FirstPixel());
-   u1 = ElMin(mSzU,mIntervs[w1-1].LastPixel());
+   u0 = std::max(0,mIntervs[w0].FirstPixel());
+   u1 = std::min(mSzU,mIntervs[w1-1].LastPixel());
 }
 
 
@@ -287,7 +287,7 @@ ElTabIntervPUP::ElTabIntervPUP
 
 INT ElTabIntervPUP::FitInUser(INT aUPix)
 {
-    return ElMax(0,ElMin(mSzU-1,aUPix));
+    return std::max(0,std::min(mSzU-1,aUPix));
 }
 
 
@@ -296,10 +296,10 @@ void ElTabIntervPUP::PushInterval(INT PixU,REAL Pds)
     ELISE_ASSERT(mIndTopRes<mNbRes,"Stack Full in ElTabIntervPUP::PushInterval");
 
     mRes[mIndTopRes].mPixU = PixU;
-    mRes[mIndTopRes].mPds = ElMin(round_ni((mPdsIntResiduel*Pds)/mPdsRealResiduel),mPdsIntResiduel);
+    mRes[mIndTopRes].mPds = std::min(round_ni((mPdsIntResiduel*Pds)/mPdsRealResiduel),mPdsIntResiduel);
 
     mPdsIntResiduel -= mRes[mIndTopRes].mPds;
-    mPdsRealResiduel  = ElMax(mPdsRealResiduel-Pds,1e-10);
+    mPdsRealResiduel  = std::max(mPdsRealResiduel-Pds,1e-10);
     mIndTopRes++;
 }
 
@@ -318,7 +318,7 @@ void ElTabIntervPUP::Actualise_Lin(INT PixW)
 REAL sincpix(REAL x)
 {
     x *= PI;
-    if (ElAbs(x)<1e-3) return 1.0;
+    if (std::abs(x)<1e-3) return 1.0;
     return sin(x)/x;
 }
 
@@ -537,8 +537,8 @@ template <class Type> ImFileLoader<Type>::ImFileLoader
                 INT X0tile =  xt *Big._sz_tile.x;
                 Big.put_tiles_in_alloc();
                 Big.load_this_tile(xt,yt);
-                INT TxTile     = ElMin(Big._tiles[yt][xt]->_loaded->sz().x,Big.SzU().x-X0tile);
-                INT TyTile     = ElMin(Big._tiles[yt][xt]->_loaded->sz().y,Big.SzU().y-Y0tile);
+                INT TxTile     = std::min(Big._tiles[yt][xt]->_loaded->sz().x,Big.SzU().x-X0tile);
+                INT TyTile     = std::min(Big._tiles[yt][xt]->_loaded->sz().y,Big.SzU().y-Y0tile);
 
                 Type ** dloc = Big._tiles[yt][xt]->_loaded->data();
                 for 
@@ -781,8 +781,8 @@ template <class Type> Type * ImFileLoader<Type>::get_line_user(INT x0,INT x1,INT
 	{
 		INT X0_tile = itx*_sz_tile.x;
 
-		INT x0l = ElMax(x0- X0_tile,0);
-		INT x1l = ElMin(x1- X0_tile,_sz_tile.x);
+		INT x0l = std::max(x0- X0_tile,0);
+		INT x1l = std::min(x1- X0_tile,_sz_tile.x);
 
 		convert
 		(
@@ -843,14 +843,14 @@ template <class Type>  void ImFileLoader<Type>::MakeOneLineReduceSomPPV()
          }
     }
 
-    INT NbY = ElMax(1,_uy1cur-_uy0cur);
+    INT NbY = std::max(1,_uy1cur-_uy0cur);
 	{
     for (INT c=0; c<_nb_chan ; c++)
     {
         INT * lc = _line[c];
         for (INT wx = _pW0.x ; wx< _pW1.x ; wx++)
         {
-            lc[wx] /= ElMax(1,(_Cw2uX[wx+1]-_Cw2uX[wx])) * NbY;
+            lc[wx] /= std::max(1,(_Cw2uX[wx+1]-_Cw2uX[wx])) * NbY;
         }
     }
 	}
@@ -936,7 +936,7 @@ template <class Type> void ImFileLoader<Type>::do_it(Pt2dr tr,REAL sc,Pt2di p0,P
 
 
     _ux0cur = _Cw2uX[_pW0.x];
-    _ux1cur = ElMin(_Cw2uX[_pW1.x]+RAB_XD,_SzU.x-1);     
+    _ux1cur = std::min(_Cw2uX[_pW1.x]+RAB_XD,_SzU.x-1);     
 
 
 

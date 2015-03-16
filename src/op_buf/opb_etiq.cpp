@@ -350,9 +350,9 @@ class Opb_MajVois_Compl : public Simple_OPBuf1<INT,INT>
                 _nb_luted--;
                  if (l != _nb_luted)
                  {
-                     ElSwap(_nb[l],_nb[_nb_luted]);
-                     ElSwap(_lut_inv[l],_lut_inv[_nb_luted]);
-                     ElSwap(_h[l],_h[_nb_luted]);
+                     std::swap(_nb[l],_nb[_nb_luted]);
+                     std::swap(_lut_inv[l],_lut_inv[_nb_luted]);
+                     std::swap(_h[l],_h[_nb_luted]);
                      _lut[_lut_inv[l]] = l;
                  }
              }
@@ -374,7 +374,7 @@ Simple_OPBuf1<INT,INT> * Opb_MajVois_Compl::dup_comp()
 
      omvc->_lut = new_vecteur_init(0,_vmax,(INT)unused) ;
 
-     INT nb_lut = ElMin(_vmax,(dx1()-dx0()+1)*(dy1()-dy0()+1));
+     INT nb_lut = std::min(_vmax,(dx1()-dx0()+1)*(dy1()-dy0()+1));
      omvc->_nb =  new_vecteur_init(0,nb_lut,0);
      omvc->_h  =  new_vecteur_init(0,nb_lut,0);
      omvc->_lut_inv =  new_vecteur_init(0,nb_lut,0);

@@ -571,7 +571,7 @@ int  cAppliWithSetImage::DeZoomOfSize(double aSz) const
 {
     double aRatio = mAverNbPix / aSz;
     double aRL2 = log2(aRatio) / 2;
-    int aL2 = ElMax(0,round_ni(aRL2));
+    int aL2 = std::max(0,round_ni(aRL2));
     return 1 << aL2;
 }
 
@@ -774,7 +774,7 @@ void cAppliWithSetImage::ComputeStripPair(int aDif)
                        Pt2dr aV2(aV3.x,aV3.y);
                        aV2 = vunit(aV2);
                        Pt2dr aDirS = Pt2dr::FromPolar(1,mTetaBande * (PI/180));
-                       double aTeta = ElAbs(angle_de_droite(aV2,aDirS));
+                       double aTeta = std::abs(angle_de_droite(aV2,aDirS));
                        OK = (aTeta < (PI/4));
                     }
 
@@ -818,7 +818,7 @@ void cAppliWithSetImage::AddPair(tSomAWSI * aS1,tSomAWSI * aS2)
     if (mGrIm.arc_s1s2(*aS1,*aS2))
        return;
     if (aS1->attr().mIma->mNameIm>aS2->attr().mIma->mNameIm)
-       ElSwap(aS1,aS2);
+       std::swap(aS1,aS2);
 
 
 

@@ -78,7 +78,7 @@ template <class Type>
 {
     if ((TX>mTMx) ||  (TY>mTMy))
     {
-         set_to_size(ElMax(TX,mTMx),ElMax(TY,mTMy));
+         set_to_size(std::max(TX,mTMx),std::max(TY,mTMy));
     }
 
     _tx = TX;
@@ -656,7 +656,7 @@ template <class Type>  void  ElMatrix<Type>::self_transpose ()
 
     for (INT x =0; x<_tx; x++)
         for (INT y =0; y<x; y++)
-            ElSwap(_data[y][x],_data[x][y]);
+            std::swap(_data[y][x],_data[x][y]);
 }
 
 
@@ -995,7 +995,7 @@ void StdAngleFromRot
     REAL  C = atan2(sinc,cosc);
 
     // REAL new_score = m.L2(ElMatrix<REAL>::Rotation(A,B,C));
-    REAL new_score = ElAbs(B);
+    REAL new_score = std::abs(B);
 
     if (new_score < score)
     {
@@ -1022,14 +1022,14 @@ void AngleFromRot(const ElMatrix<REAL> & m,REAL & a,REAL & b,REAL & c)
 
     REAL sinb  = m(0,2);
 
-    if (ElAbs(sinb) < 1-epsilon)
+    if (std::abs(sinb) < 1-epsilon)
     {
         REAL score = 1e5;
         StdAngleFromRot(m,a,b,c,score,1);
         StdAngleFromRot(m,a,b,c,score,-1);
 
 /*
-        if (ElAbs(b) > PI/2)
+        if (std::abs(b) > PI/2)
         {
 cout << "CHHHHHA\n";
             a = ToStdAng(a-PI);
@@ -1416,7 +1416,7 @@ void ComplBaseParLeHaut(ElMatrix<REAL> &aM,INT NbLigneOk)
          for (int y=IndL+1; y<aM.ty() ; y++)
          {
                       REAL aCos = aM(x,y)/mNormCBPH(0,y);
-                      ElSetMax(aCosMax,ElAbs(aCos));
+                      ElSetMax(aCosMax,std::abs(aCos));
          }
          ELISE_ASSERT(aCosMax>=0,"ComplBaseParLeHaut");
          if (aCosMax < aCosMinMax)

@@ -65,7 +65,7 @@ class Incruster : public ElImIncruster
 
             INT SzBrd() const
             {
-                return ElMin(BrdMax,round_ni(StdBrd*mScale));
+                return std::min(BrdMax,round_ni(StdBrd*mScale));
             }
             Incruster
             (
@@ -561,7 +561,7 @@ Pt2di aSzWP(600,200);
 void  TestScroller::Profil(Im2D_REAL4 aIm,Pt2dr aP0,Pt2dr aP1,INT aCoul)
 {
    REAL aD = euclid(aP1-aP0);
-   REAL aStep = ElMax(0.05,ElMax(1.0,aD)/600.0);
+   REAL aStep = std::max(0.05,std::max(1.0,aD)/600.0);
    INT aNb = round_ni(aD/aStep);
    TIm2D<REAL4,REAL> aTIm(aIm);
 
@@ -580,7 +580,7 @@ void  TestScroller::Profil(Im2D_REAL4 aIm,Pt2dr aP0,Pt2dr aP1,INT aCoul)
        aS2 += ElSquare(aV);
    }
    aS1 /= aS0;
-   aS2 = sqrt(ElMax(1e-2,aS2/aS0 - ElSquare(aS1)));
+   aS2 = sqrt(std::max(1e-2,aS2/aS0 - ElSquare(aS1)));
 
    std::vector<Pt2dr> aVPts;
    for (INT aK=0 ; aK<=aNb ; aK++)
@@ -790,7 +790,7 @@ REAL TestScroller::Op2DParam_ComputeScore(REAL xR,REAL yR)
    REAL s22 = S[5]/s - ElSquare(s2);
 
 
-   REAL coeff = s12 / sqrt(ElMax(s11*s22,0.1));
+   REAL coeff = s12 / sqrt(std::max(s11*s22,0.1));
 
 cout << "Coeff = "  << coeff << "\n";
    return coeff;
@@ -1192,7 +1192,7 @@ cElHomographie  ToImRedr
 		Pt2di POut(x,y);
 		Pt2dr PIn = aHom.Direct(Pt2dr(POut));
                 INT aV = round_ni(aTIn.getr(aKer,PIn,0));
-                DOut[POut.y][POut.x] = ElMax(0,ElMin(255,aV));
+                DOut[POut.y][POut.x] = std::max(0,std::min(255,aV));
 	}
     }
 

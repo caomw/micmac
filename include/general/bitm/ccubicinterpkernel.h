@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_BITM_CCUBICintERPKERNEL_H
 #define _ELISE_GENERAL_BITM_CCUBICintERPKERNEL_H
 
-#include "general/sys_dep.h"
+
 
 class cCubicInterpKernel : public cKernelInterpol1D
 {

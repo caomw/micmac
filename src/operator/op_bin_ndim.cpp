@@ -89,7 +89,7 @@ void op_diag_m2_sym(REAL **o,REAL **in,INT nb)
              REAL  s = sin(ang);
 
 
-             if (ElAbs(c)>ElAbs(s))
+             if (std::abs(c)>std::abs(s))
                 vp1 = (sxx*c+sxy*s)/c;
              else
                 vp1 = (sxy*c+syy*s)/s;
@@ -98,7 +98,7 @@ void op_diag_m2_sym(REAL **o,REAL **in,INT nb)
 
              if (vp1 < vp2)
              {
-                ElSwap(vp1,vp2);
+                std::swap(vp1,vp2);
                 ang += PI/2.0;
              }
         }

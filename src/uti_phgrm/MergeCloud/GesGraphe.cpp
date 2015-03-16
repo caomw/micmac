@@ -150,7 +150,7 @@ void  cAppliMergeCloud::AddVoisVois(std::vector<tMCArc *> & aVArc,tMCSom& aS1,tM
 tMCArc * cAppliMergeCloud::TestAddNewarc(tMCSom * aS1,tMCSom *aS2)
 {
    if (aS1 == aS2) return 0;
-   if (aS1 > aS2) ElSwap(aS1,aS2);
+   if (aS1 > aS2) std::swap(aS1,aS2);
 
    tMCPairS aPair(aS1,aS2);
 

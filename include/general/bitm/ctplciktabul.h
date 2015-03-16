@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_BITM_TYPE>_H
 #define _ELISE_GENERAL_BITM_TYPE>_H
 
-#include "general/sys_dep.h"
+
 
 template <class Type>
 Pt3dr BicubicInterpol
@@ -9,7 +9,7 @@ Pt3dr BicubicInterpol
 #ifndef _ELISE_GENERAL_BITM_TYPE>_H
 #define _ELISE_GENERAL_BITM_TYPE>_H
 
-#include "general/sys_dep.h"
+
 
 template <class Type>
 double_t  BicubicInterpolVal
@@ -33,13 +33,13 @@ eModeInterTabul;
 #ifndef _ELISE_GENERAL_BITM_TTABULCIK>_H
 #define _ELISE_GENERAL_BITM_TTABULCIK>_H
 
-#include "general/sys_dep.h"
+
 
 template <class TypeEl,class tTabulCIK>
 #ifndef _ELISE_GENERAL_BITM_CTPLCIKTABUL_H
 #define _ELISE_GENERAL_BITM_CTPLCIKTABUL_H
 
-#include "general/sys_dep.h"
+
 
 class  cTplCIKTabul  : public cInterpolateurIm2D<TypeEl>
 {

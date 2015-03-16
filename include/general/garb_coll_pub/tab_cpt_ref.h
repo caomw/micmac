@@ -42,7 +42,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_GARB_COLL_PUB_TAB_CPT_REF_H
 #define _ELISE_GENERAL_GARB_COLL_PUB_TAB_CPT_REF_H
 
-#include "general/sys_dep.h"
+
 
 template  <class Type> class Tab_CPT_REF : public PRC0
 {

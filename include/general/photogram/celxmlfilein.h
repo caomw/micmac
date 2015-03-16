@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CDBLEGRID_H
 #define _ELISE_GENERAL_PHOTOGRAM_CDBLEGRID_H
 
-#include "general/sys_dep.h"
+
 
 class cDbleGrid : public ElDistortion22_Gen
 {
@@ -55,7 +55,7 @@ public :
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CXMLMODE_H
 #define _ELISE_GENERAL_PHOTOGRAM_CXMLMODE_H
 
-#include "general/sys_dep.h"
+
 
     class cXMLMode {
     public :
@@ -72,7 +72,7 @@ public :
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CELXMLFILEIN_H
 #define _ELISE_GENERAL_PHOTOGRAM_CELXMLFILEIN_H
 
-#include "general/sys_dep.h"
+
 
             class cElXMLFileIn &       aFileXML,
             const std::string &  aNameDir

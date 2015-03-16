@@ -94,8 +94,8 @@ template <class Type> bool gaussj_svp(Type **A,INT n)
 				for (k=1;k<=n;k++) 
                                 {
 					if (ipiv[k] == 0) {
-						if (ElAbs(a[j][k]) >= big) {
-							big=ElAbs(a[j][k]);
+						if (std::abs(a[j][k]) >= big) {
+							big=std::abs(a[j][k]);
 							irow=j;
 							icol=k;
 						}

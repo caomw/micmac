@@ -154,7 +154,7 @@ cout <<  "Type " << (INT) type << "\n";
     fp.seek_begin(offset_0);
 
     Im2DGen I_TILE =  alloc_im_2D_Of_Type(sz_tiles,type);
-    INT vmax = 1 << ElMin(15,nbb);
+    INT vmax = 1 << std::min(15,nbb);
 
     if (signed_type_num(type)) vmax /= 2;
 

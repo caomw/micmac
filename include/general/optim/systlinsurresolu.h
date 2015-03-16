@@ -42,7 +42,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_OPTIM_SYSTLINSURRESOLU_H
 #define _ELISE_GENERAL_OPTIM_SYSTLINSURRESOLU_H
 
-#include "general/sys_dep.h"
+#include <cGenSysSurResol>
 
 class  SystLinSurResolu : public cGenSysSurResol  // Herite en tant que Solveur L1
 {

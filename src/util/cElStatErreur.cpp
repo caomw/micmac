@@ -72,7 +72,7 @@ REAL cElStatErreur::Erreur(REAL Pos)
    ELISE_ASSERT(IMax>=0,"Empty in cElStatErreur::Erreur");
 
    INT ind = round_ni(Pos*IMax);
-   ind = ElMax(0,ElMin(ind,IMax));
+   ind = std::max(0,std::min(ind,IMax));
 
    return mErrs[ind];
 }

@@ -49,7 +49,7 @@ cCpleEpip * StdCpleEpip
              std::string  aNameIm2
           )
 {
-    if (aNameIm1 > aNameIm2) ElSwap(aNameIm1,aNameIm2);
+    if (aNameIm1 > aNameIm2) std::swap(aNameIm1,aNameIm2);
     cInterfChantierNameManipulateur * anICNM = cInterfChantierNameManipulateur::BasicAlloc(aDir);
 
     std::string aNameCam1 =  anICNM->Assoc1To1("NKS-Assoc-Im2Orient@-"+aNameOri,aNameIm1,true);
@@ -97,7 +97,7 @@ int CreateEpip_main(int argc,char ** argv)
 
     if (!MMVisualMode)
     {
-    if (aName1 > aName2) ElSwap(aName1,aName2);
+    if (aName1 > aName2) std::swap(aName1,aName2);
 
     int aNbChan = Gray ? 1 : - 1;
 

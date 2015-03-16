@@ -80,7 +80,7 @@ int TestSet_main(int argc,char ** argv)
     const cInterfChantierNameManipulateur::tSet * mSetIm = aICNM->Get(aPat);
 
 
-    int aNb = ElMin(aNbMax,int(mSetIm->size()));
+    int aNb = std::min(aNbMax,int(mSetIm->size()));
 
     for (int aK=0 ; aK< aNb ; aK++)
     {

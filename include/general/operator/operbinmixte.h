@@ -42,13 +42,9 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_OPERATOR_OPERBINMIXTE_H
 #define _ELISE_GENERAL_OPERATOR_OPERBINMIXTE_H
 
-#include "general/sys_dep.h"
-
-class OperBinMixte : public OperBin 
+class OperBinMixte
 {
    public :
-
-       void t0_eg_t1_op_t2(double_t16 * t0,const double_t16 * t1,const double_t16 *t2,int nb) const ;
 
        virtual void t0_eg_t1_op_t2(double_t * t0,const double_t * t1,const double_t *t2,int nb) const = 0;
        virtual void t0_eg_t1_op_t2(double_t * t0,const double_t * t1,const int  *t2,int nb) const = 0;

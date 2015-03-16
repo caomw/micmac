@@ -512,7 +512,7 @@ tFileOffset TGA_RLE_Flx_byte::Read(U_INT1 * cbuf,tFileOffset nb_elo)
            if (_rle_state)
               _fp.read(_buf_rle,_sz_el,1); 
        }
-       nb_el_red = ElMin(_nb_buffered.IntBasicLLO(),nb_el-sum_nb_el);
+       nb_el_red = std::min(_nb_buffered.IntBasicLLO(),nb_el-sum_nb_el);
        _nb_buffered -= nb_el_red;
 
        if (_rle_state)

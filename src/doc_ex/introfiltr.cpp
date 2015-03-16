@@ -43,12 +43,12 @@ template <class  Type,class TyBase> class Filters
   static inline TyBase  sobel (Type ** im,INT x,INT y)
   {
        return
-       ElAbs
+       std::abs
        (
           im[y-1][x-1]+2*im[y][x-1]+im[y+1][x-1]
         - im[y-1][x+1]-2*im[y][x+1]-im[y+1][x+1]
        )
-     + ElAbs
+     + std::abs
        (
           im[y-1][x-1]+2*im[y-1][x]+im[y-1][x+1]
         - im[y+1][x-1]-2*im[y+1][x]-im[y+1][x+1]
@@ -67,16 +67,16 @@ void std_sobel
 {
     Type ** out = Iout.data();
     Type **  in = Iin.data();
-    INT x1 = ElMin3(Iout.tx()-1,Iin.tx()-1,p1.x);
-    INT y1 = ElMin3(Iout.ty()-1,Iin.ty()-1,p1.y);
-    INT x0 = ElMax(1,p0.x);
-    INT y0 = ElMax(1,p0.y);
+    INT x1 = std::min3(Iout.tx()-1,Iin.tx()-1,p1.x);
+    INT y1 = std::min3(Iout.ty()-1,Iin.ty()-1,p1.y);
+    INT x0 = std::max(1,p0.x);
+    INT y0 = std::max(1,p0.y);
 // pour eviter les overflow
     TyBase vmax = Iout.vmax()-1;
     for (INT x=x0; x<x1 ; x++)
         for (INT y=y0; y<y1 ; y++)
         {
-            out[y][x] = ElMin(vmax,Filters<Type,TyBase>::sobel(in,x,y));
+            out[y][x] = std::min(vmax,Filters<Type,TyBase>::sobel(in,x,y));
         }
 }
 

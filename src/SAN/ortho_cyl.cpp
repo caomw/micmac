@@ -128,7 +128,7 @@ cProjOrthoCylindrique::cProjOrthoCylindrique
                  Ab2Loc(aSegAbs.PtOfAbsc(1))
             );
 
-    mDist = ElAbs(aSegLoc.P0().z);
+    mDist = std::abs(aSegLoc.P0().z);
     
     Pt3dr aTg = aSegLoc.TgNormee();
     if (aTg.x <0)

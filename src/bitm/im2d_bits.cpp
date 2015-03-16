@@ -199,7 +199,7 @@ void Tabul_Bits_Gen::unpack
 
     for (INT i=0; i<nb ; i+=sz_buf)
     {
-        INT nb_loc = ElMin(nb-i,sz_buf);
+        INT nb_loc = std::min(nb-i,sz_buf);
         tbg.input(buf,in,i,i+nb_loc);
         convert(out+i,buf,nb_loc);
     }
@@ -221,7 +221,7 @@ void Tabul_Bits_Gen::pack
 
     for (INT i=0; i<nb ; i+=sz_buf)
     {
-        INT nb_loc = ElMin(nb-i,sz_buf);
+        INT nb_loc = std::min(nb-i,sz_buf);
         convert(buf,in+i,nb_loc);
         tbg.output(out,buf,i,i+nb_loc);
     }
@@ -562,7 +562,7 @@ template  <const int nbb>
          return res;
      }
      zoom = round_ni(zoom / (REAL) nb_per_byte) * nb_per_byte;
-     zoom = ElMax(1,zoom);
+     zoom = std::max(1,zoom);
      INT txz = tx()/zoom;
      INT tyz = ty()/zoom;
 

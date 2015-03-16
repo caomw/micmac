@@ -57,7 +57,7 @@ class cMMOnePair
       void ExeCom(const std::string &);
 
       std::string NamePx(int aStep) {return "Px1_Num"+ ToString(aStep) + "_DeZoom"+ ToString(mVZoom[aStep]) + "_LeChantier.tif";}
-      std::string NameAutoM(int aStep,std::string aPost = "" ) {return "AutoMask_LeChantier_Num_" + ToString(ElMin(aStep,mStepEnd-1)) + aPost +".tif";}
+      std::string NameAutoM(int aStep,std::string aPost = "" ) {return "AutoMask_LeChantier_Num_" + ToString(std::min(aStep,mStepEnd-1)) + aPost +".tif";}
 
       bool             mExe;
       bool             mMM1PInParal;
@@ -217,7 +217,7 @@ cMMOnePair::cMMOnePair(int argc,char ** argv) :
   }
 
   if (mNameIm1Init > mNameIm2Init)
-     ElSwap(mNameIm1Init,mNameIm2Init);
+     std::swap(mNameIm1Init,mNameIm2Init);
 
   if (EAMIsInit(&mStrQualOr))
      mQualOr = Str2eTypeQuality("eQual_"+mStrQualOr);
@@ -227,7 +227,7 @@ cMMOnePair::cMMOnePair(int argc,char ** argv) :
   if (mQualOr==eQual_High)
     mDegCorrEpip = -1;
   else
-    mDegCorrEpip = ElMax(1,mDegCorrEpip);
+    mDegCorrEpip = std::max(1,mDegCorrEpip);
 
   mDirP =DirOfFile(mNameIm1Init);
 

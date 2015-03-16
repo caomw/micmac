@@ -111,7 +111,7 @@ class cGeoc_WGS4 : public cSysCoord
           double longit = ToRadian(aP.x,mUnite);
           double lat = ToRadian(aP.y,mUnite);
           if (mSwap) 
-             ElSwap(longit,lat);
+             std::swap(longit,lat);
           double  h =   aP.z;
 
           // double ptit_axe=double(6356752.3);
@@ -235,7 +235,7 @@ Pt3dr cGeoc_WGS4::FromGeoC(const Pt3dr & aP) const
    lat    = FromRadian(lat   ,mUnite);
 
    if (mSwap) 
-     ElSwap(longit,lat);
+     std::swap(longit,lat);
    return Pt3dr(longit,lat,h);
 }
 
@@ -954,7 +954,7 @@ cSysCoord * cSysCoord::FromXML
       }
 
       double aVOdg[3] = {1,1,1};
-      for (int aK=0 ; aK<ElMin(3,int(aVBSC[0].AuxR().size())); aK++)
+      for (int aK=0 ; aK<std::min(3,int(aVBSC[0].AuxR().size())); aK++)
       {
           aVOdg[aK] = aVBSC[0].AuxR()[aK];
       }

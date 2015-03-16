@@ -167,7 +167,7 @@ cTplImInMem<Type> *  cTplOctDig<Type>::TypedGetImOfSigma(double aSig)
   for (int aK=0  ; aK<int(mVTplIms.size()) ; aK++)
   {
       cTplImInMem<Type> * aIm = mVTplIms[aK];
-      double  aSc = ElAbs(aSig-aIm->ROct());
+      double  aSc = std::abs(aSig-aIm->ROct());
       if (aSc <aBestSc)
       {
           aBestSc = aSc;

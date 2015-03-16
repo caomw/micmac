@@ -115,7 +115,7 @@ void cASAMG::ComputeSubset(int aNbPts,cResumNuage & aRN)
                   {
                      if (mTMasqN.get(aP))
                      {
-                        double aDist = euclid(Pt2dr(aP),aPMoy) - ElMin(6,aTDist.get(aP))/1.8;
+                        double aDist = euclid(Pt2dr(aP),aPMoy) - std::min(6,aTDist.get(aP))/1.8;
 
                         if (aDist<aDBest)
                         {
@@ -176,16 +176,16 @@ double cASAMG::SignedDifProf(const Pt3dr & aPE) const
 
 double cASAMG::DifProf2Gain(double aDif) const
 {
-    aDif = ElAbs(aDif/mAppli->Param().RecSeuilDistProf().Val());
-    return ElMin(1.0,ElMax(0.0,2.0-aDif));
+    aDif = std::abs(aDif/mAppli->Param().RecSeuilDistProf().Val());
+    return std::min(1.0,std::max(0.0,2.0-aDif));
 }
 
 double cASAMG::QualityProjOnMe(const Pt3dr & aPE) const
 {
     return DifProf2Gain(SignedDifProf(aPE));
 /*
-    double aDif = ElAbs(SignedDifProf(aPE)) / mAppli->Param().RecSeuilDistProf().Val();
-    return ElMin(1.0,ElMax(0.0,2.0-aDif));
+    double aDif = std::abs(SignedDifProf(aPE)) / mAppli->Param().RecSeuilDistProf().Val();
+    return std::min(1.0,std::max(0.0,2.0-aDif));
 */
 }
 

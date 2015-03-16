@@ -457,7 +457,7 @@ cAppliMICMAC::cAppliMICMAC
    mGeomDFPx->PostInit();
    *mGeomDFPxInit =  *mGeomDFPx;
    double aLogDZ = log2(mGeomDFPxInit->SzDz().XtY() / NbPixDefFilesAux().Val());
-   mDeZoomFilesAux = ElMax(DeZoomDefMinFileAux().Val(),(1<<ElMax(0,(round_ni(aLogDZ)))));
+   mDeZoomFilesAux = std::max(DeZoomDefMinFileAux().Val(),(1<<std::max(0,(round_ni(aLogDZ)))));
 
    PostInitGeom();
    InitNadirRank();

@@ -268,7 +268,7 @@ cGraphePdv GrapheOfRecouvrement(const cChantierPhotogram & aCh,double aFact)
    {
       Pt2dr aSzMax(800,500);
       Pt2dr  aSz = aRes.BoxCh().sz();
-      double anEch =  ElMin(aSzMax.x/aSz.x,aSzMax.y/aSz.y);
+      double anEch =  std::min(aSzMax.x/aSz.x,aSzMax.y/aSz.y);
       Pt2di aSzW = Pt2di(aSz *anEch + Pt2dr(3,3));
 
       El_Window aWVideo = Video_Win::WStd(aSzW,1.0);

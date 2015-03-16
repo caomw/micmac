@@ -57,31 +57,31 @@ Header-MicMac-eLiSe-25/06/2007*/
 class RC_Object : public Mcheck
 {
 
-	friend void decr_ref(class Object_cptref * oc);
-	//friend class PRC0;
+    friend void decr_ref(class Object_cptref * oc);
+    //friend class PRC0;
 
 
-	protected :
+protected :
 
-	RC_Object();
-	virtual ~RC_Object();
+    RC_Object();
+    virtual ~RC_Object();
 
-	//---- data ----
-	union
-	{
-		int            cpt_ref;
-		RC_Object * next;
-	}    _d;
+    //---- data ----
+    union
+    {
+        int            cpt_ref;
+        RC_Object * next;
+    }    _d;
 
-	private :
+private :
 
 
 
-	// declared as static so that they can be called with 0
+    // declared as static so that they can be called with 0
 
-	static void decr_ref(RC_Object *);
-	public :
-	static void incr_ref(RC_Object *);
+    static void decr_ref(RC_Object *);
+public :
+    static void incr_ref(RC_Object *);
 };
 
 #endif

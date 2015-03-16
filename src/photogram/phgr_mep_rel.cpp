@@ -90,11 +90,11 @@ REAL ElPackHomologue::MatriceEssentielle(cGenSysSurResol & aSys,double *  aVect,
       aSys.GSSR_Reset(false);
 
       INT kMax = 0;
-      REAL VMax = ElAbs(aVect[0]);
+      REAL VMax = std::abs(aVect[0]);
 
       for (INT aK = 0 ; aK < 9 ; aK++)
       {
-          REAL V = ElAbs(aVect[aK]);
+          REAL V = std::abs(aVect[aK]);
           if (V>VMax)
           {
              VMax = V;
@@ -198,7 +198,7 @@ REAL ElPackHomologue::MatriceEssentielle(cGenSysSurResol & aSys,double *  aVect,
           {
               it->Pds() = 1 / (1 + ElSquare(aResidu/EcartForPond));
           }
-          ResiduTot +=  ElAbs (aResidu);
+          ResiduTot +=  std::abs (aResidu);
 
      }
 
@@ -429,7 +429,7 @@ cElHomographie cElemMepRelCoplan::HomCam2Plan(double * aExportResidu)
 
            aPack.Cple_Add(ElCplePtsHomologues(aPIm,Pt2dr(aPPlan.x,aPPlan.y)));
 
-           aResidu += ElAbs(aPPlan.z);
+           aResidu += std::abs(aPPlan.z);
 
        }
    }
@@ -507,7 +507,7 @@ REAL cElemMepRelCoplan::AngleNormale(Pt3dr aP)
 {
    Pt3dr aV = aP-mCZCMur;
    REAL aS = -scal(mNorm,aV)/euclid(aV);
-   return ElAbs(acos(ElMax(-1.0,ElMin(1.0,aS))));
+   return std::abs(acos(std::max(-1.0,std::min(1.0,aS))));
 }
 
 REAL cElemMepRelCoplan::DPlan() const
@@ -522,7 +522,7 @@ cElemMepRelCoplan cElemMepRelCoplan::ToGivenProf(double aTargetProf)
 
     Pt3dr aCImInPlan = Plan().CoordPlan2Euclid().ImRecAff(Pt3dr(0,0,0));
 
-    double aMul = ElAbs(aTargetProf/aCImInPlan.z);
+    double aMul = std::abs(aTargetProf/aCImInPlan.z);
 
     return cElemMepRelCoplan(mHom,ElRotation3D(mRot.tr()*aMul,mRot.Mat(),true));
 }
@@ -554,7 +554,7 @@ cElemMepRelCoplan::cElemMepRelCoplan
   mAng1        (AngleNormale(mCOptC1)),
   mAng2        (AngleNormale(mCOptC2)),
   mAngTot      (mAng1+mAng2),
-  mDEuclidP    (ElAbs(scal(mNorm,mP0)))
+  mDEuclidP    (std::abs(scal(mNorm,mP0)))
 {
 
      // VERIF 
@@ -693,8 +693,8 @@ double cElemMepRelCoplan::DistanceEuclid() const
 // Diff Ensembliste
 static REAL SetDiff(REAL V1,REAL V2,REAL U1,REAL U2)
 {
-	return ElAbs(ElMax(V1,V2)-(ElMax(U1,U2)))
-	     + ElAbs(ElMin(V1,V2)-(ElMin(U1,U2)));
+	return std::abs(std::max(V1,V2)-(std::max(U1,U2)))
+	     + std::abs(std::min(V1,V2)-(std::min(U1,U2)));
 }
 
 cResMepRelCoplan ElPackHomologue::MepRelCoplan(REAL LBase,bool HomEstL2)
@@ -736,7 +736,7 @@ cResMepRelCoplan ElPackHomologue::MepRelCoplan(REAL LBase,cElHomographie aHom12,
        ElMatrix<REAL> aDiag = aPermT    * aDiagInit * aPerm;
        ElMatrix<REAL> aSvd2 = aPermT    * aSvdInit2;
 
-       if (ElAbs(aDiag(0,0)) > 1e-5)
+       if (std::abs(aDiag(0,0)) > 1e-5)
        {
            REAL aVP2 = aDiag(1,1) / aDiag(0,0);
            REAL aVP3 = aDiag(2,2) / aDiag(0,0);
@@ -747,7 +747,7 @@ cResMepRelCoplan ElPackHomologue::MepRelCoplan(REAL LBase,cElHomographie aHom12,
 
            if (B2 > -1e-4)
            {
-               B2 = ElMax(0.0,B2);
+               B2 = std::max(0.0,B2);
 
                for (INT signB=-1; signB<=1 ; signB +=2)
                {
@@ -923,7 +923,7 @@ double ElPackHomologue::QuickDistInter
          
          Pt2dr aV12  (aProj1.y-aProj2.y,aProj2.x-aProj1.x);
 
-         double aD2 =  ElAbs(scal(aV12,aProj1-aPIm1) / euclid(aV12));
+         double aD2 =  std::abs(scal(aV12,aProj1-aPIm1) / euclid(aV12));
         
 
 /*
@@ -1194,7 +1194,7 @@ double SomEcartDist
 
 ElMatrix<REAL> ElPackHomologue::MepRelCocentrique(int aNbRansac,int aNbMaxPts) const
 {
-   aNbMaxPts = ElMin(aNbMaxPts,size());
+   aNbMaxPts = std::min(aNbMaxPts,size());
 
    std::vector<Pt3dr> aVDir1;
    std::vector<Pt3dr> aVDir2;

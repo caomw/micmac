@@ -349,7 +349,7 @@ Config_Freeman_Or::Config_Freeman_Or(bool v8,bool trigo) :
       _mat_code (v8?&MAT_CODE_8_FREEM:&MAT_CODE_4_FREEM)
 {
      if(!trigo)
-       ElSwap(_succ,_prec);
+       std::swap(_succ,_prec);
 }
 
 

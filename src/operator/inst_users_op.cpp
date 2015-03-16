@@ -102,7 +102,7 @@ void Fnum_Ecart_Circ::calc_buf
         REAL ec_max = _tmp[1]-_tmp[0];
         {
             for (INT d =0; d<din; d++)
-                 ec_max = ElMax (ec_max,_tmp[d+1]-_tmp[d]);
+                 ec_max = std::max (ec_max,_tmp[d+1]-_tmp[d]);
         }
         output[0][i] = _per -ec_max;
     }

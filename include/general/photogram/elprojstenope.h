@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_ELPROJSTENOPE_H
 #define _ELISE_GENERAL_PHOTOGRAM_ELPROJSTENOPE_H
 
-#include "general/sys_dep.h"
+
 
 class ElProjStenope : public ElProj32 ,
         public ElProjStenopeGen<double_t>

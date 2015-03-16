@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_FILE_IM_GIF_IM_H
 #define _ELISE_GENERAL_FILE_IM_GIF_IM_H
 
-#include "general/sys_dep.h"
+
 
 class Gif_Im : public ElGenFileIm
 {
@@ -32,7 +32,7 @@ private :
 #ifndef _ELISE_GENERAL_FILE_IM_DATA_GIFIM_H
 #define _ELISE_GENERAL_FILE_IM_DATA_GIFIM_H
 
-#include "general/sys_dep.h"
+
 
     class Data_GifIm * dgi()
     { return SAFE_DYNC(class Data_GifIm *,_ptr);}

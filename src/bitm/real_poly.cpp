@@ -84,7 +84,7 @@ template <class Type> Type MajEncadrRoots(const ElPolynome<Type>  & aPol)
     Type aCoeff = (2.0*n)/An;
 
     for (INT k=1 ; k<=n; k++)
-        ElSetMax(res,IRoots(ElAbs(aPol[n-k]*aCoeff),k));
+        ElSetMax(res,IRoots(std::abs(aPol[n-k]*aCoeff),k));
 
     return res;
 }

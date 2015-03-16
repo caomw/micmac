@@ -213,7 +213,7 @@ class cTabulCost
       }
       inline int Cost(int aDx)
       {
-          aDx = ElAbs(aDx);
+          aDx = std::abs(aDx);
           for (;mNb<=aDx; mNb++)
 	  {
              double  aCL1 = (mNb <mSeuilAtt) ?
@@ -493,7 +493,7 @@ ELISE_ASSERT((aDyMin==0) && (aDyMax==0) && (aDxMin>=-1) && (aDxMax<=1),"!!!");
                         (
                            aCel0, aSens,
                            mTabCost[0].Cost(aDx) + mTabCost[1].Cost(aDy)
-                           // mCostActu[0]*ElAbs(aDx)+mCostActu[1]*ElAbs(aDy)
+                           // mCostActu[0]*std::abs(aDx)+mCostActu[1]*std::abs(aDy)
                         );
                     }
                 }
@@ -687,7 +687,7 @@ void cProgDynOptimiseur::Local_SolveOpt(Im2D_U_INT1)
    for (int aKP=0 ; aKP<mNbPx ; aKP++)
    {
        double aPente = aVPentes[aKP] / mEtape.KPx(aKP).ComputedPas();
-       mMaxEc[aKP] = ElMax(1,round_ni(aPente));
+       mMaxEc[aKP] = std::max(1,round_ni(aPente));
        
        /*
        std::cout  << aKP << "/"<< mNbPx << "::" 

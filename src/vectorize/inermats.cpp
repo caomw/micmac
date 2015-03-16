@@ -93,7 +93,7 @@ template <class Type> void Mat_Inertie<Type>::operator += (const Mat_Inertie<Typ
 
 static REAL  RMI(REAL  aVA,REAL  aVB,REAL epsilon)
 {
-   return sqrt(ElMax(0.0,aVA/ElMax(aVB,epsilon)));
+   return sqrt(std::max(0.0,aVA/std::max(aVB,epsilon)));
 }
 
 template <class Type>   typename Type::TypeReel::TypeEff   

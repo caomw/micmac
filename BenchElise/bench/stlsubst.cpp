@@ -172,25 +172,25 @@ int main(int,char**)
    char * Outmax = "AISL";
    TransCoder Cmax (Nbmax,Inmax,Outmax);
 
-   const int NbElMax = 8;
-   char * (InElMax[NbElMax]) ={"max","min","swap","list","ElMax","ElMin","ElSwap","ElList"};
-   char * OutElMax = "AISLAISL";
-   TransCoder CElMax (NbElMax,InElMax,OutElMax);
+   const int Nbstd::max = 8;
+   char * (Instd::max[Nbstd::max]) ={"max","min","swap","list","std::max","std::min","ElSwap","ElList"};
+   char * Outstd::max = "AISLAISL";
+   TransCoder Cstd::max (Nbstd::max,Instd::max,Outstd::max);
 
 
    Cmax.init();
    Cmax.filecoder("include/general/all.h");
    Cmax.show();
 
-   CElMax.init();
-   CElMax.filecoder("include/general/all.h");
-   CElMax.show();
+   Cstd::max.init();
+   Cstd::max.filecoder("include/general/all.h");
+   Cstd::max.show();
 
 
    STLsubst subst
    (
        "Vmaxmin/src", Cmax,
-       "src" ,   CElMax,
+       "src" ,   Cstd::max,
         44
    );
    

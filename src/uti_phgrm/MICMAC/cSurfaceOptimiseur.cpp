@@ -213,13 +213,13 @@ int   cSurfaceOptimiseur::CostI2CorExport(const int & aCostI) const
 {
     double aCostR = CostI2R(aCostI);
     double aCor = mAppli.StatGlob()->Cout2Correl(aCostR);
-    return ElMax(0,ElMin(255,round_ni(128*(1+aCor))));
+    return std::max(0,std::min(255,round_ni(128*(1+aCor))));
 }
 
 
 int cSurfaceOptimiseur::CostToMemoCorrel(double aCost)  const
 {
-   return ElMax(0,ElMin(255,round_ni(128.0*(2-aCost)-0.5)));
+   return std::max(0,std::min(255,round_ni(128.0*(2-aCost)-0.5)));
 }
 
 
@@ -705,8 +705,8 @@ void cSurfaceOptimiseur::SolveOpt()
                     const Box2di & aB = aM.Box();
                     Pt2di aPClip = Pt2di
                                (
-                                  ElMax(aB._p0.x,ElMin(aPPx.x,aB._p1.x-1)),
-                                  ElMax(aB._p0.y,ElMin(aPPx.y,aB._p1.y-1))
+                                  std::max(aB._p0.x,std::min(aPPx.x,aB._p1.x-1)),
+                                  std::max(aB._p0.y,std::min(aPPx.y,aB._p1.y-1))
                                );
 */
 

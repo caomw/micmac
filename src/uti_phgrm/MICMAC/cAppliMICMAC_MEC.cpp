@@ -600,7 +600,7 @@ void cAppliMICMAC::DoOneBloc
    int aSzCel = mCurEtape->MultiplierNbSizeCellule();
    //std::cout << "SzzEcccell " <<  aSzCel*aNbCel <<"\n"; 
 
-   int aLMin = ElMin(aBoxOut._p1.x-aBoxOut._p0.x,aBoxOut._p1.y-aBoxOut._p0.y);
+   int aLMin = std::min(aBoxOut._p1.x-aBoxOut._p0.x,aBoxOut._p1.y-aBoxOut._p0.y);
 
 /*
    for (int aK=0; aK<=aNiv; aK++)  std::cout <<"---|";
@@ -622,7 +622,7 @@ void cAppliMICMAC::DoOneBloc
        Box2di aSplitOut[4];
        aBoxOut.QSplit(aSplitOut);
 
-       mSzRec = ElMax(0,ElMin(mSzRec,aLMin/4));
+       mSzRec = std::max(0,std::min(mSzRec,aLMin/4));
 
        for (int aK=0 ; aK<4 ; aK++)
        {
@@ -908,7 +908,7 @@ template <class aTVect> double EcartType(const aTVect & aV,const  std::vector<do
        std::cout << "EC2 =" << anEc2 << "\n";
        ELISE_ASSERT(false,"Singularity in BSurH_SetOfDir ");
    }
-   anEc2 = sqrt(ElMax(0.0,anEc2));
+   anEc2 = sqrt(std::max(0.0,anEc2));
     return anEc2;
 }
 
@@ -975,7 +975,7 @@ void cAppliMICMAC::DoImagesBSurH(const cDoImageBSurH& aParBsH)
                    double aRVal = BSurH_SetOfDir(aVN,0);
                    aTNMasq.oset(aPIndex,aRVal > aSeuilBsH);
                    aRVal = (aRVal+aParBsH.Offset().Val()) * aParBsH.Dyn().Val();
-                   aVal = ElMax(0,ElMin(253,round_ni(aRVal)));
+                   aVal = std::max(0,std::min(253,round_ni(aRVal)));
                 }
                 else
                 {
@@ -1200,7 +1200,7 @@ REAL cAppliMICMAC::CalculAccelereScore()
 
      mSomI12 /= mSom0;
      mSomI12 -= mSomI1 * mSomI2;
-     double aCor = mSomI12 /sqrt(ElMax(mEpsCorr,mSomI11*mSomI22));
+     double aCor = mSomI12 /sqrt(std::max(mEpsCorr,mSomI11*mSomI22));
 
 
     return mStatGlob->CorrelToCout(aCor);

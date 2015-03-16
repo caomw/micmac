@@ -783,7 +783,7 @@ void Packed_LZW_Decompr_Flow::assert_end_code()
 tFileOffset Packed_LZW_Decompr_Flow::Read(U_INT1 * res,tFileOffset nbo)
 {
       int nb = nbo.IntBasicLLO();
-      int sum_nb_added = ElMin(nb,_nb_buffered.IntBasicLLO());
+      int sum_nb_added = std::min(nb,_nb_buffered.IntBasicLLO());
       _nb_buffered -= sum_nb_added;
       if (res)
          memcpy(res,_buf+_deb_buffered.BasicLLO(),sum_nb_added);
@@ -805,7 +805,7 @@ tFileOffset Packed_LZW_Decompr_Flow::Read(U_INT1 * res,tFileOffset nbo)
                             _flxi->nexti(_decoder->nb_bit_cur())
                        );
 
-              nb_transfered = ElMin(nb_decoded,nb-sum_nb_added);
+              nb_transfered = std::min(nb_decoded,nb-sum_nb_added);
               if (res)
                   memcpy(res+sum_nb_added,decoded,nb_transfered);
               sum_nb_added += nb_transfered;
@@ -830,7 +830,7 @@ tFileOffset RelToAbs(tRelFileOffset anOff)
 tRelFileOffset Packed_LZW_Decompr_Flow::Rseek(tRelFileOffset nbr)
 {
       tFileOffset nb = RelToAbs(nbr);
-      tFileOffset sum_nb_added = ElMin(nb,_nb_buffered);
+      tFileOffset sum_nb_added = std::min(nb,_nb_buffered);
       _nb_buffered -= sum_nb_added;
       _deb_buffered += sum_nb_added;
 
@@ -851,7 +851,7 @@ tRelFileOffset Packed_LZW_Decompr_Flow::Rseek(tRelFileOffset nbr)
                             _flxi->nexti(_decoder->nb_bit_cur())
                        );
 
-              nb_transfered = ElMin(nb_decoded,(nb-sum_nb_added).IntBasicLLO());
+              nb_transfered = std::min(nb_decoded,(nb-sum_nb_added).IntBasicLLO());
               sum_nb_added += nb_transfered;
       }
       _deb_buffered = 0;
@@ -897,7 +897,7 @@ void  Packed_LZW_Decompr_Flow::Write(const INT * vals,tFileOffset nbo)
 
    for (int i=0 ; i<nb; i+= sz_buf)
    {
-       int nb_loc = ElMin(sz_buf,nb-i);
+       int nb_loc = std::min(sz_buf,nb-i);
        convert(buf,vals+i,nb_loc);
        Write(buf,nb_loc);
    }

@@ -60,7 +60,7 @@ void cAppliApero::AddRappelOnAngle(const cRappelOnAngles & aRAO,double aMult,cSt
             double aSomPond = 0.0;
             for (int aKA=0 ; aKA<int(aVA.size()) ; aKA++)
             {
-               int aKI = ElMin(aKA,int(aVI.size()-1));
+               int aKI = std::min(aKA,int(aVI.size()-1));
                aSomPond += aPC.RF().AddRappelOnAngles
                            (
                                aPFR.OnCur().ValWithDef(true),

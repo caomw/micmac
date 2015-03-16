@@ -42,7 +42,9 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_ABSTRACT_TYPES_NEIGHBOURHOOD_H
 #define _ELISE_GENERAL_ABSTRACT_TYPES_NEIGHBOURHOOD_H
 
-#include "general/sys_dep.h"
+#include <PRC0>
+#include <Im2D>
+
 
 class Neighbourhood : public PRC0
 {
@@ -50,7 +52,7 @@ class Neighbourhood : public PRC0
      friend class B2d_Spec_Neigh_Not_Comp;
 
      public :
-         Neighbourhood (Im2D<int4,int>);
+         Neighbourhood (Im2D<int,int>);
          Neighbourhood (Pt2di *,int nb);
 
          static Neighbourhood   v4();

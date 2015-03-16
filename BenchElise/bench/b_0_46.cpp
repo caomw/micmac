@@ -63,14 +63,14 @@ void bench_deriv_formal
     }
     REAL v;
     ELISE_COPY(to_flux(I),Rconv(f),sigma(v));
-    BENCH_ASSERT(ElAbs(f.ValFonc(pt)-v)<epsilon);
+    BENCH_ASSERT(std::abs(f.ValFonc(pt)-v)<epsilon);
 
 	{
     for (INT d =0; d< dim ; d++)
     {
        REAL aDer1 =  f.deriv(d).ValFonc(pt);
        REAL aDer2 =  f.ValDeriv(pt,d);
-       BENCH_ASSERT(ElAbs(aDer1-aDer2)<epsilon);
+       BENCH_ASSERT(std::abs(aDer1-aDer2)<epsilon);
     }
 	}
 
@@ -94,7 +94,7 @@ void bench_deriv_formal
            puis *= delta;
            v2 += dk.ValFonc(pt) * puis * fact;
        }
-       BENCH_ASSERT(ElAbs(v1-v2)<ElSquare(delta));
+       BENCH_ASSERT(std::abs(v1-v2)<ElSquare(delta));
     }
 	}
 }
@@ -169,7 +169,7 @@ void matrix_is_Id(const ElMatrix<REAL>  & M)
          for (INT k2=0 ;k2<n ; k2++)
          {
              REAL vth = (k1==k2);
-             BENCH_ASSERT(ElAbs(vth-M(k1,k2))<epsilon);
+             BENCH_ASSERT(std::abs(vth-M(k1,k2))<epsilon);
          }
 }
 void bench_matrix_Id(INT n)
@@ -208,7 +208,7 @@ void bench_matrix_Rot()
           REAL v1 = scal(p1,p2);
           REAL v2 = scal(q1,q2);
           
-          BENCH_ASSERT(ElAbs(v1-v2)<epsilon);
+          BENCH_ASSERT(std::abs(v1-v2)<epsilon);
 
           ElMatrix<REAL> M2 = M*4.0+ElMatrix<REAL>(3);
           ElMatrix<REAL> M3 = I3 + M*4.0;
@@ -265,7 +265,7 @@ void bench_AngFromRot(REAL a,REAL b,REAL c)
    
    REAL d = M.L2(M2);
    BENCH_ASSERT(d<1e-4);
-   if (ElAbs(sin(b))< 0.7)
+   if (std::abs(sin(b))< 0.7)
    {
        BENCH_ASSERT(d<ElSquare(epsilon));
    }
@@ -290,8 +290,8 @@ static void find_racine(REAL x,REAL y,REAL X[],REAL Y[],INT nb,INT multip = 1)
     for (INT k=0; k<nb ; k++)
     {
        if (
-                  (ElAbs(X[k]-x) < BIG_epsilon)
-              &&  (ElAbs(Y[k]-y) < BIG_epsilon)
+                  (std::abs(X[k]-x) < BIG_epsilon)
+              &&  (std::abs(Y[k]-y) < BIG_epsilon)
           )
           multip --;
        if (multip == 0)
@@ -351,7 +351,7 @@ class PolyBench
              BENCH_ASSERT(Sol2.size()==mRoots.size());
              for (INT k=0; k<(INT) Sol2.size() ; k++)
              {
-                  REAL dif = ElAbs(Sol2[k]-mRoots[k]);
+                  REAL dif = std::abs(Sol2[k]-mRoots[k]);
                   BENCH_ASSERT(dif  < 1e-7);
              }
          }
@@ -367,9 +367,9 @@ void bench_polynome()
      for  (INT k=0 ; k < 10000; k++)
      {
           ElPolynome<REAL> P1(1,2,3);
-          BENCH_ASSERT(ElAbs(P1(1)-6)<epsilon);
-          BENCH_ASSERT(ElAbs(P1(0)-1)<epsilon);
-          BENCH_ASSERT(ElAbs(P1(-1)-2)<epsilon);
+          BENCH_ASSERT(std::abs(P1(1)-6)<epsilon);
+          BENCH_ASSERT(std::abs(P1(0)-1)<epsilon);
+          BENCH_ASSERT(std::abs(P1(-1)-2)<epsilon);
 
           ElPolynome<REAL> P2(3,2,1);
           REAL a = 100 * (NRrandom3()-0.5);
@@ -382,7 +382,7 @@ void bench_polynome()
           REAL x = 3*(NRrandom3()-0.5);
           REAL v1 = P1(x)*P2(x)*P3(x)+P4(x)*2-3*P5(x);
           REAL v2 = (P1*P2*P3+P4*2.0-P5*3.0)(x);
-          BENCH_ASSERT(ElAbs(v1-v2)<epsilon);
+          BENCH_ASSERT(std::abs(v1-v2)<epsilon);
      }
 
 
@@ -461,15 +461,15 @@ void ElPhotogram::bench_photogram_0()
 
     for ( std::list<Pt3dr>::iterator it =L3.begin(); it!=L3.end(); it++)
     {
-       EcartL = ElMin(EcartL,euclid(Labc-*it));
+       EcartL = std::min(EcartL,euclid(Labc-*it));
 
        Pt3dr A4 = A * it->x;
        Pt3dr B4 = B * it->y;
        Pt3dr C4 = C * it->z;
 
-       REAL EcD =    ElAbs(euclid(A4-B4)-dA3B3)
-                  +  ElAbs(euclid(A4-C4)-dA3C3)
-                  +  ElAbs(euclid(B4-C4)-dB3C3);
+       REAL EcD =    std::abs(euclid(A4-B4)-dA3B3)
+                  +  std::abs(euclid(A4-C4)-dA3C3)
+                  +  std::abs(euclid(B4-C4)-dB3C3);
        ElSetMax(EcartD,EcD);
     }
 
@@ -491,7 +491,7 @@ Pt3dr PrandTeta(REAL teta0)
             (NRrandom3()-0.5)* 2
        );
 	
-     if (ElAbs(aRes.z) < 0.001)
+     if (std::abs(aRes.z) < 0.001)
 	aRes.z = 0.001;
      return  aRes;
 }
@@ -936,11 +936,11 @@ void bench_FoncMeanSquare()
                                1.0
                            );
 
-    BENCH_ASSERT(ElAbs(a-sols(0,0))<1e-3);
-    BENCH_ASSERT(ElAbs(b-sols(0,1))<1e-3);
-    BENCH_ASSERT(ElAbs(c-sols(0,2))<1e-3);
-    BENCH_ASSERT(ElAbs(d-sols(0,3))<1e-3);
-    BENCH_ASSERT(ElAbs(e-sols(0,4))<1e-3);
+    BENCH_ASSERT(std::abs(a-sols(0,0))<1e-3);
+    BENCH_ASSERT(std::abs(b-sols(0,1))<1e-3);
+    BENCH_ASSERT(std::abs(c-sols(0,2))<1e-3);
+    BENCH_ASSERT(std::abs(d-sols(0,3))<1e-3);
+    BENCH_ASSERT(std::abs(e-sols(0,4))<1e-3);
 
 
     Fonc_Num appr = ApproxFoncMeanSquare    
@@ -1014,8 +1014,8 @@ void    bench_Polynome2dReal()
 
                 REAL aV1 = (aPol1(aVal)/aScal1 + aPol2(aVal)*aScal2) -aPol1(aVal);
                 REAL aV2 = aPolRes(aVal);
-                REAL aDif = ElAbs(aV1-aV2);
-                REAL ampl = ElMax(1.0,ElMax(ElAbs(aV1),ElAbs(aV2)));
+                REAL aDif = std::abs(aV1-aV2);
+                REAL ampl = std::max(1.0,std::max(std::abs(aV1),std::abs(aV2)));
                 aDif /= ampl;
 
                  BENCH_ASSERT(aDif<epsilon);
@@ -1131,7 +1131,7 @@ void bench_matrix_creuse()
 
 	  for (INT Y=0 ; Y<aM2.ty() ; Y++)
 	  {
-		REAL aDif = ElAbs(aM2(0,Y)-aR1.data()[Y]);
+		REAL aDif = std::abs(aM2(0,Y)-aR1.data()[Y]);
 		// cout << "aDif = " << aDif << "\n";
 		BENCH_ASSERT(aDif<epsilon);
 	  }
@@ -1284,9 +1284,9 @@ void bench_trace_det(INT aN)
    REAL T1s2  = M1s2.Trace();
    REAL T1B2  = M1B2.Trace();
 
-   BENCH_ASSERT(ElAbs(D1p2-D1*D2)<epsilon);
-   BENCH_ASSERT(ElAbs(T1s2-(T1+T2))<epsilon);
-   BENCH_ASSERT(ElAbs(T1B2-(T1))<BIG_epsilon);
+   BENCH_ASSERT(std::abs(D1p2-D1*D2)<epsilon);
+   BENCH_ASSERT(std::abs(T1s2-(T1+T2))<epsilon);
+   BENCH_ASSERT(std::abs(T1B2-(T1))<BIG_epsilon);
 }
 
 void bench_matrix()

@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHGR_FORMEL_CPIF_BILIN_H
 #define _ELISE_GENERAL_PHGR_FORMEL_CPIF_BILIN_H
 
-#include "general/sys_dep.h"
+
 
 class cPIF_Bilin : public cParamIntrinsequeFormel
 {

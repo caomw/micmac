@@ -35,7 +35,7 @@ void cAMD_Interf::AddArc(int aN1,int aN2,bool VerifDup)
     VerifN(aN1);
     VerifN(aN2);
     if (aN1 > aN2)
-       ElSwap(aN1,aN2);
+       std::swap(aN1,aN2);
 
     if (VerifDup)
     {

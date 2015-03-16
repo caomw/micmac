@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_BITM_TYPE>_H
 #define _ELISE_GENERAL_BITM_TYPE>_H
 
-#include "general/sys_dep.h"
+
 
 template <class Type> Pt2d<Type> operator *
          (const ElMatrix<Type> & M,const Pt2d<Type> &);
@@ -9,7 +9,7 @@ template <class Type> Pt2d<Type> operator *
 #ifndef _ELISE_GENERAL_BITM_TYPE>_H
 #define _ELISE_GENERAL_BITM_TYPE>_H
 
-#include "general/sys_dep.h"
+
 
 template <class Type> Pt3d<Type> operator *
          (const ElMatrix<Type> & M,const Pt3d<Type> &);
@@ -53,7 +53,7 @@ void AngleFromRot(const ElMatrix<double_t> & m,double_t & a,double_t & b,double_
 #ifndef _ELISE_GENERAL_BITM_TPLELROTATION3D_H
 #define _ELISE_GENERAL_BITM_TPLELROTATION3D_H
 
-#include "general/sys_dep.h"
+
 
 template <class Type> class TplElRotation3D
 {

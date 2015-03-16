@@ -102,7 +102,7 @@ void Bench_Rank()
          double aVK2 = aV2[aRnk];
 
          // std::cout << "Bench Rank " << aVK-aVK2 << "\n";
-         ELISE_ASSERT(ElAbs(aVK-aVK2)<1e-10,"Bench rnk");
+         ELISE_ASSERT(std::abs(aVK-aVK2)<1e-10,"Bench rnk");
 
 /*
    Ne marche pas : la valeur RrnK est n'importe ou
@@ -110,8 +110,8 @@ void Bench_Rank()
          SplitArrounKthValue(VData(aV3),aNb,aRnk);
          double aVK3 = aV3[aRnk];
          std::cout << "Bench Rank " << aVK-aVK2 << " " << aVK-aVK3<< "\n";
-         ELISE_ASSERT(ElAbs(aVK-aVK2)<1e-10,"Bench rnk");
-         ELISE_ASSERT(ElAbs(aVK-aVK3)<1e-10,"Bench rnk");
+         ELISE_ASSERT(std::abs(aVK-aVK2)<1e-10,"Bench rnk");
+         ELISE_ASSERT(std::abs(aVK-aVK3)<1e-10,"Bench rnk");
 */
 
     }

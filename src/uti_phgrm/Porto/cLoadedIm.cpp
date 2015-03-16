@@ -311,7 +311,7 @@ double cLoadedIm::Correl(const Pt2di & aP,cLoadedIm * aL2,const  std::vector<std
              Pt2di aQ = aP+ aV[aKP] ;
              aMat.add_pt_en_place(ValCorrel(aQ),aL2->ValCorrel(aQ));
          }
-         aRes = ElMin(aRes,aMat.correlation(1.0));
+         aRes = std::min(aRes,aMat.correlation(1.0));
     }
 
     return aRes;

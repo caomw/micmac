@@ -506,7 +506,7 @@ cAppliMalt::cAppliMalt(int argc,char ** argv) :
           else
               mZoomInit = 32;
 
-          double aWidth = ElMin(mSzGlob.x,mSzGlob.y);
+          double aWidth = std::min(mSzGlob.x,mSzGlob.y);
           while (((aWidth/mZoomInit) < mLargMin) && (mZoomInit>16))
           {
               mZoomInit /=2;

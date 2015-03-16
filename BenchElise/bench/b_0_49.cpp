@@ -56,7 +56,7 @@ template <class Type> class Bench_PackB_IM
 	
 
         Pt2dr CentreRand() {return Pt2dr(sz.x * NRrandom3(),sz.y * NRrandom3());}
-        REAL RayonRand() {return ElMax(1.5,euclid(sz) *NRrandom3());}
+        REAL RayonRand() {return std::max(1.5,euclid(sz) *NRrandom3());}
 };
 
 template <class Type> Im2D<Type,INT> Bench_PackB_IM<Type>::ImInit(Pt2di sz,Fonc_Num f)
@@ -351,7 +351,7 @@ void TestScroller::GUR_query_pointer(Clik cl,bool)
 		  REAL scy = _p0grab.y- cl._pt.y;
 		  scy /= -100.0;
 		  scy = _sc0grab *pow(2.0,scy);
-		  scy = ElMin(ElMax(scy,0.00),10.0);
+		  scy = std::min(std::max(scy,0.00),10.0);
 
       	  //scrol.SetScArroundPW(_p0grab,scy,true);
       	  scrol.SetScArroundPW( Pt2dr(_p0grab),scy,true); // __NEW

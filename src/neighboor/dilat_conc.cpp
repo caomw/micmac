@@ -188,7 +188,7 @@ const Pack_Of_Pts * Conc_Compute::next(void)
                    _nrel->set_reflexif(false);
               }
               _num_gen++;
-              ElSwap(_curent_set,_next_set);
+              std::swap(_curent_set,_next_set);
               if ((! _curent_set->nb()) || (_num_gen == _nb_step_max))
                  return 0;
               _curser->re_start(_curent_set);

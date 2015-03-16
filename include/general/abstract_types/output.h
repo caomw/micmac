@@ -42,12 +42,10 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_ABSTRACT_TYPES_OUTPUT_H
 #define _ELISE_GENERAL_ABSTRACT_TYPES_OUTPUT_H
 
-#include "general/sys_dep.h"
-
 #include <PRC0>
 #include <Fonc_Num>
-#include <OperAssocMixte>
-#include <TypeSubst>
+
+class OperAssocMixte;
 
 class Output : public  PRC0
 {
@@ -59,7 +57,7 @@ public :
     Output(class Liste_Pts_Gen);
     class Output_Computed * compute (const class Arg_Output_Comp &);
     static Output onul(int dim = 1);
-    Output chc(Fonc_Num);
+    //Output chc(Fonc_Num);
 
     static   Output Virgule(Output,Output);
     static   Output Virgule(Output,Output,Output);
@@ -79,28 +77,27 @@ public :
     static Output Filtre_Out_RedBin_Gen(Output anOut,bool aRedX,bool aRedY);
 
     //  REDUCTION
-//    static Output  reduc(const OperAssocMixte &,Type &);
-//    static Output  reduc(const OperAssocMixte &,Type *,int nb);
+    template<class Type> static Output  reduc(const OperAssocMixte &,Type &);
+    template<class Type> static Output  reduc(const OperAssocMixte &,Type *,int nb);
 
-    //  The sigma function is just a syntactic shugar that is rewriten as follow :
-    //     sigma(v) ==> reduc(OpSum,v)
-    //
+//      The sigma function is just a syntactic shugar that is rewriten as follow :
+//         sigma(v) ==> reduc(OpSum,v)
 
-//    static Output  sigma(Type &);
-//    static Output  sigma(Type *,int nb);
+    template<class Type> static Output  sigma(Type &);
+    template<class Type> static Output  sigma(Type *,int nb);
 
-//    static Output  VMax(Type &);
-//    static Output  VMax(Type *,int nb);
+    template<class Type> static Output  VMax(Type &);
+    template<class Type> static Output  VMax(Type *,int nb);
 
-//    static Output  VMin(Type &);
-//    static Output  VMin(Type *,int nb);
+    template<class Type> static Output  VMin(Type &);
+    template<class Type> static Output  VMin(Type *,int nb);
 
 
-//    static Output  WhichMax(Type &);
-//    static Output  WhichMax(Type *,int nb);
+    template<class Type> static Output  WhichMax(Type &);
+    template<class Type> static Output  WhichMax(Type *,int nb);
 
-//    static Output  WhichMin(Type &);
-//    static Output  WhichMin(Type *,int nb);
+    template<class Type> static Output  WhichMin(Type &);
+    template<class Type> static Output  WhichMin(Type *,int nb);
 };
 
 #endif

@@ -118,9 +118,9 @@ void BenchcSysQuadCreuse
 	     }
 	     else
 	     {
-                I1 = ElMin(aNbVar-1,INT(NRrandom3()*aNbVar));
-                I2 = ElMin(aNbVar-1,INT(NRrandom3()*aNbVar));
-                I3 = ElMin(aNbVar-1,INT(NRrandom3()*aNbVar));
+                I1 = std::min(aNbVar-1,INT(NRrandom3()*aNbVar));
+                I2 = std::min(aNbVar-1,INT(NRrandom3()*aNbVar));
+                I3 = std::min(aNbVar-1,INT(NRrandom3()*aNbVar));
 	     }
              REAL aCste = NRrandom3();
 
@@ -216,7 +216,7 @@ void BenchcSysQuadCreuse()
 
 REAL DiffRel(REAL v1,REAL v2,REAL eps)
 {
-     return ElAbs(v1-v2) /(ElAbs(v1)+ElAbs(v2)+eps);
+     return std::abs(v1-v2) /(std::abs(v1)+std::abs(v2)+eps);
 }
 
 class  cBenchLeastSquare : public FoncNVarDer<REAL>
@@ -447,8 +447,8 @@ void bench_triviale_opt_sous_contrainte()
      aSys.GSSR_AddNewEquation(1.0,Fy,0);
 
      Im1D_REAL8 aSol = aSys.GSSR_Solve(0);
-     BENCH_ASSERT(ElAbs(aSol.data()[0] -1.5)<epsilon);
-     BENCH_ASSERT(ElAbs(aSol.data()[1] -1.5)<epsilon);
+     BENCH_ASSERT(std::abs(aSol.data()[0] -1.5)<epsilon);
+     BENCH_ASSERT(std::abs(aSol.data()[1] -1.5)<epsilon);
 
 }
 

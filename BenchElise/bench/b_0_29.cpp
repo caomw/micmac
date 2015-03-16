@@ -191,7 +191,7 @@ void bench_epipole_orilib()
 
           Pt2dr aE317 = Epi317->to_photo(aP);
           Pt2dr aE318 = Epi318->to_photo(aP);
-          REAL aDy = ElAbs(aE317.y-aE318.y);
+          REAL aDy = std::abs(aE317.y-aE318.y);
 
          // Ce sont des systemes epipolaire si les points terrains se
          // projettent au memes y
@@ -218,7 +218,7 @@ void bench_epipole_orilib()
 
 
           // le systeme homotetique, doit etre lui aussi epipolaire
-          aDy = ElAbs(aZE317.y-aZE318.y);
+          aDy = std::abs(aZE317.y-aZE318.y);
           BENCH_ASSERT(aDy < epsilon);
 
           // est -ce que le systeme est homotetique
@@ -250,13 +250,13 @@ void bench_epipole_orilib()
               Pt2dr aQ1 = aCple->EPI1().Direct(HomApp317*aZ);
               Pt2dr aQ2 = aCple->EPI2().Direct(HomApp318*aZ);
 
-              REAL aDx = ElAbs(aQ1.x-aQ2.x);
+              REAL aDx = std::abs(aQ1.x-aQ2.x);
 
               aQ1 = aCple->EPI1().Direct(aPh317*aZ);
               aQ2 = aCple->EPI2().Direct(aPh318*aZ);
 
              
-              aDy = ElAbs(aQ1.y-aQ2.y);
+              aDy = std::abs(aQ1.y-aQ2.y);
               BENCH_ASSERT(aDx < epsilon);
               BENCH_ASSERT(aDy < GIGANTESQUE_epsilon);
 
@@ -270,7 +270,7 @@ void bench_epipole_orilib()
                REAL aDist = euclid(aHom,aPh318*aZ);
 
                BENCH_ASSERT(aDist<epsilon);
-               BENCH_ASSERT(ElAbs(aPax.y)<GIGANTESQUE_epsilon);
+               BENCH_ASSERT(std::abs(aPax.y)<GIGANTESQUE_epsilon);
 
                delete aCple;
           }
@@ -353,8 +353,8 @@ void bench_orilib()
 
           BENCH_ASSERT
           (
-                   (ElAbs(d0-d1)    < BIG_epsilon)
-                && (ElAbs(d1-d2)    < BIG_epsilon)
+                   (std::abs(d0-d1)    < BIG_epsilon)
+                && (std::abs(d1-d2)    < BIG_epsilon)
                 && (euclid(p0-p1) < BIG_epsilon)
                 && (euclid(p1-p2) < BIG_epsilon)
           );

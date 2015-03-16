@@ -97,9 +97,9 @@ void cCpleCamEtal::AddLiaisons(cEtalonnage & anEt)
             ELISE_ASSERT(pCpleRes1!=0,"Liaison en mode M2C");
             REAL aP = it->Pds();
             REAL Ecart = pCpleRes1->AddLiaisonP1P2(it->P1(),it->P2(),aP,false);
-            anEt.AddErreur(ElAbs(Ecart)*anEt.FocAPriori(),aP);
+            anEt.AddErreur(std::abs(Ecart)*anEt.FocAPriori(),aP);
             Ecart = pCpleRes2->AddLiaisonP1P2(it->P1(),it->P2(),aP,false);
-            anEt.AddErreur(ElAbs(Ecart)*anEt.FocAPriori(),aP);
+            anEt.AddErreur(std::abs(Ecart)*anEt.FocAPriori(),aP);
        }
     }
 }

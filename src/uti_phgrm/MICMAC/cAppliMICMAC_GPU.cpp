@@ -100,7 +100,7 @@ void cStatOneImage::StdNormalise(double aEpsilon)
     double aMoy = mS1 / mVals.size();
     double aSigma2  = mS2 / mVals.size() - ElSquare(aMoy);
 
-    Normalise(aMoy,sqrt(ElMax(aEpsilon,aSigma2)));
+    Normalise(aMoy,sqrt(std::max(aEpsilon,aSigma2)));
 }
 
 
@@ -1085,7 +1085,7 @@ bool  cAppliMICMAC::InitZ(int aZ,eModeInitZ aMode)
              Pt2di aSzErod = mCurSzVMax;
 
              // Calcul de l'ortho image et de l'image OK Ortho
-             double aStep = 1.0/ElMax(1,mGpuSzD); // Histoire de ne pas diviser par 0
+             double aStep = 1.0/std::max(1,mGpuSzD); // Histoire de ne pas diviser par 0
              double anIndX = 0.0;
              for (int anX = mX0UtiDilTer ; anX <  mX1UtiDilTer ; anX++)
              {
@@ -1270,7 +1270,7 @@ if (0)
               aMat.add_pt_en_place(aV1,aV2);
         }
    }
-   double aDif = ElAbs(aCorStd-aMat.correlation());
+   double aDif = std::abs(aCorStd-aMat.correlation());
    if (aDif >1e-4)
    {
        std::cout << "VeerifCOR " << aCorStd << " " << aMat.correlation() << " D=" << aDif << "\n";
@@ -1318,8 +1318,8 @@ if (0)
 
    if ((aCost>aCMax) || (aCost<aCMin))
    {
-       aCMax = ElMax(aCost,aCMax);
-       aCMin = ElMin(aCost,aCMin);
+       aCMax = std::max(aCost,aCMax);
+       aCMin = std::min(aCost,aCMin);
        std::cout << "COST " << aCMin << " " << aCMax << "\n";
    }
 /*

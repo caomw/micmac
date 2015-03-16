@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_ELDISTORTIONPOLYNOMIALE_H
 #define _ELISE_GENERAL_PHOTOGRAM_ELDISTORTIONPOLYNOMIALE_H
 
-#include "general/sys_dep.h"
+
 
 class ElDistortionPolynomiale : public ElDistortion22_Gen
 {

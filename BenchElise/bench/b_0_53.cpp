@@ -85,16 +85,16 @@ class cBenchCorrel
                  )
               );
               if (! Pondered)
-	          BENCH_ASSERT(ElAbs(aS12-aS_CorFFT )<epsilon);
+	          BENCH_ASSERT(std::abs(aS12-aS_CorFFT )<epsilon);
 
-              aS = ElMax(aS,anEps);
+              aS = std::max(aS,anEps);
               aS1 /= aS;
               aS2 /= aS;
               aS11 = aS11/aS - aS1 * aS1 ;
               aS12 = aS12/aS - aS1 * aS2 ;
               aS22 = aS22/aS - aS2 * aS2 ;
 
-              REAL aCor = aS12 / sqrt(ElMax(anEps,aS11*aS22));	
+              REAL aCor = aS12 / sqrt(std::max(anEps,aS11*aS22));	
               if (aS<aRatioSurf)
               {
                    aCor = -1 + (aCor+1) * (aS/aRatioSurf);
@@ -104,7 +104,7 @@ class cBenchCorrel
 	      REAL aNCCorFFT = ImCorrFromNrFFT(aCNC,aDec);
 
 
-              BENCH_ASSERT(ElAbs(aCor-aNCCorFFT)<epsilon);
+              BENCH_ASSERT(std::abs(aCor-aNCCorFFT)<epsilon);
       }
 
      cBenchCorrel (Pt2di aSz) :
@@ -161,7 +161,7 @@ class cBenchCorrel
 
 	            REAL aSFFT = mDup1.data()[mod(y,aSz.y)][mod(x,aSz.x)];
 
-	            BENCH_ASSERT(ElAbs(aSElise-aSFFT)<epsilon);
+	            BENCH_ASSERT(std::abs(aSElise-aSFFT)<epsilon);
 
                     Pt2di aDec(x,y);
                     VerifCorrelCNC(aDec,false,aCPad, anEps,aCNC,aRatioSurf);

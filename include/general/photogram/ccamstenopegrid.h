@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CCAMSTENOPEGRID_H
 #define _ELISE_GENERAL_PHOTOGRAM_CCAMSTENOPEGRID_H
 
-#include "general/sys_dep.h"
+
 
 class cCamStenopeGrid :  public CamStenope
 {

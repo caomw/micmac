@@ -694,7 +694,7 @@ void  ELISE_fp::write_dummy(tFileOffset nb_byte)
 
 	for ( tFileOffset nb = 0; nb<nb_byte ; nb += sz_buf)
 	{
-		tFileOffset nb_loc = ElMin(tFileOffset(sz_buf),(nb_byte-nb));
+		tFileOffset nb_loc = std::min(tFileOffset(sz_buf),(nb_byte-nb));
 		if (!nb.BasicLLO())
 			MEM_RAZ(buf_local,nb_loc);
 		write(buf_local,sizeof(U_INT1),nb_loc);
@@ -860,7 +860,7 @@ void ELISE_fp::read(void *ptr, tFileOffset size, tFileOffset nmemb)
 
 		for (int i=0; i<nb ; i+=SSIZE_MAX)
 		{
-			int nb_loc = ElMin((int)SSIZE_MAX,nb-i);
+			int nb_loc = std::min((int)SSIZE_MAX,nb-i);
 			ASSERT_TJS_USER
 				(
 				::read(_fd,c+i,nb_loc) == nb_loc,
@@ -1162,7 +1162,7 @@ tRelFileOffset  Packed_Flux_Of_Byte::Rseek(tRelFileOffset nb_elr)
                 nb_tot_el<nb_el ;
                 nb_tot_el += nb_el_buf
         )
-		Read(buf_local,ElMin(nb_el_buf,nb_el-nb_tot_el));
+		Read(buf_local,std::min(nb_el_buf,nb_el-nb_tot_el));
 
 	return nb_el;
 }

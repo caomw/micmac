@@ -42,12 +42,12 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_OPTIM_CVECTMATMUL_H
 #define _ELISE_GENERAL_OPTIM_CVECTMATMUL_H
 
-#include "general/sys_dep.h"
+#include <Im1D>
 
 class cVectMatMul
 {
     public :
-       virtual void VMMDo(Im1D_double_t8 in,Im1D_double_t8 out) = 0;
+       virtual void VMMDo(Im1D_REAL8 in,Im1D_REAL8 out) = 0;
        virtual ~cVectMatMul();
 };
 

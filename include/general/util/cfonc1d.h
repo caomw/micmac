@@ -42,7 +42,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_UTIL_CFONC1D_H
 #define _ELISE_GENERAL_UTIL_CFONC1D_H
 
-#include "general/sys_dep.h"
+
 
 class cFonc1D
 {

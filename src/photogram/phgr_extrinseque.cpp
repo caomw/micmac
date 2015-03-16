@@ -466,11 +466,11 @@ cMultiContEQF    cRotationFormelle::StdContraintes()
   {
       ELISE_ASSERT(pRotPseudoBaseU!=0,"eRotPseudoBaseU sans rattachement ");
       Pt3dr aV01 = CurCOpt()-pRotPseudoBaseU->CurCOpt();
-      if (ElAbs(aV01.x) > ElMax(ElAbs(aV01.y),ElAbs(aV01.z)))
+      if (std::abs(aV01.x) > std::max(std::abs(aV01.y),std::abs(aV01.z)))
       {
            AddFoncRappInit(aRes,3,4,mTolCentre);
       }
-      else if (ElAbs(aV01.y) > ElAbs(aV01.z))
+      else if (std::abs(aV01.y) > std::abs(aV01.z))
       {
            AddFoncRappInit(aRes,4,5,mTolCentre);
       }
@@ -988,7 +988,7 @@ Pt2dr cCameraFormelle::AddEqAppuisInc(const Pt2dr & aPIm,double aPds,cParamPtPro
 
         aPPP.mNDP0 =aCSG->L2toF2AndDer(aPLoc,aPPP.mNDdx,aPPP.mNDdy);
         // Si on remonte jusqu'a PtImGrid::ValueAndDer, on voit que GradX est la derive de X selon x et y (et non la derive selon x de X et Y)
-        ElSwap(aPPP.mNDdx.y,aPPP.mNDdy.x);
+        std::swap(aPPP.mNDdx.y,aPPP.mNDdy.x);
         aPPP.mNDP0 = aPPP.mNDP0 - aPPP.mNDdx * aPLoc.x - aPPP.mNDdy * aPLoc.y;
 
 // std::cout << "cCF:AEI Loc " << aPLoc << " " << aPPP.mNDP0 << " " << aPPP.mNDdx <<  " " << aPPP.mNDdy << "\n";

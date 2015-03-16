@@ -255,12 +255,12 @@ cMasq3DOrthoRaster * cMasq3DOrthoRaster::ByPolyg3D(SELECTION_MODE aModeSel,const
         aVP2.push_back(aP2);
         aMax.SetSup(aP2);
         aMin.SetInf(aP2);
-        aZAM = ElMax(aZAM,ElAbs(aQ3.z));
+        aZAM = std::max(aZAM,std::abs(aQ3.z));
     }
     ELISE_ASSERT(aZAM<1e-5,"Planarity in cMasq3DOrthoRaster::ByPolyg3D");
 
     Pt2dr aSzR = aMax-aMin;
-    double aLarg = ElMax(aSzR.x,aSzR.y);
+    double aLarg = std::max(aSzR.x,aSzR.y);
     //  Plan = > Ras  :  (aP-aMin) * aScal;
     double aScal = aNbPix / aLarg;
 

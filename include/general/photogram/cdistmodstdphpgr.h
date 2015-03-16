@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_CDISTMODSTDPHPGR_H
 #define _ELISE_GENERAL_PHOTOGRAM_CDISTMODSTDPHPGR_H
 
-#include "general/sys_dep.h"
+
 
 class cDistModStdPhpgr : public ElDistRadiale_PolynImpair
 {

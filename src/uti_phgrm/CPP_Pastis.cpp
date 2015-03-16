@@ -355,7 +355,7 @@ class cCple
 
          double Pente(const cCple & aCple) const
          {
-             return ElAbs(mZ-aCple.mZ) /euclid(mP1,aCple.mP1);
+             return std::abs(mZ-aCple.mZ) /euclid(mP1,aCple.mP1);
          }
 };
 
@@ -624,7 +624,7 @@ std::list<cCple>  cAppliPastis::FiltrageRot(std::list<cCple>  aLC,double aSeuil)
               itC->mOnePenteOut = true;
            ElSetMax(aMaxPente,aPente);
       }
-      aSPente /= ElMax(1,int(aLTes.size()));
+      aSPente /= std::max(1,int(aLTes.size()));
       itC->mSPente = aSPente;
 
       aKT--;

@@ -47,7 +47,7 @@ REAL SegComp::square_dist_droite(Pt2dr pt) const
 }
 REAL SegComp::dist_droite(Pt2dr pt) const
 {
-    return ElAbs(ordonnee(pt));
+    return std::abs(ordonnee(pt));
 }
 
 
@@ -120,7 +120,7 @@ REAL  SegComp::_square_dist
 {
     REAL res = DBL_MAX;
     for (INT k=0; k<(int)m1; k++)
-        res = ElMin
+        res = std::min
               (
                   res,
                   square_dist(m0,s1.kpts(k))
@@ -146,7 +146,7 @@ REAL  SegComp::square_dist
    if ((m0== droite) && (m1 == droite)) 
       return square_euclid(p0()-s1.proj_ortho_droite(p0()));
 
-   return ElMin
+   return std::min
           (
              _square_dist(m0,s1,m1),
              s1._square_dist(m1,*this,m0)
@@ -172,7 +172,7 @@ REAL  SegComp::dist
 
 REAL SegComp::square_haussdorf_seg_assym(const SegComp & s2) const
 {
-     return ElMax
+     return std::max
             (
                 s2.square_dist_seg(p0()),
                 s2.square_dist_seg(p1())
@@ -181,7 +181,7 @@ REAL SegComp::square_haussdorf_seg_assym(const SegComp & s2) const
 
 REAL SegComp::square_haussdorf_seg_sym(const SegComp & s2) const
 {
-     return ElMax
+     return std::max
             (
                 this->square_haussdorf_seg_assym(s2),
                 s2.square_haussdorf_seg_assym(*this)
@@ -191,7 +191,7 @@ REAL SegComp::square_haussdorf_seg_sym(const SegComp & s2) const
 
 REAL SegComp::square_haussdorf_droite_assym(const SegComp & s2) const
 {
-     return ElMax
+     return std::max
             (
                 s2.square_dist_droite(p0()),
                 s2.square_dist_droite(p1())
@@ -200,7 +200,7 @@ REAL SegComp::square_haussdorf_droite_assym(const SegComp & s2) const
 
 REAL SegComp::square_haussdorf_droite_sym(const SegComp & s2) const
 {
-     return ElMax
+     return std::max
             (
                 this->square_haussdorf_droite_assym(s2),
                 s2.square_haussdorf_droite_assym(*this)

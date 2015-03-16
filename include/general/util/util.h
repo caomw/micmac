@@ -37,10 +37,9 @@ English :
 
 Header-MicMac-eLiSe-25/06/2007*/
 
-#ifndef _ELISE_UTIL_H
-#define _ELISE_UTIL_H
+#ifndef _ELISE_UTIL_UTIL_H
+#define _ELISE_UTIL_UTIL_H
 
-#include <general/sys_dep.h>
 #include <general/opt_debug.h>
 
 #include <string>
@@ -51,6 +50,12 @@ Header-MicMac-eLiSe-25/06/2007*/
 #include <iostream>
 #include <list>
 #include <map>
+
+class Util {
+	public:
+		Util() {}
+
+
 
 class tFileOffset;
 
@@ -100,7 +105,7 @@ void SleepProcess(double);
 
 */
 
-const int INDEX_NOT_FOUND = -1;
+const INT INDEX_NOT_FOUND = -1;
 
 // FBoolA = "Fuzzy boolean" = boolean + option Fundef (ie undefined)
 
@@ -117,45 +122,45 @@ cDecimal StdRound(const double & aD,int aNbDigit,int * aTabR,int aSizeR);
 cDecimal StdRound(const double & aD);
 
 
-double_t angle_mod_real(double_t a,double_t b);
+REAL angle_mod_real(REAL a,REAL b);
 
 
-double_t Pow(double_t,int);
-int Pow_of_2_sup(int);
-extern bool is_pow_of_2(int );
+REAL Pow(REAL,INT);
+INT Pow_of_2_sup(INT);
+extern bool is_pow_of_2(INT );
 int NbBitsOfFlag(int aFlag);
 
-double_t El_logDeux(double_t);
+REAL El_logDeux(REAL);
 
 
 
-template <class Type> void binarise(Type *,Type,int);
-template <class Type> void binarise(Type *,const Type *,Type,int);
-template <class Type> void neg_binarise(Type *,const Type *,Type,int);
+template <class Type> void binarise(Type *,Type,INT);
+template <class Type> void binarise(Type *,const Type *,Type,INT);
+template <class Type> void neg_binarise(Type *,const Type *,Type,INT);
 
 
-template <class Type> void set_fonc_id(Type *,Type v0,int);
+template <class Type> void set_fonc_id(Type *,Type v0,INT);
 
-template <class Type> bool values_positive (const Type *t,int nb);
-template <class Type> bool values_positive_strict (const Type *t,int nb);
+template <class Type> bool values_positive (const Type *t,INT nb);
+template <class Type> bool values_positive_strict (const Type *t,INT nb);
 
 
 
 
 extern void NRrandom3InitOfTime();
 extern int  NRrandom3 (int aN);  // 0 <= X < N
-extern double_t NRrandom3 ();
-extern double_t NRrandC();  // entre -1 et 1
+extern REAL NRrandom3 ();
+extern REAL NRrandC();  // entre -1 et 1
 void ResetNRrand();
-void rationnal_approx(double_t,int &,int&);
+void rationnal_approx(REAL,INT &,INT&);
 
 
 
-double_t ElTimeOfDay();
+REAL ElTimeOfDay();
 
 
 
-void CmpByEnd(const char * aName1,const char * aName2,int & aK1,int &aK2);
+void CmpByEnd(const char * aName1,const char * aName2,INT & aK1,INT &aK2);
 bool N2IsEndN1(const char * aName1,const char * aName2);
 
 
@@ -165,7 +170,7 @@ std::string ToStrBlkCorr(const std::string &);
 
 
 std::string StrToLower(const std::string & aStr);
-int    IndPostfixed  (const std::string &,char = '.');
+INT    IndPostfixed  (const std::string &,char = '.');
 std::string StdPostfix(const std::string &,char = '.');
 std::string StdPrefix (const std::string &,char = '.');
 std::string StdPrefixGen (const std::string &,char = '.');

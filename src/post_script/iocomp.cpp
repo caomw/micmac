@@ -44,7 +44,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 
 void Ps_Hex_Code_Int(ofstream & fp,INT i)
 {
-    i = ElMax(0,ElMin(255,(INT) i));
+    i = std::max(0,std::min(255,(INT) i));
     fp << hex << (i/16) << (i%16);
     fp << dec;
 }

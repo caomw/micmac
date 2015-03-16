@@ -36,7 +36,7 @@ void verif_som_x_rect(Pt2di p1,Pt2di p2)
      ELISE_COPY(rectangle(p1,p2),FX,sigma(res));
      ELISE_COPY(select(rectangle(p1,p2),1),FX,sigma(res_sel));
 
-     BENCH_ASSERT(res == ElAbs(som_x(p1.x,p2.x)*(p1.y-p2.y)));
+     BENCH_ASSERT(res == std::abs(som_x(p1.x,p2.x)*(p1.y-p2.y)));
      BENCH_ASSERT(res == res_sel);
 
 
@@ -48,7 +48,7 @@ void verif_som_y_rect(Pt2di p1,Pt2di p2)
 
      ELISE_COPY(rectangle(p1,p2),FY,sigma(res));
      ELISE_COPY(select(rectangle(p1,p2),1),FY,sigma(res_sel));
-     BENCH_ASSERT(res == ElAbs(som_x(p1.y,p2.y)*(p1.x-p2.x)));
+     BENCH_ASSERT(res == std::abs(som_x(p1.y,p2.y)*(p1.x-p2.x)));
      BENCH_ASSERT(res == res_sel);
 }
 
@@ -204,7 +204,7 @@ void bench_cmpFN()
 	  INT C12 = F1.CmpFormel(F2);
 	  INT C21 = F2.CmpFormel(F1);
           BENCH_ASSERT(C12+C21==0);
-          BENCH_ASSERT(ElAbs(C12)<2);
+          BENCH_ASSERT(std::abs(C12)<2);
 	  if (C12 == 0)
 	  {
 	      NbEq ++;
@@ -214,7 +214,7 @@ void bench_cmpFN()
 
 	      REAL aV1 = F1.ValFonc(aP);
 	      REAL aV2 = F2.ValFonc(aP);
-              BENCH_ASSERT(ElAbs(aV1-aV2)<epsilon);
+              BENCH_ASSERT(std::abs(aV1-aV2)<epsilon);
 	  }
       }
     }
@@ -234,7 +234,7 @@ void bench_cmpFN()
 	      INT C23 = F2.CmpFormel(F3);
 	      INT C31 = F3.CmpFormel(F1);
 
-	      BENCH_ASSERT(ElAbs(C12+C23+C31)<2);
+	      BENCH_ASSERT(std::abs(C12+C23+C31)<2);
 
 	      INT NbEq = (C12==0) + (C23==0) + (C31==0);
 	      BENCH_ASSERT(NbEq != 2);

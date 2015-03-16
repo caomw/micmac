@@ -76,7 +76,7 @@ REAL EHFS_ScoreIm::AverageCostChange()
 REAL EHFS_ScoreIm::CostState(bool IsSeg,INT Abcisse)
 {
     REAL GainIfSeg = mGainIfSeg[Abcisse] / mVminRadiom;
-    GainIfSeg = ElMin(GainIfSeg,1.0);
+    GainIfSeg = std::min(GainIfSeg,1.0);
 
     if (! IsSeg)  
        GainIfSeg = 1.0-GainIfSeg;
@@ -165,7 +165,7 @@ EHFS_ScoreGrad::EHFS_ScoreGrad
 
      for (INT iRho=0 ; iRho<256 ; iRho++)
      {
-         mDataPdsRho[iRho] = ElMin(1.0,iRho/SeuilGrad);
+         mDataPdsRho[iRho] = std::min(1.0,iRho/SeuilGrad);
      }
 }
 
@@ -216,8 +216,8 @@ void  EHFS_ScoreGrad::MakeImGradXY
         for (INT x=0; x<=mNbX ; x++)
         {
             Pt2dr grad = Pt2dr(dGx[y][x],dGy[y][x]) * mInvTgtSeg;
-            dGx[y][x] = ElMax(-128,ElMin(127,round_ni(grad.x)));
-            dGy[y][x] = ElMax(-128,ElMin(127,round_ni(grad.y)));
+            dGx[y][x] = std::max(-128,std::min(127,round_ni(grad.x)));
+            dGy[y][x] = std::max(-128,std::min(127,round_ni(grad.y)));
         }
 }
 
@@ -243,7 +243,7 @@ void  EHFS_ScoreGrad::MakeImGradRhoTeta
         for (INT x=0; x<=mNbX ; x++)
         {
             Pt2dr rt = Pt2dr::polar(Pt2dr(dGx[y][x],dGy[y][x]),PI); 
-            dRho[y][x] = ElMin(255,round_ni(rt.x));
+            dRho[y][x] = std::min(255,round_ni(rt.x));
             dTeta[y][x] =  mod(round_ni(rt.y*128.0/PI),256);
         }
 }
@@ -267,7 +267,7 @@ void   EHFS_ScoreGrad::MakeImMaxLoc(Im1D_U_INT1 ImMaxLoc,Im2D_U_INT1 InRho)
          while ((yMaxL2>0) && (dRho[yMaxL2][x]<=dRho[yMaxL2-1][x]))
                yMaxL2--;
 
-        dMax[x] = (ElAbs(yMaxL1-mNbYMax)>ElAbs(yMaxL2-mNbYMax)) ? yMaxL1  : yMaxL2;
+        dMax[x] = (std::abs(yMaxL1-mNbYMax)>std::abs(yMaxL2-mNbYMax)) ? yMaxL1  : yMaxL2;
     }
 }
 

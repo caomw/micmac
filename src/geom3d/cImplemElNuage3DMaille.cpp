@@ -183,7 +183,7 @@ template <class Type,class TBase>  void  cElNuage3DMaille_FromImProf<Type,TBase>
    for (int aK=0 ; aK< (aNbTest+2) ; aK++)
    {
        Symb_FNum aFMasq = ImDef().in();
-       int aSzV = ElMax(1,ElSquare(aNbTest-aK));
+       int aSzV = std::max(1,ElSquare(aNbTest-aK));
 
        Fonc_Num aFLisse = rect_som(aIPPV.in_proj(),aSzV) /  ElSquare(1+2*aSzV);
        aFLisse  = aFLisse*(! aFMasq) + mIm.in() * aFMasq;

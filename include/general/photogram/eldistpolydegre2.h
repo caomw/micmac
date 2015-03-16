@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_ELDISTPOLYDEGRE2_H
 #define _ELISE_GENERAL_PHOTOGRAM_ELDISTPOLYDEGRE2_H
 
-#include "general/sys_dep.h"
+
 
 class ElDistPolyDegre2 : public ElDistortion22_Gen
 {

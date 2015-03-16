@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_BITM_CSINCARDAPODintERPOL1D_H
 #define _ELISE_GENERAL_BITM_CSINCARDAPODintERPOL1D_H
 
-#include "general/sys_dep.h"
+
 
 class cSinCardApodInterpol1D : public cKernelInterpol1D
 {

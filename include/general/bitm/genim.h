@@ -14,7 +14,6 @@ class GenIm : public PRC0 ,
     friend class TAG_TIF;
     friend class Tiff_Tiles_Cpr;
 
-
     public :
         bool same_dim_and_sz(GenIm);
 

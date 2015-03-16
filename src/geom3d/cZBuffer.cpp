@@ -186,10 +186,10 @@ Im2D_REAL4 cZBuffer::Basculer
     // double a
     for (int anXDal0 = aP0In.x ;  anXDal0< aP1In.x ; anXDal0 += SzDalleDef  )
     {
-        int anXDal1 = ElMin(aP1In.x,anXDal0+SzDalleDef);
+        int anXDal1 = std::min(aP1In.x,anXDal0+SzDalleDef);
         for (int anYDal0 = aP0In.y ;  anYDal0< aP1In.y ; anYDal0 += SzDalleDef  )
         {
-             int anYDal1 = ElMin(aP1In.y,anYDal0+SzDalleDef);
+             int anYDal1 = std::min(aP1In.y,anYDal0+SzDalleDef);
              std::vector<double> aVZofXY;
              for (aPIn.x=anXDal0 ; aPIn.x<anXDal1; aPIn.x++)
              {
@@ -352,7 +352,7 @@ Im2D_REAL4 cZBuffer::ZCaches
                if (OK)
                {
                    double aZProj = aTMnt.getprojR(aP2ROut);
-                   aTRes.oset(aPIn-aP0In,ElMax(0.0,aZProj-aP3Out.z));
+                   aTRes.oset(aPIn-aP0In,std::max(0.0,aZProj-aP3Out.z));
                }
 	   }
         }
@@ -466,7 +466,7 @@ void cZBuffer::BasculerUnTriangle(Pt2di A,Pt2di B,Pt2di C,bool TriBas)
 
          // Version surfacique 
 
-         aCoefEtirReel = ElAbs(aU.x * aV.y - aU.y * aV.x);
+         aCoefEtirReel = std::abs(aU.x * aV.y - aU.y * aV.x);
 
 
 if (0)
@@ -500,8 +500,8 @@ if (aCoefEtirReel>1e10)
 getchar();
 }
 */
-        // aCoefEtire = ElMin(254,round_ni(aCoefEtirReel*mDynEtire));
-        aCoefEtire = ElMax(1,ElMin(253,round_ni(mDynEtire/aCoefEtirReel)));
+        // aCoefEtire = std::min(254,round_ni(aCoefEtirReel*mDynEtire));
+        aCoefEtire = std::max(1,std::min(253,round_ni(mDynEtire/aCoefEtirReel)));
         if (aDet<0)
             aCoefEtire = 0;
      }
@@ -554,7 +554,7 @@ getchar();
                          double aMul =1.0;
                          if (mDynEtire>0)
                          {
-                              aMul = ElMin(1.0,1/aCoefEtirReel);
+                              aMul = std::min(1.0,1/aCoefEtirReel);
                          }
                          for (int aKA=0 ; aKA<(int)mImAttrIn.size() ; aKA++)
                          {
@@ -702,20 +702,20 @@ int aNBC = 0;
 		      Pt3dr aP2 = InverseProjDisc(Pt3dr(aP.x,aP.y,aZ2Out));
 		      double aDZ2 = aP2.z -ZInterpofXY(Pt2dr(aP2.x,aP2.y),OkInterp);
 
-		      if (OkInterp && (ElAbs(aDZ1-aDZ2) >  mEpsIntInv))
+		      if (OkInterp && (std::abs(aDZ1-aDZ2) >  mEpsIntInv))
 		      {
 		           double aZ3Out = aZ1Out - (aDZ1*(aZ2Out-aZ1Out))/(aDZ2-aDZ1);
 		           Pt3dr aP3 = InverseProjDisc(Pt3dr(aP.x,aP.y,aZ3Out));
 		           double aDZ3 = aP3.z -ZInterpofXY(Pt2dr(aP3.x,aP3.y),OkInterp);
 
-		           if (OkInterp && (ElAbs(aDZ3) < ElAbs(aDZ1)))
+		           if (OkInterp && (std::abs(aDZ3) < std::abs(aDZ1)))
 		           {
 aNBC++;
 		               aZ1Out = (float)aZ3Out;
 			       aDZ1 = aDZ3;
 		           }
 
-		           if (ElAbs(aDZ2) < ElAbs(aDZ1))
+		           if (std::abs(aDZ2) < std::abs(aDZ1))
 		           {
 aNBC++;
 		               aZ1Out = (float)aZ2Out;
@@ -774,11 +774,11 @@ void cZBuffer::SetProj(cZBProj & aProj,Pt2di  aSz)
      for (INT anXG = 0 ; anXG<mSzMnt.x ; anXG += aSzD)
      {
          INT anX0 = anXG;
-         INT anX1 = ElMin(mSzMnt.x-1,anX0+aSzD);
+         INT anX1 = std::min(mSzMnt.x-1,anX0+aSzD);
          for (INT anYG = 0 ; anYG<mSzMnt.y ; anYG += aSzD)
          {
              INT anY0 = anYG;
-             INT anY1 = ElMin(mSzMnt.y-1,anY0+aSzD);
+             INT anY1 = std::min(mSzMnt.y-1,anY0+aSzD);
 
 
               bool Ok =      PtMntDsIm(Pt2di(anX0,anY0))
@@ -898,10 +898,10 @@ void  cZBuffer::PartieCachees_Gen
 
      for (INT aK = 0 ; aK<INT(mVBox.size()) ; aK++)
      {
-         INT anX0 = ElMax(0,round_ni(mVBox[aK]._p0.x/aStepXY));
-         INT anY0 = ElMax(0,round_ni(mVBox[aK]._p0.y/aStepXY));
-         INT anX1 = ElMin(aSzRes.x,round_ni(mVBox[aK]._p1.x/aStepXY));
-         INT anY1 = ElMin(aSzRes.y,round_ni(mVBox[aK]._p1.y/aStepXY));
+         INT anX0 = std::max(0,round_ni(mVBox[aK]._p0.x/aStepXY));
+         INT anY0 = std::max(0,round_ni(mVBox[aK]._p0.y/aStepXY));
+         INT anX1 = std::min(aSzRes.x,round_ni(mVBox[aK]._p1.x/aStepXY));
+         INT anY1 = std::min(aSzRes.y,round_ni(mVBox[aK]._p1.y/aStepXY));
          for (INT x= anX0 ; x<anX1 ; x++)
          {
             for (INT y= anY0 ; y<anY1 ; y++)
@@ -915,11 +915,11 @@ void  cZBuffer::PartieCachees_Gen
 
                    if (aTMntP.inside_bilin(aQr))
                    {
-                      REAL aVal = ElMax(0.0,aTMntP.getr(aQr)-aZ);
+                      REAL aVal = std::max(0.0,aTMntP.getr(aQr)-aZ);
                       if (aDR)
                          aDR[y][x] = (float) aVal;
                       if (aDU)
-                         aDU[y][x] = ElMin(255,round_ni(aVal/aStep));
+                         aDU[y][x] = std::min(255,round_ni(aVal/aStep));
                       if (aResBin)
                          aTImBin.oset(aP,aVal<aSeuil);
 		   }

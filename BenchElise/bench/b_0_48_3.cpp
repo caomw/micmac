@@ -188,10 +188,10 @@ void cBenchNappes::OneBench
              }
         }
 
-     REAL aDif = ElAbs(aSCube-aSNap);
+     REAL aDif = std::abs(aSCube-aSNap);
      BENCH_ASSERT(aDif<epsilon);
 
-     aDif = ElAbs(aSCarre-aSNap2);
+     aDif = std::abs(aSCarre-aSNap2);
      BENCH_ASSERT(aDif<epsilon);
 }
 
@@ -314,8 +314,8 @@ void bench_cLineMapRect()
                          }
                          else
                          {
-                             y0 = ElMin(y0,y);
-                             y1 = ElMax(y1,y);
+                             y0 = std::min(y0,y);
+                             y1 = std::max(y1,y);
                              // Prouve que les points sont Freeman chaine
                              BENCH_ASSERT(dist8(aPi-aPrec)==1);
                          }
@@ -327,7 +327,7 @@ void bench_cLineMapRect()
                      }
 
                   // prouve que les points sont bien a peu pres alignes
-                     BENCH_ASSERT(ElAbs(y0-y1) < 1.0);
+                     BENCH_ASSERT(std::abs(y0-y1) < 1.0);
               }
               // Prouve que les points forment un recouvrt exact du rect
               for (INT k=0 ; k<4 ; k++)

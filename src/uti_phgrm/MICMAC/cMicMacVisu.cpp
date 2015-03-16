@@ -170,7 +170,7 @@ cMicMacWindowIm::cMicMacWindowIm
    mWImZ   (0),
    mIm     (mSzIm.x,mSzIm.y),
    mNbF    (mAp.PtrVI()->NbDiscHistoPartieFrac().Val()),
-   mHFrac  (ElMax(1,mNbF),ElMax(1,mNbF),0.0),
+   mHFrac  (std::max(1,mNbF),std::max(1,mNbF),0.0),
    mXFrac  (1,1),
    mYFrac  (1,1),
    mZFrac  (5),
@@ -331,7 +331,7 @@ void cMicMacVisu::Load(Box2di aBoxIn)
            ELISE_COPY
            (
              aIm.all_pts(),
-             (aIm.in() -aVMin) * (255.0 /ElMax(1,aVMax-aVMin)),
+             (aIm.in() -aVMin) * (255.0 /std::max(1,aVMax-aVMin)),
              mWTerr->ogray()
            );
         }
@@ -379,8 +379,8 @@ void cMicMacVisu::Load(Box2di aBoxIn)
       {
          for (int aY0=0 ; aY0< aSz.y ; aY0+=aPer)
          {
-              int aX1 = ElMin(aX0+aPer,aSz.x);
-              int aY1 = ElMin(aY0+aPer,aSz.x);
+              int aX1 = std::min(aX0+aPer,aSz.x);
+              int aY1 = std::min(aY0+aPer,aSz.x);
               double aSx =0;
               double aSy =0;
               double aSz =0;
@@ -453,8 +453,8 @@ if (aBug) std::cout << "-2-\n";
                     double aFracX = aRX-int(aRX);
                     double aFracY = aRY-int(aRY);
 
-                    int aIFX = ElMax(0,ElMin(mNbF,int(aFracX*mNbF)));
-                    int aIFY = ElMax(0,ElMin(mNbF,int(aFracY*mNbF)));
+                    int aIFX = std::max(0,std::min(mNbF,int(aFracX*mNbF)));
+                    int aIFY = std::max(0,std::min(mNbF,int(aFracY*mNbF)));
 
 if (aBug) std::cout << "-3-\n";
                     aMMV.mHFrac.data()[aIFY][aIFX]++;
@@ -507,7 +507,7 @@ Pt3dr cMicMacVisu::Pdisc2Pter(Pt3dr aP)
 double PartieNonFrac(double aV)
 {
     aV = aV -round_down(aV);
-    return  ElMax(0.5-aV,aV-0.5);
+    return  std::max(0.5-aV,aV-0.5);
 }
 double PartieNonFrac(Pt2dr aP)
 {

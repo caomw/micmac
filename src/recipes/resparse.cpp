@@ -273,7 +273,7 @@ template <class TVect,class TMul, class TCond>
 {
 // std::cout << "mSomRkZk " << mSomRkZk << "\n";
 /*
-   if (ElAbs(mSomRkZk) < aEps)
+   if (std::abs(mSomRkZk) < aEps)
       return false;
 */
    // mAPk = A *mPk
@@ -282,7 +282,7 @@ template <class TVect,class TMul, class TCond>
 
    double aSomPAP = TVect::Scal(mImPk,mImAPk);
   
-   if (ElAbs(aSomPAP) < aEps)
+   if (std::abs(aSomPAP) < aEps)
       return false;
    // aAlpha = ||Rk||^2  / aSomPAP
    double aAlpha = mSomRkZk  / aSomPAP;
@@ -293,7 +293,7 @@ template <class TVect,class TMul, class TCond>
    TVect::AddAlphaV(mImXSol,aAlpha,mImPk);
    TVect::AddAlphaV(mImRk,-aAlpha,mImAPk);
    
-   if (ElAbs( TVect::Scal(mImRk,mImRk)) < aEps)
+   if (std::abs( TVect::Scal(mImRk,mImRk)) < aEps)
       return false;
 
 

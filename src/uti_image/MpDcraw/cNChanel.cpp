@@ -500,7 +500,7 @@ cNChannel cNChannel::Std(const cArgMpDCRaw & anArg,const std::string & aNameFile
 */
 
          if (RBswap)
-            ElSwap(fR,fB);
+            std::swap(fR,fB);
 
          Fonc_Num aF = Virgule(fR,fV,fB);
          if (!TraitBasic)
@@ -600,7 +600,7 @@ cNChannel cNChannel::Std(const cArgMpDCRaw & anArg,const std::string & aNameFile
       GenIm::type_el aType = aNC.TypeOut(false,aSFR);
 
       if (RBswap)
-         ElSwap(fR,fB);
+         std::swap(fR,fB);
 
       if (anArg.ColReech())
       {
@@ -626,7 +626,7 @@ cNChannel cNChannel::Std(const cArgMpDCRaw & anArg,const std::string & aNameFile
              ELISE_COPY(aFile.all_pts(),FilterMax(anArg,aFR+aFV+aFB,aFile),VMax(aVM));
 
              aVM /= 3.0; 
-             double aMul = ElMin(1.0,255.0/aVM);
+             double aMul = std::min(1.0,255.0/aVM);
              aFR = (fR-aOfs[0])*(aWB[0]*aMul);
              aFV = (fV-aOfs[1])*(aWB[1]*aMul);
              aFB = (fB-aOfs[2])*(aWB[2]*aMul);
@@ -719,7 +719,7 @@ std::string cNChannel::NameRes(const std::string & aName,const std::string & aPr
        aN2 = aN2+ (mArg.Cons16B()? "16B" : "8B") ;
 
    if ( mArg.NameOriIsPrefix())
-      ElSwap(aN1,aN2);
+      std::swap(aN1,aN2);
 
    std::string aRes =  mNameDir 
          + aPref
@@ -810,8 +810,8 @@ void cNChannel::MakeImageDiag(Im2D_REAL4 aFulI,const std::string & aN1,const std
        ELISE_ASSERT(aCh2.Per()==Pt2di(2,2),"Per2 cNChannel::MakeImageDiag");
 
        Pt2di aP0b = aCh2.P0();
-       ELISE_ASSERT(ElAbs(mP0Diag.x-aP0b.x)==1,"X-Phasage in cNChannel::MakeImageDiag");
-       ELISE_ASSERT(ElAbs(mP0Diag.y-aP0b.y)==1,"Y-Phasage in cNChannel::MakeImageDiag");
+       ELISE_ASSERT(std::abs(mP0Diag.x-aP0b.x)==1,"X-Phasage in cNChannel::MakeImageDiag");
+       ELISE_ASSERT(std::abs(mP0Diag.y-aP0b.y)==1,"Y-Phasage in cNChannel::MakeImageDiag");
     }
 
     Pt2di aSzIn = aFulI.sz();

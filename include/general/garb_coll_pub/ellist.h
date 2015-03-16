@@ -42,30 +42,31 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_GARB_COLL_PUB_ELLIST_H
 #define _ELISE_GENERAL_GARB_COLL_PUB_ELLIST_H
 
-#include "general/sys_dep.h"
+#include <PRC0>
+#include <Pt2d>
 
 template <class Type>  class ElList :  public  PRC0
 {
-   public :
+public :
 
-       ElList<Type>();
+    ElList<Type>();
 
-       Type        car() const;  // Fatal error when empty
-       ElList<Type>  cdr() const;  // Fatal error when empty
-       Type        last() const;  // Fatal error when empty
-       Type        pop();  // Fatal error when empty
+    Type        car() const;  // Fatal error when empty
+    ElList<Type>  cdr() const;  // Fatal error when empty
+    Type        last() const;  // Fatal error when empty
+    Type        pop();  // Fatal error when empty
 
-       ElList<Type> reverse();  // only for ElList<Pt2di> for today
+    ElList<Type> reverse();  // only for ElList<Pt2di> for today
 
-       // friend ElList <Type> ::operator  + (ElList<Type>,Type);
+    // friend ElList <Type> ::operator  + (ElList<Type>,Type);
 
-       bool                 empty() const;
-       int                  card() const;
-       void                 clear() {while(!empty()) pop();}
+    bool                 empty() const;
+    int                  card() const;
+    void                 clear() {while(!empty()) pop();}
 
-      ElList<Type>(RC_Object*);
+    ElList<Type>(RC_Object*);
 
-	  static ElList<Pt2di> NewLPt2di(Pt2di);
+    static ElList<Pt2di> NewLPt2di(Pt2di);
 };
 
 #endif

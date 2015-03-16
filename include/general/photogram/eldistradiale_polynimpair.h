@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_ELDISTRADIALE_POLYNIMPAIR_H
 #define _ELISE_GENERAL_PHOTOGRAM_ELDISTRADIALE_POLYNIMPAIR_H
 
-#include "general/sys_dep.h"
+
 
 class ElDistRadiale_PolynImpair  : public ElDistRadiale // polynome en r de degre impair
 {

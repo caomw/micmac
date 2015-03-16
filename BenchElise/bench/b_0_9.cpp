@@ -406,9 +406,9 @@ template <class Type> void   bench_im_to_flux(Type *,INT nb)
 
     for (INT k=0; k<3 ; k++)
     {
-        BENCH_ASSERT(ElAbs(a0[k]-a1[k])<epsilon);
-        BENCH_ASSERT(ElAbs(b0[k]-b1[k])<epsilon);
-        BENCH_ASSERT(ElAbs(c0[k]-c1[k])<epsilon);
+        BENCH_ASSERT(std::abs(a0[k]-a1[k])<epsilon);
+        BENCH_ASSERT(std::abs(b0[k]-b1[k])<epsilon);
+        BENCH_ASSERT(std::abs(c0[k]-c1[k])<epsilon);
     }
 }
 

@@ -202,7 +202,7 @@ void bench_GIF_EGFI
          1,
          false,
          true,
-         ElMax(4,nbb),
+         std::max(4,nbb),
          SZ,
          true,
          inside(Pt2di(0,0),sz)

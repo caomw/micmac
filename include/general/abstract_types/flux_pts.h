@@ -42,13 +42,10 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_ABSTRACT_TYPES_FLUX_PTS_H
 #define _ELISE_GENERAL_ABSTRACT_TYPES_FLUX_PTS_H
 
-#include "general/sys_dep.h"
-
-#include "private/flux_pts.h"
-
 #include <PRC0>
 #include <Pt2d>
 #include <ElList>
+#include <Std_Pack_Of_Pts>
 
 class Flux_Pts : public  PRC0
 {

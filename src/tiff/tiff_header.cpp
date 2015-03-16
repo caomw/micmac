@@ -676,7 +676,7 @@ DATA_Tiff_Ifd::DATA_Tiff_Ifd
 
     if ((args_opt.mSzFileTile.x != -1 )  &&  (_nbb_ch0>=8))
     {
-       mSzFileTile =  Pt2di(ElAbs(args_opt.mSzFileTile.x),ElAbs(args_opt.mSzFileTile.y));
+       mSzFileTile =  Pt2di(std::abs(args_opt.mSzFileTile.x),std::abs(args_opt.mSzFileTile.y));
        CreateSubTile = args_opt.mSzFileTile.x > 0;
 
        if (CreateSubTile)
@@ -1041,7 +1041,7 @@ void DATA_Tiff_Ifd::post_init(const char * name)
     _padded_line_el_sz_tiles  = (_line_byte_sz_tiles * 8) / _nbb_ch0;
 
 
-    _maxs.init_if_0((1<<ElMin(16, _nbb_ch0)) -1,_nb_chanel);
+    _maxs.init_if_0((1<<std::min(16, _nbb_ch0)) -1,_nb_chanel);
     _mins.init_if_0(0,_nb_chanel);
 
      /*--------------------------------------------*/
@@ -1143,7 +1143,7 @@ void DATA_Tiff_Ifd::show()
      {
        cout << "TILES : ";
      {
-         for (int  i =0 ; i<ElMin(6,_nb_tile_tot.IntBasicLLO()) ; i++)
+         for (int  i =0 ; i<std::min(6,_nb_tile_tot.IntBasicLLO()) ; i++)
          {
              cout << "(" << _tiles_offset[i].BasicLLO() << "," ;
             if   (_tiles_byte_count)

@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHGR_FORMEL_CLI_MAKEEQIM_H
 #define _ELISE_GENERAL_PHGR_FORMEL_CLI_MAKEEQIM_H
 
-#include "general/sys_dep.h"
+
 
 class cLI_MakeEqIm
 {

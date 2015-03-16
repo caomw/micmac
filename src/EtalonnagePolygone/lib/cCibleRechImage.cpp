@@ -176,10 +176,10 @@ REAL cCibleRechImage::OneItereRaffinement
 
       Box2dr aBox =  pEqElIm->BoxCurEllipse(FPts);
       REAL  Rab  =  pEqElIm->CurLarg() ;
-      INT X0 = ElMax(0       , round_down(aBox._p0.x-Rab));
-      INT Y0 = ElMax(0       , round_down(aBox._p0.y-Rab));
-      INT X1 = ElMin(mSzIm.x , round_up(aBox._p1.x+Rab+1));
-      INT Y1 = ElMin(mSzIm.y , round_up(aBox._p1.y+Rab+1));
+      INT X0 = std::max(0       , round_down(aBox._p0.x-Rab));
+      INT Y0 = std::max(0       , round_down(aBox._p0.y-Rab));
+      INT X1 = std::min(mSzIm.x , round_up(aBox._p1.x+Rab+1));
+      INT Y1 = std::min(mSzIm.y , round_up(aBox._p1.y+Rab+1));
 
       RMat_Inertie aMat;
       for (INT aX = X0 ; aX<X1 ; aX++)
@@ -363,10 +363,10 @@ std::cout << "BL " <<  pEqElIm->CurBlanc()  << " N " << pEqElIm->CurNoir() << "\
 
     Box2dr aBox = pEqElIm->BoxCurEllipse(FPtsCorrel);
     INT  Rab  =  1 ;
-    INT X0 = ElMax(0       , round_down(aBox._p0.x-Rab));
-    INT Y0 = ElMax(0       , round_down(aBox._p0.y-Rab));
-    INT X1 = ElMin(mSzIm.x , round_up(aBox._p1.x+Rab+1));
-    INT Y1 = ElMin(mSzIm.y , round_up(aBox._p1.y+Rab+1));
+    INT X0 = std::max(0       , round_down(aBox._p0.x-Rab));
+    INT Y0 = std::max(0       , round_down(aBox._p0.y-Rab));
+    INT X1 = std::min(mSzIm.x , round_up(aBox._p1.x+Rab+1));
+    INT Y1 = std::min(mSzIm.y , round_up(aBox._p1.y+Rab+1));
 
     cout << "FPtsCorrel = " << FPtsCorrel << "\n";
     cout << "FPtsRaff   = " << FPtsRaff   << "\n";
@@ -536,7 +536,7 @@ std::cout << "cCibleRechImage.cpp :" << pWIm << "\n"; getchar();
         std::string aDir = ParamEtal().Directory() + "TMP/C"
 		           + ToString(anHyp.Cible().Ind());
 	
-	REAL aFact = 200 / ElMax(1.0,Blanc);
+	REAL aFact = 200 / std::max(1.0,Blanc);
 	if (aFact > 0.2 ) 
             aFact = 0.2;
 	Tiff_Im::Create8BFromFonc

@@ -79,12 +79,12 @@ cElRanGen::cElRanGen() :
 REAL cElRanGen::cNRrandom3 ()
 {
      double r =  ran3(&idum);
-     return ElMin(r,0.999999);
+     return std::min(r,0.999999);
 }
 
 int  NRrandom3 (int aN)
 {
-   return ElMax(0,ElMin(aN-1,round_ni(NRrandom3()*aN)));
+   return std::max(0,std::min(aN-1,round_ni(NRrandom3()*aN)));
 }
 
 REAL cElRanGen::cNRrandC() 

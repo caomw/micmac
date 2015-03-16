@@ -307,7 +307,7 @@ int Tequila_main(int argc,char ** argv)
                 aVT.push_back(Tiff_Im::StdConvGen(aDir+*itS,-1,false,true));
                 final_ZBufIm.push_back(aZBufIm[*it]);
                 aSzMax.SetSup(aVT.back().sz());
-                aNbCh = ElMax(aNbCh,aVT.back().nb_chan());
+                aNbCh = std::max(aNbCh,aVT.back().nb_chan());
                 break;
             }
         }
@@ -747,7 +747,7 @@ int Tequila_main(int argc,char ** argv)
         int full_width  = aSzMax.x * aNbCol;
         int full_height = aSzMax.y * aNbLine;
 
-        float Scale = (float) aTextMaxSize / ElMax(full_width, full_height) ;
+        float Scale = (float) aTextMaxSize / std::max(full_width, full_height) ;
 
         if (Scale > 1.f) Scale = 1.f;
 

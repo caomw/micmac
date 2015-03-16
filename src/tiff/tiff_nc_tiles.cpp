@@ -212,7 +212,7 @@ bool Tiff_file_2d::is_tile_front
          INT & num
      )
 {
-    x = ElMax(0,ElMin(x,tx));
+    x = std::max(0,std::min(x,tx));
 
     if (x==tx)
     {
@@ -312,7 +312,7 @@ Tiff_file_2d::Tiff_file_2d
        );
 
        _single_tile = 
-                        ((ElAbs(n1.x-n0.x)<=1) || (dti->_sz_tile.y == 1))
+                        ((std::abs(n1.x-n0.x)<=1) || (dti->_sz_tile.y == 1))
                      && (
                               (dti->_plan_conf==Tiff_Im::Chunky_conf)    
                            || (dti->_nb_chanel == 1)

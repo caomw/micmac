@@ -139,8 +139,8 @@ Polynome2dReal::Polynome2dReal
          const Polynome2dReal & aPol2,
          REAL                   aCoef2
 )   :
-        mAmpl (ElMax(aPol1.mAmpl,aPol2.mAmpl)),
-        mDMax (ElMax(aPol1.mDMax,aPol2.mDMax))
+        mAmpl (std::max(aPol1.mAmpl,aPol2.mAmpl)),
+        mDMax (std::max(aPol1.mDMax,aPol2.mDMax))
 
 {
     INT aK =0;

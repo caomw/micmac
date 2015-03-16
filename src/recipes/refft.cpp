@@ -79,8 +79,8 @@ void NR_fourn (
                                 for (i1=i2;i1<=i2+ip1-2;i1+=2) {
                                         for (i3=i1;i3<=ip3;i3+=ip2) {
                                                 i3rev=i2rev+i3-i2;
-                                                ElSwap(DATA(i3),DATA(i3rev));
-                                                ElSwap(DATA(i3+1),DATA(i3rev+1));
+                                                std::swap(DATA(i3),DATA(i3rev));
+                                                std::swap(DATA(i3+1),DATA(i3rev+1));
                                         }
                                 }
                         }
@@ -359,7 +359,7 @@ Im2D_REAL8   ElFFTCorrelNCPadded
 
               REAL aS12 = ImCorrFromNrFFT(aCor,aP);
 
-              aS = ElMax(aS,anEps);
+              aS = std::max(aS,anEps);
 
               aS1 /= aS;
               aS2/= aS;
@@ -368,7 +368,7 @@ Im2D_REAL8   ElFFTCorrelNCPadded
               aS12 =  aS12/aS - aS1*aS2;
               aS22 =  aS22/aS - aS2*aS2;
 
-              REAL aRes = aS12/sqrt(ElMax(anEps,aS11*aS22));
+              REAL aRes = aS12/sqrt(std::max(anEps,aS11*aS22));
 
               aRes = CorrectSurfMin(aRes,aS,aSurfMin);
 
@@ -418,7 +418,7 @@ Im2D_REAL8   ElFFTPonderedCorrelNCPadded
               REAL aS   = ImCorrFromNrFFT(anImS,aP);
 
 
-              aS = ElMax(aS,anEps);
+              aS = std::max(aS,anEps);
 
               aS1 /= aS;
               aS2/= aS;
@@ -427,7 +427,7 @@ Im2D_REAL8   ElFFTPonderedCorrelNCPadded
               aS12 =  aS12/aS - aS1*aS2;
               aS22 =  aS22/aS - aS2*aS2;
 
-              REAL aCoefCor = aS12/sqrt(ElMax(anEps,aS11*aS22));
+              REAL aCoefCor = aS12/sqrt(std::max(anEps,aS11*aS22));
 
               REAL aRes = CorrectSurfMin(aCoefCor,aS,aSurfMin);
 

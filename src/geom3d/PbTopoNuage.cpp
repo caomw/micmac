@@ -92,7 +92,7 @@ template <class tParam> void     GenZonec
            }
        }
 
-       ElSwap(aVNext,aVCur);
+       std::swap(aVNext,aVCur);
        aVNext->clear();
        aNbStep++;
    }
@@ -266,7 +266,7 @@ cAnalyPbTopo::cAnalyPbTopo
     mVPts     (2),
     // mDistSeuil (5),
     // mDistSeuil (sqrt(euclid(mN0.SzGeom()))),
-    // mDistSeuil ( ElMin(mNTarget.SzGeom().x,mNTarget.SzGeom().y) / 2),
+    // mDistSeuil ( std::min(mNTarget.SzGeom().x,mNTarget.SzGeom().y) / 2),
     mDistSeuil (mNTarget.SeuilDistPbTopo()),
     mNumZoneC (1),
     mNbMaxZone (2),

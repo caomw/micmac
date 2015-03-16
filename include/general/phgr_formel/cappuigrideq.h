@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHGR_FORMEL_CAPPUIGRIDEQ_H
 #define _ELISE_GENERAL_PHGR_FORMEL_CAPPUIGRIDEQ_H
 
-#include "general/sys_dep.h"
+
 
 class cAppuiGridEq : public cNameSpaceEqF,
                      public cObjFormel2Destroy

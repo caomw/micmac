@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHGR_FORMEL_CLIPARAM_IMAGE_H
 #define _ELISE_GENERAL_PHGR_FORMEL_CLIPARAM_IMAGE_H
 
-#include "general/sys_dep.h"
+
 
 class cLIParam_Image : public cObjFormel2Destroy
 {

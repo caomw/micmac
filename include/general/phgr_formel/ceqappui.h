@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHGR_FORMEL_CCAMERAFORMELLE_H
 #define _ELISE_GENERAL_PHGR_FORMEL_CCAMERAFORMELLE_H
 
-#include "general/sys_dep.h"
+
 
 class cCameraFormelle :  public cNameSpaceEqF ,
                          public cObjFormel2Destroy
@@ -61,7 +61,7 @@ class cCameraFormelle :  public cNameSpaceEqF ,
 #ifndef _ELISE_GENERAL_PHGR_FORMEL_CEQAPPUI_H
 #define _ELISE_GENERAL_PHGR_FORMEL_CEQAPPUI_H
 
-#include "general/sys_dep.h"
+
 
 	  class cEqAppui
 	  {

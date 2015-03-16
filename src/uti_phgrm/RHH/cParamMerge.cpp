@@ -73,7 +73,7 @@ double  cParamMerge::Gain // <0, veut dire on valide pas le noeud
 
         aRes += aLnk12->NbPts();
     }
-    int aDepth = 1 + ElMax(aN1->Depth(),aN2->Depth());
+    int aDepth = 1 + std::max(aN1->Depth(),aN2->Depth());
     aRes = aRes / pow(2.0,aDepth);
 
     if (mAppli.Show(eShowDetail))

@@ -143,7 +143,7 @@ class cTriangMaillage  : public cTestMinimForm
 	    tFormule EId() const; // Energie / identite
             REAL Surf() const
             {
-                 return ElAbs(U0()^V0()); // ^ : produit vectoriel
+                 return std::abs(U0()^V0()); // ^ : produit vectoriel
             }
 
 

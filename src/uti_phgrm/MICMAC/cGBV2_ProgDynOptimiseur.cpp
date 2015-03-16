@@ -286,7 +286,7 @@ void cGBV2_ProgDynOptimiseur::BalayageOneSens
                                     aCel0,                                               // cellule colonne courante
                                     aSens,                                               // Sens de parcours
                                     mTabCost[0].Cost(aDx) + mTabCost[1].Cost(aDy)        // Tabulation des pénalités ou cout de transition
-                                );                                                                                 // mCostActu[0]*ElAbs(aDx)+mCostActu[1]*ElAbs(aDy)
+                                );                                                                                 // mCostActu[0]*std::abs(aDx)+mCostActu[1]*std::abs(aDy)
                     }
                 }
             }
@@ -717,7 +717,7 @@ void cGBV2_ProgDynOptimiseur::SolveAllDirectionGpu(int aNbDir)
             double  mDMoyDir = average_euclid_line_seed(aDirI);
 
             int aJump    = round_ni(penteMax*mDMoyDir);
-            int mMaxJumpDir  = ElMax(1,aJump);
+            int mMaxJumpDir  = std::max(1,aJump);
 
             IGpuOpt.HData2Opt().setPenteMax(mMaxJumpDir);
 
@@ -807,7 +807,7 @@ void cGBV2_ProgDynOptimiseur::Local_SolveOpt(Im2D_U_INT1 aImCor)
     for (int aKP=0 ; aKP<mNbPx ; aKP++)
     {
         double aPente = aVPentes[aKP]; // MODIF  / mEtape.KPx(aKP).Pas();
-        mMaxEc[aKP] = ElMax(1,round_ni(aPente));
+        mMaxEc[aKP] = std::max(1,round_ni(aPente));
     }
 
     for

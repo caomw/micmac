@@ -451,7 +451,7 @@ Fonc_Num operator - (Fonc_Num f)
 }
 
 
-static REAL VAbs(REAL v) {return ElAbs(v);}
+static REAL VAbs(REAL v) {return std::abs(v);}
 Fonc_Num Abs (Fonc_Num f)
 {
      return new Op_Un_Mixte_Not_Comp

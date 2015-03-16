@@ -348,7 +348,7 @@ Fonc_Num deriche(Fonc_Num f,REAL alpha,INT d0)
      );
 
      Symb_FNum SF(Rconv(f));
-     return new Deriche_OPB_Not_Comp(Virgule(SF,SF),alpha,ElMax(d0,0));
+     return new Deriche_OPB_Not_Comp(Virgule(SF,SF),alpha,std::max(d0,0));
 }
 
 

@@ -80,13 +80,13 @@ void BenchDMR::test()
     golden(ax,bx,cx,1e-15,&xmin1);
 
     if (_pol.degre() <= 4)
-       BENCH_ASSERT(ElAbs(_dpol(xmin1)) < BIG_epsilon);
-    BENCH_ASSERT(ElAbs(_dpol(xmin1)) < GIGANTESQUE_epsilon);
+       BENCH_ASSERT(std::abs(_dpol(xmin1)) < BIG_epsilon);
+    BENCH_ASSERT(std::abs(_dpol(xmin1)) < GIGANTESQUE_epsilon);
 
     Pt2dr aP = brent(true);
     if (_pol.degre() <= 4)
-       BENCH_ASSERT(ElAbs(_dpol(aP.x)) < BIG_epsilon);
-    BENCH_ASSERT(ElAbs(_dpol(aP.x)) < GIGANTESQUE_epsilon);
+       BENCH_ASSERT(std::abs(_dpol(aP.x)) < BIG_epsilon);
+    BENCH_ASSERT(std::abs(_dpol(aP.x)) < GIGANTESQUE_epsilon);
 
 }
 

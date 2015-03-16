@@ -153,13 +153,13 @@ cPIF_Bilin::cPIF_Bilin(cCamStenopeBilin *aCSB,cSetEqFormelles & aSet):
 
     int aCpt=0;
     // Pour initier dans unr ordre ou le premri quadrangle passe d'abord
-    for (int aKD8=0 ; aKD8<=ElMax(mDistCur.Nb().y,mDistCur.Nb().x) ; aKD8++)
+    for (int aKD8=0 ; aKD8<=std::max(mDistCur.Nb().y,mDistCur.Nb().x) ; aKD8++)
     {
         for (int aKY=0; aKY<=mDistCur.Nb().y ; aKY++)
         {
             for (int aKX=0; aKX<=mDistCur.Nb().x ; aKX++)
             {
-                if (ElMax(aKX,aKY)==aKD8)
+                if (std::max(aKX,aKY)==aKD8)
                 {
                     if (aKY == (mDistCur.Nb().y/2))
                     {
@@ -297,7 +297,7 @@ CamStenope * cPIF_Bilin::DupCurPIF()
     //  Respecte le protocole standard pour le cas ou on ajoute qq ch de + complexe dans NV_UpdateCurPIF
      cCamStenopeBilin * aCSB = mCurPIF;
      NV_UpdateCurPIF();
-     ElSwap(aCSB,mCurPIF);
+     std::swap(aCSB,mCurPIF);
   
     return aCSB;
 }
@@ -427,7 +427,7 @@ Pt2dr cDistorBilin::FromCoordGrid(const Pt2dr & aP) const { return  mP0+aP.mcbyc
 
 void  cDistorBilin::GetDebInterval(int & aX0,const int & aSzGrd,const double & aCoordGr) const
 {
-   aX0 =  ElMax(0,ElMin(aSzGrd-1,round_down(aCoordGr)));
+   aX0 =  std::max(0,std::min(aSzGrd-1,round_down(aCoordGr)));
 }
 
 

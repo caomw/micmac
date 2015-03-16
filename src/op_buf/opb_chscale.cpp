@@ -243,7 +243,7 @@ cPixelSortie_Convol::cPixelSortie_Convol
 {
     double aPixIn = aHom.Direct(mPixOut);
     aFiltre.SetVO(aPixIn);
-    aFiltre.SetSc(ElMax(1.0,aHom.Sc()*aDilate));
+    aFiltre.SetSc(std::max(1.0,aHom.Sc()*aDilate));
 
     mPixIn0 = round_up(aPixIn -aFiltre.Support());
     mPixIn1 = 1+ round_down(aPixIn +aFiltre.Support());

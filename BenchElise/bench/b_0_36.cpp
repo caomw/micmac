@@ -221,7 +221,7 @@ static SegComp random_seg(bool not_nul)
 static SegComp  SegNotPar (const SegComp& s0)
 {
       SegComp s1 = s0;
-      while(ElAbs(angle(s1.tangente(),s0.tangente())) < 1e-3)
+      while(std::abs(angle(s1.tangente(),s0.tangente())) < 1e-3)
            s1 = random_seg(true);
       return s1;
 }
@@ -238,8 +238,8 @@ static bool pt_loin_from_bande(const SegComp & s,Pt2dr p)
 {
        REAL absc = s.abscisse(p);
        return 
-                  (ElAbs(absc)            > BIG_epsilon)
-              &&  (ElAbs(absc-s.length()) > BIG_epsilon);
+                  (std::abs(absc)            > BIG_epsilon)
+              &&  (std::abs(absc-s.length()) > BIG_epsilon);
 }
 
 bool seg_prim_inside
@@ -387,8 +387,8 @@ void bench_dist_point_seg_droite()
         REAL d1 = s.square_dist_droite(q);
         REAL dp1 = s.square_dist(mode,q);
 
-        BENCH_ASSERT(ElAbs(d0 -d1) < BIG_epsilon);
-        BENCH_ASSERT(ElAbs(dp0 -dp1) < BIG_epsilon);
+        BENCH_ASSERT(std::abs(d0 -d1) < BIG_epsilon);
+        BENCH_ASSERT(std::abs(dp0 -dp1) < BIG_epsilon);
 
         Pt2dr proj_q_2 = s.proj_ortho_droite(q);
         BENCH_ASSERT( euclid(proj_q-proj_q_2) < BIG_epsilon);
@@ -407,8 +407,8 @@ void bench_dist_point_seg_droite()
         REAL teta3 = angle(p2,p1*p2);
 
 
-        BENCH_ASSERT(ElAbs(teta2-teta)<epsilon);
-        BENCH_ASSERT(ElAbs(teta3-teta)<epsilon);
+        BENCH_ASSERT(std::abs(teta2-teta)<epsilon);
+        BENCH_ASSERT(std::abs(teta3-teta)<epsilon);
         
     }
 
@@ -424,7 +424,7 @@ void bench_dist_point_seg_droite()
 
          BENCH_ASSERT
          (
-             ElAbs
+             std::abs
              (
                  square_euclid(proj.p0()-proj.p1())
                -s0.square_dist(m0,s1,m1)
@@ -490,7 +490,7 @@ void bench_dist_InerMat_seg_droite()
         }
         REAL d1 = square_dist_droite(s,m);
 
-        BENCH_ASSERT(ElAbs(d0 -d1) < BIG_epsilon);
+        BENCH_ASSERT(std::abs(d0 -d1) < BIG_epsilon);
     }
 }
 
@@ -526,7 +526,7 @@ void bench_seg_mean_square()
         BENCH_ASSERT
         (
                 (euclid(cdg-tr) < BIG_epsilon)
-             && (ElAbs(all^rot)   < BIG_epsilon)
+             && (std::abs(all^rot)   < BIG_epsilon)
         );
 
         // BENCH_ASSERT(Abs(d0 -d1) < BIG_epsilon);
@@ -685,7 +685,7 @@ void bench_inter_Hor()
    {
        Pt2dr p0 = random_pt();
        Pt2dr p1 = random_pt();
-       if (ElAbs(p0.y-p1.y)<1e-2)
+       if (std::abs(p0.y-p1.y)<1e-2)
           p1.y += 1;
        SegComp aSp(p0,p1);
 
@@ -713,7 +713,7 @@ static ElAffin2D  RandAff2D()
 {
 	Pt2dr v10 =  random_pt(true);
 	Pt2dr v01 =  random_pt();
-	while (ElAbs(v10 ^v01) < 1e-3)
+	while (std::abs(v10 ^v01) < 1e-3)
               v01 =  random_pt();
 	     
 	return ElAffin2D ( random_pt(), v10, v01);

@@ -448,7 +448,7 @@ std::string cArgMpDCRaw::NameRes(const std::string & aNameFile,const std::string
        aN2 = aN2+ (Cons16B()? "16B" : "8B") ;
 
    if ( NameOriIsPrefix())
-      ElSwap(aN1,aN2);
+      std::swap(aN1,aN2);
 
    return  DirChantier()
          + aPref

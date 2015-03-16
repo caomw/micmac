@@ -66,7 +66,7 @@ class STD_Curser_on_PoP : public Curser_on_PoP
           {
               for (int d=0 ; d<_dim ; d++)
                   _pts_curs[d] += _sz_buf_el;
-              _curs->set_nb(ElMin(_sz_buf,_nb_rest));
+              _curs->set_nb(std::min(_sz_buf,_nb_rest));
               return _curs;
           }
           else
@@ -136,7 +136,7 @@ class RLE_Curser_on_PoP : public Curser_on_PoP
           if (_nb_rest > 0)
           {
               _curs->_pt0[0] += _sz_buf;
-              _curs->_nb = ElMin(_sz_buf,_nb_rest);
+              _curs->_nb = std::min(_sz_buf,_nb_rest);
               return _curs;
           }
           else

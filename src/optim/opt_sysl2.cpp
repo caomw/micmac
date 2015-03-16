@@ -1147,7 +1147,7 @@ std::cout <<  aNbTot << " " << aVInd.size()  << "\n";
 // std::cout << "L2SR:VG " << mDatabi_Li[0] << "\n";
 
      mBibi += aPds * ElSquare(aB);
-     mMaxBibi = ElMax(mMaxBibi,aPds * ElSquare(aB));
+     mMaxBibi = std::max(mMaxBibi,aPds * ElSquare(aB));
      mNbEq ++;
 }
 
@@ -1270,8 +1270,8 @@ Im1D_REAL8  L2SysSurResol::Solve(bool * aResOk)
 	       }
 	       else 
 	       {
-		   INT X = ElMin(kx,ky);   
-		   INT Y = ElMax(kx,ky);   
+		   INT X = std::min(kx,ky);   
+		   INT Y = std::max(kx,ky);   
 		   M(kx,ky) =  mC(X,mLineCC+Y-mNbVar);
 	       }
            }
@@ -1461,9 +1461,9 @@ template <class Type> void cMSymCoffact3x3<Type>::CoffSetInv(Type ** aMat)
 
 
 
-          aEr[aK] =      ElAbs(aEr00) + ElAbs(aEr10) + ElAbs(aEr20)
-                       + ElAbs(aEr01) + ElAbs(aEr11) + ElAbs(aEr21)
-                       + ElAbs(aEr02) + ElAbs(aEr12) + ElAbs(aEr22)
+          aEr[aK] =      std::abs(aEr00) + std::abs(aEr10) + std::abs(aEr20)
+                       + std::abs(aEr01) + std::abs(aEr11) + std::abs(aEr21)
+                       + std::abs(aEr02) + std::abs(aEr12) + std::abs(aEr22)
                     ;
 
         // aC00 ... : terme correctif
@@ -1513,7 +1513,7 @@ Pt3d<double>  L2SysSurResol::Solve3x3Sym(bool * OK)
 {
   cMSymCoffact3x3<double> aMCS(mDatatLi_Li);
 
-   if (ElAbs(aMCS.mDet<1e-30))
+   if (std::abs(aMCS.mDet<1e-30))
    {
        if (OK) *OK = false;
        return Pt3dr(1e40,1e50,1e70);

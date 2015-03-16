@@ -526,8 +526,8 @@ ElHoughFiltSeg::~ElHoughFiltSeg() {}
 
 void ElHoughFiltSeg::SetSeg(const SegComp & aSeg)
 {
-   mLength = ElMin(aSeg.length(),mLengthMax);
-   mNbX    = ElMin(mNbXMax,round_up(mLength/mStep));
+   mLength = std::min(aSeg.length(),mLengthMax);
+   mNbX    = std::min(mNbXMax,round_up(mLength/mStep));
 
 
 
@@ -586,7 +586,7 @@ Seg2d ElHoughFiltSeg::OneExtendSeg
 
 
       Ok = false; 
-      REAL delta = ElMax(10+AverageCostChange()*3,5+s0.length()*0.25);
+      REAL delta = std::max(10+AverageCostChange()*3,5+s0.length()*0.25);
       Seg2d  s1 (
                  s0.p0()-s0.tangente() * delta,
                  s0.p1()+s0.tangente() * delta
@@ -626,7 +626,7 @@ Seg2d ElHoughFiltSeg::OneExtendSeg
       REAL d1 = euclid(s1.p0(),s1.p1());
       if (d1 <= s0.length())
          return s0;
-      INT iD1 = ElMax(1,round_ni(d1));
+      INT iD1 = std::max(1,round_ni(d1));
 
       REAL ScOpt;
       s1 = Im.OptimizeSegTournantSomIm(ScOpt,s1,iD1,1.0,0.1);
@@ -648,7 +648,7 @@ Seg2d ElHoughFiltSeg::ExtendSeg
         return s0;
      s0 = sclip;
      REAL ScOpt;
-     INT iL = ElMax(1,round_ni(s0.length()));
+     INT iL = std::max(1,round_ni(s0.length()));
      s0 = Im.OptimizeSegTournantSomIm(ScOpt,s0,iL,1.0,0.1);
 
       bool Ok=true;

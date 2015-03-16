@@ -80,7 +80,7 @@ int  StatIm_main(int argc,char ** argv)
         aSomZ2 /= aSP;
         aSomZ2 -= ElSquare(aSomZ);
 
-        std::cout << "ZMoy=" << aSomZ << " ; Sigma=" << sqrt(ElMax(0.0,aSomZ2)) << "\n";
+        std::cout << "ZMoy=" << aSomZ << " ; Sigma=" << sqrt(std::max(0.0,aSomZ2)) << "\n";
         std::cout << "ZMinMax=[" << aZMin << " , " << aZMax << "]\n";
 
 

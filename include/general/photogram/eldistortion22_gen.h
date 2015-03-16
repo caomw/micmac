@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_ELDISTORTION22_GEN_H
 #define _ELISE_GENERAL_PHOTOGRAM_ELDISTORTION22_GEN_H
 
-#include "general/sys_dep.h"
+
 #include "XML_GEN/ParamChantierPhotogram.h"
 
 #include <ElDistortionPolynomiale>

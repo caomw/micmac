@@ -84,11 +84,11 @@ Data_Disp_Pallete::Data_Disp_Pallete
                       INT Rouge = round_ni(c.r()*255);
 					// Pourquoi une formule != ??? Apparemment un bug du
 					// compilo
-                      INT Vert = ElMax(0,ElMin(255,(INT)(c.g()*255)));
+                      INT Vert = std::max(0,std::min(255,(INT)(c.g()*255)));
                       INT Bleu = round_ni(c.b()*255);
                       if (_dep->is_gray_pal())
                       {
-                          INT mm =ElMin3(ded->_r_mult,ded->_g_mult,ded->_b_mult);
+                          INT mm =std::min3(ded->_r_mult,ded->_g_mult,ded->_b_mult);
                           mm = 256/ mm;
                           INT gr = (Rouge/mm) * mm;
                          _lut_compr[i] =  ded->rgb_to_16(gr,gr,gr);

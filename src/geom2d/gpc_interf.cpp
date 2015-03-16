@@ -202,7 +202,7 @@ cElPolygone::tContour  cElPolygone::ContSMax() const
       itC++
    )
    {
-       double aS = ElAbs(surf_or_poly(*itC));
+       double aS = std::abs(surf_or_poly(*itC));
        if (aS>aSMax)
        {
           aRes = *itC;
@@ -238,7 +238,7 @@ double  cElPolygone::Surf() const
        itC++,itH++
    )
    {
-       double aS = ElAbs(surf_or_poly(*itC));
+       double aS = std::abs(surf_or_poly(*itC));
        if (*itH)
           aRes -= aS;
        else

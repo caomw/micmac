@@ -69,7 +69,7 @@ REAL cFullSubGrWithP::pds(TArc & anArc)
    {
        aP1 = mSeg.to_rep_loc(aP1);
        aP2 = mSeg.to_rep_loc(aP2);
-       aPds = 1.0 + 0.1*(ElAbs(aP1.y) + ElAbs(aP2.y) + ElAbs(aP1.y+aP2.y));
+       aPds = 1.0 + 0.1*(std::abs(aP1.y) + std::abs(aP2.y) + std::abs(aP1.y+aP2.y));
        if (anArc.attr().ArcHom() !=0)
           aPds += 30;
    }

@@ -1,8 +1,6 @@
 #ifndef _ELISE_GENERAL_BITM_CFONCI2D_H
 #define _ELISE_GENERAL_BITM_CFONCI2D_H
 
-#include "general/sys_dep.h"
-
 class cFoncI2D
 {
     public :

@@ -68,7 +68,7 @@ const cPonderationPackMesure & cPonderateur::PPM() const
 
 double cPonderateur::PdsOfError(double anEr) const
 {
-   anEr = ElAbs(anEr);
+   anEr = std::abs(anEr);
    if (anEr>mEcMax)
    {
       // std::cout << "ERR = " << anEr << "\n";

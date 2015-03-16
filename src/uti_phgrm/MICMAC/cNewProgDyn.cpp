@@ -153,7 +153,7 @@ class cCpleValPrg2DTmp
               return 1.0;
            double aRes = double(mR1) * aC2.mR2 - double(mR2) * aC2.mR1;
 
-           aRes=  anArg.mPdsCrois * ElAbs(aRes / (N2() + aC2.N2()));
+           aRes=  anArg.mPdsCrois * std::abs(aRes / (N2() + aC2.N2()));
   // std::cout << "CxRES = " << aRes  <<  " " <<  N2() + aC2.N2()  << "\n";
            return aRes;
        }
@@ -238,7 +238,7 @@ template <class Type,const int NbV> class cTabValI1Prg2DTmp
 // std::cout << "V1V2 " << int(aV1) << " " << int(aV2) << "\n";
                if ((aV1!=anArg.mValOut) && (aV2!=anArg.mValOut)) 
                {
-                  aRes += ElAbs(aV1-aV2);
+                  aRes += std::abs(aV1-aV2);
                   aNbNN++;
                }
            }
@@ -493,7 +493,7 @@ template <class Type> void cMMNewPrg2D<Type>::DoConnexion
                {
                    int aZOut0 = aZOut * mMulZ;
                    int aZIn0  = (aZOut+ aDZ) * mMulZ;
-                   int aCost = mCostJump[ElAbs(aDZ)];
+                   int aCost = mCostJump[std::abs(aDZ)];
                    for (int anEt = 0 ; anEt < mMulZ ; anEt++)
                        Ouput[aZOut0+anEt].UpdateCostOneArc(Input[aZIn0+anEt],aSens,aCost);
                }
@@ -508,7 +508,7 @@ template <class Type> void cMMNewPrg2D<Type>::DoConnexion
                   ELISE_ASSERT((aZOut>=aOutZMin)&&(aZOut<aOutZMax),"Incoh Out in cMMNewPrg2D::DoConnexion");
                   ELISE_ASSERT(((aZOut+aDZ)>=aInZMin)&&((aZOut+aDZ)<aInZMax),"Incoh In in cMMNewPrg2D::DoConnexion");
 
-                  int aCost = mCostJump[ElAbs(aDZ)];
+                  int aCost = mCostJump[std::abs(aDZ)];
 
                   tCelOpt & aCelIn = Input[aZOut+aDZ];
 
@@ -553,7 +553,7 @@ template <class Type> void cMMNewPrg2D<Type>::DoConnexion
 template <class Type>  void cMMNewPrg2D<Type>::GlobInitDir(cProg2DOptimiser<cMMNewPrg2D> & aPrg)
 {
      int aJump    = round_ni(mMaxPente*aPrg.DMoyDir());
-     mMaxJumpDir  = ElMax(1,aJump);
+     mMaxJumpDir  = std::max(1,aJump);
 }
 
 template <class Type> void cMMNewPrg2D<Type>::Local_SetCout(Pt2di aPTer,int * aPX,REAL aCost,int aLabel)
@@ -792,7 +792,7 @@ cSurfaceOptimiseur * cSurfaceOptimiseur::AllocNewPrgDyn
    if (anEBI)
    {
       EtiqImage = true;
-      aMulImage = ElMax(1,aAppli.NbVueAct()-1);
+      aMulImage = std::max(1,aAppli.NbVueAct()-1);
    }
 
    if (aCAH)

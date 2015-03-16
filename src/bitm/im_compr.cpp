@@ -56,7 +56,7 @@ template <class Type>  void ImPackBitsCompr1Block
      for (INT i =0; i<nb_tot;)
      {
          INT i0 = i;
-         INT lim = ElMin(nb_tot,i+128);
+         INT lim = std::min(nb_tot,i+128);
 
          /*
              Si au moins 2 element et 2 premier egaux : RLE
@@ -147,7 +147,7 @@ template <class Type> void ImPackBitsCompr
 			Length,
 			Vals,
 			line+n,
-			ElMin(nb_tot-n,per)
+			std::min(nb_tot-n,per)
 		);
 	}
 }
@@ -745,15 +745,15 @@ template <class Type> void DPIM_Out_Comp<Type>::update
             mLPB =  mDPIM._LINES[y].mRuns+iBlock;
             ModeSpecUpdate
             (
-                  ElMax(0,x0-xDebBlock),
-                  ElMin(mPer,x1-xDebBlock)
+                  std::max(0,x0-xDebBlock),
+                  std::min(mPer,x1-xDebBlock)
             ); 
         }
    }
    else
    {
         INT xDebBlock  = iBlock0 * mPer;
-        INT xFinBlock  =  ElMin(iBlock1*mPer,mDPIM.tx());
+        INT xFinBlock  =  std::min(iBlock1*mPer,mDPIM.tx());
         INT * Vals = SVals->_pts[0];
 
         mCurDec  = mBufDec;
@@ -872,7 +872,7 @@ template <class Type> Data_PackB_IM<Type>::Data_PackB_IM
 	_LINES  (NEW_TAB(ty,Line_PackB_IM<Type>)), 
 	_tx 	(tx),
 	_ty 	(ty),
-	_per	(ElAbs(per))
+	_per	(std::abs(per))
 {
 	_p0[0]= _p0[1] = 0;
 	_p1[0]= _tx;

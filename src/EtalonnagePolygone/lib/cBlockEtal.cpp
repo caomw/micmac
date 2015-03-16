@@ -116,7 +116,7 @@ void cEtalonnage::TestEpip
      for (REAL Pax = -3000; Pax <= 3000 ; Pax += Step)
      {
 	     Pt2dr aQ1 = aCpl->Homol(P2,Pt2dr(Pax,0),!Im1);
-	     if (show && (ElAbs(Pax<75)))
+	     if (show && (std::abs(Pax<75)))
              {
                  cout << P2 << " " << Pax << " = " << aQ1 << "\n";
              }

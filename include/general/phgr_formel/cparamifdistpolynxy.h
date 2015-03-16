@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHGR_FORMEL_CPARAMIFDISTPOLYNXY_H
 #define _ELISE_GENERAL_PHGR_FORMEL_CPARAMIFDISTPOLYNXY_H
 
-#include "general/sys_dep.h"
+
 
 class cParamIFDistPolynXY : public cParamIntrinsequeFormel
 {

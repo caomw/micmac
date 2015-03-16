@@ -92,7 +92,7 @@ void ElHoughImplem::Transform_Ang
    SetImageXYCur(ImMod);
    VerifIsImageXY(ImAng);
    aHoughTr.raz();
-   INT  IincTeta = ElMin(round_ni(ElAbs(RealIncAng)/mStepTeta),NbTeta()/2-1);
+   INT  IincTeta = std::min(round_ni(std::abs(RealIncAng)/mStepTeta),NbTeta()/2-1);
    ElSetMax(IincTeta,1);
  
    U_INT1 ** dataAng = ImAng.data();
@@ -101,7 +101,7 @@ void ElHoughImplem::Transform_Ang
    {
         mDataPdsEcTeta[iTeta] 
       = mDataPdsEcTeta[NbTeta()-1-iTeta] 
-      = ElMax(0,(255*(IincTeta-iTeta))/IincTeta);
+      = std::max(0,(255*(IincTeta-iTeta))/IincTeta);
    }
  
    for (INT y=0; y<NbY() ; y++)
@@ -136,7 +136,7 @@ void ElHoughImplem::Transform_Ang
                   adr = ADR%Nb;
                   teta = TabIT[adr];
                   mDataImRT[TabIR[adr]][teta] 
-                          += TabP[adr] * val * mDataPdsEcTeta[ElAbs(teta-iAng)];
+                          += TabP[adr] * val * mDataPdsEcTeta[std::abs(teta-iAng)];
               }
            }
        }
@@ -182,7 +182,7 @@ void ElHoughImplem::MakeCirc(Im2D_INT4 aHoughTr)
 
    for (INT iTeta0 = NbTeta(); iTeta0<NbTetaAcc ; iTeta0 +=  NbTeta())
    {
-        INT nbTetaBande = ElMin(NbTeta(),NbTetaAcc-iTeta0);
+        INT nbTetaBande = std::min(NbTeta(),NbTetaAcc-iTeta0);
         for (INT iRho=0; iRho<NbRhoAcc; iRho++)
         {
              INT iRhoSym = IndRhoSym(iRho);
@@ -267,8 +267,8 @@ void ElHoughImplem::CalcMaxLoc
 // std::cout << "STEPS " << mStepTeta << " "<< mStepRhoInit << "\n";
 
 
-    INT iVoisTeta = ElMin(mNbRabTeta,round_ni(VoisTeta/mStepTeta));
-    INT iVoisRho  = ElMin(mNbRabRho,round_ni(VoisRho/mStepRhoInit));
+    INT iVoisTeta = std::min(mNbRabTeta,round_ni(VoisTeta/mStepTeta));
+    INT iVoisRho  = std::min(mNbRabRho,round_ni(VoisRho/mStepRhoInit));
     INT iVmin = round_ni(VMin);
 
 

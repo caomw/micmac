@@ -88,7 +88,7 @@ void Data_Elise_PS_Disp::draw_poly(const REAL * x,const REAL *y,INT nb)
     {
        REAL x0 = x[0];
        for (INT k = 0 ; (k< nb)&&(delta_max < tol) ; k++)
-          delta_max = ElMax(ElAbs(x[k]-(x0+k*dx)),delta_max);
+          delta_max = std::max(std::abs(x[k]-(x0+k*dx)),delta_max);
     }
 
     
@@ -124,7 +124,7 @@ void Data_Elise_PS_Disp::draw_poly(const REAL * x,const REAL *y,INT nb)
 
 REAL Data_Elise_PS_Disp::compute_sz_pixel(Pt2dr sz,Pt2dr margin,Pt2di nb,Pt2dr inside_margin)
 {
-     return ElMin
+     return std::min
             (
                  ((_sz_page.x -2*margin.x) -(inside_margin.x*(nb.x-1))) / (nb.x * sz.x),
                  ((_sz_page.y -2*margin.y) -(inside_margin.y*(nb.y-1))) / (nb.y * sz.y)

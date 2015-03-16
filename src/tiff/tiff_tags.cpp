@@ -75,13 +75,13 @@ INT   Pseudo_Tiff_Arg::byte_sz_tile(Pt2di Ktile)  const
     INT nbb = nbb_type_num(_type_im);
     INT padconstr   = (nbb < 8) ? (8/nbb) : 1;
 
-    INT sz_tile_log_x  = ElMin(_sz_tile.x,_sz.x -Ktile.x*_sz_tile.x);
+    INT sz_tile_log_x  = std::min(_sz_tile.x,_sz.x -Ktile.x*_sz_tile.x);
     INT sz_tile_phys_x = _clip_tile ? sz_tile_log_x : _sz_tile.x;
     sz_tile_phys_x *= chan_by_plan();
     sz_tile_phys_x = (sz_tile_phys_x + padconstr-1)/padconstr;
     sz_tile_phys_x *= padconstr;
 
-    INT sz_tile_log_y  = ElMin(_sz_tile.y,_sz.y -Ktile.y*_sz_tile.y);
+    INT sz_tile_log_y  = std::min(_sz_tile.y,_sz.y -Ktile.y*_sz_tile.y);
     INT sz_tile_phys_y = _clip_tile ? sz_tile_log_y : _sz_tile.y;
 
     return 

@@ -826,7 +826,7 @@ void  cSetEqFormelles::AddContrainte(const cContrainteEQF & aContr,bool Stricte)
         if (!Stricte)
         {
 
-            double anEc = ElAbs(ResiduSigne(aFonct));
+            double anEc = std::abs(ResiduSigne(aFonct));
             double aPds = aContr.PdsOfEcart(anEc);
             VAddEqFonctToSys(aFonct,aPds,false);
         }
@@ -1094,7 +1094,7 @@ void cSetEqFormelles::Solve(double ExpectResidu,bool *OK)
           }
 */
           double aR0 = mSys->ResiduOfSol(aV0.data());
-          double aDif = ElAbs(aR0-ExpectResidu) / (1e-8+ExpectResidu);
+          double aDif = std::abs(aR0-ExpectResidu) / (1e-8+ExpectResidu);
           if ((aDif>1e-7) && DoCheckResiduPhgrm)
           {
               if (aDif>=1e-1)
@@ -1397,7 +1397,7 @@ cEqEllipseImage * cSetEqFormelles::NewEqElIm(const cMirePolygonEtal & aMire,bool
     int aBlanc = 255;
     int aNoir = 0;
     if (isNeg)
-        ElSwap(aBlanc,aNoir);
+        std::swap(aBlanc,aNoir);
 
     return NewEqElIm(aMire,Pt2dr(0,0),1,0,1,0.5,aBlanc,aNoir,Code2Gen);
 }
@@ -1598,7 +1598,7 @@ REAL cEqFPtLiaison::AddPackLiaisonP1P2
        REAL aP = aPdsGlob * it->Pds();
        if (SomPdsTot)
           *SomPdsTot += aP;
-       REAL Ecart = ElAbs(AddLiaisonP1P2(it->P1(),it->P2(),aP,WithD2));
+       REAL Ecart = std::abs(AddLiaisonP1P2(it->P1(),it->P2(),aP,WithD2));
        aRes += Ecart * aP;
        aSPds += aP;
        if (aStat)
@@ -1634,7 +1634,7 @@ void cEqFPtLiaison::PondereFromResidu
 
 REAL cSignedEqFPtLiaison::ResiduNonSigneP1P2(Pt2dr aP1,Pt2dr aP2) 
 {
-    return ElAbs(ResiduSigneP1P2(aP1,aP2));
+    return std::abs(ResiduSigneP1P2(aP1,aP2));
 }
 
 
@@ -1762,8 +1762,8 @@ cElCompiledFonc * cContrainteEQF::FctrContrEQF() const
 
 double cContrainteEQF::PdsOfEcart(double anEcart) const
 {
-    // return mPds * ElMin(ElMax(anEcart,mEcMin),mEcMax);
-    return mPds * ElMin(mMax,ElMax(mMin,anEcart/mTol));
+    // return mPds * std::min(std::max(anEcart,mEcMin),mEcMax);
+    return mPds * std::min(mMax,std::max(mMin,anEcart/mTol));
 }
 
 

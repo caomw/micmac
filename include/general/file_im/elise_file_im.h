@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_FILE_IM_ELISE_FILE_IM_H
 #define _ELISE_GENERAL_FILE_IM_ELISE_FILE_IM_H
 
-#include "general/sys_dep.h"
+
 
 #include <ElGenFileIm>
 #include <GenIm>

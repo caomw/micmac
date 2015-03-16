@@ -181,7 +181,7 @@ template <class Type>
 {
    INT d1 = degre();
    INT d2 = p2.degre();
-   INT d = ElMax(d1,d2);
+   INT d = std::max(d1,d2);
    ElPolynome<Type> res((char *)0,d);
 
    for (int k=0; k<=d ; k++)
@@ -196,7 +196,7 @@ template <class Type>
 {
    INT d1 = degre();
    INT d2 = p2.degre();
-   INT d = ElMax(d1,d2);
+   INT d = std::max(d1,d2);
    ElPolynome<Type> res((char *)0,d);
 
    for (int k=0; k<=d ; k++)

@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_BITM_POLYNOME2Ddouble_t_H
 #define _ELISE_GENERAL_BITM_POLYNOME2Ddouble_t_H
 
-#include "general/sys_dep.h"
+
 
 class Polynome2dReal
 {

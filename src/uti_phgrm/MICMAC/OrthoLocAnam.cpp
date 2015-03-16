@@ -274,8 +274,8 @@ void cAppliMICMAC::MakeRedrLocAnamSA()
     int aNbX = round_up(aSzFinale.x/aSzX);
 
     // double aMaxEtirY= 0.0;
-   // double aRx = ElAbs(aFOMInit.ResolutionPlani().x);
-   // double aRZ = ElAbs(aFOMInit.ResolutionAlti());
+   // double aRx = std::abs(aFOMInit.ResolutionPlani().x);
+   // double aRZ = std::abs(aFOMInit.ResolutionAlti());
    // double aZRatio =   aRZ / aRx;
 
     //double aRegulPente = 1.0;
@@ -288,8 +288,8 @@ void cAppliMICMAC::MakeRedrLocAnamSA()
     // Cacul des tailles 
          int aX0_Out = round_ni((aSzFinale.x * double(aKX)) / aNbX);
          int aX1_Out = round_ni((aSzFinale.x * double(aKX+1)) / aNbX);
-         int aX0_In = ElMax(0,aX0_Out-aRabX);
-         int aX1_In = ElMin(aSzFinale.x,aX1_Out+aRabX);
+         int aX0_In = std::max(0,aX0_Out-aRabX);
+         int aX1_In = std::min(aSzFinale.x,aX1_Out+aRabX);
          int aSzXIn = aX1_In-aX0_In;
 
          Pt2di aSzIn(aSzXIn,aSzInit.y);
@@ -342,7 +342,7 @@ void cAppliMICMAC::MakeRedrLocAnamSA()
                    Pt3dr aPRedr = ToRedr(aFOMInit,aFOMFinale,aPDisc);
                    Pt3dr aQRedr = ToRedr(aFOMInit,aFOMFinale,aPDisc+Pt3dr(0,1,0));
 
-                   double aDY = ElAbs(aQRedr.y -aPRedr.y);
+                   double aDY = std::abs(aQRedr.y -aPRedr.y);
                    aVY.push_back(aPRedr.y);
                    aVZ.push_back(aPRedr.z);
                    aVLarg.push_back(aDY);
@@ -356,8 +356,8 @@ void cAppliMICMAC::MakeRedrLocAnamSA()
               {
                   double aYr0 = aVY[anY];
                   double aYr1 = aVY[anY+1];
-                  int aYI0 = ElMax(0,round_up(aYr0));
-                  int aYI1 = ElMin(aSzInRedr.y,round_up(aYr1));
+                  int aYI0 = std::max(0,round_up(aYr0));
+                  int aYI1 = std::min(aSzInRedr.y,round_up(aYr1));
 
                   double aF = FromSzW2FactExp(aVLarg[anY]*aMulLarg,aNbIter);
                   for (int y=aYI0 ; y<aYI1; y++)

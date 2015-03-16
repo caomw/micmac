@@ -99,7 +99,7 @@ template <class T> INT get_best_intexe(const ElFifo<T> & fp,bool EnvConv)
       return 0;
 
 
-   INT delta = EnvConv ? 1 : ElMin(5,(fp.nb()-2)/2);
+   INT delta = EnvConv ? 1 : std::min(5,(fp.nb()-2)/2);
    REAL min_cos = 10.0;
    INT best_index = 0;
 
@@ -227,7 +227,7 @@ double APP_cout_square_droite(SomApproxPoly * s1,SomApproxPoly * s2,const SegCom
 {
    RMat_Inertie   m = s1->inert_dif(s2);
    double d        =  square_dist_droite(seg,m);
-   return sqrt(ElMax(0.0,d*m.s()));
+   return sqrt(std::max(0.0,d*m.s()));
 }
 
 

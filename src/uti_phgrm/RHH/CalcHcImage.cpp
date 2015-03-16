@@ -62,7 +62,7 @@ bool cImagH::ComputeLnkHom(cLink2Img & aLnk)
       return false;
 
    int aNbPts = aLnk.NbPts();
-   mSomQual += ElMin(aLnk.QualHom(),mAppli.SeuilQual()) * aNbPts;
+   mSomQual += std::min(aLnk.QualHom(),mAppli.SeuilQual()) * aNbPts;
    mSomNbPts += aNbPts;
 
    return true;

@@ -42,7 +42,7 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_UTIL_T>_H
 #define _ELISE_GENERAL_UTIL_T>_H
 
-#include "general/sys_dep.h"
+
 
 template <class T> const T* VData(const std::vector<T> & aV)  {return aV.data();}
 #endif

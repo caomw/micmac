@@ -169,7 +169,7 @@ class Pipe_Out_Comp :  public Output_Computed
               Output_Computed       * o1
          ) :
                 Output_Computed
-                   (ElMax(o0->dim_consumed(),o1->dim_consumed()))
+                   (std::max(o0->dim_consumed(),o1->dim_consumed()))
          {
                 _to[0] = o0;
                 _to[1] = o1;

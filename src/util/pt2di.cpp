@@ -147,7 +147,7 @@ template <class Type>  Output  Pt2d<Type>::WhichMin()
 
 Pt2di  best_4_approx(const Pt2di & p)
 {
-      return (ElAbs(p.x) > ElAbs(p.y))                 ?
+      return (std::abs(p.x) > std::abs(p.y))                 ?
              (   (p.x>0) ? Pt2di(1,0) : Pt2di(-1,0)) :
              (   (p.y>0) ? Pt2di(0,1) : Pt2di(0,-1)) ;
 }
@@ -212,7 +212,7 @@ REAL  angle_de_droite(const Pt2dr & p1,const Pt2dr & p2)
 
 REAL angle_de_droite_nor(const Pt2dr & p)
 {
-     return ElAbs(angle_de_droite(p));
+     return std::abs(angle_de_droite(p));
 }
 
 REAL  angle_de_droite_nor(const Pt2dr & p1,const Pt2dr & p2)
@@ -244,7 +244,7 @@ template<> Pt2d<Fonc_Num>::TypeScalReel Pt2d<Fonc_Num>::RatioMin(const Pt2d<Fonc
 
 template<class Type> typename Pt2d<Type>::TypeScalReel Pt2d<Type>::RatioMin(const Pt2d<Type> & p) const
 {
-         return ElMin 
+         return std::min 
 		 ( 
 		     x/(typename Pt2d<Type>::TypeScalReel)p.x, 
 		     y/(typename Pt2d<Type>::TypeScalReel)p.y
@@ -388,7 +388,7 @@ REAL ToSpherique(const Pt3dr & aP,REAL & rho,REAL & teta,REAL & phi)
     rho = euclid(aP);
     ELISE_ASSERT(rho!=0.0,"ToSpherique, rho=0");
     
-    phi = asin(ElMin(1.0,ElMax(-1.0,aP.z/rho)));
+    phi = asin(std::min(1.0,std::max(-1.0,aP.z/rho)));
     if ((aP.x ==0) && (aP.y==0))
        teta = 0;
     else
@@ -735,13 +735,13 @@ Seg2d  Seg2d::clip(Box2dr b,REAL v0,REAL v1,bool IsSeg) const
      {
          if (ux > 0)
          {
-             v0 = ElMax(v0,(b._p0.x -p0().x)/ux);
-             v1 = ElMin(v1,(b._p1.x -p0().x)/ux);
+             v0 = std::max(v0,(b._p0.x -p0().x)/ux);
+             v1 = std::min(v1,(b._p1.x -p0().x)/ux);
          }
          else
          {
-             v0 = ElMax(v0,(b._p1.x -p0().x)/ux);
-             v1 = ElMin(v1,(b._p0.x -p0().x)/ux);
+             v0 = std::max(v0,(b._p1.x -p0().x)/ux);
+             v1 = std::min(v1,(b._p0.x -p0().x)/ux);
          }
      }
      // [2.2]  if vertical segment
@@ -760,13 +760,13 @@ Seg2d  Seg2d::clip(Box2dr b,REAL v0,REAL v1,bool IsSeg) const
      {
          if (uy > 0)
          {
-             v0 = ElMax(v0,(b._p0.y -p0().y)/uy);
-             v1 = ElMin(v1,(b._p1.y -p0().y)/uy);
+             v0 = std::max(v0,(b._p0.y -p0().y)/uy);
+             v1 = std::min(v1,(b._p1.y -p0().y)/uy);
          }
          else
          {
-             v0 = ElMax(v0,(b._p1.y -p0().y)/uy);
-             v1 = ElMin(v1,(b._p0.y -p0().y)/uy);
+             v0 = std::max(v0,(b._p1.y -p0().y)/uy);
+             v1 = std::min(v1,(b._p0.y -p0().y)/uy);
          }
      }
      else
@@ -841,7 +841,7 @@ cInterv1D<Type>::cInterv1D
      const Type & aV1
 )  :
    mV0    (aV0),
-   mV1    (ElMax(aV0,aV1)),
+   mV1    (std::max(aV0,aV1)),
    mEmpty (!(mV0<mV1))
 {
 }
@@ -854,8 +854,8 @@ cInterv1D<Type> cInterv1D<Type>::Inter(const cInterv1D<Type> & anInterv) const
 {
     return  cInterv1D<Type>
 	    (
-	         ElMax(mV0,anInterv.mV0),
-	         ElMin(mV1,anInterv.mV1)
+	         std::max(mV0,anInterv.mV0),
+	         std::min(mV1,anInterv.mV1)
 	    );
 }
 

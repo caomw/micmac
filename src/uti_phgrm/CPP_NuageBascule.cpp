@@ -215,7 +215,7 @@ int  NuageBascule_main(int argc,char ** argv)
     //  Modif MPD 04/01/2014 :  tenir compte du fait que la resolution des nuages pouvante etre differente un "petit" nuage peut generer de "grosse" bascule
         double aRIn = aNuageIn.SsResolRef().ValWithDef(1.0);
         double aROut = aNuageOut.SsResolRef().ValWithDef(1.0);
-        double aRatioInOut = ElMin(aROut / aRIn,1.0);
+        double aRatioInOut = std::min(aROut / aRIn,1.0);
         aSzDecoup  = Pt2di( Pt2dr(aSzDecoup) * aRatioInOut);
 
     // std::cout << "SZ DECOUP " << aSzDecoup << "\n";

@@ -65,13 +65,13 @@ Pt2dr  SegComp::proj_ortho_seg(Pt2dr pt) const
 
 REAL  SegComp::abscisse_proj_seg(Pt2dr pt) const
 {
-   return ElMax(0.0,ElMin(_a1,abscisse(pt)));
+   return std::max(0.0,std::min(_a1,abscisse(pt)));
 }
 
 
 REAL   SegComp::recouvrement_seg(const Seg2d & s) const
 {
-    return ElAbs(abscisse_proj_seg(s.p0())-abscisse_proj_seg(s.p1()));
+    return std::abs(abscisse_proj_seg(s.p0())-abscisse_proj_seg(s.p1()));
 }
 
 Pt2dr  SegComp::proj_ortho(ModePrim mode,Pt2dr pt) const

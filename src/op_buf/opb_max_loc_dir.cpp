@@ -89,7 +89,7 @@ MaxLocDir_OPB::MaxLocDir_OPB(REAL OuvAng,Pt2di P0,Pt2di P1,bool OrientedMaxLoc,R
      mROuvAng        (OuvAng),
      mIOuvAng        (Teta2I(OuvAng)),
      mOrientedMaxLoc (OrientedMaxLoc),
-     mRhoCalc        (ElMin(0.99,ElAbs(RhoCalc)))
+     mRhoCalc        (std::min(0.99,std::abs(RhoCalc)))
 {
 }
 

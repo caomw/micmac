@@ -1,7 +1,7 @@
 #ifndef _ELISE_GENERAL_PHOTOGRAM_POLYDEGRE2XY_H
 #define _ELISE_GENERAL_PHOTOGRAM_POLYDEGRE2XY_H
 
-#include "general/sys_dep.h"
+
 
 class PolyDegre2XY
 {

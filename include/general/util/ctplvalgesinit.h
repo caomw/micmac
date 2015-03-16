@@ -42,8 +42,8 @@ Header-MicMac-eLiSe-25/06/2007*/
 #ifndef _ELISE_GENERAL_UTIL_CTPLVALGESINIT_H
 #define _ELISE_GENERAL_UTIL_CTPLVALGESINIT_H
 
-#include "general/sys_dep.h"
 
+template <class Type>
 class cTplValGesInit
 {
      public :
